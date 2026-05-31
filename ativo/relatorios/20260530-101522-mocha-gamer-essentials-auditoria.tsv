@@ -1,0 +1,29 @@
+item	grupo	camada_mocha	candidatos_pacman	instalado_pacman	disponivel_repo_oficial	disponivel_aur	flatpak_appid	flatpak_status	detalhe_pacman_aur	observacao
+Steam	gamer-essencial	PADRAO	steam	sim	sim	nao		SEM_APPID_MAPEADO	steam=instalado+repo	Cliente Steam; base comum de distros gamer.
+GameMode	gamer-essencial	PADRAO	gamemode lib32-gamemode	sim	sim	nao		SEM_APPID_MAPEADO	gamemode=instalado+repo; lib32-gamemode=instalado+repo	Ativador de perfil de jogo; linha oficial atual permanece gamemoderun %command% até teste do wrapper MangoHud.
+MangoHud	gamer-essencial	PADRAO	mangohud lib32-mangohud	sim	sim	nao		SEM_APPID_MAPEADO	mangohud=instalado+repo; lib32-mangohud=instalado+repo	Overlay fundamental do Mocha; deve usar padrão visual Mocha.
+GOverlay	gamer-essencial	PADRAO	goverlay	nao	sim	nao		SEM_APPID_MAPEADO	goverlay=repo	Interface para configurar MangoHud/vkBasalt/OptiScaler; instalado não significa ativar vkBasalt no wrapper.
+Gamescope	gamer-ferramenta	DISPONIVEL_SEM_ATIVAR	gamescope	nao	sim	nao		SEM_APPID_MAPEADO	gamescope=repo	Pode existir para usuário/testes, mas não entra no wrapper oficial sem validação.
+Lutris	launcher	PADRAO	lutris	nao	sim	nao	net.lutris.Lutris	FLATHUB_DISPONIVEL	lutris=repo	Launcher importante para jogos fora da Steam.
+Heroic Games Launcher	launcher	PADRAO	heroic-games-launcher heroic-games-launcher-bin	nao	nao	sim	com.heroicgameslauncher.hgl	FLATHUB_DISPONIVEL	heroic-games-launcher=AUR_DISPONIVEL; heroic-games-launcher-bin=AUR_DISPONIVEL	Launcher Epic/GOG/Amazon; nome varia conforme repo/AUR/Flatpak.
+Protontricks	proton-wine	PADRAO	protontricks	nao	sim	nao		SEM_APPID_MAPEADO	protontricks=repo	Ferramenta de correção por prefixo Proton.
+Winetricks	proton-wine	PADRAO	winetricks	nao	sim	nao		SEM_APPID_MAPEADO	winetricks=repo	Ferramenta auxiliar Wine/Proton.
+ProtonUp-Qt	proton-wine	PADRAO_OU_FLATPAK	protonup-qt	nao	nao	sim	net.davidotek.pupgui2	FLATHUB_DISPONIVEL	protonup-qt=AUR_DISPONIVEL	Gerenciador gráfico de Proton-GE/Wine-GE.
+umu-launcher	proton-wine	PADRAO_SE_DISPONIVEL	umu-launcher	nao	sim	nao		SEM_APPID_MAPEADO	umu-launcher=repo	Camada moderna usada por launchers para Proton fora da Steam.
+Vulkan Tools	diagnostico	PADRAO	vulkan-tools	sim	sim	nao		SEM_APPID_MAPEADO	vulkan-tools=instalado+repo	Diagnóstico Vulkan.
+Mesa Utils	diagnostico	PADRAO	mesa-utils	sim	sim	nao		SEM_APPID_MAPEADO	mesa-utils=instalado+repo	Diagnóstico OpenGL.
+Piper	perifericos	PADRAO	piper	nao	sim	nao		SEM_APPID_MAPEADO	piper=repo	Configuração de mouse gamer via libratbag/ratbagd.
+libratbag	perifericos	PADRAO	libratbag	nao	sim	nao		SEM_APPID_MAPEADO	libratbag=repo	Backend do Piper para mouse gamer.
+Input Remapper	perifericos	PADRAO	input-remapper	nao	nao	sim	io.github.sezanzeb.input_remapper	NAO_ENCONTRADO_FLATHUB_OU_SEM_REDE	input-remapper=AUR_DISPONIVEL	Remapeamento de mouse, teclado, controle e periféricos; útil no Wayland.
+Oversteer	perifericos	PADRAO	oversteer	nao	nao	sim		SEM_APPID_MAPEADO	oversteer=AUR_DISPONIVEL	Gerenciamento de volantes suportados no Linux.
+AntiMicroX	perifericos	DISPONIVEL	antimicrox	nao	sim	nao		SEM_APPID_MAPEADO	antimicrox=repo	Mapeador de controle/teclado útil para jogos antigos.
+jstest-gtk	perifericos	DISPONIVEL	jstest-gtk	nao	nao	nao		SEM_APPID_MAPEADO	jstest-gtk=NAO_ENCONTRADO_AUR	Teste/calibração de joystick.
+vkBasalt	visual-opcional	DISPONIVEL_SEM_ATIVAR	vkbasalt vkbasalt-git	nao	nao	sim		SEM_APPID_MAPEADO	vkbasalt=AUR_DISPONIVEL; vkbasalt-git=AUR_DISPONIVEL	Pode ficar disponível, mas não entra no wrapper oficial por padrão.
+vkBasalt CLI	visual-opcional	DISPONIVEL_SEM_ATIVAR	vkbasalt-cli	nao	nao	sim		SEM_APPID_MAPEADO	vkbasalt-cli=AUR_DISPONIVEL	Ferramenta complementar se existir no repo usado.
+ReShade Shaders	visual-opcional	DISPONIVEL_SEM_ATIVAR	reshade-shaders	nao	nao	nao		SEM_APPID_MAPEADO	reshade-shaders=NAO_ENCONTRADO_AUR	Shaders opcionais para usuário avançado.
+LACT	energia-gpu	CANDIDATO_AUDITAR	lact lact-git	nao	sim	sim		SEM_APPID_MAPEADO	lact=repo; lact-git=AUR_DISPONIVEL	Controle de GPU; precisa validação por hardware e serviço antes de virar padrão.
+CoreCtrl	energia-gpu	CANDIDATO_AUDITAR	corectrl	nao	sim	nao		SEM_APPID_MAPEADO	corectrl=repo	Útil sobretudo para AMD; não substituir política NVIDIA atual sem teste.
+OBS Studio	criacao	PADRAO	obs-studio	nao	sim	nao	com.obsproject.Studio	FLATHUB_DISPONIVEL	obs-studio=repo	Gravação/streaming; comum em distro gamer/criador.
+GPU Screen Recorder	criacao	DISPONIVEL	gpu-screen-recorder gpu-screen-recorder-gtk	nao	sim	sim	com.dec05eba.gpu_screen_recorder	FLATHUB_DISPONIVEL	gpu-screen-recorder=repo; gpu-screen-recorder-gtk=AUR_DISPONIVEL	Gravação leve; validar com NVIDIA/Wayland antes de padrão final.
+Bottles	launcher	DISPONIVEL	bottles	nao	nao	sim	com.usebottles.bottles	FLATHUB_DISPONIVEL	bottles=AUR_DISPONIVEL	Wine apps/jogos; bom disponível, mas pode ficar Flatpak.
+Faugus Launcher	launcher	CANDIDATO_AUDITAR	faugus-launcher faugus-launcher-bin	nao	nao	sim		SEM_APPID_MAPEADO	faugus-launcher=AUR_DISPONIVEL; faugus-launcher-bin=NAO_ENCONTRADO_AUR	Candidato visto em GLF; auditar maturidade antes de padrão.

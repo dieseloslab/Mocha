@@ -1,0 +1,59 @@
+# >>> MOCHAARCH GITHUB SAFETY IGNORE >>>
+# Segredos e chaves
+.ssh/
+**/.ssh/
+**/id_rsa
+**/id_rsa.*
+**/id_ed25519
+**/id_ed25519.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/.env
+**/.env.*
+
+# Tokens/senhas por nome de arquivo
+**/*token*
+**/*secret*
+**/*senha*
+**/*password*
+
+# Quarentena, backups locais e cópias operacionais
+_QUARENTENA/
+quarentena/
+**/_QUARENTENA/
+**/quarentena/
+**/backups/
+**/*.bak
+**/*.old
+**/*.orig
+**/*.tmp
+
+# Máquinas virtuais, ISOs e imagens brutas
+**/*.qcow2
+**/*.vdi
+**/*.vmdk
+**/*.raw
+**/*.iso
+**/*.img
+**/*.ova
+**/*.ovf
+
+# Caches e builds locais
+**/.cache/
+**/cache/
+**/Cache/
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/pkg/
+**/src/
+**/pacman-cache/
+**/var-cache-pacman/
+
+# Lixo local
+.Trash-*/
+**/.Trash-*/
+**/*~
+# <<< MOCHAARCH GITHUB SAFETY IGNORE <<<

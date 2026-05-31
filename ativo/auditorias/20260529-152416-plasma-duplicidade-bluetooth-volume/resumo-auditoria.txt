@@ -1,0 +1,198 @@
+### DATA
+sex 29 mai 2026 15:24:16 -03
+
+### KERNEL
+Linux Mocha 7.0.10-arch1-1 #1 SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:21:20 +0000 x86_64 GNU/Linux
+
+### PACOTES RELEVANTES
+bluedevil 1:6.6.5-1
+bluez 5.86-6
+bluez-libs 5.86-6
+bluez-qt 6.26.0-1
+bluez-tools 0.2.0-6
+gamemode 1.8.2-2
+kdebugsettings 26.04.1-1
+kdeclarative 6.26.0-1
+kde-cli-tools 6.6.5-1
+kdeconnect 26.04.1-1
+kdecoration 6.6.5-1
+kded 6.26.0-1
+kde-dev-scripts 26.04.1-1
+kde-dev-utils 26.04.1-1
+kdeedu-data 26.04.1-1
+kdegraphics-mobipocket 26.04.1-1
+kdegraphics-thumbnailers 26.04.1-1
+kde-gtk-config 6.6.5-1
+kde-inotify-survey 26.04.1-2
+kdenetwork-filesharing 26.04.1-1
+kdenlive 26.04.1-1
+kdepim-addons 26.04.1-1
+kdepim-runtime 26.04.1-1
+kdeplasma-addons 6.6.5-1
+kdesdk-kio 26.04.1-1
+kdesdk-thumbnailers 26.04.1-1
+kdesu 6.26.0-1
+kdevelop 26.04.1-1
+kdevelop-php 26.04.1-1
+kdevelop-python 26.04.1-1
+linux 7.0.10.arch1-1
+linux-api-headers 6.19-1
+linux-atm 2.5.2-9
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+mangohud 0.8.3-2
+nvidia-open-dkms 595.71.05-2
+nvidia-settings 595.71.05-1
+nvidia-utils 595.71.05-2
+pipewire 1:1.6.6-1
+pipewire-session-manager 1:1.6.6-1
+plasma5support 6.6.5-1
+plasma-activities 6.6.5-1
+plasma-activities-stats 6.6.5-1
+plasma-browser-integration 6.6.5-1
+plasma-camera 26.04.1-1
+plasma-desktop 6.6.5-1
+plasma-disks 6.6.5-1
+plasma-firewall 6.6.5-1
+plasma-integration 6.6.5-2
+plasma-keyboard 6.6.5-1
+plasma-login-manager 6.6.5-1
+plasma-nm 6.6.5-1
+plasma-pa 6.6.5-1
+plasma-sdk 6.6.5-1
+plasma-systemmonitor 6.6.5-1
+plasma-thunderbolt 6.6.5-1
+plasmatube 26.04.1-2
+plasma-vault 6.6.5-1
+plasma-welcome 6.6.5-1
+plasma-workspace 6.6.5-2
+plasma-workspace-wallpapers 6.6.5-1
+steam 1.0.0.85-7
+steam-devices 1.0.0.85-7
+wireplumber 0.5.14-1
+
+### SERVIÇOS DO SISTEMA RELACIONADOS
+● bluetooth.service - Bluetooth service
+     Loaded: loaded (/usr/lib/systemd/system/bluetooth.service; enabled; preset: disabled)
+     Active: active (running) since Fri 2026-05-29 14:29:45 -03; 54min ago
+ Invocation: 040213ede68b4cc48886bc2a25c46bd6
+       Docs: man:bluetoothd(8)
+   Main PID: 617 (bluetoothd)
+     Status: "Running"
+      Tasks: 1 (limit: 18662)
+     Memory: 2M (peak: 3.4M)
+        CPU: 47ms
+     CGroup: /system.slice/bluetooth.service
+             └─617 /usr/lib/bluetooth/bluetoothd
+
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSource/sbc
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSink/sbc_xq_453
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSource/sbc_xq_453
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSink/sbc_xq_512
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSource/sbc_xq_512
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSink/sbc_xq_552
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSource/sbc_xq_552
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSink/faststream
+mai 29 14:29:54 Mocha bluetoothd[617]: Endpoint registered: sender=:1.50 path=/MediaEndpoint/A2DPSource/faststream
+mai 29 15:01:55 Mocha bluetoothd[617]: /org/bluez/hci0/dev_0C_ED_E7_FF_AB_9D/sep1/fd0: fd(31) ready
+
+### SERVIÇOS DE USUÁRIO RELACIONADOS
+sys-devices-pci0000:00-0000:00:08.1-0000:09:00.4-usb5-5\x2d2-5\x2d2:1.0-bluetooth-hci0-hci0:1.device                    loaded active plugged   /sys/devices/pci0000:00/0000:00:08.1/0000:09:00.4/usb5/5-2/5-2:1.0/bluetooth/hci0/hci0:1
+sys-devices-pci0000:00-0000:00:08.1-0000:09:00.4-usb5-5\x2d2-5\x2d2:1.0-bluetooth-hci0.device                           loaded active plugged   /sys/devices/pci0000:00/0000:00:08.1/0000:09:00.4/usb5/5-2/5-2:1.0/bluetooth/hci0
+sys-subsystem-bluetooth-devices-hci0.device                                                                             loaded active plugged   /sys/subsystem/bluetooth/devices/hci0
+sys-subsystem-bluetooth-devices-hci0:1.device                                                                           loaded active plugged   /sys/subsystem/bluetooth/devices/hci0:1
+app-blueman@autostart.service                                                                                           loaded active running   Blueman Applet
+app-org.kde.bluedevilwizard@2c6d514fa32d417ea2e56bae877bd717.service                                                    loaded failed failed    Adicionar dispositivo Bluetooth - Adicionar dispositivo Bluetooth
+app-pulseaudio@autostart.service                                                                                        loaded failed failed    PulseAudio Sound System
+pipewire.service                                                                                                        loaded active running   PipeWire Multimedia Service
+plasma-gmenudbusmenuproxy.service                                                                                       loaded active running   Proxies GTK DBus menus to a Plasma readable format
+plasma-kaccess.service                                                                                                  loaded active running   KAccess
+plasma-kactivitymanagerd.service                                                                                        loaded active running   KActivityManager Activity manager Service
+plasma-kded6.service                                                                                                    loaded active running   KDE Daemon 6
+plasma-ksmserver.service                                                                                                loaded active running   KDE Session Management Server
+plasma-kwin_wayland.service                                                                                             loaded active running   KDE Wayland Compositor
+plasma-plasmashell.service                                                                                              loaded active running   KDE Plasma Workspace
+plasma-polkit-agent.service                                                                                             loaded active running   KDE PolicyKit Authentication Agent
+plasma-powerdevil.service                                                                                               loaded active running   Powerdevil
+plasma-xdg-desktop-portal-kde.service                                                                                   loaded active running   Xdg Desktop Portal For KDE
+plasma-xembedsniproxy.service                                                                                           loaded active running   Handle legacy xembed system tray icons
+pulseaudio.service                                                                                                      loaded active running   Sound Service
+wireplumber.service                                                                                                     loaded active running   Multimedia Service Session Manager
+pipewire.socket                                                                                                         loaded active running   PipeWire Multimedia System Sockets
+pulseaudio.socket                                                                                                       loaded active running   Sound System
+bluetooth.target                                                                                                        loaded active active    Bluetooth
+plasma-core.target                                                                                                      loaded active active    KDE Plasma Workspace Core
+plasma-workspace-wayland.target                                                                                         loaded active active    plasma-workspace-wayland.target
+plasma-workspace.target                                                                                                 loaded active active    KDE Plasma Workspace
+
+### ÁUDIO
+String do servidor: /run/user/1000/pulse/native
+Versão do protocolo da biblioteca: 35
+Versão do protocolo do servidor: 35
+É local: sim
+Índice do cliente: 39
+Tamanho de fragmento: 65472
+Nome do usuário: hal
+Nome da máquina: Mocha
+Nome do servidor: pulseaudio
+Versão do servidor: 17.0-98-gb096
+Especificação padrão de amostragem: s16le 2ch 44100Hz
+Mapa de canais padrão: front-left,front-right
+Destino padrão: bluez_sink.0C_ED_E7_FF_AB_9D.a2dp_sink
+Fonte padrão: bluez_sink.0C_ED_E7_FF_AB_9D.a2dp_sink.monitor
+Cookie: ed82:a34c
+
+2	alsa_output.pci-0000_01_00.1.hdmi-stereo	module-alsa-card.c	s16le 2ch 44100Hz	SUSPENDED
+3	bluez_sink.0C_ED_E7_FF_AB_9D.a2dp_sink	module-bluez5-device.c	s16le 2ch 44100Hz	SUSPENDED
+
+2	alsa_output.pci-0000_01_00.1.hdmi-stereo.monitor	module-alsa-card.c	s16le 2ch 44100Hz	SUSPENDED
+3	bluez_sink.0C_ED_E7_FF_AB_9D.a2dp_sink.monitor	module-bluez5-device.c	s16le 2ch 44100Hz	SUSPENDED
+
+PipeWire 'pipewire-0' [1.6.6, hal@Mocha, cookie:1187326163]
+ └─ Clients:
+        32. kwin_wayland                        [1.6.6, hal@Mocha, pid:956]
+        33. WirePlumber                         [1.6.6, hal@Mocha, pid:1015]
+        41. WirePlumber [export]                [1.6.6, hal@Mocha, pid:1015]
+        42. plasmashell                         [1.6.6, hal@Mocha, pid:1114]
+        43. xdg-desktop-portal                  [1.6.6, hal@Mocha, pid:964]
+        47. wpctl                               [1.6.6, hal@Mocha, pid:8278]
+
+Audio
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Devices:
+
+### BLUETOOTH
+
+

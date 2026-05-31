@@ -1,0 +1,71 @@
+System:
+      Firmware: UEFI 2.70 (American Megatrends 5.17)
+ Firmware Arch: x64
+   Secure Boot: disabled
+  TPM2 Support: yes
+  Measured UKI: no
+  Boot into FW: supported
+
+Current Boot Loader:
+       Product: systemd-boot 260.1-2-arch
+     Features: ✓ Boot counting
+               ✓ Menu timeout control
+               ✓ One-shot menu timeout control
+               ✓ Default entry control
+               ✓ One-shot entry control
+               ✓ Support for XBOOTLDR partition
+               ✓ Support for passing random seed to OS
+               ✓ Load drop-in drivers
+               ✓ Support Type #1 sort-key field
+               ✓ Support @saved pseudo-entry
+               ✓ Support Type #1 devicetree field
+               ✓ Enroll SecureBoot keys
+               ✓ Retain SHIM protocols
+               ✓ Menu can be disabled
+               ✓ Multi-Profile UKIs are supported
+               ✓ Loader reports network boot URL
+               ✓ Support Type #1 uki field
+               ✓ Support Type #1 uki-url field
+               ✓ Loader reports active TPM2 PCR banks
+     Partition: /dev/disk/by-partuuid/e99e8f54-c53f-41ef-bec0-51f63189d155
+        Loader: └─/efi//EFI/SYSTEMD/SYSTEMD-BOOTX64.EFI
+ Current Entry: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-zen1-1-zen.conf
+
+Random Seed:
+ System Token: set
+       Exists: yes
+
+Available Boot Loaders on ESP:
+          ESP: /efi (/dev/disk/by-partuuid/e99e8f54-c53f-41ef-bec0-51f63189d155)
+         File: ├─/efi//EFI/systemd/systemd-bootx64.efi (systemd-boot 260.1-2-arch)
+               └─/efi//EFI/BOOT/BOOTX64.EFI (systemd-boot 260.1-2-arch)
+
+Boot Loaders Listed in EFI Variables:
+        Title: Linux Boot Manager
+           ID: 0x0000
+       Status: active, boot-order
+    Partition: /dev/disk/by-partuuid/e99e8f54-c53f-41ef-bec0-51f63189d155
+         File: └─/efi//EFI/SYSTEMD/SYSTEMD-BOOTX64.EFI
+
+        Title: UEFI OS
+           ID: 0x0014
+       Status: active, boot-order
+    Partition: /dev/disk/by-partuuid/e99e8f54-c53f-41ef-bec0-51f63189d155
+         File: └─/efi//EFI/BOOT/BOOTX64.EFI
+
+Boot Loader Entry Locations:
+          ESP: /efi (/dev/disk/by-partuuid/e99e8f54-c53f-41ef-bec0-51f63189d155, $BOOT)
+       config: /efi//loader/loader.conf
+        token: endeavouros
+
+Default Boot Loader Entry:
+         type: Boot Loader Specification Type #1 (.conf)
+        title: EndeavourOS (7.0.10-arch1-1)
+           id: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1.conf
+       source: /efi//loader/entries/09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1.conf (on the EFI System Partition)
+     sort-key: endeavouros-7.0.10-arch1-1
+      version: 7.0.10-arch1-1
+   machine-id: 09a044e993f7415a92dd2833d9afb1d2
+        linux: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/linux
+       initrd: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/initrd
+      options: nvme_load=YES nowatchdog rw rootflags=subvol=/@ root=UUID=eaa807e8-e03e-4502-bca6-f7a49c93a6f3 nvidia_drm.modeset=1 modprobe.blacklist=nouveau nouveau.modeset=0 systemd.machine_id=09a044e993f7415a92dd2833d9afb1d2

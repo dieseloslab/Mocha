@@ -1,0 +1,46 @@
+
+== Ambiente ==
+Timestamp: 20260530-055250
+Usuário: hal
+Kernel: 7.0.10-zen1-1-zen
+Pacman: .--.                  Pacman v7.1.0 - libalpm v16.0.1
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-055250-auditoria-atualizacoes-sem-aplicar.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260530-055250-auditoria-atualizacoes-sem-aplicar.md
+
+== Confirmando repositórios ativos ==
+options
+mocha-stable
+core
+extra
+multilib
+
+== Auditando atualizações disponíveis sem aplicar nada ==
+Comando usado: pacman -Qu
+Não será executado pacman -Syu.
+Total de atualizações disponíveis: 1
+
+== Classificando atualizações ==
+
+== Resumo por classe ==
+      1 CANDIDATO_TESTE
+
+== Pacotes bloqueados por segurança ==
+
+== Primeiros candidatos não críticos ==
+mangohud                                 0.8.3-2 -> 0.8.4-1
+
+== Auditando pacotes foreign/AUR/locais instalados ==
+Total de pacotes foreign/AUR/locais instalados: 2
+libpamac-aur 11.7.4-2
+pamac-aur 11.7.4-3
+
+== Gerando documentação ==
+
+== Salvando script reutilizável ==
+
+== Concluído ==
+Documentação: /media/mochafast/MochaArch/ativo/documentacao/20260530-055250-auditoria-atualizacoes-sem-aplicar.md
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-055250-auditoria-atualizacoes-sem-aplicar.log
+Classificação: /media/mochafast/MochaArch/ativo/relatorios/20260530-055250-pacman-Qu-classificado.tsv
+Foreign/AUR: /media/mochafast/MochaArch/ativo/relatorios/20260530-055250-pacotes-foreign-aur-ou-locais.txt
+Script: /media/mochafast/MochaArch/ativo/scripts/20260530-055250-mocha-auditar-atualizacoes-sem-aplicar.sh

@@ -1,0 +1,75 @@
+== Pré-checagem ==
+== Instalando ferramentas oficiais necessárias, sem prompt interativo ==
+Ferramentas ausentes detectadas: dump.erofs fsck.erofs
+atenção: cryptsetup-2.8.6-1 está atualizado -- ignorando
+atenção: squashfs-tools-4.7.5-1 está atualizado -- ignorando
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacote (1)         Versão nova    Diferença  Tamanho do download
+
+extra/erofs-utils  1.9.1-1         0,75 MiB             0,16 MiB
+
+Tamanho total download:   0,16 MiB
+Tamanho total instalado:  0,75 MiB
+
+:: Continuar a instalação? [S/n] 
+:: Obtendo pacotes...
+ erofs-utils-1.9.1-1-x86_64 sendo baixado...
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+:: Processando alterações do pacote...
+instalando erofs-utils...
+Dependências opcionais para erofs-utils
+    erofsfuse: for FUSE file system client
+:: Executando hooks pós-transação...
+(1/2) Arming ConditionNeedsUpdate...
+(2/2) Refreshing PackageKit...
+
+== ISO ==
+-rw-r--r-- 1 hal hal 4,0G mai 29 13:07 /home/hal/Downloads/Calam-Arch-Installer-2026-05.iso
+/home/hal/Downloads/Calam-Arch-Installer-2026-05.iso: ISO 9660 CD-ROM filesystem data (DOS/MBR boot sector) 'ARCH_202605' (bootable)
+f261af28f0389dfa10ac362b4a17bdf4c1ac4af394237c9c55c79983d0bcf954  /home/hal/Downloads/Calam-Arch-Installer-2026-05.iso
+
+== Montando ISO read-only ==
+Montada em: /tmp/tmp.1JYz1ccVLq/iso
+
+== Procurando rootfs interno ==
+/ISO/arch/x86_64/airootfs.sfs
+
+Imagem escolhida: /arch/x86_64/airootfs.sfs
+
+== Identificação bruta do rootfs externo ==
+-- stat --
+    Arquivo: /tmp/tmp.1JYz1ccVLq/iso/arch/x86_64/airootfs.sfs
+    Tamanho: 2725101568	Blocos: 5322464    bloco de E/S: 2048   arquivo comum
+Dispositivo: 7,0	Inode: 1606        Ligações: 1
+     Acesso: (0444/-r--r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+     Acesso: 2026-05-01 16:00:53.000000000 -0300
+Modificação: 2026-05-01 16:04:22.000000000 -0300
+  Alteração: 2026-05-01 16:04:22.000000000 -0300
+    Criação: -
+
+-- file --
+/tmp/tmp.1JYz1ccVLq/iso/arch/x86_64/airootfs.sfs: LUKS encrypted file, ver 2, header size 16384, ID 4, algo sha256, salt 0xe782251ef0ac781e..., UUID: 3a23a60d-c861-467c-a630-2baab60115f1, crc 0x55fbc045a7983caf..., at 0x1000 {"keyslots":{"0":{"type":"luks2","key_size":64,"af":{"type":"luks1","stripes":4000,"hash":"sha256"},"area":{"type":"raw","offse
+
+-- primeiros 128 bytes --
+00000000: 4c 55 4b 53 ba be 00 02 00 00 00 00 00 00 40 00  LUKS..........@.
+00000010: 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 00  ................
+00000020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000040: 00 00 00 00 00 00 00 00 73 68 61 32 35 36 00 00  ........sha256..
+00000050: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000060: 00 00 00 00 00 00 00 00 e7 82 25 1e f0 ac 78 1e  ..........%...x.
+00000070: cf 83 22 6b 0e 1a d2 27 01 bb ec f3 87 cd d0 a3  .."k...'........
+
+== Verificando se o rootfs é LUKS ==
+Detectado: contêiner LUKS.
+
+Digite a senha LUKS da ISO quando pedido. A entrada ficará oculta e não será gravada no log.
+Abrindo LUKS em modo read-only...
+ERRO: não consegui abrir o LUKS. Senha errada ou ISO incompatível.
+Nenhuma chave disponível com esta senha.
+Relatório parcial em: /media/mochafast/MochaArch/auditorias/iso-calam-luks-real-20260529-132336

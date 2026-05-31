@@ -1,0 +1,54 @@
+status	item
+OK	Pasta base existe: /media/mochafast/MochaArch
+OK	Pasta ativa existe: /media/mochafast/MochaArch/ativo
+OK	FAST esta montado em /media/mochafast
+OK	VMSTORE esta montado em /media/vmstore
+OK	FAST aparece como btrfs
+OK	VMSTORE aparece como xfs
+OK	fstab contem referencia ao FAST/mochafast
+OK	fstab contem referencia ao VMSTORE/vmstore
+OK	Lista completa de pacotes salva em: /media/mochafast/MochaArch/ativo/relatorios/20260529-195748-pacotes-instalados.txt
+OK	Lista de pacotes explicitos salva em: /media/mochafast/MochaArch/ativo/relatorios/20260529-195748-pacotes-explicitos.txt
+OK	Kernel atual e Zen: 7.0.10-zen1-1-zen
+OK	Pacote linux-zen instalado
+OK	Pacote linux-zen-headers instalado
+OK	/etc/default/grub contem indicio de default salvo/Zen
+OK	nvidia-smi respondeu; driver NVIDIA funcional no momento
+OK	Modulo NVIDIA carregado
+OK	Sessao atual e Wayland
+OK	CPU governor inclui performance
+OK	TuneD responde com perfil ativo
+OK	THP esta em madvise
+OK	Wrapper existe: /home/hal/.local/bin/mocha-steam-game-run
+OK	Wrapper nao contem MANGOHUD_DLSYM
+OK	Plasma Style atual e MochaPanelSolidCanonico
+OK	MochaSolidCanonico.colors existe no usuario
+OK	MochaSolidCanonico.colors existe no ativo: /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
+OK	MochaSolidCanonico do usuario bate com a copia do ativo
+OK	MochaPanelSolidCanonico existe no usuario
+OK	Arquivo aprovado da barra existe no caminho correto
+OK	Arquivo atual do Plasma appletsrc existe
+OK	Barra atual contem pelo menos dois panelspacers
+OK	Ha script reutilizavel na pasta aprovada da barra
+OK	blueman.desktop esta oculto no autostart do usuario
+OK	kmix_autostart.desktop esta oculto no autostart do usuario
+OK	blueman.desktop esta oculto em /etc/skel
+OK	kmix_autostart.desktop esta oculto em /etc/skel
+OK	Flathub esta configurado
+OK	google-chrome nao aparece instalado via pacman
+OK	Bitwarden nao aparece instalado via pacman
+OK	Foram encontrados 31 arquivos candidatos a manual/documentacao
+OK	Manual principal candidato: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+OK	Todos os scripts .sh encontrados passaram em bash -n
+OK	Ha arquivo/script relacionado a: kernel/zen
+OK	Ha arquivo/script relacionado a: montagem FAST/VM
+OK	Ha arquivo/script relacionado a: barra Win11
+OK	Ha arquivo/script relacionado a: bluetooth/volume duplicado
+OK	Ha arquivo/script relacionado a: manual/documentacao
+OK	Hashes salvos em: /media/mochafast/MochaArch/ativo/relatorios/20260529-195748-hashes-arquivos-criticos.txt
+ATENCAO	ColorScheme atual nao e MochaSolidCanonico: indisponivel
+ATENCAO	Nao confirmei tabela hexadecimal dentro do MochaSolidCanonico ativo
+ATENCAO	Appletsrc atual difere do arquivo aprovado; pode ser ajuste posterior ou divergencia
+ATENCAO	Nao encontrei arquivo/script claramente relacionado a: nvidia
+ATENCAO	Nao encontrei arquivo/script claramente relacionado a: energia/agressividade
+FALTA	Wrapper contem vkbasalt/gamescope; isso nao deve entrar no wrapper canonico

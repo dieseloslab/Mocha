@@ -1,0 +1,63 @@
+### /etc/pamac.conf
+5:#RemoveUnrequiredDeps
+8:RefreshPeriod = 6
+11:#NoUpdateHideIcon
+20:#EnableAUR
+26:#CheckAURUpdates
+32:BuildDirectory = /var/tmp
+35:KeepNumPackages = 3
+
+Arquivo completo:
+### Pamac configuration file
+
+## When removing a package, also remove those dependencies
+## that are not required by other packages (recurse option):
+#RemoveUnrequiredDeps
+
+## How often to check for updates, value in hours (0 to disable):
+RefreshPeriod = 6
+
+## When no update is available, hide the tray icon:
+#NoUpdateHideIcon
+
+## When applying updates, enable packages downgrade:
+#EnableDowngrade
+
+## When installing packages, do not check for updates:
+#SimpleInstall
+
+## Allow Pamac to search and install packages from AUR:
+#EnableAUR
+
+## Keep built packages from AUR in cache after installation:
+#KeepBuiltPkgs
+
+## When AUR support is enabled check for updates from AUR:
+#CheckAURUpdates
+
+## When check updates from AUR support is enabled check for vcs updates:
+#CheckAURVCSUpdates
+
+## AUR build directory:
+BuildDirectory = /var/tmp
+
+## Number of versions of each package to keep when cleaning the packages cache:
+KeepNumPackages = 3
+
+## Remove only the versions of uninstalled packages when cleaning the packages cache:
+#OnlyRmUninstalled
+
+## Download updates in background:
+#DownloadUpdates
+
+## Offline upgrade:
+#OfflineUpgrade
+
+## Maximum Parallel Downloads:
+MaxParallelDownloads = 4
+
+### configs Pamac em /etc
+/etc/dbus-1/system.d/org.manjaro.pamac.daemon.conf
+/etc/pamac.conf
+/etc/xdg/autostart/pamac-tray-budgie.desktop
+/etc/xdg/autostart/pamac-tray.desktop

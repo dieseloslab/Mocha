@@ -1,0 +1,5 @@
+options
+mocha-stable
+core
+extra
+multilib

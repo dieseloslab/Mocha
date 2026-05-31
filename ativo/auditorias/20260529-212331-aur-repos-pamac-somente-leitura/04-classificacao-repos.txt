@@ -1,0 +1,13 @@
+### Repositórios detectados
+core
+extra
+multilib
+
+### Repositórios Arch padrão esperados
+core
+extra
+multilib
+
+### Repositórios fora do Arch puro, revisar antes de qualquer update
+
+### Repositórios AUR/binários ou equivalentes, se aparecerem aqui devem ser tratados como risco

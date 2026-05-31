@@ -1,0 +1,97 @@
+
+== MOCHAARCH — auditoria, commit e push para GitHub ==
+
+== Verificando ferramentas ==
+Pacotes faltando: git-lfs
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacotes (1) git-lfs-3.7.1-1
+
+Tamanho total download:    4,13 MiB
+Tamanho total instalado:  12,54 MiB
+
+:: Continuar a instalação? [S/n] 
+:: Obtendo pacotes...
+ git-lfs-3.7.1-1-x86_64 sendo baixado...
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+verificando espaço em disco disponível...
+:: Processando alterações do pacote...
+instalando git-lfs...
+:: Executando hooks pós-transação...
+(1/1) Arming ConditionNeedsUpdate...
+
+== Testando SSH como dieseloslab ==
+Hi dieseloslab! You've successfully authenticated, but GitHub does not provide shell access.
+
+== Configurando Git local ==
+user.name : Ricardo Kern Diesel
+user.email: ricardo.diesel@gmail.com
+author    : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219613 -0300
+committer : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219613 -0300
+origin	git@github.com:dieseloslab/Mocha.git (fetch)
+origin	git@github.com:dieseloslab/Mocha.git (push)
+
+== Configurando Git LFS ==
+Updated Git hooks.
+Git LFS initialized.
+
+== Atualizando .gitignore seguro ==
+
+== Auditoria contra arquivos de chave/segredo por nome ==
+
+== Auditoria contra conteúdo sensível ==
+
+== Auditoria de arquivos maiores que 95 MiB ==
+OK: nenhum arquivo acima de 95 MiB fora do .git.
+
+== Status antes do commit ==
+?? .gitattributes
+?? .gitignore
+?? ATIVO-TRABALHO/
+?? _QUARENTENA/
+?? ajustes/
+?? ativo/
+?? auditorias/
+?? logs/
+?? quarentena/
+?? receitas/
+?? relatorios/
+?? reports/
+?? scripts/
+
+== Adicionando arquivos ==
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-bottles
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint: 	git submodule add <url> ativo/aur/pkgbuilds-auditados/20260530-102502-bottles
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint: 	git rm --cached ativo/aur/pkgbuilds-auditados/20260530-102502-bottles
+hint:
+hint: See "git help submodule" for more information.
+hint: Disable this message with "git config set advice.addEmbeddedRepo false"
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-heroic-games-launcher-bin
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-lib32-vkbasalt
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-obs-vkcapture
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt-cli
+warning: adding embedded git repository: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt
+error: open("ativo/backups/bootloader/20260530-134116-grub.cfg.bak"): Permissão negada
+error: unable to index file 'ativo/backups/bootloader/20260530-134116-grub.cfg.bak'
+fatal: adding files failed
+
+== FIM DO COMANDO ==
+RESULTADO: FALHOU com código 128
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-062646-mochaarch-commit-push-github.log

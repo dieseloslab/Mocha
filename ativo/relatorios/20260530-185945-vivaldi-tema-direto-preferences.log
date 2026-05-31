@@ -1,0 +1,37 @@
+
+==> Verificando se o Vivaldi está fechado
+
+==> Validando ferramentas
+
+==> Localizando perfil nativo do Vivaldi
+Preferences encontrados:
+/home/hal/.config/vivaldi/Default/Preferences
+
+==> Lendo esquema de cores KDE ativo
+Esquema KDE ativo: não identificado
+
+==> Localizando arquivo .colors do Mocha/KDE
+Arquivo de cores escolhido:
+/home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+
+==> Extraindo cores e aplicando direto nos Preferences
+
+Editando: /home/hal/.config/vivaldi/Default/Preferences
+Backup: /home/hal/.config/vivaldi/Default/Preferences.backup-mocha-vivaldi-tema-20260530-185945
+Tema aplicado neste Preferences.
+  Nome       : Mocha KDE Direto 20260530-185945
+  Background : #1b1612
+  Foreground : #f2e6d8
+  Highlight  : #c57b3d
+  Accent     : #c57b3d
+
+Concluído.
+
+==> Gravando documentação
+
+==> Abrindo Vivaldi
+
+PRONTO.
+Se o Vivaldi abrir igual, vá em Configurações > Temas > Biblioteca e selecione o tema "Mocha KDE Direto 20260530-185945".
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-185945-vivaldi-tema-direto-preferences.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260530-185945-vivaldi-tema-direto-preferences.md

@@ -1,0 +1,11 @@
+Auditoria somente leitura da duplicidade de Bluetooth/volume.
+
+Arquivos principais:
+- resumo-auditoria.txt
+- plasma-applets-volume-bluetooth-systemtray.txt
+- plasma-org.kde.plasma.desktop-appletsrc.copia
+
+Interpretação esperada:
+- Se houver org.kde.plasma.volume como applet independente e também dentro do system tray, a correção provável é remover apenas o applet independente.
+- Se houver org.kde.plasma.bluetooth como applet independente e também dentro do system tray, a correção provável é remover apenas o applet independente.
+- Não corrigir por dedução. Corrigir apenas após confirmar no relatório.

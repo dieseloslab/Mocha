@@ -1,0 +1,89 @@
+-- Validando nomes atuais dos pacotes no pacman local
+OK: pacote encontrado no repositório local: vivaldi
+OK: pacote encontrado no repositório local: vivaldi-ffmpeg-codecs
+OK: pacote encontrado no repositório local: bitwarden
+AVISO: não consegui confirmar via pacman -Fl que bitwarden fornece /usr/bin/bitwarden-desktop.
+Continuando porque pacman -Si confirmou o pacote bitwarden.
+-- Procurando manual de montagem real em /media/mochafast/MochaArch/ativo/documentacao
+-- Manual encontrado: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+-- Lendo trecho final atual do manual antes da alteração
+
+```text
+1. Usar `plasma-login.service` como display manager quando disponível.
+2. Desabilitar `sddm.service` para evitar conflito com login manager antigo.
+3. Não usar X11/Xorg como fallback.
+4. Não remover pacotes.
+5. Não tocar na pasta XU.
+6. Não apagar entradas de boot.
+7. Antes de editar configuração, auditar o estado real.
+
+## Script salvo
+
+Script reutilizável:
+
+`/media/mochafast/MochaArch/ativo/scripts/20260529-150104-mocha-aplicar-login-plasma-manager.sh`
+
+Atalho estável atualizado:
+
+`/media/mochafast/MochaArch/ativo/scripts/mocha-aplicar-login-plasma-manager.sh`
+```
+
+
+---
+
+## Índice de arquivos gerados nesta consolidação
+
+Data: 20260529-154304
+
+
+
+<!-- MOCHA-ENTRY:vivaldi-tema-importavel-aprovado -->
+## Vivaldi — tema importável padrão Mocha aprovado
+
+### Registro aprovado em 20260530-192447
+
+- O tema importável do Vivaldi com as cores padrão atuais do Mocha foi testado e funcionou.
+- O tema deve ser mantido fora da pasta Downloads; a pasta canônica para temas do Vivaldi é:
+  - `/media/mochafast/MochaArch/ativo/vivaldi/temas`
+- O tema deve usar as cores compatíveis com o Firefox/tema Mocha atual, para manter consistência visual com KDE/Plasma, barra, painel e navegador.
+- O arquivo importável deve ser preservado como artefato reutilizável, para que o tema possa ser importado novamente no Vivaldi sem recriação manual.
+- Fluxo correto:
+  1. Gerar ou copiar o arquivo do tema importável para `/media/mochafast/MochaArch/ativo/vivaldi/temas`.
+  2. Abrir o Vivaldi.
+  3. Ir em Configurações > Temas.
+  4. Usar Importar tema.
+  5. Selecionar o arquivo do tema Mocha salvo na pasta canônica.
+  6. Confirmar visualmente que as cores seguem o padrão Mocha atual.
+- Não recriar o tema em Downloads como solução definitiva.
+- Se uma tentativa de tema não importar ou ficar visualmente errada, apagar a tentativa falha ou mover para quarentena; não deixar arquivo quebrado no ativo.
+
+-- Backup criado: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192624
+-- Mantendo no máximo 2 backups deste manual
+-- Entrada ainda não existia; criando seção nova.
+-- Validando registro no manual
+5221-- Se uma tentativa de tema não importar ou ficar visualmente errada, apagar a tentativa falha ou mover para quarentena; não deixar arquivo quebrado no ativo.
+5222-
+5223-
+5224:<!-- MOCHA-ENTRY:programas-padrao-vivaldi-bitwarden-desktop -->
+5225-## Programas padrão — Vivaldi e Bitwarden Desktop
+5226-
+5227-### Registro aprovado em 20260530-192624
+5228-
+5229-- Incluir na lista de programas a serem instalados por padrão no Mocha Arch:
+5230-  - `vivaldi`
+5231-  - `vivaldi-ffmpeg-codecs`
+5232-  - `bitwarden`
+5233-- `vivaldi` é o navegador nativo do Mocha. Não usar a versão Flatpak como padrão, para evitar confusão entre instalações e problemas de integração nativa com KDE/Plasma.
+5234-- `vivaldi-ffmpeg-codecs` deve acompanhar o Vivaldi para suporte adicional de codecs.
+5235-- `bitwarden` é o pacote oficial do cliente Bitwarden Desktop no Arch; não confundir com extensão de navegador, Bitwarden CLI ou pacote AUR.
+5236-- A montagem padrão deve instalar estes pacotes via pacman/repositório oficial, não via AUR.
+5237-- Antes de gerar script definitivo de instalação, validar dinamicamente os nomes com:
+5238-  - `pacman -Si vivaldi vivaldi-ffmpeg-codecs bitwarden`
+5239-- Comando base para instalação, quando esta etapa for executada:
+5240-  - `sudo pacman -S --needed vivaldi vivaldi-ffmpeg-codecs bitwarden`
+5241-
+
+OK: Vivaldi e Bitwarden Desktop registrados nos programas padrão.
+Manual: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Backup: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192624
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-192624-incluir-vivaldi-bitwarden-programas-manual.log

@@ -1,0 +1,4 @@
+/home/hal/.local/share/Steam/steamapps
+/home/hal/.local/share/Steam
+/home/hal/.steam/steam/steamapps
+/home/hal/.local/share/Steam

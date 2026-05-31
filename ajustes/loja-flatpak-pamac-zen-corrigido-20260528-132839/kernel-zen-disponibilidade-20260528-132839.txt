@@ -1,0 +1,58 @@
+MOCHA ARCH — VERIFICAÇÃO KERNEL ZEN — 20260528-132839
+
+Kernel atual:
+7.0.10-arch1-1
+
+linux-zen instalado?
+
+linux-zen nos repositórios?
+linux-zen: DISPONÍVEL
+Repositório          : extra
+Nome                 : linux-zen
+Versão               : 7.0.10.zen1-1
+Descrição            : The Linux ZEN kernel and modules
+Arquitetura          : x86_64
+URL                  : https://github.com/zen-kernel/zen-kernel
+Licenças             : GPL-2.0-only
+Grupos               : Nenhum
+Provê                : KSMBD-MODULE  NTSYNC-MODULE  VHBA-MODULE  VIRTUALBOX-GUEST-MODULES  WIREGUARD-MODULE
+Depende de           : coreutils  initramfs  kmod
+Depend. opcionais    : linux-zen-headers: headers and scripts for building modules
+                       linux-firmware: firmware images needed for some devices
+                       scx-scheds: to use sched-ext schedulers
+                       wireless-regdb: to set the correct wireless channels of your country
+Conflita com         : Nenhum
+Substitui            : Nenhum
+Tamanho do download  : 152,61 MiB
+Tamanho instalado    : 152,91 MiB
+Empacotador          : Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+Data da compilação   : sáb 23 mai 2026 11:45:01
+Validado por         : Soma SHA-256  Assinatura
+
+
+linux-zen-headers: DISPONÍVEL
+Repositório          : extra
+Nome                 : linux-zen-headers
+Versão               : 7.0.10.zen1-1
+Descrição            : Headers and scripts for building modules for the Linux ZEN kernel
+Arquitetura          : x86_64
+URL                  : https://github.com/zen-kernel/zen-kernel
+Licenças             : GPL-2.0-only
+Grupos               : Nenhum
+Provê                : LINUX-HEADERS
+Depende de           : binutils  glibc  libelf  libgcc  openssl  pahole  xxhash  zlib  zstd
+Depend. opcionais    : Nenhum
+Conflita com         : Nenhum
+Substitui            : Nenhum
+Tamanho do download  : 61,50 MiB
+Tamanho instalado    : 281,31 MiB
+Empacotador          : Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+Data da compilação   : sáb 23 mai 2026 11:45:01
+Validado por         : Soma SHA-256  Assinatura
+
+
+Busca relacionada:
+extra/linux-zen 7.0.10.zen1-1
+    The Linux ZEN kernel and modules
+extra/linux-zen-headers 7.0.10.zen1-1
+    Headers and scripts for building modules for the Linux ZEN kernel

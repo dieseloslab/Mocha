@@ -1,0 +1,364 @@
+
+--- /media/mochafast/MochaArch/ativo/documentacao ---
+/media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md:9:- FPS alto usando a medição do overlay da Steam.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md:30:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md:43:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md:56:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:31:11. Não reintroduzir `MANGOHUD_DLSYM`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:32:12. Não usar `vkbasalt` nem `gamescope` no wrapper canônico Steam/Mocha.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:33:13. Não contaminar Launch Options com opções legadas.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:105:- Garantir Steam/jogo com FPS alto e fluidez.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:119:- Jogo roda na Steam com FPS alto.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:148:- FPS alto pelo overlay da Steam.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:339:### 3.8 Steam, Launch Options e wrapper
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:343:- Melhor baseline atual: Steam sem nenhuma linha em Launch Options.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:344:- Overlay da Steam usado para medir FPS.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:350:Launch Options padrão: vazio
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:361:- Não usar `MANGOHUD_DLSYM`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:369:- Todo wrapper novo precisa ser testado contra o baseline sem Launch Options.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:425:4. Wrapper Steam/Mocha novo, apenas depois de vencer ou igualar o baseline sem Launch Options.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:484:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:495:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:519:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:938:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:962:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1000:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1041:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1073:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1105:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1143:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1163:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1215:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1287:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1307:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1339:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1371:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1440:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1620:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:1644:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:2353:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:2381:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3192:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3203:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3300:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3823:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3855:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3887:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3925:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3945:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3948:### Steam, MangoHud e wrapper
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3967:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:3978:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4002:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4045:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4077:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4109:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4181:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4352:- FPS alto usando a medição do overlay da Steam.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4373:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:4461:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:5006:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:5089:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md:5153:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:1:# Mocha Arch/KDE — Auditoria e implantação do wrapper Steam limpo
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:9:Auditar o wrapper Steam real e implantar uma versão limpa, mínima e testável, baseada no melhor resultado observado até agora: jogo fluido, FPS alto e boa imagem sem Launch Options legadas.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:14:- Não usar `MANGOHUD_DLSYM`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:17:- Não forçar opções antigas de Launch Options.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:36:mangohud: /usr/bin/mangohud
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md:37:gamemoderun: /usr/bin/gamemoderun
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:1:# Mocha Arch/KDE — Wrapper Steam limpo corrigido
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:17:- O wrapper continua sem gamescope, sem vkbasalt, sem fallback X11 e sem MANGOHUD_DLSYM ativo.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:34:mangohud: /usr/bin/mangohud
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:35:gamemoderun: /usr/bin/gamemoderun
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:50:# Mocha Steam Game Run — wrapper limpo
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:51:# Uso na Steam:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:55:# - não usar MANGOHUD_DLSYM
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:59:# - preservar o comportamento base da Steam/Proton o máximo possível
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:66:unset MANGOHUD_DLSYM
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:74:MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:75:MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:79:if command -v gamemoderun >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:80:  cmd=( gamemoderun "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:83:if command -v mangohud >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:84:  export MANGOHUD=1
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:86:  if [ -f "$MANGOHUD_CONF_USER" ]; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:87:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:88:  elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:89:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:92:  cmd=( mangohud "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:117:  "MANGOHUD_"'DLSYM' \
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:128:MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:129:MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:133:if command -v gamemoderun >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:134:  cmd=( gamemoderun "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:137:if command -v mangohud >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:138:  export MANGOHUD=1
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:140:  if [ -f "$MANGOHUD_CONF_USER" ]; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:141:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:142:  elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:143:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:146:  cmd=( mangohud "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:152:## Linha para teste na Steam
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md:160:Comparar este wrapper limpo contra o baseline sem nenhuma Launch Option, porque o melhor resultado recente foi observado com o jogo lançado sem linha nenhuma.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:8:Verificar se GameMode está instalado, se o daemon responde, se ativa durante execução via `gamemoderun` e se volta ao estado normal depois.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:12:1. Jogo sem Launch Options.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:48:gamemoderun: /usr/bin/gamemoderun
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:171:Iniciando processo controlado: gamemoderun sleep 20
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:174:--- Status durante gamemoderun ---
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:303:mai 29 16:13:33 Mocha gamemoded[884]: Adding game: 11390 [/home/hal/.local/share/Steam/steamapps/common/SteamLinuxRuntime_4/pressure-vessel/libexec/steam-runtime-tools-0/x86_64-linux-gnu-inspect-library]
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:306:mai 29 16:13:33 Mocha gamemoded[884]: Removing game: 11390 [/home/hal/.local/share/Steam/steamapps/common/SteamLinuxRuntime_4/pressure-vessel/libexec/steam-runtime-tools-0/x86_64-linux-gnu-inspect-library]
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:309:mai 29 16:13:33 Mocha gamemoded[884]: Adding game: 11391 [/home/hal/.local/share/Steam/steamapps/common/SteamLinuxRuntime_4/pressure-vessel/libexec/steam-runtime-tools-0/i386-linux-gnu-inspect-library]
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:312:mai 29 16:13:33 Mocha gamemoded[884]: Removing game: 11391 [/home/hal/.local/share/Steam/steamapps/common/SteamLinuxRuntime_4/pressure-vessel/libexec/steam-runtime-tools-0/i386-linux-gnu-inspect-library]
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:476:- `gamemoderun` presente: sim
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:480:- Se `gamemoded -s` mostrou ativo durante o `gamemoderun sleep 20`, o GameMode está funcionando.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:483:  - sem Launch Options;
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:484:  - `gamemoderun %command%` puro;
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:487:Linha de teste GameMode puro para Steam:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md:490:gamemoderun %command%
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:1:# Mocha Arch/KDE — Launcher Steam com MangoHud padrão + telemetria
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:6:- MangoHud padrão usado: `/home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:8:## Linha correta para usar na Steam
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:16:- Usa o arquivo MangoHud padrão Mocha existente.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:17:- Exporta `MANGOHUD=1`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:18:- Exporta `MANGOHUD_CONFIGFILE` apontando para o padrão Mocha.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:19:- Executa `gamemoderun mangohud %command%`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:36:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:37:lib32-mangohud 0.8.3-1
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:41:gamemoderun: /usr/bin/gamemoderun
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md:43:mangohud: /usr/bin/mangohud
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:1:# Mocha Arch/KDE — Telemetria Steam ruim: não usar
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:11:Além disso, o resumo final recebido veio sem dados úteis: sem SteamAppId, sem config MangoHud, sem código de saída, sem pasta e sem resumo numérico.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:17:## Linha Steam segura atual
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:20:gamemoderun %command%
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:25:- Não mexer no MangoHud padrão Mocha.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:41:gamemoderun %command%
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md:44:Se for necessário medir depois, a medição deve ser feita de forma menos intrusiva, preferencialmente usando o próprio MangoHud padrão Mocha e log nativo, não coletor externo rodando a cada poucos segundos.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:7:## Linha Steam recomendada durante este teste
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:10:gamemoderun %command%
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:21:- Processos Steam/Proton/Wine detectados periodicamente.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:36:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:37:lib32-mangohud 0.8.3-1
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:42:gamemoderun: /usr/bin/gamemoderun
+/media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md:45:mangohud: /usr/bin/mangohud
+/media/mochafast/MochaArch/ativo/documentacao/20260529-180309-plasma-style-barra-mocha-aplicado.md:27:Não foram alterados arquivos em `/usr/share`, kernel, driver, Steam, wrapper, XU ou configurações de desempenho.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md:11:1. Wrapper Steam limpo regravado em:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md:15:   - sem `MANGOHUD_DLSYM`;
+/media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md:18:   - com `MANGOHUD=1`;
+/media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md:19:   - usa config de MangoHud do usuario se existir;
+/media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md:20:   - usa `gamemoderun` se existir.
+/media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md:66:Estado lido antes da alteração: NVIDIA 595.71.05 carregada no boot auditado, receita Mocha de agressividade ativa, mas Steam/MangoHud/wrapper ausentes e overrides de blueman/kmix ausentes.
+/media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md:67:Ação aplicada: sem mexer em boot, kernel ou driver; apenas instalou pacotes de jogos disponíveis, recriou overrides Hidden=true para blueman/kmix no usuário atual e em /etc/skel, criou MangoHud config local e wrapper limpo /home/hal/.local/bin/mocha-steam-game-run.
+/media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md:68:Regra preservada: nenhuma Launch Option da Steam foi alterada automaticamente. O baseline sem linha continua preservado; o wrapper fica disponível apenas para teste controlado.
+/media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md:69:Proibições preservadas no wrapper: sem MANGOHUD_DLSYM, sem gamescope, sem vkbasalt e sem variáveis PRIME de notebook.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-205629-base-jogos-wrapper-limpo-autostarts.md:5:Foram aplicadas apenas correções leves e reversíveis: pacotes de jogos disponíveis, autostarts Hidden=true para blueman/kmix, MangoHud config e wrapper limpo.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-205629-base-jogos-wrapper-limpo-autostarts.md:6:Launch Options não foram alteradas automaticamente.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:36:<!-- MOCHA-MANGOHUD-INICIO -->
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:37:## MangoHud padrão Mocha
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:43:- `mangohud`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:48:- Configuração Mocha do usuário: `/home/hal/.config/MangoHud/Mocha-MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:49:- Configuração padrão carregada pelo MangoHud: `/home/hal/.config/MangoHud/MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:50:- Cópia canônica do sistema: `/etc/mocha/mangohud/MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:52:Regra: o MangoHud do Mocha não deve depender de configuração genérica ou incerta. O arquivo Mocha precisa estar instalado e o `MANGOHUD_CONFIGFILE` deve apontar explicitamente para ele quando a Steam for usada em teste controlado.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:54:### Launch Option oficial para Steam
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:56:`MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/Mocha-MangoHud.conf mangohud gamemoderun %command%`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:60:`gamemoderun %command%`
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:62:Essa linha limpa só ativa GameMode. Ela não chama MangoHud.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:66:- Não usar `MANGOHUD_DLSYM=1`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:67:- Não colocar `vkbasalt` ou `gamescope` no wrapper/Launch Option canônico do Mocha.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:68:- Não trocar o arquivo de configuração do MangoHud sem registrar no manual.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:72:- Rodar `pacman -Q mangohud gamemode`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:73:- Rodar `mangohud --version`.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:74:- Abrir jogo pela Steam com a Launch Option oficial.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md:76:<!-- MOCHA-MANGOHUD-FIM -->
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211622-MARCO-ESTADO-REPRODUZIDO-POS-FORMATACAO.md:47:- Testar jogos primeiro sem Launch Options, preservando o baseline que funcionou bem anteriormente.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211622-MARCO-ESTADO-REPRODUZIDO-POS-FORMATACAO.md:48:- Não reintroduzir wrapper, MangoHud forçado, vkbasalt, gamescope ou MANGOHUD_DLSYM sem teste separado.
+/media/mochafast/MochaArch/ativo/documentacao/20260529-212702-levantamento-programas-jogos-atualizacao-zero.md:13:Jogos Steam detectados por manifest: 12
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:1:# Mocha Arch - atualização controlada apenas do MangoHud
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:7:- Foi atualizada somente a família alvo: `mangohud`.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:16:mangohud 0.8.3-2
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:22:mangohud 0.8.4-1
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:40:- Log: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-atualizacao-controlada-apenas-mangohud.log`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:41:- Atualizações antes: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacman-Qu-antes-mangohud.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:42:- Atualizações depois: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacman-Qu-depois-mangohud.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:43:- MangoHud antes: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-antes.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:44:- MangoHud repo sync: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-sync-repo.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:45:- MangoHud depois: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-depois.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:46:- Foreign/AUR: `/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacotes-foreign-pos-mangohud.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:47:- Script reutilizável: `/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:51:- Abrir um jogo pela Steam.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md:52:- Confirmar se o overlay do MangoHud aparece.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:1:# Mocha Arch - MangoHud fixado no padrão Mocha
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:7:- MangoHud e GameMode foram validados como pacotes obrigatórios.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:9:- O arquivo padrão `MangoHud.conf` agora recebe a configuração Mocha.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:10:- Uma cópia canônica foi instalada em `/etc/mocha/mangohud/MangoHud.conf`.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:11:- A Launch Option oficial foi gravada em arquivo próprio.
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:16:`/home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:18:## Launch Option oficial
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:20:`MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/Mocha-MangoHud.conf mangohud gamemoderun %command%`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:24:- Log: `/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-fixar-mangohud-padrao-mocha-e-manual.log`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:25:- Candidatos encontrados: `/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-mangohud-configs-candidatos.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:26:- Configuração selecionada: `/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-mangohud-config-selecionado.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:27:- Configuração Mocha do usuário: `/home/hal/.config/MangoHud/Mocha-MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:28:- Configuração padrão do MangoHud: `/home/hal/.config/MangoHud/MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:29:- Configuração canônica do sistema: `/etc/mocha/mangohud/MangoHud.conf`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:30:- Launch Option com timestamp: `/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/20260530-060042-launch-option-mangohud-gamemode-mocha.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:31:- Launch Option fixa: `/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/launch-option-oficial-mangohud-gamemode-mocha.txt`
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md:33:- Script reutilizável: `/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh`
+
+--- /media/mochafast/MochaArch/ativo/gaming ---
+/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/20260530-060042-launch-option-mangohud-gamemode-mocha.txt:1:MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/Mocha-MangoHud.conf mangohud gamemoderun %command%
+/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/launch-option-oficial-mangohud-gamemode-mocha.txt:1:MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/Mocha-MangoHud.conf mangohud gamemoderun %command%
+
+--- /media/mochafast/MochaArch/ativo/scripts ---
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:21:  "MANGOHUD_"'DLSYM' \
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:32:MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:33:MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:37:if command -v gamemoderun >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:38:  cmd=( gamemoderun "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:41:if command -v mangohud >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:42:  export MANGOHUD=1
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:44:  if [ -f "$MANGOHUD_CONF_USER" ]; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:45:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:46:  elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:47:    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:50:  cmd=( mangohud "${cmd[@]}" )
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:59:BAD_RAW="$(grep -En 'MANGOHUD_DLSYM|ENABLE_VKBASALT|(^|[^A-Za-z])vkbasalt([^A-Za-z]|$)|(^|[^A-Za-z])gamescope([^A-Za-z]|$)|x11|X11|xorg|Xorg' "$WRAPPER" || true)"
+/media/mochafast/MochaArch/ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh:66:echo "Wrapper Mocha Steam limpo instalado em: $WRAPPER"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:11:MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:12:MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:15:export MANGOHUD=1
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:17:if [ -f "$MANGOHUD_CONF_USER" ]; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:18:  export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:19:elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:20:  export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:23:if command -v gamemoderun >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:24:  exec gamemoderun "$@"
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:32:if grep -Eiq 'MANGOHUD_DLSYM|vkbasalt|gamescope' "$WRAPPER"; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh:37:echo "Wrapper Steam Mocha limpo aplicado: $WRAPPER"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:71:    printf '%s\n' "Estado lido antes da alteração: NVIDIA 595.71.05 carregada no boot auditado, receita Mocha de agressividade ativa, mas Steam/MangoHud/wrapper ausentes e overrides de blueman/kmix ausentes."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:72:    printf '%s\n' "Ação aplicada: sem mexer em boot, kernel ou driver; apenas instalou pacotes de jogos disponíveis, recriou overrides Hidden=true para blueman/kmix no usuário atual e em /etc/skel, criou MangoHud config local e wrapper limpo /home/hal/.local/bin/mocha-steam-game-run."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:73:    printf '%s\n' "Regra preservada: nenhuma Launch Option da Steam foi alterada automaticamente. O baseline sem linha continua preservado; o wrapper fica disponível apenas para teste controlado."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:74:    printf '%s\n' "Proibições preservadas no wrapper: sem MANGOHUD_DLSYM, sem gamescope, sem vkbasalt e sem variáveis PRIME de notebook."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:116:say "Conferindo pacman.conf e multilib para Steam"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:121:  say "Steam não está visível; verificando se multilib precisa ser habilitado"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:172:CANDIDATES=(steam mangohud lib32-mangohud gamemode lib32-gamemode)
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:198:say "Criando configuração MangoHud local do Mocha"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:199:MANGOHUD_DIR="$HOME_DIR/.config/MangoHud"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:200:MANGOHUD_CONF="$MANGOHUD_DIR/Mocha-MangoHud-FPS-Comparacao.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:201:run mkdir -p "$MANGOHUD_DIR"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:220:} > "$MANGOHUD_CONF"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:221:chmod 0644 "$MANGOHUD_CONF"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:230:  printf '%s\n' 'export MANGOHUD=1'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:231:  printf '%s\n' 'export MANGOHUD_CONFIGFILE="${MANGOHUD_CONFIGFILE:-$HOME/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf}"'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:232:  printf '%s\n' 'unset MANGOHUD_DLSYM'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:240:  printf '%s\n' '  printf "%s\n" "Uso Steam Launch Options: /home/hal/.local/bin/mocha-steam-game-run %command%" >&2'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:244:  printf '%s\n' 'if command -v gamemoderun >/dev/null 2>&1 && command -v mangohud >/dev/null 2>&1; then'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:245:  printf '%s\n' '  exec gamemoderun mangohud "$@"'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:246:  printf '%s\n' 'elif command -v mangohud >/dev/null 2>&1; then'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:247:  printf '%s\n' '  exec mangohud "$@"'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:248:  printf '%s\n' 'elif command -v gamemoderun >/dev/null 2>&1; then'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:249:  printf '%s\n' '  exec gamemoderun "$@"'
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:257:if grep -nE 'MANGOHUD_DLSYM=1|gamescope|vkbasalt|prime-run|__NV_PRIME_RENDER_OFFLOAD=1|__VK_LAYER_NV_optimus=NVIDIA_only' "$WRAPPER"; then
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:269:  printf '%s\n' "Foram aplicadas apenas correções leves e reversíveis: pacotes de jogos disponíveis, autostarts Hidden=true para blueman/kmix, MangoHud config e wrapper limpo."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:270:  printf '%s\n' "Launch Options não foram alteradas automaticamente."
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:279:pacman -Q steam mangohud lib32-mangohud gamemode lib32-gamemode 2>/dev/null || true
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:291:printf '\n%s\n' "MangoHud config:"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:292:sed -n '1,80p' "$MANGOHUD_CONF"
+/media/mochafast/MochaArch/ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh:302:printf '\n%s\n' "Próximo teste manual opcional na Steam, sem aplicar automaticamente:"
+/media/mochafast/MochaArch/ativo/scripts/20260529-211622-registrar-marco-pos-formatacao.sh:87:- Testar jogos primeiro sem Launch Options, preservando o baseline que funcionou bem anteriormente.
+/media/mochafast/MochaArch/ativo/scripts/20260529-211622-registrar-marco-pos-formatacao.sh:88:- Não reintroduzir wrapper, MangoHud forçado, vkbasalt, gamescope ou MANGOHUD_DLSYM sem teste separado.
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:17:LOG="$REPORT_DIR/${TS}-atualizacao-controlada-apenas-mangohud.log"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:18:DOC="$DOC_DIR/${TS}-atualizacao-controlada-apenas-mangohud.md"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:19:SCRIPT_COPY="$SCRIPT_DIR/${TS}-mocha-atualizar-apenas-mangohud-controlado.sh"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:21:UPDATES_BEFORE="$REPORT_DIR/${TS}-pacman-Qu-antes-mangohud.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:22:UPDATES_AFTER="$REPORT_DIR/${TS}-pacman-Qu-depois-mangohud.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:23:MANGOHUD_BEFORE="$REPORT_DIR/${TS}-mangohud-antes.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:24:MANGOHUD_SYNC="$REPORT_DIR/${TS}-mangohud-sync-repo.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:25:MANGOHUD_AFTER="$REPORT_DIR/${TS}-mangohud-depois.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:26:FOREIGN_LIST="$REPORT_DIR/${TS}-pacotes-foreign-pos-mangohud.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:128:say "Validando que MangoHud está instalado e tem atualização"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:129:pacman -Q mangohud | tee "$MANGOHUD_BEFORE"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:131:if ! grep -q '^mangohud ' "$UPDATES_BEFORE"; then
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:132:  fail "mangohud não aparece como atualização pendente. Não vou forçar instalação."
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:135:if grep -v '^mangohud ' "$UPDATES_BEFORE" | grep -q .; then
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:137:  grep -v '^mangohud ' "$UPDATES_BEFORE"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:139:  printf '%s\n' "MangoHud é a única atualização pendente."
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:143:pacman -Si mangohud | tee "$MANGOHUD_SYNC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:146:find /var/cache/pacman/pkg -maxdepth 1 -type f -name 'mangohud-*.pkg.tar.*' -printf '%T@ %p\n' 2>/dev/null \
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:151:say "Atualizando somente mangohud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:152:printf '%s\n' "Comando: sudo pacman -S --needed --noconfirm mangohud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:154:"${SUDO[@]}" pacman -S --needed --noconfirm mangohud
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:156:say "Validando MangoHud após atualização"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:157:pacman -Q mangohud | tee "$MANGOHUD_AFTER"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:159:if command -v mangohud >/dev/null 2>&1; then
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:160:  mangohud --version 2>&1 || true
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:162:  printf '%s\n' "Comando mangohud não encontrado no PATH, mas pacote pacman foi validado."
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:196:append_doc "# Mocha Arch - atualização controlada apenas do MangoHud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:202:append_doc "- Foi atualizada somente a família alvo: \`mangohud\`."
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:211:cat "$MANGOHUD_BEFORE" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:217:cat "$MANGOHUD_AFTER" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:245:append_doc "- MangoHud antes: \`$MANGOHUD_BEFORE\`"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:246:append_doc "- MangoHud repo sync: \`$MANGOHUD_SYNC\`"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:247:append_doc "- MangoHud depois: \`$MANGOHUD_AFTER\`"
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:253:append_doc "- Abrir um jogo pela Steam."
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh:254:append_doc "- Confirmar se o overlay do MangoHud aparece."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:16:QUAR_DIR="$FAST_BASE/quarentena/mangohud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:18:LOG="$REPORT_DIR/${TS}-fixar-mangohud-padrao-mocha-e-manual.log"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:19:DOC="$DOC_DIR/${TS}-mangohud-padrao-mocha-fixado.md"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:20:SCRIPT_COPY="$SCRIPT_DIR/${TS}-mocha-fixar-mangohud-padrao-mocha-e-manual.sh"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:21:CANDIDATES="$REPORT_DIR/${TS}-mangohud-configs-candidatos.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:22:SELECTED="$REPORT_DIR/${TS}-mangohud-config-selecionado.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:23:MANUAL_SECTION="$REPORT_DIR/${TS}-secao-manual-mangohud-mocha.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:24:LAUNCH_FILE="$STEAM_OPTIONS_DIR/${TS}-launch-option-mangohud-gamemode-mocha.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:25:FIXED_LAUNCH_FILE="$STEAM_OPTIONS_DIR/launch-option-oficial-mangohud-gamemode-mocha.txt"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:30:USER_MH_DIR="$USER_HOME/.config/MangoHud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:31:USER_MOCHA_CONF="$USER_MH_DIR/Mocha-MangoHud.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:32:USER_DEFAULT_CONF="$USER_MH_DIR/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:33:SYSTEM_MH_DIR="/etc/mocha/mangohud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:34:SYSTEM_MOCHA_CONF="$SYSTEM_MH_DIR/MangoHud.conf"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:38:START_MARK="<!-- MOCHA-MANGOHUD-INICIO -->"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:39:END_MARK="<!-- MOCHA-MANGOHUD-FIM -->"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:79:pacman -Q mangohud
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:82:command -v mangohud >/dev/null 2>&1 || fail "Comando mangohud não encontrado."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:83:command -v gamemoderun >/dev/null 2>&1 || fail "Comando gamemoderun não encontrado."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:85:printf '%s\n' "MangoHud versão:"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:86:mangohud --version 2>&1 || true
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:88:say "Busca controlada por configurações MangoHud existentes"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:102:    timeout 25s find "$root" -maxdepth 8 -type f \( -iname '*mangohud*.conf' -o -iname 'MangoHud.conf' \) -print 2>/dev/null >> "$CANDIDATES" || true
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:109:  fail "Nenhum arquivo de configuração MangoHud foi encontrado. Não vou inventar visual Mocha."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:124:      if (p ~ /\/\.config\/MangoHud\//) score-=1000
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:125:      if (p ~ /Mocha-MangoHud/) score-=800
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:127:      if (p ~ /MangoHud.conf$/) score-=300
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:135:[ -n "$SOURCE_CONF" ] || fail "Não foi possível selecionar configuração MangoHud."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:144:say "Preparando diretório local do MangoHud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:181:say "Instalando cópia canônica em /etc/mocha/mangohud"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:191:printf '%s\n' "Arquivo padrão do MangoHud: $USER_DEFAULT_CONF"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:194:if grep -RIn 'MANGOHUD_DLSYM' "$USER_MOCHA_CONF" "$USER_DEFAULT_CONF" "$SYSTEM_MOCHA_CONF" 2>/dev/null; then
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:195:  fail "MANGOHUD_DLSYM apareceu na configuração; isso não é permitido no padrão Mocha."
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:198:say "Criando Launch Option oficial MangoHud + GameMode + padrão Mocha"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:199:LAUNCH_OPTION="MANGOHUD_CONFIGFILE=$USER_MOCHA_CONF mangohud gamemoderun %command%"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:204:printf '%s\n' "Launch Option oficial:"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:233:printf '%s\n' "## MangoHud padrão Mocha" >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:239:printf '%s\n' "- \`mangohud\`" >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:245:printf '%s\n' "- Configuração padrão carregada pelo MangoHud: \`$USER_DEFAULT_CONF\`" >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:248:printf '%s\n' "Regra: o MangoHud do Mocha não deve depender de configuração genérica ou incerta. O arquivo Mocha precisa estar instalado e o \`MANGOHUD_CONFIGFILE\` deve apontar explicitamente para ele quando a Steam for usada em teste controlado." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:250:printf '%s\n' "### Launch Option oficial para Steam" >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:256:printf '%s\n' "\`gamemoderun %command%\`" >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:258:printf '%s\n' "Essa linha limpa só ativa GameMode. Ela não chama MangoHud." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:262:printf '%s\n' "- Não usar \`MANGOHUD_DLSYM=1\`." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:263:printf '%s\n' "- Não colocar \`vkbasalt\` ou \`gamescope\` no wrapper/Launch Option canônico do Mocha." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:264:printf '%s\n' "- Não trocar o arquivo de configuração do MangoHud sem registrar no manual." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:268:printf '%s\n' "- Rodar \`pacman -Q mangohud gamemode\`." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:269:printf '%s\n' "- Rodar \`mangohud --version\`." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:270:printf '%s\n' "- Abrir jogo pela Steam com a Launch Option oficial." >> "$MANUAL_SECTION"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:293:printf '%s\n' "# Mocha Arch - MangoHud fixado no padrão Mocha" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:299:printf '%s\n' "- MangoHud e GameMode foram validados como pacotes obrigatórios." >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:301:printf '%s\n' "- O arquivo padrão \`MangoHud.conf\` agora recebe a configuração Mocha." >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:302:printf '%s\n' "- Uma cópia canônica foi instalada em \`/etc/mocha/mangohud/MangoHud.conf\`." >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:303:printf '%s\n' "- A Launch Option oficial foi gravada em arquivo próprio." >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:310:printf '%s\n' "## Launch Option oficial" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:320:printf '%s\n' "- Configuração padrão do MangoHud: \`$USER_DEFAULT_CONF\`" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:322:printf '%s\n' "- Launch Option com timestamp: \`$LAUNCH_FILE\`" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:323:printf '%s\n' "- Launch Option fixa: \`$FIXED_LAUNCH_FILE\`" >> "$DOC"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:333:printf '%s\n' "Configuração padrão MangoHud: $USER_DEFAULT_CONF"
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh:335:printf '%s\n' "Launch Option oficial:"

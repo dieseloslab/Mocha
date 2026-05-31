@@ -1,0 +1,20 @@
+Repositório          : extra
+Nome                 : mangohud
+Versão               : 0.8.4-1
+Descrição            : A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more.
+Arquitetura          : x86_64
+URL                  : https://github.com/flightlessmango/MangoHud
+Licenças             : MIT
+Grupos               : Nenhum
+Provê                : Nenhum
+Depende de           : dbus  fmt  glfw  hicolor-icon-theme  libglvnd  libx11  libxkbcommon  python  python-matplotlib  python-numpy  vulkan-icd-loader  wayland
+Depend. opcionais    : gamescope: Use MangoApp as an overlay within gamescope
+                       libxnvctrl: NVIDIA GPU stats by XNVCtrl
+Conflita com         : mangohud-common  mangohud-common-wayland  mangohud-common-x11  mangoapp  mangohud-x11  mangohud-wayland
+Substitui            : mangohud-common  mangohud-common-wayland  mangohud-common-x11  mangoapp  mangohud-x11  mangohud-wayland
+Tamanho do download  : 2037,83 KiB
+Tamanho instalado    : 10127,08 KiB
+Empacotador          : Leonidas Spyropoulos <artafinde@archlinux.org>
+Data da compilação   : qui 28 mai 2026 08:23:51
+Validado por         : Soma SHA-256  Assinatura
+

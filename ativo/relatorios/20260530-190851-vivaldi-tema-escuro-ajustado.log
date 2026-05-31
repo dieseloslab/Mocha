@@ -1,0 +1,62 @@
+
+==> Validando ferramenta necessária
+
+==> Usando pasta canônica do Vivaldi
+BASE: /media/mochafast/MochaArch/ativo
+THEME_DIR: /media/mochafast/MochaArch/ativo/vivaldi/temas
+
+==> Apagando apenas arquivos de temas Mocha/Vivaldi das tentativas anteriores
+Apagando: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190617-Mocha-KDE-Canonico-settings.json
+Apagando: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190617-Mocha-KDE-Canonico.zip
+
+==> Lendo esquema KDE ativo
+Esquema KDE ativo: não identificado
+
+==> Localizando arquivo .colors do tema KDE/Mocha
+Arquivo de cores escolhido: /home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+
+Lista de candidatos encontrados:
+/home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaKDE.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/Mocha-Windows11.colors
+
+==> Gerando tema novo, mais escuro e com acento mais discreto
+Cores-base lidas do KDE:
+  Window BG bruto : #1b1612
+  View BG bruto   : #171310
+  Foreground      : #f2e6d8
+  Accent bruto    : #c57b3d
+  Selection bruto : #c57b3d
+
+Cores ajustadas para o Vivaldi:
+  Window BG       : #181310
+  Toolbar BG      : #191411
+  Accent UI       : #734b28
+  Highlight UI    : #8f5b2f
+
+Tema gerado:
+  Nome            : Mocha KDE Escuro Ajustado 20260530-190851
+  ZIP             : /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190851-Mocha-KDE-Escuro-Ajustado.zip
+  SHA256          : 7f2b508e66d6704f691ce0b6bea564f1f1f1107173ed27f2545693c9c6df67fa
+
+==> Validando ZIP final
+Conteúdo do ZIP:
+  settings.json  585 bytes
+ZIP válido para importação.
+
+==> Copiando caminho do ZIP para a área de transferência, se possível
+Sem wl-copy/xclip; copie o caminho manualmente.
+
+==> Documentando
+
+==> Abrindo pasta canônica do tema e tela de temas do Vivaldi
+
+PRONTO.
+Importe este ZIP no Vivaldi:
+/media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190851-Mocha-KDE-Escuro-Ajustado.zip
+
+No Vivaldi: Settings > Themes > Library > Importar Tema > selecione o ZIP > Install.
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-190851-vivaldi-tema-escuro-ajustado.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260530-190851-vivaldi-tema-escuro-ajustado.md

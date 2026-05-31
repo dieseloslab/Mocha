@@ -1,0 +1,116 @@
+
+== MOCHA — LEVANTAMENTO DE PROGRAMAS/JOGOS — SOMENTE LEITURA ==
+Saída: /media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos
+Data: 2026-05-29T21:27:02-03:00
+Usuário real: hal
+
+== Garantias ==
+Não será removido pacote nenhum.
+Não será atualizado pacote nenhum.
+Não será usado yay, paru ou Pamac.
+Não será varrida a pasta XU.
+O comando só gera relatórios e documentação.
+
+== 1/9 — Pacotes pacman explícitos ==
+
+== 2/9 — Todos os pacotes pacman ==
+
+== 3/9 — Pacotes foreign/AUR/locais ==
+
+== 4/9 — Flatpaks instalados ==
+
+== 5/9 — Aplicativos gráficos por arquivos .desktop ==
+
+== 6/9 — Candidatos a jogos/launchers/ferramentas gamer ==
+
+== 7/9 — Programas grandes ou não necessariamente finais do Mocha ==
+
+== 8/9 — Bibliotecas Steam sem varredura pesada ==
+
+== 9/9 — Estado Mocha sensível atual ==
+
+== Gerando resumo e documentação ==
+# Mocha Arch — levantamento de programas e jogos
+
+Data: 2026-05-29T21:27:03-03:00
+
+Pasta: /media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos
+
+## Resultado curto
+
+Pacotes pacman explícitos: 493
+Pacotes pacman totais: 1654
+Pacotes foreign/AUR/locais: 2
+Flatpaks instalados: 0
+Jogos Steam detectados por manifest: 12
+
+## Leitura operacional
+
+Este levantamento não removeu nem atualizou nada.
+AUR/foreign fica fora da rotina de atualização geral.
+Jogos e programas pessoais devem ser tratados como inventário da máquina atual, não como composição automática da edição final do Mocha.
+A próxima etapa é revisar as listas 06 e 07 para separar base Mocha, opcionais, testes e itens pessoais.
+
+## Arquivos principais
+
+01-pacman-explicitos.txt
+03-pacotes-foreign-detalhados.txt
+04-flatpaks.txt
+06-jogos-launchers-ferramentas-gamer.txt
+07-programas-para-revisao-edicao-final.txt
+08-steam-jogos-detectados.tsv
+09-estado-mocha-sensivel-atual.txt
+
+== Prévia — pacotes foreign/AUR/locais ==
+### pacman -Qqm
+libpamac-aur
+pamac-aur
+
+### detalhes
+
+--- libpamac-aur ---
+URL                  : https://github.com/manjaro/libpamac/
+
+--- pamac-aur ---
+URL                  : https://github.com/manjaro/pamac
+
+== Prévia — jogos/launchers/ferramentas gamer ==
+### pacman explícitos relacionados a jogos
+gamemode
+lib32-gamemode
+lib32-mangohud
+lib32-vulkan-icd-loader
+mangohud
+steam
+usb_modeswitch
+
+### flatpaks relacionados a jogos
+
+### desktop entries relacionados a jogos
+steam.desktop
+
+== Prévia — programas para revisão da edição final ==
+### pacman explícitos para revisão humana
+android-tools
+android-udev
+firefox
+kdenlive
+libpamac-aur
+pamac-aur
+steam
+
+### desktop entries para revisão humana
+firefox.desktop
+org.kde.kdenlive.desktop
+org.manjaro.pamac.manager.desktop
+pamac-installer.desktop
+steam.desktop
+
+== Concluído ==
+Cole aqui o conteúdo de:
+/media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos/RESUMO.md
+
+E, se quiser revisar agora, cole também:
+/media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos/03-pacotes-foreign-detalhados.txt
+/media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos/06-jogos-launchers-ferramentas-gamer.txt
+/media/mochafast/MochaArch/ativo/auditorias/20260529-212702-levantamento-programas-jogos/07-programas-para-revisao-edicao-final.txt

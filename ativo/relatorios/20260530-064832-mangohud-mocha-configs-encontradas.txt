@@ -1,0 +1,26 @@
+ENCONTRADO: /home/hal/.config/MangoHud/Mocha-MangoHud.conf
+ENCONTRADO: /home/hal/.config/MangoHud/MangoHud.conf
+ENCONTRADO: /etc/mocha/mangohud/MangoHud.conf
+ausente: /etc/MangoHud.conf
+/media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md
+/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/20260530-060042-launch-option-mangohud-gamemode-mocha.txt
+/media/mochafast/MochaArch/ativo/gaming/steam-launch-options/launch-option-oficial-mangohud-gamemode-mocha.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-atualizacao-controlada-apenas-mangohud.log
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-antes.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-depois.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-mangohud-sync-repo.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacman-Qu-antes-mangohud.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacman-Qu-depois-mangohud.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-055358-pacotes-foreign-pos-mangohud.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-fixar-mangohud-padrao-mocha-e-manual.log
+/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-mangohud-configs-candidatos.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-mangohud-config-selecionado.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-060042-secao-manual-mangohud-mocha.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064611-auditoria-documentacao-mangohud-grep.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064611-auditoria-documentacao-mangohud-mocha.md
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064611-auditoria-mangohud-configs.txt
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064832-mangohud-mocha-configs-encontradas.txt
+/media/mochafast/MochaArch/ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh
+/media/mochafast/MochaArch/ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh

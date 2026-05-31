@@ -1,0 +1,48 @@
+         type: Boot Loader Specification Type #1 (.conf)
+        title: EndeavourOS (7.0.10-arch1-1) (default)
+           id: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1.conf
+       source: /efi//loader/entries/09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1.conf (on the EFI System Partition)
+     sort-key: endeavouros-7.0.10-arch1-1
+      version: 7.0.10-arch1-1
+   machine-id: 09a044e993f7415a92dd2833d9afb1d2
+        linux: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/linux
+       initrd: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/initrd
+      options: nvme_load=YES nowatchdog rw rootflags=subvol=/@ root=UUID=eaa807e8-e03e-4502-bca6-f7a49c93a6f3 nvidia_drm.modeset=1 modprobe.blacklist=nouveau nouveau.modeset=0 systemd.machine_id=09a044e993f7415a92dd2833d9afb1d2
+
+         type: Boot Loader Specification Type #1 (.conf)
+        title: EndeavourOS (7.0.10-arch1-1-fallback)
+           id: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1-fallback.conf
+       source: /efi//loader/entries/09a044e993f7415a92dd2833d9afb1d2-7.0.10-arch1-1-fallback.conf (on the EFI System Partition)
+     sort-key: endeavouros-7.0.10-arch1-1-fallback
+      version: 7.0.10-arch1-1-fallback
+   machine-id: 09a044e993f7415a92dd2833d9afb1d2
+        linux: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/linux
+       initrd: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-arch1-1/initrd-fallback
+      options: nvme_load=YES nowatchdog rw rootflags=subvol=/@ root=UUID=eaa807e8-e03e-4502-bca6-f7a49c93a6f3 nvidia_drm.modeset=1 modprobe.blacklist=nouveau nouveau.modeset=0 systemd.machine_id=09a044e993f7415a92dd2833d9afb1d2
+
+         type: Boot Loader Specification Type #1 (.conf)
+        title: EndeavourOS (7.0.10-zen1-1-zen) (selected)
+           id: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-zen1-1-zen.conf
+       source: /efi//loader/entries/09a044e993f7415a92dd2833d9afb1d2-7.0.10-zen1-1-zen.conf (on the EFI System Partition)
+     sort-key: endeavouros-7.0.10-zen1-1-zen
+      version: 7.0.10-zen1-1-zen
+   machine-id: 09a044e993f7415a92dd2833d9afb1d2
+        linux: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-zen1-1-zen/linux
+       initrd: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-zen1-1-zen/initrd
+      options: nvme_load=YES nowatchdog rw rootflags=subvol=/@ root=UUID=eaa807e8-e03e-4502-bca6-f7a49c93a6f3 nvidia_drm.modeset=1 modprobe.blacklist=nouveau nouveau.modeset=0 systemd.machine_id=09a044e993f7415a92dd2833d9afb1d2
+
+         type: Boot Loader Specification Type #1 (.conf)
+        title: EndeavourOS (7.0.10-zen1-1-zen-fallback)
+           id: 09a044e993f7415a92dd2833d9afb1d2-7.0.10-zen1-1-zen-fallback.conf
+       source: /efi//loader/entries/09a044e993f7415a92dd2833d9afb1d2-7.0.10-zen1-1-zen-fallback.conf (on the EFI System Partition)
+     sort-key: endeavouros-7.0.10-zen1-1-zen-fallback
+      version: 7.0.10-zen1-1-zen-fallback
+   machine-id: 09a044e993f7415a92dd2833d9afb1d2
+        linux: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-zen1-1-zen/linux
+       initrd: /efi//09a044e993f7415a92dd2833d9afb1d2/7.0.10-zen1-1-zen/initrd-fallback
+      options: nvme_load=YES nowatchdog rw rootflags=subvol=/@ root=UUID=eaa807e8-e03e-4502-bca6-f7a49c93a6f3 nvidia_drm.modeset=1 modprobe.blacklist=nouveau nouveau.modeset=0 systemd.machine_id=09a044e993f7415a92dd2833d9afb1d2
+
+         type: Automatic
+        title: Reboot Into Firmware Interface
+           id: auto-reboot-to-firmware-setup
+       source: /sys/firmware/efi/efivars/LoaderEntries-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f (on the EFI System Partition)

@@ -1,0 +1,371 @@
+== Solicitando sudo ==
+
+== 01/05 — Estado antes da restauração ==
+Sistema:
+NAME="EndeavourOS"
+PRETTY_NAME="EndeavourOS"
+ID="endeavouros"
+ID_LIKE="arch"
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://endeavouros.com"
+DOCUMENTATION_URL="https://discovery.endeavouros.com"
+SUPPORT_URL="https://forum.endeavouros.com"
+BUG_REPORT_URL="https://forum.endeavouros.com/c/general-system/endeavouros-installation"
+PRIVACY_POLICY_URL="https://endeavouros.com/privacy-policy-2"
+LOGO="endeavouros"
+
+Kernel atual preservado:
+Linux hal-systemproductname 7.0.10-arch1-1 #1 SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:21:20 +0000 x86_64 GNU/Linux
+
+Pamac/Discover/Flatpak:
+pamac-aur 11.7.5-1
+libpamac-aur 11.7.4-2
+discover 6.6.5-1
+packagekit 1.3.5-1
+packagekit-qt6 1.1.4-2
+flatpak 1:1.16.6-1
+flatpak-kcm 6.6.5-1
+xdg-desktop-portal-kde 6.6.5-1
+
+Pacotes removidos que já estão instalados ou ausentes agora:
+A_RESTAURAR docbook-xml
+A_RESTAURAR docbook-xsl
+A_RESTAURAR gd
+A_RESTAURAR glib2-docs
+A_RESTAURAR graphviz
+A_RESTAURAR gsfonts
+A_RESTAURAR gtk-doc
+A_RESTAURAR gts
+A_RESTAURAR libheif
+A_RESTAURAR netpbm
+A_RESTAURAR python-autocommand
+A_RESTAURAR python-jaraco.collections
+A_RESTAURAR python-jaraco.context
+A_RESTAURAR python-jaraco.functools
+A_RESTAURAR python-jaraco.text
+A_RESTAURAR python-lxml
+A_RESTAURAR python-mako
+A_RESTAURAR python-markdown
+A_RESTAURAR python-more-itertools
+A_RESTAURAR python-pkg_resources
+A_RESTAURAR python-platformdirs
+A_RESTAURAR python-pygments
+A_RESTAURAR python-setuptools
+A_RESTAURAR python-tqdm
+A_RESTAURAR python-wheel
+A_RESTAURAR asciidoc
+A_RESTAURAR gobject-introspection
+A_RESTAURAR itstool
+A_RESTAURAR meson
+A_RESTAURAR ninja
+A_RESTAURAR vala
+
+== 02/05 — Validar nomes nos repositórios atuais ==
+OK: docbook-xml
+OK: docbook-xsl
+OK: gd
+OK: glib2-docs
+OK: graphviz
+OK: gsfonts
+OK: gtk-doc
+OK: gts
+OK: libheif
+OK: netpbm
+OK: python-autocommand
+OK: python-jaraco.collections
+OK: python-jaraco.context
+OK: python-jaraco.functools
+OK: python-jaraco.text
+OK: python-lxml
+OK: python-mako
+OK: python-markdown
+OK: python-more-itertools
+OK: python-pkg_resources
+OK: python-platformdirs
+OK: python-pygments
+OK: python-setuptools
+OK: python-tqdm
+OK: python-wheel
+OK: asciidoc
+OK: gobject-introspection
+OK: itstool
+OK: meson
+OK: ninja
+OK: vala
+
+== 03/05 — Reinstalar somente pacotes disponíveis, sem remover nada ==
+Pacotes disponíveis para instalar/confirmar:
+ - docbook-xml
+ - docbook-xsl
+ - gd
+ - glib2-docs
+ - graphviz
+ - gsfonts
+ - gtk-doc
+ - gts
+ - libheif
+ - netpbm
+ - python-autocommand
+ - python-jaraco.collections
+ - python-jaraco.context
+ - python-jaraco.functools
+ - python-jaraco.text
+ - python-lxml
+ - python-mako
+ - python-markdown
+ - python-more-itertools
+ - python-pkg_resources
+ - python-platformdirs
+ - python-pygments
+ - python-setuptools
+ - python-tqdm
+ - python-wheel
+ - asciidoc
+ - gobject-introspection
+ - itstool
+ - meson
+ - ninja
+ - vala
+
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacote (31)                      Versão nova       Diferença
+
+extra/asciidoc                   10.2.1-3           2,38 MiB
+extra/docbook-xml                4.5-11             1,96 MiB
+extra/docbook-xsl                1.79.2-9          26,32 MiB
+extra/gd                         2.3.3-9            0,64 MiB
+core/glib2-docs                  2.88.1-1          66,78 MiB
+extra/gobject-introspection      1.86.0-2           3,11 MiB
+extra/graphviz                   14.1.5-1          10,79 MiB
+extra/gsfonts                    20200910-6         3,11 MiB
+extra/gtk-doc                    1.36.1-1           3,43 MiB
+extra/gts                        0.7.6.121130-5     0,67 MiB
+extra/itstool                    1:2.0.7-3          0,09 MiB
+extra/libheif                    1.22.2-1           2,69 MiB
+extra/meson                      1.11.1-3          16,42 MiB
+extra/netpbm                     10.86.49-3         7,67 MiB
+extra/ninja                      1.13.2-3           0,41 MiB
+extra/python-autocommand         2.2.2-9            0,08 MiB
+extra/python-jaraco.collections  5.1.0-3            0,11 MiB
+extra/python-jaraco.context      6.1.2-1            0,06 MiB
+extra/python-jaraco.functools    4.1.0-3            0,07 MiB
+extra/python-jaraco.text         4.0.0-4            0,08 MiB
+extra/python-lxml                6.1.1-1            5,91 MiB
+extra/python-mako                1.3.11-1           0,98 MiB
+extra/python-markdown            3.10.2-1           1,13 MiB
+extra/python-more-itertools      11.1.0-1           0,77 MiB
+extra/python-pkg_resources       81.0.0-1           0,50 MiB
+extra/python-platformdirs        4.10.0-1           0,45 MiB
+extra/python-pygments            2.20.0-1          15,36 MiB
+extra/python-setuptools          1:82.0.1-1         7,35 MiB
+extra/python-tqdm                4.67.3-1           0,62 MiB
+extra/python-wheel               0.47.0-1           0,33 MiB
+extra/vala                       0.56.19-1         14,43 MiB
+
+Tamanho total instalado:  194,70 MiB
+
+:: Continuar a instalação? [S/n] 
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+:: Processando alterações do pacote...
+instalando docbook-xml...
+instalando docbook-xsl...
+instalando libheif...
+Dependências opcionais para libheif
+    libjpeg-turbo: for heif-dec and heif-enc [instalado]
+    libpng: for heif-dec and heif-enc [instalado]
+    libtiff: for heif-dec and heif-enc [instalado]
+    dav1d: dav1d encoder [instalado]
+    ffmpeg: hardware decode [instalado]
+    openjpeg2: JPEG2000 decoder [instalado]
+    rav1e: rav1e encoder [instalado]
+    svt-av1: svt-av1 encoder [instalado]
+instalando gd...
+Dependências opcionais para gd
+    perl: bdftogd script [instalado]
+instalando glib2-docs...
+instalando netpbm...
+instalando gts...
+instalando gsfonts...
+instalando graphviz...
+Dependências opcionais para graphviz
+    mono: sharp bindings
+    guile: guile bindings [instalado]
+    lua: lua bindings [instalado]
+    perl: perl bindings [instalado]
+    python: python bindings [instalado]
+    r: r bindings
+    tcl: tcl bindings [instalado]
+    qt6-base: gvedit [instalado]
+    xterm: vimdot [instalado]
+instalando python-lxml...
+Dependências opcionais para python-lxml
+    python-beautifulsoup4: support for beautifulsoup parser to parse not well formed HTML
+    python-cssselect: support for cssselect
+    python-html5lib: support for html5lib parser
+    python-lxml-docs: offline docs
+    python-lxml-html-clean: enable htmlclean feature
+instalando python-pygments...
+instalando gtk-doc...
+Dependências opcionais para gtk-doc
+    dblatex: PDF support
+instalando python-autocommand...
+instalando python-more-itertools...
+instalando python-jaraco.functools...
+instalando python-jaraco.context...
+instalando python-jaraco.text...
+Dependências opcionais para python-jaraco.text
+    python-inflect: for show-newlines script
+instalando python-jaraco.collections...
+instalando python-mako...
+Dependências opcionais para python-mako
+    python-babel: for i18n features
+    python-beaker: for caching support
+    python-dogpile.cache: for caching support
+    python-pygments: for syntax highlighting [instalado]
+    python-pytest: for testing utilities
+instalando python-markdown...
+Dependências opcionais para python-markdown
+    python-yaml: parse Python in YAML metadata [instalado]
+    python-pygments: Code highlighting [instalado]
+instalando python-platformdirs...
+instalando python-pkg_resources...
+instalando python-wheel...
+Dependências opcionais para python-wheel
+    python-keyring: for wheel.signatures
+    python-xdg: for wheel.signatures
+    python-setuptools: for legacy bdist_wheel subcommand [pendente]
+instalando python-setuptools...
+instalando python-tqdm...
+Dependências opcionais para python-tqdm
+    python-requests: telegram
+instalando asciidoc...
+Dependências opcionais para asciidoc
+    graphviz: graphviz-filter [instalado]
+    lilypond: music-filter
+    imagemagick: music-filter [instalado]
+    source-highlight: source-highlight-filter [instalado]
+    dblatex: pdf generation
+    fop: alternative pdf generation
+    w3m: text generation
+    lynx: alternative text generation
+instalando gobject-introspection...
+instalando itstool...
+instalando ninja...
+instalando meson...
+instalando vala...
+:: Executando hooks pós-transação...
+(1/6) Arming ConditionNeedsUpdate...
+(2/6) Updating fontconfig configuration...
+(3/6) Refreshing PackageKit...
+(4/6) Checking for old perl modules...
+(5/6) Updating fontconfig cache...
+(6/6) Updating 32-bit fontconfig cache...
+
+== 04/05 — Validar depois ==
+Pacotes restaurados/confirmados:
+docbook-xml 4.5-11
+docbook-xsl 1.79.2-9
+gd 2.3.3-9
+glib2-docs 2.88.1-1
+graphviz 14.1.5-1
+gsfonts 20200910-6
+gtk-doc 1.36.1-1
+gts 0.7.6.121130-5
+libheif 1.22.2-1
+netpbm 10.86.49-3
+python-autocommand 2.2.2-9
+python-jaraco.collections 5.1.0-3
+python-jaraco.context 6.1.2-1
+python-jaraco.functools 4.1.0-3
+python-jaraco.text 4.0.0-4
+python-lxml 6.1.1-1
+python-mako 1.3.11-1
+python-markdown 3.10.2-1
+python-more-itertools 11.1.0-1
+python-pkg_resources 81.0.0-1
+python-platformdirs 4.10.0-1
+python-pygments 2.20.0-1
+python-setuptools 1:82.0.1-1
+python-tqdm 4.67.3-1
+python-wheel 0.47.0-1
+asciidoc 10.2.1-3
+gobject-introspection 1.86.0-2
+itstool 1:2.0.7-3
+meson 1.11.1-3
+ninja 1.13.2-3
+vala 0.56.19-1
+
+Ferramentas principais:
+/usr/bin/meson
+/usr/bin/ninja
+/usr/bin/valac
+/usr/bin/pamac-manager
+/usr/bin/plasma-discover
+
+Kernel ainda preservado:
+7.0.10-arch1-1
+
+== 05/05 — Gravar resumo ==
+MOCHA ARCH — RESUMO RESTAURAÇÃO DEPENDÊNCIAS PAMAC — 20260528-133145
+
+Ação:
+Reinstalados/confirmados os pacotes removidos pelo --removemake após build do pamac-aur.
+
+Kernel preservado:
+7.0.10-arch1-1
+
+Pamac/Discover/Flatpak:
+pamac-aur 11.7.5-1
+libpamac-aur 11.7.4-2
+discover 6.6.5-1
+packagekit 1.3.5-1
+packagekit-qt6 1.1.4-2
+flatpak 1:1.16.6-1
+flatpak-kcm 6.6.5-1
+xdg-desktop-portal-kde 6.6.5-1
+
+Dependências restauradas/confirmadas:
+docbook-xml 4.5-11
+docbook-xsl 1.79.2-9
+gd 2.3.3-9
+glib2-docs 2.88.1-1
+graphviz 14.1.5-1
+gsfonts 20200910-6
+gtk-doc 1.36.1-1
+gts 0.7.6.121130-5
+libheif 1.22.2-1
+netpbm 10.86.49-3
+python-autocommand 2.2.2-9
+python-jaraco.collections 5.1.0-3
+python-jaraco.context 6.1.2-1
+python-jaraco.functools 4.1.0-3
+python-jaraco.text 4.0.0-4
+python-lxml 6.1.1-1
+python-mako 1.3.11-1
+python-markdown 3.10.2-1
+python-more-itertools 11.1.0-1
+python-pkg_resources 81.0.0-1
+python-platformdirs 4.10.0-1
+python-pygments 2.20.0-1
+python-setuptools 1:82.0.1-1
+python-tqdm 4.67.3-1
+python-wheel 0.47.0-1
+asciidoc 10.2.1-3
+gobject-introspection 1.86.0-2
+itstool 1:2.0.7-3
+meson 1.11.1-3
+ninja 1.13.2-3
+vala 0.56.19-1
+
+Arquivos:
+Log: /media/mochafast/MochaArch/ajustes/restaurar-dependencias-removidas-pamac-20260528-133145/LOG-RESTAURAR-DEPENDENCIAS-REMOVIDAS-PAMAC-20260528-133145.txt
+Resumo: /media/mochafast/MochaArch/ajustes/restaurar-dependencias-removidas-pamac-20260528-133145/RESUMO-RESTAURAR-DEPENDENCIAS-REMOVIDAS-PAMAC-20260528-133145.txt
+
+== CONCLUÍDO ==
+Resumo: /media/mochafast/MochaArch/ajustes/restaurar-dependencias-removidas-pamac-20260528-133145/RESUMO-RESTAURAR-DEPENDENCIAS-REMOVIDAS-PAMAC-20260528-133145.txt

@@ -1,0 +1,67 @@
+
+== MOCHAARCH — correção limpa, auditoria, commit e push para GitHub ==
+
+== Verificando ferramentas necessárias ==
+OK: ferramentas necessárias já instaladas.
+
+== Testando SSH como dieseloslab ==
+Hi dieseloslab! You've successfully authenticated, but GitHub does not provide shell access.
+
+== Inicializando/configurando Git local ==
+user.name : Ricardo Kern Diesel
+user.email: ricardo.diesel@gmail.com
+author    : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219720 -0300
+committer : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219720 -0300
+origin	git@github.com:dieseloslab/Mocha.git (fetch)
+origin	git@github.com:dieseloslab/Mocha.git (push)
+
+== Limpando índice parcial da tentativa anterior ==
+
+== Configurando Git LFS ==
+Updated Git hooks.
+Git LFS initialized.
+
+== Atualizando .gitignore seguro ==
+
+== Convertendo clones AUR auditados em snapshots comuns ==
+find: aviso: você especificou a opção global -mindepth após o argumento -path, mas as opções globais não são posicionais (ou seja, -mindepth afeta testes especificados antes disso assim como aqueles especificados após). Por favor, especifique opções globais antes de outros argumentos.
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-bottles
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-heroic-games-launcher-bin
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-lib32-vkbasalt
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-obs-vkcapture
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt
+Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt-cli
+
+== Auditoria de arquivos ignorados críticos ==
+Backups e quarentenas serão preservados no disco, mas não serão enviados ao GitHub.
+.gitignore:27:**/backups/	ativo/backups
+.gitignore:25:**/_QUARENTENA/	_QUARENTENA
+.gitignore:26:**/quarentena/	quarentena
+
+== Auditoria contra nomes de prováveis segredos ==
+OK: nenhum arquivo candidato com nome de chave/segredo.
+
+== Auditoria contra conteúdo sensível ==
+OK: nenhum conteúdo sensível detectado nos candidatos.
+
+== Auditoria de arquivos maiores que 95 MiB ==
+OK: nenhum arquivo acima de 95 MiB candidato ao commit.
+
+== Status antes do commit ==
+?? .gitattributes
+?? .gitignore
+?? ATIVO-TRABALHO/
+?? ajustes/
+?? ativo/
+?? auditorias/
+?? logs/
+?? receitas/
+?? relatorios/
+?? reports/
+?? scripts/
+
+== Adicionando arquivos ao índice ==

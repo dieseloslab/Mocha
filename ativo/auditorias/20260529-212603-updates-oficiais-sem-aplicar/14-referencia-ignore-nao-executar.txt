@@ -1,0 +1,7 @@
+### Pacotes sensíveis bloqueados para revisão
+
+### Lista em formato --ignore, somente referência, NÃO executar automaticamente
+nenhum pacote sensível detectado
+
+### Aviso
+Este arquivo é referência. Não aplicar atualização parcial sem revisão, porque Arch deve evitar upgrades parciais quando houver dependências cruzadas.

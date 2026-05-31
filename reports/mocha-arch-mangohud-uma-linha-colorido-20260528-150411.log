@@ -1,0 +1,176 @@
+== 1) Auditoria atual ==
+
+-- MangoHud instalado --
+mangohud 0.8.3-2
+lib32-mangohud 0.8.3-1
+
+-- Config root atual --
+     1	# MOCHA MangoHud — teste FPS/frametime
+     2	# Gerado em: 20260528-142427
+     3	legacy_layout=0
+     4	position=top-left
+     5	font_size=20
+     6	background_alpha=0.35
+     7	
+     8	fps
+     9	frametime
+    10	gpu_stats
+    11	gpu_temp
+    12	gpu_core_clock
+    13	gpu_mem_clock
+    14	vram
+    15	cpu_stats
+    16	cpu_temp
+    17	ram
+    18	gamemode
+    19	vulkan_driver
+    20	wine
+    21	time
+    22	time_format=%H:%M
+
+-- Config usuário atual --
+     1	# MOCHA MangoHud — teste FPS/frametime
+     2	# Gerado em: 20260528-142427
+     3	legacy_layout=0
+     4	position=top-left
+     5	font_size=20
+     6	background_alpha=0.35
+     7	
+     8	fps
+     9	frametime
+    10	gpu_stats
+    11	gpu_temp
+    12	gpu_core_clock
+    13	gpu_mem_clock
+    14	vram
+    15	cpu_stats
+    16	cpu_temp
+    17	ram
+    18	gamemode
+    19	vulkan_driver
+    20	wine
+    21	time
+    22	time_format=%H:%M
+
+-- Wrapper atual --
+     1	#!/usr/bin/env bash
+     2	set -Eeuo pipefail
+     3	
+     4	# MOCHA — wrapper de jogo Steam
+     5	# Não altera driver de vídeo.
+     6	# Não usa vkBasalt.
+     7	# Não usa gamescope.
+     8	# Não usa MANGOHUD_DLSYM.
+     9	
+    10	export MANGOHUD=1
+    11	export MANGOHUD_CONFIGFILE="${MANGOHUD_CONFIGFILE:-$HOME/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf}"
+    12	export DXVK_LOG_LEVEL="${DXVK_LOG_LEVEL:-none}"
+    13	
+    14	if command -v gamemoderun >/dev/null 2>&1 && command -v mangohud >/dev/null 2>&1; then
+    15	  exec gamemoderun mangohud "$@"
+    16	elif command -v mangohud >/dev/null 2>&1; then
+    17	  exec mangohud "$@"
+    18	elif command -v gamemoderun >/dev/null 2>&1; then
+    19	  exec gamemoderun "$@"
+    20	else
+    21	  exec "$@"
+    22	fi
+
+== 2) Gravar MangoHud Mocha: uma linha, sem gráficos, com cores ==
+Backup criado: /etc/mocha/mangohud/MangoHud.conf.bak.20260528-150411
+Arquivo gravado limpo: /etc/mocha/mangohud/MangoHud.conf
+Config Mocha copiada para:
+  /home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
+  /home/hal/.config/MangoHud/MangoHud.conf
+
+== 3) Regravar wrapper para respeitar somente esta config Mocha ==
+Backup criado: /home/hal/.local/bin/mocha-steam-game-run.bak.20260528-150411
+Arquivo gravado limpo: /home/hal/.local/bin/mocha-steam-game-run
+
+== 4) Validação final ==
+
+-- Config final --
+     1	# MOCHA MangoHud — uma linha colorida, sem gráficos
+     2	# Gerado em: 20260528-150411
+     3	# Objetivo: overlay discreto para jogo, parecido com overlay simples, mas com hora.
+     4	# Sem frametime graph, sem histórico, sem gráficos.
+     5	
+     6	legacy_layout=0
+     7	horizontal
+     8	hud_no_margin
+     9	position=top-left
+    10	font_size=18
+    11	background_alpha=0.28
+    12	round_corners=6
+    13	table_columns=24
+    14	text_outline
+    15	text_outline_thickness=1
+    16	
+    17	# Desliga gráficos/plots/frametime visual.
+    18	frame_timing=0
+    19	frametime=0
+    20	histogram=0
+    21	fps_sampling_period=500
+    22	
+    23	# Métricas em uma linha.
+    24	fps
+    25	gpu_stats
+    26	gpu_temp
+    27	cpu_stats
+    28	cpu_temp
+    29	vram
+    30	ram
+    31	gamemode
+    32	time
+    33	time_format=%H:%M
+    34	
+    35	# Cores Mocha: discretas, com destaque por métrica.
+    36	text_color=E8DCC8
+    37	background_color=241A14
+    38	fps_color=E7B66B
+    39	gpu_color=D9965B
+    40	cpu_color=C98255
+    41	vram_color=B8774D
+    42	ram_color=A86D48
+    43	wine_color=E8DCC8
+    44	engine_color=E8DCC8
+    45	
+    46	# Atalhos.
+    47	toggle_hud=Shift_R+F12
+    48	toggle_logging=Shift_R+F2
+
+-- Wrapper final --
+     1	#!/usr/bin/env bash
+     2	set -Eeuo pipefail
+     3	
+     4	# MOCHA — wrapper de jogo Steam
+     5	# MangoHud Mocha: uma linha, sem gráficos, com cores.
+     6	# Não altera driver de vídeo.
+     7	# Não usa vkBasalt.
+     8	# Não usa gamescope.
+     9	# Não usa MANGOHUD_DLSYM.
+    10	
+    11	unset MANGOHUD_CONFIG
+    12	unset MANGOHUD_PRESETSFILE
+    13	
+    14	export MANGOHUD=1
+    15	export MANGOHUD_CONFIGFILE="$HOME/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+    16	export DXVK_LOG_LEVEL="${DXVK_LOG_LEVEL:-none}"
+    17	
+    18	if command -v gamemoderun >/dev/null 2>&1 && command -v mangohud >/dev/null 2>&1; then
+    19	  exec gamemoderun mangohud "$@"
+    20	elif command -v mangohud >/dev/null 2>&1; then
+    21	  exec mangohud "$@"
+    22	elif command -v gamemoderun >/dev/null 2>&1; then
+    23	  exec gamemoderun "$@"
+    24	else
+    25	  exec "$@"
+    26	fi
+
+-- Launch Options correta na Steam --
+/home/hal/.local/bin/mocha-steam-game-run %command%
+
+Pronto. Abra o jogo pelo Steam comum com:
+/home/hal/.local/bin/mocha-steam-game-run %command%
+
+Log salvo em: /media/mochafast/MochaArch/reports/mocha-arch-mangohud-uma-linha-colorido-20260528-150411.log

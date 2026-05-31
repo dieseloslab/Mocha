@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if [ "$#" -lt 1 ]; then
+  echo "Uso: mocha-steam-game-run %command%" >&2
+  exit 64
+fi
+
+for mocha_env_var in \
+  "MANGOHUD_"'DLSYM' \
+  'ENABLE_''VKBASALT' \
+  'VK''BASALT_CONFIG_FILE' \
+  'GAMESCOPE_''ARGS' \
+  'GAMESCOPE_''WSI'
+do
+  unset "$mocha_env_var" || true
+done
+
+export DXVK_LOG_LEVEL="${DXVK_LOG_LEVEL:-none}"
+
+MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+
+cmd=( "$@" )
+
+if command -v gamemoderun >/dev/null 2>&1; then
+  cmd=( gamemoderun "${cmd[@]}" )
+fi
+
+if command -v mangohud >/dev/null 2>&1; then
+  export MANGOHUD=1
+
+  if [ -f "$MANGOHUD_CONF_USER" ]; then
+    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+  elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+  fi
+
+  cmd=( mangohud "${cmd[@]}" )
+fi
+
+exec "${cmd[@]}"

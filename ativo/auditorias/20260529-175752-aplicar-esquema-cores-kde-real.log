@@ -1,0 +1,22 @@
+== 1/7 — Preflight ==
+Origem:  /media/mochafast/MochaKDE-BaseAtiva-20260527-221154/kdedeutoflake/tema-kde-atual-salvo-20260524-212342/home-config/.local/share/color-schemes
+Destino: /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados
+Usuário: /home/hal/.local/share/color-schemes
+
+== 2/7 — Validando arquivos .colors reais ==
+OK: MochaSolidCanonico.colors
+OK: MochaKDE.colors
+OK: MochaDark.colors
+OK: Mocha-Windows11.colors
+
+== 3/7 — Copiando esquemas para pasta ativa do MochaArch ==
+Copiado: MochaSolidCanonico.colors
+Copiado: MochaKDE.colors
+Copiado: MochaDark.colors
+Copiado: Mocha-Windows11.colors
+
+== 4/7 — Mostrando nomes internos e quantidade de cores ==
+
+--- MochaSolidCanonico.colors ---
+ColorScheme=MochaSolidCanonico
+Name=Mocha Solid Canonico

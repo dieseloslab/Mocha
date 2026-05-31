@@ -1,0 +1,17 @@
+== MOCHA ARCH — RESUMO PAINEL KDE WIN11 APROVADO ==
+arquivo=/home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+paineis=2
+
+-- painel 2 --
+location=4
+formfactor=2
+AppletOrder=4;23;3;5;24;6;7;21;22
+  applet=3 plugin=org.kde.plasma.kickoff
+  applet=4 plugin=org.kde.plasma.pager
+  applet=5 plugin=org.kde.plasma.icontasks launchers=preferred://filemanager,applications:org.kde.konsole.desktop,preferred://browser
+  applet=6 plugin=org.kde.plasma.marginsseparator
+  applet=7 plugin=org.kde.plasma.systemtray
+  applet=21 plugin=org.kde.plasma.digitalclock
+  applet=22 plugin=org.kde.plasma.showdesktop
+  applet=23 plugin=org.kde.plasma.panelspacer expanding=true length=0
+  applet=24 plugin=org.kde.plasma.panelspacer expanding=true length=0

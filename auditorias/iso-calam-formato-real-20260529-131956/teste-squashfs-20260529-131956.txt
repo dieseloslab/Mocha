@@ -1,0 +1,1 @@
+FATAL ERROR: Can't find a valid SQUASHFS superblock on /tmp/tmp.OphOYAzwcX/iso/arch/x86_64/airootfs.sfs

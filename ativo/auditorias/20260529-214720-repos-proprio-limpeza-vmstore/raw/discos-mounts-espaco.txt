@@ -1,0 +1,21 @@
+Comando: bash -lc $'\ndf -hT / /media/vmstore /media/mochafast 2>/dev/null || true\necho\nfindmnt / /media/vmstore /media/mochafast 2>/dev/null || true\necho\nlsblk -o NAME,SIZE,FSTYPE,FSVER,LABEL,UUID,MOUNTPOINTS 2>/dev/null || true\n'
+
+Sist. Arq.     Tipo   Tam. Usado Disp. Uso% Montado em
+/dev/nvme0n1p2 xfs    913G  146G  767G  16% /
+/dev/sdb1      xfs    1,9T  921G  942G  50% /media/vmstore
+/dev/sda1      btrfs  448G  131G  281G  32% /media/mochafast
+
+
+NAME          SIZE FSTYPE FSVER LABEL     UUID                                 MOUNTPOINTS
+sda         447,1G                                                             
+└─sda1      447,1G btrfs        MOCHAFAST 88e6aa16-110c-4b97-9ffb-85084c000198 /media/mochafast
+sdb           1,8T                                                             
+└─sdb1        1,8T xfs          vmstore   b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore
+sdc          55,9G                                                             
+├─sdc1       55,9G exfat  1.0   Ventoy    5D8D-2429                            
+└─sdc2         32M vfat   FAT16 VTOYEFI   EA6C-95B2                            
+zram0        15,4G swap   1     zram0     b812e237-0e26-4343-9c88-0ae3019cd1d5 [SWAP]
+nvme0n1     931,5G                                                             
+├─nvme0n1p1     2G vfat   FAT32           CF08-8F54                            /boot/efi
+├─nvme0n1p2 912,6G xfs          Mocha     2a8beb39-04e6-4520-a873-9134a2f73f53 /
+└─nvme0n1p3    17G swap   1     swap      c55827ce-1ead-4561-84c9-435612a8862b [SWAP]

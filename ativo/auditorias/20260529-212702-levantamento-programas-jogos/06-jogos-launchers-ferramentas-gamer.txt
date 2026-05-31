@@ -1,0 +1,13 @@
+### pacman explícitos relacionados a jogos
+gamemode
+lib32-gamemode
+lib32-mangohud
+lib32-vulkan-icd-loader
+mangohud
+steam
+usb_modeswitch
+
+### flatpaks relacionados a jogos
+
+### desktop entries relacionados a jogos
+steam.desktop

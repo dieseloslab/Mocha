@@ -1,0 +1,23 @@
+==> Gerando tema Vivaldi com paleta tipo Firefox/Mocha
+Base: /media/mochafast/MochaArch/ativo
+Pasta de temas: /media/mochafast/MochaArch/ativo/vivaldi/temas
+
+==> Removendo temas ruins/antigos da pasta canônica
+==> Removendo somente cópias erradas anteriores em Downloads/Transferências, se existirem
+Arquivos removidos:
+  /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190851-Mocha-KDE-Escuro-Ajustado.zip
+  /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-190851-Mocha-KDE-Escuro-Ajustado-settings.json
+
+==> Criando paleta fixa baseada no Firefox da captura
+
+==> Tema criado
+Nome: Mocha Firefox Vivaldi 20260530-191138
+ZIP: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-191138-Mocha-Firefox-Vivaldi.zip
+JSON: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-191138-Mocha-Firefox-Vivaldi-settings.json
+SHA256: 8125245b00e61ea420e1fadd6c21119a586797a1a7e56721311cd08f7cfc3e2e
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260530-191138-vivaldi-tema-firefox-mocha.md
+
+
+PRONTO.
+Importe este ZIP no Vivaldi:
+/media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-191138-Mocha-Firefox-Vivaldi.zip

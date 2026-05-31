@@ -1,0 +1,30 @@
+Comando: bash -lc $'\npacman -Q \\\n  linux linux-headers linux-zen linux-zen-headers linux-lts linux-lts-headers \\\n  nvidia nvidia-open nvidia-open-dkms nvidia-utils lib32-nvidia-utils \\\n  mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader \\\n  plasma-desktop plasma-workspace sddm flatpak steam gamemode lib32-gamemode mangohud goverlay \\\n  tuned cpupower bluez bluez-utils bluedevil blueman kmix pipewire wireplumber \\\n  2>/dev/null || true\n'
+
+linux 7.0.10.arch1-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+nvidia-open-dkms 595.71.05-2
+nvidia-open-dkms 595.71.05-2
+nvidia-utils 595.71.05-2
+lib32-nvidia-utils 595.71.05-1
+mesa 1:26.1.1-2
+lib32-mesa 1:26.1.1-1
+vulkan-icd-loader 1.4.350.0-1
+lib32-vulkan-icd-loader 1.4.350.0-1
+plasma-desktop 6.6.5-1
+plasma-workspace 6.6.5-2
+sddm 0.21.0-7
+flatpak 1:1.16.6-1
+steam 1.0.0.85-7
+gamemode 1.8.2-2
+lib32-gamemode 1.8.2-1
+mangohud 0.8.3-2
+tuned 2.27.0-1
+cpupower 7.0.10-1
+bluez 5.86-6
+bluedevil 1:6.6.5-1
+blueman 2.4.6-2
+kmix 26.04.1-1
+pipewire 1:1.6.6-1
+wireplumber 0.5.14-1

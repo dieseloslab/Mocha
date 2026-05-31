@@ -1,0 +1,2 @@
+libpamac-aur 11.7.4-2
+pamac-aur 11.7.4-3

@@ -1,0 +1,33 @@
+
+== Confirmando pacman.conf atual ==
+80:[mocha-stable]
+82:Server = file:///media/vmstore/MochaArch/repos/mocha-stable/os/x86_64
+
+== Seções ativas ==
+options
+mocha-stable
+core
+extra
+multilib
+
+== Removendo temporários root-owned deixados pelo teste anterior ==
+Diretórios encontrados:
+  /tmp/mocha-repo-stable-test-20260530-055006.boaNlw
+Temporários removidos.
+
+== Localizando último script reutilizável do repo stable ==
+Script anterior encontrado:
+/media/mochafast/MochaArch/ativo/scripts/20260530-055006-mocha-continuar-repo-stable-ativar-pacman-conf.sh
+Cópia de quarentena do script com falha:
+/media/mochafast/MochaArch/quarentena/scripts-com-erro/20260530-055134-20260530-055006-mocha-continuar-repo-stable-ativar-pacman-conf.sh.quarentena
+Script corrigido validado com bash -n:
+/media/mochafast/MochaArch/ativo/scripts/20260530-055134-mocha-continuar-repo-stable-ativar-pacman-conf-corrigido.sh
+
+== Registrando correção em Markdown ==
+
+== Resumo final ==
+Documentação: /media/mochafast/MochaArch/ativo/documentacao/20260530-055134-repo-stable-correcao-limpeza-tmp.md
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-055134-corrigir-limpeza-tmp-repo-stable.log
+Script corrigido: /media/mochafast/MochaArch/ativo/scripts/20260530-055134-mocha-continuar-repo-stable-ativar-pacman-conf-corrigido.sh
+
+== Concluído ==

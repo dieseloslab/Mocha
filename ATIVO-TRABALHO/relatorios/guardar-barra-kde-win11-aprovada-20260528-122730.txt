@@ -1,0 +1,61 @@
+== Caminhos ==
+FAST_ROOT=/media/mochafast
+BASE=/media/mochafast/MochaArch
+ATIVO=/media/mochafast/MochaArch/ATIVO-TRABALHO
+SCRIPT=/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados/kde/mocha-kde-barra-win11-limpa-aprovada-20260528-122730.sh
+SNAPSHOT=/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados/kde/plasma-org.kde.plasma.desktop-appletsrc.barra-win11-funcionando-20260528-122730.conf
+MANIFEST=/media/mochafast/MochaArch/ATIVO-TRABALHO/manifestos/MANIFESTO-barra-kde-win11-aprovada-20260528-122730.txt
+REPORT=/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios/guardar-barra-kde-win11-aprovada-20260528-122730.txt
+
+== Criando script aprovado da barra KDE estilo Windows 11 ==
+OK — script aprovado salvo e executável:
+/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados/kde/mocha-kde-barra-win11-limpa-aprovada-20260528-122730.sh
+
+== Salvando snapshot da configuração atual do Plasma ==
+OK — snapshot salvo:
+/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados/kde/plasma-org.kde.plasma.desktop-appletsrc.barra-win11-funcionando-20260528-122730.conf
+
+== Mantendo no máximo 2 snapshots aprovados do appletsrc ==
+snapshots_mantidos=1
+
+== Gerando resumo técnico do painel atual ==
+== MOCHA ARCH — RESUMO PAINEL KDE WIN11 APROVADO ==
+arquivo=/home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+paineis=2
+
+-- painel 2 --
+location=4
+formfactor=2
+AppletOrder=4;23;3;5;24;6;7;21;22
+  applet=3 plugin=org.kde.plasma.kickoff
+  applet=4 plugin=org.kde.plasma.pager
+  applet=5 plugin=org.kde.plasma.icontasks launchers=preferred://filemanager,applications:org.kde.konsole.desktop,preferred://browser
+  applet=6 plugin=org.kde.plasma.marginsseparator
+  applet=7 plugin=org.kde.plasma.systemtray
+  applet=21 plugin=org.kde.plasma.digitalclock
+  applet=22 plugin=org.kde.plasma.showdesktop
+  applet=23 plugin=org.kde.plasma.panelspacer expanding=true length=0
+  applet=24 plugin=org.kde.plasma.panelspacer expanding=true length=0
+
+== Criando manifesto da solução aprovada ==
+OK — manifesto salvo:
+/media/mochafast/MochaArch/ATIVO-TRABALHO/manifestos/MANIFESTO-barra-kde-win11-aprovada-20260528-122730.txt
+
+== Estrutura criada ==
+/media/mochafast/MochaArch
+/media/mochafast/MochaArch/ATIVO-TRABALHO
+/media/mochafast/MochaArch/ATIVO-TRABALHO/manifestos
+/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios
+/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados
+/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados/kde
+/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados
+/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados/kde
+
+== Arquivos principais ==
+/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados/kde/mocha-kde-barra-win11-limpa-aprovada-20260528-122730.sh
+/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados/kde/plasma-org.kde.plasma.desktop-appletsrc.barra-win11-funcionando-20260528-122730.conf
+/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios/resumo-painel-kde-win11-aprovado-20260528-122730.txt
+/media/mochafast/MochaArch/ATIVO-TRABALHO/manifestos/MANIFESTO-barra-kde-win11-aprovada-20260528-122730.txt
+/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios/guardar-barra-kde-win11-aprovada-20260528-122730.txt
+
+OK — MochaArch criado/atualizado no FAST sem reaplicar nada.

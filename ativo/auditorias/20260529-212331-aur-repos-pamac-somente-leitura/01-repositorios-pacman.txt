@@ -1,0 +1,27 @@
+### pacman-conf --repo-list
+core
+extra
+multilib
+
+### seções em /etc/pacman.conf e includes
+9:[options]
+77:[core]
+78:Include = /etc/pacman.d/mirrorlist
+83:[extra]
+84:Include = /etc/pacman.d/mirrorlist
+92:[multilib]
+93:Include = /etc/pacman.d/mirrorlist
+
+### arquivos em /etc/pacman.d
+/etc/pacman.d/gnupg/gpg.conf
+/etc/pacman.d/gnupg/.gpg-v21-migrated
+/etc/pacman.d/gnupg/pubring.gpg
+/etc/pacman.d/gnupg/pubring.gpg~
+/etc/pacman.d/gnupg/secring.gpg
+/etc/pacman.d/gnupg/tofu.db
+/etc/pacman.d/gnupg/trustdb.gpg
+/etc/pacman.d/hooks.bin/fix-appstream-data.sh
+/etc/pacman.d/hooks/fix-appstream-data.hook
+/etc/pacman.d/mirrorlist
+
+### referências suspeitas a AUR/Chaotic/terceiros

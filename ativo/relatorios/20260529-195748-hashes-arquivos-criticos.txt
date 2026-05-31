@@ -1,0 +1,12 @@
+dd772480f6f3a6c19704e1e56c3e51f90e4f09972a5b7b6a428d84796938bad4  /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+fa9810ed17507011b44dcdbdd7a66d006414c671460f67687767d208cee3818d  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+67e1e7a134245d45ad104b214fc19451892f30b782c40b426fe7541d69c541ae  /home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+67e1e7a134245d45ad104b214fc19451892f30b782c40b426fe7541d69c541ae  /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
+c5769f634504c39abc259d21006dcb15d98e6099c9e203cb78da74180d321458  /home/hal/.config/plasmarc
+ae3ac72886b4348c91106bde9074461c0278b3b2ef1c738e5c3af534c159c98b  /home/hal/.config/kdeglobals
+3da9cca7c858a29bd8da2cb273ca588a756827c66220a9c3573895115dd9abb5  /home/hal/.config/autostart/blueman.desktop
+e54faf05e81fb7d2db9741c281e7107945e6e40703e13a75808166fca1808271  /home/hal/.config/autostart/kmix_autostart.desktop
+72e899cbcf80112637b5b9a933ddcdb3d2086b1859da8c9d78d47c283eaf8dee  /etc/skel/.config/autostart/blueman.desktop
+6af41312274e9fcc3241190a2f47214942a05cda4e1e09ef773bf857906d864c  /etc/skel/.config/autostart/kmix_autostart.desktop
+c69fa4c32b94fbcc5b6c867f22377446b5482688c3d8df72a3908ed436d26089  /etc/fstab
+40a184ed5765843dc6879be208f6ccb17936fa2bf146b11ed19967bcf088a67e  /etc/default/grub

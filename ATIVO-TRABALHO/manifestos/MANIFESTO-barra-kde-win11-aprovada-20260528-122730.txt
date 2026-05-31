@@ -1,0 +1,34 @@
+MOCHA ARCH — KDE BARRA ESTILO WINDOWS 11 — SOLUÇÃO APROVADA
+
+timestamp=20260528-122730
+host=hal-systemproductname
+usuario=hal
+kernel=7.0.10-arch1-1
+fast_root=/media/mochafast
+pasta_trabalho=/media/mochafast/MochaArch
+
+Estado:
+- Bluetooth já foi corrigido antes.
+- Barra KDE estilo Windows 11 funcionou e foi aprovada.
+- Esta gravação não reaplicou o ajuste; apenas preservou o script e a configuração atual.
+
+Arquivos:
+- script_aprovado=/media/mochafast/MochaArch/ATIVO-TRABALHO/scripts-aprovados/kde/mocha-kde-barra-win11-limpa-aprovada-20260528-122730.sh
+- snapshot_appletsrc_funcionando=/media/mochafast/MochaArch/ATIVO-TRABALHO/snapshots-aprovados/kde/plasma-org.kde.plasma.desktop-appletsrc.barra-win11-funcionando-20260528-122730.conf
+- resumo_painel=/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios/resumo-painel-kde-win11-aprovado-20260528-122730.txt
+- relatorio_execucao=/media/mochafast/MochaArch/ATIVO-TRABALHO/relatorios/guardar-barra-kde-win11-aprovada-20260528-122730.txt
+
+Descrição:
+- Usa auditoria do plasma-org.kde.plasma.desktop-appletsrc antes de aplicar.
+- Valida painel KDE real com plugin org.kde.panel.
+- Centraliza Kickoff/Iniciar + icontasks/apps fixados.
+- Usa dois org.kde.plasma.panelspacer expansíveis.
+- Preserva pager/outros à esquerda.
+- Preserva systemtray, digitalclock e showdesktop à direita.
+- Cria backup antes de alterar.
+- Mantém no máximo 2 backups locais do ajuste quando o script é executado.
+- Restaura backup se falhar.
+
+Regra:
+- Este script é aprovado para MochaArch/Endeavour KDE.
+- Antes de adaptar para outra instalação, auditar o arquivo real do Plasma.

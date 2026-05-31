@@ -1,0 +1,20 @@
+Comando: bash -lc $'\nfor svc in sddm bluetooth tuned cpupower NetworkManager systemd-timesyncd; do\n  printf "%s enabled: " "$svc"\n  systemctl is-enabled "$svc" 2>/dev/null || true\n  printf "%s active:  " "$svc"\n  systemctl is-active "$svc" 2>/dev/null || true\n  echo\ndone\n'
+
+sddm enabled: disabled
+sddm active:  inactive
+
+bluetooth enabled: enabled
+bluetooth active:  active
+
+tuned enabled: enabled
+tuned active:  active
+
+cpupower enabled: enabled
+cpupower active:  inactive
+
+NetworkManager enabled: enabled
+NetworkManager active:  active
+
+systemd-timesyncd enabled: enabled
+systemd-timesyncd active:  active
+

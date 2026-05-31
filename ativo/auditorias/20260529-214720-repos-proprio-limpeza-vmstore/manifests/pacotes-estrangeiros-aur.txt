@@ -1,0 +1,4 @@
+Comando: bash -lc $'\npacman -Qqm 2>/dev/null | sort || true\n'
+
+libpamac-aur
+pamac-aur

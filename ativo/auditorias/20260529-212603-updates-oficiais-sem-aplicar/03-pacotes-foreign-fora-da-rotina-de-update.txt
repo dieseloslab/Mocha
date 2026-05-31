@@ -1,0 +1,11 @@
+### pacman -Qqm
+libpamac-aur
+pamac-aur
+
+### Detalhes dos pacotes foreign
+
+--- libpamac-aur ---
+URL                  : https://github.com/manjaro/libpamac/
+
+--- pamac-aur ---
+URL                  : https://github.com/manjaro/pamac

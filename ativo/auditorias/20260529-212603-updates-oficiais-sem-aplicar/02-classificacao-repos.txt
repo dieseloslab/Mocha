@@ -1,0 +1,10 @@
+### Repositórios ativos
+core
+extra
+multilib
+
+### Fora do Arch puro
+nenhum
+
+### AUR/binários/terceiros suspeitos
+nenhum

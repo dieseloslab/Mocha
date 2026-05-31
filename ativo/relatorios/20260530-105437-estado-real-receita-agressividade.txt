@@ -1,0 +1,68 @@
+Estado real coletado em: 20260530-105437
+
+Kernel:
+7.0.10-zen1-1-zen
+
+
+Sessão gráfica:
+XDG_SESSION_TYPE=wayland
+WAYLAND_DISPLAY=wayland-0
+
+TuneD:
+Current active profile: latency-performance
+systemctl is-active tuned: active
+
+
+CPU performance:
+cpu0 scaling_governor: performance
+
+cpu0 energy_performance_preference: performance
+
+
+cpupower frequency-info -p:
+analisando o CPU 6:
+  política de frequência atual deve estar entre 2.39 GHz e 4.67 GHz.
+                  O regulador "performance" deve decidir qual velocidade usar
+                  dentro desse limite.
+
+
+NVIDIA:
+NVIDIA GeForce RTX 5060 Ti, 595.71.05, Disabled, [Requested functionality has been deprecated], 10.08, 180.00, 210, 405
+
+
+Sysctl da receita:
+vm.swappiness = 80
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 268435456
+vm.max_map_count = 16777216
+kernel.sched_autogroup_enabled = 0
+kernel.nmi_watchdog = 0
+
+THP:
+enabled: always [madvise] never
+
+defrag: always defer [defer+madvise] madvise never
+
+
+ZRAM e swap:
+NAME       ALGORITHM DISKSIZE   DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd         15,4G 398,7M 93,7M 97,5M         [SWAP]
+
+NAME           TYPE       SIZE USED  PRIO
+/dev/zram0     partition 15,4G 1,1G 32767
+/dev/nvme0n1p3 partition   17G   0B    -1
+
+
+GameMode:
+gamemode version: v1.8.2
+
+MangoHud:
+v0.8.4
+
+Arquivos de configuração MangoHud encontrados:
+/home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
+/home/hal/.config/MangoHud/Mocha-MangoHud.conf
+/home/hal/.config/MangoHud/MangoHud.conf
+/etc/mocha/mangohud/MangoHud.conf

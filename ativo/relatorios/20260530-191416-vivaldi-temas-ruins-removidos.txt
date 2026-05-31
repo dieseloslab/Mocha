@@ -1,0 +1,2 @@
+Removendo: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-191138-Mocha-Firefox-Vivaldi-settings.json
+Removendo: /media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-191138-Mocha-Firefox-Vivaldi.zip

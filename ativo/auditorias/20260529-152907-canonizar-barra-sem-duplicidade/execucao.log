@@ -1,0 +1,60 @@
+== 1/6 Confirmando applets nativos do KDE/Plasma ==
+75:plugin=org.kde.plasma.systemtray
+114:plugin=org.kde.plasma.volume
+145:plugin=org.kde.plasma.bluetooth
+
+== 2/6 Aplicando permanência no usuário atual ==
+OK usuário: /home/hal/.config/autostart/blueman.desktop
+38:Name=Blueman Applet
+78:Exec=blueman-applet
+83:Hidden=true
+
+OK usuário: /home/hal/.config/autostart/kmix_autostart.desktop
+2:Exec=kmix --keepvisibility
+4:OnlyShowIn=KDE;
+69:Name=KMix
+128:Hidden=true
+
+== 3/6 Preparando /etc/skel para novos usuários do Mocha ==
+OK /etc/skel: /etc/skel/.config/autostart/blueman.desktop
+3:Name=blueman.desktop
+5:Exec=blueman-applet
+6:OnlyShowIn=KDE;
+7:Hidden=true
+
+OK /etc/skel: /etc/skel/.config/autostart/kmix_autostart.desktop
+3:Name=kmix_autostart.desktop
+5:Exec=kmix --keepvisibility
+6:OnlyShowIn=KDE;
+7:Hidden=true
+
+== 4/6 Garantindo sessão atual limpa ==
+Processos redundantes após correção:
+OK: blueman-applet e kmix não estão rodando.
+
+Serviços relevantes após correção:
+sys-devices-pci0000:00-0000:00:08.1-0000:09:00.4-usb5-5\x2d2-5\x2d2:1.0-bluetooth-hci0-hci0:1.device                    loaded active plugged   /sys/devices/pci0000:00/0000:00:08.1/0000:09:00.4/usb5/5-2/5-2:1.0/bluetooth/hci0/hci0:1
+sys-devices-pci0000:00-0000:00:08.1-0000:09:00.4-usb5-5\x2d2-5\x2d2:1.0-bluetooth-hci0.device                           loaded active plugged   /sys/devices/pci0000:00/0000:00:08.1/0000:09:00.4/usb5/5-2/5-2:1.0/bluetooth/hci0
+sys-subsystem-bluetooth-devices-hci0.device                                                                             loaded active plugged   /sys/subsystem/bluetooth/devices/hci0
+sys-subsystem-bluetooth-devices-hci0:1.device                                                                           loaded active plugged   /sys/subsystem/bluetooth/devices/hci0:1
+app-org.kde.bluedevilwizard@2c6d514fa32d417ea2e56bae877bd717.service                                                    loaded failed failed    Adicionar dispositivo Bluetooth - Adicionar dispositivo Bluetooth
+app-pulseaudio@autostart.service                                                                                        loaded failed failed    PulseAudio Sound System
+pipewire.service                                                                                                        loaded active running   PipeWire Multimedia Service
+pulseaudio.service                                                                                                      loaded active running   Sound Service
+wireplumber.service                                                                                                     loaded active running   Multimedia Service Session Manager
+pipewire.socket                                                                                                         loaded active running   PipeWire Multimedia System Sockets
+pulseaudio.socket                                                                                                       loaded active running   Sound System
+bluetooth.target                                                                                                        loaded active active    Bluetooth
+
+== 5/6 Criando script reutilizável ==
+Script criado: /media/mochafast/MochaArch/ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh
+
+== 6/6 Documentando como passo canônico de montagem ==
+Documento criado:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+
+Passo canônico criado:
+/media/mochafast/MochaArch/ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
+
+Log salvo em:
+/media/mochafast/MochaArch/ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log

@@ -1,0 +1,62 @@
+
+== Lendo o manual antes de editar ==
+
+== Capturando valores atuais para relatório e rollback ==
+
+== Criando backups de arquivos que serão tocados ==
+
+== Gravando sysctl agressivo de teste ==
+
+== Aplicando sysctl agora ==
+vm.swappiness = 100
+vm.vfs_cache_pressure = 35
+vm.page-cluster = 0
+vm.dirty_background_bytes = 100663296
+vm.dirty_bytes = 402653184
+vm.max_map_count = 33554432
+kernel.sched_autogroup_enabled = 0
+kernel.nmi_watchdog = 0
+
+== Gravando serviço THP madvise ==
+
+== Gravando serviço CPU performance ==
+
+== Ativando serviços THP e CPU performance ==
+Created symlink '/etc/systemd/system/multi-user.target.wants/mocha-thp-madvise.service' → '/etc/systemd/system/mocha-thp-madvise.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/mocha-cpu-performance.service' → '/etc/systemd/system/mocha-cpu-performance.service'.
+
+== Ativando TuneD latency-performance, se disponível ==
+
+== Ajustando NVIDIA persistenced, se disponível ==
+Enabled Legacy persistence mode for GPU 00000000:01:00.0.
+All done.
+Created symlink '/etc/systemd/system/multi-user.target.wants/nvidia-persistenced.service' → '/usr/lib/systemd/system/nvidia-persistenced.service'.
+
+== Gravando drop-in ZRAM agressivo para próximo boot ou ativação segura ==
+ZRAM já está ativa; não vou reiniciar swap/ZRAM durante a sessão para evitar travamento. O drop-in vale no próximo boot.
+
+== Criando script de rollback ==
+
+== Coletando estado depois ==
+
+== Registrando documentação do teste ==
+
+== Anexando registro ao manual principal ==
+
+== Salvando cópia do script usado ==
+
+== Validação final ==
+
+== Resumo ==
+Sysctl aplicado: /etc/sysctl.d/99-mocha-agressividade-teste.conf
+Serviço THP: /etc/systemd/system/mocha-thp-madvise.service
+Serviço CPU: /etc/systemd/system/mocha-cpu-performance.service
+Drop-in ZRAM: /etc/systemd/zram-generator.conf.d/99-mocha-agressividade-teste.conf
+Relatório antes: /media/mochafast/MochaArch/ativo/relatorios/20260530-105856-estado-antes-agressividade-teste.txt
+Relatório depois: /media/mochafast/MochaArch/ativo/relatorios/20260530-105856-estado-depois-agressividade-teste.txt
+Documento do teste: /media/mochafast/MochaArch/ativo/documentacao/20260530-105856-receita-agressividade-teste-aplicada.md
+Rollback: /media/mochafast/MochaArch/ativo/scripts/20260530-105856-mocha-rollback-receita-agressividade-teste.sh
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-105856-aplicar-receita-agressividade-teste.log
+Script salvo: /media/mochafast/MochaArch/ativo/scripts/20260530-105856-mocha-aplicar-receita-agressividade-teste.sh
+
+== Concluído ==

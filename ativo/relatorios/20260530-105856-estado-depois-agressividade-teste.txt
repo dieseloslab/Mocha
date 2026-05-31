@@ -1,0 +1,48 @@
+Estado depois da receita agressiva de teste: 20260530-105856
+
+Kernel:
+7.0.10-zen1-1-zen
+
+
+Sessão:
+XDG_SESSION_TYPE=wayland
+WAYLAND_DISPLAY=wayland-0
+
+TuneD:
+Current active profile: latency-performance
+active
+
+
+CPU:
+cpu0 scaling_governor: performance
+
+cpu0 energy_performance_preference: performance
+
+
+NVIDIA:
+NVIDIA GeForce RTX 5060 Ti, 595.71.05, Enabled, [Requested functionality has been deprecated], 10.39, 180.00, 217, 405
+
+
+Sysctl depois:
+vm.swappiness = 100
+vm.vfs_cache_pressure = 35
+vm.page-cluster = 0
+vm.dirty_background_bytes = 100663296
+vm.dirty_bytes = 402653184
+vm.max_map_count = 33554432
+kernel.sched_autogroup_enabled = 0
+kernel.nmi_watchdog = 0
+
+THP depois:
+enabled: always [madvise] never
+
+defrag: always defer defer+madvise [madvise] never
+
+
+ZRAM/swap depois:
+NAME       ALGORITHM DISKSIZE   DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd         15,4G 398,7M 93,7M 97,5M         [SWAP]
+
+NAME           TYPE       SIZE USED  PRIO
+/dev/zram0     partition 15,4G 1,1G 32767
+/dev/nvme0n1p3 partition   17G   0B    -1

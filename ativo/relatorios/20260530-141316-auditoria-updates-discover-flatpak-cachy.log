@@ -1,0 +1,92 @@
+== MOCHA — auditoria de updates mostrados no Discover ==
+Data: 2026-05-30T14:13:16-03:00
+
+== Flatpak: remotes configurados ==
+flathub	Flathub	https://dl.flathub.org/repo/	-	-	-	1	system	Central repository of Flatpak applications	Central repository of Flatpak applications	https://flathub.org/	https://dl.flathub.org/repo/logo.svg
+
+== Flatpak: runtimes instalados relevantes ==
+org.freedesktop.Platform	25.08	flathub	system	org.freedesktop.Platform/x86_64/25.08
+org.freedesktop.Platform.GL.default	25.08	flathub	system	org.freedesktop.Platform.GL.default/x86_64/25.08
+org.freedesktop.Platform.GL.default	25.08-extra	flathub	system	org.freedesktop.Platform.GL.default/x86_64/25.08-extra
+org.freedesktop.Platform.codecs-extra	25.08-extra	flathub	system	org.freedesktop.Platform.codecs-extra/x86_64/25.08-extra
+org.gnome.Platform	50	flathub	system	org.gnome.Platform/x86_64/50
+
+== Flatpak: updates disponíveis ==
+
+== Pacman: repositórios ativos em /etc/pacman.conf ==
+9:[options]
+80:[mocha-stable]
+82:Server = file:///media/vmstore/MochaArch/repos/mocha-stable/os/x86_64
+84:[core]
+85:Include = /etc/pacman.d/mirrorlist
+90:[extra]
+91:Include = /etc/pacman.d/mirrorlist
+99:[multilib]
+100:Include = /etc/pacman.d/mirrorlist
+113:[cachyos-v3]
+114:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+115:[cachyos-core-v3]
+116:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+117:[cachyos-extra-v3]
+118:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+== Pacman: presença de repositórios Cachy no pacman.conf ==
+/etc/pacman.conf:110:# BEGIN MOCHA TESTE CACHYOS V3 BORE LTO NVIDIA 20260530-132409
+/etc/pacman.conf:112:# Usar pacotes CachyOS somente com repo explícito: cachyos-v3/pacote.
+/etc/pacman.conf:113:[cachyos-v3]
+/etc/pacman.conf:114:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+/etc/pacman.conf:115:[cachyos-core-v3]
+/etc/pacman.conf:116:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+/etc/pacman.conf:117:[cachyos-extra-v3]
+/etc/pacman.conf:118:Include = /etc/pacman.d/cachyos-v3-mirrorlist
+/etc/pacman.conf:119:# END MOCHA TESTE CACHYOS V3 BORE LTO NVIDIA 20260530-132409
+/etc/pacman.d/cachyos-v3-mirrorlist:3:####        CachyOS Repository Mirrorlist         ####
+/etc/pacman.d/cachyos-v3-mirrorlist:7:Server = https://cdn77.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:9:# Server = https://cdn.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:12:# Server = https://mirror.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:14:Server = https://us.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:17:## Server = https://mirror.albony.xyz/cachylinux/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:19:Server = https://mirror.lesviallon.fr/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:21:# Server = https://mirror.truenetwork.ru/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:25:Server = https://no.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:26:Server = https://nl.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:27:Server = https://ca.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:29:Server = https://mirror.zyner.org/mirror/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:31:# Server = https://mirror.funami.tech/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:33:Server = https://at.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:35:## Server = https://de-nue.soulharsh007.dev/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:37:Server = https://mirror.mergedcloud.de/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:39:Server = https://us-mnz.soulharsh007.dev/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:41:Server = https://mirrors.lansing2600.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:42:Server = https://cdn.lansing2600.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:44:Server = https://mirror.nju.edu.cn/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:46:Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:48:# Server = https://cachy-mirror.wtako.net/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:50:Server = https://mirror.allthingslinux.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:52:Server = https://cachyos.next-works.it/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:54:Server = https://cachyos-mirror.m1k.cloud/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:56:Server = https://mirror.limda.net/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:58:Server = https://cachyos.doridian.net/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:60:Server = https://mirror.hb9hil.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:62:# Server = https://mirror.yandex.ru/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:64:Server = https://archlinux.gay/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:67:## Russia Mirror much thanks to cachy-arch.ru
+/etc/pacman.d/cachyos-v3-mirrorlist:68:Server = https://mirror.cachy-arch.ru/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:70:Server = https://wan.metrosg.ru/cachyos/repo/$arch_v3/$repo
+
+== Pacotes críticos de kernel/NVIDIA atualmente instalados ==
+linux-cachyos-bore-lto 7.0.10-2
+linux-cachyos-bore-lto-nvidia-open 7.0.10-2
+nvidia-utils 610.43.02-2
+lib32-nvidia-utils 610.43.02-1
+
+== Kernel e NVIDIA carregados agora ==
+7.0.10-2-cachyos-bore-lto
+610.43.02, NVIDIA GeForce RTX 5060 Ti
+filename:       /lib/modules/7.0.10-2-cachyos-bore-lto/extramodules/nvidia.ko.zst
+version:        610.43.02
+
+== Veredito esperado ==
+Se os updates forem org.freedesktop.Platform e org.gnome.Platform com origin=flathub, são runtimes Flatpak e podem ser atualizados.
+Não atualizar pacman/kernel/NVIDIA por Discover neste momento.
+Antes de comentar repositórios Cachy, travar/pinar kernel e NVIDIA para evitar descasamento de nvidia-utils/lib32-nvidia-utils.

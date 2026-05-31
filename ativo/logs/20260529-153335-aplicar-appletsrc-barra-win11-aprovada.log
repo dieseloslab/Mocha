@@ -1,0 +1,57 @@
+== Preflight ==
+FAST montado: OK
+Pasta aprovada: OK
+Arquivo aprovado: OK
+Config atual: OK
+
+== Auditoria do arquivo aprovado ==
+Arquivo:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+
+Assinaturas esperadas:
+30:plugin=org.kde.plasma.digitalclock
+45:plugin=org.kde.plasma.kickoff
+63:plugin=org.kde.plasma.icontasks
+78:plugin=org.kde.plasma.systemtray
+155:AppletOrder=4;6;23;3;5;24;7;21;22
+163:plugin=org.kde.plasma.panelspacer
+166:expanding=true
+170:plugin=org.kde.plasma.panelspacer
+173:expanding=true
+
+Assinatura da barra aprovada validada.
+
+== Criando script reutilizável na pasta aprovada ==
+Script reutilizável criado:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+
+== Executando restauração da barra aprovada ==
+== MOCHA ARCH/KDE — restaurar barra Win11/Mocha aprovada ==
+Backup salvo em:
+  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+Parando Plasma Shell...
+Aplicando appletsrc aprovado...
+Reiniciando Plasma Shell...
+
+Validação:
+18:plugin=org.kde.plasma.digitalclock
+33:plugin=org.kde.plasma.panelspacer
+36:expanding=true
+40:plugin=org.kde.plasma.panelspacer
+43:expanding=true
+47:plugin=org.kde.plasma.kickoff
+65:plugin=org.kde.plasma.icontasks
+80:plugin=org.kde.plasma.systemtray
+161:AppletOrder=4;6;23;3;5;24;7;21;22
+
+Barra Win11/Mocha aprovada restaurada.
+Log:
+  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+Backup:
+  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+
+== Finalizado ==
+Log principal:
+  /media/mochafast/MochaArch/ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
+Script salvo para uso futuro:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh

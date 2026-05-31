@@ -1,0 +1,242 @@
+== Usuário alvo ==
+Usuário: hal
+Home:    /home/hal
+Grupo:   hal
+
+== Auditoria inicial ==
+-- Kernel atual --
+Linux hal-systemproductname 7.0.10-arch1-1 #1 SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:21:20 +0000 x86_64 GNU/Linux
+
+-- Kernel dirs instalados --
+7.0.10-1-cachyos-bore-lto
+7.0.10-arch1-1
+7.0.10-zen1-1-zen
+
+-- Display manager atual --
+graphical.target
+/usr/lib/systemd/system/sddm.service
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2026-05-28 21:32:55 -03; 6min ago
+ Invocation: 92a9d97234d0498f9fd70a000367d46f
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 977 (sddm)
+      Tasks: 4 (limit: 18854)
+     Memory: 309.2M (peak: 329.2M)
+        CPU: 417ms
+     CGroup: /system.slice/sddm.service
+             ├─977 /usr/bin/sddm
+             └─980 /usr/lib/Xorg -nolisten tcp -background none -seat seat0 vt2 -auth /run/sddm/xauth_mxhzyt -noreset -displayfd 16
+
+mai 28 21:32:56 hal-systemproductname sddm[977]: Display server started.
+mai 28 21:32:56 hal-systemproductname sddm[977]: Socket server starting...
+mai 28 21:32:56 hal-systemproductname sddm[977]: Socket server started.
+mai 28 21:32:56 hal-systemproductname sddm[977]: Loaded empty theme configuration
+mai 28 21:32:56 hal-systemproductname sddm[977]: Greeter starting...
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: [PAM] Starting...
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: [PAM] Authenticating...
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: [PAM] returning.
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: pam_unix(sddm-greeter:session): session opened for user sddm(uid=954) by (uid=0)
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: Writing cookie to "/tmp/xauth_zSwqVG"
+mai 28 21:32:56 hal-systemproductname sddm-helper[1141]: Starting X11 session: "" "/usr/bin/sddm-greeter-qt6 --socket /tmp/sddm-:0-wRlTRR"
+mai 28 21:32:56 hal-systemproductname sddm[977]: Greeter session started successfully
+mai 28 21:32:56 hal-systemproductname sddm[977]: Message received from greeter: Connect
+mai 28 21:33:01 hal-systemproductname sddm[977]: Message received from greeter: Login
+mai 28 21:33:01 hal-systemproductname sddm[977]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+mai 28 21:33:01 hal-systemproductname sddm[977]: Session "/usr/share/wayland-sessions/plasma.desktop" selected, command: "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland" for VT 1
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: [PAM] Starting...
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: [PAM] Authenticating...
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: [PAM] Preparing to converse...
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: [PAM] Conversation with 1 messages
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: [PAM] returning.
+mai 28 21:33:01 hal-systemproductname sddm[977]: Authentication for user  "hal"  successful
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: pam_unix(sddm:session): session opened for user hal(uid=1000) by hal(uid=0)
+mai 28 21:33:01 hal-systemproductname sddm[977]: Auth: sddm-helper exited successfully
+mai 28 21:33:01 hal-systemproductname sddm[977]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+mai 28 21:33:01 hal-systemproductname sddm-helper[1209]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+mai 28 21:33:01 hal-systemproductname sddm[977]: Session started true
+
+-- Sessões disponíveis --
+[Wayland]
+/usr/share/wayland-sessions/plasma.desktop
+
+[X11 apenas para auditoria, não será usado]
+/usr/share/xsessions/plasmax11.desktop
+
+-- Pacotes relevantes --
+cachyos-keyring 20240331-1
+cachyos-mirrorlist 27-1
+cachyos-v3-mirrorlist 27-1
+kwin 6.6.5-3
+kwindowsystem5 5.116.0-2
+kwindowsystem 6.26.0-1
+kwin-x11 6.6.5-2
+layer-shell-qt 6.6.5-2
+lib32-nvidia-utils 595.71.05-1
+linux-api-headers 6.19-1
+linux-cachyos-bore-lto 7.0.10-1
+linux-cachyos-bore-lto-headers 7.0.10-1
+linux-cachyos-bore-lto-nvidia-open 7.0.10-1
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+nvidia-hook 1.5.3-1
+nvidia-settings 595.71.05-1
+nvidia-utils 595.71.05-1
+opencl-nvidia 595.71.05-1
+plasma5support 6.6.5-1
+plasma-activities 6.6.5-1
+plasma-activities-stats 6.6.5-1
+plasma-browser-integration 6.6.5-1
+plasma-desktop 6.6.5-1
+plasma-disks 6.6.5-1
+plasma-integration 6.6.5-2
+plasma-keyboard 6.6.5-1
+plasma-login-manager 6.6.5-1
+plasma-nm 6.6.5-1
+plasma-pa 6.6.5-1
+plasma-systemmonitor 6.6.5-1
+plasma-workspace 6.6.5-2
+plasma-x11-session 6.6.5-2
+qt6-wayland 6.11.1-1
+sddm 0.21.0-7
+sddm-kcm 6.6.5-1
+xorg-xwayland 24.1.11-2
+
+-- Logs recentes de login/NVIDIA/Plasma --
+mai 28 21:32:50 archlinux systemd-modules-load[253]: Failed to find module 'nvidia_uvm'
+mai 28 21:32:52 hal-systemproductname systemd-modules-load[659]: Failed to find module 'nvidia_uvm'
+mai 28 21:32:56 hal-systemproductname sddm[977]: Could not setup default cursor
+mai 28 21:32:56 hal-systemproductname dbus-broker-launch[1158]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+mai 28 21:32:56 hal-systemproductname sddm-greeter-qt6[1155]: Member enabled of the object ImageButton_QMLTYPE_13 overrides a member of the base object. Consider renaming it or adding final or override specifier
+mai 28 21:32:56 hal-systemproductname sddm-greeter-qt6[1155]: file:///usr/lib/qt6/qml/SddmComponents/LayoutBox.qml:35:5: QML Connections: Implicitly defined onFoo properties in Connections are deprecated. Use this syntax instead: function onFoo(<arguments>) { ... }
+mai 28 21:32:56 hal-systemproductname sddm-greeter-qt6[1155]: file:///usr/lib/qt6/qml/SddmComponents/ComboBox.qml:105:9: QML Image: Cannot open: file:///usr/lib/qt6/qml/SddmComponents/angle-down.png
+mai 28 21:32:56 hal-systemproductname sddm-greeter-qt6[1155]: file:///usr/lib/qt6/qml/SddmComponents/ComboBox.qml:105:9: QML Image: Cannot open: file:///usr/lib/qt6/qml/SddmComponents/angle-down.png
+mai 28 21:32:56 hal-systemproductname sddm-greeter-qt6[1155]: qrc:/theme/Main.qml:41:5: QML Connections: Implicitly defined onFoo properties in Connections are deprecated. Use this syntax instead: function onFoo(<arguments>) { ... }
+mai 28 21:32:58 hal-systemproductname sddm-greeter-qt6[1155]: file:///usr/lib/qt6/qml/SddmComponents/PictureBox.qml:106:13 Parameter "event" is not declared. Injection of parameters into signal handlers is deprecated. Use JavaScript functions with formal parameters instead.
+mai 28 21:33:01 hal-systemproductname dbus-broker-launch[1269]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: Could not find edid for connector DrmConnector(id=37, gpu="/dev/dri/card0", name="Unknown-1", connection="Connected", countMode=1)
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operação não permitida
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:13:28: this compose sequence already exists; overriding
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:14:28: this compose sequence already exists; overriding
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:16:34: this compose sequence already exists; overriding
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:17:34: this compose sequence already exists; overriding
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:19:39: a sequence already exists which is a prefix of this sequence; overriding
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operação não permitida
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: Failed to open drm node: ""
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: couldn't find dev node for drm device 
+mai 28 21:33:02 hal-systemproductname kwin_wayland[1284]: No render nodes have been found, falling back to primary node
+mai 28 21:33:03 hal-systemproductname plasmashell[1520]: Could not find required file "mainscript" for package "/usr/share/plasma/plasmoids/org.kde.plasma.icontasks/" should be QList("ui/main.qml")
+mai 28 21:33:03 hal-systemproductname plasmashell[1520]: Member visible of the object PlasmaQuick::Dialog overrides a member of the base object. Consider renaming it or adding final or override specifier
+mai 28 21:33:03 hal-systemproductname plasmashell[1520]: Member enabled of the object DeclarativeDropArea overrides a member of the base object. Consider renaming it or adding final or override specifier
+mai 28 21:33:03 hal-systemproductname kded6[1431]: QDBusObjectPath: invalid path "/modules/plasma-session-shortcuts"
+mai 28 21:33:03 hal-systemproductname kded6[1431]: The kded module name "plasma-session-shortcuts" is invalid!
+mai 28 21:33:03 hal-systemproductname kwin_wayland[1284]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kwin'")
+mai 28 21:33:03 hal-systemproductname polkit-kde-authentication-agent-1[1675]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Unable to open /proc/1675/root")
+mai 28 21:33:03 hal-systemproductname polkit-kde-authentication-agent-1[1675]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Unable to open /proc/1675/root")
+mai 28 21:33:03 hal-systemproductname plasmashell[1520]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+mai 28 21:33:03 hal-systemproductname kwin_wayland[1284]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kwin'")
+mai 28 21:33:04 hal-systemproductname plasmashell[1520]: Entry is not valid "org.kde.kontact.desktop" 0x5605792e58b0
+mai 28 21:33:04 hal-systemproductname plasmashell[1520]: Entry is not valid "org.kde.kontact.desktop" 0x5605792e58b0
+mai 28 21:33:04 hal-systemproductname plasmashell[1520]: No object for name "@DEFAULT_SOURCE@"
+
+== Garantindo base Wayland/KDE/SDDM sem remover programas ==
+OK instalado: sddm
+OK instalado: plasma-workspace
+OK instalado: plasma-desktop
+OK instalado: kwin
+OK instalado: layer-shell-qt
+OK instalado: qt6-wayland
+OK instalado: xorg-xwayland
+OK instalado: kscreen
+OK instalado: breeze
+OK instalado: breeze-icons
+OK instalado: sddm-kcm
+
+== Identificando kernel Cachy bore/lto alvo ==
+Kernel Cachy bore/lto alvo: 7.0.10-1-cachyos-bore-lto
+
+== Verificando módulo NVIDIA para o kernel alvo ==
+OK: há módulo NVIDIA em /usr/lib/modules/7.0.10-1-cachyos-bore-lto
+
+== Configurando NVIDIA DRM/KMS para Wayland ==
+
+== Recriando initramfs com progresso normal do mkinitcpio ==
+AVISO: mkinitcpio não encontrado.
+
+== Depmod do kernel alvo ==
+
+== Limpando configuração X11 anterior do SDDM, se existir ==
+
+== Configurando SDDM Wayland com KWin ==
+Configuração SDDM Wayland criada:
+# MOCHA 20260528 — SDDM em Wayland, sem fallback X11
+[General]
+DisplayServer=wayland
+GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+
+[Wayland]
+CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
+
+[Theme]
+Current=breeze
+
+== Garantindo que SDDM seja o display-manager ativo ==
+
+== Limpando caches de sessão do usuário que podem causar loop pós-login ==
+
+== Travando sessão preferida como Plasma Wayland, sem X11 ==
+
+== Ajustando bootloader existente para kernel Cachy alvo e parâmetros NVIDIA Wayland ==
+Bootloader detectado: unknown
+AVISO: bootloader não identificado como GRUB ou systemd-boot. Não vou chutar.
+
+== Validação final ==
+-- Display manager symlink --
+/usr/lib/systemd/system/sddm.service
+
+-- SDDM Wayland config --
+/etc/sddm.conf.d/10-mocha-wayland.conf:3:DisplayServer=wayland
+/etc/sddm.conf.d/10-mocha-wayland.conf:4:GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+/etc/sddm.conf.d/10-mocha-wayland.conf:7:CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
+/etc/sddm.conf.d/10-mocha-wayland.conf:10:Current=breeze
+
+-- Sessão Plasma Wayland --
+-rw-r--r-- 1 root root 3860 mai 19 07:56 /usr/share/wayland-sessions/plasma.desktop
+
+-- NVIDIA module params --
+# MOCHA 20260528 — NVIDIA KMS explícito para Wayland/Plasma/SDDM
+options nvidia_drm modeset=1 fbdev=1
+
+-- Kernel alvo e módulos NVIDIA --
+7.0.10-1-cachyos-bore-lto
+/usr/lib/modules/7.0.10-1-cachyos-bore-lto/extramodules/nvidia.ko.zst
+
+-- Serviços de display-manager --
+sddm         enabled=enabled      active=active
+
+== CONCLUÍDO ==
+Log salvo em: /media/mochafast/MochaArch/reports/sddm-wayland-nvidia-20260528-213910/mocha-fix-sddm-wayland-nvidia-20260528-213910.log
+
+Reinicie pelo kernel Cachy bore/lto v3.
+Na tela do SDDM, selecione explicitamente: Plasma (Wayland), se houver seletor de sessão.
+Se piscar e voltar ao login de novo, entre por TTY e cole o log final deste comando mais:
+journalctl -b -u sddm --no-pager --lines=200
+journalctl -b --user -u plasma-plasmashell --no-pager --lines=200

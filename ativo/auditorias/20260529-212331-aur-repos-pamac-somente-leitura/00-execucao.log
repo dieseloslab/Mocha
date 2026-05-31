@@ -1,0 +1,92 @@
+
+== MOCHA — AUDITORIA AUR/REPOSITÓRIOS — SOMENTE LEITURA ==
+Saída: /media/mochafast/MochaArch/ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura
+Data: 2026-05-29T21:23:31-03:00
+Usuário real: hal
+
+== Garantias ==
+Não será executado pacman -Syu.
+Não será executado yay, paru, pamac upgrade ou qualquer atualização AUR.
+Não será removido pacote nenhum.
+Não será editado /etc/pacman.conf nem qualquer arquivo de repositório.
+
+== Lendo repositórios ativos do pacman ==
+
+== Detectando helpers AUR e Pamac ==
+
+== Listando pacotes foreign/AUR/locais ==
+
+== Classificando repositórios por risco ==
+
+== Checando configuração do Pamac, se existir ==
+
+== Resumo ==
+# Mocha Arch — auditoria AUR/repositórios
+
+Data: 2026-05-29T21:23:33-03:00
+
+Pasta: /media/mochafast/MochaArch/ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura
+
+## Resultado curto
+
+Pacotes foreign/AUR/locais detectados: 2
+Helpers AUR/Pamac detectados: nenhum
+Repositórios fora do Arch puro: nenhum
+Repositórios AUR/binários suspeitos: nenhum
+
+## Decisão operacional recomendada
+
+1. Não usar yay -Syu, paru -Syu nem Pamac para atualizar esta máquina agora.
+2. Se chaotic-aur ou outro repo AUR/binário estiver ativo, não fazer pacman -Syu antes de decidir se ele será desativado.
+3. Pacotes foreign podem permanecer instalados para teste, mas não devem entrar automaticamente na edição final do Mocha.
+4. Para a edição final, preferir pacotes dos repositórios Arch oficiais, Flatpak/Flathub quando fizer sentido, e AUR só por exceção documentada.
+
+## Arquivos gerados
+
+01-repositorios-pacman.txt
+02-helpers-aur-pamac.txt
+03-pacotes-foreign-detalhados.txt
+04-classificacao-repos.txt
+05-pamac-config.txt
+
+== Prévia dos repositórios fora do Arch puro ==
+### Repositórios detectados
+core
+extra
+multilib
+
+### Repositórios Arch padrão esperados
+core
+extra
+multilib
+
+### Repositórios fora do Arch puro, revisar antes de qualquer update
+
+### Repositórios AUR/binários ou equivalentes, se aparecerem aqui devem ser tratados como risco
+
+== Prévia dos helpers AUR/Pamac ==
+### helpers AUR/Pamac instalados
+
+### binários no PATH
+pamac -> /usr/bin/pamac
+sync -> /usr/bin/sync
+checkupdates -> /usr/bin/checkupdates
+pacman-conf -> /usr/bin/pacman-conf
+
+### serviços/timers Pamac/AUR
+pamac-cleancache.service                     static          -
+pamac-daemon.service                         static          -
+pamac-offline-upgrade.service                disabled        disabled
+pamac-cleancache.timer                       enabled         disabled
+
+### unidades de usuário Pamac/AUR
+app-pamac\x2dtray@autostart.service                                    generated -
+app-pamac\x2dtray\x2dbudgie@autostart.service                          generated -
+
+### autostarts Pamac/AUR
+/etc/xdg/autostart/pamac-tray-budgie.desktop
+/etc/xdg/autostart/pamac-tray.desktop
+
+== Concluído ==
+Cole aqui este arquivo:
+/media/mochafast/MochaArch/ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/RESUMO.md

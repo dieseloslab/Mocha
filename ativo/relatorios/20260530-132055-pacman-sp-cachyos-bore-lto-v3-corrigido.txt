@@ -1,0 +1,7 @@
+erro: falha ao preparar a transação (a arquitetura do pacote não é valida)
+:: o pacote "linux-cachyos-bore-lto-7.0.10-2-x86_64_v3" não possui uma arquitetura válida
+:: o pacote "linux-cachyos-bore-lto-headers-7.0.10-2-x86_64_v3" não possui uma arquitetura válida
+:: o pacote "linux-cachyos-bore-lto-nvidia-open-7.0.10-2-x86_64_v3" não possui uma arquitetura válida
+:: o pacote "nvidia-utils-610.43.02-3-x86_64_v3" não possui uma arquitetura válida
+:: o pacote "lib32-nvidia-utils-610.43.02-1-x86_64_v3" não possui uma arquitetura válida
+:: o pacote "nvidia-open-dkms-610.43.02-3-x86_64_v3" não possui uma arquitetura válida

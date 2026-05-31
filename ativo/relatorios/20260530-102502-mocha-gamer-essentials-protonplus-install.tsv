@@ -1,0 +1,50 @@
+item	status	alvo
+Steam	PACMAN_JA_INSTALADO	steam
+GameMode	PACMAN_JA_INSTALADO	gamemode
+GameMode 32-bit	PACMAN_JA_INSTALADO	lib32-gamemode
+MangoHud	PACMAN_JA_INSTALADO	mangohud
+MangoHud 32-bit	PACMAN_JA_INSTALADO	lib32-mangohud
+GOverlay	PACMAN_AGENDADO	goverlay
+Gamescope	PACMAN_AGENDADO	gamescope
+Lutris	PACMAN_AGENDADO	lutris
+Heroic Games Launcher	AUR_AGENDADO	heroic-games-launcher-bin
+ProtonPlus	FLATPAK_AGENDADO	com.vysp3r.ProtonPlus
+ProtonUp-Qt	AUR_AGENDADO	protonup-qt-bin
+Protontricks	PACMAN_AGENDADO	protontricks
+Winetricks	PACMAN_AGENDADO	winetricks
+umu-launcher	PACMAN_AGENDADO	umu-launcher
+Vulkan Tools	PACMAN_JA_INSTALADO	vulkan-tools
+Mesa Utils	PACMAN_JA_INSTALADO	mesa-utils
+Piper	PACMAN_AGENDADO	piper
+libratbag	PACMAN_AGENDADO	libratbag
+Input Remapper	AUR_AGENDADO	input-remapper
+Oversteer	AUR_AGENDADO	oversteer
+AntiMicroX	PACMAN_AGENDADO	antimicrox
+jstest-gtk	AUR_AGENDADO	jstest-gtk
+LACT	PACMAN_AGENDADO	lact
+CoreCtrl	PACMAN_AGENDADO	corectrl
+vkBasalt	AUR_AGENDADO	vkbasalt
+vkBasalt 32-bit	AUR_AGENDADO	lib32-vkbasalt
+vkBasalt CLI	AUR_AGENDADO	vkbasalt-cli
+ReShade Shaders	AUR_AGENDADO	reshade-shaders
+OBS Studio	PACMAN_AGENDADO	obs-studio
+OBS VkCapture	AUR_AGENDADO	obs-vkcapture
+GPU Screen Recorder	PACMAN_AGENDADO	gpu-screen-recorder
+GPU Screen Recorder GTK	AUR_AGENDADO	gpu-screen-recorder-gtk
+Bottles	AUR_AGENDADO	bottles
+Faugus Launcher	AUR_AGENDADO	faugus-launcher-bin
+Discover	PACMAN_JA_INSTALADO	discover
+com.vysp3r.ProtonPlus	FLATPAK	INSTALADO
+bottles	AUR	FALHA_MAKEPKG
+faugus-launcher-bin	AUR	NAO_ENCONTRADO_OU_SEM_REDE
+gpu-screen-recorder-gtk	AUR	INSTALADO_OU_JA_PRESENTE
+heroic-games-launcher-bin	AUR	INSTALADO_OU_JA_PRESENTE
+input-remapper	AUR	INSTALADO_OU_JA_PRESENTE
+jstest-gtk	AUR	NAO_ENCONTRADO_OU_SEM_REDE
+lib32-vkbasalt	AUR	FALHA_MAKEPKG
+obs-vkcapture	AUR	INSTALADO_OU_JA_PRESENTE
+oversteer	AUR	INSTALADO_OU_JA_PRESENTE
+protonup-qt-bin	AUR	INSTALADO_OU_JA_PRESENTE
+reshade-shaders	AUR	NAO_ENCONTRADO_OU_SEM_REDE
+vkbasalt	AUR	INSTALADO_OU_JA_PRESENTE
+vkbasalt-cli	AUR	INSTALADO_OU_JA_PRESENTE

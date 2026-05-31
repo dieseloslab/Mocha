@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Mocha Steam Game Run — wrapper limpo
+# Uso na Steam:
+# /home/hal/.local/bin/mocha-steam-game-run %command%
+#
+# Regras:
+# - não usar MANGOHUD_DLSYM
+# - não usar vkbasalt
+# - não usar gamescope
+# - não forçar X11
+# - preservar o comportamento base da Steam/Proton o máximo possível
+
+if [ "$#" -lt 1 ]; then
+  echo "Uso: mocha-steam-game-run %command%" >&2
+  exit 64
+fi
+
+unset MANGOHUD_DLSYM
+unset ENABLE_VKBASALT
+unset VKBASALT_CONFIG_FILE
+unset GAMESCOPE_ARGS
+unset GAMESCOPE_WSI
+
+export DXVK_LOG_LEVEL="${DXVK_LOG_LEVEL:-none}"
+
+MANGOHUD_CONF_USER="${HOME}/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf"
+MANGOHUD_CONF_SYSTEM="/etc/mocha/mangohud/MangoHud.conf"
+
+cmd=( "$@" )
+
+if command -v gamemoderun >/dev/null 2>&1; then
+  cmd=( gamemoderun "${cmd[@]}" )
+fi
+
+if command -v mangohud >/dev/null 2>&1; then
+  export MANGOHUD=1
+
+  if [ -f "$MANGOHUD_CONF_USER" ]; then
+    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_USER"
+  elif [ -f "$MANGOHUD_CONF_SYSTEM" ]; then
+    export MANGOHUD_CONFIGFILE="$MANGOHUD_CONF_SYSTEM"
+  fi
+
+  cmd=( mangohud "${cmd[@]}" )
+fi
+
+exec "${cmd[@]}"

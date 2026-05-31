@@ -1,0 +1,36 @@
+
+== Pré-checagem ==
+
+== Estado atual antes da correção ==
+[INFO] ColorScheme atual: BreezeDark
+[INFO] Plasma Style atual: default
+
+== Corrigindo manual vivo: removendo entrada errada ==
+[INFO] Nenhuma entrada antiga com título exato 'Tema Mocha aprovado reaplicado' foi encontrada.
+
+== Localizando arquivos aprovados do tema sem tocar XU ==
+[INFO] ColorScheme fonte: /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
+[INFO] Plasma Style fonte: /media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
+
+== Instalando tema aprovado no usuário atual ==
+[OK] Arquivos do tema aprovados reinstalados
+
+== Aplicando ColorScheme e Plasma Style ==
+O esquema de cores MochaSolidCanonico foi aplicado à sua sessão atual do Plasma com sucesso.
+O tema da sessão atual do Plasma foi definido como MochaPanelSolidCanonico
+
+== Reiniciando plasmashell para aplicar visual ==
+[OK] plasmashell reiniciado via systemd do usuário
+
+== Validação final ==
+[INFO] ColorScheme depois: MochaSolidCanonico
+[INFO] Plasma Style depois: MochaPanelSolidCanonico
+[OK] Tema Mocha aprovado aplicado e validado
+
+== Documentando entrada correta ==
+[OK] Manual vivo corrigido e atualizado: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+== Finalizado ==
+[OK] Documento: /media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md
+[OK] Script reutilizável: /media/mochafast/MochaArch/ativo/scripts/20260529-211221-corrigir-manual-e-reaplicar-tema.sh
+[OK] Log: /media/mochafast/MochaArch/ativo/logs/20260529-211221-corrigir-manual-e-reaplicar-tema.log

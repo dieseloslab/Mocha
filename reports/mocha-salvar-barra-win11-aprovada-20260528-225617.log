@@ -1,0 +1,37 @@
+== MOCHA ARCH — SALVAR BARRA KDE WIN11 APROVADA ==
+Timestamp: 20260528-225617
+Destino: /media/mochafast/MochaArch
+Modo: somente salva documentação/script/snapshot. Não reaplica a barra.
+
+
+============================================================
+== Garantir FAST montado
+============================================================
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+
+============================================================
+== Criar estrutura MochaArch
+============================================================
+
+============================================================
+== Salvar snapshot do estado aprovado atual
+============================================================
+Snapshot salvo:
+/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+
+============================================================
+== Salvar script reutilizável aprovado
+============================================================
+Script salvo:
+/media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+
+============================================================
+== Salvar nota canônica curta
+============================================================
+Nota salva:
+/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+
+============================================================
+== Copiar log para reports
+============================================================

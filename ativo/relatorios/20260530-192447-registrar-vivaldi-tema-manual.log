@@ -1,0 +1,75 @@
+-- Procurando manual de montagem real em /media/mochafast/MochaArch/ativo/documentacao
+-- Manual encontrado: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+-- Lendo trecho final atual do manual antes da alteração
+- Um único controle de volume.
+- Bluetooth funcional preservado.
+- Áudio funcional preservado.
+- Desempenho do baseline aprovado preservado.
+```
+
+#### Fonte: `documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md`
+
+Pontuação de relevância: 2
+
+Linhas aproximadas 25-41:
+
+```text
+1. Usar `plasma-login.service` como display manager quando disponível.
+2. Desabilitar `sddm.service` para evitar conflito com login manager antigo.
+3. Não usar X11/Xorg como fallback.
+4. Não remover pacotes.
+5. Não tocar na pasta XU.
+6. Não apagar entradas de boot.
+7. Antes de editar configuração, auditar o estado real.
+
+## Script salvo
+
+Script reutilizável:
+
+`/media/mochafast/MochaArch/ativo/scripts/20260529-150104-mocha-aplicar-login-plasma-manager.sh`
+
+Atalho estável atualizado:
+
+`/media/mochafast/MochaArch/ativo/scripts/mocha-aplicar-login-plasma-manager.sh`
+```
+
+
+---
+
+## Índice de arquivos gerados nesta consolidação
+
+Data: 20260529-154304
+
+
+-- Backup criado: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192447
+-- Mantendo no máximo 2 backups deste manual
+-- Entrada ainda não existia; criando seção nova.
+-- Validando registro
+5200-
+5201-
+5202-
+5203:<!-- MOCHA-ENTRY:vivaldi-tema-importavel-aprovado -->
+5204-## Vivaldi — tema importável padrão Mocha aprovado
+5205-
+5206-### Registro aprovado em 20260530-192447
+5207-
+5208-- O tema importável do Vivaldi com as cores padrão atuais do Mocha foi testado e funcionou.
+5209-- O tema deve ser mantido fora da pasta Downloads; a pasta canônica para temas do Vivaldi é:
+5210-  - `/media/mochafast/MochaArch/ativo/vivaldi/temas`
+5211-- O tema deve usar as cores compatíveis com o Firefox/tema Mocha atual, para manter consistência visual com KDE/Plasma, barra, painel e navegador.
+5212-- O arquivo importável deve ser preservado como artefato reutilizável, para que o tema possa ser importado novamente no Vivaldi sem recriação manual.
+5213-- Fluxo correto:
+5214-  1. Gerar ou copiar o arquivo do tema importável para `/media/mochafast/MochaArch/ativo/vivaldi/temas`.
+5215-  2. Abrir o Vivaldi.
+5216-  3. Ir em Configurações > Temas.
+5217-  4. Usar Importar tema.
+5218-  5. Selecionar o arquivo do tema Mocha salvo na pasta canônica.
+5219-  6. Confirmar visualmente que as cores seguem o padrão Mocha atual.
+5220-- Não recriar o tema em Downloads como solução definitiva.
+5221-- Se uma tentativa de tema não importar ou ficar visualmente errada, apagar a tentativa falha ou mover para quarentena; não deixar arquivo quebrado no ativo.
+5222-
+
+OK: entrada registrada no manual.
+Manual: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Backup: /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192447
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-192447-registrar-vivaldi-tema-manual.log

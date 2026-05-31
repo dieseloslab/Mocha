@@ -1,0 +1,172 @@
+
+== Validando sudo e mantendo sessão ativa ==
+
+== Validando pasta MochaArch no FAST ==
+
+== Auditando estado atual antes de alterar ==
+
+-- Kernel --
+7.0.10-zen1-1-zen
+
+-- Valores sysctl atuais --
+vm.swappiness = 100
+vm.vfs_cache_pressure = 35
+vm.page-cluster = 0
+vm.dirty_background_bytes = 100663296
+vm.dirty_bytes = 402653184
+vm.max_map_count = 33554432
+
+-- Arquivos sysctl que já citam esses valores --
+/etc/sysctl.d/90-mocha-performance.conf:2:vm.swappiness=80
+/etc/sysctl.d/90-mocha-performance.conf:3:vm.vfs_cache_pressure=50
+/etc/sysctl.d/90-mocha-performance.conf:4:vm.page-cluster=0
+/etc/sysctl.d/90-mocha-performance.conf:5:vm.dirty_background_bytes=67108864
+/etc/sysctl.d/90-mocha-performance.conf:6:vm.dirty_bytes=268435456
+/etc/sysctl.d/90-mocha-performance.conf:7:vm.max_map_count=16777216
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:4:vm.swappiness = 100
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:5:vm.vfs_cache_pressure = 35
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:6:vm.page-cluster = 0
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:7:vm.dirty_background_bytes = 100663296
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:8:vm.dirty_bytes = 402653184
+/etc/sysctl.d/99-mocha-agressividade-teste.conf:9:vm.max_map_count = 33554432
+/usr/lib/sysctl.d/10-arch.conf:6:# Increase the default vm.max_map_count value
+/usr/lib/sysctl.d/10-arch.conf:8:vm.max_map_count = 1048576
+
+-- ZRAM atual --
+NAME           TYPE       SIZE   USED  PRIO
+/dev/zram0     partition 15,4G 839,9M 32767
+/dev/nvme0n1p3 partition   17G     0B    -1
+NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd         15,4G 5,1M  1,1M  2,5M         [SWAP]
+lzo-rle lzo lz4 lz4hc [zstd] deflate 842 
+
+-- THP atual --
+always [madvise] never
+
+-- TuneD atual --
+enabled
+active
+Current active profile: latency-performance
+
+-- Governor CPU atual --
+analisando o CPU 7:
+  política de frequência atual deve estar entre 2.39 GHz e 4.67 GHz.
+                  O regulador "performance" deve decidir qual velocidade usar
+                  dentro desse limite.
+
+== Criando backups dos arquivos que serão sobrescritos ==
+Backup criado: /etc/systemd/zram-generator.conf.bak-20260530-154103
+Backup criado: /etc/tmpfiles.d/mocha-thp.conf.bak-20260530-154103
+
+== Escrevendo receita normal/canônica de agressividade ==
+
+== Aplicando sysctl ao vivo ==
+* Aplicando /usr/lib/sysctl.d/10-arch.conf ...
+* Aplicando /usr/lib/sysctl.d/50-coredump.conf ...
+* Aplicando /usr/lib/sysctl.d/50-default.conf ...
+* Aplicando /usr/lib/sysctl.d/50-pid-max.conf ...
+* Aplicando /etc/sysctl.d/90-mocha-performance.conf ...
+* Aplicando /etc/sysctl.d/99-mocha-agressividade-teste.conf ...
+* Aplicando /etc/sysctl.d/zz-mocha-agressividade-normal.conf ...
+fs.inotify.max_user_instances = 1024
+fs.inotify.max_user_watches = 524288
+vm.max_map_count = 1048576
+net.ipv4.tcp_keepalive_time = 120
+kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d %F
+kernel.core_pipe_limit = 16
+fs.suid_dumpable = 2
+kernel.sysrq = 16
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.enp4s0.rp_filter = 2
+net.ipv4.conf.lo.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.enp4s0.accept_source_route = 0
+net.ipv4.conf.lo.accept_source_route = 0
+net.ipv4.conf.default.promote_secondaries = 1
+net.ipv4.conf.enp4s0.promote_secondaries = 1
+net.ipv4.conf.lo.promote_secondaries = 1
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+kernel.pid_max = 4194304
+vm.swappiness = 80
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 268435456
+vm.max_map_count = 16777216
+kernel.nmi_watchdog = 0
+kernel.sched_autogroup_enabled = 0
+vm.swappiness = 100
+vm.vfs_cache_pressure = 35
+vm.page-cluster = 0
+vm.dirty_background_bytes = 100663296
+vm.dirty_bytes = 402653184
+vm.max_map_count = 33554432
+kernel.sched_autogroup_enabled = 0
+kernel.nmi_watchdog = 0
+vm.swappiness = 80
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 268435456
+vm.max_map_count = 16777216
+
+== Aplicando THP madvise ao vivo ==
+
+== Aplicando TuneD latency-performance se disponível ==
+
+== Aplicando governor performance se cpupower estiver disponível ==
+Setting cpu: 0
+Setting cpu: 1
+Setting cpu: 2
+Setting cpu: 3
+Setting cpu: 4
+Setting cpu: 5
+Setting cpu: 6
+Setting cpu: 7
+Setting cpu: 8
+Setting cpu: 9
+Setting cpu: 10
+Setting cpu: 11
+Setting cpu: 12
+Setting cpu: 13
+Setting cpu: 14
+Setting cpu: 15
+
+== Recarregando systemd para reconhecer zram-generator ==
+
+== Tentando aplicar zram ao vivo apenas se for seguro ==
+Aviso: zram possui 874917888 bytes em uso; não reiniciei para evitar travamento. A configuração entra completa no próximo boot.
+
+== Validando resultado final ==
+
+-- Valores sysctl finais --
+vm.swappiness = 100
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 100663296
+vm.dirty_bytes = 402653184
+vm.max_map_count = 16777216
+
+-- THP final --
+always [madvise] never
+
+-- ZRAM final --
+NAME           TYPE       SIZE   USED  PRIO
+/dev/zram0     partition 15,4G 834,4M 32767
+/dev/nvme0n1p3 partition   17G     0B    -1
+NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd         15,4G 5,1M  1,1M  2,5M         [SWAP]
+lzo-rle lzo lz4 lz4hc [zstd] deflate 842 
+
+-- TuneD final --
+Cannot talk to TuneD daemon via DBus. Is TuneD daemon running?
+It seems that tuned daemon is not running, preset profile is not activated.
+Preset profile: latency-performance
+
+== Gravando documentação operacional ==

@@ -1,0 +1,423 @@
+
+== Mocha Arch — instalação corrigida do CachyOS BORE LTO v3 com driver CachyOS ==
+Sat May 30 13:37:51 -03 2026
+Linux Mocha 7.0.10-zen1-1-zen #1 ZEN SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:45:01 +0000 x86_64 GNU/Linux
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-133749-instalar-cachyos-bore-lto-v3-driver-cachy-corrigido.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260530-133749-instalar-cachyos-bore-lto-v3-driver-cachy-corrigido.md
+Script salvo: /media/mochafast/MochaArch/ativo/scripts/20260530-133749-mocha-instalar-cachyos-bore-lto-v3-driver-cachy-corrigido.sh
+
+== Escopo corrigido ==
+Usa o driver CachyOS correto para o kernel: linux-cachyos-bore-lto-nvidia-open.
+Não instala nvidia-open-dkms, porque ele conflita com o pacote acima.
+Remove apenas nvidia-open-dkms se ele estiver instalado, por ser conflito direto.
+Mantém linux, linux-headers, linux-zen e linux-zen-headers como fallback.
+Define o boot padrão para linux-cachyos-bore-lto.
+Não reinicia automaticamente.
+
+== Detectando bootloader ==
+Bootloader detectado: GRUB
+
+== Architecture efetiva do pacman ==
+x86_64
+x86_64_v3
+
+== Repos necessários ==
+core
+extra
+multilib
+cachyos-v3
+cachyos-core-v3
+cachyos-extra-v3
+
+== Sincronizando bases ==
+:: Synchronizing package databases...
+ mocha-stable downloading...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+ cachyos-v3 downloading...
+ cachyos-core-v3 downloading...
+ cachyos-extra-v3 downloading...
+
+== Validando existência dos pacotes exatos ==
+
+-- cachyos-v3/linux-cachyos-bore-lto --
+Repository      : cachyos-v3
+Name            : linux-cachyos-bore-lto
+Version         : 7.0.10-2
+Description     : The Linux BORE + Cachy Sauce scheduler Kernel by CachyOS with other patches and improvements kernel and modules
+Architecture    : x86_64_v3
+URL             : https://github.com/CachyOS/linux-cachyos
+Licenses        : GPL-2.0-only
+Groups          : None
+Provides        : VIRTUALBOX-GUEST-MODULES  WIREGUARD-MODULE  KSMBD-MODULE  V4L2LOOPBACK-MODULE  NTSYNC-MODULE  VHBA-MODULE  ADIOS-MODULE
+Depends On      : coreutils  kmod  initramfs
+Optional Deps   : wireless-regdb: to set the correct wireless channels of your country
+                  linux-firmware: firmware images needed for some devices
+                  modprobed-db: Keeps track of EVERY kernel module that has ever been probed - useful for those of us who make localmodconfig
+                  scx-scheds: to use sched-ext schedulers
+Conflicts With  : None
+Replaces        : None
+Download Size   : 147.70 MiB
+Installed Size  : 148.12 MiB
+
+-- cachyos-v3/linux-cachyos-bore-lto-headers --
+Repository      : cachyos-v3
+Name            : linux-cachyos-bore-lto-headers
+Version         : 7.0.10-2
+Description     : Headers and scripts for building modules for the Linux BORE + Cachy Sauce scheduler Kernel by CachyOS with other patches and improvements kernel
+Architecture    : x86_64_v3
+URL             : https://github.com/CachyOS/linux-cachyos
+Licenses        : GPL-2.0-only
+Groups          : None
+Provides        : LINUX-HEADERS
+Depends On      : binutils  glibc  libelf  libgcc  openssl  pahole  xxhash  zlib  zstd  linux-cachyos-bore-lto
+Optional Deps   : None
+Conflicts With  : None
+Replaces        : None
+Download Size   : 31.25 MiB
+Installed Size  : 156.72 MiB
+Packager        : CachyOS <admin@cachyos.org>
+Build Date      : Thu May 28 17:49:36 2026
+Validated By    : SHA-256 Sum  Signature
+
+-- cachyos-v3/linux-cachyos-bore-lto-nvidia-open --
+Repository      : cachyos-v3
+Name            : linux-cachyos-bore-lto-nvidia-open
+Version         : 7.0.10-2
+Description     : nvidia open modules of 610.43.02 driver for the linux-cachyos-bore-lto kernel
+Architecture    : x86_64_v3
+URL             : https://github.com/CachyOS/linux-cachyos
+Licenses        : MIT AND GPL-2.0-only
+Groups          : None
+Provides        : NVIDIA-MODULE
+Depends On      : linux-cachyos-bore-lto=7.0.10-2  nvidia-utils=610.43.02  libglvnd
+Optional Deps   : None
+Conflicts With  : linux-cachyos-bore-lto-nvidia
+Replaces        : None
+Download Size   : 8.99 MiB
+Installed Size  : 9.04 MiB
+Packager        : CachyOS <admin@cachyos.org>
+Build Date      : Thu May 28 17:49:36 2026
+Validated By    : SHA-256 Sum  Signature
+
+-- cachyos-v3/nvidia-utils --
+Repository      : cachyos-v3
+Name            : nvidia-utils
+Version         : 610.43.02-3
+Description     : NVIDIA drivers utilities
+Architecture    : x86_64_v3
+URL             : http://www.nvidia.com/
+Licenses        : custom
+Groups          : None
+Provides        : vulkan-driver  opengl-driver  nvidia-libgl
+Depends On      : libglvnd  egl-wayland  egl-wayland2  egl-gbm  egl-x11
+Optional Deps   : nvidia-settings: configuration tool
+                  xorg-server: Xorg support
+                  xorg-server-devel: nvidia-xconfig
+                  opencl-nvidia: OpenCL support
+Conflicts With  : nvidia-libgl
+Replaces        : nvidia-libgl
+Download Size   : 300.20 MiB
+Installed Size  : 883.72 MiB
+
+-- cachyos-v3/lib32-nvidia-utils --
+Repository      : cachyos-v3
+Name            : lib32-nvidia-utils
+Version         : 610.43.02-1
+Description     : NVIDIA drivers utilities (32-bit)
+Architecture    : x86_64_v3
+URL             : http://www.nvidia.com/
+Licenses        : custom
+Groups          : None
+Provides        : lib32-vulkan-driver  lib32-opengl-driver  lib32-nvidia-libgl
+Depends On      : lib32-zlib  lib32-gcc-libs  lib32-libglvnd  nvidia-utils=610.43.02
+Optional Deps   : lib32-opencl-nvidia
+Conflicts With  : lib32-nvidia-libgl
+Replaces        : lib32-nvidia-libgl
+Download Size   : 112.70 MiB
+Installed Size  : 546.07 MiB
+Packager        : CachyOS <admin@cachyos.org>
+Build Date      : Fri May 29 05:13:07 2026
+Validated By    : SHA-256 Sum  Signature
+
+== Registrando estado antes da instalação ==
+linux 7.0.10.arch1-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+nvidia-utils 595.71.05-2
+lib32-nvidia-utils 595.71.05-1
+nvidia-open-dkms 595.71.05-2
+
+== Removendo conflito direto, se existir ==
+nvidia-open-dkms está instalado e conflita com linux-cachyos-bore-lto-nvidia-open.
+Removendo somente nvidia-open-dkms.
+checking dependencies...
+
+Packages (1) nvidia-open-dkms-595.71.05-2
+
+Total Removed Size:  121.01 MiB
+
+:: Do you want to remove these packages? [Y/n] 
+:: Running pre-transaction hooks...
+(1/1) Remove DKMS modules
+==> dkms remove --no-depmod nvidia/595.71.05 -k 7.0.10-arch1-1
+==> dkms remove --no-depmod nvidia/595.71.05 -k 7.0.10-zen1-1-zen
+==> depmod 7.0.10-zen1-1-zen
+==> depmod 7.0.10-arch1-1
+:: Processing package changes...
+removing nvidia-open-dkms...
+:: Running post-transaction hooks...
+(1/2) Arming ConditionNeedsUpdate...
+(2/2) Updating linux initcpios...
+==> Building image from preset: /etc/mkinitcpio.d/linux-zen.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-zen -g /boot/initramfs-linux-zen.img
+==> Starting build: '7.0.10-zen1-1-zen'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-zen.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.
+error: command failed to execute correctly
+
+== Prévia da transação corrigida ==
+https://cdn77.cachyos.org/repo/x86_64_v3/cachyos-v3/linux-cachyos-bore-lto-7.0.10-2-x86_64_v3.pkg.tar.zst
+https://cdn77.cachyos.org/repo/x86_64_v3/cachyos-v3/linux-cachyos-bore-lto-headers-7.0.10-2-x86_64_v3.pkg.tar.zst
+https://cdn77.cachyos.org/repo/x86_64_v3/cachyos-v3/nvidia-utils-610.43.02-3-x86_64_v3.pkg.tar.zst
+https://cdn77.cachyos.org/repo/x86_64_v3/cachyos-v3/linux-cachyos-bore-lto-nvidia-open-7.0.10-2-x86_64_v3.pkg.tar.zst
+https://cdn77.cachyos.org/repo/x86_64_v3/cachyos-v3/lib32-nvidia-utils-610.43.02-1-x86_64_v3.pkg.tar.zst
+
+== Instalando kernel BORE LTO v3 e driver CachyOS ==
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (5) lib32-nvidia-utils-610.43.02-1  linux-cachyos-bore-lto-7.0.10-2  linux-cachyos-bore-lto-headers-7.0.10-2  linux-cachyos-bore-lto-nvidia-open-7.0.10-2  nvidia-utils-610.43.02-3
+
+Total Download Size:    600.83 MiB
+Total Installed Size:  1743.66 MiB
+Net Upgrade Size:       405.68 MiB
+
+:: Proceed with installation? [Y/n] 
+:: Retrieving packages...
+ nvidia-utils-610.43.02-3-x86_64_v3 downloading...
+ linux-cachyos-bore-lto-7.0.10-2-x86_64_v3 downloading...
+ lib32-nvidia-utils-610.43.02-1-x86_64_v3 downloading...
+ linux-cachyos-bore-lto-headers-7.0.10-2-x86_64_v3 downloading...
+ linux-cachyos-bore-lto-nvidia-open-7.0.10-2-x86_64_v3 downloading...
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+installing linux-cachyos-bore-lto...
+Optional dependencies for linux-cachyos-bore-lto
+    wireless-regdb: to set the correct wireless channels of your country [installed]
+    linux-firmware: firmware images needed for some devices [installed]
+    modprobed-db: Keeps track of EVERY kernel module that has ever been probed - useful for those of us who make localmodconfig
+    scx-scheds: to use sched-ext schedulers
+installing linux-cachyos-bore-lto-headers...
+upgrading nvidia-utils...
+installing linux-cachyos-bore-lto-nvidia-open...
+upgrading lib32-nvidia-utils...
+:: Running post-transaction hooks...
+(1/9) Creating system user accounts...
+(2/9) Reloading system manager configuration...
+(3/9) Enqueuing marked services...
+(4/9) Reloading device manager configuration...
+(5/9) Arming ConditionNeedsUpdate...
+(6/9) Updating module dependencies...
+(7/9) Install DKMS modules
+==> dkms install --no-depmod broadcom-wl/6.30.223.271 -k 7.0.10-2-cachyos-bore-lto
+
+Error! Bad return status for module build on kernel: 7.0.10-2-cachyos-bore-lto (x86_64)
+Consult /var/lib/dkms/broadcom-wl/6.30.223.271/build/make.log for more information.
+==> WARNING: `dkms install --no-depmod broadcom-wl/6.30.223.271 -k 7.0.10-2-cachyos-bore-lto' exited 10
+(8/9) Updating linux initcpios...
+==> Building image from preset: /etc/mkinitcpio.d/linux-cachyos-bore-lto.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-cachyos-bore-lto -g /boot/initramfs-linux-cachyos-bore-lto.img
+==> Starting build: '7.0.10-2-cachyos-bore-lto'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-cachyos-bore-lto.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+==> Building image from preset: /etc/mkinitcpio.d/linux-zen.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-zen -g /boot/initramfs-linux-zen.img
+==> Starting build: '7.0.10-zen1-1-zen'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-zen.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.
+error: command failed to execute correctly
+(9/9) Reloading system bus configuration...
+
+== Estado instalado após pacman ==
+linux 7.0.10.arch1-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+linux-cachyos-bore-lto 7.0.10-2
+linux-cachyos-bore-lto-headers 7.0.10-2
+linux-cachyos-bore-lto-nvidia-open 7.0.10-2
+nvidia-utils 610.43.02-3
+lib32-nvidia-utils 610.43.02-1
+
+== Conferindo módulos NVIDIA do kernel CachyOS ==
+/usr/lib/modules
+/usr/lib/modules/7.0.10-2-cachyos-bore-lto
+/usr/lib/modules/7.0.10-arch1-1
+/usr/lib/modules/7.0.10-zen1-1-zen
+
+Módulos NVIDIA encontrados para CachyOS/BORE/LTO:
+/usr/lib/modules/7.0.10-2-cachyos-bore-lto/extramodules/nvidia.ko.zst
+
+== Regenerando initramfs ==
+==> Building image from preset: /etc/mkinitcpio.d/linux-cachyos-bore-lto.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-cachyos-bore-lto -g /boot/initramfs-linux-cachyos-bore-lto.img
+==> Starting build: '7.0.10-2-cachyos-bore-lto'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-cachyos-bore-lto.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+==> Building image from preset: /etc/mkinitcpio.d/linux-zen.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-zen -g /boot/initramfs-linux-zen.img
+==> Starting build: '7.0.10-zen1-1-zen'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-zen.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+==> WARNING: errors were encountered during the build. The image may not be complete.

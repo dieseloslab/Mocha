@@ -1,0 +1,38 @@
+
+== Ambiente ==
+Timestamp: 20260530-054856
+Usuário: hal
+Kernel: 7.0.10-zen1-1-zen
+Pacman:  .--.                  Pacman v7.1.0 - libalpm v16.0.1
+Repositório Mocha stable: /media/vmstore/MochaArch/repos/mocha-stable/os/x86_64
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-054856-criar-repo-stable-e-ativar-pacman-conf.log
+
+== Lendo seções ativas atuais do pacman.conf ==
+options
+core
+extra
+multilib
+
+== Criando estrutura canônica do mocha-stable no VMSTORE ==
+
+== Verificando ferramentas ==
+
+== Criando banco do repositório, se ainda não existir ==
+Nenhum pacote ainda. Criando banco vazio válido para inicializar o repositório.
+==> Criando arquivo atualizado da base de dados 'mocha-stable.db.tar.zst'
+==> ATENÇÃO: Nenhum pacote restante, criando base de dados vazia.
+==> ATENÇÃO: Nenhum pacote restante, criando base de dados vazia.
+Banco vazio criado via repo-add.
+
+== Garantindo links esperados pelo pacman ==
+
+== Ajustando permissões de leitura do repositório local ==
+
+== Conteúdo atual do repositório mocha-stable ==
+/media/vmstore/MochaArch/repos/mocha-stable/os/x86_64/mocha-stable.db
+/media/vmstore/MochaArch/repos/mocha-stable/os/x86_64/mocha-stable.db.tar.zst
+/media/vmstore/MochaArch/repos/mocha-stable/os/x86_64/mocha-stable.files
+/media/vmstore/MochaArch/repos/mocha-stable/os/x86_64/mocha-stable.files.tar.zst
+
+== Validando banco local com pacman em dbpath temporário ==
+erro: você não pode realizar esta operação a menos que seja root.

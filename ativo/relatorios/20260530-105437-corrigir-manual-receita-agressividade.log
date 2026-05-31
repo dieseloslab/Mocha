@@ -1,0 +1,130 @@
+
+== Lendo o manual atual antes de editar ==
+
+== Auditoria do manual salva ==
+/media/mochafast/MochaArch/ativo/relatorios/20260530-105437-leitura-manual-antes-da-correcao-agressividade.txt
+
+== Coletando estado real atual da máquina para anexar à documentação ==
+
+== Fazendo backup do manual antes de publicar correção ==
+
+== Mantendo no máximo 2 backups do manual fixo ==
+
+== Gerando seção 6 corrigida com a receita completa de agressividade ==
+
+== Substituindo a seção 6, preservando o restante do manual ==
+
+== Validando se a correção entrou no manual ==
+
+== Publicando manual corrigido ==
+
+== Salvando script usado ==
+
+== Resumo final ==
+Manual corrigido: /media/mochafast/MochaArch/ativo/documentacao/MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+Cópia histórica corrigida: /media/mochafast/MochaArch/ativo/documentacao/20260530-105437-manual-instalacao-mocha-arch-receita-agressividade-corrigida.md
+Backup anterior: /media/mochafast/MochaArch/ativo/documentacao/20260530-105437-backup-MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+Leitura feita antes de editar: /media/mochafast/MochaArch/ativo/relatorios/20260530-105437-leitura-manual-antes-da-correcao-agressividade.txt
+Estado real coletado: /media/mochafast/MochaArch/ativo/relatorios/20260530-105437-estado-real-receita-agressividade.txt
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-105437-corrigir-manual-receita-agressividade.log
+Script salvo: /media/mochafast/MochaArch/ativo/scripts/20260530-105437-mocha-ler-manual-e-corrigir-receita-agressividade.sh
+
+== Prévia da seção corrigida ==
+127:## 6. Performance, energia e agressividade
+128-
+129-Esta seção é obrigatória no manual porque a receita de agressividade do Mocha não se resume à ZRAM. ZRAM é apenas um dos componentes. A receita completa também inclui sysctl de memória/latência, THP, TuneD, CPU em performance, GPU NVIDIA em máximo desempenho quando aplicável, GameMode, MangoHud padrão Mocha e validação real em jogos.
+130-
+131-### 6.1 Receita de agressividade que não pode sumir do manual
+132-
+133-A receita de agressividade deve aparecer explicitamente no manual com estes itens:
+134-
+135-- CPU em modo performance.
+136-- GPU NVIDIA em modo de máximo desempenho quando aplicável.
+137-- TuneD ativo com perfil latency-performance.
+138-- ZRAM ativa e configurada.
+139-- THP em madvise.
+140-- Sysctl de memória/latência documentado.
+141-- GameMode instalado e funcional.
+142-- MangoHud instalado e usando padrão visual Mocha.
+143-- Baseline de jogo sem Launch Options preservado para comparação.
+144-
+145-### 6.2 Valores da receita meio termo turbo usada como referência
+146-
+147-Estes valores precisam constar no manual para evitar que a receita seja reduzida erroneamente à ZRAM:
+148-
+149-- vm.swappiness=80
+150-- vm.vfs_cache_pressure=50
+151-- vm.page-cluster=0
+152-- vm.dirty_background_bytes=67108864
+153-- vm.dirty_bytes=268435456
+154-- vm.max_map_count=16777216
+155-- kernel.sched_autogroup_enabled=0
+156-- transparent_hugepage=madvise
+157-- zram com compressão zstd quando a implementação usada permitir
+158-- zram com 100% de memória como alvo da receita
+159-- zram com prioridade alta, alvo 32767 quando a implementação usada permitir
+160-- TuneD habilitado
+161-- perfil TuneD: latency-performance
+162-
+163-Se o estado real do Arch estiver diferente desses valores, isso deve ser registrado como divergência ou adaptação da montagem atual, não apagado do manual.
+164-
+165-### 6.3 CPU em performance
+166-
+167-- A CPU deve priorizar desempenho, não economia.
+168-- Validar governor em /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor.
+169-- Quando existir energy_performance_preference, validar preferência em performance.
+170-- Validar com cpupower quando disponível.
+171-- A configuração precisa sobreviver ao reboot.
+172-
+173-### 6.4 TuneD latency-performance
+174-
+175-- TuneD faz parte da receita de agressividade.
+176-- O perfil esperado é latency-performance.
+177-- Validar com tuned-adm active.
+178-- Validar serviço ativo com systemctl is-active tuned.
+179-- Não substituir por perfil experimental sem teste em jogo e aprovação.
+180-
+181-### 6.5 GPU NVIDIA em máximo desempenho
+182-
+183-- A GPU NVIDIA deve preferir máximo desempenho quando a pilha atual permitir.
+184-- Validar o driver com nvidia-smi.
+185-- Registrar driver, power limit, clocks e modo de energia quando disponíveis.
+186-- Evitar ajuste dependente de X11.
+187-- Não alterar driver NVIDIA em atualização comum sem teste específico.
+188-
+189-### 6.6 Sysctl da receita
+190-
+191-O manual deve registrar estes sysctl, mesmo quando o comando de instalação apenas validar o estado atual:
+192-
+193-- vm.swappiness
+194-- vm.vfs_cache_pressure
+195-- vm.page-cluster
+196-- vm.dirty_background_bytes
+197-- vm.dirty_bytes
+198-- vm.max_map_count
+199-- kernel.sched_autogroup_enabled
+200-- kernel.nmi_watchdog, quando aplicado
+201-
+202-A ausência desses valores no manual é falha de documentação, porque esconde parte da receita que influenciou o comportamento em jogo.
+203-
+204-### 6.7 Transparent Huge Pages
+205-
+206-- THP deve ficar documentado como madvise na receita.
+207-- Validar em /sys/kernel/mm/transparent_hugepage/enabled.
+208-- Registrar defrag quando relevante.
+209-- Não mudar THP sem novo teste real em jogo.
+210-
+211-### 6.8 ZRAM
+212-
+213-- ZRAM é obrigatória, mas não é a receita inteira.
+214-- Validar com zramctl.
+215-- Validar com swapon --show.
+216-- Registrar algoritmo, tamanho e prioridade.
+217-- Alvo da receita: zstd, 100% de memória e prioridade 32767 quando a implementação usada permitir.
+218-
+219-### 6.9 GameMode
+220-
+221-- GameMode deve estar instalado e funcional.
+222-- Linha Steam para testar somente GameMode:
+
+== Concluído ==

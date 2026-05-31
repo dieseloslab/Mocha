@@ -1,0 +1,41 @@
+Índice gerado em: 20260530-104417
+Diretório: /media/mochafast/MochaArch/ativo/documentacao
+
+2026-05-29 15:01  /media/mochafast/MochaArch/ativo/documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md
+2026-05-29 15:24  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+2026-05-29 15:27  /media/mochafast/MochaArch/ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md
+2026-05-29 15:29  /media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+2026-05-29 15:43  /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+2026-05-29 15:44  /media/mochafast/MochaArch/ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md
+2026-05-29 15:46  /media/mochafast/MochaArch/ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md
+2026-05-29 16:13  /media/mochafast/MochaArch/ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md
+2026-05-29 16:34  /media/mochafast/MochaArch/ativo/documentacao/20260529-163403-wallpaper-kdePCan-aplicado.md
+2026-05-29 17:24  /media/mochafast/MochaArch/ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md
+2026-05-29 17:31  /media/mochafast/MochaArch/ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md
+2026-05-29 17:33  /media/mochafast/MochaArch/ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md
+2026-05-29 17:58  /media/mochafast/MochaArch/ativo/documentacao/20260529-175841-esquema-cores-kde-mocha-solid-canonico-aplicado.md
+2026-05-29 18:03  /media/mochafast/MochaArch/ativo/documentacao/20260529-180309-plasma-style-barra-mocha-aplicado.md
+2026-05-29 18:27  /media/mochafast/MochaArch/ativo/documentacao/20260529-182750-zen-default-grub-seguro.md
+2026-05-29 20:00  /media/mochafast/MochaArch/ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md
+2026-05-29 20:57  /media/mochafast/MochaArch/ativo/documentacao/20260529-205629-base-jogos-wrapper-limpo-autostarts.md
+2026-05-29 21:05  /media/mochafast/MochaArch/ativo/documentacao/20260529-210324-login-manager-plasmalogin-aplicado-pendente-pos-boot.md
+2026-05-29 21:05  /media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md
+2026-05-29 21:14  /media/mochafast/MochaArch/ativo/documentacao/20260529-211408-wallpaper-e-barra-mocha-aplicados.md
+2026-05-29 21:16  /media/mochafast/MochaArch/ativo/documentacao/20260529-211622-MARCO-ESTADO-REPRODUZIDO-POS-FORMATACAO.md
+2026-05-29 21:27  /media/mochafast/MochaArch/ativo/documentacao/20260529-212702-levantamento-programas-jogos-atualizacao-zero.md
+2026-05-29 21:28  /media/mochafast/MochaArch/ativo/documentacao/20260529-212825-atualizacoes-oficiais-seguras.md
+2026-05-29 22:14  /media/mochafast/MochaArch/ativo/documentacao/20260529-214720-mudancas-feitas-auditoria-repos-e-limpeza-vmstore.md
+2026-05-29 22:14  /media/mochafast/MochaArch/ativo/documentacao/20260529-214720-proximos-passos-repos-proprio-mocha.md
+2026-05-29 22:46  /media/mochafast/MochaArch/ativo/documentacao/20260529-224555-repositorio-proprio-mocha-estrutura-criada.md
+2026-05-29 23:44  /media/mochafast/MochaArch/ativo/documentacao/20260529-234449-primeiro-pacote-repo-seguro-vmstore.md
+2026-05-29 23:47  /media/mochafast/MochaArch/ativo/documentacao/20260529-234741-repo-seguro-testing-stable-criado.md
+2026-05-30 00:19  /media/mochafast/MochaArch/ativo/documentacao/20260530-001926-pacote-mocha-pacman-policy.md
+2026-05-30 05:50  /media/mochafast/MochaArch/ativo/documentacao/20260530-055006-repo-stable-validado-e-pacman-conf-ativado.md
+2026-05-30 05:51  /media/mochafast/MochaArch/ativo/documentacao/20260530-055134-repo-stable-correcao-limpeza-tmp.md
+2026-05-30 05:52  /media/mochafast/MochaArch/ativo/documentacao/20260530-055250-auditoria-atualizacoes-sem-aplicar.md
+2026-05-30 05:54  /media/mochafast/MochaArch/ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md
+2026-05-30 06:00  /media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.backup-20260530-064832.md
+2026-05-30 06:00  /media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md
+2026-05-30 10:15  /media/mochafast/MochaArch/ativo/documentacao/20260530-101522-mocha-gamer-essentials-politica.md
+2026-05-30 10:33  /media/mochafast/MochaArch/ativo/documentacao/20260530-102502-mocha-gamer-essentials-protonplus-politica.md
+2026-05-30 10:34  /media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md

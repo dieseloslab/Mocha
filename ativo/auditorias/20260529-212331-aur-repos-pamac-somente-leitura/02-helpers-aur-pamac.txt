@@ -1,0 +1,21 @@
+### helpers AUR/Pamac instalados
+
+### binários no PATH
+pamac -> /usr/bin/pamac
+sync -> /usr/bin/sync
+checkupdates -> /usr/bin/checkupdates
+pacman-conf -> /usr/bin/pacman-conf
+
+### serviços/timers Pamac/AUR
+pamac-cleancache.service                     static          -
+pamac-daemon.service                         static          -
+pamac-offline-upgrade.service                disabled        disabled
+pamac-cleancache.timer                       enabled         disabled
+
+### unidades de usuário Pamac/AUR
+app-pamac\x2dtray@autostart.service                                    generated -
+app-pamac\x2dtray\x2dbudgie@autostart.service                          generated -
+
+### autostarts Pamac/AUR
+/etc/xdg/autostart/pamac-tray-budgie.desktop
+/etc/xdg/autostart/pamac-tray.desktop

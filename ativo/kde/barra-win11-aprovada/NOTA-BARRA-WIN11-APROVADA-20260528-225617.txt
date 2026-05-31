@@ -1,0 +1,30 @@
+MOCHA ARCH / KDE — BARRA ESTILO WINDOWS 11 APROVADA
+Timestamp: 20260528-225617
+
+Status:
+- Funcionou e foi aprovado pelo usuário nesta instalação EndeavourOS KDE.
+- Deve ser preservado como solução de referência para MochaArch.
+
+O que a solução faz:
+- Audita o arquivo real:
+  $HOME/.config/plasma-org.kde.plasma.desktop-appletsrc
+- Cria backup com timestamp.
+- Mantém no máximo 2 backups do arquivo da barra.
+- Usa dois org.kde.plasma.panelspacer expansíveis.
+- Centraliza Kickoff/Iniciar + icontasks/taskmanager.
+- Preserva pager/outros applets à esquerda.
+- Mantém systemtray/digitalclock/showdesktop à direita.
+- Reinicia somente plasmashell.
+
+Arquivos salvos:
+- Snapshot aprovado:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+- Script reutilizável:
+  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+- Log desta gravação:
+  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+
+Observação:
+- Não depende de X11.
+- Não instala pacotes.
+- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.

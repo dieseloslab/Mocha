@@ -1,0 +1,696 @@
+== MOCHA ARCH :: auditoria pós-congelamento ==
+Data: 20260529-204737
+
+== Kernel atual ==
+Linux Mocha 7.0.10-arch1-1 #1 SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:21:20 +0000 x86_64 GNU/Linux
+
+== Últimos boots registrados ==
+IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
+ -1 945b9df6e55b4546aa9ee7bf57112ae3 Fri 2026-05-29 20:18:03 -03 Fri 2026-05-29 20:41:04 -03
+  0 aa78f3fc6fce43cf80b58b132354adc8 Fri 2026-05-29 20:41:35 -03 Fri 2026-05-29 20:47:27 -03
+
+== Erros críticos do boot anterior ==
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_unifiedmailbox_agent[2551]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.akonadi_unifiedmailbox_agent'")
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CalendarModel(0x556eaa8f8ad0, name = "ETM") without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::KColumnFilterProxyModel(0x556eacc11080, name = "Remove columns") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CollectionFilterProxyModel(0x556eaa5f5100, name = "Only show collections") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CheckableProxyModel(0x556eaa9c7da0, name = "Add checkboxes") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on KSelectionProxyModel(0x556ead76f8b0, name = "Only show items of selected collection") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CalFilterProxyModel(0x556ead770710, name = "KCalendarCore::CalFilter filtering") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CalFilterPartStatusProxyModel(0x556ead771400, name = "PartStatus filtering") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x556eacc1b9b0, name = "Show headers") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on KSelectionProxyModel(0x556ead76f8b0, name = "Only show items of selected collection") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CalFilterProxyModel(0x556ead770710, name = "KCalendarCore::CalFilter filtering") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::CalFilterPartStatusProxyModel(0x556ead771400, name = "PartStatus filtering") without calling beginResetModel first
+mai 29 20:18:19 Mocha kalendarac[1520]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x556eacc1b9b0, name = "Show headers") without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_archivemail_agent[2545]: endResetModel called on Akonadi::EntityTreeModel(0x7f30c400ca10) without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_archivemail_agent[2545]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x7f30c400c950) without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_mailfilter_agent[2543]: endResetModel called on Akonadi::EntityTreeModel(0x7f02b8009820) without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_mailfilter_agent[2543]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x55e71be92250) without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::ContactsTreeModel(0x55ecc94bd000) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::ContactsFilterProxyModel(0x7fe53801c7b0) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on KDescendantsProxyModel(0x7fe53801c2c0) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x55ecc94cce60) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on ContactsModel(0x55ecc94b5470) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on KSortFilterProxyModel(0x55ecc94b45e0) without calling beginResetModel first
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_maildir_resource[2935]: the resource is not properly configured: there is no config file for the resource. We create a new one.
+mai 29 20:18:19 Mocha akonadiserver[2533]: Notification subscriber received ModifySubscription command before RegisterSubscriber
+mai 29 20:18:19 Mocha plasmashell[1114]: "QLocalSocket: Conexão remota encerrada" "/run/user/1000/akonadi/akonadiserver-ntf.socket"
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_ical_resource[2961]: "No file selected."
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadi_control[2492]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+mai 29 20:18:19 Mocha akonadiserver[2533]: Handler exception when handling command ModifyCollection on connection akonadi_ical_resource_0 (0x557a341ebaf0) : Hierarchical RID does not specify an existing collection
+mai 29 20:18:43 Mocha kded6[1067]: "Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken."
+mai 29 20:20:59 Mocha plasmashell[1114]: qrc:/qt/qml/plasma/applet/org/kde/plasma/taskmanager/ToolTipDelegate.qml:63: TypeError: Cannot read property 'containsMouse' of null
+mai 29 20:21:00 Mocha systemsettings[4185]: Failed to connect to Bolt manager DBus interface: 
+mai 29 20:21:00 Mocha systemsettings[4185]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+mai 29 20:28:59 Mocha baloo_file_extractor[5118]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.baloo'")
+mai 29 20:30:21 Mocha baloo_file_extractor[24825]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.baloo'")
+mai 29 20:30:36 Mocha baloo_file_extractor[28224]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.baloo'")
+mai 29 20:32:53 Mocha baloo_file_extractor[54991]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.baloo'")
+mai 29 20:40:37 Mocha kernel: nvidia: loading out-of-tree module taints kernel.
+mai 29 20:40:37 Mocha kernel: 
+mai 29 20:40:37 Mocha kernel: NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  595.71.05  Release Build  (root@Mocha)  
+mai 29 20:40:49 Mocha kernel: nvidia-modeset: ERROR: GPU:0: Failed to initialize DMA.
+mai 29 20:40:56 Mocha kernel: NVRM: krcWatchdog_IMPL: RC watchdog: GPU is probably locked!  Notify Timeout Seconds: 7
+mai 29 20:41:04 Mocha kernel: NVRM: krcWatchdog_IMPL: RC watchdog: GPU is probably locked!  Notify Timeout Seconds: 7
+
+== Travamentos, GPU, NVIDIA, nouveau, Xid, hung, watchdog, OOM ==
+mai 29 20:18:03 Mocha kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+mai 29 20:18:03 Mocha kernel: MCE: In-kernel MCE decoding enabled.
+mai 29 20:18:03 Mocha kernel: NMI watchdog: Enabled. Permanently consumes one hw-PMU counter.
+mai 29 20:18:03 Mocha kernel: thermal_sys: Registered thermal governor 'fair_share'
+mai 29 20:18:03 Mocha kernel: thermal_sys: Registered thermal governor 'bang_bang'
+mai 29 20:18:03 Mocha kernel: thermal_sys: Registered thermal governor 'step_wise'
+mai 29 20:18:03 Mocha kernel: thermal_sys: Registered thermal governor 'user_space'
+mai 29 20:18:03 Mocha kernel: thermal_sys: Registered thermal governor 'power_allocator'
+mai 29 20:18:03 Mocha kernel: ACPI: bus type drm_connector registered
+mai 29 20:18:03 Mocha kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+mai 29 20:18:03 Mocha kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+mai 29 20:18:03 Mocha kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+mai 29 20:18:03 Mocha kernel: zswap: loaded using pool zstd
+mai 29 20:18:03 Mocha systemd[1]: Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+mai 29 20:18:03 Mocha systemd-modules-load[385]: Failed to find module 'nvidia_uvm'
+mai 29 20:18:05 Mocha systemd[1]: Found device KINGSTON SNV2S1000G swap.
+mai 29 20:18:05 Mocha systemd[1]: Activating swap Swap Partition...
+mai 29 20:18:05 Mocha kernel: Adding 17774484k swap on /dev/nvme0n1p3.  Priority:-1 extents:1 across:17774484k SS
+mai 29 20:18:05 Mocha kernel: sp5100_tco: SP5100/SB800 TCO WatchDog Timer Driver
+mai 29 20:18:05 Mocha kernel: sp5100-tco sp5100-tco: Using 0xfeb00000 for watchdog MMIO address
+mai 29 20:18:05 Mocha systemd[1]: Activated swap Swap Partition.
+mai 29 20:18:05 Mocha kernel: r8169 0000:04:00.0 eth0: RTL8168h/8111h, c8:7f:54:63:3e:0e, XID 541, IRQ 77
+mai 29 20:18:05 Mocha systemd[1]: Reached target Swaps.
+mai 29 20:18:05 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input28
+mai 29 20:18:05 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input29
+mai 29 20:18:05 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input30
+mai 29 20:18:05 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input31
+mai 29 20:18:06 Mocha alsactl[595]: Found hardware: "HDA-Intel" "Nvidia GPU ad HDMI/DP" "HDA:10de00ad,10de0000,00100100" "0x10de" "0x0000"
+mai 29 20:18:07 Mocha sddm-greeter-qt6[714]: Reading from "/usr/local/share/wayland-sessions/plasma.desktop"
+mai 29 20:18:07 Mocha sddm-greeter-qt6[714]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+mai 29 20:18:07 Mocha dbus-broker-launch[717]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+mai 29 20:18:09 Mocha NetworkManager[594]: <info>  [1780096689.2525] dhcp4 (enp4s0): activation: beginning transaction (timeout in 45 seconds)
+mai 29 20:18:10 Mocha NetworkManager[594]: <info>  [1780096690.7770] dhcp6 (enp4s0): activation: beginning transaction (timeout in 45 seconds)
+mai 29 20:18:13 Mocha sddm-greeter-qt6[714]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+mai 29 20:18:13 Mocha sddm[659]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+mai 29 20:18:13 Mocha sddm[659]: Session "/usr/share/wayland-sessions/plasma.desktop" selected, command: "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland" for VT 1
+mai 29 20:18:13 Mocha sddm-helper[768]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+mai 29 20:18:14 Mocha dbus-broker-launch[830]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+mai 29 20:18:14 Mocha systemd[775]: Reload requested from client PID 808 ('startplasma-way')...
+mai 29 20:18:14 Mocha kwin_wayland[848]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operation not permitted
+mai 29 20:18:14 Mocha kwin_wayland[848]: No backend specified, automatically choosing drm
+mai 29 20:18:14 Mocha kwin_wayland[848]: Could not find edid for connector DrmConnector(id=37, gpu="/dev/dri/card0", name="Unknown-1", connection="Connected", countMode=1)
+mai 29 20:18:14 Mocha kwin_wayland[848]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operação não permitida
+mai 29 20:18:14 Mocha kwin_wayland[848]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:13:28: this compose sequence already exists; overriding
+mai 29 20:18:14 Mocha kwin_wayland[848]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:14:28: this compose sequence already exists; overriding
+mai 29 20:18:14 Mocha kwin_wayland[848]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:16:34: this compose sequence already exists; overriding
+mai 29 20:18:14 Mocha kwin_wayland[848]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:17:34: this compose sequence already exists; overriding
+mai 29 20:18:14 Mocha kwin_wayland[848]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:19:39: a sequence already exists which is a prefix of this sequence; overriding
+mai 29 20:18:14 Mocha kwin_wayland[848]: Failed to gain real time thread priority (See CAP_SYS_NICE in the capabilities(7) man page). error: Operação não permitida
+mai 29 20:18:14 Mocha kwin_wayland[848]: Failed to open drm node: ""
+mai 29 20:18:14 Mocha kwin_wayland[848]: couldn't find dev node for drm device 
+mai 29 20:18:14 Mocha kwin_wayland[848]: No render nodes have been found, falling back to primary node
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[989]: Main linux-dmabuf device has no render node
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[989]: EGL setup failed, disabling glamor
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[989]: Failed to initialize glamor, falling back to sw
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: The XKEYBOARD keymap compiler (xkbcomp) reports:
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: > Warning:          Multiple symbols for level 1/group 1 on key <FK23>
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: >                   Using F23, ignoring XF86TouchpadOff
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: > Warning:          Symbol map for key <FK23> redefined
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: >                   Using last definition for conflicting fields
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: > Warning:          Symbol map for key <FK24> redefined
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: >                   Using last definition for conflicting fields
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[990]: Errors from xkbcomp are not fatal to the X server
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: The XKEYBOARD keymap compiler (xkbcomp) reports:
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: > Warning:          Unsupported maximum keycode 709, clipping.
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: >                   X11 cannot support keycodes above 255.
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: > Warning:          Virtual modifier Hyper multiply defined
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: >                   Using 0, ignoring 0
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: > Warning:          Virtual modifier ScrollLock multiply defined
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: >                   Using 0, ignoring 0
+mai 29 20:18:14 Mocha kwin_wayland_wrapper[997]: Errors from xkbcomp are not fatal to the X server
+mai 29 20:18:15 Mocha systemd[775]: Starting KDE Plasma Workspace...
+mai 29 20:18:15 Mocha plasmashell[1114]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:15 Mocha plasmashell[1114]: libEGL warning: MESA-LOADER: failed to retrieve device information
+mai 29 20:18:15 Mocha plasmashell[1114]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:15 Mocha plasmashell[1114]: MESA: error: ZINK: vkEnumeratePhysicalDevices failed (VK_ERROR_INITIALIZATION_FAILED)
+mai 29 20:18:15 Mocha plasmashell[1114]: MESA: error: ZINK: failed to choose pdev
+mai 29 20:18:15 Mocha plasmashell[1114]: libEGL warning: egl: failed to create dri2 screen
+mai 29 20:18:15 Mocha kded6[1067]: QDBusObjectPath: invalid path "/modules/oom-notifier"
+mai 29 20:18:15 Mocha kded6[1067]: The kded module name "oom-notifier" is invalid!
+mai 29 20:18:15 Mocha kded6[1067]: QDBusObjectPath: invalid path "/modules/plasma-session-shortcuts"
+mai 29 20:18:15 Mocha kded6[1067]: The kded module name "plasma-session-shortcuts" is invalid!
+mai 29 20:18:15 Mocha systemd[775]: Started KDE Plasma Workspace.
+mai 29 20:18:15 Mocha systemd[775]: Reached target KDE Plasma Workspace Core.
+mai 29 20:18:15 Mocha systemd[775]: Started Proxies GTK DBus menus to a Plasma readable format.
+mai 29 20:18:15 Mocha NetworkManager[594]: <info>  [1780096695.4158] agent-manager: agent[181d4288a3db41fe,:1.31/org.kde.plasma.networkmanagement/1000]: agent registered
+mai 29 20:18:15 Mocha plasmashell[1114]: Member visible of the object PlasmaQuick::Dialog overrides a member of the base object. Consider renaming it or adding final or override specifier
+mai 29 20:18:15 Mocha plasmashell[1114]: Member enabled of the object DeclarativeDropArea overrides a member of the base object. Consider renaming it or adding final or override specifier
+mai 29 20:18:15 Mocha systemd[1]: Created slice Slice /system/dbus-:1.2-org.kde.powerdevil.discretegpuhelper.
+mai 29 20:18:15 Mocha systemd[1]: Started dbus-:1.2-org.kde.powerdevil.discretegpuhelper@0.service.
+mai 29 20:18:15 Mocha systemd[775]: Reached target KDE Plasma Workspace.
+mai 29 20:18:15 Mocha systemd[775]: Reached target plasma-workspace-wayland.target.
+mai 29 20:18:15 Mocha systemd[775]: Starting Plasma Session Restore...
+mai 29 20:18:15 Mocha systemd[775]: Started Plasma Session Restore.
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: libEGL warning: MESA-LOADER: failed to retrieve device information
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: MESA: error: ZINK: vkEnumeratePhysicalDevices failed (VK_ERROR_INITIALIZATION_FAILED)
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: MESA: error: ZINK: failed to choose pdev
+mai 29 20:18:15 Mocha plasma-fallback-session-restore[1522]: libEGL warning: egl: failed to create dri2 screen
+mai 29 20:18:16 Mocha plasmashell[1114]: requesting unexisting screen geometry -1
+mai 29 20:18:16 Mocha plasmashell[1114]: Could not find required file "mainscript" for package "/usr/share/plasma/plasmoids/org.kde.plasma.icontasks/" should be QList("ui/main.qml")
+mai 29 20:18:16 Mocha kwin_wayland[848]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kwin'")
+mai 29 20:18:16 Mocha kwin_wayland[848]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kwin'")
+mai 29 20:18:16 Mocha plasmashell[1114]: Activity added twice "998a1de4-fe81-47a3-b92f-e0b79236a2db"
+mai 29 20:18:16 Mocha plasmashell[1114]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+mai 29 20:18:16 Mocha plasma-welcome[1835]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:16 Mocha plasma-welcome[1835]: libEGL warning: MESA-LOADER: failed to retrieve device information
+mai 29 20:18:16 Mocha plasma-welcome[1835]: libEGL warning: failed to get driver name for fd -1
+mai 29 20:18:16 Mocha systemd[775]: plasma-ksplash.service: Consumed 1.861s CPU time over 2.115s wall clock time, 181.4M memory peak.
+mai 29 20:18:16 Mocha plasma-welcome[1835]: MESA: error: ZINK: vkEnumeratePhysicalDevices failed (VK_ERROR_INITIALIZATION_FAILED)
+mai 29 20:18:16 Mocha plasma-welcome[1835]: MESA: error: ZINK: failed to choose pdev
+mai 29 20:18:16 Mocha plasma-welcome[1835]: libEGL warning: egl: failed to create dri2 screen
+mai 29 20:18:17 Mocha plasma-welcome[1835]: Trying to use rootObject before initialization is completed, whilst using setInitializationDelayed. Forcing completion
+mai 29 20:18:17 Mocha plasma-discover[2180]: Didn't find any Discover backend!
+mai 29 20:18:17 Mocha plasma-discover[2180]: qrc:/qt/qml/org/kde/discover/qml/DiscoverWindow.qml:119:5: QML Shortcut: Shortcut: Only binding to one of multiple key bindings associated with 15. Use 'sequences: [ <key> ]' to bind to all of them.
+mai 29 20:18:17 Mocha plasmashell[1114]: No object for name "auto_null.monitor"
+mai 29 20:18:17 Mocha plasma6.0-remove-old-shortcuts[2365]: "Slideshow Wallpaper Next Image"
+mai 29 20:18:17 Mocha plasma6.0-remove-old-shortcuts[2365]: "next activity"
+mai 29 20:18:17 Mocha plasma6.0-remove-old-shortcuts[2365]: "previous activity"
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::ContactsTreeModel(0x55ecc94bd000) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::ContactsFilterProxyModel(0x7fe53801c7b0) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on KDescendantsProxyModel(0x7fe53801c2c0) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x55ecc94cce60) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on ContactsModel(0x55ecc94b5470) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: endResetModel called on KSortFilterProxyModel(0x55ecc94b45e0) without calling beginResetModel first
+mai 29 20:18:19 Mocha plasmashell[1114]: "QLocalSocket: Conexão remota encerrada" "/run/user/1000/akonadi/akonadiserver-ntf.socket"
+mai 29 20:18:24 Mocha systemd[775]: app-org.kde.plasma\x2dwelcome@e5ed7dad9df2431ba743ff69bf0324ab.service: Consumed 3.029s CPU time over 8.038s wall clock time, 334.3M memory peak.
+mai 29 20:18:25 Mocha systemd[1]: dbus-:1.2-org.kde.powerdevil.discretegpuhelper@0.service: Deactivated successfully.
+mai 29 20:18:43 Mocha kded6[1067]: "Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken."
+mai 29 20:20:59 Mocha plasmashell[1114]: qrc:/qt/qml/plasma/applet/org/kde/plasma/taskmanager/ToolTipDelegate.qml:63: TypeError: Cannot read property 'containsMouse' of null
+mai 29 20:29:03 Mocha sudo[5153]:      hal : TTY=pts/1 ; PWD=/home/hal ; USER=root ; COMMAND=/usr/bin/pacman -S --needed linux-zen linux-zen-headers dkms nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings egl-wayland vulkan-icd-loader lib32-vulkan-icd-loader zram-generator tuned cpupower python
+mai 29 20:29:20 Mocha zram_generator::config[6196]: No configuration found.
+mai 29 20:37:54 Mocha zram_generator::config[55275]: No configuration found.
+mai 29 20:40:37 Mocha kernel: nvidia: loading out-of-tree module taints kernel.
+mai 29 20:40:37 Mocha kernel: nvidia: module verification failed: signature and/or required key missing - tainting kernel
+mai 29 20:40:37 Mocha kernel: nvidia-nvlink: Nvlink Core is being initialized, major device number 237
+mai 29 20:40:37 Mocha kernel: nvidia 0000:01:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+mai 29 20:40:37 Mocha kernel: NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  595.71.05  Release Build  (root@Mocha)  
+mai 29 20:40:39 Mocha kernel: nvidia-modeset: Loading NVIDIA UNIX Open Kernel Mode Setting Driver for x86_64  595.71.05  Release Build  (root@Mocha)  
+mai 29 20:40:49 Mocha kernel: nvidia-modeset: ERROR: GPU:0: Failed to initialize DMA.
+mai 29 20:40:56 Mocha kernel: NVRM: krcWatchdog_IMPL: RC watchdog: GPU is probably locked!  Notify Timeout Seconds: 7
+mai 29 20:41:04 Mocha kernel: NVRM: krcWatchdog_IMPL: RC watchdog: GPU is probably locked!  Notify Timeout Seconds: 7
+
+== Pacman recente ==
+[2026-05-29T20:16:53-0300] [ALPM] installed skladnik (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed step (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed svgpart (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed sweeper (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed telly-skout (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed tokodon (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed umbrello (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed yakuake (26.04.1-1)
+[2026-05-29T20:16:53-0300] [ALPM] installed zanshin (26.04.1-1)
+[2026-05-29T20:16:54-0300] [ALPM] transaction completed
+[2026-05-29T20:16:54-0300] [ALPM] running '20-systemd-sysusers.hook'...
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET] Creating group 'colord' with GID 954.
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET] Creating user 'colord' (colord colour management daemon) with UID 954 and GID 954.
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET] Creating group 'saned' with GID 953.
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET] Creating user 'saned' (SANE daemon user) with UID 953 and GID 953.
+[2026-05-29T20:16:54-0300] [ALPM] running '21-systemd-tmpfiles.hook'...
+[2026-05-29T20:16:54-0300] [ALPM] running '25-systemd-hwdb.hook'...
+[2026-05-29T20:16:54-0300] [ALPM] running '30-systemd-daemon-reload-system.hook'...
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:54-0300] [ALPM] running '30-systemd-daemon-reload-user.hook'...
+[2026-05-29T20:16:54-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:54-0300] [ALPM] running '30-update-mime-database.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running '35-systemd-udev-reload.hook'...
+[2026-05-29T20:16:55-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:55-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'dbus-reload.hook'...
+[2026-05-29T20:16:55-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:55-0300] [ALPM] running 'fontconfig.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'glib-compile-schemas.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'texinfo-install.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:16:55-0300] [ALPM] running 'update-vlc-plugin-cache.hook'...
+[2026-05-29T20:16:56-0300] [ALPM] running 'xorg-mkfontscale.hook'...
+[2026-05-29T20:16:56-0300] [PACMAN] Running 'pacman -S --noconfirm --noprogressbar packagekit-qt5'
+[2026-05-29T20:16:56-0300] [PACMAN] Running 'pacman -S --noconfirm --noprogressbar elisa'
+[2026-05-29T20:16:56-0300] [ALPM] transaction started
+[2026-05-29T20:16:56-0300] [ALPM] reinstalled elisa (26.04.1-1)
+[2026-05-29T20:16:56-0300] [ALPM] transaction completed
+[2026-05-29T20:16:56-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:16:56-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:16:56-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:16:56-0300] [PACMAN] Running 'pacman -S --noconfirm --noprogressbar kdeconnect'
+[2026-05-29T20:16:57-0300] [ALPM] transaction started
+[2026-05-29T20:16:57-0300] [ALPM] reinstalled kdeconnect (26.04.1-1)
+[2026-05-29T20:16:57-0300] [ALPM] transaction completed
+[2026-05-29T20:16:57-0300] [ALPM] running '35-systemd-udev-reload.hook'...
+[2026-05-29T20:16:57-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:57-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:16:57-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:16:57-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:16:57-0300] [PACMAN] Running 'pacman -S --noconfirm --noprogressbar dolphin'
+[2026-05-29T20:16:57-0300] [ALPM] transaction started
+[2026-05-29T20:16:57-0300] [ALPM] reinstalled dolphin (26.04.1-1)
+[2026-05-29T20:16:57-0300] [ALPM] transaction completed
+[2026-05-29T20:16:57-0300] [ALPM] running '30-systemd-daemon-reload-user.hook'...
+[2026-05-29T20:16:57-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:16:57-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:16:57-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:16:57-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:16:58-0300] [PACMAN] Running 'pacman -S --noconfirm --noprogressbar firefox'
+[2026-05-29T20:16:59-0300] [ALPM] transaction started
+[2026-05-29T20:16:59-0300] [ALPM] installed mailcap (2.1.54-2)
+[2026-05-29T20:16:59-0300] [ALPM] installed firefox (151.0.2-1)
+[2026-05-29T20:17:00-0300] [ALPM] transaction completed
+[2026-05-29T20:17:00-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:17:00-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:17:00-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:17:06-0300] [PACMAN] Running 'pacman -U --noconfirm /var/cache/pacman/pkg/libpamac.pkg.tar.zst'
+[2026-05-29T20:17:06-0300] [ALPM] transaction started
+[2026-05-29T20:17:06-0300] [ALPM] installed libpamac-aur (11.7.4-2)
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET] ==> An authentication agent is required
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET]     Cinnamon, Deepin, GNOME, GNOME Flashback, KDE, LXDE, LXQt, MATE and Xfce
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET]     have an authentication agent already.
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET]     See https://wiki.archlinux.org/index.php/Polkit#Authentication_agents
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET]     for other desktop environments.
+[2026-05-29T20:17:07-0300] [ALPM] transaction completed
+[2026-05-29T20:17:07-0300] [ALPM] running '30-systemd-daemon-reload-system.hook'...
+[2026-05-29T20:17:07-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:17:07-0300] [ALPM] running '30-update-mime-database.hook'...
+[2026-05-29T20:17:08-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:17:08-0300] [ALPM] running 'dbus-reload.hook'...
+[2026-05-29T20:17:08-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:17:08-0300] [PACMAN] Running 'pacman -U --noconfirm /var/cache/pacman/pkg/pamac.pkg.tar.zst'
+[2026-05-29T20:17:08-0300] [ALPM] transaction started
+[2026-05-29T20:17:08-0300] [ALPM] installed libadwaita (1:1.9.1-1)
+[2026-05-29T20:17:08-0300] [ALPM] installed pamac-aur (11.7.4-3)
+[2026-05-29T20:17:08-0300] [ALPM-SCRIPTLET] ==> Enable Pamac Updates Indicator via
+[2026-05-29T20:17:08-0300] [ALPM-SCRIPTLET]     Extensions
+[2026-05-29T20:17:08-0300] [ALPM] transaction completed
+[2026-05-29T20:17:08-0300] [ALPM] running '30-systemd-daemon-reload-system.hook'...
+[2026-05-29T20:17:08-0300] [ALPM-SCRIPTLET]   Skipped: Running in chroot.
+[2026-05-29T20:17:08-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:17:08-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:17:08-0300] [ALPM] running 'update-desktop-database.hook'...
+[2026-05-29T20:29:03-0300] [PACMAN] Running 'pacman -Syu'
+[2026-05-29T20:29:03-0300] [PACMAN] synchronizing package lists
+[2026-05-29T20:29:03-0300] [PACMAN] starting full system upgrade
+[2026-05-29T20:29:03-0300] [PACMAN] Running 'pacman -S --needed linux-zen linux-zen-headers dkms nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings egl-wayland vulkan-icd-loader lib32-vulkan-icd-loader zram-generator tuned cpupower python'
+[2026-05-29T20:29:15-0300] [ALPM] transaction started
+[2026-05-29T20:29:16-0300] [ALPM] installed linux-zen (7.0.10.zen1-1)
+[2026-05-29T20:29:17-0300] [ALPM] installed linux-zen-headers (7.0.10.zen1-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed nvidia-open-dkms (595.71.05-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-glibc (2.43+r22+g8362e8ce10b2-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-zlib (1.3.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-gcc-libs (16.1.1+r12+g301eb08fa2c5-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxdmcp (1.1.5-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxau (1.0.12-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxcb (1.17.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libx11 (1.8.13-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxext (1.3.7-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-expat (2.8.1-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libpciaccess (0.19-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libdrm (2.4.133-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-bzip2 (1.0.8-4)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-brotli (1.1.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-e2fsprogs (1.47.4-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-keyutils (1.6.3-4)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-openssl (1:3.6.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxcrypt (4.5.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libldap (2.6.13-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-krb5 (1.22.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libunistring (1.4.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libidn2 (2.3.8-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libnghttp2 (1.69.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libnghttp3 (1.15.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-gmp (6.3.0-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-nettle (4.0-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libffi (3.5.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libtasn1 (4.21.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-p11-kit (0.26.2-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-zstd (1.5.7-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-gnutls (3.8.13-3)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libngtcp2 (1.22.1-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libpsl (0.21.5-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libssh2 (1.11.1-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-curl (8.20.0-7)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-json-c (0.18-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-xz (5.8.3-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libelf (0.195-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxshmfence (1.3.3-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxxf86vm (1.1.5-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-ncurses (6.6-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-icu (78.3-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libxml2 (2.15.3-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-llvm-libs (1:22.1.5-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-lm_sensors (1:3.6.2-2)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-spirv-tools (1:1.4.350.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-wayland (1.25.0-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-mesa (1:26.1.1-1)
+[2026-05-29T20:29:18-0300] [ALPM] installed lib32-libglvnd (1.7.0-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed lib32-nvidia-utils (595.71.05-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed lib32-vulkan-icd-loader (1.4.350.0-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed zram-generator (1.2.1-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed hdparm (9.65-3)
+[2026-05-29T20:29:19-0300] [ALPM] installed numactl (2.0.19-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed libtraceevent (1:1.9.0-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed llvm21-libs (21.1.8-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed libpfm (4.13.0+r83+g91970fe-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed perf (7.0.10-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed python-configobj (5.0.9-6)
+[2026-05-29T20:29:19-0300] [ALPM] installed python-linux-procfs (0.7.4-2)
+[2026-05-29T20:29:19-0300] [ALPM] installed python-pyudev (0.24.4-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed tuned (2.27.0-1)
+[2026-05-29T20:29:19-0300] [ALPM] installed cpupower (7.0.10-1)
+[2026-05-29T20:29:19-0300] [ALPM] transaction completed
+[2026-05-29T20:29:20-0300] [ALPM] running '21-systemd-tmpfiles.hook'...
+[2026-05-29T20:29:20-0300] [ALPM] running '30-systemd-daemon-reload-system.hook'...
+[2026-05-29T20:29:20-0300] [ALPM] running '35-systemd-update.hook'...
+[2026-05-29T20:29:20-0300] [ALPM] running '60-depmod.hook'...
+[2026-05-29T20:29:21-0300] [ALPM] running '70-dkms-install.hook'...
+[2026-05-29T20:29:21-0300] [ALPM-SCRIPTLET] ==> dkms install --no-depmod nvidia/595.71.05 -k 7.0.10-arch1-1
+[2026-05-29T20:30:28-0300] [ALPM-SCRIPTLET] ==> dkms install --no-depmod broadcom-wl/6.30.223.271 -k 7.0.10-zen1-1-zen
+[2026-05-29T20:30:31-0300] [ALPM-SCRIPTLET] ==> dkms install --no-depmod nvidia/595.71.05 -k 7.0.10-zen1-1-zen
+[2026-05-29T20:31:38-0300] [ALPM-SCRIPTLET] ==> depmod 7.0.10-zen1-1-zen
+[2026-05-29T20:31:39-0300] [ALPM-SCRIPTLET] ==> depmod 7.0.10-arch1-1
+[2026-05-29T20:31:41-0300] [ALPM] running '90-mkinitcpio-install.hook'...
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET] ==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET] ==> Using default configuration file: '/etc/mkinitcpio.conf'
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET] ==> Starting build: '7.0.10-arch1-1'
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> Running build hook: [base]
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> Running build hook: [udev]
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> Running build hook: [autodetect]
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> Running build hook: [microcode]
+[2026-05-29T20:31:42-0300] [ALPM-SCRIPTLET]   -> Running build hook: [kms]
+[2026-05-29T20:31:45-0300] [ALPM-SCRIPTLET]   -> Running build hook: [modconf]
+[2026-05-29T20:31:45-0300] [ALPM-SCRIPTLET]   -> Running build hook: [block]
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET]   -> Running build hook: [keyboard]
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET]   -> Running build hook: [keymap]
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET]   -> Running build hook: [consolefont]
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET] ==> WARNING: consolefont: no font found in configuration
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET]   -> Running build hook: [filesystems]
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET] ==> Generating module dependencies
+[2026-05-29T20:31:46-0300] [ALPM-SCRIPTLET] ==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET]   -> Early uncompressed CPIO image generation successful
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET] ==> Initcpio image generation successful
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET] ==> Building image from preset: /etc/mkinitcpio.d/linux-zen.preset: 'default'
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET] ==> Using default configuration file: '/etc/mkinitcpio.conf'
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET]   -> -k /boot/vmlinuz-linux-zen -g /boot/initramfs-linux-zen.img
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET] ==> Starting build: '7.0.10-zen1-1-zen'
+[2026-05-29T20:31:47-0300] [ALPM-SCRIPTLET]   -> Running build hook: [base]
+[2026-05-29T20:31:48-0300] [ALPM-SCRIPTLET]   -> Running build hook: [udev]
+[2026-05-29T20:31:48-0300] [ALPM-SCRIPTLET]   -> Running build hook: [autodetect]
+[2026-05-29T20:31:48-0300] [ALPM-SCRIPTLET]   -> Running build hook: [microcode]
+[2026-05-29T20:31:48-0300] [ALPM-SCRIPTLET]   -> Running build hook: [kms]
+[2026-05-29T20:31:51-0300] [ALPM-SCRIPTLET]   -> Running build hook: [modconf]
+[2026-05-29T20:31:51-0300] [ALPM-SCRIPTLET]   -> Running build hook: [block]
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET]   -> Running build hook: [keyboard]
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET]   -> Running build hook: [keymap]
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET]   -> Running build hook: [consolefont]
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET] ==> WARNING: consolefont: no font found in configuration
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET]   -> Running build hook: [filesystems]
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET] ==> Generating module dependencies
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET] ==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-zen.img'
+[2026-05-29T20:31:52-0300] [ALPM-SCRIPTLET]   -> Early uncompressed CPIO image generation successful
+[2026-05-29T20:31:53-0300] [ALPM-SCRIPTLET] ==> Initcpio image generation successful
+[2026-05-29T20:31:53-0300] [ALPM] running 'dbus-reload.hook'...
+[2026-05-29T20:31:53-0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2026-05-29T20:31:53-0300] [ALPM] running 'update-desktop-database.hook'...
+
+== DKMS ==
+broadcom-wl/6.30.223.271, 7.0.10-arch1-1, x86_64: installed
+broadcom-wl/6.30.223.271, 7.0.10-zen1-1-zen, x86_64: installed
+nvidia/595.71.05, 7.0.10-arch1-1, x86_64: installed
+nvidia/595.71.05, 7.0.10-zen1-1-zen, x86_64: installed
+
+== Módulos de kernel instalados ==
+7.0.10-arch1-1
+7.0.10-zen1-1-zen
+modules
+
+== NVIDIA packages ==
+dkms 3.4.1-1
+egl-wayland 4:1.1.21-1
+egl-wayland2 1.0.1-1
+lib32-nvidia-utils 595.71.05-1
+linux 7.0.10.arch1-1
+linux-api-headers 6.19-1
+linux-atm 2.5.2-9
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+nvidia-open-dkms 595.71.05-2
+nvidia-settings 595.71.05-1
+nvidia-utils 595.71.05-2
+vulkan-icd-loader 1.4.350.0-1
+vulkan-tools 1.4.350.0-1
+
+== Mounts FAST/VMSTORE ==
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore systemd-1 autofs rw,relatime,fd=71,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=9463
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast systemd-1 autofs rw,relatime,fd=69,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=9457
+/media/mochafast /dev/sda1 btrfs  rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+
+== fstab FAST/VMSTORE ==
+UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore xfs rw,noatime,nofail,x-systemd.automount,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=VMSTORE 0 0
+UUID=88e6aa16-110c-4b97-9ffb-85084c000198 /media/mochafast btrfs rw,noatime,compress=zstd:3,nofail,x-systemd.automount,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=MochaFAST 0 0
+
+== Serviços performance ==
+○ cpupower.service - Apply cpupower configuration
+     Loaded: loaded (/usr/lib/systemd/system/cpupower.service; disabled; preset: disabled)
+     Active: inactive (dead)
+
+○ tuned.service - Dynamic System Tuning Daemon
+     Loaded: loaded (/usr/lib/systemd/system/tuned.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: man:tuned(8)
+             man:tuned.conf(5)
+             man:tuned-adm(8)
+
+○ systemd-zram-setup@zram0.service - Create swap on /dev/zram0
+     Loaded: loaded (/usr/lib/systemd/system/systemd-zram-setup@.service; static)
+     Active: inactive (dead)
+       Docs: man:zram-generator(8)
+             man:zram-generator.conf(5)
+
+== Swap ==
+NAME           TYPE      SIZE USED PRIO
+/dev/nvme0n1p3 partition  17G   0B   -1
+               total       usada       livre    compart.  buff/cache  disponível
+Mem.:           15Gi       3,2Gi        10Gi        67Mi       1,6Gi        12Gi
+Swap:           16Gi          0B        16Gi

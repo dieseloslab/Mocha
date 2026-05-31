@@ -1,0 +1,30 @@
+==> Mocha Vivaldi: gerando tema importável no formato que abriu prévia
+Base: /media/mochafast/MochaArch/ativo
+Pasta de temas: /media/mochafast/MochaArch/ativo/vivaldi/temas
+
+==> Limpando temas Mocha/Vivaldi antigos da pasta canônica
+Nada antigo para remover.
+
+==> Criando settings.json com as cores corretas
+Nome interno: Mocha Vivaldi Correto 20260530-192256
+UUID interno: 18808f3f-096f-4f5a-a89b-491adf809bde
+Cores:
+  colorWindowBg    #241e18
+  colorBg          #2b2826
+  colorAccentBg    #241e18
+  colorFg          #efe6da
+  colorHighlightBg #6f5644
+
+==> Compactando ZIP com settings.json na raiz
+
+==> Tema pronto
+Importar este ZIP:
+/media/mochafast/MochaArch/ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE-20260530-192256.zip
+
+Cópia fixa:
+/media/mochafast/MochaArch/ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE.zip
+
+Documento:
+/media/mochafast/MochaArch/ativo/documentacao/Mocha-Vivaldi-Tema-Canonico.md
+Log:
+/media/mochafast/MochaArch/ativo/relatorios/20260530-192256-vivaldi-tema-mocha-certo.log

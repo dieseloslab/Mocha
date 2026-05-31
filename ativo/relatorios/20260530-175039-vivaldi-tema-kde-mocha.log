@@ -1,0 +1,44 @@
+
+==> Validando ferramentas
+Vivaldi detectado: /usr/bin/vivaldi-stable
+
+==> Lendo esquema KDE ativo
+Esquema KDE ativo informado por kdeglobals: não identificado
+
+==> Procurando arquivo .colors do tema Mocha/KDE
+Arquivo de cores escolhido:
+/home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+
+Candidatos encontrados:
+/home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaKDE.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/Mocha-Windows11.colors
+
+==> Extraindo cores KDE e gerando theme.json do Vivaldi
+Cores extraídas para o Vivaldi:
+  Background/Fundo : #1b1612
+  Foreground/Texto : #f2e6d8
+  Highlight        : #c57b3d
+  Accent           : #c57b3d
+  Tema KDE origem  : KDE atual
+
+==> Gerando ZIP importável pelo Vivaldi
+
+==> Copiando caminho do tema para a área de transferência, se possível
+Sem wl-copy/xclip; copie o caminho manualmente.
+
+==> Documentando
+
+==> Abrindo a tela de temas do Vivaldi
+
+PRONTO.
+Tema ZIP:
+/media/mochafast/MochaArch/ativo/vivaldi/temas/20260530-175039-Mocha-KDE-Vivaldi.zip
+
+No Vivaldi: Themes > Library > Open Theme > selecione esse ZIP > Install.
+Log:
+/media/mochafast/MochaArch/ativo/relatorios/20260530-175039-vivaldi-tema-kde-mocha.log
+Documento:
+/media/mochafast/MochaArch/ativo/documentacao/20260530-175039-vivaldi-tema-kde-mocha.md

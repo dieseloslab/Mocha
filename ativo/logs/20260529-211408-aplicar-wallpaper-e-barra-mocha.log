@@ -1,0 +1,40 @@
+
+== Pré-checagem ==
+
+== Conferindo tema já aplicado ==
+[INFO] ColorScheme atual: MochaSolidCanonico
+[INFO] Plasma Style atual: MochaPanelSolidCanonico
+
+== Localizando wallpaper Mocha aprovado sem tocar XU ==
+[INFO] Candidatos encontrados:
+/media/mochafast/MochaArch/ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png
+/media/mochafast/MochaArch/ativo/assets/branding/wallpaper/mocha-wallpaper-kdePCan-20260529-163403.png
+/media/mochafast/MochaArch/ativo/assets/branding/wallpaper/mocha-wallpaper-kdePCan-20260529-1634032.png
+/media/mochafast/Legacy/kdePCan/assets/branding/wallpaper/wallpaper.png
+[INFO] Wallpaper selecionado: /media/mochafast/MochaArch/ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png
+
+== Aplicando barra Win11/Mocha aprovada ==
+[OK] Appletsrc aprovado aplicado: /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+
+== Fixando esquema e Plasma Style Mocha no KDE ==
+
+== Reiniciando plasmashell ==
+[OK] plasmashell reiniciado via systemd do usuário
+
+== Aplicando wallpaper Mocha ==
+A definição de um papel de parede para todas as áreas de trabalho da imagem /media/mochafast/MochaArch/ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png foi realizada com sucesso.
+[OK] Wallpaper aplicado: /media/mochafast/MochaArch/ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png
+
+== Validação final ==
+[INFO] ColorScheme depois: MochaSolidCanonico
+[INFO] Plasma Style depois: MochaPanelSolidCanonico
+[OK] Barra Mocha e tema Mocha validados
+[OK] Wallpaper Mocha aplicado
+
+== Documentando passo aprovado ==
+[OK] Manual vivo atualizado: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+== Finalizado ==
+[OK] Documento: /media/mochafast/MochaArch/ativo/documentacao/20260529-211408-wallpaper-e-barra-mocha-aplicados.md
+[OK] Script reutilizável: /media/mochafast/MochaArch/ativo/scripts/20260529-211408-aplicar-wallpaper-e-barra-mocha.sh
+[OK] Log: /media/mochafast/MochaArch/ativo/logs/20260529-211408-aplicar-wallpaper-e-barra-mocha.log

@@ -1,0 +1,25 @@
+
+== Ambiente ==
+Timestamp: 20260530-054640
+Usuário: hal
+Kernel: 7.0.10-zen1-1-zen
+pacman: 
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260530-054640-pacman-conf-mocha-stable.log
+
+== Validando arquivo real ==
+
+== Repositórios ativos antes da alteração ==
+options
+core
+extra
+multilib
+
+== Procurando banco real do mocha-stable no VMSTORE ==
+Não encontrei banco mocha-stable.db nos caminhos esperados:
+  /media/vmstore/MochaArch/repos/mocha-stable/os/x86_64
+  /media/vmstore/MochaArch/repo/mocha-stable/os/x86_64
+  /media/vmstore/mocha-repos/mocha-stable/os/x86_64
+  /media/vmstore/mocha-repo/mocha-stable/os/x86_64
+  /media/vmstore/pacman-repos/mocha-stable/os/x86_64
+
+ERRO: Não alterei o pacman.conf. Primeiro é preciso existir um repositório mocha-stable válido no VMSTORE.

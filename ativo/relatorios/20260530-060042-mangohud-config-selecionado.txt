@@ -1,0 +1,1 @@
+/home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf

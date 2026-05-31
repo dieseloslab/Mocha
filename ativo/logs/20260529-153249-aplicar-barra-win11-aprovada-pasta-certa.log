@@ -1,0 +1,16 @@
+== Preflight ==
+FAST montado: OK
+Pasta aprovada encontrada: OK
+Configuração Plasma encontrada: OK
+
+== Conteúdo da pasta aprovada ==
+2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+
+== Procurando script aprovado dentro da pasta correta ==
+ERRO: não achei script .sh/.bash aprovado dentro de:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+
+Arquivos encontrados:
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617

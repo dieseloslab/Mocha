@@ -1,0 +1,15 @@
+### pacman explícitos para revisão humana
+android-tools
+android-udev
+firefox
+kdenlive
+libpamac-aur
+pamac-aur
+steam
+
+### desktop entries para revisão humana
+firefox.desktop
+org.kde.kdenlive.desktop
+org.manjaro.pamac.manager.desktop
+pamac-installer.desktop
+steam.desktop

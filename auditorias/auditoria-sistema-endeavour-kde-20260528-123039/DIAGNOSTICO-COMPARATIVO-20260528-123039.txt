@@ -1,0 +1,43 @@
+MOCHA ARCH — DIAGNÓSTICO COMPARATIVO PRELIMINAR — 20260528-123039
+
+Sistema auditado: Endeavour/Arch KDE atual
+Kernel: 7.0.10-arch1-1
+NVIDIA: 595.71.05, NVIDIA GeForce RTX 5060 Ti
+CPU governor: powersave 
+CPU scaling driver: amd-pstate-epp 
+Power profile: balanced
+TuneD active: inactive
+n/a
+ tuned ausente
+GameMode active: inactive
+n/a
+Multilib: sim
+MangoHud: ausente ou parcial
+GameMode pacotes: ausente ou parcial
+
+Memória/sysctl:
+  vm.swappiness=60
+  vm.vfs_cache_pressure=100
+  vm.page-cluster=3
+  vm.max_map_count=1048576
+  kernel.sched_autogroup_enabled=1
+  kernel.nmi_watchdog=0
+  zram devices=0
+  THP enabled=[always] madvise never
+  THP defrag=always defer defer+madvise [madvise] never
+
+Leitura inicial para comparação:
+- Kernel parece Arch padrão: tende a ser mais conservador que CachyOS/Garuda agressivo.
+- TuneD não está ativo: pode explicar parte da diferença contra sistemas mais agressivos.
+- Governor não parece performance/schedutil: possível perda de responsividade/FPS.
+- power-profiles-daemon está em balanced: pode reduzir boost e resposta.
+- ZRAM não detectado: Manjaro/CachyOS/Garuda podem estar levando vantagem se usam zram/zswap agressivo.
+- sched_autogroup não está desativado; na receita Mocha canônica ele fica 0.
+- vm.page-cluster não está 0; na receita Mocha canônica ele fica 0.
+- vm.max_map_count difere da receita Mocha canônica velha/fallback: esperado 16777216.
+- THP não está em madvise; comparar com a receita Mocha usada nos melhores testes.
+
+Conclusão provisória:
+- Este arquivo ainda não decide sozinho se Endeavour é pior que Manjaro.
+- Ele separa os pontos comparáveis para bater contra Manjaro/CachyOS/Garuda/Bazzite/NixOS.
+- O próximo passo é rodar auditoria equivalente no Manjaro ou colar o resumo deste relatório para análise linha a linha.
