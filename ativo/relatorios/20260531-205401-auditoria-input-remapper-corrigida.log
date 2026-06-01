@@ -1,0 +1,724 @@
+== MOCHAARCH — auditoria corrigida somente leitura do input-remapper ==
+Timestamp: 20260531-205401
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-205401-auditoria-input-remapper-corrigida.log
+
+
+================================================================
+[1/12] Confirmando sudo uma vez
+================================================================
+
+================================================================
+[2/12] Identidade do sistema
+================================================================
+
++ date
+dom 31 mai 2026 20:54:04 -03
+
++ uname -a
+Linux Mocha 7.0.10-zen1-1-zen #1 ZEN SMP PREEMPT_DYNAMIC Sat, 23 May 2026 14:45:01 +0000 x86_64 GNU/Linux
+
++ whoami
+hal
+
++ id
+uid=1000(hal) gid=1000(hal) grupos=1000(hal),90(network),982(users),983(video),985(storage),989(lp),995(audio),998(wheel)
+
++ systemctl --version
+systemd 260 (260.2-2-arch)
++PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +LIBARCHIVE
+
++ pacman -Q pacotes relevantes
+systemd 260.2-2
+plasma-desktop 6.6.5-1
+plasma-workspace 6.6.5-2
+input-remapper 2.2.0-1
+python 3.14.5-1
+python-pydbus 0.6.0-13
+python-evdev 1.9.3-1
+python-setuptools 1:82.0.1-1
+
+================================================================
+[3/12] Binários disponíveis
+================================================================
+
++ command -v input-remapper-control
+/usr/bin/input-remapper-control
+
++ command -v input-remapper-service
+/usr/bin/input-remapper-service
+
++ command -v input-remapper-gtk
+/usr/bin/input-remapper-gtk
+
++ ls -l caminhos comuns
+-rwxr-xr-x 1 root root 1720 mai 30 10:29 /bin/input-remapper-control
+-rwxr-xr-x 1 root root 1720 mai 30 10:29 /usr/bin/input-remapper-control
+-rwxr-xr-x 1 root root 1009 mai 30 10:29 /usr/bin/input-remapper-gtk
+-rwxr-xr-x 1 root root 1048 mai 30 10:29 /usr/bin/input-remapper-service
+
+================================================================
+[4/12] Pacote instalado e arquivos entregues
+================================================================
+
++ pacman -Q input-remapper
+input-remapper 2.2.0-1
+
++ pacman -Ql input-remapper
+input-remapper /etc/
+input-remapper /etc/xdg/
+input-remapper /etc/xdg/autostart/
+input-remapper /etc/xdg/autostart/input-remapper-autoload.desktop
+input-remapper /usr/
+input-remapper /usr/bin/
+input-remapper /usr/bin/input-remapper-control
+input-remapper /usr/bin/input-remapper-gtk
+input-remapper /usr/bin/input-remapper-reader-service
+input-remapper /usr/bin/input-remapper-service
+input-remapper /usr/lib/
+input-remapper /usr/lib/python3.14/
+input-remapper /usr/lib/python3.14/site-packages/
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/PKG-INFO
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/SOURCES.txt
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/dependency_links.txt
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/requires.txt
+input-remapper /usr/lib/python3.14/site-packages/input_remapper-2.2.0-py3.14.egg-info/top_level.txt
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/commit_hash.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/daemon.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/exceptions.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/groups.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/input_event.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/user.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/__pycache__/utils.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/input_remapper_control.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/input_remapper_gtk.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/input_remapper_reader_service.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/input_remapper_service.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/__pycache__/process_utils.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/input_remapper_control.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/input_remapper_gtk.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/input_remapper_reader_service.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/input_remapper_service.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/bin/process_utils.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/commit_hash.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/data.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/global_config.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/input_config.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/keyboard_layout.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/mapping.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/migrations.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/paths.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/preset.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/__pycache__/validation_errors.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/data.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/global_config.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/input_config.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/keyboard_layout.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/mapping.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/migrations.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/paths.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/preset.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/configs/validation_errors.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/daemon.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/exceptions.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/groups.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/autocompletion.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/controller.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/data_manager.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/gettext.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/reader_client.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/reader_service.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/user_interface.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/__pycache__/utils.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/autocompletion.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/common.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/device_groups.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/editor.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/main.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/output_type_names.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/__pycache__/presets.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/common.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/device_groups.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/editor.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/main.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/output_type_names.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/components/presets.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/controller.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/data_manager.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/gettext.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__pycache__/message_broker.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__pycache__/message_data.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/__pycache__/message_types.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/message_broker.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/message_data.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/messages/message_types.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/reader_client.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/reader_service.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/user_interface.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/gui/utils.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/context.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/event_reader.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/global_uinputs.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/injector.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/__pycache__/numlock.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/context.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/event_reader.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/global_uinputs.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/injector.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/argument.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/macro.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/parse.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/raw_value.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/task.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/__pycache__/variable.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/argument.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/macro.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/parse.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/raw_value.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/task.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/add.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/event.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/hold.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/hold_keys.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/if_eq.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/if_led.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/if_single.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/if_tap.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/ifeq.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/key.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/key_down.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/key_up.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/mod_tap.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/modify.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/mouse.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/mouse_xy.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/parallel.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/repeat.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/set.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/toggle.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/util.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/wait.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/__pycache__/wheel.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/add.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/event.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/hold.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/hold_keys.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/if_eq.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/if_led.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/if_single.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/if_tap.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/ifeq.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/key.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/key_down.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/key_up.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/mod_tap.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/modify.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/mouse.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/mouse_xy.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/parallel.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/repeat.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/set.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/toggle.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/util.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/wait.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/tasks/wheel.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/macros/variable.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/abs_to_abs_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/abs_to_btn_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/abs_to_rel_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/axis_switch_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/axis_transform.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/combination_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/hierarchy_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/key_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/macro_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/mapping_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/mapping_parser.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/null_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/rel_to_abs_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/rel_to_btn_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/__pycache__/rel_to_rel_handler.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/abs_to_abs_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/abs_to_btn_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/abs_to_rel_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/axis_switch_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/axis_transform.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/combination_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/hierarchy_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/key_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/macro_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/mapping_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/mapping_parser.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/null_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/rel_to_abs_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/rel_to_btn_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/mapping_handlers/rel_to_rel_handler.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/injection/numlock.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/input_event.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__pycache__/pipe.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__pycache__/shared_dict.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/__pycache__/socket.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/pipe.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/shared_dict.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/ipc/socket.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/__init__.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/__pycache__/
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/__pycache__/__init__.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/__pycache__/formatter.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/__pycache__/logger.cpython-314.pyc
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/formatter.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/logging/logger.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/user.py
+input-remapper /usr/lib/python3.14/site-packages/inputremapper/utils.py
+input-remapper /usr/lib/systemd/
+input-remapper /usr/lib/systemd/system/
+input-remapper /usr/lib/systemd/system/input-remapper.service
+input-remapper /usr/lib/udev/
+input-remapper /usr/lib/udev/rules.d/
+input-remapper /usr/lib/udev/rules.d/99-input-remapper.rules
+input-remapper /usr/share/
+input-remapper /usr/share/applications/
+input-remapper /usr/share/applications/input-remapper-gtk.desktop
+input-remapper /usr/share/dbus-1/
+input-remapper /usr/share/dbus-1/system.d/
+input-remapper /usr/share/dbus-1/system.d/inputremapper.Control.conf
+input-remapper /usr/share/icons/
+input-remapper /usr/share/icons/hicolor/
+input-remapper /usr/share/icons/hicolor/scalable/
+input-remapper /usr/share/icons/hicolor/scalable/apps/
+input-remapper /usr/share/icons/hicolor/scalable/apps/input-remapper.svg
+input-remapper /usr/share/input-remapper/
+input-remapper /usr/share/input-remapper/99-input-remapper.rules
+input-remapper /usr/share/input-remapper/input-remapper-autoload.desktop
+input-remapper /usr/share/input-remapper/input-remapper-gtk.desktop
+input-remapper /usr/share/input-remapper/input-remapper-large.png
+input-remapper /usr/share/input-remapper/input-remapper.glade
+input-remapper /usr/share/input-remapper/input-remapper.policy
+input-remapper /usr/share/input-remapper/input-remapper.service
+input-remapper /usr/share/input-remapper/input-remapper.svg
+input-remapper /usr/share/input-remapper/inputremapper.Control.conf
+input-remapper /usr/share/input-remapper/io.github.sezanzeb.input_remapper.metainfo.xml
+input-remapper /usr/share/input-remapper/lang/
+input-remapper /usr/share/input-remapper/lang/fr/
+input-remapper /usr/share/input-remapper/lang/fr/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/fr/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/fr_FR/
+input-remapper /usr/share/input-remapper/lang/fr_FR/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/fr_FR/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/it/
+input-remapper /usr/share/input-remapper/lang/it/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/it/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/it_IT/
+input-remapper /usr/share/input-remapper/lang/it_IT/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/it_IT/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/pt/
+input-remapper /usr/share/input-remapper/lang/pt/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/pt/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/pt_BR/
+input-remapper /usr/share/input-remapper/lang/pt_BR/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/pt_BR/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/ru/
+input-remapper /usr/share/input-remapper/lang/ru/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/ru/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/ru_RU/
+input-remapper /usr/share/input-remapper/lang/ru_RU/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/ru_RU/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/sk/
+input-remapper /usr/share/input-remapper/lang/sk/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/sk/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/sk_SK/
+input-remapper /usr/share/input-remapper/lang/sk_SK/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/sk_SK/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/uk/
+input-remapper /usr/share/input-remapper/lang/uk/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/uk/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/uk_UA/
+input-remapper /usr/share/input-remapper/lang/uk_UA/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/uk_UA/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/zh/
+input-remapper /usr/share/input-remapper/lang/zh/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/zh/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/lang/zh_CN/
+input-remapper /usr/share/input-remapper/lang/zh_CN/LC_MESSAGES/
+input-remapper /usr/share/input-remapper/lang/zh_CN/LC_MESSAGES/input-remapper.mo
+input-remapper /usr/share/input-remapper/style.css
+input-remapper /usr/share/metainfo/
+input-remapper /usr/share/metainfo/io.github.sezanzeb.input_remapper.metainfo.xml
+input-remapper /usr/share/polkit-1/
+input-remapper /usr/share/polkit-1/actions/
+input-remapper /usr/share/polkit-1/actions/input-remapper.policy
+
+================================================================
+[5/12] Serviços systemd de sistema relacionados
+================================================================
+
++ systemctl list-unit-files | grep remapper
+input-remapper.service                       disabled        disabled
+
++ systemctl list-units --all | grep remapper
+
+---- Unidade de sistema detectada: input-remapper.service
+
++ systemctl status input-remapper.service --no-pager --full
+○ input-remapper.service - Service to inject keycodes without the GUI application
+     Loaded: loaded (/usr/lib/systemd/system/input-remapper.service; disabled; preset: disabled)
+     Active: inactive (dead)
+
++ systemctl cat input-remapper.service --no-pager
+# /usr/lib/systemd/system/input-remapper.service
+[Unit]
+Description=Service to inject keycodes without the GUI application
+# dbus is required for ipc between gui and input-remapper-control
+Requires=dbus.service
+After=dbus.service
+
+[Service]
+Type=dbus
+BusName=inputremapper.Control
+ExecStart=/usr/bin/input-remapper-service
+
+[Install]
+WantedBy=default.target
+Alias=input-remapper.service
+
+================================================================
+[6/12] Serviços systemd de usuário relacionados
+================================================================
+
++ systemctl --user list-unit-files | grep remapper
+app-input\x2dremapper\x2dautoload@autostart.service                    generated -
+
++ systemctl --user list-units --all | grep remapper
+● app-input\x2dremapper\x2dautoload@autostart.service                                                                                  loaded    failed   failed    input-remapper-autoload
+
+---- Unidade de usuário detectada: app-input\x2dremapper\x2dautoload@autostart.service
+
++ systemctl --user status app-input\x2dremapper\x2dautoload@autostart.service --no-pager --full
+× app-input\x2dremapper\x2dautoload@autostart.service - input-remapper-autoload
+     Loaded: loaded (/etc/xdg/autostart/input-remapper-autoload.desktop; generated)
+     Active: failed (Result: exit-code) since Sun 2026-05-31 20:49:39 -03; 4min 26s ago
+   Duration: 311ms
+ Invocation: d648f172ab934b60be55f9c01d36a8f5
+       Docs: man:systemd-xdg-autostart-generator(8)
+    Process: 1949 ExecStart=/usr/bin/bash -c input-remapper-control --command stop-all && input-remapper-control --command autoload (code=exited, status=5)
+   Main PID: 1949 (code=exited, status=5)
+   Mem peak: 33.1M
+        CPU: 322ms
+
+mai 31 20:49:39 Mocha systemd[1035]: Starting input-remapper-autoload...
+mai 31 20:49:39 Mocha systemd[1035]: Started input-remapper-autoload.
+mai 31 20:49:39 Mocha bash[1960]: /usr/lib/python3.14/site-packages/inputremapper/logging/logger.py:157: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+mai 31 20:49:39 Mocha bash[1960]:   import pkg_resources
+mai 31 20:49:39 Mocha bash[1960]: ERROR: Service not running? g-dbus-error-quark: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable (2)
+mai 31 20:49:39 Mocha bash[1960]: ERROR: Daemon missing
+mai 31 20:49:39 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Main process exited, code=exited, status=5/NOTINSTALLED
+mai 31 20:49:39 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Failed with result 'exit-code'.
+
++ systemctl --user cat app-input\x2dremapper\x2dautoload@autostart.service --no-pager
+# /run/user/1000/systemd/generator.late/app-input\x2dremapper\x2dautoload@autostart.service
+# Automatically generated by systemd-xdg-autostart-generator
+
+[Unit]
+Documentation=man:systemd-xdg-autostart-generator(8)
+SourcePath=/etc/xdg/autostart/input-remapper-autoload.desktop
+PartOf=graphical-session.target
+
+Description=input-remapper-autoload
+After=graphical-session.target
+
+[Service]
+Type=exec
+ExitType=cgroup
+ExecStart=:/usr/bin/bash -c "input-remapper-control --command stop-all && input-remapper-control --command autoload"
+Restart=no
+TimeoutStopSec=5s
+Slice=app.slice
+
+================================================================
+[7/12] Autostarts que chamam input-remapper
+================================================================
+
+-- Autostart usuário: /home/hal/.config/autostart
+
+-- Autostart sistema /etc: /etc/xdg/autostart
+/etc/xdg/autostart/input-remapper-autoload.desktop:3:Exec=bash -c "input-remapper-control --command stop-all && input-remapper-control --command autoload"
+/etc/xdg/autostart/input-remapper-autoload.desktop:4:Name=input-remapper-autoload
+/etc/xdg/autostart/input-remapper-autoload.desktop:5:Icon=input-remapper
+
+-- Aplicações /usr/share/applications: /usr/share/applications
+/usr/share/applications/input-remapper-gtk.desktop:4:Icon=input-remapper
+/usr/share/applications/input-remapper-gtk.desktop:5:Exec=input-remapper-gtk
+
+-- Autostart /usr/share/xdg: /usr/share/xdg/autostart
+Diretório inexistente
+
+================================================================
+[8/12] Regras udev que chamam input-remapper
+================================================================
+
+-- udev /etc: /etc/udev/rules.d
+
+-- udev /usr/lib: /usr/lib/udev/rules.d
+/usr/lib/udev/rules.d/99-input-remapper.rules:10:ACTION=="add", SUBSYSTEM=="input", ENV{ID_PATH}!="platform-sound", RUN+="/bin/input-remapper-control --command autoload --device $env{DEVNAME}"
+
+-- udev /lib: /lib/udev/rules.d
+/lib/udev/rules.d/99-input-remapper.rules:10:ACTION=="add", SUBSYSTEM=="input", ENV{ID_PATH}!="platform-sound", RUN+="/bin/input-remapper-control --command autoload --device $env{DEVNAME}"
+
+================================================================
+[9/12] Configurações e perfis do input-remapper
+================================================================
+
+-- Diretório: /home/hal/.config/input-remapper
+Diretório inexistente
+
+-- Diretório: /home/hal/.local/share/input-remapper
+Diretório inexistente
+
+-- Diretório: /etc/input-remapper
+Diretório inexistente
+
+================================================================
+[10/12] DBus e processos relacionados
+================================================================
+
++ pgrep -a -f input-remapper|remapper
+2855 bash /tmp/20260531-205401-mochaarch-auditar-input-remapper-corrigido.sh
+2858 tee -a /media/mochafast/MochaArch/ativo/relatorios/20260531-205401-auditoria-input-remapper-corrigida.log
+2864 bash /tmp/20260531-205401-mochaarch-auditar-input-remapper-corrigido.sh
+
++ busctl --system list | grep input/remapper
+
++ busctl --user list | grep input/remapper
+
+================================================================
+[11/12] Logs específicos do boot atual
+================================================================
+
++ journalctl -b 0 -u unidades detectadas
+-- No entries --
+
+-- Linhas contendo input-remapper/remapper no boot atual:
+mai 31 20:49:18.444103 Mocha (udev-worker)[472]: input1: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.461042 Mocha (udev-worker)[512]: input2: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.496063 Mocha (udev-worker)[484]: input31: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.496398 Mocha (udev-worker)[475]: input0: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.501511 Mocha (udev-worker)[496]: input12: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.507271 Mocha (udev-worker)[499]: input3: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.519708 Mocha (udev-worker)[506]: input24: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.537566 Mocha (udev-worker)[507]: input27: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.541246 Mocha (udev-worker)[489]: input21: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.544038 Mocha (udev-worker)[514]: input10: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.575725 Mocha (udev-worker)[491]: input20: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.582736 Mocha (udev-worker)[494]: input29: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.592060 Mocha (udev-worker)[479]: input26: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.596313 Mocha (udev-worker)[486]: input30: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.602274 Mocha (udev-worker)[493]: input19: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.610877 Mocha (udev-worker)[482]: input28: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.615101 Mocha (udev-worker)[474]: input23: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.615602 Mocha (udev-worker)[513]: input22: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.619043 Mocha (udev-worker)[480]: input25: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.649291 Mocha (udev-worker)[490]: input13: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.653126 Mocha (udev-worker)[488]: input11: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:18.665130 Mocha (udev-worker)[503]: input4: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+mai 31 20:49:19.618963 Mocha (udev-worker)[498]: mouse0: Process '/bin/input-remapper-control --command autoload --device /dev/input/mouse0' failed with exit code 1.
+mai 31 20:49:19.624857 Mocha (udev-worker)[514]: event9: Process '/bin/input-remapper-control --command autoload --device /dev/input/event9' failed with exit code 1.
+mai 31 20:49:19.626141 Mocha (udev-worker)[507]: mouse1: Process '/bin/input-remapper-control --command autoload --device /dev/input/mouse1' failed with exit code 1.
+mai 31 20:49:19.632389 Mocha (udev-worker)[512]: event2: Process '/bin/input-remapper-control --command autoload --device /dev/input/event2' failed with exit code 1.
+mai 31 20:49:19.649675 Mocha (udev-worker)[499]: event3: Process '/bin/input-remapper-control --command autoload --device /dev/input/event3' failed with exit code 1.
+mai 31 20:49:19.680758 Mocha (udev-worker)[518]: event11: Process '/bin/input-remapper-control --command autoload --device /dev/input/event11' failed with exit code 1.
+mai 31 20:49:19.693768 Mocha (udev-worker)[481]: event7: Process '/bin/input-remapper-control --command autoload --device /dev/input/event7' failed with exit code 1.
+mai 31 20:49:19.711321 Mocha (udev-worker)[515]: event21: Process '/bin/input-remapper-control --command autoload --device /dev/input/event21' failed with exit code 1.
+mai 31 20:49:19.729181 Mocha (udev-worker)[494]: event15: Process '/bin/input-remapper-control --command autoload --device /dev/input/event15' failed with exit code 1.
+mai 31 20:49:19.740556 Mocha (udev-worker)[478]: event1: Process '/bin/input-remapper-control --command autoload --device /dev/input/event1' failed with exit code 1.
+mai 31 20:49:19.747067 Mocha (udev-worker)[505]: mice: Process '/bin/input-remapper-control --command autoload --device /dev/input/mice' failed with exit code 1.
+mai 31 20:49:19.756049 Mocha (udev-worker)[517]: event17: Process '/bin/input-remapper-control --command autoload --device /dev/input/event17' failed with exit code 1.
+mai 31 20:49:19.762575 Mocha (udev-worker)[516]: event0: Process '/bin/input-remapper-control --command autoload --device /dev/input/event0' failed with exit code 1.
+mai 31 20:49:19.768406 Mocha (udev-worker)[493]: event5: Process '/bin/input-remapper-control --command autoload --device /dev/input/event5' failed with exit code 1.
+mai 31 20:49:19.768406 Mocha (udev-worker)[479]: event16: Process '/bin/input-remapper-control --command autoload --device /dev/input/event16' failed with exit code 1.
+mai 31 20:49:19.776145 Mocha (udev-worker)[486]: event8: Process '/bin/input-remapper-control --command autoload --device /dev/input/event8' failed with exit code 1.
+mai 31 20:49:19.777495 Mocha (udev-worker)[473]: event18: Process '/bin/input-remapper-control --command autoload --device /dev/input/event18' failed with exit code 1.
+mai 31 20:49:19.786968 Mocha (udev-worker)[503]: event4: Process '/bin/input-remapper-control --command autoload --device /dev/input/event4' failed with exit code 1.
+mai 31 20:49:19.800593 Mocha (udev-worker)[476]: event19: Process '/bin/input-remapper-control --command autoload --device /dev/input/event19' failed with exit code 1.
+mai 31 20:49:19.800593 Mocha (udev-worker)[477]: event6: Process '/bin/input-remapper-control --command autoload --device /dev/input/event6' failed with exit code 1.
+mai 31 20:49:19.806122 Mocha (udev-worker)[490]: event12: Process '/bin/input-remapper-control --command autoload --device /dev/input/event12' failed with exit code 1.
+mai 31 20:49:19.823273 Mocha (udev-worker)[484]: event14: Process '/bin/input-remapper-control --command autoload --device /dev/input/event14' failed with exit code 1.
+mai 31 20:49:19.825017 Mocha (udev-worker)[474]: event13: Process '/bin/input-remapper-control --command autoload --device /dev/input/event13' failed with exit code 1.
+mai 31 20:49:19.825649 Mocha (udev-worker)[506]: event20: Process '/bin/input-remapper-control --command autoload --device /dev/input/event20' failed with exit code 1.
+mai 31 20:49:19.828851 Mocha (udev-worker)[488]: event10: Process '/bin/input-remapper-control --command autoload --device /dev/input/event10' failed with exit code 1.
+mai 31 20:49:39.071173 Mocha systemd[1035]: Starting input-remapper-autoload...
+mai 31 20:49:39.095657 Mocha systemd[1035]: Started input-remapper-autoload.
+mai 31 20:49:39.214042 Mocha bash[1960]: /usr/lib/python3.14/site-packages/inputremapper/logging/logger.py:157: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+mai 31 20:49:39.370888 Mocha bash[1960]: ERROR: Service not running? g-dbus-error-quark: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable (2)
+mai 31 20:49:39.370946 Mocha bash[1960]: ERROR: Daemon missing
+mai 31 20:49:39.406624 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Main process exited, code=exited, status=5/NOTINSTALLED
+mai 31 20:49:39.406758 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Failed with result 'exit-code'.
+mai 31 20:54:06.291595 Mocha sudo[2923]:      hal : TTY=pts/1 ; PWD=/home/hal ; USER=root ; COMMAND=/usr/bin/journalctl -b 0 --no-pager --output=short-precise -u input-remapper.service
+
+================================================================
+[12/12] Testes seguros de comando — sem executar autoload
+================================================================
+
++ input-remapper-control --help
+/usr/lib/python3.14/site-packages/inputremapper/logging/logger.py:157: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+usage: input-remapper-control [-h] [--command NAME] [--config-dir PATH]
+                              [--preset NAME] [--device NAME] [--list-devices]
+                              [--symbol-names] [-d] [-v]
+
+options:
+  -h, --help         show this help message and exit
+  --command NAME     Communicate with the daemon. Available commands are
+                     autoload, start, stop, stop-all, hello, quit
+  --config-dir PATH  path to the config directory containing config.json,
+                     xmodmap.json and the presets folder. defaults to
+                     ~/.config/input-remapper/
+  --preset NAME      The filename of the preset without the .json extension.
+  --device NAME      One of the device keys from --list-devices
+  --list-devices     List available device keys and exit
+  --symbol-names     Print all available names for the preset
+  -d, --debug        Displays additional debug information
+  -v, --version      Print the version and exit
+
++ input-remapper-service --help
+/usr/lib/python3.14/site-packages/inputremapper/logging/logger.py:157: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+usage: input-remapper-service [-h] [-d] [--hide-info]
+
+options:
+  -h, --help   show this help message and exit
+  -d, --debug  Displays additional debug information
+  --hide-info  Don't display version information
+
+================================================================
+RESUMO AUTOMÁTICO
+================================================================
+
+1) Pacote:
+input-remapper 2.2.0-1
+
+2) Binários:
+input-remapper-control       /usr/bin/input-remapper-control
+input-remapper-service       /usr/bin/input-remapper-service
+input-remapper-gtk           /usr/bin/input-remapper-gtk
+
+3) Unidades systemd de sistema detectadas:
+input-remapper.service
+
+4) Estado provável do serviço principal:
+input-remapper.service não aparece em list-unit-files
+
+5) Unidades systemd de usuário detectadas:
+app-input\x2dremapper\x2dautoload@autostart.service
+
+6) Arquivos de autostart encontrados:
+/etc/xdg/autostart/input-remapper-autoload.desktop
+/usr/share/applications/input-remapper-gtk.desktop
+
+7) Regras udev encontradas:
+/lib/udev/rules.d/99-input-remapper.rules
+/usr/lib/udev/rules.d/99-input-remapper.rules
+
+8) Últimas falhas relacionadas no boot atual:
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[472]: input1: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[512]: input2: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[484]: input31: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[475]: input0: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[496]: input12: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[499]: input3: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[506]: input24: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[507]: input27: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[489]: input21: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[514]: input10: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[491]: input20: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[494]: input29: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[479]: input26: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[486]: input30: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[493]: input19: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[482]: input28: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[474]: input23: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[513]: input22: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[480]: input25: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[490]: input13: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[488]: input11: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:18-03:00 Mocha (udev-worker)[503]: input4: Process '/bin/input-remapper-control --command autoload --device ' failed with exit code 2.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[498]: mouse0: Process '/bin/input-remapper-control --command autoload --device /dev/input/mouse0' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[514]: event9: Process '/bin/input-remapper-control --command autoload --device /dev/input/event9' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[507]: mouse1: Process '/bin/input-remapper-control --command autoload --device /dev/input/mouse1' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[512]: event2: Process '/bin/input-remapper-control --command autoload --device /dev/input/event2' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[499]: event3: Process '/bin/input-remapper-control --command autoload --device /dev/input/event3' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[518]: event11: Process '/bin/input-remapper-control --command autoload --device /dev/input/event11' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[481]: event7: Process '/bin/input-remapper-control --command autoload --device /dev/input/event7' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[515]: event21: Process '/bin/input-remapper-control --command autoload --device /dev/input/event21' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[494]: event15: Process '/bin/input-remapper-control --command autoload --device /dev/input/event15' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[478]: event1: Process '/bin/input-remapper-control --command autoload --device /dev/input/event1' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[505]: mice: Process '/bin/input-remapper-control --command autoload --device /dev/input/mice' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[517]: event17: Process '/bin/input-remapper-control --command autoload --device /dev/input/event17' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[516]: event0: Process '/bin/input-remapper-control --command autoload --device /dev/input/event0' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[493]: event5: Process '/bin/input-remapper-control --command autoload --device /dev/input/event5' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[479]: event16: Process '/bin/input-remapper-control --command autoload --device /dev/input/event16' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[486]: event8: Process '/bin/input-remapper-control --command autoload --device /dev/input/event8' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[473]: event18: Process '/bin/input-remapper-control --command autoload --device /dev/input/event18' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[503]: event4: Process '/bin/input-remapper-control --command autoload --device /dev/input/event4' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[476]: event19: Process '/bin/input-remapper-control --command autoload --device /dev/input/event19' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[477]: event6: Process '/bin/input-remapper-control --command autoload --device /dev/input/event6' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[490]: event12: Process '/bin/input-remapper-control --command autoload --device /dev/input/event12' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[484]: event14: Process '/bin/input-remapper-control --command autoload --device /dev/input/event14' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[474]: event13: Process '/bin/input-remapper-control --command autoload --device /dev/input/event13' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[506]: event20: Process '/bin/input-remapper-control --command autoload --device /dev/input/event20' failed with exit code 1.
+2026-05-31T20:49:19-03:00 Mocha (udev-worker)[488]: event10: Process '/bin/input-remapper-control --command autoload --device /dev/input/event10' failed with exit code 1.
+2026-05-31T20:49:39-03:00 Mocha systemd[1035]: Starting input-remapper-autoload...
+2026-05-31T20:49:39-03:00 Mocha systemd[1035]: Started input-remapper-autoload.
+2026-05-31T20:49:39-03:00 Mocha bash[1960]: ERROR: Service not running? g-dbus-error-quark: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable (2)
+2026-05-31T20:49:39-03:00 Mocha bash[1960]: ERROR: Daemon missing
+2026-05-31T20:49:39-03:00 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Main process exited, code=exited, status=5/NOTINSTALLED
+2026-05-31T20:49:39-03:00 Mocha systemd[1035]: app-input\x2dremapper\x2dautoload@autostart.service: Failed with result 'exit-code'.
+2026-05-31T20:54:06-03:00 Mocha sudo[2923]:      hal : TTY=pts/1 ; PWD=/home/hal ; USER=root ; COMMAND=/usr/bin/journalctl -b 0 --no-pager --output=short-precise -u input-remapper.service
+
+== FIM DA AUDITORIA ==
+Relatório salvo em:
+/media/mochafast/MochaArch/ativo/relatorios/20260531-205401-auditoria-input-remapper-corrigida.log

@@ -1,0 +1,16 @@
+== MOCHAARCH — corrigir GRUB_DEFAULT do Zen para ID moderno ==
+Timestamp: 20260531-211112
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-211112-corrigir-grub-default-zen-id-moderno.log
+
+[1/5] Estado atual do GRUB_DEFAULT
+3:GRUB_DEFAULT=saved
+
+[2/5] Localizando ID moderno do linux-zen no grub.cfg
+UUID da raiz: 2a8beb39-04e6-4520-a873-9134a2f73f53
+GRUB_DEFAULT planejado:
+gnulinux-advanced-2a8beb39-04e6-4520-a873-9134a2f73f53>gnulinux-linux-zen-advanced-2a8beb39-04e6-4520-a873-9134a2f73f53
+
+grep: /boot/grub/grub.cfg: Permissão negada
+ERRO: não encontrei o ID moderno do linux-zen no grub.cfg.
+Entradas relacionadas a linux-zen encontradas:
+grep: /boot/grub/grub.cfg: Permissão negada

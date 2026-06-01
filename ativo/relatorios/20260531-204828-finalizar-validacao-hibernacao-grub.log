@@ -1,0 +1,68 @@
+== MOCHAARCH — finalizar validação da hibernação no GRUB ==
+Timestamp: 20260531-204828
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-204828-finalizar-validacao-hibernacao-grub.log
+Resume esperado: resume=UUID=c55827ce-1ead-4561-84c9-435612a8862b
+
+
+## Checando arquivos essenciais
+OK: /etc/default/grub existe
+OK: /etc/mkinitcpio.conf existe
+OK: /boot/grub/grub.cfg existe
+
+## Validando /etc/default/grub
+3:GRUB_DEFAULT=saved
+6:GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 nvidia_drm.modeset=1 nvidia_drm.fbdev=1 modprobe.blacklist=nouveau nouveau.modeset=0 resume=UUID=c55827ce-1ead-4561-84c9-435612a8862b"
+7:GRUB_CMDLINE_LINUX=""
+OK: /etc/default/grub contém resume=UUID=c55827ce-1ead-4561-84c9-435612a8862b
+
+## Validando HOOKS do mkinitcpio
+55:HOOKS=(base udev autodetect microcode modconf block keyboard keymap consolefont resume filesystems)
+OK: mkinitcpio.conf contém hook resume antes/de acordo com filesystems
+
+## Corrigindo GRUB_DEFAULT antigo do linux-zen, se necessário
+GRUB_DEFAULT antigo exato não encontrado; nada alterado neste ponto.
+
+## Regenerando GRUB novamente com sudo
+Comando: sudo grub-mkconfig -o /boot/grub/grub.cfg
+Gerando o arquivo de configuração do grub...
+Imagem Linux encontrada: /boot/vmlinuz-linux-cachyos-bore-lto
+Imagem initrd encontrada: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux-cachyos-bore-lto.img
+Imagem Linux encontrada: /boot/vmlinuz-linux-zen
+Imagem initrd encontrada: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux-zen.img
+Aviso: Por favor, não use o título antigo 'Arch Linux, with Linux linux-zen' para o GRUB_DEFAULT, use 'Advanced options for Arch Linux>Arch Linux, with Linux linux-zen' (para versões antes da 2.00) ou 'gnulinux-advanced-2a8beb39-04e6-4520-a873-9134a2f73f53>gnulinux-linux-zen-advanced-2a8beb39-04e6-4520-a873-9134a2f73f53' (para a 2.00 ou posterior)
+Imagem Linux encontrada: /boot/vmlinuz-linux
+Imagem initrd encontrada: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux.img
+Aviso: os-prober não será executado para detectar outras partições de arranque.
+Os sistemas nelas presentes não serão adicionados à configuração de arranque do GRUB.\Veja a documentação de GRUB_DISABLE_OS_PROBER.
+A adicionar entrada de menu para UEFI Firmware Settings ...
+concluído
+
+## Validação final com sudo
+OK: /boot/grub/grub.cfg contém resume=UUID=c55827ce-1ead-4561-84c9-435612a8862b
+OK: grub.cfg contém entrada do linux-zen
+
+## Snapshot do estado final
+GRUB:
+3:GRUB_DEFAULT=saved
+6:GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 nvidia_drm.modeset=1 nvidia_drm.fbdev=1 modprobe.blacklist=nouveau nouveau.modeset=0 resume=UUID=c55827ce-1ead-4561-84c9-435612a8862b"
+7:GRUB_CMDLINE_LINUX=""
+
+HOOKS:
+55:HOOKS=(base udev autodetect microcode modconf block keyboard keymap consolefont resume filesystems)
+
+## Documentando
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260531-204828-hibernacao-resume-validado-pendente-teste-real.md
+
+## Resumo
+Validação concluída.
+Agora pode reiniciar.
+Depois do reboot, confirme que o boot veio com resume:
+cat /proc/cmdline | grep -o 'resume=UUID=[^ ]*'
+
+Depois teste:
+systemctl hibernate
+
+Após voltar da hibernação, rode:
+journalctl -b -g 'hibernate|resume|PM:' --no-pager -n 160
+
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-204828-finalizar-validacao-hibernacao-grub.log

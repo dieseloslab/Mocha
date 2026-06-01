@@ -1,0 +1,91 @@
+== MOCHAARCH — VMSTORE montagem real no boot + Dolphin sem senha ==
+Timestamp: 20260531-175318
+Mountpoint: /media/vmstore
+Unidade mount: media-vmstore.mount
+Unidade automount antiga: media-vmstore.automount
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-175318-vmstore-mount-real-boot-dolphin.log
+
+== 1) Sessão sudo única ==
+
+== 2) Estado atual antes da correção ==
+-- findmnt -R /media/vmstore:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/vmstore   systemd-1 autofs rw,relatime,fd=71,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=12465
+└─/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+
+-- Linha ativa atual no /etc/fstab:
+UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore xfs rw,noatime,nofail,x-systemd.automount,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=VMSTORE 0 0
+
+-- Discos XFS/labels/UUIDs:
+NAME        FSTYPE FSVER LABEL     UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                    
+└─sda1      btrfs        MOCHAFAST 88e6aa16-110c-4b97-9ffb-85084c000198  280,3G    29% /media/mochafast
+sdb                                                                                    
+└─sdb1      xfs          vmstore   b81630a0-0756-45e4-9cb2-c7f16637a1c6    1,8T     2% /media/vmstore
+sdc                                                                                    
+├─sdc1      exfat  1.0   Ventoy    5D8D-2429                                           
+└─sdc2      vfat   FAT16 VTOYEFI   EA6C-95B2                                           
+zram0       swap   1     zram0     5113a87e-e536-4183-8a26-0dc03ceb3031                [SWAP]
+nvme0n1                                                                                
+├─nvme0n1p1 vfat   FAT32           CF08-8F54                                 2G     0% /boot/efi
+├─nvme0n1p2 xfs          Mocha     2a8beb39-04e6-4520-a873-9134a2f73f53  469,1G    49% /
+└─nvme0n1p3 swap   1     swap      c55827ce-1ead-4561-84c9-435612a8862b                [SWAP]
+
+== 3) Preparar entrada correta do /etc/fstab ==
+Entrada ativa única encontrada. Ela será preservada, removendo apenas automount/noauto e ajustando opções de boot/Dolphin.
+
+== 4) Diferença proposta no /etc/fstab ==
+--- /etc/fstab	2026-05-29 20:37:54.758285258 -0300
++++ /tmp/20260531-175318-fstab-vmstore-corrigido	2026-05-31 17:53:21.683484783 -0300
+@@ -10,5 +10,5 @@
+ tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
+ 
+ # MOCHA_AUTO_MOUNT_FAST_VM atualizado em 20260529-203750
+-UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore xfs rw,noatime,nofail,x-systemd.automount,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=VMSTORE 0 0
++UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=VMSTORE,relatime,x-systemd.device-timeout=10s	0	0
+ UUID=88e6aa16-110c-4b97-9ffb-85084c000198 /media/mochafast btrfs rw,noatime,compress=zstd:3,nofail,x-systemd.automount,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=MochaFAST 0 0
+
+== 5) Backup controlado do /etc/fstab ==
+Backup criado: /etc/fstab.mocha-vmstore-20260531-175318.bak
+Mantendo no máximo 2 backups VMSTORE do fstab.
+
+== 6) Instalar fstab corrigido ==
+
+== 7) Parar automount antigo, recarregar systemd e montar VMSTORE real ==
+Parando automount antigo: media-vmstore.automount
+Warning: The unit file, source configuration file or drop-ins of media-vmstore.automount changed on disk. Run 'systemctl daemon-reload' to reload units.
+Montando via fstab: /media/vmstore
+mount: /dev/sdb1 montada em /media/vmstore.
+
+== 8) Verificação da montagem real ==
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,relatime,inode64,logbufs=8,logbsize=32k,noquota
+
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,relatime,inode64,logbufs=8,logbsize=32k,noquota
+
+Filesystem real detectado: xfs
+Origem real detectada: /dev/sdb1
+
+== 9) Garantir acesso do usuário atual ao topo do VMSTORE ==
+Usuário atual já tem acesso de leitura/escrita/entrada em /media/vmstore.
+
+== 10) Teste de escrita não destrutivo ==
+OK: escrita no VMSTORE funcionando para o usuário hal.
+
+== 11) Verificação do fstab final ==
+UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10,x-gvfs-show,x-gvfs-name=VMSTORE,relatime,x-systemd.device-timeout=10s	0	0
+
+== 12) Documentar no manual operacional ==
+Documento criado: /media/mochafast/MochaArch/ativo/documentacao/20260531-175318-vmstore-mount-real-boot-dolphin.md
+
+== 13) Resultado final ==
+OK: VMSTORE está montado como XFS real em /media/vmstore.
+OK: a entrada do fstab agora é de montagem no boot, não automount sob demanda.
+OK: Dolphin deve abrir /media/vmstore sem pedir senha.
+
+Para conferir agora:
+  dolphin /media/vmstore
+
+Log salvo em: /media/mochafast/MochaArch/ativo/relatorios/20260531-175318-vmstore-mount-real-boot-dolphin.log
+Documento salvo em: /media/mochafast/MochaArch/ativo/documentacao/20260531-175318-vmstore-mount-real-boot-dolphin.md
