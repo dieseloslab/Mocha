@@ -1,0 +1,5 @@
+#!/bin/bash
+wget -O /tmp/calamares-root-aaaaaaaa/var/cache/pacman/pkg/pamac.pkg.tar.zst https://sourceforge.net/projects/blue-arch-installer/files/arch-installer/pamac.pkg.tar.zst/download
+wget -O /tmp/calamares-root-aaaaaaaa/var/cache/pacman/pkg/libpamac.pkg.tar.zst https://sourceforge.net/projects/blue-arch-installer/files/arch-installer/libpamac.pkg.tar.zst/download
+chroot /tmp/calamares-root-aaaaaaaa pacman -U --noconfirm /var/cache/pacman/pkg/libpamac.pkg.tar.zst
+chroot /tmp/calamares-root-aaaaaaaa pacman -U --noconfirm /var/cache/pacman/pkg/pamac.pkg.tar.zst
