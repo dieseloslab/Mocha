@@ -57,3 +57,17 @@ quarentena/
 **/.Trash-*/
 **/*~
 # <<< MOCHAARCH GITHUB SAFETY IGNORE <<<
+
+MOCHA_CALAMARES_EXCLUDES_BEGIN
+*.bak-*
+*.backup-*
+*.bkp-*
+ativo/*.bak-*
+ativo/*.backup-*
+ativo/*.bkp-*
+calamares/aur/*/src/
+calamares/aur/*/pkg/
+calamares/aur/*/*.pkg.tar.*
+calamares/aur/*/*.pkg.tar.*.sig
+calamares/aur/*/build/
+MOCHA_CALAMARES_EXCLUDES_END
