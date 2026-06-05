@@ -78,3 +78,15 @@ calamares/trabalho-mocha-calamares-*/usr/lib64/calamares/libcalamares.so
 
 # MochaArch/Calamares: payloads gerados localmente
 calamares/payloads/
+
+calamares/testes/
+
+calamares/aplicacoes/
+
+calamares/mocha-calamares/propostas/
+
+calamares/mocha-calamares/staging/
+
+calamares/mocha-calamares/reports/
+
+calamares/overlays/
