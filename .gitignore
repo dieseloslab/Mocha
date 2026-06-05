@@ -75,3 +75,6 @@ calamares/origem-calam-arch-installer-*/usr/lib/calamares/libcalamares.so
 calamares/origem-calam-arch-installer-*/usr/lib64/calamares/libcalamares.so
 calamares/trabalho-mocha-calamares-*/usr/lib/calamares/libcalamares.so
 calamares/trabalho-mocha-calamares-*/usr/lib64/calamares/libcalamares.so
+
+# MochaArch/Calamares: payloads gerados localmente
+calamares/payloads/
