@@ -1,0 +1,37 @@
+== MOCHAARCH — testar linux-cachyos x86_64_v3 e deixar padrão no GRUB ==
+Timestamp: 20260601-114126
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-114126-testar-linux-cachyos-v3-padrao-grub.log
+
+== Auditoria inicial ==
+Kernel atual: 7.0.10-zen1-1-zen
+
+lib32-nvidia-utils 610.43.02-1
+linux 7.0.10.arch1-1
+linux-api-headers 6.19-1
+linux-atm 2.5.2-9
+linux-cachyos-bore-lto 7.0.10-2
+linux-cachyos-bore-lto-headers 7.0.10-2
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+linux-zen 7.0.10.zen1-1
+linux-zen-headers 7.0.10.zen1-1
+nvidia-open-dkms 610.43.02-2
+nvidia-settings 610.43.02-1
+nvidia-utils 610.43.02-2
+
+== Verificando suporte x86-64-v3 ==
+OK: CPU compatível com x86-64-v3.
+
+== Conferindo VMSTORE ==
+mkdir: não foi possível criar o diretório “/media/vmstore/mocha-repo/incoming/20260601-114126-linux-cachyos-v3-teste”: Permissão negada

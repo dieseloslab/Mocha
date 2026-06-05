@@ -1,0 +1,104 @@
+
+[11:49:12] MOCHA — pré-flight
+Usuário: hal
+Sessão: wayland
+Desktop: KDE
+Kernel: 7.0.10-2-cachyos
+Log: /media/mochafast/MochaArch/ativo/logs/mocha-fix-steam-alt-tab-input-20260602-114912.log
+Relatório: /media/mochafast/MochaArch/ativo/reports/mocha-fix-steam-alt-tab-input-20260602-114912.md
+Steam binária: /usr/bin/steam
+
+[11:49:12] MOCHA — sudo uma vez e keepalive
+[1] 12398
+
+[11:49:16] MOCHA — instalar dependências seguras se faltarem
+Pacotes a instalar: pipewire-alsa realtime-privileges
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacotes (5) alsa-card-profiles-1:1.6.6-1  libmysofa-1.3.4-1  pipewire-audio-1:1.6.6-1  pipewire-alsa-1:1.6.6-1  realtime-privileges-5-1
+
+Tamanho total download:   2,87 MiB
+Tamanho total instalado:  8,25 MiB
+
+:: Continuar a instalação? [S/n] 
+:: Obtendo pacotes...
+ pipewire-audio-1:1.6.6-1-x86_64 sendo baixado...
+ libmysofa-1.3.4-1-x86_64 sendo baixado...
+ alsa-card-profiles-1:1.6.6-1-x86_64 sendo baixado...
+ pipewire-alsa-1:1.6.6-1-x86_64 sendo baixado...
+ realtime-privileges-5-1-any sendo baixado...
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+verificando espaço em disco disponível...
+:: Processando alterações do pacote...
+instalando alsa-card-profiles...
+instalando libmysofa...
+instalando pipewire-audio...
+instalando pipewire-alsa...
+instalando realtime-privileges...
+The 'realtime' group has been created. Add your user to it and re-login to use realtime privileges.
+:: Executando hooks pós-transação...
+(1/5) Creating system user accounts...
+Creating group 'realtime' with GID 951.
+(2/5) Reloading user manager configuration...
+(3/5) Reloading device manager configuration...
+(4/5) Arming ConditionNeedsUpdate...
+(5/5) Refreshing PackageKit...
+
+[11:49:21] MOCHA — capturar estado atual de foco/input
+
+[11:49:21] MOCHA — encerrar Steam de forma limpa para aplicar ambiente novo
+Steam está aberta. Encerrando com steam -shutdown...
+Aguardando Steam fechar... 01/20
+Aguardando Steam fechar... 02/20
+Aguardando Steam fechar... 03/20
+Aguardando Steam fechar... 04/20
+Aguardando Steam fechar... 05/20
+Aguardando Steam fechar... 06/20
+Aguardando Steam fechar... 07/20
+Aguardando Steam fechar... 08/20
+Steam encerrada.
+
+[11:49:29] MOCHA — ajustar KWin para não bloquear retorno de foco dos jogos
+Backup: /home/hal/.config/kwinrc -> /home/hal/.config/kwinrc.bak-20260602-114912
+
+[11:49:29] MOCHA — criar launcher seguro da Steam para jogos Proton no Wayland
+Desktop local da Steam corrigido: /home/hal/.local/share/applications/steam.desktop
+
+[11:49:29] MOCHA — corrigir/criar wrapper canônico de jogo
+Backup: /home/hal/.local/bin/mocha-steam-game-run -> /home/hal/.local/bin/mocha-steam-game-run.bak-20260602-114912
+
+[11:49:29] MOCHA — validação final
+Wrapper:
+#!/usr/bin/env bash
+
+# Mocha input/focus guard — 20260602-114912
+unset XMODIFIERS
+unset GTK_IM_MODULE
+unset QT_IM_MODULE
+unset GLFW_IM_MODULE
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export SDL_VIDEODRIVER=x11
+export PROTON_ENABLE_WAYLAND=0
+
+set -Eeuo pipefail
+
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export __VK_LAYER_NV_optimus=NVIDIA_only
+export DXVK_LOG_LEVEL=none
+
+if command -v gamemoderun >/dev/null 2>&1; then
+  exec gamemoderun "$@"
+fi
+
+exec "$@"
+
+[11:49:30] MOCHA — concluído
+Relatório salvo em: /media/mochafast/MochaArch/ativo/reports/mocha-fix-steam-alt-tab-input-20260602-114912.md
+
+Agora abra a Steam pelo menu e teste o jogo com esta Launch Option:
+/home/hal/.local/bin/mocha-steam-game-run %command%
+]0;hal@Mocha:~[?2004h[hal@Mocha ~]$ [K[hal@Mocha ~]$ [?2004l

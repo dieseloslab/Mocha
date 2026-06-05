@@ -1,0 +1,300 @@
+== MOCHAARCH — AUDITORIA DE PENDÊNCIAS — SOMENTE LEITURA ==
+Timestamp: 20260602-105357
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-105357-auditoria-pendencias-mochaarch.log
+
+[1/15] sudo inicial e keepalive...
+
+[2/15] Sistema base...
+  [INFO] Hostname: Mocha
+  [INFO] Kernel em uso: 7.0.10-2-cachyos
+  [INFO] Sistema: Arch Linux
+  [INFO] Data local: ter 02 jun 2026 10:54:00 -03
+
+[3/15] Montagens FAST / VMSTORE...
+  [OK] /media/mochafast está montado
+/dev/sda1 btrfs rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/ /media/mochafast
+  [OK] /media/vmstore está montado
+/dev/sdb1 xfs rw,noatime,inode64,logbufs=8,logbsize=32k,noquota /media/vmstore
+
+[4/15] Entradas persistentes em /etc/fstab...
+UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+
+[5/15] Repositórios Pacman/Cachy...
+/etc/pacman.d/cachyos-v3-mirrorlist:3:####        CachyOS Repository Mirrorlist         ####
+/etc/pacman.d/cachyos-v3-mirrorlist:7:Server = https://cdn77.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:9:# Server = https://cdn.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:12:# Server = https://mirror.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:14:Server = https://us.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:17:## Server = https://mirror.albony.xyz/cachylinux/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:19:Server = https://mirror.lesviallon.fr/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:21:# Server = https://mirror.truenetwork.ru/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:25:Server = https://no.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:26:Server = https://nl.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:27:Server = https://ca.mirror.cx/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:29:Server = https://mirror.zyner.org/mirror/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:31:# Server = https://mirror.funami.tech/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:33:Server = https://at.cachyos.org/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:35:## Server = https://de-nue.soulharsh007.dev/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:37:Server = https://mirror.mergedcloud.de/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:39:Server = https://us-mnz.soulharsh007.dev/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:41:Server = https://mirrors.lansing2600.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:42:Server = https://cdn.lansing2600.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:44:Server = https://mirror.nju.edu.cn/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:46:Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:48:# Server = https://cachy-mirror.wtako.net/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:50:Server = https://mirror.allthingslinux.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:52:Server = https://cachyos.next-works.it/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:54:Server = https://cachyos-mirror.m1k.cloud/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:56:Server = https://mirror.limda.net/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:58:Server = https://cachyos.doridian.net/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:60:Server = https://mirror.hb9hil.org/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:62:# Server = https://mirror.yandex.ru/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:64:Server = https://archlinux.gay/cachy/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:67:## Russia Mirror much thanks to cachy-arch.ru
+/etc/pacman.d/cachyos-v3-mirrorlist:68:Server = https://mirror.cachy-arch.ru/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v3-mirrorlist:70:Server = https://wan.metrosg.ru/cachyos/repo/$arch_v3/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:3:####        CachyOS Repository Mirrorlist         ####
+/etc/pacman.d/cachyos-v4-mirrorlist:7:Server = https://cdn77.cachyos.org/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:9:# Server = https://cdn.cachyos.org/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:12:# Server = https://mirror.cachyos.org/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:14:Server = https://us.cachyos.org/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:17:## Server = https://mirror.albony.xyz/cachylinux/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:19:Server = https://mirror.lesviallon.fr/cachy/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:21:# Server = https://mirror.truenetwork.ru/cachy/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:25:Server = https://no.mirror.cx/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:26:Server = https://nl.mirror.cx/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:27:Server = https://ca.mirror.cx/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:29:Server = https://mirror.zyner.org/mirror/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:31:# Server = https://mirror.funami.tech/cachy/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:33:Server = https://at.cachyos.org/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:35:## Server = https://de-nue.soulharsh007.dev/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:37:Server = https://mirror.mergedcloud.de/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:39:Server = https://us-mnz.soulharsh007.dev/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:41:Server = https://mirrors.lansing2600.org/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:42:Server = https://cdn.lansing2600.org/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:44:Server = https://mirror.nju.edu.cn/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:46:Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:48:# Server = https://cachy-mirror.wtako.net/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:50:Server = https://mirror.allthingslinux.org/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:52:Server = https://cachyos.next-works.it/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:54:Server = https://cachyos-mirror.m1k.cloud/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:56:Server = https://mirror.limda.net/cachy/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:58:Server = https://cachyos.doridian.net/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:60:Server = https://mirror.hb9hil.org/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:62:# Server = https://mirror.yandex.ru/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:64:Server = https://archlinux.gay/cachy/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:67:## Russia Mirror much thanks to cachy-arch.ru
+/etc/pacman.d/cachyos-v4-mirrorlist:68:Server = https://mirror.cachy-arch.ru/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-v4-mirrorlist:70:Server = https://wan.metrosg.ru/cachyos/repo/$arch_v4/$repo
+/etc/pacman.d/cachyos-mirrorlist:3:####        CachyOS Repository Mirrorlist         ####
+/etc/pacman.d/cachyos-mirrorlist:7:Server = https://cdn77.cachyos.org/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:9:# Server = https://cdn.cachyos.org/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:12:# Server = https://mirror.cachyos.org/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:14:Server = https://us.cachyos.org/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:17:## Server = https://mirror.albony.xyz/cachylinux/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:19:Server = https://mirror.lesviallon.fr/cachy/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:21:# Server = https://mirror.truenetwork.ru/cachy/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:25:Server = https://no.mirror.cx/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:26:Server = https://nl.mirror.cx/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:27:Server = https://ca.mirror.cx/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:29:Server = https://mirror.zyner.org/mirror/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:31:# Server = https://mirror.funami.tech/cachy/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:33:Server = https://at.cachyos.org/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:35:## Server = https://de-nue.soulharsh007.dev/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:37:Server = https://mirror.mergedcloud.de/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:39:Server = https://us-mnz.soulharsh007.dev/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:41:Server = https://mirrors.lansing2600.org/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:42:Server = https://cdn.lansing2600.org/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:44:Server = https://mirror.nju.edu.cn/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:46:Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:48:# Server = https://cachy-mirror.wtako.net/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:50:Server = https://mirror.allthingslinux.org/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:52:Server = https://cachyos.next-works.it/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:54:Server = https://cachyos-mirror.m1k.cloud/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:56:Server = https://mirror.limda.net/cachy/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:58:Server = https://cachyos.doridian.net/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:60:Server = https://mirror.hb9hil.org/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:62:# Server = https://mirror.yandex.ru/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:64:Server = https://archlinux.gay/cachy/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:67:## Russia Mirror much thanks to cachy-arch.ru
+/etc/pacman.d/cachyos-mirrorlist:68:Server = https://mirror.cachy-arch.ru/cachyos/repo/$arch/$repo
+/etc/pacman.d/cachyos-mirrorlist:70:Server = https://wan.metrosg.ru/cachyos/repo/$arch/$repo
+  [OK] Não encontrei repo CachyOS ativo por texto simples em pacman.conf/pacman.d
+
+[6/15] Pacotes de kernel instalados...
+linux 7.0.10.arch1-1
+linux-api-headers 6.19-1
+linux-atm 2.5.2-9
+linux-cachyos 7.0.10-2
+linux-cachyos-headers 7.0.10-2
+linux-cachyos-nvidia-open 7.0.10-2
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+
+[7/15] GRUB e kernel padrão...
+GRUB_DEFAULT='Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos'
+GRUB_CMDLINE_LINUX_DEFAULT='quiet splash loglevel=3'
+GRUB_SAVEDEFAULT=false
+  [INFO] grub.cfg não legível sem sudo; lendo com sudo
+109:menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+121:submenu 'Opções avançadas para Arch Linux' $menuentry_id_option 'gnulinux-advanced-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+122:	menuentry 'Arch Linux, with Linux linux-cachyos' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-linux-cachyos-advanced-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+134:	menuentry 'Arch Linux, with Linux linux' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-linux-advanced-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+169:		menuentry 'UEFI Firmware Settings' $menuentry_id_option 'uefi-firmware' {
+
+[8/15] NVIDIA...
+NVIDIA GeForce RTX 5060 Ti, 610.43.02, P0, [Requested functionality has been deprecated], 180.00 W
+  [PENDENTE/VERIFICAR] Módulos NVIDIA não aparecem carregados
+  [OK] nouveau não está carregado
+
+[9/15] Sessão gráfica / Wayland...
+  [INFO] XDG_SESSION_TYPE=wayland
+Name=hal
+Desktop=KDE
+Type=wayland
+  [OK] Sessão atual é Wayland
+
+[10/15] Firewall UFW/GUFW e regras Steam...
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+  [OK] gufw instalado
+  [ATALHO] /home/hal/Área de trabalho/Mocha-Firewall.desktop
+  [ATALHO] /home/hal/Área de trabalho/Mocha Firewall.desktop
+  [ATALHO] /home/hal/Área de trabalho/Mocha Firewall - Liberar Steam.desktop
+  [ATALHO] /home/hal/Área de trabalho/Mocha Firewall - Fechar Steam.desktop
+  [ATALHO] /home/hal/.local/share/applications/mocha-firewall-gui.desktop
+  [ATALHO] /home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+  [ATALHO] /home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+
+[11/15] DNS Cloudflare com systemd-resolved...
+  [OK] systemd-resolved ativo
+Global
+           Protocols: +LLMNR +mDNS +DNSOverTLS DNSSEC=allow-downgrade/supported
+    resolv.conf mode: stub
+  Current DNS Server: 1.1.1.1#cloudflare-dns.com
+         DNS Servers: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com
+                      2606:4700:4700::1111#cloudflare-dns.com
+                      2606:4700:4700::1001#cloudflare-dns.com
+Fallback DNS Servers: 9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+          DNS Domain: ~.
+
+Link 2 (enp4s0)
+    Current Scopes: LLMNR/IPv4 LLMNR/IPv6 mDNS/IPv4 mDNS/IPv6
+         Protocols: -DefaultRoute +LLMNR +mDNS +DNSOverTLS
+                    DNSSEC=allow-downgrade/supported
+     Default Route: no
+/etc/systemd/resolved.conf:21:# Cloudflare: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf:31:#FallbackDNS=9.9.9.9#dns.quad9.net 2620:fe::9#dns.quad9.net 1.1.1.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 8.8.8.8#dns.google 2001:4860:4860::8888#dns.google
+/etc/systemd/resolved.conf:34:#DNSOverTLS=no
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:2:DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:5:DNSOverTLS=yes
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:2:DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:4:DNSOverTLS=yes
+  [OK] Configuração Cloudflare/DoT encontrada em systemd-resolved
+
+[12/15] Performance: TuneD, CPU governor, zram...
+  [OK] tuned ativo
+Current active profile: latency-performance
+  driver: amd-pstate-epp
+  current CPU frequency: Unable to call hardware
+  current CPU frequency: 4.18 GHz (asserted by call to kernel)
+  boost state support:
+NAME           TYPE      SIZE USED PRIO
+/dev/nvme0n1p3 partition  17G  60K   -1
+
+[13/15] Steam, GameMode, MangoHud...
+  [OK] steam instalado
+  [OK] gamemode instalado
+  [OK] mangohud instalado
+  [OK] goverlay instalado
+  [OK] gamemoded ativo/em execução
+  [OK] MangoHud config encontrada: /home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
+  [OK] MangoHud config encontrada: /etc/mocha/mangohud/MangoHud.conf
+
+[14/15] KDE/tema/barra/wallpaper/autostart redundante...
+  [OK] Config da barra Plasma existe
+LookAndFeelPackage=org.kde.breezedark.desktop
+Arquivo autostart: /home/hal/.config/autostart/blueman.desktop
+Name=blueman-applet
+Hidden=true
+Arquivo autostart: /home/hal/.config/autostart/kmix_autostart.desktop
+Name=KMix
+Hidden=true
+
+[15/15] Manual/documentação MochaArch...
+Procurando manuais em: /media/mochafast/MochaArch/ativo
+/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/MANUAL-BARRA-WIN11-MOCHA-APROVADA.md
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/20260529-200013-TABELA-CORES-MOCHA-SOLID-CANONICO.md
+/media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/TABELA-CORES-MOCHA-SOLID-CANONICO.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-175841-esquema-cores-kde-mocha-solid-canonico-aplicado.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-180309-plasma-style-barra-mocha-aplicado.md
+/media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211408-wallpaper-e-barra-mocha-aplicados.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-214720-proximos-passos-repos-proprio-mocha.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-224555-repositorio-proprio-mocha-estrutura-criada.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-001926-pacote-mocha-pacman-policy.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md
+/media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.backup-20260530-064832.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-101522-mocha-gamer-essentials-politica.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-102502-mocha-gamer-essentials-protonplus-politica.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-104417-manual-instalacao-mocha-arch-em-ordem.md
+/media/mochafast/MochaArch/ativo/documentacao/MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-105437-backup-MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-105437-manual-instalacao-mocha-arch-receita-agressividade-corrigida.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-175039-vivaldi-tema-kde-mocha.md
+/media/mochafast/MochaArch/ativo/documentacao/20260530-191138-vivaldi-tema-firefox-mocha.md
+/media/mochafast/MochaArch/ativo/documentacao/Mocha-Vivaldi-Canonico.md
+/media/mochafast/MochaArch/ativo/documentacao/Mocha-Vivaldi-Tema-Canonico.md
+/media/mochafast/MochaArch/ativo/documentacao/20260531-215226-mochaarch-aprovados-operacionais.md
+/media/mochafast/MochaArch/ativo/documentacao/manual-operacional-mochaarch.md
+/media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+/media/mochafast/MochaArch/ativo/documentacao/20260602-075226-registro-montagem-fase01-corrigida.md
+/media/mochafast/MochaArch/ativo/documentacao/20260602-100554-estado-pos-manual-kernel-driver-login-manager-ok.md
+/media/mochafast/MochaArch/ativo/documentacao/20260602-102320-snapshot-antes-nova-entrada-manual-vivo.md
+/media/mochafast/MochaArch/ativo/documentacao/20260602-102320-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE-pos-nova-entrada.md
+/media/mochafast/MochaArch/ativo/auditorias/20260529-210855-seguimento-manual-estado-real.md
+/media/mochafast/MochaArch/ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
+/media/mochafast/MochaArch/ativo/logs/20260529-154304-auditoria-estado-atual-para-manual.md
+/media/mochafast/MochaArch/ativo/logs/20260529-154304-evidencias-extraidas-para-manual.md
+/media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+/media/mochafast/MochaArch/ativo/relatorios/20260529-195748-auditoria-geral-pre-formatacao-mochaarch.md
+/media/mochafast/MochaArch/ativo/relatorios/20260529-205350-auditoria-seguimento-manual-pos-congelamento.md
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064611-auditoria-documentacao-mangohud-mocha.md
+/media/mochafast/MochaArch/ativo/relatorios/20260530-064832-mangohud-mocha-documentacao-corrigida.md
+/media/mochafast/MochaArch/ativo/relatorios/20260530-101522-mocha-gamer-essentials-auditoria.md
+/media/mochafast/MochaArch/ativo/relatorios/20260530-102502-mocha-gamer-essentials-protonplus-install.md
+/media/mochafast/MochaArch/ativo/docs/20260602-104316-mocha-steam-wrapper-mangohud-modo-steam-overlay.md
+Procurando manuais em: /media/vmstore/MochaArch
+/media/vmstore/MochaArch/ativo/relatorios/20260530-141632-mocha-auditoria-repositorios.md
+/media/vmstore/MochaArch/ativo/relatorios/20260531-060721-limpeza-vmstore-legado-nix-xu-preservar-assets-mocha.md
+Procurando manuais em: /home/hal
+
+== RESUMO PRÁTICO ==
+- Se FAST/VMSTORE não estiverem montados ou não aparecerem no fstab: falta corrigir persistência.
+- Se Cachy ainda aparecer ativo no pacman: falta desativar repo temporário após kernel/driver.
+- Se kernel em uso/default não for Cachy comum aprovado: falta corrigir GRUB/default.
+- Se nvidia-smi falhar ou nouveau aparecer: falta corrigir driver NVIDIA.
+- Se sessão não for Wayland: falta corrigir login/sessão.
+- Se UFW/GUFW/atalhos não estiverem presentes: falta finalizar firewall padrão Mocha.
+- Se Cloudflare DoT não aparecer no resolved: falta finalizar DNS criptografado.
+- Se tuned/governor/zram não estiverem corretos: falta finalizar agressividade.
+- Se tema/barra/wallpaper/autostarts não estiverem corretos: falta finalizar polimento KDE.
+- Se manual não registrar esses pontos: falta documentar como padrão permanente.
+
+Log salvo em: /media/mochafast/MochaArch/ativo/relatorios/20260602-105357-auditoria-pendencias-mochaarch.log

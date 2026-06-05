@@ -1,0 +1,755 @@
+== MOCHAARCH — AUDITORIA SOMENTE LEITURA — REDE / FIREWALL / DNS / STEAM / GAMEMODE / MANGOHUD / WRAPPER ==
+Timestamp: 20260602-110334
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-110334-auditoria-rede-firewall-dns-steam-gamemode-mangohud-wrapper.log
+Observação: este script só audita. Não altera configurações.
+
+[1/11] sudo inicial para leituras privilegiadas
+  [OK] sudo validado para auditoria
+
+[2/11] base do sistema, kernel, sessão e NVIDIA
+  [INFO] Kernel em uso: 7.0.10-2-cachyos
+  [INFO] Sessão: wayland
+  [INFO] Cmdline: BOOT_IMAGE=/boot/vmlinuz-linux-cachyos root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw quiet splash loglevel=3 nvidia_drm.modeset=1 nvidia_drm.fbdev=1 modprobe.blacklist=nouveau nouveau.modeset=0
+  [OK] kernel Cachy em uso
+  [OK] boot real está usando /boot/vmlinuz-linux-cachyos
+  [OK] parâmetro presente no boot: nvidia_drm.modeset=1
+  [OK] parâmetro presente no boot: nvidia_drm.fbdev=1
+  [OK] parâmetro presente no boot: modprobe.blacklist=nouveau
+  [OK] parâmetro presente no boot: nouveau.modeset=0
+  [OK] sessão Wayland ativa
+
+-- nvidia-smi resumo --
+NVIDIA GeForce RTX 5060 Ti, 610.43.02, P0, Enabled, 180.00 W
+  [OK] NVIDIA funcional via nvidia-smi
+
+-- módulos NVIDIA carregados --
+nvidia_drm 176128 95 - Live 0x0000000000000000 (O)
+nvidia_modeset 1847296 52 nvidia_drm, Live 0x0000000000000000 (O)
+nvidia_uvm 2359296 0 - Live 0x0000000000000000 (O)
+nvidia 17174528 986 nvidia_modeset,nvidia_uvm, Live 0x0000000000000000 (O)
+
+[3/11] FAST e VMSTORE montados e persistentes
+  [OK] /media/mochafast está montado
+/dev/sda1 btrfs rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/ /media/mochafast
+  [OK] /media/vmstore está montado
+/dev/sdb1 xfs rw,noatime,inode64,logbufs=8,logbsize=32k,noquota /media/vmstore
+
+-- fstab relevante: /etc/fstab --
+4:# be used with UUID= as a more robust way to name devices that works even if
+8:UUID=FEA3-C9BE                            /boot/efi      vfat    defaults,umask=0077 0 2
+9:UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 /              ext4    defaults,noatime 0 1
+10:UUID=933991ca-ef8a-468f-8f4b-673a555d6041 /home          xfs     defaults,noatime 0 2
+16:UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+  [OK] fstab contém entrada para /media/mochafast
+  [OK] fstab contém entrada para /media/vmstore
+
+[4/11] firewall UFW/GUFW
+
+-- pacotes ufw/gufw --
+ufw 0.36.2-7
+gufw 26.04-2
+  [OK] ufw instalado
+
+-- ufw status verbose --
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+-- ufw status numbered --
+Status: active
+  [OK] serviço ufw ativo
+  [OK] serviço ufw habilitado no boot
+  [OK] UFW está ativo
+  [OK] política padrão de entrada parece negar conexões
+  [OK] política padrão de saída parece liberada
+  [OK] não há regra Steam óbvia aberta permanentemente no UFW
+  [OK] gufw instalado
+
+[5/11] atalhos e scripts de firewall/Steam
+
+-- Atalhos .desktop relevantes --
+/home/hal/.local/share/applications/mocha-firewall-gui.desktop
+3:Name=Mocha Firewall
+4:Comment=Abrir interface gráfica do firewall
+5:Exec=gufw
+6:Icon=gufw
+/home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+3:Name=Mocha Firewall - Liberar Steam
+4:Comment=Abrir regras Steam no UFW
+5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-on
+6:Icon=steam
+/home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+3:Name=Mocha Firewall - Fechar Steam
+4:Comment=Fechar regras Steam no UFW
+5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-off
+
+-- Scripts relevantes em MochaArch ativo --
+/media/mochafast/MochaArch/ativo/docs/20260602-105111-regra-canonica-firewall-ipfixo-cloudflare-dot.md
+1:# REGRA CANÔNICA — MOCHAARCH — FIREWALL, IP FIXO E DNS CLOUDFLARE DOT
+7:- UFW e GUFW instalados;
+8:- firewall ativo;
+11:- perfis Steam disponíveis, mas fechados por padrão;
+12:- atalho para GUI do firewall;
+13:- atalho para liberar regras Steam;
+14:- atalho para fechar regras Steam;
+20:As portas Steam não devem ficar abertas permanentemente. Elas devem ser acionadas por perfil/atalho apenas quando necessário.
+/media/mochafast/MochaArch/ativo/documentacao/20260601-174355-atalho-gui-firewall.md
+1:# MochaArch — atalho GUI do firewall
+7:- Lançador: /home/hal/.local/bin/mocha-firewall-gui
+8:- Atalho no menu: /home/hal/.local/share/applications/mocha-firewall-gui.desktop
+9:- Atalho na Área de Trabalho: /home/hal/Área de trabalho/mocha-firewall-gui.desktop
+13:Mocha Firewall - Interface Gráfica
+19:1. módulo de firewall encontrado via kcmshell6;
+20:2. kcmshell6 kcm_firewall;
+21:3. systemsettings kcm_firewall;
+22:4. firewall-config, se instalado.
+26:/media/mochafast/MochaArch/ativo/relatorios/20260601-174355-criar-atalho-gui-firewall.log
+/media/mochafast/MochaArch/ativo/documentacao/20260601-174733-firewall-dot-atalhos-concluido.md
+1:# MochaArch — firewall e DNS-over-TLS concluídos
+7:- firewalld ativo e habilitado.
+8:- plasma-firewall instalado para integração KDE.
+9:- firewall-config instalado como GUI alternativa do firewalld.
+13:- Steam Remote Play não fica aberto por padrão.
+14:- Atalho para GUI do firewall criado na Área de Trabalho.
+15:- Atalhos para ativar/desativar Steam Remote Play criados.
+21:- mocha-steam-remoteplay: UDP 27031, UDP 27036, TCP 27036, TCP 27037.
+22:- mocha-steam-vr: UDP 10400, UDP 10401.
+28:- Mocha Firewall - Interface Gráfica.
+29:- Mocha Firewall - Ativar Steam Remote Play.
+30:- Mocha Firewall - Desativar Steam Remote Play.
+31:- Mocha Firewall - Ativar Rede Local Gamer.
+32:- Mocha Firewall - Desativar Rede Local Gamer.
+33:- Mocha Firewall - Status.
+39:- Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174733-concluir-firewall-dot-atalhos-pos-invalid-zone.log
+/media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+1:# MochaArch — firewall, regras, atalho e DNS Cloudflare criptografado
+7:- O firewall deve ficar ativo no boot antes de entregar a montagem.
+8:- As regras abertas devem ser documentadas a partir do estado real do firewall, sem abrir portas amplas sem necessidade.
+9:- Perfis de jogo/Steam devem ficar controláveis pela GUI do firewall, para ativação quando necessário.
+10:- Deve existir acesso fácil à GUI do firewall pelo KDE, preferencialmente por atalho na área de trabalho e/ou menu.
+23:### firewalld — estado do serviço
+25:Comando auditado: systemctl status firewalld.service --no-pager
+27:● firewalld.service - firewalld - dynamic firewall daemon
+28:     Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; preset: disabled)
+31:       Docs: man:firewalld(1)
+32:   Main PID: 666 (firewalld)
+36:     CGroup: /system.slice/firewalld.service
+37:             └─666 /usr/bin/python /usr/bin/firewalld --nofork --nopid
+39:jun 02 07:04:36 Mocha systemd[1]: Started firewalld - dynamic firewall daemon.
+41:### firewalld — estado runtime
+43:Comando auditado: firewall-cmd --state
+47:### firewalld — zona padrão
+49:Comando auditado: firewall-cmd --get-default-zone
+53:### firewalld — regras da zona padrão
+55:Comando auditado: firewall-cmd --list-all
+128:### Atalhos de firewall encontrados
+131:- /home/hal/Área de trabalho/mocha-firewall-gui.desktop
+132:- /home/hal/Área de trabalho/mocha-firewall-gamer-local-off.desktop
+133:- /home/hal/Área de trabalho/mocha-firewall-gamer-local-on.desktop
+134:- /home/hal/Área de trabalho/mocha-firewall-status.desktop
+135:- /home/hal/Área de trabalho/mocha-firewall-steam-off.desktop
+136:- /home/hal/Área de trabalho/mocha-firewall-steam-on.desktop
+138:- /home/hal/.local/share/applications/mocha-firewall-gui.desktop
+139:- /home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+140:- /home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+141:- /home/hal/.local/share/applications/mocha-firewall-gamer-local-on.desktop
+142:- /home/hal/.local/share/applications/mocha-firewall-gamer-local-off.desktop
+143:- /home/hal/.local/share/applications/mocha-firewall-status.desktop
+/media/mochafast/MochaArch/ativo/relatorios/20260601-173548-auditoria-firewall-atual.log
+1:== MOCHAARCH — auditoria somente leitura do firewall atual ==
+3:Relatório: /media/mochafast/MochaArch/ativo/relatorios/20260601-173548-auditoria-firewall-atual.log
+31:[3/9] Verificando pacotes de firewall instalados...
+32:ausente: firewalld
+33:ausente: ufw
+38:ausente: gufw
+39:INSTALADO: plasma-firewall -> plasma-firewall 6.6.5-1
+43:Serviço: firewalld.service
+47:Serviço: ufw.service
+63:[5/9] Verificando firewalld, se existir...
+64:firewall-cmd não encontrado.
+66:[6/9] Verificando UFW, se existir...
+67:ufw não encontrado.
+113:udp   UNCONN 0      0                            224.0.0.251:5353       0.0.0.0:*    users:(("steamwebhelper",pid=2182,fd=236)) uid:1000 ino:5289329 sk:2 cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                          
+116:udp   UNCONN 0      0                                0.0.0.0:27036      0.0.0.0:*    users:(("steam",pid=1941,fd=158)) uid:1000 ino:30908 sk:5 cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+120:tcp   LISTEN 0      128                            127.0.0.1:35519      0.0.0.0:*    users:(("steam",pid=1941,fd=67)) uid:1000 ino:29825 sk:9 cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+121:tcp   LISTEN 0      128                            127.0.0.1:27060      0.0.0.0:*    users:(("steam",pid=1941,fd=102)) uid:1000 ino:31804 sk:a cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+122:tcp   LISTEN 0      128                            127.0.0.1:41905      0.0.0.0:*    users:(("steam",pid=1941,fd=114)) uid:1000 ino:33051 sk:b cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+123:tcp   LISTEN 0      128                            127.0.0.1:57343      0.0.0.0:*    users:(("steam",pid=1941,fd=61)) uid:1000 ino:28532 sk:c cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+124:tcp   LISTEN 0      128                              0.0.0.0:27036      0.0.0.0:*    users:(("steam",pid=1941,fd=160)) uid:1000 ino:30909 sk:d cgroup:/user.slice/user-1000.slice/user@1000.service/app.slice/app-steam@2549af24c23740f7a203b8ab878ca46b.service <->                                            
+128:- Se firewalld/ufw/nftables estiverem inactive/disabled e não houver ruleset relevante, o sistema está praticamente sem firewall gerenciado.
+129:- Se firewalld estiver active, a zona padrão e os ports/services listados acima são o estado real.
+130:- Se nftables tiver ruleset mesmo sem firewalld/ufw, o firewall pode estar sendo aplicado diretamente por nft.
+135:/media/mochafast/MochaArch/ativo/relatorios/20260601-173548-auditoria-firewall-atual.log
+/media/mochafast/MochaArch/ativo/relatorios/20260601-174300-instalar-firewall-cloudflare-dot-atalhos.log
+1:== MOCHAARCH — instalar firewall ativo + Cloudflare DNS-over-TLS + atalhos ==
+3:Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174300-instalar-firewall-cloudflare-dot-atalhos.log
+4:Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174300-firewall-firewalld-cloudflare-dot-atalhos.md
+12:Serviços de firewall antes:
+13:firewalld.service active=inactive
+14:firewalld.service enabled=not-found
+21:ufw.service active=inactive
+22:ufw.service enabled=not-found
+25:Já instalado: plasma-firewall 6.6.5-1
+26:Pacotes a instalar: firewalld
+30:Pacotes (3) python-capng-0.9.3-1  python-firewall-2.4.1-1  firewalld-2.4.1-1
+37: python-firewall-2.4.1-1-any sendo baixado...
+38: firewalld-2.4.1-1-any sendo baixado...
+46:instalando python-firewall...
+48:instalando firewalld...
+50::: The firewallD components & utilities have now been split into different packages:
+52:   - firewalld: Firewall daemon with D-Bus interface 
+53:   - python-firewall: Python bindings for firewallD
+54:   - firewall-config: Graphical user interface for firewallD
+55:   - firewall-applet: Systray applet for firewallD
+56:   - firewalld-test: FirewallD test suite
+60:Dependências opcionais para firewalld
+64:    firewall-config: Graphical user interface for firewallD configuration
+65:    firewall-applet: Systray applet for firewallD
+66:    firewalld-test: firewallD test suite
+72:[4/14] Criando serviços nomeados do firewalld para Mocha...
+74:[5/14] Ativando firewalld...
+75:Created symlink '/etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service' → '/usr/lib/systemd/system/firewalld.service'.
+76:Created symlink '/etc/systemd/system/multi-user.target.wants/firewalld.service' → '/usr/lib/systemd/system/firewalld.service'.
+79:FirewallD is not running
+/media/mochafast/MochaArch/ativo/relatorios/20260601-174355-criar-atalho-gui-firewall.log
+1:== MOCHAARCH — criar atalho para GUI do firewall ==
+3:Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174355-criar-atalho-gui-firewall.log
+4:Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174355-atalho-gui-firewall.md
+10:Lançador criado: /home/hal/.local/bin/mocha-firewall-gui
+13:Atalho do menu criado: /home/hal/.local/share/applications/mocha-firewall-gui.desktop
+16:Atalho da Área de Trabalho criado: /home/hal/Área de trabalho/mocha-firewall-gui.desktop
+25:/home/hal/Área de trabalho/mocha-firewall-gui.desktop
+28:Mocha Firewall - Interface Gráfica
+/media/mochafast/MochaArch/ativo/relatorios/20260601-174608-reparar-firewall-dot-e-atalho-gui.log
+1:== MOCHAARCH — reparar firewalld + Cloudflare DNS-over-TLS + atalho GUI ==
+3:Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174608-reparar-firewall-dot-e-atalho-gui.log
+4:Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174608-firewall-dot-atalho-gui-reparado.md
+13:INSTALADO: firewalld 2.4.1-1
+14:INSTALADO: plasma-firewall 6.6.5-1
+15:AUSENTE: firewall-config
+20:firewalld.service active=active
+21:firewalld.service enabled=enabled
+34:Já instalado: firewalld 2.4.1-1
+35:Já instalado: plasma-firewall 6.6.5-1
+36:Disponível para instalar: firewall-config
+39:Pacotes: firewall-config
+43:Pacotes (1) firewall-config-2.4.1-1
+50: firewall-config-2.4.1-1-any sendo baixado...
+57:instalando firewall-config...
+64:[5/15] Criando/atualizando serviços nomeados do firewalld...
+66:[6/15] Iniciando firewalld de forma validada...
+67:Aguardando firewalld ficar ativo... tentativa 1/20
+68:Aguardando firewalld ficar ativo... tentativa 2/20
+69:firewalld ativo e respondendo.
+/media/mochafast/MochaArch/ativo/relatorios/20260601-174733-concluir-firewall-dot-atalhos-pos-invalid-zone.log
+1:== MOCHAARCH — concluir firewall + Cloudflare DNS-over-TLS + atalhos ==
+3:Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174733-concluir-firewall-dot-atalhos-pos-invalid-zone.log
+4:Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174733-firewall-dot-atalhos-concluido.md
+9:OK: firewalld 2.4.1-1
+10:OK: plasma-firewall 6.6.5-1
+11:OK: firewall-config 2.4.1-1
+13:[3/12] Garantindo firewalld ativo...
+14:Aguardando firewalld responder... tentativa 1/20
+15:Aguardando firewalld responder... tentativa 2/20
+16:OK: firewalld ativo.
+18:[4/12] Recriando/validando serviços Mocha do firewalld...
+52:[10/12] Validação final do firewall...
+53:firewalld active/enabled:
+57:firewall-cmd --state:
+127:- Firewall ativo: firewalld.
+130:- Atalho principal na Área de Trabalho: /home/hal/Área de trabalho/mocha-firewall-gui.desktop
+131:- Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174733-firewall-dot-atalhos-concluido.md
+/media/mochafast/MochaArch/ativo/relatorios/20260602-071429-documentar-firewall-dns-cloudflare.log
+2:== MOCHAARCH — documentação de firewall, regras, atalho e DNS Cloudflare ==
+6:Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-071429-documentar-firewall-dns-cloudflare.log
+16:/media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+24:Adendo: /media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+25:Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-071429-documentar-firewall-dns-cloudflare.log
+27:5287:# MochaArch — firewall, regras, atalho e DNS Cloudflare criptografado
+/media/mochafast/MochaArch/ativo/relatorios/20260602-104530-auditoria-firewall-ipfixo-dns-cloudflare.log
+1:== MOCHAARCH — AUDITORIA FIREWALL + IP FIXO + DNS CLOUDFLARE ==
+2:Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-104530-auditoria-firewall-ipfixo-dns-cloudflare.log
+6:[2/7] Firewall instalado/ativo
+7:PENDENTE: ufw não encontrado.
+9:AVISO: gufw não encontrado; sem GUI simples do firewall.
+11:[3/7] Serviços relacionados ao firewall
+15:[4/7] Regras atuais relevantes para Steam/Remote Play/servidores
+83:[7/7] Atalho/GUI de firewall
+87:Firewall Steam:
+88:  - Para jogar online via Steam, normalmente basta saída liberada.
+92:Portas Steam de referência para perfil manual:
+93:  - UDP 27000:27250 para tráfego de jogo/Steam.
+94:  - UDP 27031:27036 e TCP 27036:27037 para Remote Play/streaming.
+96:  - TCP/UDP 27015 quando for hospedar servidor Valve/Source.
+99:/media/mochafast/MochaArch/ativo/relatorios/20260602-104530-auditoria-firewall-ipfixo-dns-cloudflare.log
+/media/mochafast/MochaArch/ativo/relatorios/20260602-104812-corrigir-firewall-ipfixo-cloudflare-steam.log
+4:[2/9] Validando pacotes oficiais e instalando firewall GUI
+8:Pacotes (2) gufw-26.04-2  ufw-0.36.2-7
+15: gufw-26.04-2-any sendo baixado...
+16: ufw-0.36.2-7-any sendo baixado...
+23:instalando ufw...
+24:instalando gufw...
+42:[6/9] Configurando UFW com padrão seguro e perfis Steam opcionais
+48:Firewall is active and enabled on system startup
+49:Created symlink '/etc/systemd/system/multi-user.target.wants/ufw.service' → '/usr/lib/systemd/system/ufw.service'.
+51:[7/9] Criando scripts e atalhos para abrir GUI e alternar portas Steam
+59:ufw 0.36.2-7
+60:gufw 26.04-2
+62:-- UFW --
+68:-- Perfis Steam disponíveis --
+70:  Mocha Steam Local Transfer
+71:  Mocha Steam Online UDP
+72:  Mocha Steam Remote Play
+73:  Mocha Steam Source Server
+115:/home/hal/Área de trabalho/Mocha Firewall.desktop
+116:/home/hal/Área de trabalho/Mocha-Firewall.desktop
+117:/home/hal/Área de trabalho/Mocha Firewall - Fechar Steam.desktop
+118:/home/hal/Área de trabalho/Mocha Firewall - Liberar Steam.desktop
+119:/home/hal/.local/share/applications/mocha-firewall-gui.desktop
+120:/home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+121:/home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+124:Firewall ativo: padrão deny incoming / allow outgoing.
+125:Steam: portas ficam fechadas por padrão; use o atalho "Mocha Firewall - Liberar Steam" quando precisar.
+128:Log salvo em: /media/mochafast/MochaArch/ativo/relatorios/20260602-104812-corrigir-firewall-ipfixo-cloudflare-steam.log
+/media/mochafast/MochaArch/ativo/relatorios/20260602-105111-documentar-padrao-firewall-ipfixo-cloudflare.log
+1:== MOCHAARCH — DOCUMENTAR PADRÃO FIREWALL + IP FIXO + CLOUDFLARE DOT ==
+2:Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-105111-documentar-padrao-firewall-ipfixo-cloudflare.log
+15:  - /media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+45:/media/mochafast/MochaArch/ativo/docs/20260602-105111-regra-canonica-firewall-ipfixo-cloudflare-dot.md
+48:5529:## REGRA CANÔNICA — MOCHAARCH — FIREWALL, IP FIXO E DNS CLOUDFLARE DOT
+51:/media/mochafast/MochaArch/ativo/relatorios/20260602-105111-documentar-padrao-firewall-ipfixo-cloudflare.log
+/media/mochafast/MochaArch/ativo/relatorios/20260602-110334-auditoria-rede-firewall-dns-steam-gamemode-mangohud-wrapper.log
+1:== MOCHAARCH — AUDITORIA SOMENTE LEITURA — REDE / FIREWALL / DNS / STEAM / GAMEMODE / MANGOHUD / WRAPPER ==
+3:Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-110334-auditoria-rede-firewall-dns-steam-gamemode-mangohud-wrapper.log
+47:[4/11] firewall UFW/GUFW
+49:-- pacotes ufw/gufw --
+50:ufw 0.36.2-7
+51:gufw 26.04-2
+52:  [OK] ufw instalado
+54:-- ufw status verbose --
+60:-- ufw status numbered --
+62:  [OK] serviço ufw ativo
+63:  [OK] serviço ufw habilitado no boot
+64:  [OK] UFW está ativo
+67:  [OK] não há regra Steam óbvia aberta permanentemente no UFW
+68:  [OK] gufw instalado
+70:[5/11] atalhos e scripts de firewall/Steam
+73:/home/hal/.local/share/applications/mocha-firewall-gui.desktop
+74:3:Name=Mocha Firewall
+75:4:Comment=Abrir interface gráfica do firewall
+76:5:Exec=gufw
+77:6:Icon=gufw
+78:/home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+79:3:Name=Mocha Firewall - Liberar Steam
+80:4:Comment=Abrir regras Steam no UFW
+81:5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-on
+82:6:Icon=steam
+83:/home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+84:3:Name=Mocha Firewall - Fechar Steam
+85:4:Comment=Fechar regras Steam no UFW
+86:5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-off
+89:/media/mochafast/MochaArch/ativo/docs/20260602-105111-regra-canonica-firewall-ipfixo-cloudflare-dot.md
+90:1:# REGRA CANÔNICA — MOCHAARCH — FIREWALL, IP FIXO E DNS CLOUDFLARE DOT
+91:7:- UFW e GUFW instalados;
+92:8:- firewall ativo;
+93:11:- perfis Steam disponíveis, mas fechados por padrão;
+94:12:- atalho para GUI do firewall;
+95:13:- atalho para liberar regras Steam;
+96:14:- atalho para fechar regras Steam;
+97:20:As portas Steam não devem ficar abertas permanentemente. Elas devem ser acionadas por perfil/atalho apenas quando necessário.
+98:/media/mochafast/MochaArch/ativo/documentacao/20260601-174355-atalho-gui-firewall.md
+99:1:# MochaArch — atalho GUI do firewall
+  [OK] atalho de firewall/Steam encontrado
+  [OK] script/documento de firewall/Steam encontrado no MochaArch ativo
+
+[6/11] DNS Cloudflare, systemd-resolved e NetworkManager
+  [OK] systemd-resolved ativo
+  [OK] systemd-resolved habilitado no boot
+
+-- resolvectl status --
+Global
+           Protocols: +LLMNR +mDNS +DNSOverTLS DNSSEC=allow-downgrade/supported
+    resolv.conf mode: stub
+  Current DNS Server: 1.1.1.1#cloudflare-dns.com
+         DNS Servers: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com
+                      2606:4700:4700::1111#cloudflare-dns.com
+                      2606:4700:4700::1001#cloudflare-dns.com
+Fallback DNS Servers: 9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+          DNS Domain: ~.
+
+Link 2 (enp4s0)
+    Current Scopes: LLMNR/IPv4 LLMNR/IPv6 mDNS/IPv4 mDNS/IPv6
+         Protocols: -DefaultRoute +LLMNR +mDNS +DNSOverTLS
+                    DNSSEC=allow-downgrade/supported
+     Default Route: no
+  [OK] Cloudflare aparece no resolvectl
+  [OK] DNS-over-TLS aparece habilitado ou referenciado no resolved
+
+-- teste resolvectl query cloudflare.com --
+cloudflare.com: 104.16.132.229                              -- link: enp4s0
+                104.16.133.229                              -- link: enp4s0
+                2606:4700::6810:84e5                        -- link: enp4s0
+                2606:4700::6810:85e5                        -- link: enp4s0
+
+-- Information acquired via protocol DNS in 58.6ms.
+-- Data is authenticated: yes; Data was acquired via local or encrypted transport: yes
+-- Data from: network
+  [INFO] /etc/resolv.conf aponta para: /run/systemd/resolve/stub-resolv.conf
+  [OK] /etc/resolv.conf está integrado ao systemd-resolved
+
+-- resolved.conf: /etc/systemd/resolved.conf --
+
+-- resolved.conf.d relevante --
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:2:DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:3:FallbackDNS=9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:4:Domains=~.
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:5:DNSOverTLS=yes
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:6:DNSSEC=allow-downgrade
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:2:DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:3:FallbackDNS=9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:4:DNSOverTLS=yes
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:5:DNSSEC=allow-downgrade
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf.bak-20260602-104812:6:Domains=~.
+  [OK] NetworkManager ativo
+
+-- conexões ativas NetworkManager --
+Conexão cabeada 1:a4ec18c4-ee6d-3d64-aca8-9051854af361:802-3-ethernet:enp4s0
+lo:daf09974-0f44-4690-ba67-895b0882565f:loopback:lo
+
+-- nmcli conexão ativa: Conexão cabeada 1 --
+connection.id:                          Conexão cabeada 1
+connection.type:                        802-3-ethernet
+ipv4.method:                            manual
+ipv4.addresses:                         192.168.100.2/24
+ipv4.gateway:                           192.168.100.1
+ipv4.dns:                               --
+ipv4.ignore-auto-dns:                   sim
+ipv6.method:                            auto
+ipv6.dns:                               --
+  [OK] conexão 'Conexão cabeada 1' usa IPv4 manual/fixo
+  [OK] conexão 'Conexão cabeada 1' tem endereço IPv4 fixado: 192.168.100.2/24
+  [OK] conexão 'Conexão cabeada 1' ignora DNS automático
+  [PENDENTE/VERIFICAR] conexão 'Conexão cabeada 1' não mostra DNS Cloudflare diretamente no perfil NM; pode estar vindo do resolved global
+
+-- nmcli conexão ativa: lo --
+connection.id:                          lo
+connection.type:                        loopback
+ipv4.method:                            manual
+ipv4.addresses:                         127.0.0.1/8
+ipv4.gateway:                           --
+ipv4.dns:                               --
+ipv4.ignore-auto-dns:                   não
+ipv6.method:                            manual
+ipv6.dns:                               --
+  [OK] conexão 'lo' usa IPv4 manual/fixo
+  [OK] conexão 'lo' tem endereço IPv4 fixado: 127.0.0.1/8
+  [PENDENTE/VERIFICAR] conexão 'lo' não ignora DNS automático
+  [PENDENTE/VERIFICAR] conexão 'lo' não mostra DNS Cloudflare diretamente no perfil NM; pode estar vindo do resolved global
+
+-- NetworkManager conf.d relevante --
+/etc/NetworkManager/conf.d/10-mocha-dns-systemd-resolved.conf:2:dns=systemd-resolved
+
+[7/11] Steam, GameMode e MangoHud instalados
+
+-- pacotes Steam/GameMode/MangoHud --
+steam 1.0.0.85-7
+gamemode 1.8.2-2
+lib32-gamemode 1.8.2-1
+mangohud 0.8.4-1
+lib32-mangohud 0.8.4-1
+goverlay 1.8.1-1
+  [OK] binário encontrado: steam
+/usr/bin/steam
+  [OK] binário encontrado: gamemoderun
+/usr/bin/gamemoderun
+  [OK] binário encontrado: gamemoded
+/usr/bin/gamemoded
+  [OK] binário encontrado: mangohud
+/usr/bin/mangohud
+  [OK] binário encontrado: goverlay
+/usr/bin/goverlay
+
+-- gamemoded -s --
+gamemode is inactive
+  [OK] gamemoderun executou comando simples com sucesso
+
+-- Arquivos MangoHud --
+  [INFO] não encontrado: /etc/MangoHud.conf
+  [OK] config MangoHud encontrada: /etc/mocha/mangohud/MangoHud.conf
+1:legacy_layout=false
+5:position=top-left
+6:fps
+7:frametime=0
+8:gpu_stats
+9:gpu_temp
+10:gpu_power
+11:cpu_stats
+12:cpu_temp
+18:time
+19:time_format=%H:%M
+  [INFO] não encontrado: /home/hal/.config/MangoHud/MangoHud.conf
+  [OK] config MangoHud encontrada: /home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
+1:legacy_layout=false
+5:position=top-left
+6:fps
+7:frametime=0
+8:gpu_stats
+9:gpu_temp
+10:gpu_power
+11:cpu_stats
+12:cpu_temp
+18:time
+19:time_format=%H:%M
+  [OK] há configuração MangoHud presente
+
+[8/11] wrapper Mocha Steam/GameMode
+  [OK] wrapper encontrado: /home/hal/.local/bin/mocha-steam-game-run
+-rwxr-xr-x 1 hal hal 235 jun  2 10:43 /home/hal/.local/bin/mocha-steam-game-run
+
+-- Conteúdo do wrapper: /home/hal/.local/bin/mocha-steam-game-run --
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export __VK_LAYER_NV_optimus=NVIDIA_only
+export DXVK_LOG_LEVEL=none
+
+if command -v gamemoderun >/dev/null 2>&1; then
+  exec gamemoderun "$@"
+fi
+
+exec "$@"
+  [OK] wrapper é executável: /home/hal/.local/bin/mocha-steam-game-run
+  [OK] wrapper contém GameMode/gamemoderun
+  [PENDENTE/VERIFICAR] wrapper não contém referência MangoHud; pode estar correto se o MangoHud ficar só configurado e não ativo por padrão
+  [OK] wrapper não contém MANGOHUD_DLSYM
+  [OK] wrapper não contém gamescope/vkbasalt
+  [OK] há wrapper Mocha Steam presente
+
+[9/11] Launch Options Steam e atalhos Steam
+
+-- LaunchOptions/localconfig Steam --
+Arquivo: /home/hal/.local/share/Steam/userdata/389303290/config/localconfig.vdf
+535:						"LaunchOptions"		"gamemoderun %command%"
+653:						"LaunchOptions"		"gamemoderun %command%"
+691:						"LaunchOptions"		"gamemoderun %command%"
+740:						"LaunchOptions"		"gamemoderun %command%"
+Arquivo: /home/hal/.steam/steam/userdata/389303290/config/localconfig.vdf
+535:						"LaunchOptions"		"gamemoderun %command%"
+653:						"LaunchOptions"		"gamemoderun %command%"
+691:						"LaunchOptions"		"gamemoderun %command%"
+740:						"LaunchOptions"		"gamemoderun %command%"
+  [PENDENTE/VERIFICAR] Launch Options encontradas; conferir se cada jogo está coerente com o padrão atual
+
+-- Atalhos Steam/Mocha --
+/home/hal/.local/share/applications/Sniper Elite Resistance.desktop
+2:Name=Sniper Elite: Resistance
+3:Comment=Play this game on Steam
+4:Exec=steam steam://rungameid/2169200
+5:Icon=steam_icon_2169200
+/home/hal/.local/share/applications/Sniper Elite 5.desktop
+2:Name=Sniper Elite 5
+3:Comment=Play this game on Steam
+4:Exec=steam steam://rungameid/1029690
+5:Icon=steam_icon_1029690
+/home/hal/.local/share/applications/DiRT Rally 2.0.desktop
+2:Name=DiRT Rally 2.0
+3:Comment=Play this game on Steam
+4:Exec=steam steam://rungameid/690790
+5:Icon=steam_icon_690790
+/home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+3:Name=Mocha Firewall - Liberar Steam
+4:Comment=Abrir regras Steam no UFW
+5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-on
+6:Icon=steam
+/home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+3:Name=Mocha Firewall - Fechar Steam
+4:Comment=Fechar regras Steam no UFW
+5:Exec=pkexec /usr/local/bin/mocha-ufw-steam-off
+  [OK] atalho Steam/Mocha encontrado
+
+[10/11] manual vivo e documentação operacional
+  [OK] manual vivo encontrado: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+-- Ocorrências no manual vivo --
+31:11. Não reintroduzir `MANGOHUD_DLSYM`.
+32:12. Não usar `vkbasalt` nem `gamescope` no wrapper canônico Steam/Mocha.
+105:- Garantir Steam/jogo com FPS alto e fluidez.
+119:- Jogo roda na Steam com FPS alto.
+148:- FPS alto pelo overlay da Steam.
+339:### 3.8 Steam, Launch Options e wrapper
+343:- Melhor baseline atual: Steam sem nenhuma linha em Launch Options.
+344:- Overlay da Steam usado para medir FPS.
+353:Wrapper canônico pretendido:
+356:/home/hal/.local/bin/mocha-steam-game-run %command%
+359:Proibições no wrapper canônico:
+361:- Não usar `MANGOHUD_DLSYM`.
+369:- Todo wrapper novo precisa ser testado contra o baseline sem Launch Options.
+425:4. Wrapper Steam/Mocha novo, apenas depois de vencer ou igualar o baseline sem Launch Options.
+483:|    0   N/A  N/A            2093      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+484:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+485:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+486:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+495:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+500:gamemode 1.8.2-2
+501:lib32-gamemode 1.8.2-1
+519:mangohud 0.8.3-2
+524:steam 1.0.0.85-7
+525:steam-devices 1.0.0.85-7
+849:2026-05-29 15:24  1070 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+928:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+929:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+938:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+943:gamemode 1.8.2-2
+944:lib32-gamemode 1.8.2-1
+962:mangohud 0.8.3-2
+967:steam 1.0.0.85-7
+968:steam-devices 1.0.0.85-7
+1000:mangohud 0.8.3-2
+1013:plasma-firewall 6.6.5-1
+1041:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1073:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1105:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+1126:#### Fonte: `documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md`
+1143:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+1163:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+1205:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+1206:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+1215:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+1220:gamemode 1.8.2-2
+1221:lib32-gamemode 1.8.2-1
+1287:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+1307:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1339:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1371:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+1411:gamemode 1.8.2-2
+1423:#### Fonte: `documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md`
+1440:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+1452:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+1455:SUDO="/run/wrappers/bin/sudo"
+1490:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+1493:SUDO="/run/wrappers/bin/sudo"
+1620:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+1625:gamemode 1.8.2-2
+1626:lib32-gamemode 1.8.2-1
+1644:mangohud 0.8.3-2
+1649:steam 1.0.0.85-7
+1650:steam-devices 1.0.0.85-7
+1740:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+1743:SUDO="/run/wrappers/bin/sudo"
+1793:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+1796:SUDO="/run/wrappers/bin/sudo"
+1850:plasma-firewall 6.6.5-1
+1864:steam 1.0.0.85-7
+1865:steam-devices 1.0.0.85-7
+1891:plasma-xdg-desktop-portal-kde.service                                                                                   loaded active running   Xdg Desktop Portal For KDE
+1931:        43. xdg-desktop-portal                  [1.6.6, hal@Mocha, pid:964]
+2063:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+2268:if [ -x /run/wrappers/bin/sudo ]; then
+2269:  SUDO="/run/wrappers/bin/sudo"
+2353:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+2381:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+2557:if [ -x /run/wrappers/bin/sudo ]; then
+2558:  SUDO="/run/wrappers/bin/sudo"
+2781:if [ -x /run/wrappers/bin/sudo ]; then
+2782:  SUDO="/run/wrappers/bin/sudo"
+3053:steam 1.0.0.85-7
+3054:steam-devices 1.0.0.85-7
+3127:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+3191:|    0   N/A  N/A            2093      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+3192:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+3193:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+3194:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+3203:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+3208:gamemode 1.8.2-2
+3209:lib32-gamemode 1.8.2-1
+3257:2026-05-29 15:24  1070 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+3300:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+3514:if [ -x /run/wrappers/bin/sudo ]; then
+3515:  SUDO="/run/wrappers/bin/sudo"
+3702:plasma-xdg-desktop-portal-kde.service                                                                                   loaded active running   Xdg Desktop Portal For KDE
+3734:        43. xdg-desktop-portal                  [1.6.6, hal@Mocha, pid:964]
+3823:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+3855:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+3887:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+3908:#### Fonte: `documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md`
+3925:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+3945:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+3948:### Steam, MangoHud e wrapper
+3966:|    0   N/A  N/A            2093      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+3967:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+3968:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+3969:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+3978:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+3983:gamemode 1.8.2-2
+3984:lib32-gamemode 1.8.2-1
+4002:mangohud 0.8.3-2
+4007:steam 1.0.0.85-7
+4008:steam-devices 1.0.0.85-7
+4045:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+4077:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+4109:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+4147:gamemode 1.8.2-2
+4181:mangohud 0.8.3-2
+4194:plasma-firewall 6.6.5-1
+4208:steam 1.0.0.85-7
+4209:steam-devices 1.0.0.85-7
+4242:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+4280:if [ -x /run/wrappers/bin/sudo ]; then
+4281:  SUDO="/run/wrappers/bin/sudo"
+4315:if [ -x /run/wrappers/bin/sudo ]; then
+4316:  SUDO="/run/wrappers/bin/sudo"
+4337:#### Fonte: `documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md`
+4352:- FPS alto usando a medição do overlay da Steam.
+4373:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+4386:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+4389:SUDO="/run/wrappers/bin/sudo"
+4420:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+4423:SUDO="/run/wrappers/bin/sudo"
+4461:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+4590:2026-05-29 15:24  1070 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+4685:export PATH="/run/wrappers/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+4784:if [ -x /run/wrappers/bin/sudo ]; then
+4785:  SUDO="/run/wrappers/bin/sudo"
+5006:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+5089:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+5153:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+5209:- Correção importante: arquivos `.colors` do KDE podem usar RGB em vez de HEX; scripts não devem abortar quando não houver códigos `#RRGGBB`.
+5232:1. Wrapper Steam limpo regravado em:
+5233:   - `/home/hal/.local/bin/mocha-steam-game-run`
+5236:   - sem `MANGOHUD_DLSYM`;
+5239:   - com `MANGOHUD=1`;
+5240:   - usa config de MangoHud do usuario se existir;
+5241:   - usa `gamemoderun` se existir.
+5252:   - Wrapper limpo: `/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh`
+5294:## Observacao importante
+5299:Estado lido antes da alteração: NVIDIA 595.71.05 carregada no boot auditado, receita Mocha de agressividade ativa, mas Steam/MangoHud/wrapper ausentes e overrides de blueman/kmix ausentes.
+5300:Ação aplicada: sem mexer em boot, kernel ou driver; apenas instalou pacotes de jogos disponíveis, recriou overrides Hidden=true para blueman/kmix no usuário atual e em /etc/skel, criou MangoHud config local e wrapper limpo /home/hal/.local/bin/mocha-steam-game-run.
+5301:Regra preservada: nenhuma Launch Option da Steam foi alterada automaticamente. O baseline sem linha continua preservado; o wrapper fica disponível apenas para teste controlado.
+5302:Proibições preservadas no wrapper: sem MANGOHUD_DLSYM, sem gamescope, sem vkbasalt e sem variáveis PRIME de notebook.
+5363:- Serviço persistente `mocha-max-performance.service` força governor/EPP da CPU em performance e aplica NVIDIA persistence mode, power limit máximo e lock de clocks quando suportado pelo driver/GPU.
+  [OK] manual contém referência a: firewall
+  [PENDENTE/VERIFICAR] manual não contém referência clara a: ufw
+  [PENDENTE/VERIFICAR] manual não contém referência clara a: gufw
+  [PENDENTE/VERIFICAR] manual não contém referência clara a: cloudflare
+  [PENDENTE/VERIFICAR] manual não contém referência clara a: resolved
+  [PENDENTE/VERIFICAR] manual não contém referência clara a: NetworkManager
+  [OK] manual contém referência a: gamemode
+  [OK] manual contém referência a: mangohud
+  [OK] manual contém referência a: steam
+  [OK] manual contém referência a: wrapper
+
+[11/11] resumo objetivo
+
+== RESUMO DA AUDITORIA ==
+OK: 56
+PENDENTE/VERIFICAR: 10
+FALHA: 0
+
+== LEITURA RÁPIDA ==
+Não houve falha crítica, mas há pendências/verificações listadas acima.
+
+Log salvo em: /media/mochafast/MochaArch/ativo/relatorios/20260602-110334-auditoria-rede-firewall-dns-steam-gamemode-mangohud-wrapper.log
+== FIM DA AUDITORIA SOMENTE LEITURA ==

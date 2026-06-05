@@ -1,0 +1,99 @@
+== MOCHAARCH — AUDITORIA FIREWALL + IP FIXO + DNS CLOUDFLARE ==
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-104530-auditoria-firewall-ipfixo-dns-cloudflare.log
+
+[1/7] Validando sudo uma vez...
+
+[2/7] Firewall instalado/ativo
+PENDENTE: ufw não encontrado.
+
+AVISO: gufw não encontrado; sem GUI simples do firewall.
+
+[3/7] Serviços relacionados ao firewall
+not-found
+inactive
+
+[4/7] Regras atuais relevantes para Steam/Remote Play/servidores
+
+[5/7] Perfis NetworkManager e IP
+-- Conexões ativas --
+Conexão cabeada 1:a4ec18c4-ee6d-3d64-aca8-9051854af361:802-3-ethernet:enp4s0
+lo:d2cbc59b-24b4-46c9-afb8-a8a6b35fe66e:loopback:lo
+
+Conexão ativa auditada: Conexão cabeada 1
+
+connection.id:                          Conexão cabeada 1
+connection.interface-name:              enp4s0
+ipv4.method:                            auto
+ipv4.dns:                               --
+ipv4.dns-search:                        --
+ipv4.dns-options:                       --
+ipv4.dns-priority:                      0
+ipv4.addresses:                         --
+ipv4.gateway:                           --
+ipv4.ignore-auto-dns:                   não
+ipv6.method:                            auto
+ipv6.dns:                               --
+ipv6.dns-search:                        --
+ipv6.dns-options:                       --
+ipv6.dns-priority:                      0
+ipv6.addresses:                         --
+ipv6.gateway:                           --
+ipv6.ignore-auto-dns:                   não
+
+-- Diagnóstico IP fixo --
+PENDENTE: IPv4 não parece estar fixo/manual.
+ipv4.method=auto
+ipv4.addresses=
+ipv4.gateway=
+
+-- Diagnóstico DNS Cloudflare no NetworkManager --
+ipv4.dns=
+ipv4.ignore-auto-dns=no
+PENDENTE: DNS Cloudflare IPv4 não aparece claramente no perfil NetworkManager.
+AVISO: DNS automático via DHCP pode estar misturando servidores externos.
+
+[6/7] systemd-resolved / DNS criptografado
+-- resolvectl status resumido --
+Global
+           Protocols: +LLMNR +mDNS +DNSOverTLS DNSSEC=allow-downgrade/supported
+    resolv.conf mode: stub
+  Current DNS Server: 2606:4700:4700::1001#cloudflare-dns.com
+         DNS Servers: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com
+                      2606:4700:4700::1111#cloudflare-dns.com
+                      2606:4700:4700::1001#cloudflare-dns.com
+Fallback DNS Servers: 9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+          DNS Domain: ~.
+
+Link 2 (enp4s0)
+    Current Scopes: DNS LLMNR/IPv4 LLMNR/IPv6 mDNS/IPv4 mDNS/IPv6
+         Protocols: +DefaultRoute +LLMNR +mDNS +DNSOverTLS
+                    DNSSEC=allow-downgrade/supported
+Current DNS Server: fe80::1%2
+       DNS Servers: 192.168.100.1 fe80::1%2
+     Default Route: yes
+
+-- DNSOverTLS em arquivos de configuração --
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:4:DNSOverTLS=yes
+
+-- DNS Cloudflare em arquivos systemd-resolved --
+/etc/systemd/resolved.conf:21:# Cloudflare: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+/etc/systemd/resolved.conf:31:#FallbackDNS=9.9.9.9#dns.quad9.net 2620:fe::9#dns.quad9.net 1.1.1.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 8.8.8.8#dns.google 2001:4860:4860::8888#dns.google
+/etc/systemd/resolved.conf.d/10-mocha-cloudflare-dot.conf:2:DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+
+[7/7] Atalho/GUI de firewall
+-- Área de trabalho --
+
+== RESUMO ==
+Firewall Steam:
+  - Para jogar online via Steam, normalmente basta saída liberada.
+  - Para Remote Play/transferência local/servidor hospedado, podem ser necessárias regras específicas.
+  - Não foi aplicada nenhuma alteração nesta auditoria.
+
+Portas Steam de referência para perfil manual:
+  - UDP 27000:27250 para tráfego de jogo/Steam.
+  - UDP 27031:27036 e TCP 27036:27037 para Remote Play/streaming.
+  - TCP 27040 para transferência local de jogos.
+  - TCP/UDP 27015 quando for hospedar servidor Valve/Source.
+
+Log salvo em:
+/media/mochafast/MochaArch/ativo/relatorios/20260602-104530-auditoria-firewall-ipfixo-dns-cloudflare.log

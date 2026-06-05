@@ -1,0 +1,128 @@
+
+[1/9] Validando sudo uma vez e mantendo sessão ativa
+
+[2/9] Validando pacotes oficiais e instalando firewall GUI
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacotes (2) gufw-26.04-2  ufw-0.36.2-7
+
+Tamanho total download:   0,95 MiB
+Tamanho total instalado:  3,77 MiB
+
+:: Continuar a instalação? [S/n] 
+:: Obtendo pacotes...
+ gufw-26.04-2-any sendo baixado...
+ ufw-0.36.2-7-any sendo baixado...
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+verificando espaço em disco disponível...
+:: Processando alterações do pacote...
+instalando ufw...
+instalando gufw...
+:: Executando hooks pós-transação...
+(1/5) Reloading system manager configuration...
+(2/5) Arming ConditionNeedsUpdate...
+(3/5) Refreshing PackageKit...
+(4/5) Updating icon theme caches...
+(5/5) Updating the desktop file MIME type cache...
+
+[3/9] Detectando conexão ativa, IP atual e gateway para transformar em IP fixo
+Conexão ativa: Conexão cabeada 1
+Dispositivo: enp4s0
+IPv4 fixado a partir do lease atual: 192.168.100.2/24
+Gateway: 192.168.100.1
+
+[4/9] Configurando DNS-over-TLS global da Cloudflare e integração com NetworkManager
+
+[5/9] Fixando IPv4 no perfil ativo e impedindo DNS automático do roteador
+
+[6/9] Configurando UFW com padrão seguro e perfis Steam opcionais
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+Logging enabled
+Firewall is active and enabled on system startup
+Created symlink '/etc/systemd/system/multi-user.target.wants/ufw.service' → '/usr/lib/systemd/system/ufw.service'.
+
+[7/9] Criando scripts e atalhos para abrir GUI e alternar portas Steam
+
+[8/9] Reiniciando DNS/rede para aplicar as mudanças
+Conexão ativada com sucesso (caminho D-Bus ativo: /org/freedesktop/NetworkManager/ActiveConnection/3)
+
+[9/9] Validação final
+
+-- Pacotes --
+ufw 0.36.2-7
+gufw 26.04-2
+
+-- UFW --
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+-- Perfis Steam disponíveis --
+Available applications:
+  Mocha Steam Local Transfer
+  Mocha Steam Online UDP
+  Mocha Steam Remote Play
+  Mocha Steam Source Server
+
+-- NetworkManager: conexão ativa --
+Conexão cabeada 1:a4ec18c4-ee6d-3d64-aca8-9051854af361:802-3-ethernet:enp4s0
+lo:d2cbc59b-24b4-46c9-afb8-a8a6b35fe66e:loopback:lo
+
+-- Perfil IPv4/DNS da conexão --
+connection.id:                          Conexão cabeada 1
+connection.interface-name:              enp4s0
+ipv4.method:                            manual
+ipv4.dns:                               --
+ipv4.dns-search:                        --
+ipv4.dns-options:                       --
+ipv4.dns-priority:                      0
+ipv4.addresses:                         192.168.100.2/24
+ipv4.gateway:                           192.168.100.1
+ipv4.ignore-auto-dns:                   sim
+ipv6.method:                            auto
+ipv6.dns:                               --
+ipv6.dns-search:                        --
+ipv6.dns-options:                       --
+ipv6.dns-priority:                      0
+ipv6.ignore-auto-dns:                   sim
+
+-- systemd-resolved --
+Global
+           Protocols: +LLMNR +mDNS +DNSOverTLS DNSSEC=allow-downgrade/supported
+    resolv.conf mode: stub
+  Current DNS Server: 1.1.1.1#cloudflare-dns.com
+         DNS Servers: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com
+                      2606:4700:4700::1111#cloudflare-dns.com
+                      2606:4700:4700::1001#cloudflare-dns.com
+Fallback DNS Servers: 9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+          DNS Domain: ~.
+
+Link 2 (enp4s0)
+    Current Scopes: LLMNR/IPv4 mDNS/IPv4
+         Protocols: -DefaultRoute +LLMNR +mDNS +DNSOverTLS
+                    DNSSEC=allow-downgrade/supported
+     Default Route: no
+
+-- Atalhos criados --
+/home/hal/Área de trabalho/Mocha Firewall.desktop
+/home/hal/Área de trabalho/Mocha-Firewall.desktop
+/home/hal/Área de trabalho/Mocha Firewall - Fechar Steam.desktop
+/home/hal/Área de trabalho/Mocha Firewall - Liberar Steam.desktop
+/home/hal/.local/share/applications/mocha-firewall-gui.desktop
+/home/hal/.local/share/applications/mocha-firewall-steam-off.desktop
+/home/hal/.local/share/applications/mocha-firewall-steam-on.desktop
+
+== CONCLUÍDO ==
+Firewall ativo: padrão deny incoming / allow outgoing.
+Steam: portas ficam fechadas por padrão; use o atalho "Mocha Firewall - Liberar Steam" quando precisar.
+IP fixo: perfil ativo convertido para manual usando o IP atual detectado.
+DNS: Cloudflare DNS-over-TLS global configurado e DNS automático do roteador ignorado.
+Log salvo em: /media/mochafast/MochaArch/ativo/relatorios/20260602-104812-corrigir-firewall-ipfixo-cloudflare-steam.log

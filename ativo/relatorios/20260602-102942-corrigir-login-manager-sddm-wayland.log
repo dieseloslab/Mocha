@@ -1,0 +1,114 @@
+== MOCHAARCH — corrigir login manager para SDDM Wayland ==
+Timestamp: 20260602-102942
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-102942-corrigir-login-manager-sddm-wayland.log
+
+== sudo ==
+
+== auditoria antes da correção ==
+-- display-manager ativo/symlink --
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-06-02 10:27:51 -03; 1min 59s ago
+ Invocation: d271623a9be24c438945157ef14cda6e
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 727 (sddm)
+      Tasks: 2 (limit: 18765)
+     Memory: 23.6M (peak: 42.4M)
+        CPU: 96ms
+     CGroup: /system.slice/sddm.service
+             └─727 /usr/bin/sddm
+
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+jun 02 10:27:58 Mocha sddm-helper[941]: [PAM] returning.
+jun 02 10:27:58 Mocha sddm[727]: Authentication for user  "hal"  successful
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_unix(sddm:session): session opened for user hal(uid=1000) by hal(uid=0)
+jun 02 10:27:58 Mocha sddm[727]: Auth: sddm-helper exited successfully
+jun 02 10:27:58 Mocha sddm[727]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+jun 02 10:27:58 Mocha sddm-helper[941]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+jun 02 10:27:58 Mocha sddm[727]: Session started true
+
+-- serviços de login manager conhecidos --
+enabled
+sddm.service: enabled
+not-found
+gdm.service: disabled/not-found
+not-found
+lightdm.service: disabled/not-found
+not-found
+lxdm.service: disabled/not-found
+not-found
+ly.service: disabled/not-found
+
+-- arquivos SDDM atuais --
+/etc/sddm.conf
+/etc/sddm.conf.d/10-mocha-wayland.conf
+
+== pacotes necessários ==
+OK instalado: sddm
+OK instalado: sddm-kcm
+OK instalado: layer-shell-qt
+OK instalado: qt6-virtualkeyboard
+Nenhum pacote obrigatório faltando.
+
+== backup controlado dos arquivos SDDM ==
+Backup: /etc/sddm.conf.d/mocha-backup-20260602-102942
+
+== limitar backups antigos de SDDM a 2 ==
+
+== neutralizar snippets antigos que forçam X11 ==
+
+== gravar configuração canônica SDDM Wayland ==
+
+== copiar configuração de monitores do Plasma para o SDDM, se existir ==
+OK: kwinoutputconfig.json copiado para /var/lib/sddm/.config/
+
+== definir SDDM como display manager do sistema ==
+
+== validação final ==
+-- serviço display-manager --
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-06-02 10:27:51 -03; 2min 0s ago
+ Invocation: d271623a9be24c438945157ef14cda6e
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 727 (sddm)
+      Tasks: 2 (limit: 18765)
+     Memory: 23.6M (peak: 42.4M)
+        CPU: 96ms
+     CGroup: /system.slice/sddm.service
+             └─727 /usr/bin/sddm
+
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+jun 02 10:27:58 Mocha sddm-helper[941]: [PAM] returning.
+jun 02 10:27:58 Mocha sddm[727]: Authentication for user  "hal"  successful
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_unix(sddm:session): session opened for user hal(uid=1000) by hal(uid=0)
+jun 02 10:27:58 Mocha sddm[727]: Auth: sddm-helper exited successfully
+jun 02 10:27:58 Mocha sddm[727]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+jun 02 10:27:58 Mocha sddm-helper[941]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+jun 02 10:27:58 Mocha sddm-helper[941]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+jun 02 10:27:58 Mocha sddm[727]: Session started true
+
+-- sddm enabled --
+enabled
+
+-- configuração efetiva escrita --
+[General]
+DisplayServer=wayland
+GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+
+[Wayland]
+CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1 --inputmethod qt6-virtualkeyboard
+
+-- snippets que ainda forçam X11, se houver --
+OK: nenhum snippet ativo força X11.
+
+== resultado ==
+Login manager corrigido para SDDM Wayland.
+Não reiniciei o SDDM agora para não derrubar a sessão gráfica atual.
+Reinicie o sistema quando quiser aplicar no próximo boot:
+  sudo reboot

@@ -1,0 +1,65 @@
+
+================================================================
+== Auditoria inicial
+================================================================
+Usuário: hal
+Home: /home/hal
+Kernel atual: 7.0.10-arch1-1
+
+NAME          SIZE FSTYPE LABEL     UUID                                 MOUNTPOINTS
+sda         447.1G                                                       
+`-sda1      447.1G btrfs  MOCHAFAST 88e6aa16-110c-4b97-9ffb-85084c000198 
+sdb           1.8T                                                       
+`-sdb1        1.8T xfs    vmstore   b81630a0-0756-45e4-9cb2-c7f16637a1c6 
+sdc          55.9G                                                       
+|-sdc1       55.9G exfat  Ventoy    5D8D-2429                            
+`-sdc2         32M vfat   VTOYEFI   EA6C-95B2                            
+nvme0n1     931.5G                                                       
+|-nvme0n1p1     2G vfat             FEA3-C9BE                            /boot/efi
+|-nvme0n1p2 326.6G ext4   Mocha     a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 /
+|-nvme0n1p3    17G swap   swap      c55827ce-1ead-4561-84c9-435612a8862b [SWAP]
+`-nvme0n1p4 585.9G xfs              933991ca-ef8a-468f-8f4b-673a555d6041 /home
+
+================================================================
+== Montagem persistente de FAST em /media/mochafast
+================================================================
+FAST detectado:
+  device: /dev/sda1
+  label:  MOCHAFAST
+  uuid:   88e6aa16-110c-4b97-9ffb-85084c000198
+  fs:     btrfs
+  mount:  /media/mochafast
+  opts:   defaults,nofail,x-systemd.automount,x-systemd.device-timeout=10s,x-gvfs-show
++ sudo mkdir -p /media/mochafast
++ sudo cp -a /etc/fstab /etc/fstab.bak-20260602-075226
++ sudo install -m 0644 /tmp/20260602-075226-fstab.tmp /etc/fstab
++ sudo systemctl daemon-reload
++ sudo mount /media/mochafast
+
+Resultado:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,relatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+
+================================================================
+== Montagem persistente de VMSTORE em /media/vmstore
+================================================================
+VMSTORE detectado:
+  device: /dev/sdb1
+  label:  vmstore
+  uuid:   b81630a0-0756-45e4-9cb2-c7f16637a1c6
+  fs:     xfs
+  mount:  /media/vmstore
+  opts:   defaults,nofail,x-systemd.automount,x-systemd.device-timeout=10s,x-gvfs-show
++ sudo mkdir -p /media/vmstore
++ sudo cp -a /etc/fstab /etc/fstab.bak-20260602-075226
++ sudo install -m 0644 /tmp/20260602-075226-fstab.tmp /etc/fstab
++ sudo systemctl daemon-reload
++ sudo mount /media/vmstore
+
+Resultado:
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,relatime,inode64,logbufs=8,logbsize=32k,noquota
+
+================================================================
+== Preparar estrutura MochaArch no FAST
+================================================================

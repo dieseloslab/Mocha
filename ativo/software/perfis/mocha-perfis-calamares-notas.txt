@@ -1,0 +1,15 @@
+Mocha Gamer:
+Perfil padrão da ISO gamer. Inclui Steam, Lutris, Heroic, Bottles, Wine/Proton, Protontricks, Winetricks, MangoHud, GOverlay, GameMode, Gamescope, vkBasalt, OBS, Kdenlive, OnlyOffice via Flatpak e ferramentas de controle/performance. Mantém somente kmahjongg, kpat e kigo entre os jogos casuais.
+
+Mocha Criador:
+Perfil opcional com ferramentas de criação de conteúdo, edição de vídeo, imagem, áudio e streaming.
+
+Mocha Escritório:
+Perfil opcional de produtividade. O OnlyOffice via Flatpak é a suíte de escritório canônica do Mocha e deve estar presente neste perfil. LibreOffice, Calligra e outras suítes devem ser tratadas como alternativas opcionais, não como substitutas do OnlyOffice.
+
+Mocha Escola:
+Perfil opcional com aplicativos educacionais KDE e softwares didáticos.
+
+Regra:
+A ISO Mocha Gamer não deve instalar kde-games-meta, kde-education-meta, kde-pim-meta ou suítes redundantes fora do perfil escolhido no Calamares.
+OnlyOffice é canônico no Mocha via Flatpak com o App ID org.onlyoffice.desktopeditors e deve constar tanto no perfil Gamer quanto no perfil Escritório.

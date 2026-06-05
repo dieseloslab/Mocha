@@ -1,0 +1,137 @@
+
+== MOCHAARCH — corrigir FAST/VMSTORE com checagem exata de mountpoint ==
+Timestamp: 20260602-080953
+Usuário alvo: hal
+Log: /tmp/mochaarch-20260602-080953/20260602-080953-corrigir-fast-vmstore-findmnt-mountpoint-exato.log
+
+== 1. Autenticação sudo única ==
+
+== 2. Estado atual dos discos ==
+NAME        FSTYPE FSVER LABEL     UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                    
+└─sda1      btrfs        MOCHAFAST 88e6aa16-110c-4b97-9ffb-85084c000198                
+sdb                                                                                    
+└─sdb1      xfs          vmstore   b81630a0-0756-45e4-9cb2-c7f16637a1c6                
+sdc                                                                                    
+├─sdc1      exfat  1.0   Ventoy    5D8D-2429                                           
+└─sdc2      vfat   FAT16 VTOYEFI   EA6C-95B2                                           
+nvme0n1                                                                                
+├─nvme0n1p1 vfat   FAT32           FEA3-C9BE                                 2G     0% /boot/efi
+├─nvme0n1p2 ext4   1.0   Mocha     a6248851-81d9-42ba-b3cf-b2d0d0dc44d4  291,2G     4% /
+├─nvme0n1p3 swap   1     swap      c55827ce-1ead-4561-84c9-435612a8862b                [SWAP]
+└─nvme0n1p4 xfs                    933991ca-ef8a-468f-8f4b-673a555d6041  574,2G     2% /home
+
+== 3. Validação por UUID, label e filesystem ==
+FAST:    /dev/sda1 | label=MOCHAFAST | uuid=88e6aa16-110c-4b97-9ffb-85084c000198 | fs=btrfs | mount=/media/mochafast
+VMSTORE: /dev/sdb1 | label=vmstore | uuid=b81630a0-0756-45e4-9cb2-c7f16637a1c6 | fs=xfs | mount=/media/vmstore
+
+== 4. Parar automounts antigos, se ainda existirem ==
+Checando automount antigo: media-mochafast.automount
+Checando automount antigo: media-vmstore.automount
+
+== 5. Backup e reescrita limpa do /etc/fstab ==
+Backup criado: /etc/fstab.mocha-backup-20260602-080953
+Limpando backups excedentes do /etc/fstab, mantendo os 2 mais recentes.
+
+== 6. Entradas finais no /etc/fstab ==
+15:# MochaArch FAST persistente - 20260602-080953
+16:UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+17:# MochaArch VMSTORE persistente - 20260602-080953
+18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+
+== 7. Recarregar systemd e validar fstab ==
+/boot/efi
+   [ ] alvo existe
+   [ ] Opções de FS: umask=0077
+   [ ] UUID=FEA3-C9BE se traduziu para /dev/nvme0n1p1
+   [ ] fonte /dev/nvme0n1p1 existe
+   [ ] tipo de FS é vfat
+/
+   [ ] alvo existe
+   [ ] Opções de VFS: noatime
+   [ ] UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 se traduziu para /dev/nvme0n1p2
+   [ ] fonte /dev/nvme0n1p2 existe
+   [ ] tipo de FS é ext4
+/home
+   [ ] alvo existe
+   [ ] Opções de VFS: noatime
+   [ ] UUID=933991ca-ef8a-468f-8f4b-673a555d6041 se traduziu para /dev/nvme0n1p4
+   [ ] fonte /dev/nvme0n1p4 existe
+   [ ] tipo de FS é xfs
+/tmp
+   [ ] alvo existe
+   [ ] Opções de VFS: noatime
+   [ ] Opções de FS: mode=1777
+   [ ] não verifica a fonte tmpfs (pseudo/net)
+   [ ] não verifica o tipo de FS tmpfs (pseudo/net)
+/media/mochafast
+   [ ] alvo existe
+   [ ] Opções de VFS: rw,noatime
+   [ ] opções de espaço de usuário: nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST
+   [ ] UUID=88e6aa16-110c-4b97-9ffb-85084c000198 se traduziu para /dev/sda1
+   [ ] fonte /dev/sda1 existe
+   [ ] tipo de FS é btrfs
+/media/vmstore
+   [ ] alvo existe
+   [ ] Opções de VFS: rw,noatime
+   [ ] opções de espaço de usuário: nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE
+   [ ] UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 se traduziu para /dev/sdb1
+   [ ] fonte /dev/sdb1 existe
+   [ ] tipo de FS é xfs
+Sucesso, nenhum erro ou aviso detectado
+
+== 8. Montagem real usando ponto de montagem exato ==
+FAST ainda não está montado como mountpoint exato. Montando agora: /media/mochafast
+FAST montado corretamente:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+VMSTORE ainda não está montado como mountpoint exato. Montando agora: /media/vmstore
+VMSTORE montado corretamente:
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+
+== 9. Validação final ==
+FAST:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+VMSTORE:
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+fstab final:
+16:UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+
+== 10. Visibilidade/acesso ==
+Caminhos canônicos:
+- /media/mochafast
+- /media/vmstore
+
+GVFS/Dolphin:
+nome de exibição: mochafast
+nome para edição: mochafast
+nome: mochafast
+tipo: directory
+tamanho:  394
+uri: file:///media/mochafast
+caminho local: /media/mochafast
+montagem unix: /dev/sda1 /media/mochafast btrfs rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST
+atributos:
+  standard::type: 2
+  standard::is-hidden: FALSE
+  standard::is-backup: FALSE
+  standard::is-symlink: FALSE
+  standard::name: mochafast
+nome de exibição: vmstore
+nome para edição: vmstore
+nome: vmstore
+tipo: directory
+tamanho:  59
+uri: file:///media/vmstore
+caminho local: /media/vmstore
+montagem unix: /dev/sdb1 /media/vmstore xfs rw,noatime,inode64,logbufs=8,logbsize=32k,noquota,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE
+atributos:
+  standard::type: 2
+  standard::is-hidden: FALSE
+  standard::is-backup: FALSE
+  standard::is-symlink: FALSE
+  standard::name: vmstore

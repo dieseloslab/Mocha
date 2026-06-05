@@ -1,0 +1,51 @@
+== MOCHAARCH — DOCUMENTAR PADRÃO FIREWALL + IP FIXO + CLOUDFLARE DOT ==
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-105111-documentar-padrao-firewall-ipfixo-cloudflare.log
+
+[1/5] Validando sudo uma vez...
+
+[2/5] Procurando manual operacional existente...
+Manuais candidatos encontrados:
+  - /media/mochafast/MochaArch/ativo/auditorias/20260529-210855-seguimento-manual-estado-real.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.backup-20260530-064832.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260530-104417-manual-instalacao-mocha-arch-em-ordem.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260530-105437-backup-MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260530-105437-manual-instalacao-mocha-arch-receita-agressividade-corrigida.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260602-071429-manual-montagem-firewall-dns-cloudflare.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260602-075226-registro-montagem-fase01-corrigida.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260602-100554-estado-pos-manual-kernel-driver-login-manager-ok.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260602-102320-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE-pos-nova-entrada.md
+  - /media/mochafast/MochaArch/ativo/documentacao/20260602-102320-snapshot-antes-nova-entrada-manual-vivo.md
+  - /media/mochafast/MochaArch/ativo/documentacao/MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
+  - /media/mochafast/MochaArch/ativo/documentacao/manual-montagem-mochaarch.md
+  - /media/mochafast/MochaArch/ativo/documentacao/manual-operacional-mochaarch.md
+  - /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/MANUAL-BARRA-WIN11-MOCHA-APROVADA.md
+  - /media/mochafast/MochaArch/ativo/logs/20260529-154304-auditoria-estado-atual-para-manual.md
+  - /media/mochafast/MochaArch/ativo/logs/20260529-154304-evidencias-extraidas-para-manual.md
+  - /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+  - /media/mochafast/MochaArch/ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
+  - /media/mochafast/MochaArch/ativo/relatorios/20260529-205350-auditoria-seguimento-manual-pos-congelamento.md
+
+Manual alvo:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+[3/5] Fazendo backup limitado do manual alvo...
+
+[4/5] Inserindo seção canônica se ainda não existir...
+Seção canônica adicionada ao manual.
+
+[5/5] Criando também documento destacado da regra operacional...
+
+== VALIDAÇÃO ==
+Manual atualizado:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+Documento destacado criado:
+/media/mochafast/MochaArch/ativo/docs/20260602-105111-regra-canonica-firewall-ipfixo-cloudflare-dot.md
+
+Trecho registrado no manual:
+5529:## REGRA CANÔNICA — MOCHAARCH — FIREWALL, IP FIXO E DNS CLOUDFLARE DOT
+
+Log salvo em:
+/media/mochafast/MochaArch/ativo/relatorios/20260602-105111-documentar-padrao-firewall-ipfixo-cloudflare.log

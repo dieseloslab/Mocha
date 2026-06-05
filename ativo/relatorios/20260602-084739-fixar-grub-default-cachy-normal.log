@@ -1,0 +1,75 @@
+
+== MOCHAARCH — fixar GRUB no kernel Cachy normal ==
+Timestamp: 20260602-084739
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-084739-fixar-grub-default-cachy-normal.log
+Alvo: Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+SUDO usado: /usr/bin/sudo
+
+== Autenticação sudo inicial ==
+sudo -v autenticado.
+Keepalive sudo ativo.
+
+== Auditoria antes de alterar ==
+Kernel atual:
+7.0.10-2-cachyos
+
+Entradas GRUB relevantes antes:
+109: menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+117: 	linux	/boot/vmlinuz-linux-cachyos root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+121: submenu 'Advanced options for Arch Linux' $menuentry_id_option 'gnulinux-advanced-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+130: 		linux	/boot/vmlinuz-linux-cachyos root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+142: 		linux	/boot/vmlinuz-linux root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+
+/etc/default/grub antes:
+3:GRUB_DEFAULT=saved
+6:GRUB_CMDLINE_LINUX_DEFAULT='quiet splash loglevel=3'
+7:GRUB_CMDLINE_LINUX=""
+64:GRUB_SAVEDEFAULT=false
+
+== Validação da entrada Cachy normal ==
+Entrada Cachy normal encontrada e validada.
+
+== Backup controlado ==
+Backup criado: /etc/default/grub.bak-20260602-084739
+Mantendo no máximo 2 backups recentes de /etc/default/grub.
+Nenhum backup excedente para remover.
+
+== Editar /etc/default/grub ==
+/etc/default/grub atualizado.
+
+== Limpar saved_entry antigo para não confundir ==
+saved_entry removido do grubenv, quando existente.
+
+== Regenerar grub.cfg ==
+Gerando o arquivo de configuração do grub...
+Imagem Linux encontrada: /boot/vmlinuz-linux-cachyos
+Imagem initrd encontrada: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux-cachyos.img
+Imagem Linux encontrada: /boot/vmlinuz-linux
+Imagem initrd encontrada: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux.img
+Aviso: os-prober não será executado para detectar outras partições de arranque.
+Os sistemas nelas presentes não serão adicionados à configuração de arranque do GRUB.\Veja a documentação de GRUB_DISABLE_OS_PROBER.
+A adicionar entrada de menu para UEFI Firmware Settings ...
+concluído
+
+== Validação final ==
+/etc/default/grub final:
+3:GRUB_DEFAULT='Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos'
+6:GRUB_CMDLINE_LINUX_DEFAULT='quiet splash loglevel=3'
+7:GRUB_CMDLINE_LINUX=""
+64:GRUB_SAVEDEFAULT=false
+
+grubenv final:
+
+Entradas GRUB finais relevantes:
+109: menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+117: 	linux	/boot/vmlinuz-linux-cachyos root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+121: submenu 'Opções avançadas para Arch Linux' $menuentry_id_option 'gnulinux-advanced-a6248851-81d9-42ba-b3cf-b2d0d0dc44d4' {
+130: 		linux	/boot/vmlinuz-linux-cachyos root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+142: 		linux	/boot/vmlinuz-linux root=UUID=a6248851-81d9-42ba-b3cf-b2d0d0dc44d4 rw  quiet splash loglevel=3
+
+OK: GRUB fixado explicitamente no Cachy normal.
+No próximo boot, ele deve entrar sozinho em:
+Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+
+Relatório salvo em:
+/media/mochafast/MochaArch/ativo/relatorios/20260602-084739-fixar-grub-default-cachy-normal.log

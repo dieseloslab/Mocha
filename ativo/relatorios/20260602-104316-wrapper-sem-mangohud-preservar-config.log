@@ -1,0 +1,83 @@
+== MOCHAARCH — wrapper sem MangoHud forçado + config MangoHud preservada ==
+Timestamp: 20260602-104316
+Usuário: hal
+Wrapper: /home/hal/.local/bin/mocha-steam-game-run
+MangoHud usuário: /home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
+MangoHud sistema: /etc/mocha/mangohud/MangoHud.conf
+Relatório: /media/mochafast/MochaArch/ativo/relatorios/20260602-104316-wrapper-sem-mangohud-preservar-config.log
+
+== 1. sudo único + keepalive ==
+OK: sudo validado.
+
+== 2. Pré-checagem ==
+OK: bash         -> /usr/bin/bash
+OK: grep         -> /usr/bin/grep
+OK: sed          -> /usr/bin/sed
+OK: awk          -> /usr/bin/awk
+OK: install      -> /usr/bin/install
+OK: chmod        -> /usr/bin/chmod
+OK: tee          -> /usr/bin/tee
+OK: gamemoderun  -> /usr/bin/gamemoderun
+
+== 3. Backup controlado do wrapper ==
+OK: backup salvo em /media/mochafast/MochaArch/ativo/relatorios/backups-wrapper-steam/20260602-104316-mocha-steam-game-run.backup
+Mantendo no máximo 2 backups recentes do wrapper.
+
+== 4. Garantir MangoHud configurado no padrão Mocha, sem ativar por padrão ==
+OK: config MangoHud Mocha preservada no usuário.
+OK: config MangoHud Mocha preservada em /etc/mocha/mangohud.
+OK: MangoHud não será ativado automaticamente pelo wrapper.
+
+== 5. Recriar wrapper canônico sem MangoHud forçado ==
+OK: wrapper recriado sem MANGOHUD, sem MANGOHUD_DLSYM, sem vkBasalt e sem gamescope.
+
+== 6. Auditoria do wrapper ==
+--- conteúdo atual do wrapper ---
+     1	#!/usr/bin/env bash
+     2	set -Eeuo pipefail
+     3	
+     4	export __GLX_VENDOR_LIBRARY_NAME=nvidia
+     5	export __VK_LAYER_NV_optimus=NVIDIA_only
+     6	export DXVK_LOG_LEVEL=none
+     7	
+     8	if command -v gamemoderun >/dev/null 2>&1; then
+     9	  exec gamemoderun "$@"
+    10	fi
+    11	
+    12	exec "$@"
+--- fim do wrapper ---
+OK: bash -n aprovou o wrapper.
+OK: wrapper não contém MangoHud, DLSYM, vkBasalt nem gamescope.
+8:if command -v gamemoderun >/dev/null 2>&1; then
+9:  exec gamemoderun "$@"
+OK: wrapper chama gamemoderun.
+
+== 7. Teste seco do wrapper ==
+gamemodeauto: 
+MOCHA_PROBE_EXECUTED=1
+ARGV=
+MANGOHUD=
+MANGOHUD_CONFIGFILE=
+__GLX_VENDOR_LIBRARY_NAME=nvidia
+__VK_LAYER_NV_optimus=NVIDIA_only
+DXVK_LOG_LEVEL=none
+Código de saída do teste seco: 0
+OK: wrapper executou comando-prova.
+
+== 8. Documentar decisão operacional ==
+OK: documentação criada em /media/mochafast/MochaArch/ativo/docs/20260602-104316-mocha-steam-wrapper-mangohud-modo-steam-overlay.md
+
+== 9. Resultado final ==
+Erros: 0
+Relatório: /media/mochafast/MochaArch/ativo/relatorios/20260602-104316-wrapper-sem-mangohud-preservar-config.log
+Documento: /media/mochafast/MochaArch/ativo/docs/20260602-104316-mocha-steam-wrapper-mangohud-modo-steam-overlay.md
+
+Linhas para teste na Steam:
+1) Preferência atual, simples:
+   gamemoderun %command%
+
+2) Se quiser usar o wrapper sem MangoHud forçado:
+   /home/hal/.local/bin/mocha-steam-game-run %command%
+
+3) Baseline aprovado anteriormente:
+   Launch Options vazia

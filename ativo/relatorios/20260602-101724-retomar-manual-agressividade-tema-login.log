@@ -1,0 +1,374 @@
+== MOCHAARCH — retomada manual/agressividade/tema/login ==
+Timestamp: 20260602-101724
+Script: /tmp/20260602-101724-mocha-retomar-manual-agressividade-tema-login.sh
+Log temporário: /tmp/20260602-101724-mocha-retomar-manual-agressividade-tema-login.log
+
+== 1/9 Sudo com keepalive ==
+Sudo OK.
+
+== 2/9 Conferindo/montando FAST e VMSTORE via fstab ==
+/media/mochafast: já montado.
+/media/vmstore: já montado.
+
+== 3/9 Preparando diretórios ativos ==
+Base ativa: /media/mochafast/MochaArch/ativo
+Documentação: /media/mochafast/MochaArch/ativo/documentacao
+Relatório: /media/mochafast/MochaArch/ativo/relatorios/20260602-101724-retomar-manual-agressividade-tema-login.log
+
+== 4/9 Restaurando MANUAL ÚNICO VIVO se necessário ==
+Manual vivo já existe:
+/media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+Trechos relevantes do manual:
+8:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh
+14:/media/mochafast/MochaArch/ativo
+29:9. Não usar X11 como fallback. O caminho é Wayland.
+43:/media/mochafast/MochaArch/ativo
+44:/media/mochafast/MochaArch/ativo/documentacao
+45:/media/mochafast/MochaArch/ativo/scripts
+46:/media/mochafast/MochaArch/ativo/logs
+47:/media/mochafast/MochaArch/ativo/backups
+48:/media/mochafast/MochaArch/ativo/quarentena
+49:/media/mochafast/MochaArch/ativo/kde
+50:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+63:### 3.1 Montagem obrigatória do FAST e VMSTORE
+67:- O Mocha precisa ter FAST e VMSTORE montados de forma persistente.
+68:- FAST contém o trabalho ativo/evolutivo.
+69:- VMSTORE contém armazenamento/canônico quando aplicável.
+74:/media/mochafast
+75:/media/vmstore
+81:mountpoint -q /media/mochafast && echo "FAST OK"
+82:mountpoint -q /media/vmstore && echo "VMSTORE OK"
+83:findmnt /media/mochafast
+84:findmnt /media/vmstore
+85:grep -nE '/media/mochafast|/media/vmstore' /etc/fstab
+104:- Garantir Plasma/Wayland funcional.
+112:pacman -Q | grep -E '^(linux($|-)|linux-zen|linux-cachyos|nvidia|nvidia-utils|lib32-nvidia-utils|opencl-nvidia|egl-wayland|vulkan|lib32-vulkan)' | sort
+118:- Plasma/Wayland abre.
+160:### 3.4 Login manager / Wayland
+165:- Sessão KDE/Plasma em Wayland.
+183:- Sessão é Wayland.
+190:- Quando a solução final do login manager estiver fechada, acrescentar comando exato neste manual.
+255:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/
+261:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+272:1. Validar `/media/mochafast`.
+299:### 3.7 Energia, CPU/GPU e agressividade
+333:- Não reduzir agressividade sem teste comparativo.
+391:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh "Área" "Título" <<'EOF'
+405:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh "Login manager" "Plasma login validado em Wayland" <<'EOF'
+422:1. Login manager final validado pós-boot.
+424:3. Script permanente final de energia/agressividade.
+463:|    0   N/A  N/A             956      G   /usr/bin/kwin_wayland                    30MiB |
+464:|    0   N/A  N/A            1039      G   /usr/bin/Xwayland                         2MiB |
+498:egl-wayland2 1.0.1-1
+499:egl-wayland 4:1.1.21-1
+530:### Login manager / display manager
+533:● plasmalogin.service - Plasma Login Manager
+551:mai 29 14:29:52 Mocha plasmalogin-helper[865]: Starting Wayland user session: "/usr/share/plasmalogin/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+573:sddm.service                                 disabled        disabled
+582:XDG_SESSION_TYPE=wayland
+586:Type=wayland
+589:### Montagens obrigatórias FAST e VMSTORE
+592:/media/mochafast: MONTADO
+594:/media/mochafast /dev/sda1 btrfs  rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+596:/media/vmstore: MONTADO
+598:/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+601:17:UUID=88e6aa16-110c-4b97-9ffb-85084c000198 /media/mochafast btrfs defaults,noatime,compress=zstd:3,ssd,discard=async,nofail,x-systemd.device-timeout=10s 0 0
+602:18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore xfs defaults,noatime,nofail,x-systemd.device-timeout=10s 0 2
+605:### Energia, CPU, GPU e agressividade
+612:Current active profile: latency-performance
+617:/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor:performance
+618:/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor:performance
+619:/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor:performance
+620:/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor:performance
+621:/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor:performance
+622:/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor:performance
+623:/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor:performance
+624:/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor:performance
+625:/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor:performance
+626:/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor:performance
+627:/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor:performance
+628:/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor:performance
+629:/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor:performance
+630:/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor:performance
+631:/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor:performance
+632:/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor:performance
+825:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+826:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+827:2026-05-29 15:33  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+844:2026-05-28 22:56  1159 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+845:2026-05-29 15:01  1754 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md
+846:2026-05-29 15:01  2068 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-150104-mocha-aplicar-login-plasma-manager.sh
+847:2026-05-29 15:01  2068 bytes  /media/mochafast/MochaArch/ativo/scripts/mocha-aplicar-login-plasma-manager.sh
+848:2026-05-29 15:24  10321 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/resumo-auditoria.txt
+849:2026-05-29 15:24  1070 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+850:2026-05-29 15:24  4616 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasma-applets-volume-bluetooth-systemtray.txt
+851:2026-05-29 15:24  624 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/LEIA-ME.txt
+852:2026-05-29 15:25  3401 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152529-corrigir-blueman-auditar-volume/execucao.log
+853:2026-05-29 15:27  1108 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-152700-mocha-desativar-kmix-volume-duplicado.sh
+854:2026-05-29 15:27  1389 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md
+855:2026-05-29 15:27  7077 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152700-corrigir-kmix-volume-duplicado/execucao.log
+856:2026-05-29 15:29  1624 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+857:2026-05-29 15:29  1624 bytes  /media/mochafast/MochaArch/ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
+858:2026-05-29 15:29  2541 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh
+859:2026-05-29 15:29  3810 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log
+860:2026-05-29 15:30  3891 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
+861:2026-05-29 15:32  824 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log
+862:2026-05-29 15:33  2039 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
+863:2026-05-29 15:33  2985 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+864:2026-05-29 15:33  835 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+865:2026-05-29 15:43  17941 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-154304-auditoria-estado-atual-para-manual.md
+866:2026-05-29 15:43  203 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-154304-criar-manual-vivo-definitivo-mocha-arch-kde.log
+915:|    0   N/A  N/A             956      G   /usr/bin/kwin_wayland                    30MiB |
+916:|    0   N/A  N/A            1039      G   /usr/bin/Xwayland                         2MiB |
+941:egl-wayland2 1.0.1-1
+942:egl-wayland 4:1.1.21-1
+973:### Login manager / display manager
+1013:plasma-firewall 6.6.5-1
+1041:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1045:`/media/mochafast/MochaArch/ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh`
+1073:7. Não mexer em kernel, NVIDIA, Steam, MangoHud, GameMode ou ajustes de performance.
+1077:`/media/mochafast/MochaArch/ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh`
+1105:- Kernel, NVIDIA, Steam, MangoHud, GameMode e ajustes de performance não foram alterados.
+1143:4. Não mexer em kernel, driver NVIDIA, Steam, agressividade/performance, Bluetooth funcional ou baseline de desempenho.
+1146:#### Fonte: `kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt`
+1154:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+1156:  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+1158:  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+1163:- Não mexe em kernel, NVIDIA, boot, Steam ou receita de performance.
+1218:egl-wayland2 1.0.1-1
+1219:egl-wayland 4:1.1.21-1
+1253:sddm.service                                 disabled        disabled
+1262:XDG_SESSION_TYPE=wayland
+
+== 5/9 Auditoria antes de aplicar ==
+-- Kernel/driver/boot: apenas leitura; não serão alterados.
+Linux Mocha 7.0.10-2-cachyos #1 SMP PREEMPT_DYNAMIC Thu, 28 May 2026 21:12:58 +0000 x86_64 GNU/Linux
+Tue Jun  2 10:17:33 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5060 Ti     Off |   00000000:01:00.0  On |                  N/A |
+|  0%   34C    P8             11W /  180W |     744MiB /  16311MiB |      1%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A             909      G   /usr/bin/ksecretd                         2MiB |
+|    0   N/A  N/A             946      G   /usr/bin/kwin_wayland                    20MiB |
+|    0   N/A  N/A            1032      G   /usr/bin/Xwayland                        14MiB |
+|    0   N/A  N/A            1070      G   /usr/bin/ksmserver                        2MiB |
+|    0   N/A  N/A            1072      G   /usr/bin/kded6                            2MiB |
+|    0   N/A  N/A            1090      G   /usr/bin/plasmashell                     83MiB |
+|    0   N/A  N/A            1191      G   /usr/bin/kaccess                          2MiB |
+|    0   N/A  N/A            1192      G   ...it-kde-authentication-agent-1          2MiB |
+|    0   N/A  N/A            1294      G   /usr/bin/kdeconnectd                      2MiB |
+|    0   N/A  N/A            1320      G   /usr/bin/akonadi_control                  2MiB |
+|    0   N/A  N/A            1334      G   ...bin/akonadi_archivemail_agent          2MiB |
+|    0   N/A  N/A            1337      G   ...konadi_followupreminder_agent          2MiB |
+|    0   N/A  N/A            1341      G   .../akonadi_maildispatcher_agent          2MiB |
+|    0   N/A  N/A            1342      G   .../bin/akonadi_mailfilter_agent          2MiB |
+|    0   N/A  N/A            1343      G   /usr/bin/akonadi_mailmerge_agent          2MiB |
+|    0   N/A  N/A            1344      G   /usr/bin/akonadi_migration_agent          2MiB |
+|    0   N/A  N/A            1345      G   ...akonadi_newmailnotifier_agent          2MiB |
+|    0   N/A  N/A            1346      G   /usr/bin/akonadi_sendlater_agent          2MiB |
+|    0   N/A  N/A            1347      G   .../akonadi_unifiedmailbox_agent          2MiB |
+|    0   N/A  N/A            1492      G   /usr/lib/DiscoverNotifier                 2MiB |
+|    0   N/A  N/A            1493      G   /usr/bin/kalendarac                       2MiB |
+|    0   N/A  N/A            1551      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+|    0   N/A  N/A            4322      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+|    0   N/A  N/A            4521      G   ./steamwebhelper                         22MiB |
+|    0   N/A  N/A            4555    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+|    0   N/A  N/A            5376      G   /usr/lib/firefox/firefox                204MiB |
+|    0   N/A  N/A            6323      G   /usr/bin/konsole                          2MiB |
++-----------------------------------------------------------------------------------------+
+
+-- Montagens:
+
+-- Sysctl atual:
+vm.swappiness = 100
+vm.vfs_cache_pressure = 100
+vm.page-cluster = 0
+vm.dirty_background_bytes = 0
+vm.dirty_bytes = 0
+vm.max_map_count = 1048576
+kernel.nmi_watchdog = 1
+kernel.sched_autogroup_enabled = 1
+
+-- THP atual:
+[always] madvise never
+
+-- TuneD/CPU atual:
+tuned enabled: not-found
+tuned enabled: indisponível
+tuned active: inactive
+tuned active: indisponível
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor: powersave
+
+-- Tema atual:
+BreezeDark
+default
+
+-- Login manager atual:
+display-manager enabled: alias
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-06-02 10:07:09 -03; 10min ago
+ Invocation: 4107bf851e734451823f172e860d3cfd
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 729 (sddm)
+      Tasks: 2 (limit: 18765)
+     Memory: 31M (peak: 54.2M)
+        CPU: 86ms
+     CGroup: /system.slice/sddm.service
+             └─729 /usr/bin/sddm
+sddm enabled: enabled
+sddm active: active
+plasma-login enabled: not-found
+plasma-login active: inactive
+
+== 6/9 Aplicando receita de agressividade/performance ==
+Aplicando sysctl...
+* Aplicando /usr/lib/sysctl.d/10-arch.conf ...
+* Aplicando /usr/lib/sysctl.d/50-coredump.conf ...
+* Aplicando /usr/lib/sysctl.d/50-default.conf ...
+* Aplicando /usr/lib/sysctl.d/50-pid-max.conf ...
+* Aplicando /etc/sysctl.d/99-mocha-agressividade.conf ...
+fs.inotify.max_user_instances = 1024
+fs.inotify.max_user_watches = 524288
+vm.max_map_count = 1048576
+net.ipv4.tcp_keepalive_time = 120
+kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d %F
+kernel.core_pipe_limit = 16
+fs.suid_dumpable = 2
+kernel.sysrq = 16
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.enp4s0.rp_filter = 2
+net.ipv4.conf.lo.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.enp4s0.accept_source_route = 0
+net.ipv4.conf.lo.accept_source_route = 0
+net.ipv4.conf.default.promote_secondaries = 1
+net.ipv4.conf.enp4s0.promote_secondaries = 1
+net.ipv4.conf.lo.promote_secondaries = 1
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+kernel.pid_max = 4194304
+vm.swappiness = 80
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 268435456
+vm.max_map_count = 16777216
+kernel.nmi_watchdog = 0
+kernel.sched_autogroup_enabled = 0
+Aplicando THP=madvise em runtime...
+AVISO: tuned-adm não encontrado; TuneD não foi alterado.
+Aplicando governor performance em runtime quando disponível...
+Governors ajustados: 16
+Ativando NVIDIA persistence mode quando suportado...
+Enabled Legacy persistence mode for GPU 00000000:01:00.0.
+All done.
+
+== 7/9 Aplicando tema KDE/Mocha aprovado ==
+Procurando MochaSolidCanonico.colors no ativo...
+Color scheme instalado em: /home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
+Procurando MochaPanelSolidCanonico no ativo...
+Plasma theme instalado em: /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
+Aplicando color scheme: MochaSolidCanonico
+O esquema de cores MochaSolidCanonico foi aplicado à sua sessão atual do Plasma com sucesso.
+Aplicando Plasma desktop theme: MochaPanelSolidCanonico
+O tema da sessão atual do Plasma foi definido como MochaPanelSolidCanonico
+Aplicando barra Win11 aprovada a partir de:
+/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+Backup: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc -> /media/mochafast/MochaArch/ativo/backups/configs/plasma-appletsrc/plasma-org.kde.plasma.desktop-appletsrc.20260602-101724.bak
+Barra Win11 aprovada aplicada.
+
+== 8/9 Conferindo/configurando login manager Wayland ==
+Configurando SDDM para Wayland.
+Backup: /etc/sddm.conf.d/10-mocha-wayland.conf -> /media/mochafast/MochaArch/ativo/backups/configs/sddm/10-mocha-wayland.conf.20260602-101724.bak
+Habilitando sddm.service para o próximo boot sem reiniciar agora...
+
+== 9/9 Auditoria final ==
+-- Manual:
+-rw-r--r-- 1 hal hal 198K jun  2 07:14 /media/mochafast/MochaArch/ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+-- Sysctl final:
+vm.swappiness = 80
+vm.vfs_cache_pressure = 50
+vm.page-cluster = 0
+vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 268435456
+vm.max_map_count = 16777216
+kernel.nmi_watchdog = 0
+kernel.sched_autogroup_enabled = 0
+
+-- THP final:
+always [madvise] never
+
+-- TuneD/CPU final:
+tuned enabled: not-found
+tuned active: inactive
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor: performance
+
+-- Tema final:
+ColorScheme: MochaSolidCanonico
+PlasmaTheme: MochaPanelSolidCanonico
+
+-- Login manager final:
+display-manager enabled: alias
+sddm enabled: enabled
+sddm active: active
+plasma-login enabled: not-found
+plasma-login active: inactive
+
+-- Kernel/NVIDIA/GRUB não alterados por este script.
+Relatório final: /media/mochafast/MochaArch/ativo/relatorios/20260602-101724-retomar-manual-agressividade-tema-login.log
+Script reutilizável salvo em:
+/media/mochafast/MochaArch/ativo/scripts/20260602-101724-mocha-retomar-manual-agressividade-tema-login.sh
+
+== CONCLUÍDO ==

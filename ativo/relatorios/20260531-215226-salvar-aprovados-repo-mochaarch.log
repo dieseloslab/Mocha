@@ -57,3 +57,64 @@ Script reutilizável criado:
 /media/mochafast/MochaArch/ativo/scripts/20260531-215226-aplicar-kde-sem-duplicidade-blueman-kmix.sh
 
 == Adicionando ao Git ==
+[main 80f8e0f] docs: salvar aprovados operacionais mochaarch 20260531-215226
+ 43 files changed, 5578 insertions(+)
+ create mode 100644 ativo/README-ATIVO.md
+ create mode 100644 ativo/documentacao/20260531-175318-vmstore-mount-real-boot-dolphin.md
+ create mode 100644 ativo/documentacao/20260531-204828-hibernacao-resume-validado-pendente-teste-real.md
+ create mode 100644 ativo/documentacao/20260531-205511-input-remapper-daemon-corrigido.md
+ create mode 100644 ativo/documentacao/20260531-210301-finalizar-resume-hibernacao-zen.md
+ create mode 100644 ativo/documentacao/20260531-214202-hibernacao-swap-fisica-zram-prioridade-alta.md
+ create mode 100644 ativo/documentacao/20260531-215226-mochaarch-aprovados-operacionais.md
+ create mode 100644 ativo/documentacao/APROVADOS-ATUAIS.md
+ create mode 100644 ativo/relatorios/20260531-092419-documentar-site-cloudflare-ultrahd.log
+ create mode 100644 ativo/relatorios/20260531-154702-auditoria-vmstore-nao-montado.log
+ create mode 100644 ativo/relatorios/20260531-154848-forcar-vmstore-xfs-e-auditar-dolphin.log
+ create mode 100644 ativo/relatorios/20260531-175318-vmstore-mount-real-boot-dolphin.log
+ create mode 100644 ativo/relatorios/20260531-204225-auditoria-hibernacao-mochaarch.log
+ create mode 100644 ativo/relatorios/20260531-204530-corrigir-hibernacao-resume-grub-mkinitcpio.log
+ create mode 100644 ativo/relatorios/20260531-204704-corrigir-hibernacao-resume-grub-mkinitcpio-v2.log
+ create mode 100644 ativo/relatorios/20260531-204828-finalizar-validacao-hibernacao-grub.log
+ create mode 100644 ativo/relatorios/20260531-205037-auditoria-erro-ultimo-boot.log
+ create mode 100644 ativo/relatorios/20260531-205401-auditoria-input-remapper-corrigida.log
+ create mode 100644 ativo/relatorios/20260531-205511-corrigir-input-remapper-daemon.log
+ create mode 100644 ativo/relatorios/20260531-205931-corrigir-resume-hibernacao.log
+ create mode 100644 ativo/relatorios/20260531-210152-corrigir-resume-hibernacao-v2.log
+ create mode 100644 ativo/relatorios/20260531-210301-finalizar-resume-hibernacao-zen.log
+ create mode 100644 ativo/relatorios/20260531-210646-corrigir-resume-boot-normal.log
+ create mode 100644 ativo/relatorios/20260531-210834-corrigir-resume-swap-nvme0n1p3.log
+ create mode 100644 ativo/relatorios/20260531-211006-finalizar-resume-zen-sem-cachy.log
+ create mode 100644 ativo/relatorios/20260531-211112-corrigir-grub-default-zen-id-moderno.log
+ create mode 100644 ativo/relatorios/20260531-211216-corrigir-grub-default-zen-id-moderno-corrigido.log
+ create mode 100644 ativo/relatorios/20260531-211502-fixar-grub-default-linux-zen.log
+ create mode 100644 ativo/relatorios/20260531-211604-finalizar-grub-default-zen-com-sudo.log
+ create mode 100644 ativo/relatorios/20260531-212111-rollback-hibernacao-restaurar-boot-normal.log
+ create mode 100644 ativo/relatorios/20260531-212237-finalizar-rollback-resume-grub-zen.log
+ create mode 100644 ativo/relatorios/20260531-212459-auditoria-hibernacao-sem-alterar.log
+ create mode 100644 ativo/relatorios/20260531-212753-reabilitar-hibernacao-zen-hook-correto.log
+ create mode 100644 ativo/relatorios/20260531-212916-reabilitar-hibernacao-zen-corrigido.log
+ create mode 100644 ativo/relatorios/20260531-213038-validar-grub-zen-hibernacao-com-sudo.log
+ create mode 100644 ativo/relatorios/20260531-213618-corrigir-resume-boot-normal-sem-chute.log
+ create mode 100644 ativo/relatorios/20260531-213819-auditoria-real-resume-sem-editar.log
+ create mode 100644 ativo/relatorios/20260531-214202-corrigir-hibernacao-swap-fisica-sem-mexer-zram.log
+ create mode 100644 ativo/relatorios/20260531-214733-rollback-hibernacao-remover-resume.log
+ create mode 100644 ativo/relatorios/20260531-215226-salvar-aprovados-repo-mochaarch.log
+ create mode 100755 ativo/scripts/20260531-215226-aplicar-kde-sem-duplicidade-blueman-kmix.sh
+
+== Estado Git depois ==
+ M ativo/relatorios/20260531-215226-salvar-aprovados-repo-mochaarch.log
+?? 20260531-095114-mocha-arch-cloudflare-pages.zip
+?? 20260531-120500-mocha-arch-site-ultrahd-multilang.zip
+?? dieseloslab-cloudflare-ultrahd-20260531.zip
+
+== Remotes configurados ==
+origin	git@github.com:dieseloslab/Mocha.git (fetch)
+origin	git@github.com:dieseloslab/Mocha.git (push)
+
+Remote origin encontrado. Tentando push sem force.
+To github.com:dieseloslab/Mocha.git
+   0547c57..80f8e0f  HEAD -> main
+Push concluído.
+
+Concluído.
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-215226-salvar-aprovados-repo-mochaarch.log

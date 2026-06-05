@@ -1,0 +1,72 @@
+
+== MOCHAARCH — fixar linux-cachyos como padrão do GRUB com leitura sudo ==
+Timestamp: 20260601-115311
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-115311-fixar-cachy-padrao-grub-com-sudo.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-115311-fixar-cachy-padrao-grub-com-sudo.md
+Kernel em execução agora: 7.0.10-arch1-1
+
+== Pré-checagens ==
+
+== Solicitando sudo uma vez ==
+
+== Estado atual dos kernels ==
+Pacotes de kernel instalados:
+  linux
+  linux-api-headers
+  linux-atm
+  linux-cachyos
+  linux-cachyos-headers
+  linux-firmware
+  linux-firmware-amdgpu
+  linux-firmware-atheros
+  linux-firmware-broadcom
+  linux-firmware-cirrus
+  linux-firmware-intel
+  linux-firmware-mediatek
+  linux-firmware-nvidia
+  linux-firmware-other
+  linux-firmware-radeon
+  linux-firmware-realtek
+  linux-firmware-whence
+  linux-headers
+  linux-zen
+  linux-zen-headers
+
+Arquivos vmlinuz em /boot:
+  vmlinuz-linux
+  vmlinuz-linux-cachyos
+  vmlinuz-linux-zen
+
+Pacotes Cachy BORE restantes:
+  nenhum
+
+== Garantindo GRUB_DEFAULT=saved sem acumular backup ==
+Backup criado: /etc/default/grub.bak-20260601-115311-mocha-fixar-cachy
+Limite de backups OK.
+
+== Lendo entradas do GRUB com sudo ==
+Entradas encontradas:
+  Arch Linux, with Linux linux-zen
+  Arch Linux, with Linux linux-cachyos
+  Arch Linux, with Linux linux
+  UEFI Firmware Settings
+
+== Fixando padrão salvo ==
+Entrada escolhida:
+  Arch Linux, with Linux linux-cachyos
+
+== Verificação final ==
+grub-editenv list:
+saved_entry=Arch Linux, with Linux linux-cachyos
+
+/etc/default/grub — linhas relevantes:
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT=false
+
+Kernels restantes em /boot:
+  vmlinuz-linux
+  vmlinuz-linux-cachyos
+  vmlinuz-linux-zen
+
+Concluído. Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-115311-fixar-cachy-padrao-grub-com-sudo.md
+Na próxima reinicialização, o GRUB deve entrar por padrão no linux-cachyos.

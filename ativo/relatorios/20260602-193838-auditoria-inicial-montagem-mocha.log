@@ -1,0 +1,126 @@
+== MOCHAARCH — auditoria inicial antes de montar/alterar ==
+Timestamp: 20260602-193838
+Relatório: /media/mochafast/MochaArch/ativo/relatorios/20260602-193838-auditoria-inicial-montagem-mocha.log
+
+[1/12] Validando sudo
+OK: sudo validado
+
+[2/12] Validando FAST e VMSTORE
+OK: /media/mochafast montado
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+OK: /media/vmstore montado
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+
+[3/12] Conferindo fstab
+16:UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+
+[4/12] Validando manual principal
+-rw-r--r-- 1 hal hal 196K jun  2 19:37 /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+726f8ad7dcea02b21e9867628e29a5689848485b50d2331252921e4221e079f6  /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+-- primeiras linhas --
+# MANUAL ÚNICO VIVO — Montagem do Mocha Arch/KDE
+
+Este é o manual operacional vivo do Mocha Arch/KDE.
+
+Ele deve conter tudo que já fizemos e funcionou, em passo a passo, com validação e regra de não regressão. A partir de agora, toda nova solução aprovada deve ser acrescentada neste manual usando o script:
+
+```text
+/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh
+```
+
+Pasta ativa:
+
+```text
+/media/mochafast/MochaArch/ativo
+```
+
+---
+
+## 1. Regras obrigatórias
+
+1. Auditar antes de editar.
+2. Usar o arquivo real como fonte, não dedução.
+3. Quando funcionar, documentar imediatamente.
+4. Salvar script reutilizável quando fizer sentido.
+5. Não guardar lixo na pasta ativa.
+6. Tentativa falha deve ser apagada ou movida para quarentena.
+7. Não remover programa sem ordem expressa.
+8. Não usar Chrome como padrão do Mocha.
+9. Não usar X11 como fallback. O caminho é Wayland.
+10. Não tocar em XU sem ordem explícita.
+11. Não reintroduzir `MANGOHUD_DLSYM`.
+12. Não usar `vkbasalt` nem `gamescope` no wrapper canônico Steam/Mocha.
+13. Não contaminar Launch Options com opções legadas.
+14. Não mexer em geometria visual aprovada sem ordem.
+15. Todo arquivo novo deve ter timestamp, salvo nome fixo obrigatório.
+16. Manter no máximo 1 ou 2 backups por item.
+
+---
+
+## 2. Estrutura oficial do MochaArch
+
+```text
+/media/mochafast/MochaArch/ativo
+/media/mochafast/MochaArch/ativo/documentacao
+/media/mochafast/MochaArch/ativo/scripts
+/media/mochafast/MochaArch/ativo/logs
+/media/mochafast/MochaArch/ativo/backups
+/media/mochafast/MochaArch/ativo/quarentena
+/media/mochafast/MochaArch/ativo/kde
+/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+```
+
+Regra:
+
+- `ativo` recebe apenas solução aprovada, funcional ou em refino controlado.
+- `quarentena` recebe coisa que talvez sirva depois.
+- lixo experimental que não serve deve ser apagado.
+
+---
+
+## 3. Passo a passo aprovado até agora
+
+### 3.1 Montagem obrigatória do FAST e VMSTORE
+
+Objetivo:
+
+- O Mocha precisa ter FAST e VMSTORE montados de forma persistente.
+- FAST contém o trabalho ativo/evolutivo.
+- VMSTORE contém armazenamento/canônico quando aplicável.
+
+Caminhos obrigatórios:
+
+```text
+/media/mochafast
+/media/vmstore
+```
+
+Validação:
+
+```bash
+
+[5/12] Documentos mais novos que o manual principal
+2026-06-02 19:38  /media/mochafast/MochaArch/ativo/relatorios/20260602-193838-auditoria-inicial-montagem-mocha.log
+2026-06-02 19:37  /media/mochafast/MochaArch/ativo/relatorios/20260602-193706-atualizar-manual-sddm-steam-estado-real.log
+
+[6/12] Estado real do SDDM/login
+sddm enabled: enabled
+sddm active: active
+/usr/lib/systemd/system/sddm.service
+
+-- configs SDDM reais --
+
+--- /etc/sddm.conf.d/00-mocha-resgate.conf ---
+[Theme]
+Current=breeze
+
+[General]
+DisplayServer=wayland
+GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+
+[Wayland]
+CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1

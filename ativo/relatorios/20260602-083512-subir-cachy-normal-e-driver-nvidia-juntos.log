@@ -1,0 +1,399 @@
+== MOCHAARCH — subir kernel Cachy NORMAL e driver NVIDIA juntos ==
+Timestamp: 20260602-083512
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-083512-subir-cachy-normal-e-driver-nvidia-juntos.log
+
+== 0) sudo inicial e keepalive ==
+
+== 1) Auditoria inicial somente leitura ==
+-- Kernel em uso agora:
+Linux Mocha 7.0.9-1-cachyos #1 SMP PREEMPT_DYNAMIC Tue, 19 May 2026 11:47:15 +0000 x86_64 GNU/Linux
+
+-- Pacotes relevantes instalados:
+dkms 3.4.1-1
+grub 2:2.14-1
+linux 7.0.10.arch1-1
+linux-cachyos 7.0.9-1
+mkinitcpio 41-4
+
+-- Repositórios persistentes atuais:
+78:[core]
+84:[extra]
+93:[multilib]
+
+-- Architecture persistente atual:
+22:Architecture = auto
+
+== 2) Backups controlados ==
+
++ sudo mkdir -p /etc/mocha-backups
+
++ sudo cp -a /etc/pacman.conf /etc/mocha-backups/pacman.conf.20260602-083512.raw-before-cachy-nvidia-juntos.bak
+
++ sudo cp -a /etc/default/grub /etc/mocha-backups/grub.20260602-083512.before-cachy-default.bak
+
++ sudo bash -c ls -1t /etc/mocha-backups/pacman.conf.*.bak 2>/dev/null | tail -n +3 | xargs -r rm -f
+
++ sudo bash -c ls -1t /etc/mocha-backups/grub.*.bak 2>/dev/null | tail -n +3 | xargs -r rm -f
+
+== 3) Limpar Cachy persistente do pacman.conf ==
+
++ sudo install -m 0644 /tmp/pacman.clean-no-cachy.20260602-083512.conf /etc/pacman.conf
+
++ sudo cp -a /etc/pacman.conf /etc/mocha-backups/pacman.conf.20260602-083512.clean-no-cachy.bak
+OK: /etc/pacman.conf persistente ficou sem Cachy.
+
+== 4) Detectar arquitetura Cachy correta ==
+Usage: /lib/ld-linux-x86-64.so.2 [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
+This program interpreter self-identifies as: /usr/lib/ld-linux-x86-64.so.2
+  x86-64-v4
+  x86-64-v3 (supported, searched)
+  x86-64-v2 (supported, searched)
+OK: CPU suporta x86-64-v3; usando Cachy v3.
+
+== 5) Chave CachyOS e keyring oficial ==
+
++ sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+gpg: key F3B607488DB35A47: "CachyOS <admin@cachyos.org>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+
++ sudo pacman-key --lsign-key F3B607488DB35A47
+  -> Locally signed 1 key.
+==> Updating trust database...
+gpg: next trustdb check due at 2026-10-21
+OK: cachyos-keyring já instalado.
+
+== 6) Criar pacman.conf TEMPORÁRIO com Cachy acima do Arch ==
+-- Repositórios temporários:
+79:[cachyos-v3]
+81:[cachyos-core-v3]
+83:[cachyos-extra-v3]
+87:[core]
+93:[extra]
+102:[multilib]
+
+-- Architecture temporária:
+22:Architecture = x86_64 x86_64_v3
+
+== 7) Sincronizar bases temporárias Cachy ==
+
++ sudo pacman --config /tmp/pacman.cachy-temp.20260602-083512.conf -Syy --noconfirm
+:: Synchronizing package databases...
+ cachyos-v3 downloading...
+ cachyos-core-v3 downloading...
+ cachyos-extra-v3 downloading...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+
+== 8) Validar versão-alvo do módulo NVIDIA Cachy ==
+Repository      : cachyos-v3
+Name            : linux-cachyos-nvidia-open
+Version         : 7.0.10-2
+Description     : nvidia open modules of 610.43.02 driver for the linux-cachyos kernel
+Architecture    : x86_64_v3
+Depends On      : linux-cachyos=7.0.10-2  nvidia-utils=610.43.02  libglvnd
+
+Driver NVIDIA que será exigido pelo módulo Cachy: nvidia-utils=610.43.02
+
+== 9) Subir kernel Cachy NORMAL + headers + módulo NVIDIA + driver/userspace NVIDIA juntos ==
+
++ sudo pacman --config /tmp/pacman.cachy-temp.20260602-083512.conf -S --needed --noconfirm linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (6) lib32-nvidia-utils-610.43.02-1  linux-cachyos-7.0.10-2  linux-cachyos-headers-7.0.10-2  linux-cachyos-nvidia-open-7.0.10-2  nvidia-settings-610.43.02-1  nvidia-utils-610.43.02-3
+
+Total Download Size:    601.48 MiB
+Total Installed Size:  1744.60 MiB
+Net Upgrade Size:        93.04 MiB
+
+:: Proceed with installation? [Y/n] 
+:: Retrieving packages...
+ nvidia-utils-610.43.02-3-x86_64_v3 downloading...
+ linux-cachyos-7.0.10-2-x86_64_v3 downloading...
+ lib32-nvidia-utils-610.43.02-1-x86_64_v3 downloading...
+ linux-cachyos-headers-7.0.10-2-x86_64_v3 downloading...
+ linux-cachyos-nvidia-open-7.0.10-2-x86_64_v3 downloading...
+ nvidia-settings-610.43.02-1-x86_64_v3 downloading...
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Running pre-transaction hooks...
+(1/2) Removing linux initcpios...
+(2/2) Remove DKMS modules
+==> dkms remove --no-depmod broadcom-wl/6.30.223.271 -k 7.0.9-1-cachyos
+==> depmod 7.0.9-1-cachyos
+:: Processing package changes...
+upgrading linux-cachyos...
+upgrading linux-cachyos-headers...
+upgrading nvidia-utils...
+upgrading linux-cachyos-nvidia-open...
+upgrading lib32-nvidia-utils...
+upgrading nvidia-settings...
+:: Running post-transaction hooks...
+( 1/10) Creating system user accounts...
+( 2/10) Reloading system manager configuration...
+( 3/10) Enqueuing marked services...
+( 4/10) Reloading device manager configuration...
+( 5/10) Arming ConditionNeedsUpdate...
+( 6/10) Updating module dependencies...
+( 7/10) Install DKMS modules
+==> dkms install --no-depmod broadcom-wl/6.30.223.271 -k 7.0.10-2-cachyos
+==> depmod 7.0.10-2-cachyos
+( 8/10) Updating linux initcpios...
+==> Building image from preset: /etc/mkinitcpio.d/linux-cachyos.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-cachyos -g /boot/initramfs-linux-cachyos.img
+==> Starting build: '7.0.10-2-cachyos'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-cachyos.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+( 9/10) Reloading system bus configuration...
+(10/10) Updating the desktop file MIME type cache...
+
+== 10) Verificar que o driver NVIDIA realmente subiu para a versão exigida ==
+nvidia-utils instalado: 610.43.02-3
+nvidia-utils exigido:   610.43.02
+OK: driver NVIDIA subiu junto com o módulo Cachy.
+
+== 11) Regenerar initramfs ==
+
++ sudo mkinitcpio -P
+==> Building image from preset: /etc/mkinitcpio.d/linux-cachyos.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-cachyos -g /boot/initramfs-linux-cachyos.img
+==> Starting build: '7.0.10-2-cachyos'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-cachyos.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+
+== 12) Garantir que Cachy NÃO ficou persistente ==
+OK: /etc/pacman.conf persistente segue sem Cachy.
+
+== 13) Atualização geral Arch depois de destravar NVIDIA ==
+
++ sudo pacman -Syu --noconfirm
+:: Synchronizing package databases...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+:: Starting full system upgrade...
+warning: lib32-mesa: local (2:26.1.1-1) is newer than multilib (1:26.1.1-1)
+warning: nvidia-utils: local (610.43.02-3) is newer than extra (610.43.02-2)
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (2) lib32-opencl-nvidia-610.43.02-1  opencl-nvidia-610.43.02-2
+
+Total Download Size:     9.00 MiB
+Total Installed Size:  126.73 MiB
+Net Upgrade Size:       23.41 MiB
+
+:: Proceed with installation? [Y/n] 
+:: Retrieving packages...
+ opencl-nvidia-610.43.02-2-x86_64 downloading...
+ lib32-opencl-nvidia-610.43.02-1-x86_64 downloading...
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+upgrading lib32-opencl-nvidia...
+upgrading opencl-nvidia...
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+
+== 14) Regenerar initramfs após atualização geral ==
+
++ sudo mkinitcpio -P
+==> Building image from preset: /etc/mkinitcpio.d/linux-cachyos.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux-cachyos -g /boot/initramfs-linux-cachyos.img
+==> Starting build: '7.0.10-2-cachyos'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-cachyos.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+==> Building image from preset: /etc/mkinitcpio.d/linux.preset: 'default'
+==> Using default configuration file: '/etc/mkinitcpio.conf'
+  -> -k /boot/vmlinuz-linux -g /boot/initramfs-linux.img
+==> Starting build: '7.0.10-arch1-1'
+  -> Running build hook: [base]
+  -> Running build hook: [udev]
+  -> Running build hook: [autodetect]
+  -> Running build hook: [microcode]
+  -> Running build hook: [kms]
+  -> Running build hook: [modconf]
+  -> Running build hook: [block]
+  -> Running build hook: [keyboard]
+  -> Running build hook: [keymap]
+  -> Running build hook: [consolefont]
+==> WARNING: consolefont: no font found in configuration
+  -> Running build hook: [filesystems]
+==> Generating module dependencies
+==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux.img'
+  -> Early uncompressed CPIO image generation successful
+==> Initcpio image generation successful
+
+== 15) Definir linux-cachyos NORMAL como padrão fixo no GRUB ==
+
++ sudo install -m 0644 /tmp/grub.default.20260602-083512.tmp /etc/default/grub
+
++ sudo grub-mkconfig -o /boot/grub/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-linux-cachyos
+Found initrd image: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux-cachyos.img
+Found linux image: /boot/vmlinuz-linux
+Found initrd image: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux.img
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+-- Entrada selecionada como padrão:
+Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+
++ sudo grub-set-default Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+
++ sudo grub-mkconfig -o /boot/grub/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-linux-cachyos
+Found initrd image: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux-cachyos.img
+Found linux image: /boot/vmlinuz-linux
+Found initrd image: /boot/intel-ucode.img /boot/amd-ucode.img /boot/initramfs-linux.img
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+
+== 16) Limpar bancos temporários Cachy da sync db local ==
+
++ sudo rm -f /var/lib/pacman/sync/cachyos.db /var/lib/pacman/sync/cachyos.db.sig /var/lib/pacman/sync/cachyos-core.db /var/lib/pacman/sync/cachyos-core.db.sig /var/lib/pacman/sync/cachyos-extra.db /var/lib/pacman/sync/cachyos-extra.db.sig /var/lib/pacman/sync/cachyos-v3.db /var/lib/pacman/sync/cachyos-v3.db.sig /var/lib/pacman/sync/cachyos-core-v3.db /var/lib/pacman/sync/cachyos-core-v3.db.sig /var/lib/pacman/sync/cachyos-extra-v3.db /var/lib/pacman/sync/cachyos-extra-v3.db.sig
+
+== 17) Auditoria final ==
+-- Repositórios persistentes:
+78:[core]
+84:[extra]
+93:[multilib]
+
+-- Pacotes relevantes finais:
+linux 7.0.10.arch1-1
+linux-cachyos 7.0.10-2
+linux-cachyos-headers 7.0.10-2
+linux-cachyos-nvidia-open 7.0.10-2
+nvidia-utils 610.43.02-3
+lib32-nvidia-utils 610.43.02-1
+nvidia-settings 610.43.02-1
+
+-- Arquitetura dos pacotes Cachy/NVIDIA:
+Name            : linux-cachyos
+Version         : 7.0.10-2
+Architecture    : x86_64_v3
+Name            : linux-cachyos-nvidia-open
+Version         : 7.0.10-2
+Architecture    : x86_64_v3
+Name            : nvidia-utils
+Version         : 610.43.02-3
+Architecture    : x86_64_v3
+
+-- Kernel em uso agora, antes do reboot:
+7.0.9-1-cachyos
+
+-- GRUB saved default:
+
++ sudo grub-editenv list
+saved_entry=Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+
+-- Entrada linux-cachyos normal definida como padrão:
+Advanced options for Arch Linux>Arch Linux, with Linux linux-cachyos
+
+== CONCLUÍDO ==
+Kernel Cachy NORMAL, headers, módulo linux-cachyos-nvidia-open e driver NVIDIA foram atualizados juntos.
+Driver NVIDIA validado contra a dependência exata do módulo Cachy: nvidia-utils=610.43.02.
+O Cachy não ficou persistente no /etc/pacman.conf.
+A atualização geral Arch foi executada depois.
+Reinicie para validar o kernel/driver novo.
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-083512-subir-cachy-normal-e-driver-nvidia-juntos.log

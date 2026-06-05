@@ -1,0 +1,74 @@
+== MOCHAARCH — TRIM SSD/NVME + MANUTENÇÃO HDD ==
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-111857-trim-ssd-manutencao-hdd.log
+
+== Autenticando sudo uma vez ==
+
+== Conferindo ferramentas necessárias ==
+OK: findmnt
+OK: lsblk
+OK: awk
+OK: sed
+OK: fstrim
+OK: sync
+
+== Mapa atual de mounts relevantes ==
+  / /dev/nvme0n1p2 ext4 rw,noatime
+  /media/mochafast /dev/sda1 btrfs rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+  /media/vmstore /dev/sdb1 xfs rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+  /home /dev/nvme0n1p4 xfs rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+
+== Rodando fstrim somente em SSD/NVMe com suporte real a discard ==
+
+[TRIM] /
+       source=/dev/nvme0n1p2 fs=ext4 rota=0 disc-max=2199023255040B
+/: 305,1 GiB (327600422912 bytes) descartado
+
+[TRIM] /media/mochafast
+       source=/dev/sda1 fs=btrfs rota=0 disc-max=2147450880B
+/media/mochafast: 317 GiB (340396019712 bytes) descartado
+[SKIP] /media/vmstore — sem TRIM aplicável aqui; source=/dev/sdb1 fs=xfs rota=1 disc-max=0B
+
+[TRIM] /home
+       source=/dev/nvme0n1p4 fs=xfs rota=0 disc-max=2199023255040B
+/home: 585,9 GiB (629147435008 bytes) descartado
+
+== Manutenção equivalente no rotacional VMSTORE ==
+Alvo rotacional padrão: /media/vmstore
+VMSTORE: target=/media/vmstore source=/dev/sdb1 fs=xfs rota=1 disc-max=0B
+
+[HDD/XFS] Rodando xfs_fsr em /media/vmstore por até 1800s, com saída visível.
+          Isto reorganiza arquivos no XFS; não é TRIM.
+/media/vmstore start inode=0
+ino=1342984324
+extents before:5 after:1 DONE ino=1342984324
+ino=1347030028
+extents before:12 after:1 DONE ino=1347030028
+ino=1347030029
+extents before:8 after:1 DONE ino=1347030029
+ino=1350549348
+extents before:2 after:1 DONE ino=1350549348
+ino=1350549350
+extents before:2 after:1 DONE ino=1350549350
+ino=1350549363
+extents before:2 after:1 DONE ino=1350549363
+ino=3627176007
+extents before:3 after:1 DONE ino=3627176007
+ino=2488692146
+extents before:2 after:1 DONE ino=2488692146
+ino=3633726686
+extents before:2 after:1 DONE ino=3633726686
+ino=3633726687
+extents before:2 after:1 DONE ino=3633726687
+ino=3633726692
+extents before:2 after:1 DONE ino=3633726692
+
+== Resumo ==
+TRIM OK:        3
+TRIM falhou:    0
+TRIM ignorado:  1
+HDD feito:      1
+HDD falhou:     0
+HDD ignorado:   0
+Log salvo em:   /media/mochafast/MochaArch/ativo/relatorios/20260602-111857-trim-ssd-manutencao-hdd.log
+
+== Finalizado ==

@@ -1,0 +1,28 @@
+== MOCHAARCH — registrar regra 'anote' no manual ==
+Timestamp: 20260601-111912
+Manual: /media/mochafast/MochaArch/ativo/documentacao/manual-operacional-mochaarch.md
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-111912-registrar-regra-anote-manual.log
+
+Manual criado: /media/mochafast/MochaArch/ativo/documentacao/manual-operacional-mochaarch.md
+Regra adicionada ao manual.
+
+Conferência final:
+6----
+7-
+8:## Regra operacional — significado de “anote”
+9-
+10-Quando o usuário disser **“anote”**, isso deve ser tratado como ordem para registrar a informação no **manual/documentação operacional do MochaArch**, não apenas como memória interna da conversa.
+11-
+12-Aplicação prática:
+13-
+14-- registrar a regra, decisão ou procedimento no manual correspondente;
+15-- manter o padrão de timestamp quando gerar arquivos auxiliares;
+16-- documentar apenas o que foi aprovado, decidido ou validado;
+17-- não registrar tentativas falhas como procedimento ativo;
+18-- quando a anotação envolver comportamento permanente do sistema, transformar isso em regra operacional reutilizável.
+19-
+20-Exemplo já aprovado:
+21-
+22-- jogos casuais/não focados no perfil gamer devem ficar organizados em uma subpasta dentro de **Jogos**, preferencialmente chamada **Jogos casuais / Escola**;
+
+Concluído.

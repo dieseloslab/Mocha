@@ -1,0 +1,978 @@
+
+== 1/13 — montar FAST e VMSTORE via fstab, sem redetectar disco no chute ==
+-- Montagens atuais:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+grep: aviso: \ perdida antes de /:
+grep: aviso: \ perdida antes de /:
+OK: /media/mochafast já possui entrada em /etc/fstab:
+grep: aviso: \ perdida antes de /:
+grep: aviso: \ perdida antes de /:
+UUID=88e6aa16-110c-4b97-9ffb-85084c000198	/media/mochafast	btrfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=MOCHAFAST	0	0
+grep: aviso: \ perdida antes de /:
+grep: aviso: \ perdida antes de /:
+OK: /media/vmstore já possui entrada em /etc/fstab:
+grep: aviso: \ perdida antes de /:
+grep: aviso: \ perdida antes de /:
+UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6	/media/vmstore	xfs	rw,noatime,nofail,x-systemd.device-timeout=10s,x-gvfs-show,x-gvfs-name=VMSTORE	0	0
+-- Depois do mount -a:
+TARGET           SOURCE    FSTYPE OPTIONS
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+/media/mochafast /dev/sda1 btrfs  rw,noatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+TARGET         SOURCE    FSTYPE OPTIONS
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+
+== 2/13 — localizar e ler manual real do MochaArch ==
+Manual escolhido: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+-- Primeiras 220 linhas do manual:
+     1	# MANUAL ÚNICO VIVO — Montagem do Mocha Arch/KDE
+     2	
+     3	Este é o manual operacional vivo do Mocha Arch/KDE.
+     4	
+     5	Ele deve conter tudo que já fizemos e funcionou, em passo a passo, com validação e regra de não regressão. A partir de agora, toda nova solução aprovada deve ser acrescentada neste manual usando o script:
+     6	
+     7	```text
+     8	/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh
+     9	```
+    10	
+    11	Pasta ativa:
+    12	
+    13	```text
+    14	/media/mochafast/MochaArch/ativo
+    15	```
+    16	
+    17	---
+    18	
+    19	## 1. Regras obrigatórias
+    20	
+    21	1. Auditar antes de editar.
+    22	2. Usar o arquivo real como fonte, não dedução.
+    23	3. Quando funcionar, documentar imediatamente.
+    24	4. Salvar script reutilizável quando fizer sentido.
+    25	5. Não guardar lixo na pasta ativa.
+    26	6. Tentativa falha deve ser apagada ou movida para quarentena.
+    27	7. Não remover programa sem ordem expressa.
+    28	8. Não usar Chrome como padrão do Mocha.
+    29	9. Não usar X11 como fallback. O caminho é Wayland.
+    30	10. Não tocar em XU sem ordem explícita.
+    31	11. Não reintroduzir `MANGOHUD_DLSYM`.
+    32	12. Não usar `vkbasalt` nem `gamescope` no wrapper canônico Steam/Mocha.
+    33	13. Não contaminar Launch Options com opções legadas.
+    34	14. Não mexer em geometria visual aprovada sem ordem.
+    35	15. Todo arquivo novo deve ter timestamp, salvo nome fixo obrigatório.
+    36	16. Manter no máximo 1 ou 2 backups por item.
+    37	
+    38	---
+    39	
+    40	## 2. Estrutura oficial do MochaArch
+    41	
+    42	```text
+    43	/media/mochafast/MochaArch/ativo
+    44	/media/mochafast/MochaArch/ativo/documentacao
+    45	/media/mochafast/MochaArch/ativo/scripts
+    46	/media/mochafast/MochaArch/ativo/logs
+    47	/media/mochafast/MochaArch/ativo/backups
+    48	/media/mochafast/MochaArch/ativo/quarentena
+    49	/media/mochafast/MochaArch/ativo/kde
+    50	/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+    51	```
+    52	
+    53	Regra:
+    54	
+    55	- `ativo` recebe apenas solução aprovada, funcional ou em refino controlado.
+    56	- `quarentena` recebe coisa que talvez sirva depois.
+    57	- lixo experimental que não serve deve ser apagado.
+    58	
+    59	---
+    60	
+    61	## 3. Passo a passo aprovado até agora
+    62	
+    63	### 3.1 Montagem obrigatória do FAST e VMSTORE
+    64	
+    65	Objetivo:
+    66	
+    67	- O Mocha precisa ter FAST e VMSTORE montados de forma persistente.
+    68	- FAST contém o trabalho ativo/evolutivo.
+    69	- VMSTORE contém armazenamento/canônico quando aplicável.
+    70	
+    71	Caminhos obrigatórios:
+    72	
+    73	```text
+    74	/media/mochafast
+    75	/media/vmstore
+    76	```
+    77	
+    78	Validação:
+    79	
+    80	```bash
+    81	mountpoint -q /media/mochafast && echo "FAST OK"
+    82	mountpoint -q /media/vmstore && echo "VMSTORE OK"
+    83	findmnt /media/mochafast
+    84	findmnt /media/vmstore
+    85	grep -nE '/media/mochafast|/media/vmstore' /etc/fstab
+    86	```
+    87	
+    88	Regra de não regressão:
+    89	
+    90	- Não empilhar linhas erradas no `/etc/fstab`.
+    91	- Auditar antes de editar.
+    92	- Se entrada estiver errada, substituir pela correta, sem duplicar.
+    93	- Não mexer no NVMe sem necessidade.
+    94	- Não fazer operação destrutiva em disco.
+    95	
+    96	---
+    97	
+    98	### 3.2 Driver de vídeo NVIDIA funcional
+    99	
+   100	Objetivo:
+   101	
+   102	- Sair do estado em que o sistema tinha interface, mas `nvidia-smi` falhava.
+   103	- Deixar NVIDIA funcional no kernel em uso.
+   104	- Garantir Plasma/Wayland funcional.
+   105	- Garantir Steam/jogo com FPS alto e fluidez.
+   106	
+   107	Validação obrigatória:
+   108	
+   109	```bash
+   110	uname -r
+   111	nvidia-smi
+   112	pacman -Q | grep -E '^(linux($|-)|linux-zen|linux-cachyos|nvidia|nvidia-utils|lib32-nvidia-utils|opencl-nvidia|egl-wayland|vulkan|lib32-vulkan)' | sort
+   113	```
+   114	
+   115	Critério de aprovação:
+   116	
+   117	- `nvidia-smi` comunica com a GPU.
+   118	- Plasma/Wayland abre.
+   119	- Jogo roda na Steam com FPS alto.
+   120	- Não quebra o login gráfico.
+   121	
+   122	Regra de não regressão:
+   123	
+   124	- Não voltar para Nouveau como solução permanente.
+   125	- Não usar X11 como escape.
+   126	- Não trocar driver sem auditar kernel atual, pacotes e boot.
+   127	
+   128	---
+   129	
+   130	### 3.3 Kernel/base funcional
+   131	
+   132	Objetivo:
+   133	
+   134	- Preservar a base atual que entregou desempenho superior ao Endeavour.
+   135	- Tratar kernel atual + NVIDIA funcional como base aprovada até novo teste.
+   136	
+   137	Validação:
+   138	
+   139	```bash
+   140	uname -a
+   141	pacman -Q | grep -E '^(linux($|-)|linux-zen|linux-cachyos|nvidia)' | sort
+   142	```
+   143	
+   144	Resultado aprovado:
+   145	
+   146	- Sistema rápido.
+   147	- Jogo fluido.
+   148	- FPS alto pelo overlay da Steam.
+   149	- Bluetooth funcional.
+   150	- Driver de vídeo funcional.
+   151	
+   152	Regra de não regressão:
+   153	
+   154	- Não trocar kernel no escuro.
+   155	- Registrar kernel atual antes de qualquer troca.
+   156	- Garantir entrada de retorno antes de mexer em boot/kernel.
+   157	
+   158	---
+   159	
+   160	### 3.4 Login manager / Wayland
+   161	
+   162	Objetivo:
+   163	
+   164	- Login gráfico funcional.
+   165	- Sessão KDE/Plasma em Wayland.
+   166	- Sem loop de senha.
+   167	- Sem fallback X11.
+   168	
+   169	Validação:
+   170	
+   171	```bash
+   172	systemctl status display-manager --no-pager --full
+   173	readlink -f /etc/systemd/system/display-manager.service
+   174	echo "$XDG_SESSION_TYPE"
+   175	loginctl show-session "$XDG_SESSION_ID" -p Type -p Desktop -p Name
+   176	```
+   177	
+   178	Critério de aprovação:
+   179	
+   180	- Tela de login aparece.
+   181	- Senha entra.
+   182	- Sessão Plasma/KDE abre.
+   183	- Sessão é Wayland.
+   184	- Não há loop de login.
+   185	
+   186	Regra de não regressão:
+   187	
+   188	- X11 não é opção.
+   189	- Não trocar gerenciador de login sem validação pós-boot.
+   190	- Quando a solução final do login manager estiver fechada, acrescentar comando exato neste manual.
+   191	
+   192	---
+   193	
+   194	### 3.5 Correção aprovada: Bluetooth e volume duplicados
+   195	
+   196	Problema:
+   197	
+   198	- Bluetooth aparecia duplicado na barra.
+   199	- Volume aparecia duplicado na barra.
+   200	
+   201	Solução aprovada:
+   202	
+   203	- Manter Bluetooth nativo do KDE/Bluedevil.
+   204	- Manter volume nativo do Plasma.
+   205	- Desativar apenas autostart redundante de `blueman-applet`.
+   206	- Desativar apenas autostart redundante de `kmix`.
+   207	- Não remover `blueman`.
+   208	- Não remover `kmix`.
+   209	
+   210	Arquivos do usuário:
+   211	
+   212	```text
+   213	~/.config/autostart/blueman.desktop
+   214	~/.config/autostart/kmix_autostart.desktop
+   215	```
+   216	
+   217	Arquivos para novos usuários:
+   218	
+   219	```text
+   220	/etc/skel/.config/autostart/blueman.desktop
+
+-- Linhas relevantes encontradas:
+1:# MANUAL ÚNICO VIVO — Montagem do Mocha Arch/KDE
+3:Este é o manual operacional vivo do Mocha Arch/KDE.
+8:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh
+14:/media/mochafast/MochaArch/ativo
+27:7. Não remover programa sem ordem expressa.
+30:10. Não tocar em XU sem ordem explícita.
+31:11. Não reintroduzir `MANGOHUD_DLSYM`.
+32:12. Não usar `vkbasalt` nem `gamescope` no wrapper canônico Steam/Mocha.
+34:14. Não mexer em geometria visual aprovada sem ordem.
+43:/media/mochafast/MochaArch/ativo
+44:/media/mochafast/MochaArch/ativo/documentacao
+45:/media/mochafast/MochaArch/ativo/scripts
+46:/media/mochafast/MochaArch/ativo/logs
+47:/media/mochafast/MochaArch/ativo/backups
+48:/media/mochafast/MochaArch/ativo/quarentena
+49:/media/mochafast/MochaArch/ativo/kde
+50:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+63:### 3.1 Montagem obrigatória do FAST e VMSTORE
+67:- O Mocha precisa ter FAST e VMSTORE montados de forma persistente.
+68:- FAST contém o trabalho ativo/evolutivo.
+69:- VMSTORE contém armazenamento/canônico quando aplicável.
+74:/media/mochafast
+75:/media/vmstore
+81:mountpoint -q /media/mochafast && echo "FAST OK"
+82:mountpoint -q /media/vmstore && echo "VMSTORE OK"
+83:findmnt /media/mochafast
+84:findmnt /media/vmstore
+85:grep -nE '/media/mochafast|/media/vmstore' /etc/fstab
+98:### 3.2 Driver de vídeo NVIDIA funcional
+102:- Sair do estado em que o sistema tinha interface, mas `nvidia-smi` falhava.
+103:- Deixar NVIDIA funcional no kernel em uso.
+105:- Garantir Steam/jogo com FPS alto e fluidez.
+111:nvidia-smi
+112:pacman -Q | grep -E '^(linux($|-)|linux-zen|linux-cachyos|nvidia|nvidia-utils|lib32-nvidia-utils|opencl-nvidia|egl-wayland|vulkan|lib32-vulkan)' | sort
+117:- `nvidia-smi` comunica com a GPU.
+119:- Jogo roda na Steam com FPS alto.
+120:- Não quebra o login gráfico.
+126:- Não trocar driver sem auditar kernel atual, pacotes e boot.
+130:### 3.3 Kernel/base funcional
+135:- Tratar kernel atual + NVIDIA funcional como base aprovada até novo teste.
+141:pacman -Q | grep -E '^(linux($|-)|linux-zen|linux-cachyos|nvidia)' | sort
+148:- FPS alto pelo overlay da Steam.
+149:- Bluetooth funcional.
+150:- Driver de vídeo funcional.
+154:- Não trocar kernel no escuro.
+155:- Registrar kernel atual antes de qualquer troca.
+156:- Garantir entrada de retorno antes de mexer em boot/kernel.
+160:### 3.4 Login manager / Wayland
+164:- Login gráfico funcional.
+165:- Sessão KDE/Plasma em Wayland.
+175:loginctl show-session "$XDG_SESSION_ID" -p Type -p Desktop -p Name
+180:- Tela de login aparece.
+182:- Sessão Plasma/KDE abre.
+184:- Não há loop de login.
+189:- Não trocar gerenciador de login sem validação pós-boot.
+190:- Quando a solução final do login manager estiver fechada, acrescentar comando exato neste manual.
+194:### 3.5 Correção aprovada: Bluetooth e volume duplicados
+198:- Bluetooth aparecia duplicado na barra.
+199:- Volume aparecia duplicado na barra.
+203:- Manter Bluetooth nativo do KDE/Bluedevil.
+204:- Manter volume nativo do Plasma.
+241:- Esta correção é passo permanente da montagem do Mocha Arch/KDE.
+250:### 3.6 Barra Win11/Mocha aprovada
+255:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/
+261:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+267:~/.config/plasma-org.kde.plasma.desktop-appletsrc
+272:1. Validar `/media/mochafast`.
+273:2. Validar pasta da barra aprovada.
+274:3. Validar arquivo `plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617`.
+276:   - `plugin=org.kde.plasma.panelspacer`
+277:   - `plugin=org.kde.plasma.icontasks` ou `plugin=org.kde.plasma.taskmanager`
+278:   - `plugin=org.kde.plasma.systemtray`
+289:- A barra Mocha/Win11 ficou correta.
+305:- GPU NVIDIA priorizando desempenho máximo.
+316:nvidia-smi -q -d POWER
+317:systemctl is-enabled nvidia-persistenced
+318:systemctl is-active nvidia-persistenced
+339:### 3.8 Steam, Launch Options e wrapper
+343:- Melhor baseline atual: Steam sem nenhuma linha em Launch Options.
+344:- Overlay da Steam usado para medir FPS.
+356:/home/hal/.local/bin/mocha-steam-game-run %command%
+361:- Não usar `MANGOHUD_DLSYM`.
+391:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh "Área" "Título" <<'EOF'
+405:/media/mochafast/MochaArch/ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh "Login manager" "Plasma login validado em Wayland" <<'EOF'
+422:1. Login manager final validado pós-boot.
+423:2. Comando exato final do driver NVIDIA.
+425:4. Wrapper Steam/Mocha novo, apenas depois de vencer ou igualar o baseline sem Launch Options.
+435:### Kernel atual
+441:### Driver NVIDIA
+446:| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
+452:|   0  NVIDIA GeForce RTX 5060 Ti     On  |   00000000:01:00.0  On |                  N/A |
+466:|    0   N/A  N/A            1081      G   /usr/bin/kded6                            2MiB |
+468:|    0   N/A  N/A            1193      G   ...it-kde-authentication-agent-1          2MiB |
+469:|    0   N/A  N/A            1288      G   /usr/bin/kdeconnectd                      2MiB |
+483:|    0   N/A  N/A            2093      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+484:|    0   N/A  N/A            2469      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+485:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+486:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+495:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+500:gamemode 1.8.2-2
+501:lib32-gamemode 1.8.2-1
+502:lib32-nvidia-utils 595.71.05-1
+513:linux-firmware-nvidia 20260519-1
+519:mangohud 0.8.3-2
+520:nvidia-open-dkms 595.71.05-2
+521:nvidia-settings 595.71.05-1
+522:nvidia-utils 595.71.05-2
+523:opencl-nvidia 595.71.05-2
+524:steam 1.0.0.85-7
+525:steam-devices 1.0.0.85-7
+530:### Login manager / display manager
+533:● plasmalogin.service - Plasma Login Manager
+534:     Loaded: loaded (/usr/lib/systemd/system/plasmalogin.service; enabled; preset: disabled)
+537:       Docs: man:plasmalogin(1)
+538:             man:plasmalogin.conf(5)
+539:   Main PID: 683 (plasmalogin)
+543:     CGroup: /system.slice/plasmalogin.service
+544:             └─683 /usr/bin/plasmalogin
+546:mai 29 14:29:52 Mocha plasmalogin-helper[865]: [PAM] returning.
+547:mai 29 14:29:52 Mocha plasmalogin[683]: Authentication for user  "hal"  successful
+548:mai 29 14:29:52 Mocha plasmalogin-helper[865]: pam_kwallet5(plasmalogin:setcred): pam_kwallet5: pam_sm_setcred
+549:mai 29 14:29:52 Mocha plasmalogin-helper[865]: pam_unix(plasmalogin:session): session opened for user hal(uid=1000) by hal(uid=0)
+550:mai 29 14:29:52 Mocha plasmalogin-helper[865]: pam_kwallet5(plasmalogin:session): pam_kwallet5: pam_sm_open_session
+551:mai 29 14:29:52 Mocha plasmalogin-helper[865]: Starting Wayland user session: "/usr/share/plasmalogin/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+552:mai 29 14:29:52 Mocha plasmalogin[683]: Session started true
+553:mai 29 14:29:57 Mocha plasmalogin[683]: Greeter stopping...
+554:mai 29 14:29:57 Mocha plasmalogin[683]: Auth: plasmalogin-helper exited with 255
+555:mai 29 14:29:57 Mocha plasmalogin[683]: Greeter stopped. PLASMALOGIN::Auth::HelperExitStatus(255)
+558:/usr/lib/systemd/system/plasmalogin.service
+562:plasmalogin.service                          enabled         disabled
+573:sddm.service                                 disabled        disabled
+583:XDG_CURRENT_DESKTOP=KDE
+585:Desktop=KDE
+589:### Montagens obrigatórias FAST e VMSTORE
+592:/media/mochafast: MONTADO
+594:/media/mochafast /dev/sda1 btrfs  rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/
+596:/media/vmstore: MONTADO
+598:/media/vmstore /dev/sdb1 xfs    rw,noatime,inode64,logbufs=8,logbsize=32k,noquota
+601:17:UUID=88e6aa16-110c-4b97-9ffb-85084c000198 /media/mochafast btrfs defaults,noatime,compress=zstd:3,ssd,discard=async,nofail,x-systemd.device-timeout=10s 0 0
+602:18:UUID=b81630a0-0756-45e4-9cb2-c7f16637a1c6 /media/vmstore xfs defaults,noatime,nofail,x-systemd.device-timeout=10s 0 2
+634:--- NVIDIA power/persistence ---
+639:Driver Version                                         : 595.71.05
+675:### Correção Bluetooth e volume duplicados
+696:Name[ja]=Bluetooth アプレット
+707:Name[sk]=Aplet bluetooth
+717:Comment[ast]=Alministrador Bluetooth Blueman
+718:Comment[be]=Blueman - кіраўнік Bluetooth
+719:Comment[ca]=Gestor de Bluetooth Blueman
+720:Comment[da]=Blueman Bluetooth-håndtering
+721:Comment[de]=Blueman Bluetooth Manager
+722:Comment[el]=Διαχειριστής bluetooth του blueman
+723:Comment[en_GB]=Blueman Bluetooth Manager
+724:Comment[es]=Gestor de conexiones Bluetooth Blueman
+725:Comment[et]=Bluetoothi haldur Blueman
+726:Comment[eu]=Blueman Bluetooth kudeatzailea
+727:Comment[fi]=Blueman bluetooth-hallinta
+728:Comment[fr]=Gestionnaire Bluetooth Blueman
+729:Comment[ga]=Bainisteoir Bluetooth Blueman
+731:Comment[hr]=Blueman Bluetooth upravitelj
+732:Comment[hu]=Blueman Bluetooth-kezelő
+733:Comment[is]=Blueman Bluetooth-umsýsla
+734:Comment[it]=Blueman Gestore Bluetooth
+735:Comment[ja]=Blueman Bluetooth マネージャー
+737:Comment[lt]=Blueman „Bluetooth“ tvarkytuvė
+744:OnlyShowIn=KDE;
+746:X-KDE-autostart-after=panel
+747:X-KDE-autostart-after=pulseaudio
+748:X-KDE-StartupNotify=false
+750:X-KDE-autostart-condition=kmixrc:Global:AutoStart:true
+806:Comment=Mocha KDE: disabled because KDE/Bluedevil already provides Bluetooth in the system tray
+808:OnlyShowIn=KDE;
+815:Comment=Mocha KDE: disabled because Plasma volume applet already provides volume control in the system tray
+817:OnlyShowIn=KDE;
+822:### Barra Win11/Mocha aprovada
+825:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+826:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+827:2026-05-29 15:33  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+830:30:plugin=org.kde.plasma.digitalclock
+831:45:plugin=org.kde.plasma.kickoff
+832:63:plugin=org.kde.plasma.icontasks
+833:78:plugin=org.kde.plasma.systemtray
+835:163:plugin=org.kde.plasma.panelspacer
+837:170:plugin=org.kde.plasma.panelspacer
+844:2026-05-28 22:56  1159 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+845:2026-05-29 15:01  1754 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md
+846:2026-05-29 15:01  2068 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-150104-mocha-aplicar-login-plasma-manager.sh
+847:2026-05-29 15:01  2068 bytes  /media/mochafast/MochaArch/ativo/scripts/mocha-aplicar-login-plasma-manager.sh
+848:2026-05-29 15:24  10321 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/resumo-auditoria.txt
+849:2026-05-29 15:24  1070 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
+850:2026-05-29 15:24  4616 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasma-applets-volume-bluetooth-systemtray.txt
+851:2026-05-29 15:24  624 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/LEIA-ME.txt
+852:2026-05-29 15:25  3401 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152529-corrigir-blueman-auditar-volume/execucao.log
+853:2026-05-29 15:27  1108 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-152700-mocha-desativar-kmix-volume-duplicado.sh
+854:2026-05-29 15:27  1389 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md
+855:2026-05-29 15:27  7077 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152700-corrigir-kmix-volume-duplicado/execucao.log
+856:2026-05-29 15:29  1624 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+857:2026-05-29 15:29  1624 bytes  /media/mochafast/MochaArch/ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
+858:2026-05-29 15:29  2541 bytes  /media/mochafast/MochaArch/ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh
+859:2026-05-29 15:29  3810 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log
+860:2026-05-29 15:30  3891 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
+861:2026-05-29 15:32  824 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log
+862:2026-05-29 15:33  2039 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
+863:2026-05-29 15:33  2985 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+864:2026-05-29 15:33  835 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+865:2026-05-29 15:43  17941 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-154304-auditoria-estado-atual-para-manual.md
+866:2026-05-29 15:43  203 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-154304-criar-manual-vivo-definitivo-mocha-arch-kde.log
+872:Estas evidências foram extraídas automaticamente de `documentacao`, `scripts`, `logs` e `kde`, ignorando `backups`, `quarentena` e caminhos com `XU`.
+874:### Driver de vídeo NVIDIA
+887:### Kernel atual
+893:### Driver NVIDIA
+898:| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
+904:|   0  NVIDIA GeForce RTX 5060 Ti     On  |   00000000:01:00.0  On |                  N/A |
+918:|    0   N/A  N/A            1081      G   /usr/bin/kded6                            2MiB |
+920:|    0   N/A  N/A            1193      G   ...it-kde-authentication-agent-1          2MiB |
+921:|    0   N/A  N/A            1288      G   /usr/bin/kdeconnectd                      2MiB |
+928:|    0   N/A  N/A            2676      G   ./steamwebhelper                         23MiB |
+929:|    0   N/A  N/A            2705    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+938:### Pacotes de kernel, NVIDIA, Vulkan e Steam relevantes
+943:gamemode 1.8.2-2
+944:lib32-gamemode 1.8.2-1
+
+== 3/13 — validar kernel e driver sem alterar nada ==
+-- Kernel ativo:
+Linux Mocha 7.0.10-2-cachyos #1 SMP PREEMPT_DYNAMIC Thu, 28 May 2026 21:12:58 +0000 x86_64 GNU/Linux
+
+-- Pacotes de kernel instalados:
+linux 7.0.10.arch1-1
+linux-api-headers 6.19-1
+linux-atm 2.5.2-9
+linux-cachyos 7.0.10-2
+linux-cachyos-headers 7.0.10-2
+linux-cachyos-nvidia-open 7.0.10-2
+linux-firmware 20260519-1
+linux-firmware-amdgpu 20260519-1
+linux-firmware-atheros 20260519-1
+linux-firmware-broadcom 20260519-1
+linux-firmware-cirrus 20260519-1
+linux-firmware-intel 20260519-1
+linux-firmware-mediatek 20260519-1
+linux-firmware-nvidia 20260519-1
+linux-firmware-other 20260519-1
+linux-firmware-radeon 20260519-1
+linux-firmware-realtek 20260519-1
+linux-firmware-whence 20260519-1
+linux-headers 7.0.10.arch1-1
+
+-- NVIDIA:
+lib32-nvidia-utils 610.43.02-1
+nvidia-settings 610.43.02-1
+nvidia-utils 610.43.02-3
+opencl-nvidia 610.43.02-2
+
+-- Módulos NVIDIA carregados:
+nvidia_drm            176128  96
+nvidia_modeset       1847296  55 nvidia_drm
+nvidia_uvm           2359296  0
+nvidia              17174528  1037 nvidia_uvm,nvidia_modeset
+
+-- GPU:
+01:00.0 VGA compatible controller: NVIDIA Corporation GB206 [GeForce RTX 5060 Ti] (rev a1)
+	Subsystem: Micro-Star International Co., Ltd. [MSI] Device 5351
+	Kernel driver in use: nvidia
+	Kernel modules: nouveau, nvidia_drm, nvidia
+01:00.1 Audio device: NVIDIA Corporation GB206 High Definition Audio Controller (rev a1)
+	Subsystem: NVIDIA Corporation Device 0000
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+02:00.0 USB controller: Advanced Micro Devices, Inc. [AMD] A520 Series Chipset USB 3.1 XHCI Controller
+	Subsystem: ASMedia Technology Inc. Device 1142
+
+== 4/13 — garantir que repositórios Cachy temporários não fiquem ativos ==
+-- Repositórios ativos antes:
+9:[options]
+78:[core]
+84:[extra]
+93:[multilib]
+OK: nenhum bloco Cachy ativo em /etc/pacman.conf.
+-- Repositórios ativos depois:
+9:[options]
+78:[core]
+84:[extra]
+93:[multilib]
+
+== 5/13 — habilitar multilib se necessário para Steam/lib32, sem atualização geral ==
+OK: multilib já ativo.
+
+== 6/13 — instalar somente pacotes pós-kernel do manual, sem Chrome, sem vkbasalt/gamescope ==
+-- Pacotes encontrados nos repositórios ativos ou já instalados:
+  sddm
+  flatpak
+  firewalld
+  plasma-firewall
+  steam
+  gamemode
+  lib32-gamemode
+  mangohud
+  lib32-mangohud
+  goverlay
+  vulkan-tools
+  mesa-utils
+  btop
+  nvtop
+  vivaldi
+  bitwarden
+
+-- Pacotes não encontrados nos repositórios ativos, pulados sem AUR automático:
+  onlyoffice-desktopeditors
+
+Instalando pacotes disponíveis com --needed, sem upgrade geral do sistema:
+atenção: sddm-0.21.0-7 está atualizado -- ignorando
+atenção: flatpak-1:1.16.6-1 está atualizado -- ignorando
+atenção: plasma-firewall-6.6.5-1 está atualizado -- ignorando
+atenção: vulkan-tools-1.4.350.0-1 está atualizado -- ignorando
+atenção: mesa-utils-9.0.0-7 está atualizado -- ignorando
+resolvendo dependências...
+procurando pacotes conflitantes...
+
+Pacotes (66) 7zip-26.01-1  c-ares-1.34.6-1  electron37-37.5.1-1  glfw-1:3.4-1  lib32-alsa-lib-1.2.15.3-1  lib32-alsa-plugins-1.2.12-1  lib32-dbus-1.16.2-1  lib32-fontconfig-2:2.17.1-1  lib32-freetype2-2.14.3-1  lib32-glew-2.3.1-1  lib32-glib2-2.88.1-1  lib32-glu-9.0.3-2  lib32-libgcrypt-1.12.2-1  lib32-libgpg-error-1.61-1  lib32-libice-1.1.1-2  lib32-libnm-1.56.1-1  lib32-libpipewire-1:1.6.6-1  lib32-libpng-1.6.58-1  lib32-libsm-1.2.6-1  lib32-libva-2.22.0-1  lib32-libxcrypt-compat-4.5.2-1  lib32-libxfixes-6.0.1-2  lib32-libxi-1.8.3-1  lib32-libxinerama-1.1.6-1  lib32-libxkbcommon-1.13.1-1  lib32-libxmu-1.3.1-1  lib32-libxss-1.2.5-1  lib32-libxt-1.3.1-1  lib32-nspr-4.39-1  lib32-nss-3.124-1  lib32-pcre2-10.47-1  lib32-pipewire-1:1.6.6-1  lib32-sqlite-3.53.1-1  lib32-systemd-260.2-1  lib32-util-linux-2.42.1-1  lib32-vulkan-icd-loader-1.4.350.0-1  libimagequant-4.4.1-2  libnss_nis-3.4-1  libxcrypt-compat-4.5.2-1  lsof-4.99.6-1  python-capng-0.9.3-1  python-contourpy-1.3.3-4  python-cycler-0.12.1-4  python-dateutil-2.9.0-8  python-firewall-2.4.1-1  python-fonttools-4.63.0-1  python-kiwisolver-1.5.0-1  python-matplotlib-3.10.9-1  python-numpy-2.4.6-1  python-pillow-12.2.0-1  python-pyparsing-3.3.2-1  python-six-1.17.0-3  qt6pas-6.2.10-3  steam-devices-1.0.0.85-7  zenity-4.2.2-1  bitwarden-2026.2.1-1  btop-1.4.7-1  firewalld-2.4.1-1  gamemode-1.8.2-2  goverlay-1.8.1-1  lib32-gamemode-1.8.2-1  lib32-mangohud-0.8.4-1  mangohud-0.8.4-1  nvtop-3.3.2-1  steam-1.0.0.85-7  vivaldi-8.0.4033.35-1
+
+Tamanho total download:   285,32 MiB
+Tamanho total instalado:  980,64 MiB
+
+:: Continuar a instalação? [S/n] 
+:: Obtendo pacotes...
+ vivaldi-8.0.4033.35-1-x86_64 sendo baixado...
+ electron37-37.5.1-1-x86_64 sendo baixado...
+ steam-1.0.0.85-7-x86_64 sendo baixado...
+ bitwarden-2026.2.1-1-x86_64 sendo baixado...
+ python-numpy-2.4.6-1-x86_64 sendo baixado...
+ python-matplotlib-3.10.9-1-x86_64 sendo baixado...
+ python-fonttools-4.63.0-1-x86_64 sendo baixado...
+ zenity-4.2.2-1-x86_64 sendo baixado...
+ goverlay-1.8.1-1-x86_64 sendo baixado...
+ mangohud-0.8.4-1-x86_64 sendo baixado...
+ 7zip-26.01-1-x86_64 sendo baixado...
+ lib32-mangohud-0.8.4-1-x86_64 sendo baixado...
+ lib32-pipewire-1:1.6.6-1-x86_64 sendo baixado...
+ lib32-glib2-2.88.1-1-x86_64 sendo baixado...
+ lib32-nss-3.124-1-x86_64 sendo baixado...
+ python-pillow-12.2.0-1-x86_64 sendo baixado...
+ lib32-systemd-260.2-1-x86_64 sendo baixado...
+ lib32-sqlite-3.53.1-1-x86_64 sendo baixado...
+ btop-1.4.7-1-x86_64 sendo baixado...
+ qt6pas-6.2.10-3-x86_64 sendo baixado...
+ lib32-pcre2-10.47-1-x86_64 sendo baixado...
+ lib32-libgcrypt-1.12.2-1-x86_64 sendo baixado...
+ python-firewall-2.4.1-1-any sendo baixado...
+ lib32-libnm-1.56.1-1-x86_64 sendo baixado...
+ lib32-util-linux-2.42.1-1-x86_64 sendo baixado...
+ firewalld-2.4.1-1-any sendo baixado...
+ glfw-1:3.4-1-x86_64 sendo baixado...
+ lib32-alsa-lib-1.2.15.3-1-x86_64 sendo baixado...
+ lib32-freetype2-2.14.3-1-x86_64 sendo baixado...
+ lib32-libpipewire-1:1.6.6-1-x86_64 sendo baixado...
+ python-dateutil-2.9.0-8-any sendo baixado...
+ python-contourpy-1.3.3-4-x86_64 sendo baixado...
+ libimagequant-4.4.1-2-x86_64 sendo baixado...
+ python-pyparsing-3.3.2-1-any sendo baixado...
+ c-ares-1.34.6-1-x86_64 sendo baixado...
+ lib32-glew-2.3.1-1-x86_64 sendo baixado...
+ lib32-libxkbcommon-1.13.1-1-x86_64 sendo baixado...
+ lib32-vulkan-icd-loader-1.4.350.0-1-x86_64 sendo baixado...
+ lib32-libxt-1.3.1-1-x86_64 sendo baixado...
+ lsof-4.99.6-1-x86_64 sendo baixado...
+ lib32-fontconfig-2:2.17.1-1-x86_64 sendo baixado...
+ lib32-glu-9.0.3-2-x86_64 sendo baixado...
+ lib32-libpng-1.6.58-1-x86_64 sendo baixado...
+ lib32-dbus-1.16.2-1-x86_64 sendo baixado...
+ lib32-nspr-4.39-1-x86_64 sendo baixado...
+ lib32-libva-2.22.0-1-x86_64 sendo baixado...
+ nvtop-3.3.2-1-x86_64 sendo baixado...
+ gamemode-1.8.2-2-x86_64 sendo baixado...
+ lib32-libgpg-error-1.61-1-x86_64 sendo baixado...
+ libxcrypt-compat-4.5.2-1-x86_64 sendo baixado...
+ lib32-libxcrypt-compat-4.5.2-1-x86_64 sendo baixado...
+ lib32-alsa-plugins-1.2.12-1-x86_64 sendo baixado...
+ python-kiwisolver-1.5.0-1-x86_64 sendo baixado...
+ lib32-libxmu-1.3.1-1-x86_64 sendo baixado...
+ lib32-libice-1.1.1-2-x86_64 sendo baixado...
+ lib32-libxi-1.8.3-1-x86_64 sendo baixado...
+ python-six-1.17.0-3-any sendo baixado...
+ python-capng-0.9.3-1-x86_64 sendo baixado...
+ libnss_nis-3.4-1-x86_64 sendo baixado...
+ python-cycler-0.12.1-4-any sendo baixado...
+ lib32-libsm-1.2.6-1-x86_64 sendo baixado...
+ lib32-gamemode-1.8.2-1-x86_64 sendo baixado...
+ lib32-libxfixes-6.0.1-2-x86_64 sendo baixado...
+ lib32-libxss-1.2.5-1-x86_64 sendo baixado...
+ lib32-libxinerama-1.1.6-1-x86_64 sendo baixado...
+ steam-devices-1.0.0.85-7-x86_64 sendo baixado...
+verificando chaveiro...
+verificando integridade de pacotes...
+carregando arquivos do pacote...
+verificando conflitos de arquivos...
+verificando espaço em disco disponível...
+:: Processando alterações do pacote...
+instalando python-firewall...
+instalando python-capng...
+instalando firewalld...
+
+:: The firewallD components & utilities have now been split into different packages:
+
+   - firewalld: Firewall daemon with D-Bus interface 
+   - python-firewall: Python bindings for firewallD
+   - firewall-config: Graphical user interface for firewallD
+   - firewall-applet: Systray applet for firewallD
+   - firewalld-test: FirewallD test suite
+
+   Make sure to install the ones you may want / need.
+
+Dependências opcionais para firewalld
+    bash-completion: bash completion [instalado]
+    networkmanager: NetworkManager support [instalado]
+    polkit: privileged actions [instalado]
+    firewall-config: Graphical user interface for firewallD configuration
+    firewall-applet: Systray applet for firewallD
+    firewalld-test: firewallD test suite
+instalando libxcrypt-compat...
+instalando lsof...
+instalando zenity...
+instalando steam-devices...
+instalando lib32-alsa-lib...
+instalando lib32-alsa-plugins...
+Dependências opcionais para lib32-alsa-plugins
+    lib32-dbus: for maemo plugin [pendente]
+    lib32-jack: for pcm_jack plugin
+    lib32-libavtp: for pcm_aaf plugin
+    lib32-libsamplerate: for rate_samplerate plugin
+    lib32-libpulse: for conf_pulse, ctl_pulse and pcm_pulse plugins
+    lib32-speexdsp: for pcm_speex and rate_speexrate plugins
+instalando lib32-libpng...
+instalando lib32-freetype2...
+Dependências opcionais para lib32-freetype2
+    lib32-harfbuzz: Improved autohinting
+instalando lib32-fontconfig...
+Rebuilding 32-bit fontconfig cache...
+instalando lib32-libgpg-error...
+instalando lib32-pcre2...
+instalando lib32-util-linux...
+instalando lib32-glib2...
+instalando lib32-nspr...
+instalando lib32-sqlite...
+instalando lib32-nss...
+instalando lib32-libgcrypt...
+instalando lib32-systemd...
+instalando lib32-libnm...
+instalando lib32-libxfixes...
+instalando lib32-libva...
+Dependências opcionais para lib32-libva
+    lib32-libva-intel-driver: backend for Intel GPUs (<= Haswell)
+    lib32-libva-mesa-driver: backend for AMD and NVIDIA GPUs [instalado]
+instalando lib32-libxcrypt-compat...
+instalando lib32-libxinerama...
+instalando lib32-libxss...
+instalando lib32-libpipewire...
+instalando lib32-dbus...
+instalando lib32-pipewire...
+Dependências opcionais para lib32-pipewire
+    lib32-pipewire-jack: JACK support
+    lib32-pipewire-v4l2: V4L2 interceptor
+instalando lib32-vulkan-icd-loader...
+Dependências opcionais para lib32-vulkan-icd-loader
+    lib32-vulkan-driver: packaged vulkan driver [instalado]
+instalando steam...
+Dependências opcionais para steam
+    polkit: to setup SteamVR without root access [instalado]
+    xdg-desktop-portal-impl: file & folder picker [instalado]
+    xorg-fonts-misc: for non-latin locales
+instalando gamemode...
+instalando lib32-gamemode...
+instalando glfw...
+instalando python-numpy...
+Dependências opcionais para python-numpy
+    blas-openblas: faster linear algebra
+instalando python-contourpy...
+Dependências opcionais para python-contourpy
+    python-matplotlib: matplotlib renderer [pendente]
+instalando python-cycler...
+instalando python-six...
+instalando python-dateutil...
+instalando python-fonttools...
+Dependências opcionais para python-fonttools
+    python-brotli: to compress/decompress WOFF 2.0 web fonts
+    python-fs: to read/write UFO source files
+    python-lxml: faster backend for XML files reading/writing [instalado]
+    python-lz4: for graphite type tables in ttLib/tables
+    python-matplotlib: for visualizing DesignSpaceDocument and resulting VariationModel [pendente]
+    python-pyqt5: for drawing glyphs with Qt’s QPainterPath [instalado]
+    python-reportlab: to drawing glyphs as PNG images
+    python-scipy: for finding wrong contour/component order between different masters
+    python-sympy: for symbolic font statistics analysis
+    python-uharfbuzz: to use the Harfbuzz Repacker for packing GSUB/GPOS tables
+    python-unicodedata2: for displaying the Unicode character names when dumping the cmap table with ttx
+    python-zopfli: faster backend fom WOFF 1.0 web fonts compression
+instalando python-kiwisolver...
+instalando libimagequant...
+instalando python-pillow...
+Dependências opcionais para python-pillow
+    libwebp: for webp images [instalado]
+    tk: for the ImageTK module
+    python-olefile: OLE2 file support
+    python-pyqt6: for the ImageQt module
+    python-defusedxml: for reading XMP tags [instalado]
+instalando python-pyparsing...
+Dependências opcionais para python-pyparsing
+    python-railroad-diagrams: for generating Railroad Diagrams
+    python-jinja: for generating Railroad Diagrams [instalado]
+instalando python-matplotlib...
+Dependências opcionais para python-matplotlib
+    tk: Tk{Agg,Cairo} backends
+    pyside6: alternative for Qt6{Agg,Cairo} backends [instalado]
+    python-pyqt6: Qt6{Agg,Cairo} backends
+    python-gobject: for GTK{3,4}{Agg,Cairo} backend [instalado]
+    python-wxpython: WX{Agg,Cairo} backend
+    python-cairo: {GTK{3,4},Qt{5,6},Tk,WX}Cairo backends [instalado]
+    python-cairocffi: alternative for Cairo backends
+    python-tornado: WebAgg backend
+    ffmpeg: for saving movies [instalado]
+    imagemagick: for saving animated gifs [instalado]
+    ghostscript: usetex dependencies [instalado]
+    texlive-binextra: usetex dependencies
+    texlive-fontsrecommended: usetex dependencies
+    texlive-latexrecommended: usetex usage with pdflatex
+    python-certifi: https support [instalado]
+instalando mangohud...
+Dependências opcionais para mangohud
+    gamescope: Use MangoApp as an overlay within gamescope
+    libxnvctrl: NVIDIA GPU stats by XNVCtrl [instalado]
+instalando lib32-libice...
+instalando lib32-libsm...
+instalando lib32-libxt...
+instalando lib32-libxmu...
+instalando lib32-libxi...
+instalando lib32-glu...
+instalando lib32-glew...
+instalando lib32-libxkbcommon...
+instalando lib32-mangohud...
+instalando qt6pas...
+instalando 7zip...
+instalando goverlay...
+Dependências opcionais para goverlay
+    mesa-utils: OpenGL preview [instalado]
+    vulkan-tools: Vulkan preview [instalado]
+    vkbasalt: Configure vkBasalt
+    git: Clone reshade repository [instalado]
+instalando btop...
+Dependências opcionais para btop
+    rocm-smi-lib: AMD GPU support
+instalando nvtop...
+instalando vivaldi...
+Dependências opcionais para vivaldi
+    vivaldi-ffmpeg-codecs: playback of proprietary video/audio
+    org.freedesktop.secrets: better secret storage in gnome-keyring or kwallet [instalado]
+    libnotify: native notifications [instalado]
+    pipewire: WebRTC desktop sharing under Wayland [instalado]
+    gtk3: gtk3 integration [instalado]
+    gtk4: for use with --gtk-version=4 [instalado]
+    qt5-base: qt5 integration [instalado]
+    qt6-base: qt6 integration [instalado]
+    upower: Battery Status API support [instalado]
+instalando c-ares...
+instalando electron37...
+Dependências opcionais para electron37
+    kde-cli-tools: file deletion support (kioclient5) [instalado]
+    pipewire: WebRTC desktop sharing under Wayland [instalado]
+    qt5-base: enable Qt5 with --enable-features=AllowQt [instalado]
+    gtk4: for --gtk-version=4 (GTK4 IME might work better on Wayland) [instalado]
+    trash-cli: file deletion support (trash-put)
+    xdg-utils: open URLs with desktop’s default (xdg-email, xdg-open) [instalado]
+instalando libnss_nis...
+instalando bitwarden...
+:: Executando hooks pós-transação...
+(1/8) Creating system user accounts...
+Creating group 'gamemode' with GID 952.
+(2/8) Reloading system manager configuration...
+(3/8) Reloading user manager configuration...
+(4/8) Reloading device manager configuration...
+(5/8) Arming ConditionNeedsUpdate...
+(6/8) Reloading system bus configuration...
+(7/8) Updating icon theme caches...
+(8/8) Updating the desktop file MIME type cache...
+
+== 7/13 — configurar login manager SDDM em Wayland, sem reiniciar a sessão atual ==
+-- Display manager atual:
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-06-02 09:59:42 -03; 6min ago
+ Invocation: d8817ac4a05247e0b0a8f69dc6503e7c
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 705 (sddm)
+      Tasks: 4 (limit: 18765)
+     Memory: 229M (peak: 232M)
+        CPU: 622ms
+     CGroup: /system.slice/sddm.service
+             ├─705 /usr/bin/sddm
+             └─707 /usr/lib/Xorg -nolisten tcp -background none -seat seat0 vt2 -auth /run/sddm/xauth_Ufikzq -noreset -displayfd 16
+
+jun 02 09:59:43 Mocha sddm-helper[716]: Starting X11 session: "" "/usr/bin/sddm-greeter-qt6 --socket /tmp/sddm-:0-GVBMAb"
+jun 02 09:59:43 Mocha sddm[705]: Greeter session started successfully
+jun 02 09:59:43 Mocha sddm[705]: Message received from greeter: Connect
+jun 02 09:59:48 Mocha sddm[705]: Message received from greeter: Login
+jun 02 09:59:48 Mocha sddm[705]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+jun 02 09:59:48 Mocha sddm[705]: Session "/usr/share/wayland-sessions/plasma.desktop" selected, command: "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland" for VT 1
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Starting...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Authenticating...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Preparing to converse...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Conversation with 1 messages
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] returning.
+jun 02 09:59:48 Mocha sddm[705]: Authentication for user  "hal"  successful
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_unix(sddm:session): session opened for user hal(uid=1000) by hal(uid=0)
+jun 02 09:59:48 Mocha sddm[705]: Auth: sddm-helper exited successfully
+jun 02 09:59:48 Mocha sddm[705]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+jun 02 09:59:49 Mocha sddm-helper[745]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+jun 02 09:59:49 Mocha sddm-helper[745]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+jun 02 09:59:49 Mocha sddm[705]: Session started true
+
+-- Serviços de login manager existentes:
+UNIT FILE    STATE   PRESET
+sddm.service enabled disabled
+
+1 unit files listed.
+-- Configuração SDDM Mocha:
+[General]
+DisplayServer=wayland
+
+[Theme]
+Current=breeze
+-- Definindo SDDM como display-manager padrão do próximo boot:
+
+-- Display manager após enable:
+● sddm.service - Simple Desktop Display Manager
+     Loaded: loaded (/usr/lib/systemd/system/sddm.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2026-06-02 09:59:42 -03; 6min ago
+ Invocation: d8817ac4a05247e0b0a8f69dc6503e7c
+       Docs: man:sddm(1)
+             man:sddm.conf(5)
+   Main PID: 705 (sddm)
+      Tasks: 4 (limit: 18765)
+     Memory: 229M (peak: 232M)
+        CPU: 622ms
+     CGroup: /system.slice/sddm.service
+             ├─705 /usr/bin/sddm
+             └─707 /usr/lib/Xorg -nolisten tcp -background none -seat seat0 vt2 -auth /run/sddm/xauth_Ufikzq -noreset -displayfd 16
+
+jun 02 09:59:43 Mocha sddm-helper[716]: Starting X11 session: "" "/usr/bin/sddm-greeter-qt6 --socket /tmp/sddm-:0-GVBMAb"
+jun 02 09:59:43 Mocha sddm[705]: Greeter session started successfully
+jun 02 09:59:43 Mocha sddm[705]: Message received from greeter: Connect
+jun 02 09:59:48 Mocha sddm[705]: Message received from greeter: Login
+jun 02 09:59:48 Mocha sddm[705]: Reading from "/usr/share/wayland-sessions/plasma.desktop"
+jun 02 09:59:48 Mocha sddm[705]: Session "/usr/share/wayland-sessions/plasma.desktop" selected, command: "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland" for VT 1
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Starting...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Authenticating...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Preparing to converse...
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] Conversation with 1 messages
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_kwallet5(sddm:auth): pam_kwallet5: pam_sm_authenticate
+jun 02 09:59:48 Mocha sddm-helper[745]: [PAM] returning.
+jun 02 09:59:48 Mocha sddm[705]: Authentication for user  "hal"  successful
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_kwallet5(sddm:setcred): pam_kwallet5: pam_sm_setcred
+jun 02 09:59:48 Mocha sddm-helper[745]: pam_unix(sddm:session): session opened for user hal(uid=1000) by hal(uid=0)
+jun 02 09:59:48 Mocha sddm[705]: Auth: sddm-helper exited successfully
+jun 02 09:59:48 Mocha sddm[705]: Greeter stopped. SDDM::Auth::HELPER_SUCCESS
+jun 02 09:59:49 Mocha sddm-helper[745]: pam_kwallet5(sddm:session): pam_kwallet5: pam_sm_open_session
+jun 02 09:59:49 Mocha sddm-helper[745]: Starting Wayland user session: "/usr/share/sddm/scripts/wayland-session" "/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
+jun 02 09:59:49 Mocha sddm[705]: Session started true
+
+OK: SDDM fica como login manager padrão no próximo boot. A sessão atual não foi reiniciada.
+
+== 8/13 — ativar firewall e DNS criptografado Cloudflare ==
+Created symlink '/etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service' → '/usr/lib/systemd/system/firewalld.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/firewalld.service' → '/usr/lib/systemd/system/firewalld.service'.
+FirewallD is not running
+FirewallD is not running
+success
+running
+Created symlink '/etc/systemd/system/dbus-org.freedesktop.resolve1.service' → '/usr/lib/systemd/system/systemd-resolved.service'.
+Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-resolved.service' → '/usr/lib/systemd/system/systemd-resolved.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-varlink.socket' → '/usr/lib/systemd/system/systemd-resolved-varlink.socket'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-monitor.socket' → '/usr/lib/systemd/system/systemd-resolved-monitor.socket'.
+Global
+           Protocols: +LLMNR +mDNS +DNSOverTLS DNSSEC=allow-downgrade/supported
+    resolv.conf mode: stub
+  Current DNS Server: 1.1.1.1#cloudflare-dns.com
+         DNS Servers: 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com
+                      2606:4700:4700::1111#cloudflare-dns.com
+                      2606:4700:4700::1001#cloudflare-dns.com
+Fallback DNS Servers: 9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net
+          DNS Domain: ~.
+
+Link 2 (enp4s0)
+    Current Scopes: DNS LLMNR/IPv4 LLMNR/IPv6 mDNS/IPv4 mDNS/IPv6
+         Protocols: +DefaultRoute +LLMNR +mDNS +DNSOverTLS
+                    DNSSEC=allow-downgrade/supported
+Current DNS Server: 192.168.100.1
+       DNS Servers: 192.168.100.1 fe80::1%2
+     Default Route: yes
+
+== 9/13 — habilitar Flathub ==
+flathub	system
+
+== 10/13 — criar atalho do firewall na área de trabalho ==
+Atalho criado: /home/hal/Área de trabalho/Mocha-Firewall.desktop
+
+== 11/13 — aplicar MangoHud Mocha e wrapper Steam canônico ==
+Wrapper canônico Steam:
+/home/hal/.local/bin/mocha-steam-game-run %command%
+
+== 12/13 — corrigir duplicidade KDE de Bluetooth/volume sem remover pacotes ==
+
+== 13/13 — registrar estado pós-manual ==
+
+== CONCLUÍDO ==
+Manual lido: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Status: /media/mochafast/MochaArch/ativo/documentacao/20260602-100554-estado-pos-manual-kernel-driver-login-manager-ok.md
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-100554-seguir-manual-pos-kernel-driver-com-login-manager.log
+
+Login manager:
+SDDM habilitado para o próximo boot com greeter em Wayland.
+
+Launch Option canônica Steam:
+/home/hal/.local/bin/mocha-steam-game-run %command%

@@ -1,0 +1,140 @@
+== MOCHAARCH — CachyOS temporário para kernel normal + NVIDIA; depois Arch update ==
+Timestamp: 20260602-081845
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260602-081845-cachy-normal-temp-nvidia-arch-update.log
+
+== 0) sudo inicial e keepalive ==
+
+== 1) Auditoria inicial somente leitura ==
+-- Kernel em uso:
+Linux Mocha 7.0.9-1-cachyos #1 SMP PREEMPT_DYNAMIC Tue, 19 May 2026 11:47:15 +0000 x86_64 GNU/Linux
+
+-- Pacotes de kernel instalados:
+dkms 3.4.1-1
+grub 2:2.14-1
+linux 7.0.10.arch1-1
+linux-cachyos 7.0.9-1
+mkinitcpio 41-4
+
+-- Repositórios ativos no pacman.conf:
+77:[core]
+83:[extra]
+92:[multilib]
+
+
+== 2) Backup controlado de pacman.conf e grub ==
+-- Mantendo no máximo 2 backups por arquivo:
+
+== 3) Detectar canal Cachy compatível com a CPU, sem escolher kernel variante ==
+Canal Cachy detectado para pacotes: v3
+Pacote de kernel alvo: linux-cachyos
+Pacote NVIDIA alvo para esse kernel: linux-cachyos-nvidia-open
+
+
+== 4) Preparar keyring/mirrorlists do CachyOS sem instalar pacman modificado ==
+gpg: key F3B607488DB35A47: "CachyOS <admin@cachyos.org>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+  -> Locally signed 1 key.
+==> Updating trust database...
+gpg: next trustdb check due at 2026-10-21
+-- Baixando pacotes oficiais mínimos: keyring + mirrorlists
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100   4967 100   4967   0      0  65123      0                              0100   4967 100   4967   0      0  65071      0                              0100   4967 100   4967   0      0  65021      0                              0
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100   3630 100   3630   0      0  54515      0                              0100   3630 100   3630   0      0  54461      0                              0100   3630 100   3630   0      0  54415      0                              0
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100   3650 100   3650   0      0   5016      0                              0100   3650 100   3650   0      0   5015      0                              0100   3650 100   3650   0      0   5015      0                              0
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100   3646 100   3646   0      0   5007      0                              0100   3646 100   3646   0      0   5006      0                              0100   3646 100   3646   0      0   5006      0                              0
+warning: cachyos-keyring-20240331-1 is up to date -- skipping
+warning: cachyos-mirrorlist-27-1 is up to date -- skipping
+loading packages...
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (2) cachyos-v3-mirrorlist-27-1  cachyos-v4-mirrorlist-27-1
+
+Total Installed Size:  0.01 MiB
+
+:: Proceed with installation? [Y/n] 
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+installing cachyos-v3-mirrorlist...
+installing cachyos-v4-mirrorlist...
+
+== 5) Inserir repositório Cachy temporário acima dos repositórios Arch ==
+-- Repositórios após inserção temporária:
+78:[cachyos-v3]
+80:[cachyos-core-v3]
+82:[cachyos-extra-v3]
+86:[core]
+92:[extra]
+101:[multilib]
+
+== 6) Sincronizar bancos e verificar pacote correto ==
+:: Synchronizing package databases...
+ cachyos-v3 downloading...
+ cachyos-core-v3 downloading...
+ cachyos-extra-v3 downloading...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+error: failed retrieving file 'cachyos-core-v3.db' from cdn77.cachyos.org : The requested URL returned error: 572
+-- Candidatos nos repositórios temporários:
+Repository      : cachyos-v3
+Name            : linux-cachyos
+Version         : 7.0.10-2
+Description     : The Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel and modules
+Repository      : cachyos-v3
+Name            : linux-cachyos-headers
+Version         : 7.0.10-2
+Description     : Headers and scripts for building modules for the Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel
+Repository      : cachyos-v3
+Name            : linux-cachyos-nvidia-open
+Version         : 7.0.10-2
+Description     : nvidia open modules of 610.43.02 driver for the linux-cachyos kernel
+Repository      : cachyos-v3
+Name            : nvidia-utils
+Version         : 610.43.02-3
+Description     : NVIDIA drivers utilities
+Repository      : extra
+Name            : nvidia-utils
+Version         : 610.43.02-2
+Description     : NVIDIA drivers utilities
+Repository      : cachyos-v3
+Name            : lib32-nvidia-utils
+Version         : 610.43.02-1
+Description     : NVIDIA drivers utilities (32-bit)
+Repository      : multilib
+Name            : lib32-nvidia-utils
+Version         : 610.43.02-1
+Description     : NVIDIA drivers utilities (32-bit)
+Repository      : cachyos-v3
+Name            : nvidia-settings
+Version         : 610.43.02-1
+Description     : Tool for configuring the NVIDIA graphics driver
+Repository      : cachyos-extra-v3
+Name            : nvidia-settings
+Version         : 610.43.02-1.1
+Description     : Tool for configuring the NVIDIA graphics driver
+Repository      : extra
+Name            : nvidia-settings
+Version         : 610.43.02-1
+Description     : Tool for configuring the NVIDIA graphics driver
+
+== 7) Instalar/atualizar kernel Cachy NORMAL e NVIDIA correspondente ==
+error: failed to prepare transaction (package architecture is not valid)
+:: package linux-cachyos-7.0.10-2-x86_64_v3 does not have a valid architecture
+:: package linux-cachyos-headers-7.0.10-2-x86_64_v3 does not have a valid architecture
+:: package linux-cachyos-nvidia-open-7.0.10-2-x86_64_v3 does not have a valid architecture
+:: package nvidia-utils-610.43.02-3-x86_64_v3 does not have a valid architecture
+:: package lib32-nvidia-utils-610.43.02-1-x86_64_v3 does not have a valid architecture
+:: package nvidia-settings-610.43.02-1-x86_64_v3 does not have a valid architecture

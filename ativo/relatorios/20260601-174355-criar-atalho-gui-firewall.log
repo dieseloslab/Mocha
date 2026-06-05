@@ -1,0 +1,28 @@
+== MOCHAARCH — criar atalho para GUI do firewall ==
+Timestamp: 20260601-174355
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-174355-criar-atalho-gui-firewall.log
+Documento: /media/mochafast/MochaArch/ativo/documentacao/20260601-174355-atalho-gui-firewall.md
+
+[1/6] Detectando Área de Trabalho...
+Área de Trabalho detectada: /home/hal/Área de trabalho
+
+[2/6] Criando lançador robusto em ~/.local/bin...
+Lançador criado: /home/hal/.local/bin/mocha-firewall-gui
+
+[3/6] Criando arquivo .desktop no menu de aplicativos...
+Atalho do menu criado: /home/hal/.local/share/applications/mocha-firewall-gui.desktop
+
+[4/6] Criando atalho na Área de Trabalho...
+Atalho da Área de Trabalho criado: /home/hal/Área de trabalho/mocha-firewall-gui.desktop
+
+[5/6] Atualizando cache do menu KDE, se disponível...
+Cache KDE atualizado com kbuildsycoca6.
+
+[6/6] Documentando...
+
+Concluído.
+Atalho criado na Área de Trabalho:
+/home/hal/Área de trabalho/mocha-firewall-gui.desktop
+
+Também deve aparecer no menu como:
+Mocha Firewall - Interface Gráfica

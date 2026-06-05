@@ -1,0 +1,50 @@
+== MOCHAARCH — separar jogos casuais por perfil ==
+Timestamp: 20260601-111446
+Base: /media/mochafast/MochaArch/ativo
+Log: /media/mochafast/MochaArch/ativo/relatorios/20260601-111446-separar-jogos-casuais-perfis.log
+
+Regra aplicada: na edição Gamer, manter apenas Mahjong/Go entre os joguinhos casuais detectados.
+O restante será documentado como perfil Escola/Casual.
+Este script não remove pacotes do sistema.
+
+Pacotes instalados: 1732
+Pacotes explícitos: 524
+
+Classificando exceções que ficam no perfil Gamer...
+Classificando joguinhos casuais para perfil Escola/Casual...
+Procurando candidatos não classificados por descrição/grupo de pacote...
+Auditoria: 25/524 pacotes explícitos verificados
+Auditoria: 50/524 pacotes explícitos verificados
+Auditoria: 75/524 pacotes explícitos verificados
+Auditoria: 100/524 pacotes explícitos verificados
+Auditoria: 125/524 pacotes explícitos verificados
+Auditoria: 150/524 pacotes explícitos verificados
+Auditoria: 175/524 pacotes explícitos verificados
+Auditoria: 200/524 pacotes explícitos verificados
+Auditoria: 225/524 pacotes explícitos verificados
+Auditoria: 250/524 pacotes explícitos verificados
+Auditoria: 275/524 pacotes explícitos verificados
+Auditoria: 300/524 pacotes explícitos verificados
+Auditoria: 325/524 pacotes explícitos verificados
+Auditoria: 350/524 pacotes explícitos verificados
+Auditoria: 375/524 pacotes explícitos verificados
+Auditoria: 400/524 pacotes explícitos verificados
+Auditoria: 425/524 pacotes explícitos verificados
+Auditoria: 450/524 pacotes explícitos verificados
+Auditoria: 475/524 pacotes explícitos verificados
+Auditoria: 500/524 pacotes explícitos verificados
+Auditoria: 524/524 pacotes explícitos verificados
+
+== Resultado ==
+Manter no Gamer: 4 pacote(s)
+Separar para Escola/Casual: 36 pacote(s)
+Candidatos a revisar: 0 item(ns)
+
+Arquivos atuais:
+- /media/mochafast/MochaArch/ativo/perfis/gamer/jogos-casuais-permitidos-mahjong-go-atual.pacmanlist
+- /media/mochafast/MochaArch/ativo/perfis/gamer/retirar-do-perfil-gamer-jogos-casuais-atual.pacmanlist
+- /media/mochafast/MochaArch/ativo/perfis/escola/jogos-casuais-escola-atual.pacmanlist
+- /media/mochafast/MochaArch/ativo/perfis/escola/revisar-candidatos-jogos-casuais-atual.txt
+- /media/mochafast/MochaArch/ativo/documentacao/20260601-111446-separacao-jogos-casuais-gamer-escola.md
+
+Concluído. Nenhum pacote foi removido.

@@ -1,0 +1,22 @@
+Backup salvo em:
+  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260602-232434-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+Parando Plasma Shell...
+Aplicando appletsrc aprovado...
+Reiniciando Plasma Shell...
+
+Validação:
+30:plugin=org.kde.plasma.digitalclock
+45:plugin=org.kde.plasma.kickoff
+63:plugin=org.kde.plasma.icontasks
+78:plugin=org.kde.plasma.systemtray
+155:AppletOrder=4;6;23;3;5;24;7;21;22
+163:plugin=org.kde.plasma.panelspacer
+166:expanding=true
+170:plugin=org.kde.plasma.panelspacer
+173:expanding=true
+
+Barra Win11/Mocha aprovada restaurada.
+Log:
+  /media/mochafast/MochaArch/ativo/logs/20260602-232434-restaurar-barra-win11-mocha-aprovada.log
+Backup:
+  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260602-232434-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
