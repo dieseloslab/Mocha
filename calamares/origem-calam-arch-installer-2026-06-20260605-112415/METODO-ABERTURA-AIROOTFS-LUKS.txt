@@ -1,0 +1,9 @@
+ISO: /tmp/mocha-iso-calam-arch
+airootfs: /tmp/mocha-iso-calam-arch/arch/x86_64/airootfs.sfs
+initramfs: /tmp/mocha-iso-calam-arch/arch/boot/x86_64/archiso.img
+keyfile extraído: /media/mochafast/MochaArch/auditorias/mocha-dotkey-airootfs-work-20260605-112415/initramfs-extraido/.key
+mapper: /dev/mapper/mocha_airootfs_calam_arch
+montagem: /tmp/mocha-airootfs-calam-arch
+método aceito: /.key extraído de archiso.img
+relatório: /media/mochafast/MochaArch/auditorias/mocha-abre-airootfs-dotkey-calamares-20260605-112415.log
+área de trabalho: /media/mochafast/MochaArch/auditorias/mocha-dotkey-airootfs-work-20260605-112415

@@ -1,0 +1,13 @@
+# Mocha Gamer - remoções candidatas
+# Remover somente depois de validar dependências.
+
+akonadi
+kmail
+kontact
+korganizer
+kaddressbook
+merkuro
+kdeedu-meta
+kdegames-meta
+elisa
+dragon
