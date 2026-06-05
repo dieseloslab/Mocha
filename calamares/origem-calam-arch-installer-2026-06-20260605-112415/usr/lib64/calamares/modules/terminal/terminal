@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f -r /root/.cache/calamares/session.log
+ln -s '/tmp/calamares-root-aaaaaaaa/var/log/pacman.log'  /root/.cache/calamares/session.log

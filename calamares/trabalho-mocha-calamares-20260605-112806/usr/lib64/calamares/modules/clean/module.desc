@@ -1,0 +1,7 @@
+# Syntax is YAML 1.2
+---
+type:       "job"
+name:       "clean"
+interface:  "process"
+command:    "/usr/lib/calamares/modules/clean/clean"
+timeout:    86400

@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f -r /tmp/calamares-root-aaaaaaaa/var/cache/pacman/pkg/*
+rm -f -r /var/cache/pacman/pkg/*
