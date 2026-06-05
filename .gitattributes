@@ -21,3 +21,32 @@
 *.woff filter=lfs diff=lfs merge=lfs -text
 *.woff2 filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
+
+# BEGIN MOCHA LINGUIST POLICY
+# GitHub Languages deve refletir código real do projeto.
+# Auditorias, logs, relatórios, snapshots de trabalho e documentação operacional
+# não devem dominar a barra pública de linguagens.
+
+auditorias/** linguist-generated
+logs/** linguist-generated
+relatorios/** linguist-documentation
+reports/** linguist-documentation
+documentacao/** linguist-documentation
+docs/** linguist-documentation
+receitas/** linguist-documentation
+ajustes/** linguist-documentation
+ATIVO-TRABALHO/** linguist-documentation
+ativo/** linguist-documentation
+
+*.log linguist-generated
+*.bak linguist-generated
+*.old linguist-generated
+*.orig linguist-generated
+*.tmp linguist-generated
+*.backup linguist-generated
+*.pre-* linguist-generated
+
+# Scripts reais continuam detectáveis.
+scripts/** linguist-detectable
+calamares/** linguist-detectable
+# END MOCHA LINGUIST POLICY
