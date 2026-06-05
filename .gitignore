@@ -71,3 +71,7 @@ calamares/aur/*/*.pkg.tar.*
 calamares/aur/*/*.pkg.tar.*.sig
 calamares/aur/*/build/
 MOCHA_CALAMARES_EXCLUDES_END
+calamares/origem-calam-arch-installer-*/usr/lib/calamares/libcalamares.so
+calamares/origem-calam-arch-installer-*/usr/lib64/calamares/libcalamares.so
+calamares/trabalho-mocha-calamares-*/usr/lib/calamares/libcalamares.so
+calamares/trabalho-mocha-calamares-*/usr/lib64/calamares/libcalamares.so
