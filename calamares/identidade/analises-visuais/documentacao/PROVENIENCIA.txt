@@ -1,0 +1,4 @@
+origem_local=/media/mochafast/MochaArch/calamares/identidade/analises-visuais/migracao-area-de-trabalho-20260606-171425/Mocha-Calamares-Analise-Visual-20260606-171057
+publicado_em=2026-06-06T17:19:54-03:00
+arquivos_validados=38
+classificacao_local=/media/mochafast/MochaArch/auditorias/mocha-classificacao-diferencas-analises-visuais-20260606-171831

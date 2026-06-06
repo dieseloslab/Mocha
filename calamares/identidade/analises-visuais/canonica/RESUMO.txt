@@ -1,0 +1,20 @@
+MOCHA CALAMARES — ANÁLISE VISUAL DAS IMAGENS
+
+Downloads examinados: /home/hal/Downloads
+Modo temporal: SOMENTE_IMAGENS_DESDE_2026_06_05
+Data inicial priorizada: 2026-06-05 00:00:00
+Hashes originais Calam-Arch excluídos: 13
+Imagens únicas encontradas: 16
+Imagens preparadas: 16
+Pranchas geradas: 2
+
+CLASSIFICAÇÃO POR FORMATO
+PAISAGEM: 4
+PAISAGEM_16_9: 12
+
+ARQUIVOS PARA ENVIAR AO CHATGPT
+/home/hal/Área de trabalho/Mocha-Calamares-Analise-Visual-20260606-171057/pranchas/PRANCHA-*.png
+/home/hal/Área de trabalho/Mocha-Calamares-Analise-Visual-20260606-171057/MAPA-IMAGENS.tsv
+
+Os arquivos numerados em originais-numerados preservam
+a resolução e o conteúdo dos arquivos selecionados.

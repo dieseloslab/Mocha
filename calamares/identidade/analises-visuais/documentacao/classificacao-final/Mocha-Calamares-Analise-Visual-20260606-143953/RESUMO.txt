@@ -1,0 +1,13 @@
+Análise: Mocha-Calamares-Analise-Visual-20260606-143953
+Canônica: Mocha-Calamares-Analise-Visual-20260606-171057
+
+Arquivos idênticos: 37
+Arquivos diferentes: 1
+Ausentes na análise: 0
+Extras na análise: 0
+Imagens com hash diferente: 0
+Imagens com pixels iguais: 0
+Imagens com pixels diferentes: 0
+Textos diferentes: 1
+
+Classificação: SOMENTE-TEXTOS

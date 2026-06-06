@@ -90,3 +90,7 @@ calamares/mocha-calamares/staging/
 calamares/mocha-calamares/reports/
 
 calamares/overlays/
+calamares/identidade/analises-visuais/migracao-area-de-trabalho-*/
+calamares/identidade/analises-visuais/arquivados/
+calamares/identidade/analises-visuais/ULTIMA-ANALISE-VISUAL.txt
+calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
