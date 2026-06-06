@@ -1,0 +1,258 @@
+# Amostra de textos editáveis
+
+Total de linhas indexadas:
+2262
+
+Primeiras 250 linhas do índice:
+
+arquivo	linha	texto
+etc-calamares/branding/mocha/show.qml	1	import QtQuick 2.15
+etc-calamares/branding/mocha/show.qml	3	Rectangle {
+etc-calamares/branding/mocha/show.qml	4	width: 800
+etc-calamares/branding/mocha/show.qml	5	height: 480
+etc-calamares/branding/mocha/show.qml	7	Text {
+etc-calamares/branding/mocha/show.qml	8	anchors.centerIn: parent
+etc-calamares/branding/mocha/show.qml	9	text: "Instalando o MochaArch"
+etc-calamares/branding/mocha/show.qml	10	font.pixelSize: 28
+etc-calamares/modules/bootloader.conf	11	---
+etc-calamares/modules/bootloader.conf	17	efiBootLoader: "grub"
+etc-calamares/modules/bootloader.conf	23	kernelSearchPath: "/usr/lib/modules"
+etc-calamares/modules/bootloader.conf	24	kernelPattern: "^vmlinuz.*"
+etc-calamares/modules/bootloader.conf	28	loaderEntries:
+etc-calamares/modules/bootloader.conf	29	- "timeout 5"
+etc-calamares/modules/bootloader.conf	30	- "console-mode keep"
+etc-calamares/modules/bootloader.conf	33	kernelParams: [ "quiet" ]
+etc-calamares/modules/bootloader.conf	44	grubInstall: "grub-install"
+etc-calamares/modules/bootloader.conf	45	grubMkconfig: "grub-mkconfig"
+etc-calamares/modules/bootloader.conf	46	grubCfg: "/boot/grub/grub.cfg"
+etc-calamares/modules/bootloader.conf	47	grubProbe: "grub-probe"
+etc-calamares/modules/bootloader.conf	48	efiBootMgr: "efibootmgr"
+etc-calamares/modules/bootloader.conf	83	installEFIFallback: true
+etc-calamares/modules/displaymanager.conf	1	---
+etc-calamares/modules/displaymanager.conf	2	displaymanagers:
+etc-calamares/modules/displaymanager.conf	3	- sddm
+etc-calamares/modules/displaymanager.conf	4	defaultDesktopEnvironment:
+etc-calamares/modules/displaymanager.conf	5	executable: /usr/bin/startplasma-wayland
+etc-calamares/modules/displaymanager.conf	6	desktopFile: plasma
+etc-calamares/modules/displaymanager.conf	7	basicSetup: false
+etc-calamares/modules/displaymanager.conf	8	sysconfigSetup: false
+etc-calamares/modules/finished.conf	6	---
+etc-calamares/modules/finished.conf	37	restartNowMode: user-unchecked
+etc-calamares/modules/finished.conf	42	restartNowCommand: "systemctl -i reboot"
+etc-calamares/modules/finished.conf	47	notifyOnFinished: false
+etc-calamares/modules/fstab.conf	9	---
+etc-calamares/modules/fstab.conf	12	crypttabOptions: luks
+etc-calamares/modules/fstab.conf	31	tmpOptions:
+etc-calamares/modules/fstab.conf	32	default:
+etc-calamares/modules/fstab.conf	33	tmpfs: false
+etc-calamares/modules/fstab.conf	34	options: ""
+etc-calamares/modules/fstab.conf	35	ssd:
+etc-calamares/modules/fstab.conf	36	tmpfs: true
+etc-calamares/modules/fstab.conf	37	options: "defaults,noatime,mode=1777"
+etc-calamares/modules/grubcfg.conf	18	---
+etc-calamares/modules/grubcfg.conf	21	overwrite: false
+etc-calamares/modules/grubcfg.conf	26	prefer_grub_d: false
+etc-calamares/modules/grubcfg.conf	32	keep_distributor: false
+etc-calamares/modules/grubcfg.conf	38	kernel_params: [ "quiet" ]
+etc-calamares/modules/grubcfg.conf	43	defaults:
+etc-calamares/modules/grubcfg.conf	44	GRUB_TIMEOUT: 5
+etc-calamares/modules/grubcfg.conf	45	GRUB_DEFAULT: "saved"
+etc-calamares/modules/grubcfg.conf	46	GRUB_DISABLE_SUBMENU: true
+etc-calamares/modules/grubcfg.conf	47	GRUB_TERMINAL_OUTPUT: "console"
+etc-calamares/modules/grubcfg.conf	48	GRUB_DISABLE_RECOVERY: true
+etc-calamares/modules/grubcfg.conf	51	always_use_defaults: false
+etc-calamares/modules/initcpio.conf	5	---
+etc-calamares/modules/initcpio.conf	16	kernel: linux
+etc-calamares/modules/initcpio.conf	26	be_unsafe: false
+etc-calamares/modules/keyboard.conf	6	---
+etc-calamares/modules/keyboard.conf	10	xOrgConfFileName: "/etc/X11/xorg.conf.d/00-keyboard.conf"
+etc-calamares/modules/keyboard.conf	18	convertedKeymapPath: "/lib/kbd/keymaps/xkb"
+etc-calamares/modules/locale.conf	1	---
+etc-calamares/modules/locale.conf	2	region: America
+etc-calamares/modules/locale.conf	3	zone: Sao_Paulo
+etc-calamares/modules/locale.conf	4	geoip:
+etc-calamares/modules/locale.conf	5	style: json
+etc-calamares/modules/locale.conf	6	url: https://geoip.kde.org/v1/calamares
+etc-calamares/modules/locale.conf	7	selector: ''
+etc-calamares/modules/mount.conf	9	---
+etc-calamares/modules/mount.conf	21	extraMounts:
+etc-calamares/modules/mount.conf	22	- device: proc
+etc-calamares/modules/mount.conf	23	fs: proc
+etc-calamares/modules/mount.conf	24	mountPoint: /proc
+etc-calamares/modules/mount.conf	25	- device: sys
+etc-calamares/modules/mount.conf	26	fs: sysfs
+etc-calamares/modules/mount.conf	27	mountPoint: /sys
+etc-calamares/modules/mount.conf	28	- device: /dev
+etc-calamares/modules/mount.conf	29	mountPoint: /dev
+etc-calamares/modules/mount.conf	30	options: [ bind ]
+etc-calamares/modules/mount.conf	31	- device: tmpfs
+etc-calamares/modules/mount.conf	32	fs: tmpfs
+etc-calamares/modules/mount.conf	33	mountPoint: /run
+etc-calamares/modules/mount.conf	34	- device: /run/udev
+etc-calamares/modules/mount.conf	35	mountPoint: /run/udev
+etc-calamares/modules/mount.conf	36	options: [ bind ]
+etc-calamares/modules/mount.conf	37	- device: efivarfs
+etc-calamares/modules/mount.conf	38	fs: efivarfs
+etc-calamares/modules/mount.conf	39	mountPoint: /sys/firmware/efi/efivars
+etc-calamares/modules/mount.conf	40	efi: true
+etc-calamares/modules/mount.conf	50	btrfsSubvolumes:
+etc-calamares/modules/mount.conf	51	- mountPoint: /
+etc-calamares/modules/mount.conf	52	subvolume: /@
+etc-calamares/modules/mount.conf	56	- mountPoint: /home
+etc-calamares/modules/mount.conf	57	subvolume: /@home
+etc-calamares/modules/mount.conf	58	- mountPoint: /var/cache
+etc-calamares/modules/mount.conf	59	subvolume: /@cache
+etc-calamares/modules/mount.conf	60	- mountPoint: /var/log
+etc-calamares/modules/mount.conf	61	subvolume: /@log
+etc-calamares/modules/mount.conf	66	btrfsSwapSubvol: /@swap
+etc-calamares/modules/mount.conf	113	mountOptions:
+etc-calamares/modules/mount.conf	114	- filesystem: default
+etc-calamares/modules/mount.conf	115	options: [ defaults, noatime ]
+etc-calamares/modules/mount.conf	116	- filesystem: efi
+etc-calamares/modules/mount.conf	117	options: [ defaults, umask=0077 ]
+etc-calamares/modules/mount.conf	118	- filesystem: btrfs
+etc-calamares/modules/mount.conf	119	options: [ defaults, noatime, compress=lzo ]
+etc-calamares/modules/mount.conf	120	- filesystem: btrfs_swap
+etc-calamares/modules/mount.conf	121	options: [ defaults, noatime ]
+etc-calamares/modules/netinstall.conf	1	---
+etc-calamares/modules/netinstall.conf	2	groupsUrl: file:///etc/calamares/netinstall.yaml
+etc-calamares/modules/netinstall.conf	3	required: false
+etc-calamares/modules/packagechooser.conf	1	---
+etc-calamares/modules/packagechooser.conf	2	mode: required
+etc-calamares/modules/packagechooser.conf	3	method: netinstall-select
+etc-calamares/modules/packagechooser.conf	4	items:
+etc-calamares/modules/packagechooser.conf	5	- id: Mocha-Gamer-KDE
+etc-calamares/modules/packagechooser.conf	6	name: "Mocha Gamer KDE"
+etc-calamares/modules/packagechooser.conf	7	description: "Instalação inicial do Mocha com KDE Plasma e SDDM. Outros desktops não são oferecidos nesta fase."
+etc-calamares/modules/packagechooser.conf	8	screenshot: /usr/share/calamares/branding/mocha/welcome.png
+etc-calamares/modules/packagechooser.conf	9	selected: true
+etc-calamares/modules/packages.conf	1	---
+etc-calamares/modules/packages.conf	2	backend: pacman
+etc-calamares/modules/packages.conf	3	skip_if_no_internet: false
+etc-calamares/modules/packages.conf	4	update_db: false
+etc-calamares/modules/packages.conf	5	update_system: false
+etc-calamares/modules/partition.conf	34	efi:
+etc-calamares/modules/partition.conf	35	mountPoint:         "/boot/efi"
+etc-calamares/modules/partition.conf	36	recommendedSize:    300MiB
+etc-calamares/modules/partition.conf	37	minimumSize:        32MiB
+etc-calamares/modules/partition.conf	38	label:              "EFI"
+etc-calamares/modules/partition.conf	74	userSwapChoices:
+etc-calamares/modules/partition.conf	75	- none      # Create no swap, use no swap
+etc-calamares/modules/partition.conf	76	- small     # Up to 4GB
+etc-calamares/modules/partition.conf	77	- suspend   # At least main memory size
+etc-calamares/modules/partition.conf	79	- file      # To swap file instead of partition
+etc-calamares/modules/partition.conf	102	luksGeneration: luks1
+etc-calamares/modules/partition.conf	115	drawNestedPartitions:   false
+etc-calamares/modules/partition.conf	118	alwaysShowPartitionLabels: true
+etc-calamares/modules/partition.conf	149	initialPartitioningChoice: none
+etc-calamares/modules/partition.conf	157	initialSwapChoice: none
+etc-calamares/modules/partition.conf	208	defaultFileSystemType:  "ext4"
+etc-calamares/modules/services-systemd.conf	1	---
+etc-calamares/modules/services-systemd.conf	2	units:
+etc-calamares/modules/services-systemd.conf	3	- name: NetworkManager.service
+etc-calamares/modules/services-systemd.conf	4	action: enable
+etc-calamares/modules/services-systemd.conf	5	- name: systemd-resolved.service
+etc-calamares/modules/services-systemd.conf	6	action: enable
+etc-calamares/modules/services-systemd.conf	7	- name: ufw.service
+etc-calamares/modules/services-systemd.conf	8	action: enable
+etc-calamares/modules/services-systemd.conf	9	- name: sddm.service
+etc-calamares/modules/services-systemd.conf	10	action: enable
+etc-calamares/modules/services-systemd.conf	11	- name: cups.service
+etc-calamares/modules/services-systemd.conf	12	action: enable
+etc-calamares/modules/services-systemd.conf	13	- name: avahi-daemon.service
+etc-calamares/modules/services-systemd.conf	14	action: enable
+etc-calamares/modules/services-systemd.conf	15	- name: systemd-timesyncd.service
+etc-calamares/modules/services-systemd.conf	16	action: enable
+etc-calamares/modules/services-systemd.conf	17	- name: power-profiles-daemon.service
+etc-calamares/modules/services-systemd.conf	18	action: enable
+etc-calamares/modules/services-systemd.conf	19	- name: bluetooth.service
+etc-calamares/modules/services-systemd.conf	20	action: enable
+etc-calamares/modules/services-systemd.conf	21	- name: fstrim.timer
+etc-calamares/modules/services-systemd.conf	22	action: enable
+etc-calamares/modules/services-systemd.conf	23	- name: graphical.target
+etc-calamares/modules/services-systemd.conf	24	action: set-default
+etc-calamares/modules/shellprocess.conf	53	---
+etc-calamares/modules/shellprocess.conf	55	dontChroot: false
+etc-calamares/modules/shellprocess.conf	76	script:
+etc-calamares/modules/shellprocess.conf	77	- "-touch ${ROOT}/tmp/thingy"
+etc-calamares/modules/shellprocess.conf	78	- "/usr/bin/true"
+etc-calamares/modules/shellprocess.conf	79	- command: "/usr/local/bin/slowloris"
+etc-calamares/modules/shellprocess.conf	80	timeout: 3600
+etc-calamares/modules/unpackfs.conf	14	---
+etc-calamares/modules/unpackfs.conf	90	unpack:
+etc-calamares/modules/unpackfs.conf	91	-   source: ../CHANGES
+etc-calamares/modules/unpackfs.conf	92	sourcefs: file
+etc-calamares/modules/unpackfs.conf	93	destination: "/tmp/changes.txt"
+etc-calamares/modules/unpackfs.conf	94	weight: 1  # Single file
+etc-calamares/modules/unpackfs.conf	95	-   source: src/qml/calamares/slideshow
+etc-calamares/modules/unpackfs.conf	96	sourcefs: file
+etc-calamares/modules/unpackfs.conf	97	destination: "/tmp/slideshow/"
+etc-calamares/modules/unpackfs.conf	98	exclude: [ "*.qmlc", "qmldir" ]
+etc-calamares/modules/unpackfs.conf	99	weight: 5  # Lots of files
+etc-calamares/modules/users.conf	16	---
+etc-calamares/modules/users.conf	31	defaultGroups:
+etc-calamares/modules/users.conf	32	- name: users
+etc-calamares/modules/users.conf	33	must_exist: true
+etc-calamares/modules/users.conf	34	system: true
+etc-calamares/modules/users.conf	35	- lp
+etc-calamares/modules/users.conf	36	- video
+etc-calamares/modules/users.conf	37	- network
+etc-calamares/modules/users.conf	38	- storage
+etc-calamares/modules/users.conf	39	- name: wheel
+etc-calamares/modules/users.conf	40	must_exist: false
+etc-calamares/modules/users.conf	41	system: true
+etc-calamares/modules/users.conf	42	- audio
+etc-calamares/modules/users.conf	48	autologinGroup:  autologin
+etc-calamares/modules/users.conf	54	doAutologin:     false
+etc-calamares/modules/users.conf	65	sudoersGroup:    wheel
+etc-calamares/modules/users.conf	69	sudoersConfigureWithGroup: false
+etc-calamares/modules/users.conf	74	setRootPassword: true
+etc-calamares/modules/users.conf	84	doReusePassword: false
+etc-calamares/modules/users.conf	118	passwordRequirements:
+etc-calamares/modules/users.conf	120	minLength: -1  # Password at least this many characters
+etc-calamares/modules/users.conf	133	allowWeakPasswords: false
+etc-calamares/modules/users.conf	141	allowWeakPasswordsDefault: false
+etc-calamares/modules/users.conf	161	user:
+etc-calamares/modules/users.conf	162	shell: /bin/bash
+etc-calamares/modules/users.conf	163	forbidden_names: [ root ]
+etc-calamares/modules/users.conf	205	hostname:
+etc-calamares/modules/users.conf	206	location: EtcFile
+etc-calamares/modules/users.conf	207	writeHostsFile: true
+etc-calamares/modules/users.conf	208	template: "derp-${cpu}"
+etc-calamares/modules/users.conf	209	forbidden_names: [ localhost ]
+etc-calamares/modules/users.conf	211	presets:
+etc-calamares/modules/users.conf	212	fullName:
+etc-calamares/modules/users.conf	214	editable: true
+etc-calamares/modules/users.conf	215	loginName:
+etc-calamares/modules/users.conf	217	editable: true
+etc-calamares/modules/welcome.conf	1	---
+etc-calamares/modules/welcome.conf	2	showSupportUrl: true
+etc-calamares/modules/welcome.conf	3	showKnownIssuesUrl: true
+etc-calamares/modules/welcome.conf	4	showReleaseNotesUrl: false
+etc-calamares/modules/welcome.conf	5	showDonateUrl: true
+etc-calamares/modules/welcome.conf	6	requirements:
+etc-calamares/modules/welcome.conf	7	requiredStorage: 5.5
+etc-calamares/modules/welcome.conf	8	requiredRam: 1.0
+etc-calamares/modules/welcome.conf	9	internetCheckUrl: https://archlinux.org/
+etc-calamares/modules/welcome.conf	10	check:
+etc-calamares/modules/welcome.conf	11	- storage
+etc-calamares/modules/welcome.conf	12	- ram
+etc-calamares/modules/welcome.conf	13	- power
+etc-calamares/modules/welcome.conf	14	- internet
+etc-calamares/modules/welcome.conf	15	- root
+etc-calamares/modules/welcome.conf	16	- screen
+etc-calamares/modules/welcome.conf	17	required:
+etc-calamares/modules/welcome.conf	18	- ram
+etc-calamares/modules/welcome.conf	19	geoip:
+etc-calamares/modules/welcome.conf	20	style: none
+etc-calamares/modules/welcome.conf	21	url: https://geoip.kde.org/v1/ubiquity
+etc-calamares/modules/welcome.conf	22	selector: CountryCode
+etc-calamares/modules/welcome.conf	23	requiredStorage: 40.0
+etc-calamares/modules/welcome.conf	24	requiredRam: 4.0
+etc-calamares/modules/welcome.conf	25	internetCheckUrl: https://archlinux.org/
+etc-calamares/modules/welcome.conf	26	check:
+etc-calamares/modules/welcome.conf	27	- storage
+etc-calamares/modules/welcome.conf	28	- ram
+etc-calamares/modules/welcome.conf	29	- power
+etc-calamares/modules/welcome.conf	30	- internet
+etc-calamares/modules/welcome.conf	31	- root

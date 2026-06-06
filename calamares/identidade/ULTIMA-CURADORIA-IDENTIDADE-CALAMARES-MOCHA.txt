@@ -1,0 +1,7 @@
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/01-arquivos-criticos-calamares.txt
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/02-residuos-e-alvos-de-reescrita.tsv
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/04-inventario-imagens.txt
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/05-proposta-textos-base-mocha.md
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/06-plano-proximo-overlay-identidade.md
+/media/mochafast/MochaArch/auditorias/mocha-curadoria-identidade-calamares-20260605-154121.log

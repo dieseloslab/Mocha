@@ -1,0 +1,6 @@
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655/00-RESUMO-PARA-CHATGPT.md
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655/01-TEXTOS-CRITICOS-CONSOLIDADOS.md
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655/02-IMAGENS-LISTA.tsv
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655/03-MOSAICO-IMAGENS-CALAMARES.png
+/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/pacote-analise-chatgpt-calamares-20260605-155655.tar.zst
