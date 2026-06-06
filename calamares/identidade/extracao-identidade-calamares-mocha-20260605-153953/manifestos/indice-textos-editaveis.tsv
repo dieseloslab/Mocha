@@ -1,0 +1,2263 @@
+arquivo	linha	texto
+etc-calamares/branding/mocha/show.qml	1	import QtQuick 2.15
+etc-calamares/branding/mocha/show.qml	3	Rectangle {
+etc-calamares/branding/mocha/show.qml	4	width: 800
+etc-calamares/branding/mocha/show.qml	5	height: 480
+etc-calamares/branding/mocha/show.qml	7	Text {
+etc-calamares/branding/mocha/show.qml	8	anchors.centerIn: parent
+etc-calamares/branding/mocha/show.qml	9	text: "Instalando o MochaArch"
+etc-calamares/branding/mocha/show.qml	10	font.pixelSize: 28
+etc-calamares/modules/bootloader.conf	11	---
+etc-calamares/modules/bootloader.conf	17	efiBootLoader: "grub"
+etc-calamares/modules/bootloader.conf	23	kernelSearchPath: "/usr/lib/modules"
+etc-calamares/modules/bootloader.conf	24	kernelPattern: "^vmlinuz.*"
+etc-calamares/modules/bootloader.conf	28	loaderEntries:
+etc-calamares/modules/bootloader.conf	29	- "timeout 5"
+etc-calamares/modules/bootloader.conf	30	- "console-mode keep"
+etc-calamares/modules/bootloader.conf	33	kernelParams: [ "quiet" ]
+etc-calamares/modules/bootloader.conf	44	grubInstall: "grub-install"
+etc-calamares/modules/bootloader.conf	45	grubMkconfig: "grub-mkconfig"
+etc-calamares/modules/bootloader.conf	46	grubCfg: "/boot/grub/grub.cfg"
+etc-calamares/modules/bootloader.conf	47	grubProbe: "grub-probe"
+etc-calamares/modules/bootloader.conf	48	efiBootMgr: "efibootmgr"
+etc-calamares/modules/bootloader.conf	83	installEFIFallback: true
+etc-calamares/modules/displaymanager.conf	1	---
+etc-calamares/modules/displaymanager.conf	2	displaymanagers:
+etc-calamares/modules/displaymanager.conf	3	- sddm
+etc-calamares/modules/displaymanager.conf	4	defaultDesktopEnvironment:
+etc-calamares/modules/displaymanager.conf	5	executable: /usr/bin/startplasma-wayland
+etc-calamares/modules/displaymanager.conf	6	desktopFile: plasma
+etc-calamares/modules/displaymanager.conf	7	basicSetup: false
+etc-calamares/modules/displaymanager.conf	8	sysconfigSetup: false
+etc-calamares/modules/finished.conf	6	---
+etc-calamares/modules/finished.conf	37	restartNowMode: user-unchecked
+etc-calamares/modules/finished.conf	42	restartNowCommand: "systemctl -i reboot"
+etc-calamares/modules/finished.conf	47	notifyOnFinished: false
+etc-calamares/modules/fstab.conf	9	---
+etc-calamares/modules/fstab.conf	12	crypttabOptions: luks
+etc-calamares/modules/fstab.conf	31	tmpOptions:
+etc-calamares/modules/fstab.conf	32	default:
+etc-calamares/modules/fstab.conf	33	tmpfs: false
+etc-calamares/modules/fstab.conf	34	options: ""
+etc-calamares/modules/fstab.conf	35	ssd:
+etc-calamares/modules/fstab.conf	36	tmpfs: true
+etc-calamares/modules/fstab.conf	37	options: "defaults,noatime,mode=1777"
+etc-calamares/modules/grubcfg.conf	18	---
+etc-calamares/modules/grubcfg.conf	21	overwrite: false
+etc-calamares/modules/grubcfg.conf	26	prefer_grub_d: false
+etc-calamares/modules/grubcfg.conf	32	keep_distributor: false
+etc-calamares/modules/grubcfg.conf	38	kernel_params: [ "quiet" ]
+etc-calamares/modules/grubcfg.conf	43	defaults:
+etc-calamares/modules/grubcfg.conf	44	GRUB_TIMEOUT: 5
+etc-calamares/modules/grubcfg.conf	45	GRUB_DEFAULT: "saved"
+etc-calamares/modules/grubcfg.conf	46	GRUB_DISABLE_SUBMENU: true
+etc-calamares/modules/grubcfg.conf	47	GRUB_TERMINAL_OUTPUT: "console"
+etc-calamares/modules/grubcfg.conf	48	GRUB_DISABLE_RECOVERY: true
+etc-calamares/modules/grubcfg.conf	51	always_use_defaults: false
+etc-calamares/modules/initcpio.conf	5	---
+etc-calamares/modules/initcpio.conf	16	kernel: linux
+etc-calamares/modules/initcpio.conf	26	be_unsafe: false
+etc-calamares/modules/keyboard.conf	6	---
+etc-calamares/modules/keyboard.conf	10	xOrgConfFileName: "/etc/X11/xorg.conf.d/00-keyboard.conf"
+etc-calamares/modules/keyboard.conf	18	convertedKeymapPath: "/lib/kbd/keymaps/xkb"
+etc-calamares/modules/locale.conf	1	---
+etc-calamares/modules/locale.conf	2	region: America
+etc-calamares/modules/locale.conf	3	zone: Sao_Paulo
+etc-calamares/modules/locale.conf	4	geoip:
+etc-calamares/modules/locale.conf	5	style: json
+etc-calamares/modules/locale.conf	6	url: https://geoip.kde.org/v1/calamares
+etc-calamares/modules/locale.conf	7	selector: ''
+etc-calamares/modules/mount.conf	9	---
+etc-calamares/modules/mount.conf	21	extraMounts:
+etc-calamares/modules/mount.conf	22	- device: proc
+etc-calamares/modules/mount.conf	23	fs: proc
+etc-calamares/modules/mount.conf	24	mountPoint: /proc
+etc-calamares/modules/mount.conf	25	- device: sys
+etc-calamares/modules/mount.conf	26	fs: sysfs
+etc-calamares/modules/mount.conf	27	mountPoint: /sys
+etc-calamares/modules/mount.conf	28	- device: /dev
+etc-calamares/modules/mount.conf	29	mountPoint: /dev
+etc-calamares/modules/mount.conf	30	options: [ bind ]
+etc-calamares/modules/mount.conf	31	- device: tmpfs
+etc-calamares/modules/mount.conf	32	fs: tmpfs
+etc-calamares/modules/mount.conf	33	mountPoint: /run
+etc-calamares/modules/mount.conf	34	- device: /run/udev
+etc-calamares/modules/mount.conf	35	mountPoint: /run/udev
+etc-calamares/modules/mount.conf	36	options: [ bind ]
+etc-calamares/modules/mount.conf	37	- device: efivarfs
+etc-calamares/modules/mount.conf	38	fs: efivarfs
+etc-calamares/modules/mount.conf	39	mountPoint: /sys/firmware/efi/efivars
+etc-calamares/modules/mount.conf	40	efi: true
+etc-calamares/modules/mount.conf	50	btrfsSubvolumes:
+etc-calamares/modules/mount.conf	51	- mountPoint: /
+etc-calamares/modules/mount.conf	52	subvolume: /@
+etc-calamares/modules/mount.conf	56	- mountPoint: /home
+etc-calamares/modules/mount.conf	57	subvolume: /@home
+etc-calamares/modules/mount.conf	58	- mountPoint: /var/cache
+etc-calamares/modules/mount.conf	59	subvolume: /@cache
+etc-calamares/modules/mount.conf	60	- mountPoint: /var/log
+etc-calamares/modules/mount.conf	61	subvolume: /@log
+etc-calamares/modules/mount.conf	66	btrfsSwapSubvol: /@swap
+etc-calamares/modules/mount.conf	113	mountOptions:
+etc-calamares/modules/mount.conf	114	- filesystem: default
+etc-calamares/modules/mount.conf	115	options: [ defaults, noatime ]
+etc-calamares/modules/mount.conf	116	- filesystem: efi
+etc-calamares/modules/mount.conf	117	options: [ defaults, umask=0077 ]
+etc-calamares/modules/mount.conf	118	- filesystem: btrfs
+etc-calamares/modules/mount.conf	119	options: [ defaults, noatime, compress=lzo ]
+etc-calamares/modules/mount.conf	120	- filesystem: btrfs_swap
+etc-calamares/modules/mount.conf	121	options: [ defaults, noatime ]
+etc-calamares/modules/netinstall.conf	1	---
+etc-calamares/modules/netinstall.conf	2	groupsUrl: file:///etc/calamares/netinstall.yaml
+etc-calamares/modules/netinstall.conf	3	required: false
+etc-calamares/modules/packagechooser.conf	1	---
+etc-calamares/modules/packagechooser.conf	2	mode: required
+etc-calamares/modules/packagechooser.conf	3	method: netinstall-select
+etc-calamares/modules/packagechooser.conf	4	items:
+etc-calamares/modules/packagechooser.conf	5	- id: Mocha-Gamer-KDE
+etc-calamares/modules/packagechooser.conf	6	name: "Mocha Gamer KDE"
+etc-calamares/modules/packagechooser.conf	7	description: "Instalação inicial do Mocha com KDE Plasma e SDDM. Outros desktops não são oferecidos nesta fase."
+etc-calamares/modules/packagechooser.conf	8	screenshot: /usr/share/calamares/branding/mocha/welcome.png
+etc-calamares/modules/packagechooser.conf	9	selected: true
+etc-calamares/modules/packages.conf	1	---
+etc-calamares/modules/packages.conf	2	backend: pacman
+etc-calamares/modules/packages.conf	3	skip_if_no_internet: false
+etc-calamares/modules/packages.conf	4	update_db: false
+etc-calamares/modules/packages.conf	5	update_system: false
+etc-calamares/modules/partition.conf	34	efi:
+etc-calamares/modules/partition.conf	35	mountPoint:         "/boot/efi"
+etc-calamares/modules/partition.conf	36	recommendedSize:    300MiB
+etc-calamares/modules/partition.conf	37	minimumSize:        32MiB
+etc-calamares/modules/partition.conf	38	label:              "EFI"
+etc-calamares/modules/partition.conf	74	userSwapChoices:
+etc-calamares/modules/partition.conf	75	- none      # Create no swap, use no swap
+etc-calamares/modules/partition.conf	76	- small     # Up to 4GB
+etc-calamares/modules/partition.conf	77	- suspend   # At least main memory size
+etc-calamares/modules/partition.conf	79	- file      # To swap file instead of partition
+etc-calamares/modules/partition.conf	102	luksGeneration: luks1
+etc-calamares/modules/partition.conf	115	drawNestedPartitions:   false
+etc-calamares/modules/partition.conf	118	alwaysShowPartitionLabels: true
+etc-calamares/modules/partition.conf	149	initialPartitioningChoice: none
+etc-calamares/modules/partition.conf	157	initialSwapChoice: none
+etc-calamares/modules/partition.conf	208	defaultFileSystemType:  "ext4"
+etc-calamares/modules/services-systemd.conf	1	---
+etc-calamares/modules/services-systemd.conf	2	units:
+etc-calamares/modules/services-systemd.conf	3	- name: NetworkManager.service
+etc-calamares/modules/services-systemd.conf	4	action: enable
+etc-calamares/modules/services-systemd.conf	5	- name: systemd-resolved.service
+etc-calamares/modules/services-systemd.conf	6	action: enable
+etc-calamares/modules/services-systemd.conf	7	- name: ufw.service
+etc-calamares/modules/services-systemd.conf	8	action: enable
+etc-calamares/modules/services-systemd.conf	9	- name: sddm.service
+etc-calamares/modules/services-systemd.conf	10	action: enable
+etc-calamares/modules/services-systemd.conf	11	- name: cups.service
+etc-calamares/modules/services-systemd.conf	12	action: enable
+etc-calamares/modules/services-systemd.conf	13	- name: avahi-daemon.service
+etc-calamares/modules/services-systemd.conf	14	action: enable
+etc-calamares/modules/services-systemd.conf	15	- name: systemd-timesyncd.service
+etc-calamares/modules/services-systemd.conf	16	action: enable
+etc-calamares/modules/services-systemd.conf	17	- name: power-profiles-daemon.service
+etc-calamares/modules/services-systemd.conf	18	action: enable
+etc-calamares/modules/services-systemd.conf	19	- name: bluetooth.service
+etc-calamares/modules/services-systemd.conf	20	action: enable
+etc-calamares/modules/services-systemd.conf	21	- name: fstrim.timer
+etc-calamares/modules/services-systemd.conf	22	action: enable
+etc-calamares/modules/services-systemd.conf	23	- name: graphical.target
+etc-calamares/modules/services-systemd.conf	24	action: set-default
+etc-calamares/modules/shellprocess.conf	53	---
+etc-calamares/modules/shellprocess.conf	55	dontChroot: false
+etc-calamares/modules/shellprocess.conf	76	script:
+etc-calamares/modules/shellprocess.conf	77	- "-touch ${ROOT}/tmp/thingy"
+etc-calamares/modules/shellprocess.conf	78	- "/usr/bin/true"
+etc-calamares/modules/shellprocess.conf	79	- command: "/usr/local/bin/slowloris"
+etc-calamares/modules/shellprocess.conf	80	timeout: 3600
+etc-calamares/modules/unpackfs.conf	14	---
+etc-calamares/modules/unpackfs.conf	90	unpack:
+etc-calamares/modules/unpackfs.conf	91	-   source: ../CHANGES
+etc-calamares/modules/unpackfs.conf	92	sourcefs: file
+etc-calamares/modules/unpackfs.conf	93	destination: "/tmp/changes.txt"
+etc-calamares/modules/unpackfs.conf	94	weight: 1  # Single file
+etc-calamares/modules/unpackfs.conf	95	-   source: src/qml/calamares/slideshow
+etc-calamares/modules/unpackfs.conf	96	sourcefs: file
+etc-calamares/modules/unpackfs.conf	97	destination: "/tmp/slideshow/"
+etc-calamares/modules/unpackfs.conf	98	exclude: [ "*.qmlc", "qmldir" ]
+etc-calamares/modules/unpackfs.conf	99	weight: 5  # Lots of files
+etc-calamares/modules/users.conf	16	---
+etc-calamares/modules/users.conf	31	defaultGroups:
+etc-calamares/modules/users.conf	32	- name: users
+etc-calamares/modules/users.conf	33	must_exist: true
+etc-calamares/modules/users.conf	34	system: true
+etc-calamares/modules/users.conf	35	- lp
+etc-calamares/modules/users.conf	36	- video
+etc-calamares/modules/users.conf	37	- network
+etc-calamares/modules/users.conf	38	- storage
+etc-calamares/modules/users.conf	39	- name: wheel
+etc-calamares/modules/users.conf	40	must_exist: false
+etc-calamares/modules/users.conf	41	system: true
+etc-calamares/modules/users.conf	42	- audio
+etc-calamares/modules/users.conf	48	autologinGroup:  autologin
+etc-calamares/modules/users.conf	54	doAutologin:     false
+etc-calamares/modules/users.conf	65	sudoersGroup:    wheel
+etc-calamares/modules/users.conf	69	sudoersConfigureWithGroup: false
+etc-calamares/modules/users.conf	74	setRootPassword: true
+etc-calamares/modules/users.conf	84	doReusePassword: false
+etc-calamares/modules/users.conf	118	passwordRequirements:
+etc-calamares/modules/users.conf	120	minLength: -1  # Password at least this many characters
+etc-calamares/modules/users.conf	133	allowWeakPasswords: false
+etc-calamares/modules/users.conf	141	allowWeakPasswordsDefault: false
+etc-calamares/modules/users.conf	161	user:
+etc-calamares/modules/users.conf	162	shell: /bin/bash
+etc-calamares/modules/users.conf	163	forbidden_names: [ root ]
+etc-calamares/modules/users.conf	205	hostname:
+etc-calamares/modules/users.conf	206	location: EtcFile
+etc-calamares/modules/users.conf	207	writeHostsFile: true
+etc-calamares/modules/users.conf	208	template: "derp-${cpu}"
+etc-calamares/modules/users.conf	209	forbidden_names: [ localhost ]
+etc-calamares/modules/users.conf	211	presets:
+etc-calamares/modules/users.conf	212	fullName:
+etc-calamares/modules/users.conf	214	editable: true
+etc-calamares/modules/users.conf	215	loginName:
+etc-calamares/modules/users.conf	217	editable: true
+etc-calamares/modules/welcome.conf	1	---
+etc-calamares/modules/welcome.conf	2	showSupportUrl: true
+etc-calamares/modules/welcome.conf	3	showKnownIssuesUrl: true
+etc-calamares/modules/welcome.conf	4	showReleaseNotesUrl: false
+etc-calamares/modules/welcome.conf	5	showDonateUrl: true
+etc-calamares/modules/welcome.conf	6	requirements:
+etc-calamares/modules/welcome.conf	7	requiredStorage: 5.5
+etc-calamares/modules/welcome.conf	8	requiredRam: 1.0
+etc-calamares/modules/welcome.conf	9	internetCheckUrl: https://archlinux.org/
+etc-calamares/modules/welcome.conf	10	check:
+etc-calamares/modules/welcome.conf	11	- storage
+etc-calamares/modules/welcome.conf	12	- ram
+etc-calamares/modules/welcome.conf	13	- power
+etc-calamares/modules/welcome.conf	14	- internet
+etc-calamares/modules/welcome.conf	15	- root
+etc-calamares/modules/welcome.conf	16	- screen
+etc-calamares/modules/welcome.conf	17	required:
+etc-calamares/modules/welcome.conf	18	- ram
+etc-calamares/modules/welcome.conf	19	geoip:
+etc-calamares/modules/welcome.conf	20	style: none
+etc-calamares/modules/welcome.conf	21	url: https://geoip.kde.org/v1/ubiquity
+etc-calamares/modules/welcome.conf	22	selector: CountryCode
+etc-calamares/modules/welcome.conf	23	requiredStorage: 40.0
+etc-calamares/modules/welcome.conf	24	requiredRam: 4.0
+etc-calamares/modules/welcome.conf	25	internetCheckUrl: https://archlinux.org/
+etc-calamares/modules/welcome.conf	26	check:
+etc-calamares/modules/welcome.conf	27	- storage
+etc-calamares/modules/welcome.conf	28	- ram
+etc-calamares/modules/welcome.conf	29	- power
+etc-calamares/modules/welcome.conf	30	- internet
+etc-calamares/modules/welcome.conf	31	- root
+etc-calamares/modules/welcome.conf	32	- screen
+etc-calamares/modules/welcome.conf	33	required:
+etc-calamares/modules/welcome.conf	34	- storage
+etc-calamares/modules/welcome.conf	35	- ram
+etc-calamares/modules/welcome.conf	36	- root
+etc-calamares/modules/welcome.conf	37	- screen
+etc-calamares/netinstall.yaml	1	---
+etc-calamares/netinstall.yaml	2	- name: "Mocha Core System"
+etc-calamares/netinstall.yaml	3	description: "Base mínima do Mocha para instalação Arch com NetworkManager, GRUB, firmware e ferramentas essenciais."
+etc-calamares/netinstall.yaml	4	hidden: false
+etc-calamares/netinstall.yaml	5	selected: true
+etc-calamares/netinstall.yaml	6	critical: true
+etc-calamares/netinstall.yaml	7	packages:
+etc-calamares/netinstall.yaml	8	- base
+etc-calamares/netinstall.yaml	9	- base-devel
+etc-calamares/netinstall.yaml	10	- linux
+etc-calamares/netinstall.yaml	11	- linux-headers
+etc-calamares/netinstall.yaml	12	- linux-firmware
+etc-calamares/netinstall.yaml	13	- amd-ucode
+etc-calamares/netinstall.yaml	14	- intel-ucode
+etc-calamares/netinstall.yaml	15	- grub
+etc-calamares/netinstall.yaml	16	- efibootmgr
+etc-calamares/netinstall.yaml	17	- os-prober
+etc-calamares/netinstall.yaml	18	- mtools
+etc-calamares/netinstall.yaml	19	- dosfstools
+etc-calamares/netinstall.yaml	20	- btrfs-progs
+etc-calamares/netinstall.yaml	21	- xfsprogs
+etc-calamares/netinstall.yaml	22	- exfatprogs
+etc-calamares/netinstall.yaml	23	- ntfs-3g
+etc-calamares/netinstall.yaml	24	- networkmanager
+etc-calamares/netinstall.yaml	25	- iwd
+etc-calamares/netinstall.yaml	26	- wpa_supplicant
+etc-calamares/netinstall.yaml	27	- wireless-regdb
+etc-calamares/netinstall.yaml	28	- modemmanager
+etc-calamares/netinstall.yaml	29	- mobile-broadband-provider-info
+etc-calamares/netinstall.yaml	30	- sudo
+etc-calamares/netinstall.yaml	31	- polkit
+etc-calamares/netinstall.yaml	32	- dbus
+etc-calamares/netinstall.yaml	33	- nano
+etc-calamares/netinstall.yaml	34	- vim
+etc-calamares/netinstall.yaml	35	- git
+etc-calamares/netinstall.yaml	36	- wget
+etc-calamares/netinstall.yaml	37	- curl
+etc-calamares/netinstall.yaml	38	- rsync
+etc-calamares/netinstall.yaml	39	- openssh
+etc-calamares/netinstall.yaml	40	- pacman-contrib
+etc-calamares/netinstall.yaml	41	- reflector
+etc-calamares/netinstall.yaml	42	- arch-install-scripts
+etc-calamares/netinstall.yaml	43	- squashfs-tools
+etc-calamares/netinstall.yaml	44	- cpio
+etc-calamares/netinstall.yaml	45	- busybox
+etc-calamares/netinstall.yaml	46	- pv
+etc-calamares/netinstall.yaml	47	- dialog
+etc-calamares/netinstall.yaml	48	- bash-completion
+etc-calamares/netinstall.yaml	49	- xdg-user-dirs
+etc-calamares/netinstall.yaml	50	- xdg-utils
+etc-calamares/netinstall.yaml	51	- shared-mime-info
+etc-calamares/netinstall.yaml	52	- desktop-file-utils
+etc-calamares/netinstall.yaml	53	- appstream-glib
+etc-calamares/netinstall.yaml	54	- pipewire
+etc-calamares/netinstall.yaml	55	- pipewire-alsa
+etc-calamares/netinstall.yaml	56	- pipewire-pulse
+etc-calamares/netinstall.yaml	57	- pipewire-jack
+etc-calamares/netinstall.yaml	58	- wireplumber
+etc-calamares/netinstall.yaml	59	- alsa-utils
+etc-calamares/netinstall.yaml	60	- pavucontrol
+etc-calamares/netinstall.yaml	61	- bluez
+etc-calamares/netinstall.yaml	62	- bluez-utils
+etc-calamares/netinstall.yaml	63	- bluedevil
+etc-calamares/netinstall.yaml	64	- smartmontools
+etc-calamares/netinstall.yaml	65	- hdparm
+etc-calamares/netinstall.yaml	66	- sdparm
+etc-calamares/netinstall.yaml	67	- nvme-cli
+etc-calamares/netinstall.yaml	68	- usbutils
+etc-calamares/netinstall.yaml	69	- pciutils
+etc-calamares/netinstall.yaml	70	- lsb-release
+etc-calamares/netinstall.yaml	71	- hwinfo
+etc-calamares/netinstall.yaml	72	- htop
+etc-calamares/netinstall.yaml	73	- glances
+etc-calamares/netinstall.yaml	74	- ufw
+etc-calamares/netinstall.yaml	75	- gufw
+etc-calamares/netinstall.yaml	76	- firewalld
+etc-calamares/netinstall.yaml	77	- name: "Mocha KDE Plasma Wayland SDDM"
+etc-calamares/netinstall.yaml	78	description: "Interface inicial única do Mocha: KDE Plasma com SDDM e Wayland. XWayland entra apenas para compatibilidade de aplicativos/jogos."
+etc-calamares/netinstall.yaml	79	hidden: false
+etc-calamares/netinstall.yaml	80	selected: true
+etc-calamares/netinstall.yaml	81	critical: true
+etc-calamares/netinstall.yaml	82	packages:
+etc-calamares/netinstall.yaml	83	- plasma-meta
+etc-calamares/netinstall.yaml	84	- plasma-desktop
+etc-calamares/netinstall.yaml	85	- plasma-nm
+etc-calamares/netinstall.yaml	86	- plasma-pa
+etc-calamares/netinstall.yaml	87	- powerdevil
+etc-calamares/netinstall.yaml	88	- sddm
+etc-calamares/netinstall.yaml	89	- sddm-kcm
+etc-calamares/netinstall.yaml	90	- breeze
+etc-calamares/netinstall.yaml	91	- breeze-gtk
+etc-calamares/netinstall.yaml	92	- kde-gtk-config
+etc-calamares/netinstall.yaml	93	- xdg-desktop-portal
+etc-calamares/netinstall.yaml	94	- xdg-desktop-portal-kde
+etc-calamares/netinstall.yaml	95	- dolphin
+etc-calamares/netinstall.yaml	96	- konsole
+etc-calamares/netinstall.yaml	97	- kate
+etc-calamares/netinstall.yaml	98	- ark
+etc-calamares/netinstall.yaml	99	- spectacle
+etc-calamares/netinstall.yaml	100	- gwenview
+etc-calamares/netinstall.yaml	101	- okular
+etc-calamares/netinstall.yaml	102	- partitionmanager
+etc-calamares/netinstall.yaml	103	- kcalc
+etc-calamares/netinstall.yaml	104	- kcharselect
+etc-calamares/netinstall.yaml	105	- ffmpegthumbs
+etc-calamares/netinstall.yaml	106	- kdegraphics-thumbnailers
+etc-calamares/netinstall.yaml	107	- kio-extras
+etc-calamares/netinstall.yaml	108	- kio-admin
+etc-calamares/netinstall.yaml	109	- kio-fuse
+etc-calamares/netinstall.yaml	110	- xorg-xwayland
+etc-calamares/netinstall.yaml	111	- mesa
+etc-calamares/netinstall.yaml	112	- vulkan-icd-loader
+etc-calamares/netinstall.yaml	113	- lib32-vulkan-icd-loader
+etc-calamares/netinstall.yaml	114	- noto-fonts
+etc-calamares/netinstall.yaml	115	- noto-fonts-cjk
+etc-calamares/netinstall.yaml	116	- noto-fonts-emoji
+etc-calamares/netinstall.yaml	117	- ttf-dejavu
+etc-calamares/netinstall.yaml	118	- ttf-liberation
+etc-calamares/netinstall.yaml	119	- ttf-carlito
+etc-calamares/netinstall.yaml	120	- ttf-caladea
+etc-calamares/netinstall.yaml	121	- gvfs
+etc-calamares/netinstall.yaml	122	- gvfs-mtp
+etc-calamares/netinstall.yaml	123	- gvfs-gphoto2
+etc-calamares/netinstall.yaml	124	- gvfs-nfs
+etc-calamares/netinstall.yaml	125	- gvfs-smb
+etc-calamares/netinstall.yaml	126	- sshfs
+etc-calamares/netinstall.yaml	127	- fuse3
+etc-calamares/netinstall.yaml	128	- name: "Mocha Gamer Default"
+etc-calamares/netinstall.yaml	129	description: "Camada gamer padrão: Steam, Wine/Proton, overlays, GameMode, ferramentas Vulkan e launchers disponíveis nos repositórios ativos."
+etc-calamares/netinstall.yaml	130	hidden: false
+etc-calamares/netinstall.yaml	131	selected: true
+etc-calamares/netinstall.yaml	132	critical: false
+etc-calamares/netinstall.yaml	133	packages:
+etc-calamares/netinstall.yaml	134	- steam
+etc-calamares/netinstall.yaml	135	- wine
+etc-calamares/netinstall.yaml	136	- winetricks
+etc-calamares/netinstall.yaml	137	- wine-mono
+etc-calamares/netinstall.yaml	138	- wine-gecko
+etc-calamares/netinstall.yaml	139	- gamemode
+etc-calamares/netinstall.yaml	140	- lib32-gamemode
+etc-calamares/netinstall.yaml	141	- mangohud
+etc-calamares/netinstall.yaml	142	- lib32-mangohud
+etc-calamares/netinstall.yaml	143	- goverlay
+etc-calamares/netinstall.yaml	144	- gamescope
+etc-calamares/netinstall.yaml	145	- protontricks
+etc-calamares/netinstall.yaml	146	- lutris
+etc-calamares/netinstall.yaml	147	- vulkan-tools
+etc-calamares/netinstall.yaml	148	- vulkan-headers
+etc-calamares/netinstall.yaml	149	- vulkan-validation-layers
+etc-calamares/netinstall.yaml	150	- mesa-utils
+etc-calamares/netinstall.yaml	151	- piper
+etc-calamares/netinstall.yaml	152	- libratbag
+etc-calamares/netinstall.yaml	153	- antimicrox
+etc-calamares/netinstall.yaml	154	- openrgb
+etc-calamares/netinstall.yaml	155	- name: "Mocha Creation Office Streaming"
+etc-calamares/netinstall.yaml	156	description: "Ferramentas úteis para criação, documentação e uso geral sem transformar o perfil em desktop corporativo ou educacional."
+etc-calamares/netinstall.yaml	157	hidden: false
+etc-calamares/netinstall.yaml	158	selected: true
+etc-calamares/netinstall.yaml	159	critical: false
+etc-calamares/netinstall.yaml	160	packages:
+etc-calamares/netinstall.yaml	161	- obs-studio
+etc-calamares/netinstall.yaml	162	- kdenlive
+etc-calamares/netinstall.yaml	163	- krita
+etc-calamares/netinstall.yaml	164	- inkscape
+etc-calamares/netinstall.yaml	165	- gimp
+etc-calamares/netinstall.yaml	166	- audacity
+etc-calamares/netinstall.yaml	167	- vivaldi
+etc-calamares/netinstall.yaml	168	- vivaldi-ffmpeg-codecs
+etc-calamares/netinstall.yaml	169	- bitwarden
+etc-calamares/netinstall.yaml	170	- flatpak
+etc-calamares/netinstall.yaml	171	- discover
+etc-calamares/netinstall.yaml	172	- packagekit-qt6
+etc-calamares/netinstall.yaml	173	- name: "Mocha GPU Mesa AMD Intel"
+etc-calamares/netinstall.yaml	174	description: "Pilha Mesa/Vulkan aberta para AMD e Intel."
+etc-calamares/netinstall.yaml	175	hidden: false
+etc-calamares/netinstall.yaml	176	selected: true
+etc-calamares/netinstall.yaml	177	critical: false
+etc-calamares/netinstall.yaml	178	packages:
+etc-calamares/netinstall.yaml	179	- mesa
+etc-calamares/netinstall.yaml	180	- lib32-mesa
+etc-calamares/netinstall.yaml	181	- vulkan-radeon
+etc-calamares/netinstall.yaml	182	- lib32-vulkan-radeon
+etc-calamares/netinstall.yaml	183	- vulkan-intel
+etc-calamares/netinstall.yaml	184	- lib32-vulkan-intel
+etc-calamares/netinstall.yaml	185	- vulkan-nouveau
+etc-calamares/netinstall.yaml	186	- lib32-vulkan-nouveau
+etc-calamares/netinstall.yaml	187	- name: "Mocha GPU NVIDIA Proprietary"
+etc-calamares/netinstall.yaml	188	description: "Drivers NVIDIA proprietários opcionais. A escolha final do driver/kernel será refinada na montagem da ISO."
+etc-calamares/netinstall.yaml	189	hidden: false
+etc-calamares/netinstall.yaml	190	selected: false
+etc-calamares/netinstall.yaml	191	critical: false
+etc-calamares/netinstall.yaml	192	packages:
+etc-calamares/netinstall.yaml	193	- nvidia-utils
+etc-calamares/netinstall.yaml	194	- lib32-nvidia-utils
+etc-calamares/netinstall.yaml	195	- nvidia-settings
+etc-calamares/netinstall.yaml	196	- nvidia-prime
+etc-calamares/netinstall.yaml	197	- opencl-nvidia
+etc-calamares/netinstall.yaml	198	- nvidia-open
+etc-calamares/netinstall.yaml	199	- nvidia-open-dkms
+etc-calamares/netinstall.yaml	200	- libva-nvidia-driver
+etc-calamares/netinstall.yaml	201	- name: "Mocha Compatibility Hardware Network"
+etc-calamares/netinstall.yaml	202	description: "Compatibilidade adicional de rede, impressoras, VPNs, arquivos e dispositivos externos."
+etc-calamares/netinstall.yaml	203	hidden: false
+etc-calamares/netinstall.yaml	204	selected: false
+etc-calamares/netinstall.yaml	205	critical: false
+etc-calamares/netinstall.yaml	206	packages:
+etc-calamares/netinstall.yaml	207	- networkmanager-openvpn
+etc-calamares/netinstall.yaml	208	- networkmanager-openconnect
+etc-calamares/netinstall.yaml	209	- networkmanager-pptp
+etc-calamares/netinstall.yaml	210	- networkmanager-vpnc
+etc-calamares/netinstall.yaml	211	- openvpn
+etc-calamares/netinstall.yaml	212	- openconnect
+etc-calamares/netinstall.yaml	213	- vpnc
+etc-calamares/netinstall.yaml	214	- pptpclient
+etc-calamares/netinstall.yaml	215	- xl2tpd
+etc-calamares/netinstall.yaml	216	- rp-pppoe
+etc-calamares/netinstall.yaml	217	- ethtool
+etc-calamares/netinstall.yaml	218	- whois
+etc-calamares/netinstall.yaml	219	- nss-mdns
+etc-calamares/netinstall.yaml	220	- avahi
+etc-calamares/netinstall.yaml	221	- cups
+etc-calamares/netinstall.yaml	222	- system-config-printer
+etc-calamares/netinstall.yaml	223	- sane
+etc-calamares/netinstall.yaml	224	- simple-scan
+etc-calamares/netinstall.yaml	225	- android-tools
+etc-calamares/netinstall.yaml	226	- android-udev
+etc-calamares/netinstall.yaml	227	- mtpfs
+etc-calamares/netinstall.yaml	228	- gvfs-afc
+etc-calamares/netinstall.yaml	229	- nfs-utils
+etc-calamares/netinstall.yaml	230	- smbclient
+etc-calamares/netinstall.yaml	231	- cifs-utils
+etc-calamares/netinstall.yaml	232	- unrar
+etc-calamares/netinstall.yaml	233	- unzip
+etc-calamares/netinstall.yaml	234	- zip
+etc-calamares/netinstall.yaml	235	- lrzip
+etc-calamares/netinstall.yaml	236	- lzop
+etc-calamares/netinstall.yaml	237	- lzip
+etc-calamares/netinstall.yaml	238	- gparted
+etc-calamares/netinstall.yaml	239	- fsarchiver
+etc-calamares/netinstall.yaml	240	- ddrescue
+etc-calamares/netinstall.yaml	241	- testdisk
+etc-calamares/settings.conf	1	modules-search:
+etc-calamares/settings.conf	2	- local
+etc-calamares/settings.conf	3	sequence:
+etc-calamares/settings.conf	4	- show:
+etc-calamares/settings.conf	5	- welcome
+etc-calamares/settings.conf	6	- locale
+etc-calamares/settings.conf	7	- keyboard
+etc-calamares/settings.conf	8	- partition
+etc-calamares/settings.conf	9	- packagechooser
+etc-calamares/settings.conf	10	- netinstall
+etc-calamares/settings.conf	11	- users
+etc-calamares/settings.conf	12	- summary
+etc-calamares/settings.conf	13	- exec:
+etc-calamares/settings.conf	14	- partition
+etc-calamares/settings.conf	15	- mount
+etc-calamares/settings.conf	16	- pacstrap
+etc-calamares/settings.conf	17	- machineid
+etc-calamares/settings.conf	18	- fstab
+etc-calamares/settings.conf	19	- locale
+etc-calamares/settings.conf	20	- keyboard
+etc-calamares/settings.conf	21	- localecfg
+etc-calamares/settings.conf	22	- luksopenswaphookcfg
+etc-calamares/settings.conf	23	- luksbootkeyfile
+etc-calamares/settings.conf	24	- plymouthcfg
+etc-calamares/settings.conf	25	- initcpiocfg
+etc-calamares/settings.conf	26	- initcpio
+etc-calamares/settings.conf	27	- networkcfg
+etc-calamares/settings.conf	28	- packages
+etc-calamares/settings.conf	29	- users
+etc-calamares/settings.conf	30	- displaymanager
+etc-calamares/settings.conf	31	- hwclock
+etc-calamares/settings.conf	32	- services-systemd
+etc-calamares/settings.conf	33	- grubcfg
+etc-calamares/settings.conf	34	- bootloader
+etc-calamares/settings.conf	35	- umount
+etc-calamares/settings.conf	36	- show:
+etc-calamares/settings.conf	37	- finished
+etc-calamares/settings.conf	38	branding: mocha
+etc-calamares/settings.conf	39	prompt-install: false
+etc-calamares/settings.conf	40	dont-chroot: false
+etc-calamares/settings.conf	41	oem-setup: false
+etc-calamares/settings.conf	42	disable-cancel: false
+etc-calamares/settings.conf	43	disable-cancel-during-exec: false
+etc-calamares/settings.conf	44	quit-at-end: false
+etc-calamares/settings-online.conf	1	modules-search:
+etc-calamares/settings-online.conf	2	- local
+etc-calamares/settings-online.conf	3	sequence:
+etc-calamares/settings-online.conf	4	- show:
+etc-calamares/settings-online.conf	5	- welcome
+etc-calamares/settings-online.conf	6	- locale
+etc-calamares/settings-online.conf	7	- keyboard
+etc-calamares/settings-online.conf	8	- partition
+etc-calamares/settings-online.conf	9	- packagechooser
+etc-calamares/settings-online.conf	10	- netinstall
+etc-calamares/settings-online.conf	11	- users
+etc-calamares/settings-online.conf	12	- summary
+etc-calamares/settings-online.conf	13	- exec:
+etc-calamares/settings-online.conf	14	- partition
+etc-calamares/settings-online.conf	15	- mount
+etc-calamares/settings-online.conf	16	- pacstrap
+etc-calamares/settings-online.conf	17	- machineid
+etc-calamares/settings-online.conf	18	- fstab
+etc-calamares/settings-online.conf	19	- locale
+etc-calamares/settings-online.conf	20	- keyboard
+etc-calamares/settings-online.conf	21	- localecfg
+etc-calamares/settings-online.conf	22	- luksopenswaphookcfg
+etc-calamares/settings-online.conf	23	- luksbootkeyfile
+etc-calamares/settings-online.conf	24	- plymouthcfg
+etc-calamares/settings-online.conf	25	- initcpiocfg
+etc-calamares/settings-online.conf	26	- initcpio
+etc-calamares/settings-online.conf	27	- networkcfg
+etc-calamares/settings-online.conf	28	- packages
+etc-calamares/settings-online.conf	29	- users
+etc-calamares/settings-online.conf	30	- displaymanager
+etc-calamares/settings-online.conf	31	- hwclock
+etc-calamares/settings-online.conf	32	- services-systemd
+etc-calamares/settings-online.conf	33	- grubcfg
+etc-calamares/settings-online.conf	34	- bootloader
+etc-calamares/settings-online.conf	35	- umount
+etc-calamares/settings-online.conf	36	- show:
+etc-calamares/settings-online.conf	37	- finished
+etc-calamares/settings-online.conf	38	branding: mocha
+etc-calamares/settings-online.conf	39	prompt-install: false
+etc-calamares/settings-online.conf	40	dont-chroot: false
+etc-calamares/settings-online.conf	41	oem-setup: false
+etc-calamares/settings-online.conf	42	disable-cancel: false
+etc-calamares/settings-online.conf	43	disable-cancel-during-exec: false
+etc-calamares/settings-online.conf	44	quit-at-end: false
+usr-share-calamares/branding/arch/show.qml	3	*   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+usr-share-calamares/branding/arch/show.qml	5	*   Calamares is free software: you can redistribute it and/or modify
+usr-share-calamares/branding/arch/show.qml	6	*   it under the terms of the GNU General Public License as published by
+usr-share-calamares/branding/arch/show.qml	7	*   the Free Software Foundation, either version 3 of the License, or
+usr-share-calamares/branding/arch/show.qml	8	*   (at your option) any later version.
+usr-share-calamares/branding/arch/show.qml	10	*   Calamares is distributed in the hope that it will be useful,
+usr-share-calamares/branding/arch/show.qml	11	*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+usr-share-calamares/branding/arch/show.qml	12	*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+usr-share-calamares/branding/arch/show.qml	13	*   GNU General Public License for more details.
+usr-share-calamares/branding/arch/show.qml	15	*   You should have received a copy of the GNU General Public License
+usr-share-calamares/branding/arch/show.qml	16	*   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
+usr-share-calamares/branding/arch/show.qml	20	* Slides images dimensions are 800x440px.
+usr-share-calamares/branding/arch/show.qml	23	import QtQuick 2.0;
+usr-share-calamares/branding/arch/show.qml	24	import calamares.slideshow 1.0;
+usr-share-calamares/branding/arch/show.qml	26	Presentation
+usr-share-calamares/branding/arch/show.qml	28	id: presentation
+usr-share-calamares/branding/arch/show.qml	30	Timer {
+usr-share-calamares/branding/arch/show.qml	31	interval: 20000
+usr-share-calamares/branding/arch/show.qml	32	running: true
+usr-share-calamares/branding/arch/show.qml	33	repeat: true
+usr-share-calamares/branding/arch/show.qml	34	onTriggered: presentation.goToNextSlide()
+usr-share-calamares/branding/arch/show.qml	37	Slide {
+usr-share-calamares/branding/arch/show.qml	39	Image {
+usr-share-calamares/branding/arch/show.qml	40	id: background1
+usr-share-calamares/branding/arch/show.qml	41	source: "slide1.png"
+usr-share-calamares/branding/arch/show.qml	42	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	43	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	44	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	46	Text {
+usr-share-calamares/branding/arch/show.qml	47	anchors.horizontalCenter: background1.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	48	anchors.top: background1.bottom
+usr-share-calamares/branding/arch/show.qml	49	text: ""
+usr-share-calamares/branding/arch/show.qml	50	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	51	width: 800
+usr-share-calamares/branding/arch/show.qml	52	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	56	Slide {
+usr-share-calamares/branding/arch/show.qml	58	Image {
+usr-share-calamares/branding/arch/show.qml	59	id: background2
+usr-share-calamares/branding/arch/show.qml	60	source: "slide2.png"
+usr-share-calamares/branding/arch/show.qml	61	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	62	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	63	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	65	Text {
+usr-share-calamares/branding/arch/show.qml	66	anchors.horizontalCenter: background2.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	67	anchors.top: background2.bottom
+usr-share-calamares/branding/arch/show.qml	68	text: ""
+usr-share-calamares/branding/arch/show.qml	69	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	70	width: 800
+usr-share-calamares/branding/arch/show.qml	71	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	75	Slide {
+usr-share-calamares/branding/arch/show.qml	77	Image {
+usr-share-calamares/branding/arch/show.qml	78	id: background3
+usr-share-calamares/branding/arch/show.qml	79	source: "slide3.png"
+usr-share-calamares/branding/arch/show.qml	80	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	81	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	82	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	84	Text {
+usr-share-calamares/branding/arch/show.qml	85	anchors.horizontalCenter: background3.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	86	anchors.top: background3.bottom
+usr-share-calamares/branding/arch/show.qml	87	text: ""
+usr-share-calamares/branding/arch/show.qml	88	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	89	width: 800
+usr-share-calamares/branding/arch/show.qml	90	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	94	Slide {
+usr-share-calamares/branding/arch/show.qml	96	Image {
+usr-share-calamares/branding/arch/show.qml	97	id: background4
+usr-share-calamares/branding/arch/show.qml	98	source: "slide4.png"
+usr-share-calamares/branding/arch/show.qml	99	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	100	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	101	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	103	Text {
+usr-share-calamares/branding/arch/show.qml	104	anchors.horizontalCenter: background4.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	105	anchors.top: background4.bottom
+usr-share-calamares/branding/arch/show.qml	106	text: ""
+usr-share-calamares/branding/arch/show.qml	107	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	108	width: 800
+usr-share-calamares/branding/arch/show.qml	109	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	113	Slide {
+usr-share-calamares/branding/arch/show.qml	115	Image {
+usr-share-calamares/branding/arch/show.qml	116	id: background5
+usr-share-calamares/branding/arch/show.qml	117	source: "slide5.png"
+usr-share-calamares/branding/arch/show.qml	118	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	119	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	120	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	122	Text {
+usr-share-calamares/branding/arch/show.qml	123	anchors.horizontalCenter: background5.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	124	anchors.top: background5.bottom
+usr-share-calamares/branding/arch/show.qml	125	text: ""
+usr-share-calamares/branding/arch/show.qml	126	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	127	width: 800
+usr-share-calamares/branding/arch/show.qml	128	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	131	Slide {
+usr-share-calamares/branding/arch/show.qml	133	Image {
+usr-share-calamares/branding/arch/show.qml	134	id: background6
+usr-share-calamares/branding/arch/show.qml	135	source: "slide6.png"
+usr-share-calamares/branding/arch/show.qml	136	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	137	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	138	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	140	Text {
+usr-share-calamares/branding/arch/show.qml	141	anchors.horizontalCenter: background6.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	142	anchors.top: background6.bottom
+usr-share-calamares/branding/arch/show.qml	143	text: ""
+usr-share-calamares/branding/arch/show.qml	144	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	145	width: 800
+usr-share-calamares/branding/arch/show.qml	146	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	150	Slide {
+usr-share-calamares/branding/arch/show.qml	152	Image {
+usr-share-calamares/branding/arch/show.qml	153	id: background7
+usr-share-calamares/branding/arch/show.qml	154	source: "slide7.png"
+usr-share-calamares/branding/arch/show.qml	155	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	156	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	157	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	159	Text {
+usr-share-calamares/branding/arch/show.qml	160	anchors.horizontalCenter: background7.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	161	anchors.top: background7.bottom
+usr-share-calamares/branding/arch/show.qml	162	text: ""
+usr-share-calamares/branding/arch/show.qml	163	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	164	width: 800
+usr-share-calamares/branding/arch/show.qml	165	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	169	Slide {
+usr-share-calamares/branding/arch/show.qml	171	Image {
+usr-share-calamares/branding/arch/show.qml	172	id: background8
+usr-share-calamares/branding/arch/show.qml	173	source: "slide8.png"
+usr-share-calamares/branding/arch/show.qml	174	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	175	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	176	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	178	Text {
+usr-share-calamares/branding/arch/show.qml	179	anchors.horizontalCenter: background8.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	180	anchors.top: background8.bottom
+usr-share-calamares/branding/arch/show.qml	181	text: ""
+usr-share-calamares/branding/arch/show.qml	182	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	183	width: 800
+usr-share-calamares/branding/arch/show.qml	184	horizontalAlignment: Text.Center
+usr-share-calamares/branding/arch/show.qml	188	Slide {
+usr-share-calamares/branding/arch/show.qml	190	Image {
+usr-share-calamares/branding/arch/show.qml	191	id: background9
+usr-share-calamares/branding/arch/show.qml	192	source: "slide9.png"
+usr-share-calamares/branding/arch/show.qml	193	width: 800; height: 440
+usr-share-calamares/branding/arch/show.qml	194	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/arch/show.qml	195	anchors.centerIn: parent
+usr-share-calamares/branding/arch/show.qml	197	Text {
+usr-share-calamares/branding/arch/show.qml	198	anchors.horizontalCenter: background9.horizontalCenter
+usr-share-calamares/branding/arch/show.qml	199	anchors.top: background9.bottom
+usr-share-calamares/branding/arch/show.qml	200	text: ""
+usr-share-calamares/branding/arch/show.qml	201	wrapMode: Text.WordWrap
+usr-share-calamares/branding/arch/show.qml	202	width: 800
+usr-share-calamares/branding/arch/show.qml	203	horizontalAlignment: Text.Center
+usr-share-calamares/branding/default/show.qml	3	*   SPDX-FileCopyrightText: 2015 Teo Mrnjavac <teo@kde.org>
+usr-share-calamares/branding/default/show.qml	4	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/branding/default/show.qml	5	*   SPDX-License-Identifier: GPL-3.0-or-later
+usr-share-calamares/branding/default/show.qml	7	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/branding/default/show.qml	11	import QtQuick 2.0;
+usr-share-calamares/branding/default/show.qml	12	import calamares.slideshow 1.0;
+usr-share-calamares/branding/default/show.qml	14	Presentation
+usr-share-calamares/branding/default/show.qml	16	id: presentation
+usr-share-calamares/branding/default/show.qml	18	function nextSlide() {
+usr-share-calamares/branding/default/show.qml	19	console.log("QML Component (default slideshow) Next slide");
+usr-share-calamares/branding/default/show.qml	20	presentation.goToNextSlide();
+usr-share-calamares/branding/default/show.qml	23	Timer {
+usr-share-calamares/branding/default/show.qml	24	id: advanceTimer
+usr-share-calamares/branding/default/show.qml	25	interval: 1000
+usr-share-calamares/branding/default/show.qml	26	running: presentation.activatedInCalamares
+usr-share-calamares/branding/default/show.qml	27	repeat: true
+usr-share-calamares/branding/default/show.qml	28	onTriggered: nextSlide()
+usr-share-calamares/branding/default/show.qml	31	Slide {
+usr-share-calamares/branding/default/show.qml	33	Image {
+usr-share-calamares/branding/default/show.qml	34	id: background
+usr-share-calamares/branding/default/show.qml	35	source: "squid.png"
+usr-share-calamares/branding/default/show.qml	36	width: 200; height: 200
+usr-share-calamares/branding/default/show.qml	37	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/default/show.qml	38	anchors.centerIn: parent
+usr-share-calamares/branding/default/show.qml	40	Text {
+usr-share-calamares/branding/default/show.qml	41	anchors.horizontalCenter: background.horizontalCenter
+usr-share-calamares/branding/default/show.qml	42	anchors.top: background.bottom
+usr-share-calamares/branding/default/show.qml	43	text: "This is a customizable QML slideshow.<br/>"+
+usr-share-calamares/branding/default/show.qml	44	"Distributions should provide their own slideshow and list it in <br/>"+
+usr-share-calamares/branding/default/show.qml	45	"their custom branding.desc file.<br/>"+
+usr-share-calamares/branding/default/show.qml	46	"To create a Calamares presentation in QML, import calamares.slideshow,<br/>"+
+usr-share-calamares/branding/default/show.qml	47	"define a Presentation element with as many Slide elements as needed."
+usr-share-calamares/branding/default/show.qml	48	wrapMode: Text.WordWrap
+usr-share-calamares/branding/default/show.qml	49	width: presentation.width
+usr-share-calamares/branding/default/show.qml	50	horizontalAlignment: Text.Center
+usr-share-calamares/branding/default/show.qml	54	Slide {
+usr-share-calamares/branding/default/show.qml	55	centeredText: qsTr("This is a second Slide element.")
+usr-share-calamares/branding/default/show.qml	58	Slide {
+usr-share-calamares/branding/default/show.qml	59	centeredText: qsTr("This is a third Slide element.")
+usr-share-calamares/branding/default/show.qml	68	function onActivate() {
+usr-share-calamares/branding/default/show.qml	69	console.log("QML Component (default slideshow) activated");
+usr-share-calamares/branding/default/show.qml	70	presentation.currentSlide = 0;
+usr-share-calamares/branding/default/show.qml	73	function onLeave() {
+usr-share-calamares/branding/default/show.qml	74	console.log("QML Component (default slideshow) deactivated");
+usr-share-calamares/branding/mocha/show.qml	3	*   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+usr-share-calamares/branding/mocha/show.qml	5	*   Calamares is free software: you can redistribute it and/or modify
+usr-share-calamares/branding/mocha/show.qml	6	*   it under the terms of the GNU General Public License as published by
+usr-share-calamares/branding/mocha/show.qml	7	*   the Free Software Foundation, either version 3 of the License, or
+usr-share-calamares/branding/mocha/show.qml	8	*   (at your option) any later version.
+usr-share-calamares/branding/mocha/show.qml	10	*   Calamares is distributed in the hope that it will be useful,
+usr-share-calamares/branding/mocha/show.qml	11	*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+usr-share-calamares/branding/mocha/show.qml	12	*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+usr-share-calamares/branding/mocha/show.qml	13	*   GNU General Public License for more details.
+usr-share-calamares/branding/mocha/show.qml	15	*   You should have received a copy of the GNU General Public License
+usr-share-calamares/branding/mocha/show.qml	16	*   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
+usr-share-calamares/branding/mocha/show.qml	20	* Slides images dimensions are 800x440px.
+usr-share-calamares/branding/mocha/show.qml	23	import QtQuick 2.0;
+usr-share-calamares/branding/mocha/show.qml	24	import calamares.slideshow 1.0;
+usr-share-calamares/branding/mocha/show.qml	26	Presentation
+usr-share-calamares/branding/mocha/show.qml	28	id: presentation
+usr-share-calamares/branding/mocha/show.qml	30	Timer {
+usr-share-calamares/branding/mocha/show.qml	31	interval: 20000
+usr-share-calamares/branding/mocha/show.qml	32	running: true
+usr-share-calamares/branding/mocha/show.qml	33	repeat: true
+usr-share-calamares/branding/mocha/show.qml	34	onTriggered: presentation.goToNextSlide()
+usr-share-calamares/branding/mocha/show.qml	37	Slide {
+usr-share-calamares/branding/mocha/show.qml	39	Image {
+usr-share-calamares/branding/mocha/show.qml	40	id: background1
+usr-share-calamares/branding/mocha/show.qml	41	source: "slide1.png"
+usr-share-calamares/branding/mocha/show.qml	42	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	43	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	44	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	46	Text {
+usr-share-calamares/branding/mocha/show.qml	47	anchors.horizontalCenter: background1.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	48	anchors.top: background1.bottom
+usr-share-calamares/branding/mocha/show.qml	49	text: ""
+usr-share-calamares/branding/mocha/show.qml	50	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	51	width: 800
+usr-share-calamares/branding/mocha/show.qml	52	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	56	Slide {
+usr-share-calamares/branding/mocha/show.qml	58	Image {
+usr-share-calamares/branding/mocha/show.qml	59	id: background2
+usr-share-calamares/branding/mocha/show.qml	60	source: "slide2.png"
+usr-share-calamares/branding/mocha/show.qml	61	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	62	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	63	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	65	Text {
+usr-share-calamares/branding/mocha/show.qml	66	anchors.horizontalCenter: background2.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	67	anchors.top: background2.bottom
+usr-share-calamares/branding/mocha/show.qml	68	text: ""
+usr-share-calamares/branding/mocha/show.qml	69	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	70	width: 800
+usr-share-calamares/branding/mocha/show.qml	71	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	75	Slide {
+usr-share-calamares/branding/mocha/show.qml	77	Image {
+usr-share-calamares/branding/mocha/show.qml	78	id: background3
+usr-share-calamares/branding/mocha/show.qml	79	source: "slide3.png"
+usr-share-calamares/branding/mocha/show.qml	80	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	81	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	82	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	84	Text {
+usr-share-calamares/branding/mocha/show.qml	85	anchors.horizontalCenter: background3.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	86	anchors.top: background3.bottom
+usr-share-calamares/branding/mocha/show.qml	87	text: ""
+usr-share-calamares/branding/mocha/show.qml	88	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	89	width: 800
+usr-share-calamares/branding/mocha/show.qml	90	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	94	Slide {
+usr-share-calamares/branding/mocha/show.qml	96	Image {
+usr-share-calamares/branding/mocha/show.qml	97	id: background4
+usr-share-calamares/branding/mocha/show.qml	98	source: "slide4.png"
+usr-share-calamares/branding/mocha/show.qml	99	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	100	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	101	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	103	Text {
+usr-share-calamares/branding/mocha/show.qml	104	anchors.horizontalCenter: background4.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	105	anchors.top: background4.bottom
+usr-share-calamares/branding/mocha/show.qml	106	text: ""
+usr-share-calamares/branding/mocha/show.qml	107	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	108	width: 800
+usr-share-calamares/branding/mocha/show.qml	109	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	113	Slide {
+usr-share-calamares/branding/mocha/show.qml	115	Image {
+usr-share-calamares/branding/mocha/show.qml	116	id: background5
+usr-share-calamares/branding/mocha/show.qml	117	source: "slide5.png"
+usr-share-calamares/branding/mocha/show.qml	118	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	119	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	120	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	122	Text {
+usr-share-calamares/branding/mocha/show.qml	123	anchors.horizontalCenter: background5.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	124	anchors.top: background5.bottom
+usr-share-calamares/branding/mocha/show.qml	125	text: ""
+usr-share-calamares/branding/mocha/show.qml	126	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	127	width: 800
+usr-share-calamares/branding/mocha/show.qml	128	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	131	Slide {
+usr-share-calamares/branding/mocha/show.qml	133	Image {
+usr-share-calamares/branding/mocha/show.qml	134	id: background6
+usr-share-calamares/branding/mocha/show.qml	135	source: "slide6.png"
+usr-share-calamares/branding/mocha/show.qml	136	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	137	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	138	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	140	Text {
+usr-share-calamares/branding/mocha/show.qml	141	anchors.horizontalCenter: background6.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	142	anchors.top: background6.bottom
+usr-share-calamares/branding/mocha/show.qml	143	text: ""
+usr-share-calamares/branding/mocha/show.qml	144	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	145	width: 800
+usr-share-calamares/branding/mocha/show.qml	146	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	150	Slide {
+usr-share-calamares/branding/mocha/show.qml	152	Image {
+usr-share-calamares/branding/mocha/show.qml	153	id: background7
+usr-share-calamares/branding/mocha/show.qml	154	source: "slide7.png"
+usr-share-calamares/branding/mocha/show.qml	155	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	156	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	157	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	159	Text {
+usr-share-calamares/branding/mocha/show.qml	160	anchors.horizontalCenter: background7.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	161	anchors.top: background7.bottom
+usr-share-calamares/branding/mocha/show.qml	162	text: ""
+usr-share-calamares/branding/mocha/show.qml	163	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	164	width: 800
+usr-share-calamares/branding/mocha/show.qml	165	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	169	Slide {
+usr-share-calamares/branding/mocha/show.qml	171	Image {
+usr-share-calamares/branding/mocha/show.qml	172	id: background8
+usr-share-calamares/branding/mocha/show.qml	173	source: "slide8.png"
+usr-share-calamares/branding/mocha/show.qml	174	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	175	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	176	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	178	Text {
+usr-share-calamares/branding/mocha/show.qml	179	anchors.horizontalCenter: background8.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	180	anchors.top: background8.bottom
+usr-share-calamares/branding/mocha/show.qml	181	text: ""
+usr-share-calamares/branding/mocha/show.qml	182	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	183	width: 800
+usr-share-calamares/branding/mocha/show.qml	184	horizontalAlignment: Text.Center
+usr-share-calamares/branding/mocha/show.qml	188	Slide {
+usr-share-calamares/branding/mocha/show.qml	190	Image {
+usr-share-calamares/branding/mocha/show.qml	191	id: background9
+usr-share-calamares/branding/mocha/show.qml	192	source: "slide9.png"
+usr-share-calamares/branding/mocha/show.qml	193	width: 800; height: 440
+usr-share-calamares/branding/mocha/show.qml	194	fillMode: Image.PreserveAspectFit
+usr-share-calamares/branding/mocha/show.qml	195	anchors.centerIn: parent
+usr-share-calamares/branding/mocha/show.qml	197	Text {
+usr-share-calamares/branding/mocha/show.qml	198	anchors.horizontalCenter: background9.horizontalCenter
+usr-share-calamares/branding/mocha/show.qml	199	anchors.top: background9.bottom
+usr-share-calamares/branding/mocha/show.qml	200	text: ""
+usr-share-calamares/branding/mocha/show.qml	201	wrapMode: Text.WordWrap
+usr-share-calamares/branding/mocha/show.qml	202	width: 800
+usr-share-calamares/branding/mocha/show.qml	203	horizontalAlignment: Text.Center
+usr-share-calamares/modules/bootloader.conf	11	---
+usr-share-calamares/modules/bootloader.conf	17	efiBootLoader: "grub"
+usr-share-calamares/modules/bootloader.conf	23	kernelSearchPath: "/usr/lib/modules"
+usr-share-calamares/modules/bootloader.conf	24	kernelPattern: "^vmlinuz.*"
+usr-share-calamares/modules/bootloader.conf	28	loaderEntries:
+usr-share-calamares/modules/bootloader.conf	29	- "timeout 5"
+usr-share-calamares/modules/bootloader.conf	30	- "console-mode keep"
+usr-share-calamares/modules/bootloader.conf	33	kernelParams: [ "quiet" ]
+usr-share-calamares/modules/bootloader.conf	44	grubInstall: "grub-install"
+usr-share-calamares/modules/bootloader.conf	45	grubMkconfig: "grub-mkconfig"
+usr-share-calamares/modules/bootloader.conf	46	grubCfg: "/boot/grub/grub.cfg"
+usr-share-calamares/modules/bootloader.conf	47	grubProbe: "grub-probe"
+usr-share-calamares/modules/bootloader.conf	48	efiBootMgr: "efibootmgr"
+usr-share-calamares/modules/bootloader.conf	83	installEFIFallback: true
+usr-share-calamares/modules/chrootcfg.conf	1	---
+usr-share-calamares/modules/chrootcfg.conf	2	requirements:
+usr-share-calamares/modules/chrootcfg.conf	3	- name: /etc
+usr-share-calamares/modules/chrootcfg.conf	4	mode: "0o755"
+usr-share-calamares/modules/chrootcfg.conf	5	- name: /var/cache/pacman/pkg
+usr-share-calamares/modules/chrootcfg.conf	6	mode: "0o755"
+usr-share-calamares/modules/chrootcfg.conf	7	- name: /var/lib/pacman
+usr-share-calamares/modules/chrootcfg.conf	8	mode: "0o755"
+usr-share-calamares/modules/chrootcfg.conf	10	isRank: true
+usr-share-calamares/modules/chrootcfg.conf	12	keyrings:
+usr-share-calamares/modules/chrootcfg.conf	13	- archlinux
+usr-share-calamares/modules/chrootcfg.conf	14	- manjaro
+usr-share-calamares/modules/contextualprocess.conf	51	---
+usr-share-calamares/modules/contextualprocess.conf	52	dontChroot: false
+usr-share-calamares/modules/contextualprocess.conf	53	firmwareType:
+usr-share-calamares/modules/contextualprocess.conf	54	efi:
+usr-share-calamares/modules/contextualprocess.conf	55	-   "-pkg remove efi-firmware"
+usr-share-calamares/modules/contextualprocess.conf	56	-   command: "-mkinitramfsrd -abgn"
+usr-share-calamares/modules/contextualprocess.conf	57	timeout: 120  # This is slow
+usr-share-calamares/modules/contextualprocess.conf	58	bios:   "-pkg remove bios-firmware"
+usr-share-calamares/modules/contextualprocess.conf	59	"":     "/bin/false no-firmware-type-set"
+usr-share-calamares/modules/contextualprocess.conf	60	"*":    "/bin/false some-other-firmware-value"
+usr-share-calamares/modules/contextualprocess.conf	61	"branding.shortVersion":
+usr-share-calamares/modules/contextualprocess.conf	62	"2020.2": "/bin/false february"
+usr-share-calamares/modules/contextualprocess.conf	63	"2019.4": "/bin/true april"
+usr-share-calamares/modules/displaymanager.conf	1	---
+usr-share-calamares/modules/displaymanager.conf	2	displaymanagers:
+usr-share-calamares/modules/displaymanager.conf	3	- sddm
+usr-share-calamares/modules/displaymanager.conf	4	defaultDesktopEnvironment:
+usr-share-calamares/modules/displaymanager.conf	5	executable: /usr/bin/startplasma-wayland
+usr-share-calamares/modules/displaymanager.conf	6	desktopFile: plasma
+usr-share-calamares/modules/displaymanager.conf	7	basicSetup: false
+usr-share-calamares/modules/displaymanager.conf	8	sysconfigSetup: false
+usr-share-calamares/modules/finished.conf	6	---
+usr-share-calamares/modules/finished.conf	37	restartNowMode: user-unchecked
+usr-share-calamares/modules/finished.conf	42	restartNowCommand: "systemctl -i reboot"
+usr-share-calamares/modules/finished.conf	47	notifyOnFinished: false
+usr-share-calamares/modules/fsresizer.conf	13	---
+usr-share-calamares/modules/fsresizer.conf	19	fs: /
+usr-share-calamares/modules/fsresizer.conf	31	size: 100%
+usr-share-calamares/modules/fsresizer.conf	52	required: false
+usr-share-calamares/modules/fstab.conf	9	---
+usr-share-calamares/modules/fstab.conf	12	crypttabOptions: luks
+usr-share-calamares/modules/fstab.conf	31	tmpOptions:
+usr-share-calamares/modules/fstab.conf	32	default:
+usr-share-calamares/modules/fstab.conf	33	tmpfs: false
+usr-share-calamares/modules/fstab.conf	34	options: ""
+usr-share-calamares/modules/fstab.conf	35	ssd:
+usr-share-calamares/modules/fstab.conf	36	tmpfs: true
+usr-share-calamares/modules/fstab.conf	37	options: "defaults,noatime,mode=1777"
+usr-share-calamares/modules/grubcfg.conf	18	---
+usr-share-calamares/modules/grubcfg.conf	21	overwrite: false
+usr-share-calamares/modules/grubcfg.conf	26	prefer_grub_d: false
+usr-share-calamares/modules/grubcfg.conf	32	keep_distributor: false
+usr-share-calamares/modules/grubcfg.conf	38	kernel_params: [ "quiet" ]
+usr-share-calamares/modules/grubcfg.conf	43	defaults:
+usr-share-calamares/modules/grubcfg.conf	44	GRUB_TIMEOUT: 5
+usr-share-calamares/modules/grubcfg.conf	45	GRUB_DEFAULT: "saved"
+usr-share-calamares/modules/grubcfg.conf	46	GRUB_DISABLE_SUBMENU: true
+usr-share-calamares/modules/grubcfg.conf	47	GRUB_TERMINAL_OUTPUT: "console"
+usr-share-calamares/modules/grubcfg.conf	48	GRUB_DISABLE_RECOVERY: true
+usr-share-calamares/modules/grubcfg.conf	51	always_use_defaults: false
+usr-share-calamares/modules/initcpio.conf	5	---
+usr-share-calamares/modules/initcpio.conf	16	kernel: linux
+usr-share-calamares/modules/initcpio.conf	26	be_unsafe: false
+usr-share-calamares/modules/keyboard.conf	6	---
+usr-share-calamares/modules/keyboard.conf	10	xOrgConfFileName: "/etc/X11/xorg.conf.d/00-keyboard.conf"
+usr-share-calamares/modules/keyboard.conf	18	convertedKeymapPath: "/lib/kbd/keymaps/xkb"
+usr-share-calamares/modules/license.conf	6	---
+usr-share-calamares/modules/license.conf	24	entries:
+usr-share-calamares/modules/license.conf	25	- id:       nvidia
+usr-share-calamares/modules/license.conf	26	name:     Nvidia
+usr-share-calamares/modules/license.conf	27	vendor:   Nvidia Corporation
+usr-share-calamares/modules/license.conf	28	type:     driver
+usr-share-calamares/modules/license.conf	29	url:      http://developer.download.nvidia.com/cg/Cg_3.0/license.pdf
+usr-share-calamares/modules/license.conf	30	required: false
+usr-share-calamares/modules/license.conf	31	- id:       amd
+usr-share-calamares/modules/license.conf	32	name:     Catalyst
+usr-share-calamares/modules/license.conf	33	vendor:   "Advanced Micro Devices, Inc."
+usr-share-calamares/modules/license.conf	34	type:     gpudriver
+usr-share-calamares/modules/license.conf	35	url:      http://support.amd.com/en-us/download/eula
+usr-share-calamares/modules/license.conf	36	required: false
+usr-share-calamares/modules/license.conf	37	- id:       flashplugin
+usr-share-calamares/modules/license.conf	38	name:     Adobe Flash
+usr-share-calamares/modules/license.conf	39	vendor:   Adobe Systems Incorporated
+usr-share-calamares/modules/license.conf	40	type:     browserplugin
+usr-share-calamares/modules/license.conf	41	url:      http://www.adobe.com/products/eulas/pdfs/PlatformClients_PC_WWEULA_Combined_20100108_1657.pdf
+usr-share-calamares/modules/license.conf	42	required: true
+usr-share-calamares/modules/license.conf	47	- id:   mine_mine
+usr-share-calamares/modules/license.conf	48	name: Calamares Proprietary License
+usr-share-calamares/modules/license.conf	49	vendor: Calamares, Inc.
+usr-share-calamares/modules/license.conf	50	type: software
+usr-share-calamares/modules/license.conf	51	required: true
+usr-share-calamares/modules/license.conf	52	url: file:../LICENSE
+usr-share-calamares/modules/license.conf	53	expand: true
+usr-share-calamares/modules/locale.conf	1	---
+usr-share-calamares/modules/locale.conf	2	region: America
+usr-share-calamares/modules/locale.conf	3	zone: Sao_Paulo
+usr-share-calamares/modules/locale.conf	4	geoip:
+usr-share-calamares/modules/locale.conf	5	style: json
+usr-share-calamares/modules/locale.conf	6	url: https://geoip.kde.org/v1/calamares
+usr-share-calamares/modules/locale.conf	7	selector: ''
+usr-share-calamares/modules/luksbootkeyfile.conf	6	---
+usr-share-calamares/modules/luksbootkeyfile.conf	14	luks2Hash: default
+usr-share-calamares/modules/luksopenswaphookcfg.conf	5	---
+usr-share-calamares/modules/luksopenswaphookcfg.conf	7	configFilePath: /etc/openswap.conf
+usr-share-calamares/modules/machineid.conf	5	---
+usr-share-calamares/modules/machineid.conf	7	systemd: true
+usr-share-calamares/modules/machineid.conf	9	dbus: true
+usr-share-calamares/modules/machineid.conf	11	dbus-symlink: true
+usr-share-calamares/modules/machineid.conf	13	entropy-copy: false
+usr-share-calamares/modules/machineid.conf	15	entropy-files:
+usr-share-calamares/modules/machineid.conf	16	- /var/lib/urandom/random-seed
+usr-share-calamares/modules/machineid.conf	17	- /var/lib/systemd/random-seed
+usr-share-calamares/modules/mhwdcfg.conf	1	---
+usr-share-calamares/modules/mhwdcfg.conf	2	bus:
+usr-share-calamares/modules/mhwdcfg.conf	3	- pci
+usr-share-calamares/modules/mhwdcfg.conf	6	identifier:
+usr-share-calamares/modules/mhwdcfg.conf	7	net:
+usr-share-calamares/modules/mhwdcfg.conf	8	- 200
+usr-share-calamares/modules/mhwdcfg.conf	9	- 280
+usr-share-calamares/modules/mhwdcfg.conf	10	video:
+usr-share-calamares/modules/mhwdcfg.conf	11	- 300
+usr-share-calamares/modules/mhwdcfg.conf	12	- 302
+usr-share-calamares/modules/mhwdcfg.conf	13	- 380
+usr-share-calamares/modules/mhwdcfg.conf	15	driver: free
+usr-share-calamares/modules/mhwdcfg.conf	17	local: true
+usr-share-calamares/modules/mhwdcfg.conf	19	repo: /opt/mhwd/pacman-mhwd.conf
+usr-share-calamares/modules/mount.conf	9	---
+usr-share-calamares/modules/mount.conf	21	extraMounts:
+usr-share-calamares/modules/mount.conf	22	- device: proc
+usr-share-calamares/modules/mount.conf	23	fs: proc
+usr-share-calamares/modules/mount.conf	24	mountPoint: /proc
+usr-share-calamares/modules/mount.conf	25	- device: sys
+usr-share-calamares/modules/mount.conf	26	fs: sysfs
+usr-share-calamares/modules/mount.conf	27	mountPoint: /sys
+usr-share-calamares/modules/mount.conf	28	- device: /dev
+usr-share-calamares/modules/mount.conf	29	mountPoint: /dev
+usr-share-calamares/modules/mount.conf	30	options: [ bind ]
+usr-share-calamares/modules/mount.conf	31	- device: tmpfs
+usr-share-calamares/modules/mount.conf	32	fs: tmpfs
+usr-share-calamares/modules/mount.conf	33	mountPoint: /run
+usr-share-calamares/modules/mount.conf	34	- device: /run/udev
+usr-share-calamares/modules/mount.conf	35	mountPoint: /run/udev
+usr-share-calamares/modules/mount.conf	36	options: [ bind ]
+usr-share-calamares/modules/mount.conf	37	- device: efivarfs
+usr-share-calamares/modules/mount.conf	38	fs: efivarfs
+usr-share-calamares/modules/mount.conf	39	mountPoint: /sys/firmware/efi/efivars
+usr-share-calamares/modules/mount.conf	40	efi: true
+usr-share-calamares/modules/mount.conf	50	btrfsSubvolumes:
+usr-share-calamares/modules/mount.conf	51	- mountPoint: /
+usr-share-calamares/modules/mount.conf	52	subvolume: /@
+usr-share-calamares/modules/mount.conf	56	- mountPoint: /home
+usr-share-calamares/modules/mount.conf	57	subvolume: /@home
+usr-share-calamares/modules/mount.conf	58	- mountPoint: /var/cache
+usr-share-calamares/modules/mount.conf	59	subvolume: /@cache
+usr-share-calamares/modules/mount.conf	60	- mountPoint: /var/log
+usr-share-calamares/modules/mount.conf	61	subvolume: /@log
+usr-share-calamares/modules/mount.conf	66	btrfsSwapSubvol: /@swap
+usr-share-calamares/modules/mount.conf	113	mountOptions:
+usr-share-calamares/modules/mount.conf	114	- filesystem: default
+usr-share-calamares/modules/mount.conf	115	options: [ defaults, noatime ]
+usr-share-calamares/modules/mount.conf	116	- filesystem: efi
+usr-share-calamares/modules/mount.conf	117	options: [ defaults, umask=0077 ]
+usr-share-calamares/modules/mount.conf	118	- filesystem: btrfs
+usr-share-calamares/modules/mount.conf	119	options: [ defaults, noatime, compress=lzo ]
+usr-share-calamares/modules/mount.conf	120	- filesystem: btrfs_swap
+usr-share-calamares/modules/mount.conf	121	options: [ defaults, noatime ]
+usr-share-calamares/modules/netinstall.conf	1	---
+usr-share-calamares/modules/netinstall.conf	2	groupsUrl: file:///etc/calamares/netinstall.yaml
+usr-share-calamares/modules/netinstall.conf	3	required: false
+usr-share-calamares/modules/oemid.conf	5	---
+usr-share-calamares/modules/oemid.conf	16	batch-identifier: neon-${DATE}
+usr-share-calamares/modules/openrcdmcryptcfg.conf	1	---
+usr-share-calamares/modules/openrcdmcryptcfg.conf	2	configFilePath: /etc/conf.d/dmcrypt
+usr-share-calamares/modules/packagechooser.conf	1	---
+usr-share-calamares/modules/packagechooser.conf	2	mode: required
+usr-share-calamares/modules/packagechooser.conf	3	method: netinstall-select
+usr-share-calamares/modules/packagechooser.conf	4	items:
+usr-share-calamares/modules/packagechooser.conf	5	- id: Mocha-Gamer-KDE
+usr-share-calamares/modules/packagechooser.conf	6	name: "Mocha Gamer KDE"
+usr-share-calamares/modules/packagechooser.conf	7	description: "Instalação inicial do Mocha com KDE Plasma e SDDM. Outros desktops não são oferecidos nesta fase."
+usr-share-calamares/modules/packagechooser.conf	8	screenshot: /usr/share/calamares/branding/mocha/welcome.png
+usr-share-calamares/modules/packagechooser.conf	9	selected: true
+usr-share-calamares/modules/packages.conf	1	---
+usr-share-calamares/modules/packages.conf	2	backend: pacman
+usr-share-calamares/modules/packages.conf	3	skip_if_no_internet: false
+usr-share-calamares/modules/packages.conf	4	update_db: false
+usr-share-calamares/modules/packages.conf	5	update_system: false
+usr-share-calamares/modules/partition.conf	34	efi:
+usr-share-calamares/modules/partition.conf	35	mountPoint:         "/boot/efi"
+usr-share-calamares/modules/partition.conf	36	recommendedSize:    300MiB
+usr-share-calamares/modules/partition.conf	37	minimumSize:        32MiB
+usr-share-calamares/modules/partition.conf	38	label:              "EFI"
+usr-share-calamares/modules/partition.conf	74	userSwapChoices:
+usr-share-calamares/modules/partition.conf	75	- none      # Create no swap, use no swap
+usr-share-calamares/modules/partition.conf	76	- small     # Up to 4GB
+usr-share-calamares/modules/partition.conf	77	- suspend   # At least main memory size
+usr-share-calamares/modules/partition.conf	79	- file      # To swap file instead of partition
+usr-share-calamares/modules/partition.conf	102	luksGeneration: luks1
+usr-share-calamares/modules/partition.conf	115	drawNestedPartitions:   false
+usr-share-calamares/modules/partition.conf	118	alwaysShowPartitionLabels: true
+usr-share-calamares/modules/partition.conf	149	initialPartitioningChoice: none
+usr-share-calamares/modules/partition.conf	157	initialSwapChoice: none
+usr-share-calamares/modules/partition.conf	208	defaultFileSystemType:  "ext4"
+usr-share-calamares/modules/plasmalnf.conf	14	---
+usr-share-calamares/modules/plasmalnf.conf	18	lnftool: "/usr/bin/lookandfeeltool"
+usr-share-calamares/modules/plasmalnf.conf	33	showAll: false
+usr-share-calamares/modules/plasmalnf.conf	61	themes:
+usr-share-calamares/modules/plasmalnf.conf	62	- org.kde.fuzzy-pig.desktop
+usr-share-calamares/modules/plasmalnf.conf	63	- theme: org.kde.breeze.desktop
+usr-share-calamares/modules/plasmalnf.conf	64	image: "breeze.png"
+usr-share-calamares/modules/plasmalnf.conf	65	- theme: org.kde.breezedark.desktop
+usr-share-calamares/modules/plasmalnf.conf	66	image: "breeze-dark.png"
+usr-share-calamares/modules/plasmalnf.conf	67	- org.kde.fluffy-bunny.desktop
+usr-share-calamares/modules/plasmalnf.conf	83	preselect: "*"
+usr-share-calamares/modules/plymouthcfg.conf	14	---
+usr-share-calamares/modules/plymouthcfg.conf	27	plymouth_theme: spinfinity
+usr-share-calamares/modules/postcfg.conf	1	---
+usr-share-calamares/modules/postcfg.conf	2	keyrings:
+usr-share-calamares/modules/postcfg.conf	3	- archlinux
+usr-share-calamares/modules/postcfg.conf	4	- manjaro
+usr-share-calamares/modules/preservefiles.conf	52	files:
+usr-share-calamares/modules/preservefiles.conf	53	- from: log
+usr-share-calamares/modules/preservefiles.conf	54	dest: /var/log/Calamares.log
+usr-share-calamares/modules/preservefiles.conf	55	perm: root:wheel:600
+usr-share-calamares/modules/preservefiles.conf	56	- from: log
+usr-share-calamares/modules/preservefiles.conf	57	dest: /home/${USER}/installation.log
+usr-share-calamares/modules/preservefiles.conf	58	optional: true
+usr-share-calamares/modules/preservefiles.conf	59	- from: config
+usr-share-calamares/modules/preservefiles.conf	60	dest: /var/log/Calamares-install.json
+usr-share-calamares/modules/preservefiles.conf	61	perm: root:wheel:600
+usr-share-calamares/modules/rawfs.conf	6	---
+usr-share-calamares/modules/rawfs.conf	20	targets:
+usr-share-calamares/modules/rawfs.conf	21	- mountPoint: /
+usr-share-calamares/modules/rawfs.conf	22	source: /
+usr-share-calamares/modules/rawfs.conf	23	- mountPoint: /home
+usr-share-calamares/modules/rawfs.conf	24	source: /images/home.img
+usr-share-calamares/modules/rawfs.conf	25	resize: true
+usr-share-calamares/modules/rawfs.conf	26	- mountPoint: /data
+usr-share-calamares/modules/rawfs.conf	27	source: /dev/mmcblk0p3
+usr-share-calamares/modules/removeuser.conf	11	---
+usr-share-calamares/modules/removeuser.conf	13	username: live
+usr-share-calamares/modules/servicescfg.conf	1	---
+usr-share-calamares/modules/servicescfg.conf	2	services:
+usr-share-calamares/modules/servicescfg.conf	3	enabled:
+usr-share-calamares/modules/servicescfg.conf	4	- name: "NetworkManager"
+usr-share-calamares/modules/servicescfg.conf	5	runlevel: "default"
+usr-share-calamares/modules/servicescfg.conf	6	- name: "cups"
+usr-share-calamares/modules/servicescfg.conf	7	runlevel: "default"
+usr-share-calamares/modules/services.conf	9	---
+usr-share-calamares/modules/services.conf	69	disable-targets: []
+usr-share-calamares/modules/services.conf	70	mask: []
+usr-share-calamares/modules/services.conf	74	services:
+usr-share-calamares/modules/services.conf	75	- name: "NetworkManager"
+usr-share-calamares/modules/services.conf	76	mandatory: false
+usr-share-calamares/modules/services.conf	78	- name: "org.cups.cupsd"
+usr-share-calamares/modules/services.conf	79	mandatory: false
+usr-share-calamares/modules/services.conf	81	targets:
+usr-share-calamares/modules/services.conf	82	- name: "graphical"
+usr-share-calamares/modules/services.conf	83	mandatory: true
+usr-share-calamares/modules/services.conf	85	disable:
+usr-share-calamares/modules/services.conf	86	- name: "pacman-init"
+usr-share-calamares/modules/services.conf	87	mandatory: false
+usr-share-calamares/modules/services-systemd.conf	1	---
+usr-share-calamares/modules/services-systemd.conf	2	units:
+usr-share-calamares/modules/services-systemd.conf	3	- name: NetworkManager.service
+usr-share-calamares/modules/services-systemd.conf	4	action: enable
+usr-share-calamares/modules/services-systemd.conf	5	- name: systemd-resolved.service
+usr-share-calamares/modules/services-systemd.conf	6	action: enable
+usr-share-calamares/modules/services-systemd.conf	7	- name: ufw.service
+usr-share-calamares/modules/services-systemd.conf	8	action: enable
+usr-share-calamares/modules/services-systemd.conf	9	- name: sddm.service
+usr-share-calamares/modules/services-systemd.conf	10	action: enable
+usr-share-calamares/modules/services-systemd.conf	11	- name: cups.service
+usr-share-calamares/modules/services-systemd.conf	12	action: enable
+usr-share-calamares/modules/services-systemd.conf	13	- name: avahi-daemon.service
+usr-share-calamares/modules/services-systemd.conf	14	action: enable
+usr-share-calamares/modules/services-systemd.conf	15	- name: systemd-timesyncd.service
+usr-share-calamares/modules/services-systemd.conf	16	action: enable
+usr-share-calamares/modules/services-systemd.conf	17	- name: power-profiles-daemon.service
+usr-share-calamares/modules/services-systemd.conf	18	action: enable
+usr-share-calamares/modules/services-systemd.conf	19	- name: bluetooth.service
+usr-share-calamares/modules/services-systemd.conf	20	action: enable
+usr-share-calamares/modules/services-systemd.conf	21	- name: fstrim.timer
+usr-share-calamares/modules/services-systemd.conf	22	action: enable
+usr-share-calamares/modules/services-systemd.conf	23	- name: graphical.target
+usr-share-calamares/modules/services-systemd.conf	24	action: set-default
+usr-share-calamares/modules/shellprocess.conf	53	---
+usr-share-calamares/modules/shellprocess.conf	55	dontChroot: false
+usr-share-calamares/modules/shellprocess.conf	76	script:
+usr-share-calamares/modules/shellprocess.conf	77	- "-touch ${ROOT}/tmp/thingy"
+usr-share-calamares/modules/shellprocess.conf	78	- "/usr/bin/true"
+usr-share-calamares/modules/shellprocess.conf	79	- command: "/usr/local/bin/slowloris"
+usr-share-calamares/modules/shellprocess.conf	80	timeout: 3600
+usr-share-calamares/modules/umount.conf	11	---
+usr-share-calamares/modules/umount.conf	14	emergency: true
+usr-share-calamares/modules/unpackfs.conf	14	---
+usr-share-calamares/modules/unpackfs.conf	90	unpack:
+usr-share-calamares/modules/unpackfs.conf	91	-   source: ../CHANGES
+usr-share-calamares/modules/unpackfs.conf	92	sourcefs: file
+usr-share-calamares/modules/unpackfs.conf	93	destination: "/tmp/changes.txt"
+usr-share-calamares/modules/unpackfs.conf	94	weight: 1  # Single file
+usr-share-calamares/modules/unpackfs.conf	95	-   source: src/qml/calamares/slideshow
+usr-share-calamares/modules/unpackfs.conf	96	sourcefs: file
+usr-share-calamares/modules/unpackfs.conf	97	destination: "/tmp/slideshow/"
+usr-share-calamares/modules/unpackfs.conf	98	exclude: [ "*.qmlc", "qmldir" ]
+usr-share-calamares/modules/unpackfs.conf	99	weight: 5  # Lots of files
+usr-share-calamares/modules/users.conf	16	---
+usr-share-calamares/modules/users.conf	31	defaultGroups:
+usr-share-calamares/modules/users.conf	32	- name: users
+usr-share-calamares/modules/users.conf	33	must_exist: true
+usr-share-calamares/modules/users.conf	34	system: true
+usr-share-calamares/modules/users.conf	35	- lp
+usr-share-calamares/modules/users.conf	36	- video
+usr-share-calamares/modules/users.conf	37	- network
+usr-share-calamares/modules/users.conf	38	- storage
+usr-share-calamares/modules/users.conf	39	- name: wheel
+usr-share-calamares/modules/users.conf	40	must_exist: false
+usr-share-calamares/modules/users.conf	41	system: true
+usr-share-calamares/modules/users.conf	42	- audio
+usr-share-calamares/modules/users.conf	48	autologinGroup:  autologin
+usr-share-calamares/modules/users.conf	54	doAutologin:     false
+usr-share-calamares/modules/users.conf	65	sudoersGroup:    wheel
+usr-share-calamares/modules/users.conf	69	sudoersConfigureWithGroup: false
+usr-share-calamares/modules/users.conf	74	setRootPassword: true
+usr-share-calamares/modules/users.conf	84	doReusePassword: false
+usr-share-calamares/modules/users.conf	118	passwordRequirements:
+usr-share-calamares/modules/users.conf	120	minLength: -1  # Password at least this many characters
+usr-share-calamares/modules/users.conf	133	allowWeakPasswords: false
+usr-share-calamares/modules/users.conf	141	allowWeakPasswordsDefault: false
+usr-share-calamares/modules/users.conf	161	user:
+usr-share-calamares/modules/users.conf	162	shell: /bin/bash
+usr-share-calamares/modules/users.conf	163	forbidden_names: [ root ]
+usr-share-calamares/modules/users.conf	205	hostname:
+usr-share-calamares/modules/users.conf	206	location: EtcFile
+usr-share-calamares/modules/users.conf	207	writeHostsFile: true
+usr-share-calamares/modules/users.conf	208	template: "derp-${cpu}"
+usr-share-calamares/modules/users.conf	209	forbidden_names: [ localhost ]
+usr-share-calamares/modules/users.conf	211	presets:
+usr-share-calamares/modules/users.conf	212	fullName:
+usr-share-calamares/modules/users.conf	214	editable: true
+usr-share-calamares/modules/users.conf	215	loginName:
+usr-share-calamares/modules/users.conf	217	editable: true
+usr-share-calamares/modules/welcome.conf	1	---
+usr-share-calamares/modules/welcome.conf	2	showSupportUrl: true
+usr-share-calamares/modules/welcome.conf	3	showKnownIssuesUrl: true
+usr-share-calamares/modules/welcome.conf	4	showReleaseNotesUrl: false
+usr-share-calamares/modules/welcome.conf	5	showDonateUrl: true
+usr-share-calamares/modules/welcome.conf	6	requirements:
+usr-share-calamares/modules/welcome.conf	7	requiredStorage: 5.5
+usr-share-calamares/modules/welcome.conf	8	requiredRam: 1.0
+usr-share-calamares/modules/welcome.conf	9	internetCheckUrl: https://archlinux.org/
+usr-share-calamares/modules/welcome.conf	10	check:
+usr-share-calamares/modules/welcome.conf	11	- storage
+usr-share-calamares/modules/welcome.conf	12	- ram
+usr-share-calamares/modules/welcome.conf	13	- power
+usr-share-calamares/modules/welcome.conf	14	- internet
+usr-share-calamares/modules/welcome.conf	15	- root
+usr-share-calamares/modules/welcome.conf	16	- screen
+usr-share-calamares/modules/welcome.conf	17	required:
+usr-share-calamares/modules/welcome.conf	18	- ram
+usr-share-calamares/modules/welcome.conf	19	geoip:
+usr-share-calamares/modules/welcome.conf	20	style: none
+usr-share-calamares/modules/welcome.conf	21	url: https://geoip.kde.org/v1/ubiquity
+usr-share-calamares/modules/welcome.conf	22	selector: CountryCode
+usr-share-calamares/modules/welcome.conf	23	requiredStorage: 40.0
+usr-share-calamares/modules/welcome.conf	24	requiredRam: 4.0
+usr-share-calamares/modules/welcome.conf	25	internetCheckUrl: https://archlinux.org/
+usr-share-calamares/modules/welcome.conf	26	check:
+usr-share-calamares/modules/welcome.conf	27	- storage
+usr-share-calamares/modules/welcome.conf	28	- ram
+usr-share-calamares/modules/welcome.conf	29	- power
+usr-share-calamares/modules/welcome.conf	30	- internet
+usr-share-calamares/modules/welcome.conf	31	- root
+usr-share-calamares/modules/welcome.conf	32	- screen
+usr-share-calamares/modules/welcome.conf	33	required:
+usr-share-calamares/modules/welcome.conf	34	- storage
+usr-share-calamares/modules/welcome.conf	35	- ram
+usr-share-calamares/modules/welcome.conf	36	- root
+usr-share-calamares/modules/welcome.conf	37	- screen
+usr-share-calamares/netinstall.yaml	1	---
+usr-share-calamares/netinstall.yaml	2	- name: "Mocha Core System"
+usr-share-calamares/netinstall.yaml	3	description: "Base mínima do Mocha para instalação Arch com NetworkManager, GRUB, firmware e ferramentas essenciais."
+usr-share-calamares/netinstall.yaml	4	hidden: false
+usr-share-calamares/netinstall.yaml	5	selected: true
+usr-share-calamares/netinstall.yaml	6	critical: true
+usr-share-calamares/netinstall.yaml	7	packages:
+usr-share-calamares/netinstall.yaml	8	- base
+usr-share-calamares/netinstall.yaml	9	- base-devel
+usr-share-calamares/netinstall.yaml	10	- linux
+usr-share-calamares/netinstall.yaml	11	- linux-headers
+usr-share-calamares/netinstall.yaml	12	- linux-firmware
+usr-share-calamares/netinstall.yaml	13	- amd-ucode
+usr-share-calamares/netinstall.yaml	14	- intel-ucode
+usr-share-calamares/netinstall.yaml	15	- grub
+usr-share-calamares/netinstall.yaml	16	- efibootmgr
+usr-share-calamares/netinstall.yaml	17	- os-prober
+usr-share-calamares/netinstall.yaml	18	- mtools
+usr-share-calamares/netinstall.yaml	19	- dosfstools
+usr-share-calamares/netinstall.yaml	20	- btrfs-progs
+usr-share-calamares/netinstall.yaml	21	- xfsprogs
+usr-share-calamares/netinstall.yaml	22	- exfatprogs
+usr-share-calamares/netinstall.yaml	23	- ntfs-3g
+usr-share-calamares/netinstall.yaml	24	- networkmanager
+usr-share-calamares/netinstall.yaml	25	- iwd
+usr-share-calamares/netinstall.yaml	26	- wpa_supplicant
+usr-share-calamares/netinstall.yaml	27	- wireless-regdb
+usr-share-calamares/netinstall.yaml	28	- modemmanager
+usr-share-calamares/netinstall.yaml	29	- mobile-broadband-provider-info
+usr-share-calamares/netinstall.yaml	30	- sudo
+usr-share-calamares/netinstall.yaml	31	- polkit
+usr-share-calamares/netinstall.yaml	32	- dbus
+usr-share-calamares/netinstall.yaml	33	- nano
+usr-share-calamares/netinstall.yaml	34	- vim
+usr-share-calamares/netinstall.yaml	35	- git
+usr-share-calamares/netinstall.yaml	36	- wget
+usr-share-calamares/netinstall.yaml	37	- curl
+usr-share-calamares/netinstall.yaml	38	- rsync
+usr-share-calamares/netinstall.yaml	39	- openssh
+usr-share-calamares/netinstall.yaml	40	- pacman-contrib
+usr-share-calamares/netinstall.yaml	41	- reflector
+usr-share-calamares/netinstall.yaml	42	- arch-install-scripts
+usr-share-calamares/netinstall.yaml	43	- squashfs-tools
+usr-share-calamares/netinstall.yaml	44	- cpio
+usr-share-calamares/netinstall.yaml	45	- busybox
+usr-share-calamares/netinstall.yaml	46	- pv
+usr-share-calamares/netinstall.yaml	47	- dialog
+usr-share-calamares/netinstall.yaml	48	- bash-completion
+usr-share-calamares/netinstall.yaml	49	- xdg-user-dirs
+usr-share-calamares/netinstall.yaml	50	- xdg-utils
+usr-share-calamares/netinstall.yaml	51	- shared-mime-info
+usr-share-calamares/netinstall.yaml	52	- desktop-file-utils
+usr-share-calamares/netinstall.yaml	53	- appstream-glib
+usr-share-calamares/netinstall.yaml	54	- pipewire
+usr-share-calamares/netinstall.yaml	55	- pipewire-alsa
+usr-share-calamares/netinstall.yaml	56	- pipewire-pulse
+usr-share-calamares/netinstall.yaml	57	- pipewire-jack
+usr-share-calamares/netinstall.yaml	58	- wireplumber
+usr-share-calamares/netinstall.yaml	59	- alsa-utils
+usr-share-calamares/netinstall.yaml	60	- pavucontrol
+usr-share-calamares/netinstall.yaml	61	- bluez
+usr-share-calamares/netinstall.yaml	62	- bluez-utils
+usr-share-calamares/netinstall.yaml	63	- bluedevil
+usr-share-calamares/netinstall.yaml	64	- smartmontools
+usr-share-calamares/netinstall.yaml	65	- hdparm
+usr-share-calamares/netinstall.yaml	66	- sdparm
+usr-share-calamares/netinstall.yaml	67	- nvme-cli
+usr-share-calamares/netinstall.yaml	68	- usbutils
+usr-share-calamares/netinstall.yaml	69	- pciutils
+usr-share-calamares/netinstall.yaml	70	- lsb-release
+usr-share-calamares/netinstall.yaml	71	- hwinfo
+usr-share-calamares/netinstall.yaml	72	- htop
+usr-share-calamares/netinstall.yaml	73	- glances
+usr-share-calamares/netinstall.yaml	74	- ufw
+usr-share-calamares/netinstall.yaml	75	- gufw
+usr-share-calamares/netinstall.yaml	76	- firewalld
+usr-share-calamares/netinstall.yaml	77	- name: "Mocha KDE Plasma Wayland SDDM"
+usr-share-calamares/netinstall.yaml	78	description: "Interface inicial única do Mocha: KDE Plasma com SDDM e Wayland. XWayland entra apenas para compatibilidade de aplicativos/jogos."
+usr-share-calamares/netinstall.yaml	79	hidden: false
+usr-share-calamares/netinstall.yaml	80	selected: true
+usr-share-calamares/netinstall.yaml	81	critical: true
+usr-share-calamares/netinstall.yaml	82	packages:
+usr-share-calamares/netinstall.yaml	83	- plasma-meta
+usr-share-calamares/netinstall.yaml	84	- plasma-desktop
+usr-share-calamares/netinstall.yaml	85	- plasma-nm
+usr-share-calamares/netinstall.yaml	86	- plasma-pa
+usr-share-calamares/netinstall.yaml	87	- powerdevil
+usr-share-calamares/netinstall.yaml	88	- sddm
+usr-share-calamares/netinstall.yaml	89	- sddm-kcm
+usr-share-calamares/netinstall.yaml	90	- breeze
+usr-share-calamares/netinstall.yaml	91	- breeze-gtk
+usr-share-calamares/netinstall.yaml	92	- kde-gtk-config
+usr-share-calamares/netinstall.yaml	93	- xdg-desktop-portal
+usr-share-calamares/netinstall.yaml	94	- xdg-desktop-portal-kde
+usr-share-calamares/netinstall.yaml	95	- dolphin
+usr-share-calamares/netinstall.yaml	96	- konsole
+usr-share-calamares/netinstall.yaml	97	- kate
+usr-share-calamares/netinstall.yaml	98	- ark
+usr-share-calamares/netinstall.yaml	99	- spectacle
+usr-share-calamares/netinstall.yaml	100	- gwenview
+usr-share-calamares/netinstall.yaml	101	- okular
+usr-share-calamares/netinstall.yaml	102	- partitionmanager
+usr-share-calamares/netinstall.yaml	103	- kcalc
+usr-share-calamares/netinstall.yaml	104	- kcharselect
+usr-share-calamares/netinstall.yaml	105	- ffmpegthumbs
+usr-share-calamares/netinstall.yaml	106	- kdegraphics-thumbnailers
+usr-share-calamares/netinstall.yaml	107	- kio-extras
+usr-share-calamares/netinstall.yaml	108	- kio-admin
+usr-share-calamares/netinstall.yaml	109	- kio-fuse
+usr-share-calamares/netinstall.yaml	110	- xorg-xwayland
+usr-share-calamares/netinstall.yaml	111	- mesa
+usr-share-calamares/netinstall.yaml	112	- vulkan-icd-loader
+usr-share-calamares/netinstall.yaml	113	- lib32-vulkan-icd-loader
+usr-share-calamares/netinstall.yaml	114	- noto-fonts
+usr-share-calamares/netinstall.yaml	115	- noto-fonts-cjk
+usr-share-calamares/netinstall.yaml	116	- noto-fonts-emoji
+usr-share-calamares/netinstall.yaml	117	- ttf-dejavu
+usr-share-calamares/netinstall.yaml	118	- ttf-liberation
+usr-share-calamares/netinstall.yaml	119	- ttf-carlito
+usr-share-calamares/netinstall.yaml	120	- ttf-caladea
+usr-share-calamares/netinstall.yaml	121	- gvfs
+usr-share-calamares/netinstall.yaml	122	- gvfs-mtp
+usr-share-calamares/netinstall.yaml	123	- gvfs-gphoto2
+usr-share-calamares/netinstall.yaml	124	- gvfs-nfs
+usr-share-calamares/netinstall.yaml	125	- gvfs-smb
+usr-share-calamares/netinstall.yaml	126	- sshfs
+usr-share-calamares/netinstall.yaml	127	- fuse3
+usr-share-calamares/netinstall.yaml	128	- name: "Mocha Gamer Default"
+usr-share-calamares/netinstall.yaml	129	description: "Camada gamer padrão: Steam, Wine/Proton, overlays, GameMode, ferramentas Vulkan e launchers disponíveis nos repositórios ativos."
+usr-share-calamares/netinstall.yaml	130	hidden: false
+usr-share-calamares/netinstall.yaml	131	selected: true
+usr-share-calamares/netinstall.yaml	132	critical: false
+usr-share-calamares/netinstall.yaml	133	packages:
+usr-share-calamares/netinstall.yaml	134	- steam
+usr-share-calamares/netinstall.yaml	135	- wine
+usr-share-calamares/netinstall.yaml	136	- winetricks
+usr-share-calamares/netinstall.yaml	137	- wine-mono
+usr-share-calamares/netinstall.yaml	138	- wine-gecko
+usr-share-calamares/netinstall.yaml	139	- gamemode
+usr-share-calamares/netinstall.yaml	140	- lib32-gamemode
+usr-share-calamares/netinstall.yaml	141	- mangohud
+usr-share-calamares/netinstall.yaml	142	- lib32-mangohud
+usr-share-calamares/netinstall.yaml	143	- goverlay
+usr-share-calamares/netinstall.yaml	144	- gamescope
+usr-share-calamares/netinstall.yaml	145	- protontricks
+usr-share-calamares/netinstall.yaml	146	- lutris
+usr-share-calamares/netinstall.yaml	147	- vulkan-tools
+usr-share-calamares/netinstall.yaml	148	- vulkan-headers
+usr-share-calamares/netinstall.yaml	149	- vulkan-validation-layers
+usr-share-calamares/netinstall.yaml	150	- mesa-utils
+usr-share-calamares/netinstall.yaml	151	- piper
+usr-share-calamares/netinstall.yaml	152	- libratbag
+usr-share-calamares/netinstall.yaml	153	- antimicrox
+usr-share-calamares/netinstall.yaml	154	- openrgb
+usr-share-calamares/netinstall.yaml	155	- name: "Mocha Creation Office Streaming"
+usr-share-calamares/netinstall.yaml	156	description: "Ferramentas úteis para criação, documentação e uso geral sem transformar o perfil em desktop corporativo ou educacional."
+usr-share-calamares/netinstall.yaml	157	hidden: false
+usr-share-calamares/netinstall.yaml	158	selected: true
+usr-share-calamares/netinstall.yaml	159	critical: false
+usr-share-calamares/netinstall.yaml	160	packages:
+usr-share-calamares/netinstall.yaml	161	- obs-studio
+usr-share-calamares/netinstall.yaml	162	- kdenlive
+usr-share-calamares/netinstall.yaml	163	- krita
+usr-share-calamares/netinstall.yaml	164	- inkscape
+usr-share-calamares/netinstall.yaml	165	- gimp
+usr-share-calamares/netinstall.yaml	166	- audacity
+usr-share-calamares/netinstall.yaml	167	- vivaldi
+usr-share-calamares/netinstall.yaml	168	- vivaldi-ffmpeg-codecs
+usr-share-calamares/netinstall.yaml	169	- bitwarden
+usr-share-calamares/netinstall.yaml	170	- flatpak
+usr-share-calamares/netinstall.yaml	171	- discover
+usr-share-calamares/netinstall.yaml	172	- packagekit-qt6
+usr-share-calamares/netinstall.yaml	173	- name: "Mocha GPU Mesa AMD Intel"
+usr-share-calamares/netinstall.yaml	174	description: "Pilha Mesa/Vulkan aberta para AMD e Intel."
+usr-share-calamares/netinstall.yaml	175	hidden: false
+usr-share-calamares/netinstall.yaml	176	selected: true
+usr-share-calamares/netinstall.yaml	177	critical: false
+usr-share-calamares/netinstall.yaml	178	packages:
+usr-share-calamares/netinstall.yaml	179	- mesa
+usr-share-calamares/netinstall.yaml	180	- lib32-mesa
+usr-share-calamares/netinstall.yaml	181	- vulkan-radeon
+usr-share-calamares/netinstall.yaml	182	- lib32-vulkan-radeon
+usr-share-calamares/netinstall.yaml	183	- vulkan-intel
+usr-share-calamares/netinstall.yaml	184	- lib32-vulkan-intel
+usr-share-calamares/netinstall.yaml	185	- vulkan-nouveau
+usr-share-calamares/netinstall.yaml	186	- lib32-vulkan-nouveau
+usr-share-calamares/netinstall.yaml	187	- name: "Mocha GPU NVIDIA Proprietary"
+usr-share-calamares/netinstall.yaml	188	description: "Drivers NVIDIA proprietários opcionais. A escolha final do driver/kernel será refinada na montagem da ISO."
+usr-share-calamares/netinstall.yaml	189	hidden: false
+usr-share-calamares/netinstall.yaml	190	selected: false
+usr-share-calamares/netinstall.yaml	191	critical: false
+usr-share-calamares/netinstall.yaml	192	packages:
+usr-share-calamares/netinstall.yaml	193	- nvidia-utils
+usr-share-calamares/netinstall.yaml	194	- lib32-nvidia-utils
+usr-share-calamares/netinstall.yaml	195	- nvidia-settings
+usr-share-calamares/netinstall.yaml	196	- nvidia-prime
+usr-share-calamares/netinstall.yaml	197	- opencl-nvidia
+usr-share-calamares/netinstall.yaml	198	- nvidia-open
+usr-share-calamares/netinstall.yaml	199	- nvidia-open-dkms
+usr-share-calamares/netinstall.yaml	200	- libva-nvidia-driver
+usr-share-calamares/netinstall.yaml	201	- name: "Mocha Compatibility Hardware Network"
+usr-share-calamares/netinstall.yaml	202	description: "Compatibilidade adicional de rede, impressoras, VPNs, arquivos e dispositivos externos."
+usr-share-calamares/netinstall.yaml	203	hidden: false
+usr-share-calamares/netinstall.yaml	204	selected: false
+usr-share-calamares/netinstall.yaml	205	critical: false
+usr-share-calamares/netinstall.yaml	206	packages:
+usr-share-calamares/netinstall.yaml	207	- networkmanager-openvpn
+usr-share-calamares/netinstall.yaml	208	- networkmanager-openconnect
+usr-share-calamares/netinstall.yaml	209	- networkmanager-pptp
+usr-share-calamares/netinstall.yaml	210	- networkmanager-vpnc
+usr-share-calamares/netinstall.yaml	211	- openvpn
+usr-share-calamares/netinstall.yaml	212	- openconnect
+usr-share-calamares/netinstall.yaml	213	- vpnc
+usr-share-calamares/netinstall.yaml	214	- pptpclient
+usr-share-calamares/netinstall.yaml	215	- xl2tpd
+usr-share-calamares/netinstall.yaml	216	- rp-pppoe
+usr-share-calamares/netinstall.yaml	217	- ethtool
+usr-share-calamares/netinstall.yaml	218	- whois
+usr-share-calamares/netinstall.yaml	219	- nss-mdns
+usr-share-calamares/netinstall.yaml	220	- avahi
+usr-share-calamares/netinstall.yaml	221	- cups
+usr-share-calamares/netinstall.yaml	222	- system-config-printer
+usr-share-calamares/netinstall.yaml	223	- sane
+usr-share-calamares/netinstall.yaml	224	- simple-scan
+usr-share-calamares/netinstall.yaml	225	- android-tools
+usr-share-calamares/netinstall.yaml	226	- android-udev
+usr-share-calamares/netinstall.yaml	227	- mtpfs
+usr-share-calamares/netinstall.yaml	228	- gvfs-afc
+usr-share-calamares/netinstall.yaml	229	- nfs-utils
+usr-share-calamares/netinstall.yaml	230	- smbclient
+usr-share-calamares/netinstall.yaml	231	- cifs-utils
+usr-share-calamares/netinstall.yaml	232	- unrar
+usr-share-calamares/netinstall.yaml	233	- unzip
+usr-share-calamares/netinstall.yaml	234	- zip
+usr-share-calamares/netinstall.yaml	235	- lrzip
+usr-share-calamares/netinstall.yaml	236	- lzop
+usr-share-calamares/netinstall.yaml	237	- lzip
+usr-share-calamares/netinstall.yaml	238	- gparted
+usr-share-calamares/netinstall.yaml	239	- fsarchiver
+usr-share-calamares/netinstall.yaml	240	- ddrescue
+usr-share-calamares/netinstall.yaml	241	- testdisk
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	4	*   SPDX-License-Identifier: GPL-3.0-or-later
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	10	NavButton {
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	11	id: backButton
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	12	anchors.left: parent.left
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	13	visible: parent.currentSlide > 0
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	14	isForward: false
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	4	*   SPDX-License-Identifier: GPL-3.0-or-later
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	10	NavButton {
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	11	id: forwardButton
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	12	anchors.right: parent.right
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	13	visible: parent.currentSlide + 1 < parent.slides.length;
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	4	*   SPDX-License-Identifier: GPL-3.0-or-later
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	11	* which calls forward / backward navigation on the presentation it
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	12	* is in. It should be a child item of the presentation (not of a
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	13	* single slide). Use the ForwardButton or BackButton for a pre-
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	14	* configured instance that interacts with the presentation.
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	17	import QtQuick 2.5;
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	19	Image {
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	20	id: fade
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	22	property bool isForward : true
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	24	width: 100
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	25	height: 100
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	26	anchors.verticalCenter: parent.verticalCenter
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	27	opacity: 0.3
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	29	OpacityAnimator {
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	30	id: fadeIn
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	31	target: fade
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	32	from: fade.opacity
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	33	to: 1.0
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	34	duration: 500
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	35	running: false
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	38	OpacityAnimator {
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	39	id: fadeOut
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	40	target: fade
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	41	from: fade.opacity
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	42	to: 0.3
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	43	duration: 250
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	44	running: false
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	47	MouseArea {
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	48	anchors.fill: parent
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	49	hoverEnabled: true
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	50	onEntered: { fadeOut.running = false; fadeIn.running = true }
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	51	onExited: { fadeIn.running = false ; fadeOut.running = true }
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	52	onClicked: {
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	53	if (isForward)
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	54	fade.parent.goToNextSlide()
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	55	else
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	56	fade.parent.goToPreviousSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	3	*   SPDX-FileCopyrightText: 2017 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	4	*   SPDX-FileCopyrightText: 2016 The Qt Company Ltd.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	5	*   SPDX-License-Identifier: LGPL-2.1-only
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	7	*   2017, Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	8	*     - added looping, keys-instead-of-shortcut
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	9	*   2018, Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	10	*     - make looping a property, drop the 'c' fade-key
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	11	*     - drop navigation through entering a slide number
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	12	*       (this and the 'c' key make sense in a *presentation*
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	13	*       slideshow, not in a passive slideshow like Calamares)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	14	*     - remove quit key
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	15	*   2019, Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	16	*     - Support "V2" loading
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	17	*     - Disable shortcuts until the content is visible in Calamares
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	18	*   2020, Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	19	*     - Updated to SPDX headers
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	24	** Copyright (C) 2016 The Qt Company Ltd.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	25	** Contact: https://www.qt.io/licensing/
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	27	** This file is part of the QML Presentation System.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	29	** $QT_BEGIN_LICENSE:LGPL$
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	30	** Commercial License Usage
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	31	** Licensees holding valid commercial Qt licenses may use this file in
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	32	** accordance with the commercial license agreement provided with the
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	33	** Software or, alternatively, in accordance with the terms contained in
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	34	** a written agreement between you and Digia.  For licensing terms and
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	35	** conditions see http://qt.digia.com/licensing.  For further information
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	36	** use the contact form at http://qt.digia.com/contact-us.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	38	** GNU Lesser General Public License Usage
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	39	** Alternatively, this file may be used under the terms of the GNU Lesser
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	40	** General Public License version 2.1 as published by the Free Software
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	41	** Foundation and appearing in the file LICENSE.LGPL included in the
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	42	** packaging of this file.  Please review the following information to
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	43	** ensure the GNU Lesser General Public License version 2.1 requirements
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	44	** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	46	** In addition, as a special exception, Digia gives you certain additional
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	47	** rights.  These rights are described in the Digia Qt LGPL Exception
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	48	** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	50	** GNU General Public License Usage
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	51	** Alternatively, this file may be used under the terms of the GNU
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	52	** General Public License version 3.0 as published by the Free Software
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	53	** Foundation and appearing in the file LICENSE.GPL included in the
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	54	** packaging of this file.  Please review the following information to
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	55	** ensure the GNU General Public License version 3.0 requirements will be
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	56	** met: http://www.gnu.org/copyleft/gpl.html.
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	59	** $QT_END_LICENSE$
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	61	****************************************************************************/
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	64	import QtQuick 2.5
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	65	import QtQuick.Window 2.0
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	67	Item {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	68	id: root
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	70	property variant slides: []
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	71	property int currentSlide: 0
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	73	property bool loopSlides: true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	75	property bool showNotes: false;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	76	property bool allowDelay: true;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	77	property alias mouseNavigation: mouseArea.enabled
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	78	property bool arrowNavigation: true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	79	property bool keyShortcutsEnabled: true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	81	property color titleColor: textColor;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	82	property color textColor: "black"
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	83	property string fontFamily: "Helvetica"
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	84	property string codeFontFamily: "Courier New"
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	92	property bool activatedInCalamares: false
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	95	property int _lastShownSlide: 0
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	97	Component.onCompleted: {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	98	var slideCount = 0;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	99	var slides = [];
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	100	for (var i=0; i<root.children.length; ++i) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	101	var r = root.children[i];
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	102	if (r.isSlide) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	103	slides.push(r);
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	107	root.slides = slides;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	110	if (root.slides.length > 0)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	111	root.slides[root.currentSlide].visible = true;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	114	function switchSlides(from, to, forward) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	115	from.visible = false
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	116	to.visible = true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	117	return true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	120	onCurrentSlideChanged: {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	121	switchSlides(root.slides[_lastShownSlide], root.slides[currentSlide], currentSlide > _lastShownSlide)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	122	_lastShownSlide = currentSlide
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	124	root.focus = true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	127	function goToNextSlide() {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	128	if (root.slides[currentSlide].delayPoints) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	129	if (root.slides[currentSlide]._advance())
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	130	return;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	132	if (currentSlide + 1 < root.slides.length)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	133	++currentSlide;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	134	else if (loopSlides)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	135	currentSlide = 0;  // Loop at the end
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	138	function goToPreviousSlide() {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	139	if (currentSlide - 1 >= 0)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	140	--currentSlide;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	141	else if (loopSlides)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	142	currentSlide = root.slides.length - 1
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	145	focus: true  // Keep focus
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	148	Keys.onSpacePressed: goToNextSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	149	Keys.onRightPressed: goToNextSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	150	Keys.onLeftPressed: goToPreviousSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	153	Shortcut { sequence: StandardKey.MoveToNextLine; enabled: root.activatedInCalamares && root .arrowNavigation; onActivated: goToNextSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	154	Shortcut { sequence: StandardKey.MoveToPreviousLine; enabled: root.activatedInCalamares && root.arrowNavigation; onActivated: goToPreviousSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	155	Shortcut { sequence: StandardKey.MoveToNextChar; enabled: root.activatedInCalamares && root.arrowNavigation; onActivated: goToNextSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	156	Shortcut { sequence: StandardKey.MoveToPreviousChar; enabled: root.activatedInCalamares && root.arrowNavigation; onActivated: goToPreviousSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	159	Shortcut { sequence: " "; enabled: root.activatedInCalamares && root.keyShortcutsEnabled; onActivated: goToNextSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	162	Shortcut { sequence: StandardKey.MoveToNextPage; enabled: root.activatedInCalamares; onActivated: goToNextSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	163	Shortcut { sequence: StandardKey.MoveToPreviousPage; enabled: root.activatedInCalamares; onActivated: goToPreviousSlide() }
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	165	MouseArea {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	166	id: mouseArea
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	167	anchors.fill: parent
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	168	acceptedButtons: Qt.LeftButton | Qt.RightButton
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	169	onClicked: {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	170	if (mouse.button == Qt.RightButton)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	171	goToPreviousSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	172	else
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	173	goToNextSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	175	onPressAndHold: goToPreviousSlide(); //A back mechanism for touch only devices
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	178	Window {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	179	id: notesWindow;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	180	width: 400
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	181	height: 300
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	183	title: "QML Presentation: Notes"
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	184	visible: root.showNotes
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	186	Flickable {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	187	anchors.fill: parent
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	188	contentWidth: parent.width
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	189	contentHeight: textContainer.height
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	191	Item {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	192	id: textContainer
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	193	width: parent.width
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	194	height: notesText.height + 2 * notesText.padding
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	196	Text {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	197	id: notesText
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	199	property real padding: 16;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	201	x: padding
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	202	y: padding
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	203	width: parent.width - 2 * padding
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	206	font.pixelSize: 16
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	207	wrapMode: Text.WordWrap
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	209	property string notes: root.slides[root.currentSlide].notes;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	211	onNotesChanged: {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	212	var result = "";
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	214	var lines = notes.split("\n");
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	215	var beginNewLine = false
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	216	for (var i=0; i<lines.length; ++i) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	217	var line = lines[i].trim();
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	218	if (line.length == 0) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	219	beginNewLine = true;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	220	} else {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	221	if (beginNewLine && result.length) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	222	result += "\n\n"
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	223	beginNewLine = false
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	225	if (result.length > 0)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	226	result += " ";
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	227	result += line;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	231	if (result.length == 0) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	232	font.italic = true;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	233	text = "no notes.."
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	234	} else {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	235	font.italic = false;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	236	text = result;
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot <groot@kde.org>
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	4	*   SPDX-License-Identifier: GPL-3.0-or-later
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	11	* in the slideshow in the format "n / total".
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	14	import QtQuick 2.5;
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	16	Rectangle {
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	17	id: slideCounter
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	18	anchors.right: parent.right
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	19	anchors.bottom: parent.bottom
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	20	width: 100
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	21	height: 50
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	23	Text {
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	24	id: slideCounterText
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	25	anchors.centerIn: parent
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml	27	text: qsTr("%L1 / %L2").arg(parent.parent.currentSlide + 1).arg(parent.parent.slides.length)
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	3	*   SPDX-FileCopyrightText: 2012 Digia Plc and/or its subsidiary(-ies).
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	4	*   SPDX-License-Identifier: LGPL-2.1-only
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	9	** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	10	** Contact: http://www.qt-project.org/legal
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	12	** This file is part of the QML Presentation System.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	14	** $QT_BEGIN_LICENSE:LGPL$
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	15	** Commercial License Usage
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	16	** Licensees holding valid commercial Qt licenses may use this file in
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	17	** accordance with the commercial license agreement provided with the
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	18	** Software or, alternatively, in accordance with the terms contained in
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	19	** a written agreement between you and Digia.  For licensing terms and
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	20	** conditions see http://qt.digia.com/licensing.  For further information
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	21	** use the contact form at http://qt.digia.com/contact-us.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	23	** GNU Lesser General Public License Usage
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	24	** Alternatively, this file may be used under the terms of the GNU Lesser
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	25	** General Public License version 2.1 as published by the Free Software
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	26	** Foundation and appearing in the file LICENSE.LGPL included in the
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	27	** packaging of this file.  Please review the following information to
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	28	** ensure the GNU Lesser General Public License version 2.1 requirements
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	29	** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	31	** In addition, as a special exception, Digia gives you certain additional
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	32	** rights.  These rights are described in the Digia Qt LGPL Exception
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	33	** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	35	** GNU General Public License Usage
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	36	** Alternatively, this file may be used under the terms of the GNU
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	37	** General Public License version 3.0 as published by the Free Software
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	38	** Foundation and appearing in the file LICENSE.GPL included in the
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	39	** packaging of this file.  Please review the following information to
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	40	** ensure the GNU General Public License version 3.0 requirements will be
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	41	** met: http://www.gnu.org/copyleft/gpl.html.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	44	** $QT_END_LICENSE$
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	46	****************************************************************************/
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	49	import QtQuick 2.5
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	51	Item {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	53	Slides can only be instantiated as a direct child of a Presentation {} as they rely on
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	54	several properties there.
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	57	id: slide
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	59	property bool isSlide: true;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	61	property bool delayPoints: false;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	62	property int _pointCounter: 0;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	63	function _advance() {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	64	if (!parent.allowDelay)
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	65	return false;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	67	_pointCounter = _pointCounter + 1;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	68	if (_pointCounter < content.length)
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	69	return true;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	70	_pointCounter = 0;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	71	return false;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	74	property string title;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	75	property variant content: []
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	76	property string centeredText
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	77	property string writeInText;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	78	property string notes;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	80	property real fontSize: parent.height * 0.05
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	81	property real fontScale: 1
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	83	property real baseFontSize: fontSize * fontScale
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	84	property real titleFontSize: fontSize * 1.2 * fontScale
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	85	property real bulletSpacing: 1
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	87	property real contentWidth: width
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	90	x: parent.width * 0.05
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	91	y: parent.height * 0.2
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	92	width: parent.width * 0.9
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	93	height: parent.height * 0.7
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	95	property real masterWidth: parent.width
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	96	property real masterHeight: parent.height
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	98	property color titleColor: parent.titleColor;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	99	property color textColor: parent.textColor;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	100	property string fontFamily: parent.fontFamily;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	101	property int textFormat: Text.PlainText
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	103	visible: false
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	105	Text {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	106	id: titleText
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	107	font.pixelSize: titleFontSize
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	108	text: title;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	109	anchors.horizontalCenter: parent.horizontalCenter
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	110	anchors.bottom: parent.top
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	111	anchors.bottomMargin: parent.fontSize * 1.5
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	112	font.bold: true;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	113	font.family: slide.fontFamily
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	114	color: slide.titleColor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	115	horizontalAlignment: Text.Center
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	116	z: 1
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	119	Text {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	120	id: centeredId
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	121	width: parent.width
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	122	anchors.centerIn: parent
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	123	anchors.verticalCenterOffset: - parent.y / 3
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	124	text: centeredText
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	125	horizontalAlignment: Text.Center
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	126	font.pixelSize: baseFontSize
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	127	font.family: slide.fontFamily
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	128	color: slide.textColor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	129	wrapMode: Text.Wrap
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	132	Text {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	133	id: writeInTextId
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	134	property int length;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	135	font.family: slide.fontFamily
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	136	font.pixelSize: baseFontSize
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	137	color: slide.textColor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	139	anchors.fill: parent;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	140	wrapMode: Text.Wrap
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	142	text: slide.writeInText.substring(0, length);
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	144	NumberAnimation on length {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	145	from: 0;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	146	to: slide.writeInText.length;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	147	duration: slide.writeInText.length * 30;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	148	running: slide.visible && parent.visible && slide.writeInText.length > 0
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	151	visible: slide.writeInText != undefined;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	155	Column {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	156	id: contentId
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	157	anchors.fill: parent
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	159	Repeater {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	160	model: content.length
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	162	Row {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	163	id: row
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	165	function decideIndentLevel(s) { return s.charAt(0) == " " ? 1 + decideIndentLevel(s.substring(1)) : 0 }
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	166	property int indentLevel: decideIndentLevel(content[index])
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	167	property int nextIndentLevel: index < content.length - 1 ? decideIndentLevel(content[index+1]) : 0
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	168	property real indentFactor: (10 - row.indentLevel * 2) / 10;
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	170	height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	171	x: slide.baseFontSize * indentLevel
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	172	visible: (!slide.parent.allowDelay || !delayPoints) || index <= _pointCounter
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	174	Rectangle {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	175	id: dot
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	176	anchors.baseline: text.baseline
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	177	anchors.baselineOffset: -text.font.pixelSize / 2
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	178	width: text.font.pixelSize / 3
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	179	height: text.font.pixelSize / 3
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	180	color: slide.textColor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	181	radius: width / 2
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	182	opacity: text.text.length == 0 ? 0 : 1
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	185	Item {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	186	id: space
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	187	width: dot.width * 1.5
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	188	height: 1
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	191	Text {
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	192	id: text
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	193	width: slide.contentWidth - parent.x - dot.width - space.width
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	194	font.pixelSize: baseFontSize * row.indentFactor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	195	text: content[index]
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	196	textFormat: slide.textFormat
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	197	wrapMode: Text.WordWrap
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	198	color: slide.textColor
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	199	horizontalAlignment: Text.AlignLeft
+usr-share-calamares/qml/calamares/slideshow/Slide.qml	200	font.family: slide.fontFamily
+usr-share-calamares/qml/netinstall.yaml	1	---
+usr-share-calamares/qml/netinstall.yaml	2	- name: "Mocha Core System"
+usr-share-calamares/qml/netinstall.yaml	3	description: "Base mínima do Mocha para instalação Arch com NetworkManager, GRUB, firmware e ferramentas essenciais."
+usr-share-calamares/qml/netinstall.yaml	4	hidden: false
+usr-share-calamares/qml/netinstall.yaml	5	selected: true
+usr-share-calamares/qml/netinstall.yaml	6	critical: true
+usr-share-calamares/qml/netinstall.yaml	7	packages:
+usr-share-calamares/qml/netinstall.yaml	8	- base
+usr-share-calamares/qml/netinstall.yaml	9	- base-devel
+usr-share-calamares/qml/netinstall.yaml	10	- linux
+usr-share-calamares/qml/netinstall.yaml	11	- linux-headers
+usr-share-calamares/qml/netinstall.yaml	12	- linux-firmware
+usr-share-calamares/qml/netinstall.yaml	13	- amd-ucode
+usr-share-calamares/qml/netinstall.yaml	14	- intel-ucode
+usr-share-calamares/qml/netinstall.yaml	15	- grub
+usr-share-calamares/qml/netinstall.yaml	16	- efibootmgr
+usr-share-calamares/qml/netinstall.yaml	17	- os-prober
+usr-share-calamares/qml/netinstall.yaml	18	- mtools
+usr-share-calamares/qml/netinstall.yaml	19	- dosfstools
+usr-share-calamares/qml/netinstall.yaml	20	- btrfs-progs
+usr-share-calamares/qml/netinstall.yaml	21	- xfsprogs
+usr-share-calamares/qml/netinstall.yaml	22	- exfatprogs
+usr-share-calamares/qml/netinstall.yaml	23	- ntfs-3g
+usr-share-calamares/qml/netinstall.yaml	24	- networkmanager
+usr-share-calamares/qml/netinstall.yaml	25	- iwd
+usr-share-calamares/qml/netinstall.yaml	26	- wpa_supplicant
+usr-share-calamares/qml/netinstall.yaml	27	- wireless-regdb
+usr-share-calamares/qml/netinstall.yaml	28	- modemmanager
+usr-share-calamares/qml/netinstall.yaml	29	- mobile-broadband-provider-info
+usr-share-calamares/qml/netinstall.yaml	30	- sudo
+usr-share-calamares/qml/netinstall.yaml	31	- polkit
+usr-share-calamares/qml/netinstall.yaml	32	- dbus
+usr-share-calamares/qml/netinstall.yaml	33	- nano
+usr-share-calamares/qml/netinstall.yaml	34	- vim
+usr-share-calamares/qml/netinstall.yaml	35	- git
+usr-share-calamares/qml/netinstall.yaml	36	- wget
+usr-share-calamares/qml/netinstall.yaml	37	- curl
+usr-share-calamares/qml/netinstall.yaml	38	- rsync
+usr-share-calamares/qml/netinstall.yaml	39	- openssh
+usr-share-calamares/qml/netinstall.yaml	40	- pacman-contrib
+usr-share-calamares/qml/netinstall.yaml	41	- reflector
+usr-share-calamares/qml/netinstall.yaml	42	- arch-install-scripts
+usr-share-calamares/qml/netinstall.yaml	43	- squashfs-tools
+usr-share-calamares/qml/netinstall.yaml	44	- cpio
+usr-share-calamares/qml/netinstall.yaml	45	- busybox
+usr-share-calamares/qml/netinstall.yaml	46	- pv
+usr-share-calamares/qml/netinstall.yaml	47	- dialog
+usr-share-calamares/qml/netinstall.yaml	48	- bash-completion
+usr-share-calamares/qml/netinstall.yaml	49	- xdg-user-dirs
+usr-share-calamares/qml/netinstall.yaml	50	- xdg-utils
+usr-share-calamares/qml/netinstall.yaml	51	- shared-mime-info
+usr-share-calamares/qml/netinstall.yaml	52	- desktop-file-utils
+usr-share-calamares/qml/netinstall.yaml	53	- appstream-glib
+usr-share-calamares/qml/netinstall.yaml	54	- pipewire
+usr-share-calamares/qml/netinstall.yaml	55	- pipewire-alsa
+usr-share-calamares/qml/netinstall.yaml	56	- pipewire-pulse
+usr-share-calamares/qml/netinstall.yaml	57	- pipewire-jack
+usr-share-calamares/qml/netinstall.yaml	58	- wireplumber
+usr-share-calamares/qml/netinstall.yaml	59	- alsa-utils
+usr-share-calamares/qml/netinstall.yaml	60	- pavucontrol
+usr-share-calamares/qml/netinstall.yaml	61	- bluez
+usr-share-calamares/qml/netinstall.yaml	62	- bluez-utils
+usr-share-calamares/qml/netinstall.yaml	63	- bluedevil
+usr-share-calamares/qml/netinstall.yaml	64	- smartmontools
+usr-share-calamares/qml/netinstall.yaml	65	- hdparm
+usr-share-calamares/qml/netinstall.yaml	66	- sdparm
+usr-share-calamares/qml/netinstall.yaml	67	- nvme-cli
+usr-share-calamares/qml/netinstall.yaml	68	- usbutils
+usr-share-calamares/qml/netinstall.yaml	69	- pciutils
+usr-share-calamares/qml/netinstall.yaml	70	- lsb-release
+usr-share-calamares/qml/netinstall.yaml	71	- hwinfo
+usr-share-calamares/qml/netinstall.yaml	72	- htop
+usr-share-calamares/qml/netinstall.yaml	73	- glances
+usr-share-calamares/qml/netinstall.yaml	74	- ufw
+usr-share-calamares/qml/netinstall.yaml	75	- gufw
+usr-share-calamares/qml/netinstall.yaml	76	- firewalld
+usr-share-calamares/qml/netinstall.yaml	77	- name: "Mocha KDE Plasma Wayland SDDM"
+usr-share-calamares/qml/netinstall.yaml	78	description: "Interface inicial única do Mocha: KDE Plasma com SDDM e Wayland. XWayland entra apenas para compatibilidade de aplicativos/jogos."
+usr-share-calamares/qml/netinstall.yaml	79	hidden: false
+usr-share-calamares/qml/netinstall.yaml	80	selected: true
+usr-share-calamares/qml/netinstall.yaml	81	critical: true
+usr-share-calamares/qml/netinstall.yaml	82	packages:
+usr-share-calamares/qml/netinstall.yaml	83	- plasma-meta
+usr-share-calamares/qml/netinstall.yaml	84	- plasma-desktop
+usr-share-calamares/qml/netinstall.yaml	85	- plasma-nm
+usr-share-calamares/qml/netinstall.yaml	86	- plasma-pa
+usr-share-calamares/qml/netinstall.yaml	87	- powerdevil
+usr-share-calamares/qml/netinstall.yaml	88	- sddm
+usr-share-calamares/qml/netinstall.yaml	89	- sddm-kcm
+usr-share-calamares/qml/netinstall.yaml	90	- breeze
+usr-share-calamares/qml/netinstall.yaml	91	- breeze-gtk
+usr-share-calamares/qml/netinstall.yaml	92	- kde-gtk-config
+usr-share-calamares/qml/netinstall.yaml	93	- xdg-desktop-portal
+usr-share-calamares/qml/netinstall.yaml	94	- xdg-desktop-portal-kde
+usr-share-calamares/qml/netinstall.yaml	95	- dolphin
+usr-share-calamares/qml/netinstall.yaml	96	- konsole
+usr-share-calamares/qml/netinstall.yaml	97	- kate
+usr-share-calamares/qml/netinstall.yaml	98	- ark
+usr-share-calamares/qml/netinstall.yaml	99	- spectacle
+usr-share-calamares/qml/netinstall.yaml	100	- gwenview
+usr-share-calamares/qml/netinstall.yaml	101	- okular
+usr-share-calamares/qml/netinstall.yaml	102	- partitionmanager
+usr-share-calamares/qml/netinstall.yaml	103	- kcalc
+usr-share-calamares/qml/netinstall.yaml	104	- kcharselect
+usr-share-calamares/qml/netinstall.yaml	105	- ffmpegthumbs
+usr-share-calamares/qml/netinstall.yaml	106	- kdegraphics-thumbnailers
+usr-share-calamares/qml/netinstall.yaml	107	- kio-extras
+usr-share-calamares/qml/netinstall.yaml	108	- kio-admin
+usr-share-calamares/qml/netinstall.yaml	109	- kio-fuse
+usr-share-calamares/qml/netinstall.yaml	110	- xorg-xwayland
+usr-share-calamares/qml/netinstall.yaml	111	- mesa
+usr-share-calamares/qml/netinstall.yaml	112	- vulkan-icd-loader
+usr-share-calamares/qml/netinstall.yaml	113	- lib32-vulkan-icd-loader
+usr-share-calamares/qml/netinstall.yaml	114	- noto-fonts
+usr-share-calamares/qml/netinstall.yaml	115	- noto-fonts-cjk
+usr-share-calamares/qml/netinstall.yaml	116	- noto-fonts-emoji
+usr-share-calamares/qml/netinstall.yaml	117	- ttf-dejavu
+usr-share-calamares/qml/netinstall.yaml	118	- ttf-liberation
+usr-share-calamares/qml/netinstall.yaml	119	- ttf-carlito
+usr-share-calamares/qml/netinstall.yaml	120	- ttf-caladea
+usr-share-calamares/qml/netinstall.yaml	121	- gvfs
+usr-share-calamares/qml/netinstall.yaml	122	- gvfs-mtp
+usr-share-calamares/qml/netinstall.yaml	123	- gvfs-gphoto2
+usr-share-calamares/qml/netinstall.yaml	124	- gvfs-nfs
+usr-share-calamares/qml/netinstall.yaml	125	- gvfs-smb
+usr-share-calamares/qml/netinstall.yaml	126	- sshfs
+usr-share-calamares/qml/netinstall.yaml	127	- fuse3
+usr-share-calamares/qml/netinstall.yaml	128	- name: "Mocha Gamer Default"
+usr-share-calamares/qml/netinstall.yaml	129	description: "Camada gamer padrão: Steam, Wine/Proton, overlays, GameMode, ferramentas Vulkan e launchers disponíveis nos repositórios ativos."
+usr-share-calamares/qml/netinstall.yaml	130	hidden: false
+usr-share-calamares/qml/netinstall.yaml	131	selected: true
+usr-share-calamares/qml/netinstall.yaml	132	critical: false
+usr-share-calamares/qml/netinstall.yaml	133	packages:
+usr-share-calamares/qml/netinstall.yaml	134	- steam
+usr-share-calamares/qml/netinstall.yaml	135	- wine
+usr-share-calamares/qml/netinstall.yaml	136	- winetricks
+usr-share-calamares/qml/netinstall.yaml	137	- wine-mono
+usr-share-calamares/qml/netinstall.yaml	138	- wine-gecko
+usr-share-calamares/qml/netinstall.yaml	139	- gamemode
+usr-share-calamares/qml/netinstall.yaml	140	- lib32-gamemode
+usr-share-calamares/qml/netinstall.yaml	141	- mangohud
+usr-share-calamares/qml/netinstall.yaml	142	- lib32-mangohud
+usr-share-calamares/qml/netinstall.yaml	143	- goverlay
+usr-share-calamares/qml/netinstall.yaml	144	- gamescope
+usr-share-calamares/qml/netinstall.yaml	145	- protontricks
+usr-share-calamares/qml/netinstall.yaml	146	- lutris
+usr-share-calamares/qml/netinstall.yaml	147	- vulkan-tools
+usr-share-calamares/qml/netinstall.yaml	148	- vulkan-headers
+usr-share-calamares/qml/netinstall.yaml	149	- vulkan-validation-layers
+usr-share-calamares/qml/netinstall.yaml	150	- mesa-utils
+usr-share-calamares/qml/netinstall.yaml	151	- piper
+usr-share-calamares/qml/netinstall.yaml	152	- libratbag
+usr-share-calamares/qml/netinstall.yaml	153	- antimicrox
+usr-share-calamares/qml/netinstall.yaml	154	- openrgb
+usr-share-calamares/qml/netinstall.yaml	155	- name: "Mocha Creation Office Streaming"
+usr-share-calamares/qml/netinstall.yaml	156	description: "Ferramentas úteis para criação, documentação e uso geral sem transformar o perfil em desktop corporativo ou educacional."
+usr-share-calamares/qml/netinstall.yaml	157	hidden: false
+usr-share-calamares/qml/netinstall.yaml	158	selected: true
+usr-share-calamares/qml/netinstall.yaml	159	critical: false
+usr-share-calamares/qml/netinstall.yaml	160	packages:
+usr-share-calamares/qml/netinstall.yaml	161	- obs-studio
+usr-share-calamares/qml/netinstall.yaml	162	- kdenlive
+usr-share-calamares/qml/netinstall.yaml	163	- krita
+usr-share-calamares/qml/netinstall.yaml	164	- inkscape
+usr-share-calamares/qml/netinstall.yaml	165	- gimp
+usr-share-calamares/qml/netinstall.yaml	166	- audacity
+usr-share-calamares/qml/netinstall.yaml	167	- vivaldi
+usr-share-calamares/qml/netinstall.yaml	168	- vivaldi-ffmpeg-codecs
+usr-share-calamares/qml/netinstall.yaml	169	- bitwarden
+usr-share-calamares/qml/netinstall.yaml	170	- flatpak
+usr-share-calamares/qml/netinstall.yaml	171	- discover
+usr-share-calamares/qml/netinstall.yaml	172	- packagekit-qt6
+usr-share-calamares/qml/netinstall.yaml	173	- name: "Mocha GPU Mesa AMD Intel"
+usr-share-calamares/qml/netinstall.yaml	174	description: "Pilha Mesa/Vulkan aberta para AMD e Intel."
+usr-share-calamares/qml/netinstall.yaml	175	hidden: false
+usr-share-calamares/qml/netinstall.yaml	176	selected: true
+usr-share-calamares/qml/netinstall.yaml	177	critical: false
+usr-share-calamares/qml/netinstall.yaml	178	packages:
+usr-share-calamares/qml/netinstall.yaml	179	- mesa
+usr-share-calamares/qml/netinstall.yaml	180	- lib32-mesa
+usr-share-calamares/qml/netinstall.yaml	181	- vulkan-radeon
+usr-share-calamares/qml/netinstall.yaml	182	- lib32-vulkan-radeon
+usr-share-calamares/qml/netinstall.yaml	183	- vulkan-intel
+usr-share-calamares/qml/netinstall.yaml	184	- lib32-vulkan-intel
+usr-share-calamares/qml/netinstall.yaml	185	- vulkan-nouveau
+usr-share-calamares/qml/netinstall.yaml	186	- lib32-vulkan-nouveau
+usr-share-calamares/qml/netinstall.yaml	187	- name: "Mocha GPU NVIDIA Proprietary"
+usr-share-calamares/qml/netinstall.yaml	188	description: "Drivers NVIDIA proprietários opcionais. A escolha final do driver/kernel será refinada na montagem da ISO."
+usr-share-calamares/qml/netinstall.yaml	189	hidden: false
+usr-share-calamares/qml/netinstall.yaml	190	selected: false
+usr-share-calamares/qml/netinstall.yaml	191	critical: false
+usr-share-calamares/qml/netinstall.yaml	192	packages:
+usr-share-calamares/qml/netinstall.yaml	193	- nvidia-utils
+usr-share-calamares/qml/netinstall.yaml	194	- lib32-nvidia-utils
+usr-share-calamares/qml/netinstall.yaml	195	- nvidia-settings
+usr-share-calamares/qml/netinstall.yaml	196	- nvidia-prime
+usr-share-calamares/qml/netinstall.yaml	197	- opencl-nvidia
+usr-share-calamares/qml/netinstall.yaml	198	- nvidia-open
+usr-share-calamares/qml/netinstall.yaml	199	- nvidia-open-dkms
+usr-share-calamares/qml/netinstall.yaml	200	- libva-nvidia-driver
+usr-share-calamares/qml/netinstall.yaml	201	- name: "Mocha Compatibility Hardware Network"
+usr-share-calamares/qml/netinstall.yaml	202	description: "Compatibilidade adicional de rede, impressoras, VPNs, arquivos e dispositivos externos."
+usr-share-calamares/qml/netinstall.yaml	203	hidden: false
+usr-share-calamares/qml/netinstall.yaml	204	selected: false
+usr-share-calamares/qml/netinstall.yaml	205	critical: false
+usr-share-calamares/qml/netinstall.yaml	206	packages:
+usr-share-calamares/qml/netinstall.yaml	207	- networkmanager-openvpn
+usr-share-calamares/qml/netinstall.yaml	208	- networkmanager-openconnect
+usr-share-calamares/qml/netinstall.yaml	209	- networkmanager-pptp
+usr-share-calamares/qml/netinstall.yaml	210	- networkmanager-vpnc
+usr-share-calamares/qml/netinstall.yaml	211	- openvpn
+usr-share-calamares/qml/netinstall.yaml	212	- openconnect
+usr-share-calamares/qml/netinstall.yaml	213	- vpnc
+usr-share-calamares/qml/netinstall.yaml	214	- pptpclient
+usr-share-calamares/qml/netinstall.yaml	215	- xl2tpd
+usr-share-calamares/qml/netinstall.yaml	216	- rp-pppoe
+usr-share-calamares/qml/netinstall.yaml	217	- ethtool
+usr-share-calamares/qml/netinstall.yaml	218	- whois
+usr-share-calamares/qml/netinstall.yaml	219	- nss-mdns
+usr-share-calamares/qml/netinstall.yaml	220	- avahi
+usr-share-calamares/qml/netinstall.yaml	221	- cups
+usr-share-calamares/qml/netinstall.yaml	222	- system-config-printer
+usr-share-calamares/qml/netinstall.yaml	223	- sane
+usr-share-calamares/qml/netinstall.yaml	224	- simple-scan
+usr-share-calamares/qml/netinstall.yaml	225	- android-tools
+usr-share-calamares/qml/netinstall.yaml	226	- android-udev
+usr-share-calamares/qml/netinstall.yaml	227	- mtpfs
+usr-share-calamares/qml/netinstall.yaml	228	- gvfs-afc
+usr-share-calamares/qml/netinstall.yaml	229	- nfs-utils
+usr-share-calamares/qml/netinstall.yaml	230	- smbclient
+usr-share-calamares/qml/netinstall.yaml	231	- cifs-utils
+usr-share-calamares/qml/netinstall.yaml	232	- unrar
+usr-share-calamares/qml/netinstall.yaml	233	- unzip
+usr-share-calamares/qml/netinstall.yaml	234	- zip
+usr-share-calamares/qml/netinstall.yaml	235	- lrzip
+usr-share-calamares/qml/netinstall.yaml	236	- lzop
+usr-share-calamares/qml/netinstall.yaml	237	- lzip
+usr-share-calamares/qml/netinstall.yaml	238	- gparted
+usr-share-calamares/qml/netinstall.yaml	239	- fsarchiver
+usr-share-calamares/qml/netinstall.yaml	240	- ddrescue
+usr-share-calamares/qml/netinstall.yaml	241	- testdisk
+usr-share-calamares/settings.conf	1	modules-search:
+usr-share-calamares/settings.conf	2	- local
+usr-share-calamares/settings.conf	3	sequence:
+usr-share-calamares/settings.conf	4	- show:
+usr-share-calamares/settings.conf	5	- welcome
+usr-share-calamares/settings.conf	6	- locale
+usr-share-calamares/settings.conf	7	- keyboard
+usr-share-calamares/settings.conf	8	- partition
+usr-share-calamares/settings.conf	9	- packagechooser
+usr-share-calamares/settings.conf	10	- netinstall
+usr-share-calamares/settings.conf	11	- users
+usr-share-calamares/settings.conf	12	- summary
+usr-share-calamares/settings.conf	13	- exec:
+usr-share-calamares/settings.conf	14	- partition
+usr-share-calamares/settings.conf	15	- mount
+usr-share-calamares/settings.conf	16	- pacstrap
+usr-share-calamares/settings.conf	17	- machineid
+usr-share-calamares/settings.conf	18	- fstab
+usr-share-calamares/settings.conf	19	- locale
+usr-share-calamares/settings.conf	20	- keyboard
+usr-share-calamares/settings.conf	21	- localecfg
+usr-share-calamares/settings.conf	22	- luksopenswaphookcfg
+usr-share-calamares/settings.conf	23	- luksbootkeyfile
+usr-share-calamares/settings.conf	24	- plymouthcfg
+usr-share-calamares/settings.conf	25	- initcpiocfg
+usr-share-calamares/settings.conf	26	- initcpio
+usr-share-calamares/settings.conf	27	- networkcfg
+usr-share-calamares/settings.conf	28	- packages
+usr-share-calamares/settings.conf	29	- users
+usr-share-calamares/settings.conf	30	- displaymanager
+usr-share-calamares/settings.conf	31	- hwclock
+usr-share-calamares/settings.conf	32	- services-systemd
+usr-share-calamares/settings.conf	33	- grubcfg
+usr-share-calamares/settings.conf	34	- bootloader
+usr-share-calamares/settings.conf	35	- umount
+usr-share-calamares/settings.conf	36	- show:
+usr-share-calamares/settings.conf	37	- finished
+usr-share-calamares/settings.conf	38	branding: mocha
+usr-share-calamares/settings.conf	39	prompt-install: false
+usr-share-calamares/settings.conf	40	dont-chroot: false
+usr-share-calamares/settings.conf	41	oem-setup: false
+usr-share-calamares/settings.conf	42	disable-cancel: false
+usr-share-calamares/settings.conf	43	disable-cancel-during-exec: false
+usr-share-calamares/settings.conf	44	quit-at-end: false
+usr-share-calamares/settings-online.conf	1	modules-search:
+usr-share-calamares/settings-online.conf	2	- local
+usr-share-calamares/settings-online.conf	3	sequence:
+usr-share-calamares/settings-online.conf	4	- show:
+usr-share-calamares/settings-online.conf	5	- welcome
+usr-share-calamares/settings-online.conf	6	- locale
+usr-share-calamares/settings-online.conf	7	- keyboard
+usr-share-calamares/settings-online.conf	8	- partition
+usr-share-calamares/settings-online.conf	9	- packagechooser
+usr-share-calamares/settings-online.conf	10	- netinstall
+usr-share-calamares/settings-online.conf	11	- users
+usr-share-calamares/settings-online.conf	12	- summary
+usr-share-calamares/settings-online.conf	13	- exec:
+usr-share-calamares/settings-online.conf	14	- partition
+usr-share-calamares/settings-online.conf	15	- mount
+usr-share-calamares/settings-online.conf	16	- pacstrap
+usr-share-calamares/settings-online.conf	17	- machineid
+usr-share-calamares/settings-online.conf	18	- fstab
+usr-share-calamares/settings-online.conf	19	- locale
+usr-share-calamares/settings-online.conf	20	- keyboard
+usr-share-calamares/settings-online.conf	21	- localecfg
+usr-share-calamares/settings-online.conf	22	- luksopenswaphookcfg
+usr-share-calamares/settings-online.conf	23	- luksbootkeyfile
+usr-share-calamares/settings-online.conf	24	- plymouthcfg
+usr-share-calamares/settings-online.conf	25	- initcpiocfg
+usr-share-calamares/settings-online.conf	26	- initcpio
+usr-share-calamares/settings-online.conf	27	- networkcfg
+usr-share-calamares/settings-online.conf	28	- packages
+usr-share-calamares/settings-online.conf	29	- users
+usr-share-calamares/settings-online.conf	30	- displaymanager
+usr-share-calamares/settings-online.conf	31	- hwclock
+usr-share-calamares/settings-online.conf	32	- services-systemd
+usr-share-calamares/settings-online.conf	33	- grubcfg
+usr-share-calamares/settings-online.conf	34	- bootloader
+usr-share-calamares/settings-online.conf	35	- umount
+usr-share-calamares/settings-online.conf	36	- show:
+usr-share-calamares/settings-online.conf	37	- finished
+usr-share-calamares/settings-online.conf	38	branding: mocha
+usr-share-calamares/settings-online.conf	39	prompt-install: false
+usr-share-calamares/settings-online.conf	40	dont-chroot: false
+usr-share-calamares/settings-online.conf	41	oem-setup: false
+usr-share-calamares/settings-online.conf	42	disable-cancel: false
+usr-share-calamares/settings-online.conf	43	disable-cancel-during-exec: false
+usr-share-calamares/settings-online.conf	44	quit-at-end: false

@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Visualização Calamares Mocha — Identidade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #15110f;
+      --panel: #211916;
+      --panel2: #2d211d;
+      --text: #f2e7dd;
+      --muted: #c8b6a8;
+      --line: #4a362f;
+      --accent: #d6a15f;
+      --bad: #e08a70;
+      --ok: #b9d18b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #3a2922 0, var(--bg) 42%);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    header {
+      padding: 32px 40px 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(21, 17, 15, 0.84);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      margin: 36px 0 14px;
+      font-size: 22px;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    p, small {
+      color: var(--muted);
+    }
+    main {
+      padding: 24px 40px 60px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin: 18px 0 8px;
+    }
+    .metric {
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 260px;
+    }
+    .card img {
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+      background: #0f0b0a;
+      border-bottom: 1px solid var(--line);
+    }
+    .card-body {
+      padding: 12px;
+    }
+    code {
+      display: block;
+      margin: 7px 0;
+      color: var(--ok);
+      font-size: 12px;
+      word-break: break-all;
+      white-space: normal;
+    }
+    pre {
+      background: #100c0b;
+      color: #f4e9df;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      overflow: auto;
+      max-height: 520px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .reports {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 10px;
+    }
+    .reports li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .path {
+      color: var(--muted);
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .note {
+      border-left: 4px solid var(--accent);
+      background: rgba(214, 161, 95, 0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Visualização dos itens de identidade — Calamares Mocha</h1>
+    <div class="path">Curadoria: /media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121</div>
+    <div class="path">Extração: /media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953</div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Resumo</h2>
+      <div class="summary">
+        <div class="metric"><strong>41</strong><span>Imagens copiadas para galeria</span></div><div class="metric"><strong>330</strong><span>Linhas em resíduos/alvos</span></div><div class="metric"><strong>0</strong><span>Linhas em resíduos críticos</span></div><div class="metric"><strong>69</strong><span>Linhas em arquivos críticos</span></div><div class="metric"><strong>7</strong><span>Relatórios copiados</span></div>
+      </div>
+      <div class="note">
+        Esta visualização é somente leitura. Ela copia imagens e relatórios para uma pasta local de consulta e não altera o Calamares ativo.
+      </div>
+    </section>
+
+    <section>
+      <h2>Relatórios e arquivos de apoio</h2>
+      <ul class="reports">
+        
+      <li>
+        <a href="relatorios/arquivos-cr%C3%ADticos-01-arquivos-criticos-calamares.txt" target="_blank">Arquivos críticos</a>
+        <small>/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/01-arquivos-criticos-calamares.txt</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/res%C3%ADduos-e-alvos-de-reescrita-02-residuos-e-alvos-de-reescrita.tsv" target="_blank">Resíduos e alvos de reescrita</a>
+        <small>/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/02-residuos-e-alvos-de-reescrita.tsv</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/invent%C3%A1rio-de-imagens-04-inventario-imagens.txt" target="_blank">Inventário de imagens</a>
+        <small>/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/04-inventario-imagens.txt</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/textos-base-mocha-05-proposta-textos-base-mocha.md" target="_blank">Textos base Mocha</a>
+        <small>/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/05-proposta-textos-base-mocha.md</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/plano-do-pr%C3%B3ximo-overlay-06-plano-proximo-overlay-identidade.md" target="_blank">Plano do próximo overlay</a>
+        <small>/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/curadoria-identidade-mocha-20260605-154121/06-plano-proximo-overlay-identidade.md</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/relat%C3%B3rio-da-curadoria-mocha-curadoria-identidade-calamares-20260605-154121.log" target="_blank">Relatório da curadoria</a>
+        <small>/media/mochafast/MochaArch/auditorias/mocha-curadoria-identidade-calamares-20260605-154121.log</small>
+      </li>
+    
+      <li>
+        <a href="relatorios/relat%C3%B3rio-desta-visualiza%C3%A7%C3%A3o-mocha-gera-visualizacao-identidade-calamares-20260605-155107.log" target="_blank">Relatório desta visualização</a>
+        <small>/media/mochafast/MochaArch/auditorias/mocha-gera-visualizacao-identidade-calamares-20260605-155107.log</small>
+      </li>
+    
+      </ul>
+    </section>
+
+    <section>
+      <h2>Galeria de imagens extraídas</h2>
+      <div class="grid">
+        
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/Arch.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/Arch.png" alt="usr-share-calamares/branding/arch/Arch.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>Arch.png</strong>
+          <code>usr-share-calamares/branding/arch/Arch.png</code>
+          <small>PNG image data, 300 x 300, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/languages.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/languages.png" alt="usr-share-calamares/branding/arch/languages.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>languages.png</strong>
+          <code>usr-share-calamares/branding/arch/languages.png</code>
+          <small>PNG image data, 640 x 360, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide1.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide1.png" alt="usr-share-calamares/branding/arch/slide1.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide1.png</strong>
+          <code>usr-share-calamares/branding/arch/slide1.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide2.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide2.png" alt="usr-share-calamares/branding/arch/slide2.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide2.png</strong>
+          <code>usr-share-calamares/branding/arch/slide2.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide3.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide3.png" alt="usr-share-calamares/branding/arch/slide3.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide3.png</strong>
+          <code>usr-share-calamares/branding/arch/slide3.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide4.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide4.png" alt="usr-share-calamares/branding/arch/slide4.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide4.png</strong>
+          <code>usr-share-calamares/branding/arch/slide4.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide5.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide5.png" alt="usr-share-calamares/branding/arch/slide5.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide5.png</strong>
+          <code>usr-share-calamares/branding/arch/slide5.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide6.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide6.png" alt="usr-share-calamares/branding/arch/slide6.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide6.png</strong>
+          <code>usr-share-calamares/branding/arch/slide6.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide7.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide7.png" alt="usr-share-calamares/branding/arch/slide7.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide7.png</strong>
+          <code>usr-share-calamares/branding/arch/slide7.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide8.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide8.png" alt="usr-share-calamares/branding/arch/slide8.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide8.png</strong>
+          <code>usr-share-calamares/branding/arch/slide8.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/slide9.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/slide9.png" alt="usr-share-calamares/branding/arch/slide9.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide9.png</strong>
+          <code>usr-share-calamares/branding/arch/slide9.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/splash.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/splash.png" alt="usr-share-calamares/branding/arch/splash.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>splash.png</strong>
+          <code>usr-share-calamares/branding/arch/splash.png</code>
+          <small>PNG image data, 640 x 480, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/arch/squid.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/arch/squid.png" alt="usr-share-calamares/branding/arch/squid.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>squid.png</strong>
+          <code>usr-share-calamares/branding/arch/squid.png</code>
+          <small>PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/default/banner.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/default/banner.png" alt="usr-share-calamares/branding/default/banner.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>banner.png</strong>
+          <code>usr-share-calamares/branding/default/banner.png</code>
+          <small>PNG image data, 480 x 64, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/default/languages.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/default/languages.png" alt="usr-share-calamares/branding/default/languages.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>languages.png</strong>
+          <code>usr-share-calamares/branding/default/languages.png</code>
+          <small>PNG image data, 320 x 149, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/default/squid.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/default/squid.png" alt="usr-share-calamares/branding/default/squid.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>squid.png</strong>
+          <code>usr-share-calamares/branding/default/squid.png</code>
+          <small>PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/Arch.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/Arch.png" alt="usr-share-calamares/branding/mocha/Arch.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>Arch.png</strong>
+          <code>usr-share-calamares/branding/mocha/Arch.png</code>
+          <small>PNG image data, 300 x 300, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/languages.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/languages.png" alt="usr-share-calamares/branding/mocha/languages.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>languages.png</strong>
+          <code>usr-share-calamares/branding/mocha/languages.png</code>
+          <small>PNG image data, 640 x 360, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/logo.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/logo.png" alt="usr-share-calamares/branding/mocha/logo.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>logo.png</strong>
+          <code>usr-share-calamares/branding/mocha/logo.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide1.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide1.png" alt="usr-share-calamares/branding/mocha/slide1.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide1.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide1.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide2.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide2.png" alt="usr-share-calamares/branding/mocha/slide2.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide2.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide2.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide3.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide3.png" alt="usr-share-calamares/branding/mocha/slide3.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide3.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide3.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide4.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide4.png" alt="usr-share-calamares/branding/mocha/slide4.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide4.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide4.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide5.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide5.png" alt="usr-share-calamares/branding/mocha/slide5.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide5.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide5.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide6.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide6.png" alt="usr-share-calamares/branding/mocha/slide6.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide6.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide6.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide7.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide7.png" alt="usr-share-calamares/branding/mocha/slide7.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide7.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide7.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide8.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide8.png" alt="usr-share-calamares/branding/mocha/slide8.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide8.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide8.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/slide9.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/slide9.png" alt="usr-share-calamares/branding/mocha/slide9.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>slide9.png</strong>
+          <code>usr-share-calamares/branding/mocha/slide9.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/splash.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/splash.png" alt="usr-share-calamares/branding/mocha/splash.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>splash.png</strong>
+          <code>usr-share-calamares/branding/mocha/splash.png</code>
+          <small>PNG image data, 640 x 480, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/squid.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/squid.png" alt="usr-share-calamares/branding/mocha/squid.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>squid.png</strong>
+          <code>usr-share-calamares/branding/mocha/squid.png</code>
+          <small>PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/branding/mocha/welcome.png" target="_blank">
+          <img src="midia/usr-share-calamares/branding/mocha/welcome.png" alt="usr-share-calamares/branding/mocha/welcome.png" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>welcome.png</strong>
+          <code>usr-share-calamares/branding/mocha/welcome.png</code>
+          <small>PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/archlinux.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/archlinux.jpg" alt="usr-share-calamares/images/archlinux.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>archlinux.jpg</strong>
+          <code>usr-share-calamares/images/archlinux.jpg</code>
+          <small>PNG image data, 600 x 199, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/budgie.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/budgie.jpg" alt="usr-share-calamares/images/budgie.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>budgie.jpg</strong>
+          <code>usr-share-calamares/images/budgie.jpg</code>
+          <small>PNG image data, 1366 x 768, 8-bit colormap, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/cinnamon.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/cinnamon.jpg" alt="usr-share-calamares/images/cinnamon.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>cinnamon.jpg</strong>
+          <code>usr-share-calamares/images/cinnamon.jpg</code>
+          <small>PNG image data, 617 x 347, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/deepin.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/deepin.jpg" alt="usr-share-calamares/images/deepin.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>deepin.jpg</strong>
+          <code>usr-share-calamares/images/deepin.jpg</code>
+          <small>JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, progressive, precision 8, 1200x675, components 3</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/gnome.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/gnome.jpg" alt="usr-share-calamares/images/gnome.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>gnome.jpg</strong>
+          <code>usr-share-calamares/images/gnome.jpg</code>
+          <small>PNG image data, 1366 x 768, 8-bit colormap, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/i3.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/i3.jpg" alt="usr-share-calamares/images/i3.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>i3.jpg</strong>
+          <code>usr-share-calamares/images/i3.jpg</code>
+          <small>PNG image data, 1280 x 768, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/kde.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/kde.jpg" alt="usr-share-calamares/images/kde.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>kde.jpg</strong>
+          <code>usr-share-calamares/images/kde.jpg</code>
+          <small>PNG image data, 1920 x 1080, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/mate.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/mate.jpg" alt="usr-share-calamares/images/mate.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>mate.jpg</strong>
+          <code>usr-share-calamares/images/mate.jpg</code>
+          <small>PNG image data, 1022 x 766, 8-bit colormap, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/openbox.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/openbox.jpg" alt="usr-share-calamares/images/openbox.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>openbox.jpg</strong>
+          <code>usr-share-calamares/images/openbox.jpg</code>
+          <small>PNG image data, 900 x 562, 8-bit/color RGBA, non-interlaced</small>
+        </div>
+      </article>
+    
+      <article class="card">
+        <a href="midia/usr-share-calamares/images/xfce4.jpg" target="_blank">
+          <img src="midia/usr-share-calamares/images/xfce4.jpg" alt="usr-share-calamares/images/xfce4.jpg" loading="lazy">
+        </a>
+        <div class="card-body">
+          <strong>xfce4.jpg</strong>
+          <code>usr-share-calamares/images/xfce4.jpg</code>
+          <small>PNG image data, 1366 x 768, 8-bit/color RGB, non-interlaced</small>
+        </div>
+      </article>
+    
+      </div>
+    </section>
+
+    <section>
+      <h2>Inventário de imagens</h2>
+      <pre># Inventário de imagens do instalador
+
+usr-share-calamares/branding/arch/Arch.png	300x300	PNG image data, 300 x 300, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/arch/languages.png	640x360	PNG image data, 640 x 360, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/arch/slide1.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide2.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide3.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide4.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide5.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide6.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide7.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide8.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/slide9.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/arch/splash.png	640x480	PNG image data, 640 x 480, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/arch/squid.png	256x256	PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/default/banner.png	480x64	PNG image data, 480 x 64, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/default/languages.png	320x149	PNG image data, 320 x 149, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/default/squid.png	256x256	PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/mocha/Arch.png	300x300	PNG image data, 300 x 300, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/mocha/languages.png	640x360	PNG image data, 640 x 360, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/mocha/logo.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide1.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide2.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide3.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide4.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide5.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide6.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide7.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide8.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/slide9.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/branding/mocha/splash.png	640x480	PNG image data, 640 x 480, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/mocha/squid.png	256x256	PNG image data, 256 x 256, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/branding/mocha/welcome.png	800x440	PNG image data, 800 x 440, 8-bit/color RGB, non-interlaced
+usr-share-calamares/images/archlinux.jpg	600x199	PNG image data, 600 x 199, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/images/budgie.jpg	1366x768	PNG image data, 1366 x 768, 8-bit colormap, non-interlaced
+usr-share-calamares/images/cinnamon.jpg	617x347	PNG image data, 617 x 347, 8-bit/color RGB, non-interlaced
+usr-share-calamares/images/deepin.jpg	1200x675	JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, progressive, precision 8, 1200x675, components 3
+usr-share-calamares/images/gnome.jpg	1366x768	PNG image data, 1366 x 768, 8-bit colormap, non-interlaced
+usr-share-calamares/images/i3.jpg	1280x768	PNG image data, 1280 x 768, 8-bit/color RGB, non-interlaced
+usr-share-calamares/images/kde.jpg	1920x1080	PNG image data, 1920 x 1080, 8-bit/color RGB, non-interlaced
+usr-share-calamares/images/mate.jpg	1022x766	PNG image data, 1022 x 766, 8-bit colormap, non-interlaced
+usr-share-calamares/images/openbox.jpg	900x562	PNG image data, 900 x 562, 8-bit/color RGBA, non-interlaced
+usr-share-calamares/images/xfce4.jpg	1366x768	PNG image data, 1366 x 768, 8-bit/color RGB, non-interlaced
+</pre>
+    </section>
+
+    <section>
+      <h2>Arquivos críticos / ativos</h2>
+      <pre># Arquivos críticos encontrados na extração
+
+## Branding / welcome / slideshow / QML / configs
+etc-calamares/branding/mocha/branding.desc
+etc-calamares/branding/mocha/show.qml
+etc-calamares/modules/displaymanager.conf
+etc-calamares/modules/packagechooser.conf
+etc-calamares/modules/packages.conf
+etc-calamares/modules/welcome.conf
+etc-calamares/netinstall.yaml
+etc-calamares/settings.conf
+etc-calamares/settings-online.conf
+usr-share-calamares/branding/arch/Arch.png
+usr-share-calamares/branding/arch/branding.desc
+usr-share-calamares/branding/arch/branding.desca
+usr-share-calamares/branding/arch/languages.png
+usr-share-calamares/branding/arch/show.qml
+usr-share-calamares/branding/arch/slide1.png
+usr-share-calamares/branding/arch/slide2.png
+usr-share-calamares/branding/arch/slide3.png
+usr-share-calamares/branding/arch/slide4.png
+usr-share-calamares/branding/arch/slide5.png
+usr-share-calamares/branding/arch/slide6.png
+usr-share-calamares/branding/arch/slide7.png
+usr-share-calamares/branding/arch/slide8.png
+usr-share-calamares/branding/arch/slide9.png
+usr-share-calamares/branding/arch/splash.png
+usr-share-calamares/branding/arch/squid.png
+usr-share-calamares/branding/default/banner.png
+usr-share-calamares/branding/default/banner.png.license
+usr-share-calamares/branding/default/branding.desc
+usr-share-calamares/branding/default/lang/calamares-default_ar.qm
+usr-share-calamares/branding/default/lang/calamares-default_en.qm
+usr-share-calamares/branding/default/lang/calamares-default_eo.qm
+usr-share-calamares/branding/default/lang/calamares-default_fr.qm
+usr-share-calamares/branding/default/lang/calamares-default_nl.qm
+usr-share-calamares/branding/default/languages.png
+usr-share-calamares/branding/default/languages.png.license
+usr-share-calamares/branding/default/show.qml
+usr-share-calamares/branding/default/squid.png
+usr-share-calamares/branding/default/squid.png.license
+usr-share-calamares/branding/default/stylesheet.qss
+usr-share-calamares/branding/mocha/Arch.png
+usr-share-calamares/branding/mocha/branding.desc
+usr-share-calamares/branding/mocha/languages.png
+usr-share-calamares/branding/mocha/logo.png
+usr-share-calamares/branding/mocha/show.qml
+usr-share-calamares/branding/mocha/slide1.png
+usr-share-calamares/branding/mocha/slide2.png
+usr-share-calamares/branding/mocha/slide3.png
+usr-share-calamares/branding/mocha/slide4.png
+usr-share-calamares/branding/mocha/slide5.png
+usr-share-calamares/branding/mocha/slide6.png
+usr-share-calamares/branding/mocha/slide7.png
+usr-share-calamares/branding/mocha/slide8.png
+usr-share-calamares/branding/mocha/slide9.png
+usr-share-calamares/branding/mocha/splash.png
+usr-share-calamares/branding/mocha/squid.png
+usr-share-calamares/branding/mocha/welcome.png
+usr-share-calamares/modules/displaymanager.conf
+usr-share-calamares/modules/packagechooser.conf
+usr-share-calamares/modules/packages.conf
+usr-share-calamares/modules/welcome.conf
+usr-share-calamares/netinstall.yaml
+usr-share-calamares/qml/calamares/slideshow/SlideCounter.qml
+usr-share-calamares/qml/calamares/slideshow/Slide.qml
+usr-share-calamares/qml/netinstall.yaml
+usr-share-calamares/settings.conf
+usr-share-calamares/settings-online.conf
+</pre>
+    </section>
+
+    <section>
+      <h2>Resíduos e alvos de reescrita</h2>
+      <pre>arquivo	linha	texto
+etc-calamares/branding/mocha/show.qml	9	text: &quot;Instalando o MochaArch&quot;
+etc-calamares/modules/bootloader.conf	23	kernelSearchPath: &quot;/usr/lib/modules&quot;
+etc-calamares/modules/bootloader.conf	44	grubInstall: &quot;grub-install&quot;
+etc-calamares/modules/bootloader.conf	83	installEFIFallback: true
+etc-calamares/modules/displaymanager.conf	3	- sddm
+etc-calamares/modules/displaymanager.conf	4	defaultDesktopEnvironment:
+etc-calamares/modules/displaymanager.conf	5	executable: /usr/bin/startplasma-wayland
+etc-calamares/modules/displaymanager.conf	6	desktopFile: plasma
+etc-calamares/modules/initcpio.conf	16	kernel: linux
+etc-calamares/modules/locale.conf	6	url: https://geoip.kde.org/v1/calamares
+etc-calamares/modules/netinstall.conf	2	groupsUrl: file:///etc/calamares/netinstall.yaml
+etc-calamares/modules/packagechooser.conf	3	method: netinstall-select
+etc-calamares/modules/packagechooser.conf	5	- id: Mocha-Gamer-KDE
+etc-calamares/modules/packagechooser.conf	6	name: &quot;Mocha Gamer KDE&quot;
+etc-calamares/modules/packagechooser.conf	7	description: &quot;Instalação inicial do Mocha com KDE Plasma e SDDM. Outros desktops não são oferecidos nesta fase.&quot;
+etc-calamares/modules/packagechooser.conf	8	screenshot: /usr/share/calamares/branding/mocha/welcome.png
+etc-calamares/modules/services-systemd.conf	9	- name: sddm.service
+etc-calamares/modules/unpackfs.conf	95	-   source: src/qml/calamares/slideshow
+etc-calamares/modules/unpackfs.conf	97	destination: &quot;/tmp/slideshow/&quot;
+etc-calamares/modules/welcome.conf	2	showSupportUrl: true
+etc-calamares/modules/welcome.conf	9	internetCheckUrl: https://archlinux.org/
+etc-calamares/modules/welcome.conf	21	url: https://geoip.kde.org/v1/ubiquity
+etc-calamares/modules/welcome.conf	25	internetCheckUrl: https://archlinux.org/
+etc-calamares/netinstall.yaml	3	description: &quot;Base mínima do Mocha para instalação Arch com NetworkManager, GRUB, firmware e ferramentas essenciais.&quot;
+etc-calamares/netinstall.yaml	10	- linux
+etc-calamares/netinstall.yaml	11	- linux-headers
+etc-calamares/netinstall.yaml	12	- linux-firmware
+etc-calamares/netinstall.yaml	42	- arch-install-scripts
+etc-calamares/netinstall.yaml	52	- desktop-file-utils
+etc-calamares/netinstall.yaml	77	- name: &quot;Mocha KDE Plasma Wayland SDDM&quot;
+etc-calamares/netinstall.yaml	78	description: &quot;Interface inicial única do Mocha: KDE Plasma com SDDM e Wayland. XWayland entra apenas para compatibilidade de aplicativos/jogos.&quot;
+etc-calamares/netinstall.yaml	83	- plasma-meta
+etc-calamares/netinstall.yaml	84	- plasma-desktop
+etc-calamares/netinstall.yaml	85	- plasma-nm
+etc-calamares/netinstall.yaml	86	- plasma-pa
+etc-calamares/netinstall.yaml	88	- sddm
+etc-calamares/netinstall.yaml	89	- sddm-kcm
+etc-calamares/netinstall.yaml	92	- kde-gtk-config
+etc-calamares/netinstall.yaml	93	- xdg-desktop-portal
+etc-calamares/netinstall.yaml	94	- xdg-desktop-portal-kde
+etc-calamares/netinstall.yaml	106	- kdegraphics-thumbnailers
+etc-calamares/netinstall.yaml	110	- xorg-xwayland
+etc-calamares/netinstall.yaml	128	- name: &quot;Mocha Gamer Default&quot;
+etc-calamares/netinstall.yaml	129	description: &quot;Camada gamer padrão: Steam, Wine/Proton, overlays, GameMode, ferramentas Vulkan e launchers disponíveis nos repositórios ativos.&quot;
+etc-calamares/netinstall.yaml	134	- steam
+etc-calamares/netinstall.yaml	139	- gamemode
+etc-calamares/netinstall.yaml	140	- lib32-gamemode
+etc-calamares/netinstall.yaml	144	- gamescope
+etc-calamares/netinstall.yaml	145	- protontricks
+etc-calamares/netinstall.yaml	156	description: &quot;Ferramentas úteis para criação, documentação e uso geral sem transformar o perfil em desktop corporativo ou educacional.&quot;
+etc-calamares/netinstall.yaml	162	- kdenlive
+etc-calamares/netinstall.yaml	239	- fsarchiver
+etc-calamares/settings.conf	1	modules-search:
+etc-calamares/settings.conf	5	- welcome
+etc-calamares/settings.conf	10	- netinstall
+etc-calamares/settings.conf	38	branding: mocha
+etc-calamares/settings.conf	39	prompt-install: false
+etc-calamares/settings-online.conf	1	modules-search:
+etc-calamares/settings-online.conf	5	- welcome
+etc-calamares/settings-online.conf	10	- netinstall
+etc-calamares/settings-online.conf	38	branding: mocha
+etc-calamares/settings-online.conf	39	prompt-install: false
+usr-share-calamares/branding/arch/show.qml	3	*   Copyright 2015, Teo Mrnjavac &lt;teo@kde.org&gt;
+usr-share-calamares/branding/arch/show.qml	5	*   Calamares is free software: you can redistribute it and/or modify
+usr-share-calamares/branding/arch/show.qml	10	*   Calamares is distributed in the hope that it will be useful,
+usr-share-calamares/branding/arch/show.qml	16	*   along with Calamares. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+usr-share-calamares/branding/arch/show.qml	20	* Slides images dimensions are 800x440px.
+usr-share-calamares/branding/arch/show.qml	24	import calamares.slideshow 1.0;
+usr-share-calamares/branding/arch/show.qml	34	onTriggered: presentation.goToNextSlide()
+usr-share-calamares/branding/arch/show.qml	37	Slide {
+usr-share-calamares/branding/arch/show.qml	41	source: &quot;slide1.png&quot;
+usr-share-calamares/branding/arch/show.qml	56	Slide {
+usr-share-calamares/branding/arch/show.qml	60	source: &quot;slide2.png&quot;
+usr-share-calamares/branding/arch/show.qml	75	Slide {
+usr-share-calamares/branding/arch/show.qml	79	source: &quot;slide3.png&quot;
+usr-share-calamares/branding/arch/show.qml	94	Slide {
+usr-share-calamares/branding/arch/show.qml	98	source: &quot;slide4.png&quot;
+usr-share-calamares/branding/arch/show.qml	113	Slide {
+usr-share-calamares/branding/arch/show.qml	117	source: &quot;slide5.png&quot;
+usr-share-calamares/branding/arch/show.qml	131	Slide {
+usr-share-calamares/branding/arch/show.qml	135	source: &quot;slide6.png&quot;
+usr-share-calamares/branding/arch/show.qml	150	Slide {
+usr-share-calamares/branding/arch/show.qml	154	source: &quot;slide7.png&quot;
+usr-share-calamares/branding/arch/show.qml	169	Slide {
+usr-share-calamares/branding/arch/show.qml	173	source: &quot;slide8.png&quot;
+usr-share-calamares/branding/arch/show.qml	188	Slide {
+usr-share-calamares/branding/arch/show.qml	192	source: &quot;slide9.png&quot;
+usr-share-calamares/branding/default/show.qml	3	*   SPDX-FileCopyrightText: 2015 Teo Mrnjavac &lt;teo@kde.org&gt;
+usr-share-calamares/branding/default/show.qml	4	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/branding/default/show.qml	7	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/branding/default/show.qml	12	import calamares.slideshow 1.0;
+usr-share-calamares/branding/default/show.qml	18	function nextSlide() {
+usr-share-calamares/branding/default/show.qml	19	console.log(&quot;QML Component (default slideshow) Next slide&quot;);
+usr-share-calamares/branding/default/show.qml	20	presentation.goToNextSlide();
+usr-share-calamares/branding/default/show.qml	26	running: presentation.activatedInCalamares
+usr-share-calamares/branding/default/show.qml	28	onTriggered: nextSlide()
+usr-share-calamares/branding/default/show.qml	31	Slide {
+usr-share-calamares/branding/default/show.qml	43	text: &quot;This is a customizable QML slideshow.&lt;br/&gt;&quot;+
+usr-share-calamares/branding/default/show.qml	44	&quot;Distributions should provide their own slideshow and list it in &lt;br/&gt;&quot;+
+usr-share-calamares/branding/default/show.qml	45	&quot;their custom branding.desc file.&lt;br/&gt;&quot;+
+usr-share-calamares/branding/default/show.qml	46	&quot;To create a Calamares presentation in QML, import calamares.slideshow,&lt;br/&gt;&quot;+
+usr-share-calamares/branding/default/show.qml	47	&quot;define a Presentation element with as many Slide elements as needed.&quot;
+usr-share-calamares/branding/default/show.qml	54	Slide {
+usr-share-calamares/branding/default/show.qml	55	centeredText: qsTr(&quot;This is a second Slide element.&quot;)
+usr-share-calamares/branding/default/show.qml	58	Slide {
+usr-share-calamares/branding/default/show.qml	59	centeredText: qsTr(&quot;This is a third Slide element.&quot;)
+usr-share-calamares/branding/default/show.qml	69	console.log(&quot;QML Component (default slideshow) activated&quot;);
+usr-share-calamares/branding/default/show.qml	70	presentation.currentSlide = 0;
+usr-share-calamares/branding/default/show.qml	74	console.log(&quot;QML Component (default slideshow) deactivated&quot;);
+usr-share-calamares/branding/mocha/show.qml	3	*   Copyright 2015, Teo Mrnjavac &lt;teo@kde.org&gt;
+usr-share-calamares/branding/mocha/show.qml	5	*   Calamares is free software: you can redistribute it and/or modify
+usr-share-calamares/branding/mocha/show.qml	10	*   Calamares is distributed in the hope that it will be useful,
+usr-share-calamares/branding/mocha/show.qml	16	*   along with Calamares. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+usr-share-calamares/branding/mocha/show.qml	20	* Slides images dimensions are 800x440px.
+usr-share-calamares/branding/mocha/show.qml	24	import calamares.slideshow 1.0;
+usr-share-calamares/branding/mocha/show.qml	34	onTriggered: presentation.goToNextSlide()
+usr-share-calamares/branding/mocha/show.qml	37	Slide {
+usr-share-calamares/branding/mocha/show.qml	41	source: &quot;slide1.png&quot;
+usr-share-calamares/branding/mocha/show.qml	56	Slide {
+usr-share-calamares/branding/mocha/show.qml	60	source: &quot;slide2.png&quot;
+usr-share-calamares/branding/mocha/show.qml	75	Slide {
+usr-share-calamares/branding/mocha/show.qml	79	source: &quot;slide3.png&quot;
+usr-share-calamares/branding/mocha/show.qml	94	Slide {
+usr-share-calamares/branding/mocha/show.qml	98	source: &quot;slide4.png&quot;
+usr-share-calamares/branding/mocha/show.qml	113	Slide {
+usr-share-calamares/branding/mocha/show.qml	117	source: &quot;slide5.png&quot;
+usr-share-calamares/branding/mocha/show.qml	131	Slide {
+usr-share-calamares/branding/mocha/show.qml	135	source: &quot;slide6.png&quot;
+usr-share-calamares/branding/mocha/show.qml	150	Slide {
+usr-share-calamares/branding/mocha/show.qml	154	source: &quot;slide7.png&quot;
+usr-share-calamares/branding/mocha/show.qml	169	Slide {
+usr-share-calamares/branding/mocha/show.qml	173	source: &quot;slide8.png&quot;
+usr-share-calamares/branding/mocha/show.qml	188	Slide {
+usr-share-calamares/branding/mocha/show.qml	192	source: &quot;slide9.png&quot;
+usr-share-calamares/modules/bootloader.conf	23	kernelSearchPath: &quot;/usr/lib/modules&quot;
+usr-share-calamares/modules/bootloader.conf	44	grubInstall: &quot;grub-install&quot;
+usr-share-calamares/modules/bootloader.conf	83	installEFIFallback: true
+usr-share-calamares/modules/chrootcfg.conf	13	- archlinux
+usr-share-calamares/modules/chrootcfg.conf	14	- manjaro
+usr-share-calamares/modules/contextualprocess.conf	61	&quot;branding.shortVersion&quot;:
+usr-share-calamares/modules/displaymanager.conf	3	- sddm
+usr-share-calamares/modules/displaymanager.conf	4	defaultDesktopEnvironment:
+usr-share-calamares/modules/displaymanager.conf	5	executable: /usr/bin/startplasma-wayland
+usr-share-calamares/modules/displaymanager.conf	6	desktopFile: plasma
+usr-share-calamares/modules/initcpio.conf	16	kernel: linux
+usr-share-calamares/modules/license.conf	35	url:      http://support.amd.com/en-us/download/eula
+usr-share-calamares/modules/license.conf	48	name: Calamares Proprietary License
+usr-share-calamares/modules/license.conf	49	vendor: Calamares, Inc.
+usr-share-calamares/modules/locale.conf	6	url: https://geoip.kde.org/v1/calamares
+usr-share-calamares/modules/netinstall.conf	2	groupsUrl: file:///etc/calamares/netinstall.yaml
+usr-share-calamares/modules/packagechooser.conf	3	method: netinstall-select
+usr-share-calamares/modules/packagechooser.conf	5	- id: Mocha-Gamer-KDE
+usr-share-calamares/modules/packagechooser.conf	6	name: &quot;Mocha Gamer KDE&quot;
+usr-share-calamares/modules/packagechooser.conf	7	description: &quot;Instalação inicial do Mocha com KDE Plasma e SDDM. Outros desktops não são oferecidos nesta fase.&quot;
+usr-share-calamares/modules/packagechooser.conf	8	screenshot: /usr/share/calamares/branding/mocha/welcome.png
+usr-share-calamares/modules/plasmalnf.conf	62	- org.kde.fuzzy-pig.desktop
+usr-share-calamares/modules/plasmalnf.conf	63	- theme: org.kde.breeze.desktop
+usr-share-calamares/modules/plasmalnf.conf	65	- theme: org.kde.breezedark.desktop
+usr-share-calamares/modules/plasmalnf.conf	67	- org.kde.fluffy-bunny.desktop
+usr-share-calamares/modules/postcfg.conf	3	- archlinux
+usr-share-calamares/modules/postcfg.conf	4	- manjaro
+usr-share-calamares/modules/preservefiles.conf	54	dest: /var/log/Calamares.log
+usr-share-calamares/modules/preservefiles.conf	57	dest: /home/${USER}/installation.log
+usr-share-calamares/modules/preservefiles.conf	60	dest: /var/log/Calamares-install.json
+usr-share-calamares/modules/services-systemd.conf	9	- name: sddm.service
+usr-share-calamares/modules/unpackfs.conf	95	-   source: src/qml/calamares/slideshow
+usr-share-calamares/modules/unpackfs.conf	97	destination: &quot;/tmp/slideshow/&quot;
+usr-share-calamares/modules/welcome.conf	2	showSupportUrl: true
+usr-share-calamares/modules/welcome.conf	9	internetCheckUrl: https://archlinux.org/
+usr-share-calamares/modules/welcome.conf	21	url: https://geoip.kde.org/v1/ubiquity
+usr-share-calamares/modules/welcome.conf	25	internetCheckUrl: https://archlinux.org/
+usr-share-calamares/netinstall.yaml	3	description: &quot;Base mínima do Mocha para instalação Arch com NetworkManager, GRUB, firmware e ferramentas essenciais.&quot;
+usr-share-calamares/netinstall.yaml	10	- linux
+usr-share-calamares/netinstall.yaml	11	- linux-headers
+usr-share-calamares/netinstall.yaml	12	- linux-firmware
+usr-share-calamares/netinstall.yaml	42	- arch-install-scripts
+usr-share-calamares/netinstall.yaml	52	- desktop-file-utils
+usr-share-calamares/netinstall.yaml	77	- name: &quot;Mocha KDE Plasma Wayland SDDM&quot;
+usr-share-calamares/netinstall.yaml	78	description: &quot;Interface inicial única do Mocha: KDE Plasma com SDDM e Wayland. XWayland entra apenas para compatibilidade de aplicativos/jogos.&quot;
+usr-share-calamares/netinstall.yaml	83	- plasma-meta
+usr-share-calamares/netinstall.yaml	84	- plasma-desktop
+usr-share-calamares/netinstall.yaml	85	- plasma-nm
+usr-share-calamares/netinstall.yaml	86	- plasma-pa
+usr-share-calamares/netinstall.yaml	88	- sddm
+usr-share-calamares/netinstall.yaml	89	- sddm-kcm
+usr-share-calamares/netinstall.yaml	92	- kde-gtk-config
+usr-share-calamares/netinstall.yaml	93	- xdg-desktop-portal
+usr-share-calamares/netinstall.yaml	94	- xdg-desktop-portal-kde
+usr-share-calamares/netinstall.yaml	106	- kdegraphics-thumbnailers
+usr-share-calamares/netinstall.yaml	110	- xorg-xwayland
+usr-share-calamares/netinstall.yaml	128	- name: &quot;Mocha Gamer Default&quot;
+usr-share-calamares/netinstall.yaml	129	description: &quot;Camada gamer padrão: Steam, Wine/Proton, overlays, GameMode, ferramentas Vulkan e launchers disponíveis nos repositórios ativos.&quot;
+usr-share-calamares/netinstall.yaml	134	- steam
+usr-share-calamares/netinstall.yaml	139	- gamemode
+usr-share-calamares/netinstall.yaml	140	- lib32-gamemode
+usr-share-calamares/netinstall.yaml	144	- gamescope
+usr-share-calamares/netinstall.yaml	145	- protontricks
+usr-share-calamares/netinstall.yaml	156	description: &quot;Ferramentas úteis para criação, documentação e uso geral sem transformar o perfil em desktop corporativo ou educacional.&quot;
+usr-share-calamares/netinstall.yaml	162	- kdenlive
+usr-share-calamares/netinstall.yaml	239	- fsarchiver
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/BackButton.qml	13	visible: parent.currentSlide &gt; 0
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/ForwardButton.qml	13	visible: parent.currentSlide + 1 &lt; parent.slides.length;
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	3	*   SPDX-FileCopyrightText: 2018 Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	6	*   Calamares is Free Software: see the License-Identifier above.
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	13	* single slide). Use the ForwardButton or BackButton for a pre-
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	54	fade.parent.goToNextSlide()
+usr-share-calamares/qml/calamares/slideshow/NavButton.qml	56	fade.parent.goToPreviousSlide()
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	3	*   SPDX-FileCopyrightText: 2017 Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	7	*   2017, Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	9	*   2018, Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	11	*     - drop navigation through entering a slide number
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	13	*       slideshow, not in a passive slideshow like Calamares)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	15	*   2019, Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	16	*     - Support &quot;V2&quot; loading
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	17	*     - Disable shortcuts until the content is visible in Calamares
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	18	*   2020, Adriaan de Groot &lt;groot@kde.org&gt;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	70	property variant slides: []
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	71	property int currentSlide: 0
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	73	property bool loopSlides: true
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	92	property bool activatedInCalamares: false
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	95	property int _lastShownSlide: 0
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	98	var slideCount = 0;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	99	var slides = [];
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	102	if (r.isSlide) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	103	slides.push(r);
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	107	root.slides = slides;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	110	if (root.slides.length &gt; 0)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	111	root.slides[root.currentSlide].visible = true;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	114	function switchSlides(from, to, forward) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	120	onCurrentSlideChanged: {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	121	switchSlides(root.slides[_lastShownSlide], root.slides[currentSlide], currentSlide &gt; _lastShownSlide)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	122	_lastShownSlide = currentSlide
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	127	function goToNextSlide() {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	128	if (root.slides[currentSlide].delayPoints) {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	129	if (root.slides[currentSlide]._advance())
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	132	if (currentSlide + 1 &lt; root.slides.length)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	133	++currentSlide;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	134	else if (loopSlides)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	135	currentSlide = 0;  // Loop at the end
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	138	function goToPreviousSlide() {
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	139	if (currentSlide - 1 &gt;= 0)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	140	--currentSlide;
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	141	else if (loopSlides)
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	142	currentSlide = root.slides.length - 1
+usr-share-calamares/qml/calamares/slideshow/Presentation.qml	148	Keys.onSpacePr
+
+... conteúdo truncado na visualização ...</pre>
+    </section>
+
+    <section>
+      <h2>Candidatos de logo e wallpaper</h2>
+      <pre>Sem relatório de candidatos disponível. Rode antes a auditoria dos ativos se quiser incluir esta seção.</pre>
+    </section>
+
+    <section>
+      <h2>Proposta textual Mocha</h2>
+      <pre># Proposta textual base — Calamares Mocha
+
+## Regras editoriais
+
+- Inglês é a base e o fallback.
+- Português é tradução inicial, não fallback global.
+- Não reaproveitar literalmente textos da ISO base.
+- Não oferecer desktops alternativos.
+- KDE Plasma é a única interface inicial.
+- SDDM e Wayland são a base gráfica inicial.
+- O tom deve ser claro, direto e próprio do projeto.
+- A causa social deve aparecer sem prometer resultados financeiros ou suporte além do real.
+
+---
+
+# English base / fallback
+
+## Welcome
+
+Welcome to Mocha.
+
+Mocha is an Arch-based KDE Plasma system built for gaming, daily use and careful performance tuning. This installer will prepare a clean Plasma desktop with the Mocha defaults, SDDM, Wayland, gaming tools and a practical base for Steam, Proton and modern Linux gaming.
+
+Mocha is also a personal and social project. Its goal is to deliver a polished system that can help support a wider cause through visibility, donations and community interest.
+
+## Slide 1 — Gaming-first Arch base
+
+Mocha starts from Arch and focuses on a gaming-ready desktop. The system is designed around KDE Plasma, current graphics stacks, Steam/Proton workflows, GameMode, MangoHud and practical performance settings.
+
+## Slide 2 — KDE Plasma only
+
+This first Mocha release installs KDE Plasma as the only graphical desktop. The goal is consistency: one interface, one display manager, one visual identity and fewer conflicting desktop components.
+
+## Slide 3 — Wayland and SDDM
+
+Mocha uses SDDM and a Wayland-first Plasma session. The installation keeps the graphical stack focused on the tested Mocha path instead of mixing unrelated sessions.
+
+## Slide 4 — Practical tools
+
+The system is prepared for gaming, browsing, office work, media tools and daily maintenance. The default selection favors useful applications without turning the installation into a cluttered desktop.
+
+## Slide 5 — Social purpose
+
+Mocha is built with a social purpose. The project aims to create a system that is useful, attractive and capable of drawing support for a meaningful cause.
+
+## Finished
+
+Installation is complete. Restart the computer, remove the installation media and boot into Mocha.
+
+---
+
+# Português inicial
+
+## Boas-vindas
+
+Bem-vindo ao Mocha.
+
+O Mocha é um sistema baseado em Arch com KDE Plasma, criado para jogos, uso diário e ajustes cuidadosos de desempenho. Este instalador preparará um desktop Plasma limpo com os padrões Mocha, SDDM, Wayland, ferramentas gamer e uma base prática para Steam, Proton e jogos modernos no Linux.
+
+O Mocha também é um projeto pessoal e social. Seu objetivo é entregar um sistema bem acabado que possa ajudar uma causa maior por meio de visibilidade, doações e interesse da comunidade.
+
+## Slide 1 — Base Arch com foco gamer
+
+O Mocha parte do Arch e foca em um desktop pronto para jogos. O sistema é pensado em torno do KDE Plasma, pilhas gráficas atuais, fluxos Steam/Proton, GameMode, MangoHud e ajustes práticos de desempenho.
+
+## Slide 2 — Somente KDE Plasma
+
+Esta primeira versão do Mocha instala o KDE Plasma como única interface gráfica. O objetivo é consistência: uma interface, um gerenciador de login, uma identidade visual e menos componentes conflitantes.
+
+## Slide 3 — Wayland e SDDM
+
+O Mocha usa SDDM e uma sessão Plasma com prioridade para Wayland. A instalação mantém a pilha gráfica focada no caminho testado do Mocha, sem misturar sessões sem relação com o projeto.
+
+## Slide 4 — Ferramentas práticas
+
+O sistema é preparado para jogos, navegação, escritório, mídia e manutenção diária. A seleção padrão prioriza aplicativos úteis sem transformar a instalação em um desktop poluído.
+
+## Slide 5 — Propósito social
+
+O Mocha é construído com um propósito social. O projeto busca criar um sistema útil, atraente e capaz de atrair apoio para uma causa significativa.
+
+## Finalização
+
+A instalação foi concluída. Reinicie o computador, remova a mídia de instalação e inicie o Mocha.
+</pre>
+    </section>
+
+    <section>
+      <h2>Plano técnico</h2>
+      <pre># Plano do próximo overlay de identidade Calamares Mocha
+
+## Estado atual
+
+Extração usada:
+
+- /media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953
+
+Arquivos já separados:
+
+- imagens/
+- textos/
+- slideshow-welcome/
+- yaml-configs/
+- manifestos/
+- proposta/
+
+## Próxima ação segura
+
+A próxima etapa não deve gerar airootfs.sfs ainda.
+
+A próxima etapa deve criar um overlay de proposta contendo apenas:
+
+1. branding.desc ajustado para Mocha;
+2. show.qml/slideshow com textos próprios;
+3. welcome.conf revisado;
+4. imagens substituídas por logo e wallpaper Mocha;
+5. traduções iniciais em inglês e português;
+6. estrutura preparada para futuras traduções;
+7. validação YAML/QML;
+8. aplicação em cópia de airootfs;
+9. auditoria visual/textual;
+10. somente depois empacotar novo airootfs.sfs.
+
+## Restrições
+
+- Não mexer em kernel.
+- Não mexer em boot.
+- Não mexer em SDDM funcional fora do escopo do Calamares.
+- Não mexer no wrapper Steam.
+- Não mexer em firewall.
+- Não oferecer GNOME/XFCE/MATE/Cinnamon/Budgie/Deepin/i3/Openbox.
+- Não usar português como fallback global.
+- Não copiar texto literal da ISO base.
+
+## Relatórios gerados nesta curadoria
+
+- 01-arquivos-criticos-calamares.txt
+- 02-residuos-e-alvos-de-reescrita.tsv
+- 03-amostra-textos-editaveis.txt
+- 04-inventario-imagens.txt
+- 05-proposta-textos-base-mocha.md
+- 06-plano-proximo-overlay-identidade.md
+</pre>
+    </section>
+  </main>
+</body>
+</html>

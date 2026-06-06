@@ -1,0 +1,36 @@
+---
+componentName: mocha
+strings:
+  productName: Mocha
+  shortProductName: Mocha
+  version: '2026'
+  shortVersion: '2026'
+  versionedName: Mocha 2026
+  shortVersionedName: Mocha 2026
+  bootloaderEntryName: Mocha
+  productUrl: https://github.com/dieseloslab/Mocha
+  supportUrl: https://github.com/dieseloslab/Mocha
+  knownIssuesUrl: https://github.com/dieseloslab/Mocha/issues
+  releaseNotesUrl: https://github.com/dieseloslab/Mocha
+  donateUrl: https://github.com/dieseloslab/Mocha
+images:
+  productLogo: logo.png
+  productIcon: logo.png
+  productWelcome: welcome.png
+style:
+  sidebarBackground: '#2a1b14'
+  sidebarText: '#f4dfc2'
+  sidebarTextSelect: '#ffffff'
+productName: Mocha
+versionedName: Mocha 2026
+shortVersion: '2026'
+version: '2026'
+shortProductName: Mocha
+bootloaderEntryName: Mocha
+productUrl: https://github.com/dieseloslab/Mocha
+supportUrl: https://github.com/dieseloslab/Mocha
+knownIssuesUrl: https://github.com/dieseloslab/Mocha/issues
+donateUrl: https://github.com/dieseloslab/Mocha
+productLogo: logo.png
+productIcon: logo.png
+productWelcome: welcome.png
