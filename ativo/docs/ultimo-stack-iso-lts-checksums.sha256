@@ -1,0 +1,4 @@
+ae04941138f9d726c843173599c4835d8581cbf39189203a50556b162e978d02  ./linux-lts-6.18.34-1-x86_64.pkg.tar.zst
+620df16530d4f39ef6005befefa784d4f6f6617fc695c04022b71a25b76d48b4  ./linux-lts-6.18.34-1-x86_64.pkg.tar.zst.sig
+490b7bb7950618cbc149a7d0965a958187c87358d7d859c2dc1de2f68fc79eaf  ./linux-lts-headers-6.18.34-1-x86_64.pkg.tar.zst
+68fcf61b6b0cb56038dc4cdcd9aaf1283fe8c387ee7844918b1ff62b1e1bad46  ./linux-lts-headers-6.18.34-1-x86_64.pkg.tar.zst.sig

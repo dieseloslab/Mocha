@@ -1,0 +1,3 @@
+arquivo	pkgname	pkgver	arch	repository
+linux-lts-6.18.34-1-x86_64.pkg.tar.zst	linux-lts	6.18.34-1	x86_64	core
+linux-lts-headers-6.18.34-1-x86_64.pkg.tar.zst	linux-lts-headers	6.18.34-1	x86_64	core
