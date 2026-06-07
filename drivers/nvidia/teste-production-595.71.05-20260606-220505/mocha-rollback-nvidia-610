@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+echo "==> Restaurando NVIDIA 610.43.02"
+PACOTES=( /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/nvidia-utils-610.43.02-3-x86_64_v3.pkg.tar.zst /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/lib32-nvidia-utils-610.43.02-1-x86_64_v3.pkg.tar.zst /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/nvidia-open-dkms-610.43.02-2-x86_64.pkg.tar.zst /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/opencl-nvidia-610.43.02-3-x86_64_v3.pkg.tar.zst /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/nvidia-settings-610.43.02-1-x86_64.pkg.tar.zst /media/mochafast/MochaArch/drivers/nvidia/teste-production-595.71.05-20260606-220505/rollback-610.43.02/libxnvctrl-610.43.02-1-x86_64.pkg.tar.zst )
+pacman -U --noconfirm "${PACOTES[@]}"
+dkms autoinstall
+mkinitcpio -P
+depmod -a
+sync
+echo "Rollback NVIDIA 610.43.02 concluído."
+echo "Reinicie com: systemctl reboot"

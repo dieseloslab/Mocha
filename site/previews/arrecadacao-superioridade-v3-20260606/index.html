@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Prévia local do site MochaArch — Diesel OS Lab.">
+<title>MochaArch — Prévia local para aprovação</title>
+<style>
+:root{
+  --bg:#070605;--bg2:#100b08;--panel:#17100cdd;--text:#f6eee8;--muted:#baa99f;
+  --copper:#d87d42;--copper2:#f2ad72;--line:#e58f5438;--green:#8bd2a3;
+  --max:1180px;--radius:25px;--shadow:0 28px 90px #0008
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58;
+  background:
+    radial-gradient(circle at 10% -5%,#9b431f55,transparent 32rem),
+    radial-gradient(circle at 95% 15%,#6d2d172f,transparent 34rem),
+    linear-gradient(180deg,#080605,#0d0907 42%,#070605)
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.14;
+  background-image:linear-gradient(#fff08 1px,transparent 1px),
+  linear-gradient(90deg,#fff08 1px,transparent 1px);
+  background-size:52px 52px;mask-image:linear-gradient(#000,transparent 82%)
+}
+a{color:inherit;text-decoration:none}
+button,select{font:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{width:min(calc(100% - 34px),var(--max));margin-inline:auto}
+.preview{
+  position:sticky;top:0;z-index:200;background:linear-gradient(90deg,#70361b,#a05227,#70361b);
+  border-bottom:1px solid #ffffff2b;box-shadow:0 8px 28px #0007
+}
+.preview .wrap{min-height:46px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;font-size:.82rem;font-weight:800}
+.preview strong{padding:.17rem .52rem;border-radius:999px;background:#0004;border:1px solid #fff3}
+header{position:sticky;top:46px;z-index:100;background:#080706c7;backdrop-filter:blur(18px);border-bottom:1px solid #fff1}
+.nav{min-height:74px;display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+.logo{width:41px;height:41px;border-radius:13px;display:grid;place-items:center;font-weight:950;color:#170b05;background:linear-gradient(145deg,#f5b47b,#a64b20 60%,#421c0d);box-shadow:inset 0 1px #fff7,0 9px 27px #9d421b66}
+.brand strong{display:block;letter-spacing:.025em}
+.brand small{display:block;color:var(--muted);font-size:.72rem}
+nav{margin-left:auto;display:flex;gap:19px}
+nav a{font-size:.88rem;color:#d7cac1}
+nav a:hover{color:#fff}
+.tools{display:flex;align-items:center;gap:9px}
+select,.ghost{color:var(--text);background:#17100c;border:1px solid var(--line);border-radius:12px;padding:.62rem .8rem}
+.ghost{cursor:pointer}
+section{padding:82px 0}
+.hero{padding:88px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:52px;align-items:center}
+.kicker{font-size:.75rem;font-weight:850;letter-spacing:.17em;text-transform:uppercase;color:var(--copper2);margin-bottom:18px}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(3rem,7vw,6.2rem);line-height:.9;letter-spacing:-.066em;margin-bottom:21px}
+h1 span{display:block;font-size:.25em;letter-spacing:.055em;text-transform:uppercase;color:var(--copper2);margin-bottom:18px}
+.lead{font-size:clamp(1.08rem,2vw,1.34rem);color:#dfd2ca;max-width:690px}
+.actions{display:flex;flex-wrap:wrap;gap:11px;margin:29px 0}
+.btn{min-height:49px;padding:0 19px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-weight:830;background:linear-gradient(135deg,#efaa70,#a64d22);color:#1b0d06;box-shadow:0 13px 34px #aa461d55}
+.btn.secondary{background:#ffffff08;color:var(--text);border:1px solid var(--line);box-shadow:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.8rem;color:#d8cbc2;padding:.41rem .72rem;border-radius:999px;border:1px solid #fff2;background:#fff1}
+.proof{margin-top:24px;padding:18px;border-left:4px solid var(--copper2);border-radius:0 15px 15px 0;background:#d8783820;color:#f2dfd1}
+.proof strong{display:block;color:#fff;margin-bottom:5px;font-size:1.02rem}
+.hero-media{min-height:555px;position:relative;overflow:hidden;border-radius:32px;border:1px solid #fff2;background:#150d08;box-shadow:var(--shadow)}
+.hero-media img{position:absolute;inset:0;opacity:0;transform:scale(1.03);transition:opacity 1s ease,transform 8s ease}
+.hero-media img.active{opacity:.86;transform:scale(1.1)}
+.hero-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#050302ee),linear-gradient(90deg,#08040242,transparent)}
+.caption{position:absolute;z-index:3;left:24px;right:24px;bottom:23px;padding:17px 18px;border-radius:17px;border:1px solid #fff2;background:#090604a8;backdrop-filter:blur(15px)}
+.caption b{display:block}.caption span{display:block;color:#c7b7ad;font-size:.84rem;margin-top:4px}
+.section-head{display:grid;grid-template-columns:.76fr 1.24fr;gap:44px;align-items:end;margin-bottom:38px}
+.section-head h2{font-size:clamp(2.15rem,4.7vw,4.5rem);line-height:.99;letter-spacing:-.052em;margin:0}
+.section-head p{margin:0;color:var(--muted);font-size:1.04rem;max-width:720px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{min-height:235px;position:relative;overflow:hidden;padding:24px;border-radius:var(--radius);border:1px solid #fff2;background:linear-gradient(145deg,#2a1a12e8,#0d0907f2);box-shadow:0 17px 45px #0004}
+.card:after{content:"";position:absolute;width:210px;height:210px;right:-78px;bottom:-110px;background:radial-gradient(circle,#d86e333b,transparent 67%)}
+.num{color:var(--copper2);font-weight:900;letter-spacing:.13em;font-size:.75rem}
+.card h3{font-size:1.24rem;line-height:1.16;margin:48px 0 11px}
+.card p{color:var(--muted);font-size:.91rem}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:23px}
+.story-copy,.story-media{border-radius:29px;border:1px solid #fff2;background:var(--panel);overflow:hidden}
+.story-copy{padding:38px}
+.story-copy h2{font-size:clamp(2.15rem,4vw,4rem);line-height:1;letter-spacing:-.048em}
+.story-copy ul{padding-left:1.15rem;color:#ddd0c7}
+.story-copy li+li{margin-top:.63rem}
+.story-media{min-height:460px;position:relative}
+.story-media:after{content:attr(data-label);position:absolute;left:18px;bottom:18px;padding:.48rem .69rem;border-radius:10px;background:#000b;font-size:.75rem}
+.tech{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.tech .card{min-height:205px}.tech .card h3{margin:27px 0 9px}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.shot{grid-column:span 4;min-height:285px;position:relative;overflow:hidden;border-radius:22px;border:1px solid #fff2;background:#140e0a}
+.shot:nth-child(1),.shot:nth-child(5){grid-column:span 7}
+.shot:nth-child(2),.shot:nth-child(6){grid-column:span 5}
+.shot img{opacity:.79;transition:.45s}.shot:hover img{transform:scale(1.035);opacity:.96}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:52px 18px 16px;background:linear-gradient(transparent,#000f)}
+.shot b{display:block}.shot span{display:block;color:#cdbdb3;font-size:.82rem;margin-top:2px}
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.status{padding:22px;border:1px solid #fff2;border-radius:20px;background:#ffffff07}
+.status strong{display:block}.status span{display:block;margin-top:8px;color:var(--copper2);font-size:.86rem;font-weight:790}
+.social{padding:34px;display:grid;grid-template-columns:1.08fr .92fr;gap:25px;border-radius:31px;border:1px solid #fff2;background:linear-gradient(130deg,#512713a1,#0e0907f5);overflow:hidden}
+.social h2{font-size:clamp(2.25rem,5vw,4.8rem);line-height:.96;letter-spacing:-.055em}
+.social p{color:#dfd1c8}
+.social-media{min-height:390px;border-radius:24px;overflow:hidden;border:1px solid #fff2}
+.dual{margin:20px 0;padding:18px;border-radius:16px;background:#ffffff0b;border:1px solid #fff2}
+.dual strong{display:block}.dual span{display:block;color:#d9cbc2;margin-top:6px}
+.review{border:1px solid var(--line);border-radius:23px;background:#0e0a08e8;overflow:hidden}
+.review summary{cursor:pointer;padding:21px 23px;font-weight:850;color:#f7dfcd}
+.review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.review-item{padding:21px;background:#110c09}.review-item b{display:block;color:var(--copper2);margin-bottom:7px}.review-item p{margin:0;color:var(--muted);font-size:.9rem}
+.contact{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:28px;border:1px solid #fff2;border-radius:23px;background:#ffffff07}
+footer{padding:38px 0;border-top:1px solid #fff1;color:#9f9188}
+.footer-grid{display:flex;justify-content:space-between;gap:20px;align-items:center}
+@media(max-width:980px){
+  nav{display:none}.hero-grid,.story,.social{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,1fr)}
+  .section-head{grid-template-columns:1fr}.hero-media{min-height:470px}.shot,.shot:nth-child(n){grid-column:span 6}
+  .status-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .wrap{width:min(calc(100% - 24px),var(--max))}.preview .wrap{font-size:.71rem}
+  header{top:46px}.nav{min-height:66px}.brand small{display:none}.ghost{display:none}
+  section{padding:63px 0}.hero{padding-top:58px}.hero-media{min-height:395px}
+  .grid4,.tech,.status-grid,.review-grid{grid-template-columns:1fr}
+  .shot,.shot:nth-child(n){grid-column:1/-1;min-height:245px}.story-copy{padding:26px}
+  .contact{grid-template-columns:1fr}.footer-grid{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="preview"><div class="wrap"><strong data-i18n="previewBadge">PRÉVIA LOCAL</strong><span data-i18n="previewText">Não publicada. Site oficial, Git e Cloudflare permanecem intactos.</span></div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio"><span class="logo">D</span><span><strong>Diesel OS Lab</strong><small data-i18n="brandSub">Organização e laboratório responsável pelo MochaArch</small></span></a>
+    <nav>
+      <a href="#edicao" data-i18n="navEdition">Edição</a>
+      <a href="#experiencia" data-i18n="navExperience">Experiência</a>
+      <a href="#tecnologia" data-i18n="navTechnology">Tecnologia</a>
+      <a href="#status" data-i18n="navStatus">Status</a>
+      <a href="#social" data-i18n="navSocial">Social / T21</a>
+      <a href="#contato" data-i18n="navContact">Contato</a>
+    </nav>
+    <div class="tools">
+      <button class="ghost" id="reviewButton" data-i18n="reviewButton">Revisões</button>
+      <select id="language" aria-label="Idioma">
+        <option value="pt">Português</option><option value="en">English</option>
+        <option value="fr">Français</option><option value="es">Español</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker" data-i18n="heroKicker">TECHNOLOGY & GAMING PLATFORM</div>
+      <h1><span data-i18n="heroOrg">Diesel OS Lab apresenta</span>MochaArch</h1>
+      <p class="lead" data-i18n="heroLead">Uma distribuição Linux baseada em Arch e KDE Plasma, criada para jogar, criar, produzir e trabalhar com identidade própria, software selecionado e uma base técnica reproduzível.</p>
+      <div class="actions">
+        <a class="btn" href="#experiencia" data-i18n="heroPrimary">Conhecer a experiência</a>
+        <a class="btn secondary" href="#galeria" data-i18n="heroSecondary">Ver visuais do projeto</a>
+      </div>
+      <div class="chips"><span class="chip">Arch Linux</span><span class="chip">KDE Plasma</span><span class="chip">Wayland</span><span class="chip">Steam + Proton</span></div>
+      <div class="proof"><strong data-i18n="proofTitle">Superioridade comprovada no hardware de referência</strong><span data-i18n="proofText">Nos testes comparativos realizados no mesmo computador, com os mesmos jogos e cenários de referência, o MochaArch obteve desempenho muito superior ao Windows, com FPS mais altos e menor latência.</span></div>
+    </div>
+    <div class="hero-media">
+      <img class="active" src="https://dieseloslab.org/assets/images/wallpaper-wave-1600.webp" alt="Identidade visual MochaArch">
+      <img src="https://dieseloslab.org/assets/images/welcome-wave-1600.webp" alt="Boas-vindas do MochaArch">
+      <img src="https://dieseloslab.org/assets/images/welcome-classic-1600.webp" alt="Desktop conceitual MochaArch">
+      <div class="caption"><b data-i18n="heroMediaTitle">Identidade MochaArch</b><span data-i18n="heroMediaText">Imagens já aprovadas e utilizadas no projeto.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="edicao">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker" data-i18n="editionKicker">SOBRE O SISTEMA</div><h2 data-i18n="editionTitle">MochaArch é o sistema. Diesel OS Lab é quem o desenvolve.</h2></div>
+      <p data-i18n="editionText">O foco atual é o Mocha Gamer. Creator, Escolas e Escritórios continuam como direções planejadas, construídas sobre a mesma base técnica e documental.</p>
+    </div>
+    <div class="grid4">
+      <article class="card"><span class="num">01</span><h3 data-i18n="card1Title">Base Arch controlada</h3><p data-i18n="card1Text">Rolling release com validação, documentação, repositório Mocha controlado e fallback funcional para mudanças sensíveis.</p></article>
+      <article class="card"><span class="num">02</span><h3 data-i18n="card2Title">Mocha Gamer</h3><p data-i18n="card2Text">O perfil prioritário, voltado a desempenho, baixa latência, Steam, Proton e ferramentas gamer.</p></article>
+      <article class="card"><span class="num">03</span><h3 data-i18n="card3Title">Creator, Escolas e Escritórios</h3><p data-i18n="card3Text">Direções planejadas para criação, educação, laboratórios, produtividade e uso administrativo.</p></article>
+      <article class="card"><span class="num">04</span><h3 data-i18n="card4Title">Identidade em consolidação</h3><p data-i18n="card4Text">O visual aprovado é preservado enquanto os materiais finais do Calamares e da ISO são consolidados.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap story">
+    <div class="story-copy">
+      <div class="kicker" data-i18n="experienceKicker">A EXPERIÊNCIA MOCHA</div>
+      <h2 data-i18n="experienceTitle">Base segura na instalação. Desempenho ajustado ao hardware.</h2>
+      <p data-i18n="experienceText">A ISO é planejada com kernel Arch LTS genérico. Depois da instalação, o MochaArch detecta CPU e GPU e pode sugerir, com consentimento do usuário, uma pilha validada de kernel, headers e driver para melhor desempenho.</p>
+      <ul>
+        <li data-i18n="experienceItem1">Kernel Arch LTS mantido como fallback seguro.</li>
+        <li data-i18n="experienceItem2">Detecção posterior de arquitetura da CPU e GPU.</li>
+        <li data-i18n="experienceItem3">Upgrade voluntário pelo repositório Mocha controlado.</li>
+        <li data-i18n="experienceItem4">Sem habilitar o repositório CachyOS no computador do usuário.</li>
+      </ul>
+    </div>
+    <div class="story-media" data-label="Visual aprovado do projeto"><img src="https://dieseloslab.org/assets/images/welcome-classic-1600.webp" alt="Visual aprovado do MochaArch"></div>
+  </div>
+</section>
+
+<section id="tecnologia">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker" data-i18n="technologyKicker">TECNOLOGIA</div><h2 data-i18n="technologyTitle">Ferramentas fortes, integradas com critério.</h2></div>
+      <p data-i18n="technologyText">O conjunto é selecionado para entregar desempenho, estabilidade, produtividade e diagnóstico sem contaminar a base ou esconder o que está sendo executado.</p>
+    </div>
+    <div class="tech">
+      <article class="card"><span class="num">⌁</span><h3 data-i18n="tech1Title">Stack gamer selecionada</h3><p data-i18n="tech1Text">Steam, Proton, Lutris, Heroic, Bottles, GameMode, MangoHud, Vulkan e utilitários úteis.</p></article>
+      <article class="card"><span class="num">◇</span><h3 data-i18n="tech2Title">Kernel e vídeo validados</h3><p data-i18n="tech2Text">Kernel LTS como fallback e atualização de desempenho sugerida após a detecção do hardware.</p></article>
+      <article class="card"><span class="num">◎</span><h3 data-i18n="tech3Title">KDE Plasma em Wayland</h3><p data-i18n="tech3Text">Sessão moderna, SDDM funcional e identidade visual consistente sem recorrer ao X11 como fallback.</p></article>
+      <article class="card"><span class="num">▦</span><h3 data-i18n="tech4Title">Criação e produtividade</h3><p data-i18n="tech4Text">OnlyOffice, criação, edição, streaming, monitoramento e ferramentas de laboratório.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker" data-i18n="galleryKicker">VISUAIS DO PROJETO</div><h2 data-i18n="galleryTitle">Imagens aprovadas para comunicar a identidade Mocha.</h2></div>
+      <p data-i18n="galleryText">A galeria apresenta a direção visual do projeto e evita tratar imagens conceituais como capturas verificadas de uma ISO final.</p>
+    </div>
+    <div class="gallery">
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/welcome-wave-1600.webp" alt=""><figcaption><b data-i18n="shot1Title">Boas-vindas</b><span data-i18n="shot1Text">Identidade, desktop e proposta gamer.</span></figcaption></figure>
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/wallpaper-wave-1600.webp" alt=""><figcaption><b data-i18n="shot2Title">Identidade Mocha</b><span data-i18n="shot2Text">Cobre, contraste e leitura em telas escuras.</span></figcaption></figure>
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/welcome-classic-1600.webp" alt=""><figcaption><b data-i18n="shot3Title">Desktop KDE</b><span data-i18n="shot3Text">Plasma, Wayland e fluxo de uso diário.</span></figcaption></figure>
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/welcome-wave-1600.webp" alt=""><figcaption><b data-i18n="shot4Title">Mocha Gamer</b><span data-i18n="shot4Text">Jogos, launchers e ferramentas de diagnóstico.</span></figcaption></figure>
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/social-wave-1600.webp" alt=""><figcaption><b data-i18n="shot5Title">Causa social T21</b><span data-i18n="shot5Text">Tecnologia, inclusão, presença e continuidade.</span></figcaption></figure>
+      <figure class="shot"><img src="https://dieseloslab.org/assets/images/wallpaper-wave-1600.webp" alt=""><figcaption><b data-i18n="shot6Title">Curadoria visual</b><span data-i18n="shot6Text">Materiais avaliados antes da integração final.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker" data-i18n="statusKicker">STATUS DO PROJETO</div><h2 data-i18n="statusTitle">Construção aberta, progresso verificável.</h2></div>
+      <p data-i18n="statusText">O site separa o que já funciona no sistema de referência do que ainda precisa ser empacotado, generalizado e validado para distribuição pública.</p>
+    </div>
+    <div class="status-grid">
+      <div class="status"><strong data-i18n="status1Title">Identidade visual</strong><span data-i18n="status1Text">Aprovada; materiais finais em consolidação</span></div>
+      <div class="status"><strong data-i18n="status2Title">Mocha Gamer</strong><span data-i18n="status2Text">Funcional e em refinamento</span></div>
+      <div class="status"><strong data-i18n="status3Title">Stack gamer</strong><span data-i18n="status3Text">Funcional no sistema de referência</span></div>
+      <div class="status"><strong data-i18n="status4Title">Desempenho e latência</strong><span data-i18n="status4Text">Superioridade medida frente ao Windows</span></div>
+      <div class="status"><strong data-i18n="status5Title">ISO e instalador</strong><span data-i18n="status5Text">Em integração e testes</span></div>
+      <div class="status"><strong data-i18n="status6Title">Documentação</strong><span data-i18n="status6Text">Em expansão contínua</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="social">
+  <div class="wrap social">
+    <div>
+      <div class="kicker" data-i18n="socialKicker">SOCIAL / T21</div>
+      <h2 data-i18n="socialTitle">Ajude o MochaArch a crescer e a causa social a continuar.</h2>
+      <p data-i18n="socialText1">A atuação ligada à Trissomia 21 já faz parte do trabalho do projeto. Ela não é uma promessa futura: precisa de continuidade, presença e recursos.</p>
+      <p data-i18n="socialText2">O desenvolvimento do MochaArch também exige infraestrutura, testes, documentação, hospedagem, equipamentos e tempo de trabalho. Cada contribuição fortalece as duas frentes.</p>
+      <div class="dual"><strong data-i18n="dualTitle">Uma contribuição, duas finalidades complementares</strong><span data-i18n="dualText">O PayPal recebe donativos destinados ao desenvolvimento do MochaArch e à campanha e atuação social relacionadas à causa T21.</span></div>
+      <div class="actions">
+        <a class="btn" href="https://www.paypal.com/donate/?business=RE5E2EWMKAFBW&currency_code=USD&no_recurring=0" target="_blank" rel="noopener" data-i18n="socialButton">Apoiar o projeto e a causa</a>
+        <a class="btn secondary" href="mailto:ricardo@dieseloslab.org" data-i18n="socialContact">Falar com o projeto</a>
+      </div>
+    </div>
+    <div class="social-media"><img src="https://dieseloslab.org/assets/images/social-wave-1600.webp" alt="Identidade visual da frente social T21"></div>
+  </div>
+</section>
+
+<section id="revisoes">
+  <div class="wrap">
+    <details class="review" id="review">
+      <summary data-i18n="reviewSummary">O que foi preservado e o que foi corrigido nesta prévia</summary>
+      <div class="review-grid">
+        <div class="review-item"><b data-i18n="review1Title">Superioridade frente ao Windows preservada</b><p data-i18n="review1Text">A comparação permanece como resultado comprovado nos testes realizados no mesmo computador, jogos e cenários de referência.</p></div>
+        <div class="review-item"><b data-i18n="review2Title">Função social preservada</b><p data-i18n="review2Text">A atuação T21 continua apresentada como trabalho real e atual, não como promessa futura.</p></div>
+        <div class="review-item"><b data-i18n="review3Title">PayPal com dupla finalidade</b><p data-i18n="review3Text">As contribuições apoiam tanto o desenvolvimento do MochaArch quanto a campanha e a continuidade da atuação social.</p></div>
+        <div class="review-item"><b data-i18n="review4Title">Nome corrigido</b><p data-i18n="review4Text">MochaArch é o sistema; Diesel OS Lab é a organização e o laboratório responsável.</p></div>
+        <div class="review-item"><b data-i18n="review5Title">Estado técnico corrigido</b><p data-i18n="review5Text">A ISO e o instalador não aparecem como entregues enquanto ainda estão em integração e testes.</p></div>
+        <div class="review-item"><b data-i18n="review6Title">Imagens aprovadas preservadas</b><p data-i18n="review6Text">A prévia usa os mesmos endereços de imagens já adotados no site, sem substituição por arte genérica.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap contact">
+    <div><div class="kicker" data-i18n="contactKicker">CONTATO</div><h2 data-i18n="contactTitle">Acompanhe, colabore e ajude a financiar a próxima etapa.</h2><p data-i18n="contactText">Contato técnico, divulgação e apoio financeiro ajudam o MochaArch a avançar e mantêm ativa a frente social do Diesel OS Lab.</p></div>
+    <div class="actions"><a class="btn" href="mailto:ricardo@dieseloslab.org">ricardo@dieseloslab.org</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap footer-grid"><div><strong>Diesel OS Lab — MochaArch</strong><br><span data-i18n="footerText">Tecnologia, desempenho e compromisso social.</span></div><div>© 2024–2026 Diesel OS Lab</div></div></footer>
+
+<script>
+const t={
+pt:{
+previewBadge:"PRÉVIA LOCAL",previewText:"Não publicada. Site oficial, Git e Cloudflare permanecem intactos.",
+brandSub:"Organização e laboratório responsável pelo MochaArch",navEdition:"Edição",navExperience:"Experiência",navTechnology:"Tecnologia",navStatus:"Status",navSocial:"Social / T21",navContact:"Contato",reviewButton:"Revisões",
+heroKicker:"TECHNOLOGY & GAMING PLATFORM",heroOrg:"Diesel OS Lab apresenta",heroLead:"Uma distribuição Linux baseada em Arch e KDE Plasma, criada para jogar, criar, produzir e trabalhar com identidade própria, software selecionado e uma base técnica reproduzível.",heroPrimary:"Conhecer a experiência",heroSecondary:"Ver visuais do projeto",
+proofTitle:"Superioridade comprovada no hardware de referência",proofText:"Nos testes comparativos realizados no mesmo computador, com os mesmos jogos e cenários de referência, o MochaArch obteve desempenho muito superior ao Windows, com FPS mais altos e menor latência.",heroMediaTitle:"Identidade MochaArch",heroMediaText:"Imagens já aprovadas e utilizadas no projeto.",
+editionKicker:"SOBRE O SISTEMA",editionTitle:"MochaArch é o sistema. Diesel OS Lab é quem o desenvolve.",editionText:"O foco atual é o Mocha Gamer. Creator, Escolas e Escritórios continuam como direções planejadas, construídas sobre a mesma base técnica e documental.",
+card1Title:"Base Arch controlada",card1Text:"Rolling release com validação, documentação, repositório Mocha controlado e fallback funcional para mudanças sensíveis.",card2Title:"Mocha Gamer",card2Text:"O perfil prioritário, voltado a desempenho, baixa latência, Steam, Proton e ferramentas gamer.",card3Title:"Creator, Escolas e Escritórios",card3Text:"Direções planejadas para criação, educação, laboratórios, produtividade e uso administrativo.",card4Title:"Identidade em consolidação",card4Text:"O visual aprovado é preservado enquanto os materiais finais do Calamares e da ISO são consolidados.",
+experienceKicker:"A EXPERIÊNCIA MOCHA",experienceTitle:"Base segura na instalação. Desempenho ajustado ao hardware.",experienceText:"A ISO é planejada com kernel Arch LTS genérico. Depois da instalação, o MochaArch detecta CPU e GPU e pode sugerir, com consentimento do usuário, uma pilha validada de kernel, headers e driver para melhor desempenho.",experienceItem1:"Kernel Arch LTS mantido como fallback seguro.",experienceItem2:"Detecção posterior de arquitetura da CPU e GPU.",experienceItem3:"Upgrade voluntário pelo repositório Mocha controlado.",experienceItem4:"Sem habilitar o repositório CachyOS no computador do usuário.",
+technologyKicker:"TECNOLOGIA",technologyTitle:"Ferramentas fortes, integradas com critério.",technologyText:"O conjunto é selecionado para entregar desempenho, estabilidade, produtividade e diagnóstico sem contaminar a base ou esconder o que está sendo executado.",tech1Title:"Stack gamer selecionada",tech1Text:"Steam, Proton, Lutris, Heroic, Bottles, GameMode, MangoHud, Vulkan e utilitários úteis.",tech2Title:"Kernel e vídeo validados",tech2Text:"Kernel LTS como fallback e atualização de desempenho sugerida após a detecção do hardware.",tech3Title:"KDE Plasma em Wayland",tech3Text:"Sessão moderna, SDDM funcional e identidade visual consistente sem recorrer ao X11 como fallback.",tech4Title:"Criação e produtividade",tech4Text:"OnlyOffice, criação, edição, streaming, monitoramento e ferramentas de laboratório.",
+galleryKicker:"VISUAIS DO PROJETO",galleryTitle:"Imagens aprovadas para comunicar a identidade Mocha.",galleryText:"A galeria apresenta a direção visual do projeto e evita tratar imagens conceituais como capturas verificadas de uma ISO final.",shot1Title:"Boas-vindas",shot1Text:"Identidade, desktop e proposta gamer.",shot2Title:"Identidade Mocha",shot2Text:"Cobre, contraste e leitura em telas escuras.",shot3Title:"Desktop KDE",shot3Text:"Plasma, Wayland e fluxo de uso diário.",shot4Title:"Mocha Gamer",shot4Text:"Jogos, launchers e ferramentas de diagnóstico.",shot5Title:"Causa social T21",shot5Text:"Tecnologia, inclusão, presença e continuidade.",shot6Title:"Curadoria visual",shot6Text:"Materiais avaliados antes da integração final.",
+statusKicker:"STATUS DO PROJETO",statusTitle:"Construção aberta, progresso verificável.",statusText:"O site separa o que já funciona no sistema de referência do que ainda precisa ser empacotado, generalizado e validado para distribuição pública.",status1Title:"Identidade visual",status1Text:"Aprovada; materiais finais em consolidação",status2Title:"Mocha Gamer",status2Text:"Funcional e em refinamento",status3Title:"Stack gamer",status3Text:"Funcional no sistema de referência",status4Title:"Desempenho e latência",status4Text:"Superioridade medida frente ao Windows",status5Title:"ISO e instalador",status5Text:"Em integração e testes",status6Title:"Documentação",status6Text:"Em expansão contínua",
+socialKicker:"SOCIAL / T21",socialTitle:"Ajude o MochaArch a crescer e a causa social a continuar.",socialText1:"A atuação ligada à Trissomia 21 já faz parte do trabalho do projeto. Ela não é uma promessa futura: precisa de continuidade, presença e recursos.",socialText2:"O desenvolvimento do MochaArch também exige infraestrutura, testes, documentação, hospedagem, equipamentos e tempo de trabalho. Cada contribuição fortalece as duas frentes.",dualTitle:"Uma contribuição, duas finalidades complementares",dualText:"O PayPal recebe donativos destinados ao desenvolvimento do MochaArch e à campanha e atuação social relacionadas à causa T21.",socialButton:"Apoiar o projeto e a causa",socialContact:"Falar com o projeto",
+reviewSummary:"O que foi preservado e o que foi corrigido nesta prévia",review1Title:"Superioridade frente ao Windows preservada",review1Text:"A comparação permanece como resultado comprovado nos testes realizados no mesmo computador, jogos e cenários de referência.",review2Title:"Função social preservada",review2Text:"A atuação T21 continua apresentada como trabalho real e atual, não como promessa futura.",review3Title:"PayPal com dupla finalidade",review3Text:"As contribuições apoiam tanto o desenvolvimento do MochaArch quanto a campanha e a continuidade da atuação social.",review4Title:"Nome corrigido",review4Text:"MochaArch é o sistema; Diesel OS Lab é a organização e o laboratório responsável.",review5Title:"Estado técnico corrigido",review5Text:"A ISO e o instalador não aparecem como entregues enquanto ainda estão em integração e testes.",review6Title:"Imagens aprovadas preservadas",review6Text:"A prévia usa os mesmos endereços de imagens já adotados no site, sem substituição por arte genérica.",
+contactKicker:"CONTATO",contactTitle:"Acompanhe, colabore e ajude a financiar a próxima etapa.",contactText:"Contato técnico, divulgação e apoio financeiro ajudam o MochaArch a avançar e mantêm ativa a frente social do Diesel OS Lab.",footerText:"Tecnologia, desempenho e compromisso social."
+},
+en:{
+previewBadge:"LOCAL PREVIEW",previewText:"Unpublished. The official site, Git repository, and Cloudflare remain unchanged.",
+brandSub:"Organization and laboratory responsible for MochaArch",navEdition:"Edition",navExperience:"Experience",navTechnology:"Technology",navStatus:"Status",navSocial:"Social / T21",navContact:"Contact",reviewButton:"Revisions",
+heroKicker:"TECHNOLOGY & GAMING PLATFORM",heroOrg:"Presented by Diesel OS Lab",heroLead:"An Arch Linux and KDE Plasma-based distribution built for gaming, creation, production, and work, with its own identity, selected software, and a reproducible technical foundation.",heroPrimary:"Explore the experience",heroSecondary:"View project visuals",
+proofTitle:"Proven superiority on the reference hardware",proofText:"In comparative tests performed on the same computer, using the same games and reference scenarios, MochaArch delivered performance far superior to Windows, with higher FPS and lower latency.",heroMediaTitle:"MochaArch identity",heroMediaText:"Images already approved and used by the project.",
+editionKicker:"ABOUT THE SYSTEM",editionTitle:"MochaArch is the system. Diesel OS Lab develops it.",editionText:"Mocha Gamer is the current focus. Creator, Schools, and Offices remain planned directions built on the same technical and documentation foundation.",
+card1Title:"Controlled Arch base",card1Text:"Rolling release with validation, documentation, a controlled Mocha repository, and a functional fallback for sensitive changes.",card2Title:"Mocha Gamer",card2Text:"The priority profile, focused on performance, low latency, Steam, Proton, and gaming tools.",card3Title:"Creator, Schools, and Offices",card3Text:"Planned directions for creation, education, laboratories, productivity, and administrative use.",card4Title:"Identity being consolidated",card4Text:"The approved visual direction is preserved while the final Calamares and ISO materials are consolidated.",
+experienceKicker:"THE MOCHA EXPERIENCE",experienceTitle:"A safe installation base. Performance matched to the hardware.",experienceText:"The ISO is planned with a generic Arch LTS kernel. After installation, MochaArch detects CPU and GPU and may suggest, with the user's consent, a validated kernel, headers, and driver stack for better performance.",experienceItem1:"Arch LTS kernel retained as a safe fallback.",experienceItem2:"Post-installation CPU architecture and GPU detection.",experienceItem3:"Voluntary upgrade through the controlled Mocha repository.",experienceItem4:"No CachyOS repository enabled on the user's computer.",
+technologyKicker:"TECHNOLOGY",technologyTitle:"Powerful tools, integrated with clear criteria.",technologyText:"The set is selected to deliver performance, stability, productivity, and diagnostics without contaminating the base or hiding what is being executed.",tech1Title:"Selected gaming stack",tech1Text:"Steam, Proton, Lutris, Heroic, Bottles, GameMode, MangoHud, Vulkan, and useful utilities.",tech2Title:"Validated kernel and graphics",tech2Text:"LTS kernel as fallback and a performance upgrade suggested after hardware detection.",tech3Title:"KDE Plasma on Wayland",tech3Text:"Modern session, functional SDDM, and consistent visual identity without using X11 as a fallback.",tech4Title:"Creation and productivity",tech4Text:"OnlyOffice, creation, editing, streaming, monitoring, and laboratory tools.",
+galleryKicker:"PROJECT VISUALS",galleryTitle:"Approved images that communicate the Mocha identity.",galleryText:"The gallery presents the project's visual direction without treating conceptual images as verified screenshots of a final ISO.",shot1Title:"Welcome",shot1Text:"Identity, desktop, and gaming proposal.",shot2Title:"Mocha identity",shot2Text:"Copper, contrast, and readability on dark screens.",shot3Title:"KDE desktop",shot3Text:"Plasma, Wayland, and daily workflow.",shot4Title:"Mocha Gamer",shot4Text:"Games, launchers, and diagnostic tools.",shot5Title:"T21 social cause",shot5Text:"Technology, inclusion, presence, and continuity.",shot6Title:"Visual curation",shot6Text:"Materials evaluated before final integration.",
+statusKicker:"PROJECT STATUS",statusTitle:"Open construction, verifiable progress.",statusText:"The site separates what already works on the reference system from what still requires packaging, generalization, and validation for public distribution.",status1Title:"Visual identity",status1Text:"Approved; final materials being consolidated",status2Title:"Mocha Gamer",status2Text:"Functional and being refined",status3Title:"Gaming stack",status3Text:"Functional on the reference system",status4Title:"Performance and latency",status4Text:"Measured superiority over Windows",status5Title:"ISO and installer",status5Text:"Integration and testing",status6Title:"Documentation",status6Text:"Continuously expanding",
+socialKicker:"SOCIAL / T21",socialTitle:"Help MochaArch grow and keep the social cause moving.",socialText1:"Work related to Trisomy 21 is already part of the project. It is not a future promise: it needs continuity, presence, and resources.",socialText2:"MochaArch development also requires infrastructure, testing, documentation, hosting, equipment, and working time. Every contribution strengthens both fronts.",dualTitle:"One contribution, two complementary purposes",dualText:"PayPal receives donations for MochaArch development and for the campaign and ongoing social work related to the T21 cause.",socialButton:"Support the project and the cause",socialContact:"Contact the project",
+reviewSummary:"What was preserved and what was corrected in this preview",review1Title:"Superiority over Windows preserved",review1Text:"The comparison remains a proven result from tests performed on the same computer, games, and reference scenarios.",review2Title:"Social role preserved",review2Text:"T21 work remains described as real and current, not as a future promise.",review3Title:"PayPal has two purposes",review3Text:"Contributions support both MochaArch development and the campaign and continuity of social work.",review4Title:"Name corrected",review4Text:"MochaArch is the system; Diesel OS Lab is the responsible organization and laboratory.",review5Title:"Technical status corrected",review5Text:"The ISO and installer are not shown as delivered while integration and testing continue.",review6Title:"Approved images preserved",review6Text:"The preview uses the image addresses already adopted by the site, without replacing them with generic artwork.",
+contactKicker:"CONTACT",contactTitle:"Follow, collaborate, and help fund the next stage.",contactText:"Technical contact, promotion, and financial support help MochaArch advance and keep Diesel OS Lab's social work active.",footerText:"Technology, performance, and social commitment."
+},
+fr:{
+previewBadge:"APERÇU LOCAL",previewText:"Non publié. Le site officiel, le dépôt Git et Cloudflare restent inchangés.",
+brandSub:"Organisation et laboratoire responsables de MochaArch",navEdition:"Édition",navExperience:"Expérience",navTechnology:"Technologie",navStatus:"État",navSocial:"Social / T21",navContact:"Contact",reviewButton:"Révisions",
+heroKicker:"PLATEFORME TECHNOLOGIQUE ET GAMING",heroOrg:"Présenté par Diesel OS Lab",heroLead:"Une distribution basée sur Arch Linux et KDE Plasma, conçue pour jouer, créer, produire et travailler, avec sa propre identité, des logiciels sélectionnés et une base technique reproductible.",heroPrimary:"Découvrir l’expérience",heroSecondary:"Voir les visuels du projet",
+proofTitle:"Supériorité prouvée sur le matériel de référence",proofText:"Lors de tests comparatifs réalisés sur le même ordinateur, avec les mêmes jeux et scénarios de référence, MochaArch a obtenu des performances très supérieures à Windows, avec davantage d’images par seconde et une latence plus faible.",heroMediaTitle:"Identité MochaArch",heroMediaText:"Images déjà approuvées et utilisées par le projet.",
+editionKicker:"À PROPOS DU SYSTÈME",editionTitle:"MochaArch est le système. Diesel OS Lab le développe.",editionText:"Mocha Gamer est l’objectif actuel. Creator, Écoles et Bureaux restent des orientations prévues, fondées sur la même base technique et documentaire.",
+card1Title:"Base Arch contrôlée",card1Text:"Rolling release avec validation, documentation, dépôt Mocha contrôlé et solution de repli fonctionnelle pour les changements sensibles.",card2Title:"Mocha Gamer",card2Text:"Le profil prioritaire, axé sur les performances, la faible latence, Steam, Proton et les outils de jeu.",card3Title:"Creator, Écoles et Bureaux",card3Text:"Orientations prévues pour la création, l’éducation, les laboratoires, la productivité et l’administration.",card4Title:"Identité en consolidation",card4Text:"La direction visuelle approuvée est préservée pendant la consolidation des éléments finaux de Calamares et de l’ISO.",
+experienceKicker:"L’EXPÉRIENCE MOCHA",experienceTitle:"Une base sûre à l’installation. Des performances adaptées au matériel.",experienceText:"L’ISO est prévue avec un noyau Arch LTS générique. Après l’installation, MochaArch détecte le processeur et le GPU et peut proposer, avec l’accord de l’utilisateur, une pile validée de noyau, d’en-têtes et de pilote.",experienceItem1:"Noyau Arch LTS conservé comme solution de repli sûre.",experienceItem2:"Détection ultérieure de l’architecture du processeur et du GPU.",experienceItem3:"Mise à niveau volontaire via le dépôt Mocha contrôlé.",experienceItem4:"Aucun dépôt CachyOS activé sur l’ordinateur de l’utilisateur.",
+technologyKicker:"TECHNOLOGIE",technologyTitle:"Des outils puissants, intégrés avec méthode.",technologyText:"L’ensemble est sélectionné pour fournir performances, stabilité, productivité et diagnostic sans contaminer la base ni masquer ce qui est exécuté.",tech1Title:"Pile gaming sélectionnée",tech1Text:"Steam, Proton, Lutris, Heroic, Bottles, GameMode, MangoHud, Vulkan et utilitaires utiles.",tech2Title:"Noyau et graphismes validés",tech2Text:"Noyau LTS comme solution de repli et mise à niveau des performances proposée après détection du matériel.",tech3Title:"KDE Plasma sous Wayland",tech3Text:"Session moderne, SDDM fonctionnel et identité visuelle cohérente sans utiliser X11 comme solution de repli.",tech4Title:"Création et productivité",tech4Text:"OnlyOffice, création, montage, diffusion, surveillance et outils de laboratoire.",
+galleryKicker:"VISUELS DU PROJET",galleryTitle:"Des images approuvées pour communiquer l’identité Mocha.",galleryText:"La galerie présente la direction visuelle du projet sans traiter les images conceptuelles comme des captures vérifiées d’une ISO finale.",shot1Title:"Accueil",shot1Text:"Identité, bureau et proposition gaming.",shot2Title:"Identité Mocha",shot2Text:"Cuivre, contraste et lisibilité sur fond sombre.",shot3Title:"Bureau KDE",shot3Text:"Plasma, Wayland et usage quotidien.",shot4Title:"Mocha Gamer",shot4Text:"Jeux, lanceurs et outils de diagnostic.",shot5Title:"Cause sociale T21",shot5Text:"Technologie, inclusion, présence et continuité.",shot6Title:"Curation visuelle",shot6Text:"Éléments évalués avant l’intégration finale.",
+statusKicker:"ÉTAT DU PROJET",statusTitle:"Construction ouverte, progrès vérifiable.",statusText:"Le site distingue ce qui fonctionne déjà sur le système de référence de ce qui doit encore être empaqueté, généralisé et validé pour une distribution publique.",status1Title:"Identité visuelle",status1Text:"Approuvée ; éléments finaux en consolidation",status2Title:"Mocha Gamer",status2Text:"Fonctionnel et en amélioration",status3Title:"Pile gaming",status3Text:"Fonctionnelle sur le système de référence",status4Title:"Performances et latence",status4Text:"Supériorité mesurée face à Windows",status5Title:"ISO et installateur",status5Text:"Intégration et tests",status6Title:"Documentation",status6Text:"En expansion continue",
+socialKicker:"SOCIAL / T21",socialTitle:"Aidez MochaArch à grandir et la cause sociale à continuer.",socialText1:"Le travail lié à la trisomie 21 fait déjà partie du projet. Ce n’est pas une promesse future : il a besoin de continuité, de présence et de ressources.",socialText2:"Le développement de MochaArch exige également infrastructure, tests, documentation, hébergement, équipement et temps de travail. Chaque contribution renforce les deux fronts.",dualTitle:"Une contribution, deux finalités complémentaires",dualText:"PayPal reçoit des dons destinés au développement de MochaArch ainsi qu’à la campagne et au travail social continu liés à la cause T21.",socialButton:"Soutenir le projet et la cause",socialContact:"Contacter le projet",
+reviewSummary:"Ce qui a été préservé et corrigé dans cet aperçu",review1Title:"Supériorité face à Windows préservée",review1Text:"La comparaison reste un résultat prouvé par des tests réalisés sur le même ordinateur, avec les mêmes jeux et scénarios.",review2Title:"Rôle social préservé",review2Text:"Le travail T21 reste présenté comme réel et actuel, et non comme une promesse future.",review3Title:"PayPal a deux finalités",review3Text:"Les contributions soutiennent à la fois le développement de MochaArch et la campagne ainsi que la continuité du travail social.",review4Title:"Nom corrigé",review4Text:"MochaArch est le système ; Diesel OS Lab est l’organisation et le laboratoire responsables.",review5Title:"État technique corrigé",review5Text:"L’ISO et l’installateur ne sont pas présentés comme livrés tant que l’intégration et les tests continuent.",review6Title:"Images approuvées préservées",review6Text:"L’aperçu utilise les adresses d’images déjà adoptées par le site, sans les remplacer par des illustrations génériques.",
+contactKicker:"CONTACT",contactTitle:"Suivez, collaborez et aidez à financer la prochaine étape.",contactText:"Le contact technique, la diffusion et le soutien financier aident MochaArch à progresser et maintiennent actif le travail social de Diesel OS Lab.",footerText:"Technologie, performances et engagement social."
+},
+es:{
+previewBadge:"VISTA PREVIA LOCAL",previewText:"No publicada. El sitio oficial, el repositorio Git y Cloudflare permanecen intactos.",
+brandSub:"Organización y laboratorio responsables de MochaArch",navEdition:"Edición",navExperience:"Experiencia",navTechnology:"Tecnología",navStatus:"Estado",navSocial:"Social / T21",navContact:"Contacto",reviewButton:"Revisiones",
+heroKicker:"PLATAFORMA TECNOLÓGICA Y GAMING",heroOrg:"Presentado por Diesel OS Lab",heroLead:"Una distribución basada en Arch Linux y KDE Plasma, creada para jugar, crear, producir y trabajar con identidad propia, software seleccionado y una base técnica reproducible.",heroPrimary:"Conocer la experiencia",heroSecondary:"Ver los visuales del proyecto",
+proofTitle:"Superioridad comprobada en el hardware de referencia",proofText:"En las pruebas comparativas realizadas en el mismo ordenador, con los mismos juegos y escenarios de referencia, MochaArch obtuvo un rendimiento muy superior a Windows, con más FPS y menor latencia.",heroMediaTitle:"Identidad MochaArch",heroMediaText:"Imágenes ya aprobadas y utilizadas por el proyecto.",
+editionKicker:"SOBRE EL SISTEMA",editionTitle:"MochaArch es el sistema. Diesel OS Lab lo desarrolla.",editionText:"Mocha Gamer es el foco actual. Creator, Escuelas y Oficinas continúan como direcciones previstas, construidas sobre la misma base técnica y documental.",
+card1Title:"Base Arch controlada",card1Text:"Rolling release con validación, documentación, repositorio Mocha controlado y fallback funcional para cambios sensibles.",card2Title:"Mocha Gamer",card2Text:"El perfil prioritario, centrado en rendimiento, baja latencia, Steam, Proton y herramientas gamer.",card3Title:"Creator, Escuelas y Oficinas",card3Text:"Direcciones previstas para creación, educación, laboratorios, productividad y uso administrativo.",card4Title:"Identidad en consolidación",card4Text:"La dirección visual aprobada se conserva mientras se consolidan los materiales finales de Calamares y la ISO.",
+experienceKicker:"LA EXPERIENCIA MOCHA",experienceTitle:"Una base segura en la instalación. Rendimiento ajustado al hardware.",experienceText:"La ISO está prevista con un kernel Arch LTS genérico. Después de la instalación, MochaArch detecta CPU y GPU y puede sugerir, con consentimiento del usuario, un stack validado de kernel, headers y controlador.",experienceItem1:"Kernel Arch LTS conservado como fallback seguro.",experienceItem2:"Detección posterior de arquitectura de CPU y GPU.",experienceItem3:"Actualización voluntaria mediante el repositorio Mocha controlado.",experienceItem4:"Sin habilitar el repositorio CachyOS en el equipo del usuario.",
+technologyKicker:"TECNOLOGÍA",technologyTitle:"Herramientas potentes, integradas con criterio.",technologyText:"El conjunto se selecciona para ofrecer rendimiento, estabilidad, productividad y diagnóstico sin contaminar la base ni ocultar lo que se ejecuta.",tech1Title:"Stack gamer seleccionado",tech1Text:"Steam, Proton, Lutris, Heroic, Bottles, GameMode, MangoHud, Vulkan y utilidades útiles.",tech2Title:"Kernel y gráficos validados",tech2Text:"Kernel LTS como fallback y actualización de rendimiento sugerida tras detectar el hardware.",tech3Title:"KDE Plasma sobre Wayland",tech3Text:"Sesión moderna, SDDM funcional e identidad visual consistente sin recurrir a X11 como fallback.",tech4Title:"Creación y productividad",tech4Text:"OnlyOffice, creación, edición, streaming, monitoreo y herramientas de laboratorio.",
+galleryKicker:"VISUALES DEL PROYECTO",galleryTitle:"Imágenes aprobadas para comunicar la identidad Mocha.",galleryText:"La galería presenta la dirección visual del proyecto sin tratar imágenes conceptuales como capturas verificadas de una ISO final.",shot1Title:"Bienvenida",shot1Text:"Identidad, escritorio y propuesta gamer.",shot2Title:"Identidad Mocha",shot2Text:"Cobre, contraste y lectura en pantallas oscuras.",shot3Title:"Escritorio KDE",shot3Text:"Plasma, Wayland y flujo de uso diario.",shot4Title:"Mocha Gamer",shot4Text:"Juegos, launchers y herramientas de diagnóstico.",shot5Title:"Causa social T21",shot5Text:"Tecnología, inclusión, presencia y continuidad.",shot6Title:"Curaduría visual",shot6Text:"Materiales evaluados antes de la integración final.",
+statusKicker:"ESTADO DEL PROYECTO",statusTitle:"Construcción abierta, progreso verificable.",statusText:"El sitio separa lo que ya funciona en el sistema de referencia de lo que aún debe empaquetarse, generalizarse y validarse para distribución pública.",status1Title:"Identidad visual",status1Text:"Aprobada; materiales finales en consolidación",status2Title:"Mocha Gamer",status2Text:"Funcional y en refinamiento",status3Title:"Stack gamer",status3Text:"Funcional en el sistema de referencia",status4Title:"Rendimiento y latencia",status4Text:"Superioridad medida frente a Windows",status5Title:"ISO e instalador",status5Text:"Integración y pruebas",status6Title:"Documentación",status6Text:"En expansión continua",
+socialKicker:"SOCIAL / T21",socialTitle:"Ayude a crecer a MochaArch y a que la causa social continúe.",socialText1:"El trabajo relacionado con la trisomía 21 ya forma parte del proyecto. No es una promesa futura: necesita continuidad, presencia y recursos.",socialText2:"El desarrollo de MochaArch también requiere infraestructura, pruebas, documentación, alojamiento, equipos y tiempo de trabajo. Cada contribución fortalece ambos frentes.",dualTitle:"Una contribución, dos finalidades complementarias",dualText:"PayPal recibe donativos para el desarrollo de MochaArch y para la campaña y el trabajo social continuo relacionados con la causa T21.",socialButton:"Apoyar el proyecto y la causa",socialContact:"Contactar con el proyecto",
+reviewSummary:"Lo que se conservó y lo que se corrigió en esta vista previa",review1Title:"Superioridad frente a Windows conservada",review1Text:"La comparación sigue siendo un resultado comprobado en pruebas realizadas en el mismo ordenador, juegos y escenarios de referencia.",review2Title:"Función social conservada",review2Text:"El trabajo T21 sigue presentado como real y actual, no como una promesa futura.",review3Title:"PayPal tiene dos finalidades",review3Text:"Las contribuciones apoyan tanto el desarrollo de MochaArch como la campaña y la continuidad del trabajo social.",review4Title:"Nombre corregido",review4Text:"MochaArch es el sistema; Diesel OS Lab es la organización y el laboratorio responsables.",review5Title:"Estado técnico corregido",review5Text:"La ISO y el instalador no se presentan como entregados mientras continúan la integración y las pruebas.",review6Title:"Imágenes aprobadas conservadas",review6Text:"La vista previa utiliza las direcciones de imágenes ya adoptadas por el sitio, sin sustituirlas por arte genérico.",
+contactKicker:"CONTACTO",contactTitle:"Siga, colabore y ayude a financiar la próxima etapa.",contactText:"El contacto técnico, la difusión y el apoyo financiero ayudan a avanzar a MochaArch y mantienen activo el trabajo social de Diesel OS Lab.",footerText:"Tecnología, rendimiento y compromiso social."
+}
+};
+const lang=document.getElementById("language");
+const saved=localStorage.getItem("mocha-preview-lang");
+if(saved&&t[saved])lang.value=saved;
+function apply(code){
+  const d=t[code]||t.en;
+  document.documentElement.lang=code==="pt"?"pt-BR":code;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(d[k])el.textContent=d[k]});
+  localStorage.setItem("mocha-preview-lang",code);
+}
+lang.addEventListener("change",e=>apply(e.target.value));apply(lang.value);
+const imgs=[...document.querySelectorAll(".hero-media img")];let i=0;
+setInterval(()=>{imgs[i].classList.remove("active");i=(i+1)%imgs.length;imgs[i].classList.add("active")},5200);
+document.getElementById("reviewButton").addEventListener("click",()=>{const r=document.getElementById("review");r.open=true;document.getElementById("revisoes").scrollIntoView({behavior:"smooth"})});
+document.querySelectorAll("img").forEach(img=>img.addEventListener("error",()=>{img.style.display="none";img.parentElement.style.background="radial-gradient(circle at 25% 20%,#b1582d55,transparent 30%),linear-gradient(135deg,#2d1a10,#0c0806)"}));
+</script>
+</body>
+</html>
