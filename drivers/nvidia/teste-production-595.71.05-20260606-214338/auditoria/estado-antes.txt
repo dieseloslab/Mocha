@@ -1,0 +1,70 @@
+Data: 2026-06-06T21:43:44-03:00
+
+Kernel:
+Linux Mocha 7.0.11-1-cachyos #1 SMP PREEMPT_DYNAMIC Wed, 03 Jun 2026 22:05:15 +0000 x86_64 GNU/Linux
+
+GPU:
+01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GB206 [GeForce RTX 5060 Ti] [10de:2d04] (rev a1)
+	Subsystem: Micro-Star International Co., Ltd. [MSI] Device [1462:5351]
+	Kernel driver in use: nvidia
+	Kernel modules: nouveau, nvidia_drm, nvidia
+01:00.1 Audio device [0403]: NVIDIA Corporation GB206 High Definition Audio Controller [10de:22eb] (rev a1)
+
+Pacotes NVIDIA:
+lib32-nvidia-utils 610.43.02-1
+libxnvctrl 610.43.02-1
+linux-cachyos-nvidia-open 7.0.11-1
+linux-firmware-nvidia 20260519-1
+nvidia-open 610.43.02-2
+nvidia-settings 610.43.02-1
+nvidia-utils 610.43.02-3
+opencl-nvidia 610.43.02-3
+
+DKMS:
+broadcom-wl/6.30.223.271, 7.0.11-1-cachyos, x86_64: installed
+broadcom-wl/6.30.223.271, 7.0.11-arch1-1, x86_64: installed
+
+Módulo carregado:
+NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  610.43.02  Release Build  (notroot@)  Wed Jun  3 22:21:41 UTC 2026
+GCC version:  Selected multilib: .;@m64
+
+NVIDIA-SMI:
+Sat Jun  6 21:43:45 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5060 Ti     Off |   00000000:01:00.0  On |                  N/A |
+|  0%   37C    P8             12W /  180W |     834MiB /  16311MiB |      2%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A             959      G   /usr/bin/ksecretd                         2MiB |
+|    0   N/A  N/A            1026      G   /usr/bin/kwin_wayland                    26MiB |
+|    0   N/A  N/A            1112      G   /usr/bin/Xwayland                         3MiB |
+|    0   N/A  N/A            1149      G   /usr/bin/ksmserver                        2MiB |
+|    0   N/A  N/A            1151      G   /usr/bin/kded6                            2MiB |
+|    0   N/A  N/A            1188      G   /usr/bin/plasmashell                     67MiB |
+|    0   N/A  N/A            1232      G   /usr/bin/kaccess                          2MiB |
+|    0   N/A  N/A            1233      G   ...it-kde-authentication-agent-1          2MiB |
+|    0   N/A  N/A            1371      G   /usr/bin/kdeconnectd                      2MiB |
+|    0   N/A  N/A            1496      G   /usr/lib/xdg-desktop-portal-kde           2MiB |
+|    0   N/A  N/A            4339      G   /usr/bin/kwalletd6                        2MiB |
+|    0   N/A  N/A           11728      G   /opt/vivaldi/vivaldi-bin                  2MiB |
+|    0   N/A  N/A           11780    C+G   ...rack-uuid=3190708988185955192        191MiB |
+|    0   N/A  N/A           11899      G   ...asma-browser-integration-host          2MiB |
+|    0   N/A  N/A           19811      G   /usr/lib/baloorunner                      2MiB |
+|    0   N/A  N/A           30188      G   dolphin                                   2MiB |
+|    0   N/A  N/A           51147      G   /usr/bin/dolphin                          2MiB |
+|    0   N/A  N/A           51175      G   /usr/lib/firefox/firefox                194MiB |
+|    0   N/A  N/A           51666      G   ...asma-browser-integration-host          2MiB |
+|    0   N/A  N/A           56396      G   /usr/bin/konsole                          2MiB |
++-----------------------------------------------------------------------------------------+

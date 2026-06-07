@@ -1,0 +1,21 @@
+PRÉVIA LOCAL — MOCHAARCH / DIESEL OS LAB
+
+Objetivo:
+- avaliar textos, chamadas de arrecadação, estrutura e idiomas;
+- preservar a superioridade comprovada frente ao Windows nos testes realizados;
+- preservar a atuação social T21 como trabalho atual;
+- identificar o PayPal como apoio ao projeto e à causa social;
+- usar as imagens já aprovadas e publicadas no site.
+
+Esta pasta não é o pacote final do Cloudflare.
+Nenhum arquivo oficial foi alterado.
+
+Destino canônico sugerido no computador:
+  /media/mochafast/MochaArch/site/previews/arrecadacao-superioridade-v3-20260606/
+
+Página para abrir:
+  file:///media/mochafast/MochaArch/site/previews/arrecadacao-superioridade-v3-20260606/index.html
+
+Observação:
+As imagens são carregadas do site dieseloslab.org para preservar os visuais já aprovados.
+É necessário estar conectado à internet durante a avaliação.

@@ -1,0 +1,20 @@
+Data: 2026-06-06 22:05:41 -03
+Kernel ativo: 7.0.11-1-cachyos
+
+Pacotes anteriores:
+nvidia-utils 610.43.02-2
+lib32-nvidia-utils 610.43.02-1
+nvidia-open-dkms 610.43.02-2
+opencl-nvidia 610.43.02-2
+nvidia-settings 610.43.02-1
+libxnvctrl 610.43.02-1
+
+DKMS anterior:
+broadcom-wl/6.30.223.271, 7.0.11-1-cachyos, x86_64: installed
+broadcom-wl/6.30.223.271, 7.0.11-arch1-1, x86_64: installed
+nvidia/610.43.02, 7.0.11-1-cachyos, x86_64: installed
+nvidia/610.43.02, 7.0.11-arch1-1, x86_64: installed
+
+Driver carregado antes da troca:
+NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  610.43.02  Release Build  (notroot@)  Wed Jun  3 22:21:41 UTC 2026
+GCC version:  Selected multilib: .;@m64
