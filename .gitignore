@@ -106,3 +106,5 @@ calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
 /auditorias/candidatos-wallpaper-*.txt
 /auditorias/wallpaper-candidatos-*.txt
 /auditorias/mocha-pacnew-*.txt
+/auditorias/backup-*
+/auditorias/mocha-wallpaper-canonico-bloco-*.md
