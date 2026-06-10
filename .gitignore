@@ -94,3 +94,15 @@ calamares/identidade/analises-visuais/migracao-area-de-trabalho-*/
 calamares/identidade/analises-visuais/arquivados/
 calamares/identidade/analises-visuais/ULTIMA-ANALISE-VISUAL.txt
 calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
+# MochaArch — artefatos brutos locais de auditoria
+/auditorias/mocha-*.log
+/auditorias/mocha-*.tsv
+/auditorias/mocha-*.lst
+/auditorias/mocha-*.sha256
+/auditorias/backup-*/
+/auditorias/tmp-*/
+/auditorias/gate-pre-iso-curadoria-git-*/
+/auditorias/RETOMADA-*.txt
+/auditorias/candidatos-wallpaper-*.txt
+/auditorias/wallpaper-candidatos-*.txt
+/auditorias/mocha-pacnew-*.txt
