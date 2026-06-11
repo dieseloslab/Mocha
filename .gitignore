@@ -108,3 +108,7 @@ calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
 /auditorias/mocha-pacnew-*.txt
 /auditorias/backup-*
 /auditorias/mocha-wallpaper-canonico-bloco-*.md
+# MochaArch — artefatos gerados de curadoria/visualização da identidade Calamares
+/calamares/identidade/artefatos-curadoria-arquivados-*/
+/calamares/identidade/visualizacao-branding-aplicado-calamares-*/
+/auditorias/.mocha-*.lock
