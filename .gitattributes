@@ -51,3 +51,6 @@ scripts/** linguist-detectable
 calamares/** linguist-detectable
 # END MOCHA LINGUIST POLICY
 /calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.png -filter -diff -merge -text
+/calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.jpg -filter -diff -merge -text
+/calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.jpeg -filter -diff -merge -text
+/calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.webp -filter -diff -merge -text
