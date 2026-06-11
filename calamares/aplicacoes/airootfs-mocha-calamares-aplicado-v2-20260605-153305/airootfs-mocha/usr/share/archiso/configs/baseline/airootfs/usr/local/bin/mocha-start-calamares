@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+sleep 2
+command -v calamares >/dev/null 2>&1 || exit 0
+exec sudo -E calamares

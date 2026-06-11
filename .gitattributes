@@ -54,3 +54,7 @@ calamares/** linguist-detectable
 /calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.jpg -filter -diff -merge -text
 /calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.jpeg -filter -diff -merge -text
 /calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.webp -filter -diff -merge -text
+calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/usr/share/wallpapers/mocha/contents/images/3840x2160.png -filter -diff -merge
+calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/usr/share/sddm/themes/mocha/mocha-background.png -filter -diff -merge
+calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/var/lib/AccountsService/icons/mocha -filter -diff -merge
+calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/etc/skel/.face.icon -filter -diff -merge
