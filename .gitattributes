@@ -50,3 +50,4 @@ ativo/** linguist-documentation
 scripts/** linguist-detectable
 calamares/** linguist-detectable
 # END MOCHA LINGUIST POLICY
+/calamares/mocha-calamares/usr/share/calamares/branding/mocha/*.png -filter -diff -merge -text
