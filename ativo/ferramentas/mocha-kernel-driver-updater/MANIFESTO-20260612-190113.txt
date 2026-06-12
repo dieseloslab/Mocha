@@ -1,0 +1,35 @@
+MochaArch — programa localizado pelo atalho funcional
+Data: 2026-06-12 19:01:19 -03
+
+Atalho escolhido:
+/usr/share/applications/mocha-firstboot-stack.desktop
+
+Name:
+Mocha Stack Optimizer
+
+Exec original:
+/usr/bin/mocha-firstboot-stack
+
+Binário original resolvido:
+/usr/bin/mocha-firstboot-stack
+
+Destino:
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater
+
+Cargo root:
+não encontrado
+
+Arquivos copiados:
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/MANIFESTO-20260612-190113.txt
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/desktop/mocha-firstboot-stack.desktop
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/desktop/original-mocha-firstboot-stack.desktop
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/icon/mocha-firstboot-stack.svg
+
+SHA256 principais:
+aa82172b0a7c91add2cc45c7127e26e136cbae401703ba6d3da385f506c088f1  /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack
+feb31d1838d50b12fa687a640954421d36122486aeb1c066a7b6d6ab8fcf871c  /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/desktop/mocha-firstboot-stack.desktop
+124e6a748ab85bb1caecc35c84c834e1bbe87a849b31c39ed9578f3d362e90b3  /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/icon/mocha-firstboot-stack.svg
+
+file do binário:
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=e92b805f902fac072686e2bb96e889100763a28a, stripped

@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=Mocha Stack Optimizer
+Name[pt_BR]=Otimizador de Stack Mocha
+GenericName=Mocha Hardware Stack Tool
+GenericName[pt_BR]=Ferramenta de Stack de Hardware Mocha
+Comment=Atualiza o sistema e instala kernel CachyOS com driver de vídeo casado, sem manter canal CachyOS
+Comment[pt_BR]=Atualiza o sistema e instala kernel CachyOS com driver de vídeo casado, sem manter canal CachyOS
+Exec=/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack
+Icon=/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/icon/mocha-firstboot-stack.svg
+Terminal=false
+StartupNotify=true
+Categories=Utility;System;Settings;
+Keywords=Mocha;Kernel;CachyOS;NVIDIA;Driver;Hardware;Ferramentas;Sistema;
+X-KDE-SubstituteUID=false
