@@ -1,0 +1,2 @@
+[2026-06-10T22:30:49-0300] [PACMAN] Running 'pacman -Syy --config /media/mochafast/MochaArch/calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/releng/pacman.conf --dbpath /media/mochafast/MochaArch/auditorias/pacman-test-db-calamares-20260610-222821 --cachedir /media/mochafast/MochaArch/auditorias/pacman-test-cache-calamares-20260610-222821 --logfile /media/mochafast/MochaArch/auditorias/pacman-test-calamares-20260610-222821.log --noconfirm'
+[2026-06-10T22:30:49-0300] [PACMAN] synchronizing package lists
