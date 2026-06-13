@@ -112,11 +112,13 @@ calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
 /calamares/identidade/artefatos-curadoria-arquivados-*/
 /calamares/identidade/visualizacao-branding-aplicado-calamares-*/
 /auditorias/.mocha-*.lock
-/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
-# MochaArch: manual canônico privado fica em /media/mochafast/MochaArch-Interno/
-**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+# MochaArch: o público versiona apenas o symlink do manual; cópias reais/backups ficam fora.
+ativo/**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak*
+ativo/**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.mocha-bak*
+ativo/documentacao/*MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md*
 manual/
 docs-internos/
 *interno*manual*.md
 *privado*manual*.md
+# MochaArch: manual público é apenas symlink; conteúdo real fica no interno local.
+ativo/backups/**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md*
