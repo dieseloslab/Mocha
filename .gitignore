@@ -114,3 +114,9 @@ calamares/identidade/analises-visuais/ANALISE-VISUAL-CANONICA.txt
 /auditorias/.mocha-*.lock
 /ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
 MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+# MochaArch: manual canônico privado fica em /media/mochafast/MochaArch-Interno/
+**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+manual/
+docs-internos/
+*interno*manual*.md
+*privado*manual*.md
