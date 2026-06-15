@@ -2,7 +2,7 @@
 Type=Application
 Name=Mocha Stack Optimizer
 GenericName=Mocha Kernel and Driver Optimizer
-Comment=Detecta arquitetura, busca kernel CachyOS mais novo e casa NVIDIA
+Comment=Mostra kernel/driver atual e disponível, detecta arquitetura e casa NVIDIA
 Exec=konsole --hold -e /usr/local/bin/mocha-firstboot-stack
 Icon=preferences-system-performance
 Terminal=false

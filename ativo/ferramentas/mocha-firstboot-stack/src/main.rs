@@ -27,6 +27,10 @@ impl PackageTarget {
     fn spec(&self) -> String {
         format!("{}/{}", self.repo, self.pkg)
     }
+
+    fn display(&self) -> String {
+        format!("{} {} [{}]", self.spec(), self.version, self.arch)
+    }
 }
 
 struct Logger {
@@ -75,6 +79,50 @@ impl Logger {
         let _ = write!(self.file, "{}", s);
         let _ = self.file.flush();
     }
+}
+
+fn command_output(program: &str, args: &[&str]) -> Option<String> {
+    let output = Command::new(program)
+        .env("LC_ALL", "C")
+        .env("LANG", "C")
+        .args(args)
+        .output()
+        .ok()?;
+
+    if !output.status.success() {
+        return None;
+    }
+
+    Some(String::from_utf8_lossy(&output.stdout).trim().to_string())
+}
+
+fn local_pkg_version(pkg: &str) -> Option<String> {
+    let out = command_output("pacman", &["-Q", pkg])?;
+    let mut parts = out.split_whitespace();
+    let _name = parts.next()?;
+    let version = parts.next()?;
+    Some(version.to_string())
+}
+
+fn current_kernel_runtime() -> String {
+    command_output("uname", &["-r"]).unwrap_or_else(|| "indisponível".to_string())
+}
+
+fn current_pkg_line(pkg: &str) -> String {
+    match local_pkg_version(pkg) {
+        Some(v) => format!("{} {}", pkg, v),
+        None => format!("{} não instalado", pkg),
+    }
+}
+
+fn first_installed_pkg(pkgs: &[&str]) -> String {
+    for pkg in pkgs {
+        if let Some(v) = local_pkg_version(pkg) {
+            return format!("{} {}", pkg, v);
+        }
+    }
+
+    "não instalado".to_string()
 }
 
 fn run_capture(log: &mut Logger, program: &str, args: &[String]) -> Result<String, String> {
@@ -153,7 +201,7 @@ fn yes_no(question: &str, default_yes: bool) -> bool {
     matches!(a.as_str(), "s" | "sim" | "y" | "yes")
 }
 
-fn detect_cpu_profile(log: &mut Logger) -> Result<CpuProfile, String> {
+fn detect_cpu_profile(log: &mut Logger) -> CpuProfile {
     let help = run_capture(log, "/lib/ld-linux-x86-64.so.2", &[String::from("--help")])
         .unwrap_or_default();
 
@@ -166,7 +214,7 @@ fn detect_cpu_profile(log: &mut Logger) -> Result<CpuProfile, String> {
         .any(|l| l.contains("x86-64-v3") && l.contains("supported"));
 
     if has_v4 {
-        Ok(CpuProfile {
+        CpuProfile {
             label: "x86_64_v4".to_string(),
             arch_line: "Architecture = x86_64 x86_64_v4".to_string(),
             mirror_arch: "x86_64_v4".to_string(),
@@ -175,9 +223,9 @@ fn detect_cpu_profile(log: &mut Logger) -> Result<CpuProfile, String> {
                 "cachyos-core-v4".to_string(),
                 "cachyos-extra-v4".to_string(),
             ],
-        })
+        }
     } else if has_v3 {
-        Ok(CpuProfile {
+        CpuProfile {
             label: "x86_64_v3".to_string(),
             arch_line: "Architecture = x86_64 x86_64_v3".to_string(),
             mirror_arch: "x86_64_v3".to_string(),
@@ -186,14 +234,14 @@ fn detect_cpu_profile(log: &mut Logger) -> Result<CpuProfile, String> {
                 "cachyos-core-v3".to_string(),
                 "cachyos-extra-v3".to_string(),
             ],
-        })
+        }
     } else {
-        Ok(CpuProfile {
+        CpuProfile {
             label: "x86_64".to_string(),
             arch_line: "Architecture = x86_64".to_string(),
             mirror_arch: "x86_64".to_string(),
             optimized_repos: Vec::new(),
-        })
+        }
     }
 }
 
@@ -504,6 +552,100 @@ fn build_plan(
     Ok(targets)
 }
 
+fn find_target<'a>(targets: &'a [PackageTarget], pkg: &str) -> Option<&'a PackageTarget> {
+    targets.iter().find(|t| t.pkg == pkg)
+}
+
+fn available_line(targets: &[PackageTarget], pkg: &str) -> String {
+    match find_target(targets, pkg) {
+        Some(t) => t.display(),
+        None => format!("{} indisponível", pkg),
+    }
+}
+
+fn available_video_module_line(targets: &[PackageTarget]) -> String {
+    find_target(targets, "linux-cachyos-nvidia-open")
+        .or_else(|| find_target(targets, "linux-cachyos-nvidia"))
+        .map(|t| t.display())
+        .unwrap_or_else(|| "módulo NVIDIA indisponível".to_string())
+}
+
+fn show_current_vs_available(
+    log: &mut Logger,
+    profile: &CpuProfile,
+    targets: &[PackageTarget],
+    nvidia: bool,
+) {
+    log.line("");
+    log.line("============================================================");
+    log.line(" Stack atual vs disponível");
+    log.line("============================================================");
+    log.line(format!("Arquitetura detectada: {}", profile.label));
+    log.line("");
+
+    log.line("Kernel:");
+    log.line(format!(" - Em uso agora: {}", current_kernel_runtime()));
+    log.line(format!(
+        " - Pacote atual: {}",
+        current_pkg_line("linux-cachyos")
+    ));
+    log.line(format!(
+        " - Novo disponível: {}",
+        available_line(targets, "linux-cachyos")
+    ));
+    log.line(format!(
+        " - Headers atuais: {}",
+        current_pkg_line("linux-cachyos-headers")
+    ));
+    log.line(format!(
+        " - Headers disponíveis: {}",
+        available_line(targets, "linux-cachyos-headers")
+    ));
+
+    log.line("");
+    if nvidia {
+        log.line("Driver de vídeo NVIDIA:");
+        log.line(format!(
+            " - Módulo atual do kernel: {}",
+            first_installed_pkg(&["linux-cachyos-nvidia-open", "linux-cachyos-nvidia"])
+        ));
+        log.line(format!(
+            " - Módulo disponível do kernel: {}",
+            available_video_module_line(targets)
+        ));
+        log.line(format!(
+            " - nvidia-utils atual: {}",
+            current_pkg_line("nvidia-utils")
+        ));
+        log.line(format!(
+            " - nvidia-utils disponível: {}",
+            available_line(targets, "nvidia-utils")
+        ));
+        log.line(format!(
+            " - lib32-nvidia-utils atual: {}",
+            current_pkg_line("lib32-nvidia-utils")
+        ));
+        log.line(format!(
+            " - lib32-nvidia-utils disponível: {}",
+            available_line(targets, "lib32-nvidia-utils")
+        ));
+        log.line(format!(
+            " - opencl-nvidia atual: {}",
+            current_pkg_line("opencl-nvidia")
+        ));
+        log.line(format!(
+            " - opencl-nvidia disponível: {}",
+            available_line(targets, "opencl-nvidia")
+        ));
+    } else {
+        log.line("Driver de vídeo:");
+        log.line(" - NVIDIA não detectada; stack NVIDIA não será instalado.");
+    }
+
+    log.line("============================================================");
+    log.line("");
+}
+
 fn grub_default_entry_from_cfg(cfg: &str) -> Option<String> {
     let mut submenu = String::new();
 
@@ -566,6 +708,11 @@ fn usage() {
     println!("  mocha-firstboot-stack");
     println!("  mocha-firstboot-stack --yes");
     println!("  mocha-firstboot-stack --yes --reinstall");
+    println!();
+    println!("Antes de instalar, mostra:");
+    println!("  - kernel em uso e pacote linux-cachyos atual");
+    println!("  - kernel CachyOS novo disponível para a arquitetura detectada");
+    println!("  - driver NVIDIA atual e driver disponível correspondente");
     println!();
     println!("Sem --yes, pede confirmação antes de aplicar.");
     println!("Com --reinstall, reinstala o stack mesmo quando já estiver atualizado.");
@@ -647,7 +794,7 @@ fn real_main(log: &mut Logger, assume_yes: bool, reinstall: &mut bool) -> Result
     )?;
 
     progress(log, 30, "Detectando arquitetura do processador");
-    let profile = detect_cpu_profile(log)?;
+    let profile = detect_cpu_profile(log);
     log.line(format!("Arquitetura escolhida: {}", profile.label));
 
     progress(
@@ -709,14 +856,11 @@ fn real_main(log: &mut Logger, assume_yes: bool, reinstall: &mut bool) -> Result
 
     let targets = build_plan(log, &conf, &profile, nvidia)?;
 
+    show_current_vs_available(log, &profile, &targets, nvidia);
+
     log.line("Plano de instalação:");
     for t in &targets {
-        log.line(format!(
-            " - {}  versão={}  arch={}",
-            t.spec(),
-            t.version,
-            t.arch
-        ));
+        log.line(format!(" - {}", t.display()));
     }
 
     if !assume_yes {
@@ -796,6 +940,7 @@ fn real_main(log: &mut Logger, assume_yes: bool, reinstall: &mut bool) -> Result
     for pkg in [
         "linux-cachyos",
         "linux-cachyos-headers",
+        "linux-cachyos-nvidia-open",
         "nvidia-utils",
         "lib32-nvidia-utils",
         "opencl-nvidia",
