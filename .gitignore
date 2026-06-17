@@ -122,3 +122,6 @@ docs-internos/
 *privado*manual*.md
 # MochaArch: manual público é apenas symlink; conteúdo real fica no interno local.
 ativo/backups/**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md*
+# Rust/build artifacts — não versionar
+**/target/
+target/
