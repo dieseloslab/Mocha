@@ -1,0 +1,1 @@
+/media/vmstore/mocha-repo/docs/MANUAL-REPOSITORIO-ARQUIVO-MOCHA.md
