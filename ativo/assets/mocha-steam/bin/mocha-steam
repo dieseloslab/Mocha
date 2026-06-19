@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# MochaArch — lançador Steam com ambiente Mocha
+
+set -Ee
+
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/mocha"
+mkdir -p "$LOG_DIR" 2>/dev/null || true
+LOG="$LOG_DIR/mocha-steam.log"
+
+log() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG" 2>/dev/null || true
+}
+
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+export MANGOHUD=1
+
+if [ -f "$HOME/.config/MangoHud/MangoHud.conf" ]; then
+    export MANGOHUD_CONFIGFILE="$HOME/.config/MangoHud/MangoHud.conf"
+fi
+
+mkdir -p "$HOME/.config/mocha"
+printf '%s\n' "/home/hal/.local/bin/mocha-steam-game-run %command%" > "$HOME/.config/mocha/steam-launch-option.txt"
+
+if command -v wl-copy >/dev/null 2>&1; then
+    printf '%s\n' "/home/hal/.local/bin/mocha-steam-game-run %command%" | wl-copy || true
+fi
+
+log "Steam Mocha iniciado"
+log "Launch option canônica: /home/hal/.local/bin/mocha-steam-game-run %command%"
+
+if command -v steam >/dev/null 2>&1; then
+    exec steam "$@"
+fi
+
+if [ -x /usr/bin/steam ]; then
+    exec /usr/bin/steam "$@"
+fi
+
+printf '%s\n' "ERRO: Steam não encontrada."
+exit 127

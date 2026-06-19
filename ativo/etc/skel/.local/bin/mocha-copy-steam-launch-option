@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -Ee
+
+LINE="/home/hal/.local/bin/mocha-steam-game-run %command%"
+mkdir -p "$HOME/.config/mocha"
+printf '%s\n' "$LINE" > "$HOME/.config/mocha/steam-launch-option.txt"
+
+if command -v wl-copy >/dev/null 2>&1; then
+    printf '%s\n' "$LINE" | wl-copy
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send "Mocha Steam" "Launch option copiada: $LINE" || true
+    fi
+    exit 0
+fi
+
+if command -v xclip >/dev/null 2>&1; then
+    printf '%s\n' "$LINE" | xclip -selection clipboard
+    exit 0
+fi
+
+printf '%s\n' "$LINE"
+exit 0
