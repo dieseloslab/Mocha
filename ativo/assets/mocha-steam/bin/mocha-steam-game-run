@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# MochaArch — wrapper Steam canônico
+# Launch option por jogo:
+# /home/hal/.local/bin/mocha-steam-game-run %command%
+
+set -Ee
+
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/mocha"
+mkdir -p "$LOG_DIR" 2>/dev/null || true
+LOG="$LOG_DIR/mocha-steam-game-run.log"
+
+log() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG" 2>/dev/null || true
+}
+
+log "============================================================"
+log "Wrapper iniciado"
+log "SteamAppId=${SteamAppId:-${steam_appid:-indisponivel}}"
+log "STEAM_COMPAT_DATA_PATH=${STEAM_COMPAT_DATA_PATH:-indisponivel}"
+log "Comando recebido: $*"
+
+# Correção recorrente Mocha: perda de input/foco após Alt+Tab.
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+
+# MangoHud Mocha por variável. Não inserir mangohud no argv.
+export MANGOHUD=1
+
+if [ -f "$HOME/.config/MangoHud/MangoHud.conf" ]; then
+    export MANGOHUD_CONFIGFILE="$HOME/.config/MangoHud/MangoHud.conf"
+fi
+
+# Wrapper limpo: sem vkBasalt/gamescope/MANGOHUD_DLSYM aqui.
+unset ENABLE_VKBASALT 2>/dev/null || true
+unset MANGOHUD_DLSYM 2>/dev/null || true
+
+patch_prefix() {
+    local compat pfx reg tmp
+
+    compat="${STEAM_COMPAT_DATA_PATH:-}"
+    [ -n "$compat" ] || return 0
+
+    pfx="$compat/pfx"
+    reg="$pfx/user.reg"
+
+    [ -d "$pfx" ] || return 0
+
+    if [ ! -f "$reg" ]; then
+        : > "$reg" 2>/dev/null || return 0
+    fi
+
+    if grep -q '^"MouseWarpOverride"="force"$' "$reg" 2>/dev/null \
+       && grep -q '^"UseTakeFocus"="N"$' "$reg" 2>/dev/null \
+       && grep -q '^"GrabFullscreen"="Y"$' "$reg" 2>/dev/null; then
+        log "Prefix já corrigido"
+        return 0
+    fi
+
+    tmp="$(mktemp)"
+    awk '
+    BEGIN {
+        in_direct=0
+        in_x11=0
+    }
+    /^\[/ {
+        in_direct=($0=="[Software\\\\Wine\\\\DirectInput]")
+        in_x11=($0=="[Software\\\\Wine\\\\X11 Driver]")
+    }
+    in_direct && /^"MouseWarpOverride"=/ { next }
+    in_x11 && /^"UseTakeFocus"=/ { next }
+    in_x11 && /^"GrabFullscreen"=/ { next }
+    { print }
+    ' "$reg" > "$tmp" 2>/dev/null || {
+        rm -f "$tmp"
+        return 0
+    }
+
+    {
+        printf '\n'
+        printf '[Software\\\\Wine\\\\DirectInput]\n'
+        printf '"MouseWarpOverride"="force"\n'
+        printf '\n'
+        printf '[Software\\\\Wine\\\\X11 Driver]\n'
+        printf '"UseTakeFocus"="N"\n'
+        printf '"GrabFullscreen"="Y"\n'
+    } >> "$tmp"
+
+    cp -a "$reg" "$reg.backup-mocha-input-focus-$(date '+%Y%m%d-%H%M%S')" 2>/dev/null || true
+    cat "$tmp" > "$reg" 2>/dev/null || true
+    rm -f "$tmp"
+
+    log "Prefix corrigido: $pfx"
+}
+
+patch_prefix || true
+
+if [ "$#" -eq 0 ]; then
+    log "ERRO: chamado sem %command%"
+    printf '%s\n' "ERRO: wrapper chamado sem comando."
+    printf '%s\n' "Use na launch option do jogo:"
+    printf '%s\n' "/home/hal/.local/bin/mocha-steam-game-run %command%"
+    exit 64
+fi
+
+if command -v gamemoderun >/dev/null 2>&1 && [ "${MOCHA_NO_GAMEMODE:-0}" != "1" ]; then
+    log "Executando com gamemoderun"
+    exec gamemoderun "$@"
+fi
+
+log "Executando sem gamemoderun"
+exec "$@"

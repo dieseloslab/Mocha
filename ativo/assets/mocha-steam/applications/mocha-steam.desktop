@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Application
+Name=Steam Mocha
+GenericName=Steam com perfil Mocha
+Comment=Abre a Steam com ambiente Mocha. Launch option por jogo: /home/hal/.local/bin/mocha-steam-game-run %command%
+Exec=/home/hal/.local/bin/mocha-steam
+Icon=steam
+Terminal=false
+Categories=Game;Network;
+StartupNotify=true
+Keywords=Steam;Mocha;GameMode;MangoHud;Proton;
+X-Mocha-CanonicalLaunchOption=/home/hal/.local/bin/mocha-steam-game-run %command%
+X-Mocha-Wrapper=/home/hal/.local/bin/mocha-steam-game-run
+
+Actions=CopyLaunchOption;
+
+[Desktop Action CopyLaunchOption]
+Name=Copiar launch option Mocha
+Exec=/home/hal/.local/bin/mocha-copy-steam-launch-option

@@ -1,0 +1,1 @@
+/home/hal/.local/bin/mocha-steam-game-run %command%
