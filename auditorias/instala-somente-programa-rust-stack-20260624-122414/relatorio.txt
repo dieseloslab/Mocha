@@ -1,0 +1,36 @@
+
+[2026-06-24 12:24:17] [1] Validando que isto é instalação-only
+Este comando NÃO roda pacman -S, NÃO entra no CachyOS, NÃO roda mkinitcpio, NÃO roda grub-mkconfig e NÃO executa o atualizador.
+
+[2026-06-24 12:24:17] [2] Backup dos destinos atuais, se existirem
+Backup: /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue -> /media/mochafast/MochaArch/auditorias/instala-somente-programa-rust-stack-20260624-122414/backups__usr__local__lib__mocha__mocha-cachy-v3-kernel-nvidia-rescue
+
+[2026-06-24 12:24:17] [3] Instalando somente binário e symlinks
+
+[2026-06-24 12:24:17] [4] Instalando somente atalhos
+
+[2026-06-24 12:24:17] [5] Auditoria final sem tocar em kernel/driver
+
+Binários/symlinks:
+lrwxrwxrwx 1 root root   36 Jun 24 12:24 /usr/local/bin/mocha-atualizar-kernel-driver -> /usr/local/bin/mocha-firstboot-stack
+-rwxr-xr-x 1 root root 462K Jun 24 12:24 /usr/local/bin/mocha-firstboot-stack
+lrwxrwxrwx 1 root root   36 Jun 24 12:24 /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue -> /usr/local/bin/mocha-firstboot-stack
+
+Atalhos:
+-rwxr-xr-x 1 root root 356 Jun 24 12:24 /usr/share/applications/mocha-firstboot-stack.desktop
+-rwxr-xr-x 1 root root 356 Jun 24 12:24 /usr/share/applications/mocha-kernel-driver-updater.desktop
+
+Exec dos atalhos:
+/usr/share/applications/mocha-firstboot-stack.desktop:6:Exec=konsole --hold -e /usr/local/bin/mocha-firstboot-stack
+/usr/share/applications/mocha-kernel-driver-updater.desktop:6:Exec=konsole --hold -e /usr/local/bin/mocha-firstboot-stack
+
+pacman.conf Cachy ativo:
+OK: sem CachyOS ativo.
+
+Kernel rodando, apenas leitura:
+7.0.12-1-cachyos
+
+[OK] Programa instalado. Nada de kernel/driver foi reinstalado por este comando.
+
+[OK] Instalação somente do programa concluída.
+Relatório: /media/mochafast/MochaArch/auditorias/instala-somente-programa-rust-stack-20260624-122414/relatorio.txt

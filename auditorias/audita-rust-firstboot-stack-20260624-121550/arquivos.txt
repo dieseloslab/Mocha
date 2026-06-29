@@ -1,0 +1,4 @@
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/Cargo.lock
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/Cargo.toml
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/packaging/mocha-firstboot-stack.desktop
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/src/main.rs

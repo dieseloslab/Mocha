@@ -1,0 +1,97 @@
+
+============================================================
+ Mocha — aplicar cores Mocha somente na barra
+============================================================
+Usuário: hal
+Home:    /home/hal
+Tema:    MochaPanelKDEVisible
+Backup:  /media/mochafast/MochaArch/ativo/backups/antes-aplicar-cores-mocha-so-barra-20260628-173054
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-173054-aplica-cores-mocha-somente-na-barra.log
+
+
+============================================================
+ 1) Backup do estado atual
+============================================================
+[OK] backup: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+[OK] backup: /home/hal/.config/plasmarc
+[OK] backup: /home/hal/.config/kdeglobals
+
+============================================================
+ 2) Encontrar MochaDark.colors real
+============================================================
+[OK] cores Mocha encontradas: /home/hal/.local/share/color-schemes/MochaDark.colors
+
+============================================================
+ 3) Criar tema Plasma local visível com cores Mocha
+============================================================
+[OK] tema Plasma local criado a partir de: /usr/share/plasma/desktoptheme/breeze-dark
+[OK] arquivo de cores instalado em: /home/hal/.local/share/plasma/desktoptheme/MochaPanelKDEVisible/colors
+
+============================================================
+ 4) Aplicar somente o tema Plasma da barra
+============================================================
+The requested theme "MochaPanelKDEVisible" is already set as the theme for the current Plasma session.
+[OK] plasmarc aponta para MochaPanelKDEVisible
+
+============================================================
+ 5) Reiniciar somente plasmashell
+============================================================
+[OK] plasmashell rodando
+
+============================================================
+ 6) Verificação
+============================================================
+--- tema Plasma ativo ---
+1:[Theme]
+2:name=MochaPanelKDEVisible
+
+--- painel preservado ---
+25:plugin=org.kde.panel
+30:plugin=org.kde.plasma.digitalclock
+42:plugin=org.kde.plasma.kickoff
+57:plugin=org.kde.plasma.icontasks
+72:plugin=org.kde.plasma.systemtray
+
+--- colors do tema da barra ---
+-rw-r--r-- 1 hal hal 3.5K Jun 28 17:30 /home/hal/.local/share/plasma/desktoptheme/MochaPanelKDEVisible/colors
+21:[Colors:Button]
+23:BackgroundNormal=54,47,42
+24:DecorationFocus=195,128,86
+25:DecorationHover=219,154,104
+37:BackgroundNormal=35,31,28
+38:DecorationFocus=195,128,86
+39:DecorationHover=219,154,104
+51:BackgroundNormal=35,31,28
+52:DecorationFocus=195,128,86
+53:DecorationHover=219,154,104
+65:BackgroundNormal=31,27,25
+66:DecorationFocus=159,104,71
+67:DecorationHover=184,119,79
+77:[Colors:Selection]
+79:BackgroundNormal=195,128,86
+80:DecorationFocus=245,196,147
+81:DecorationHover=219,154,104
+93:BackgroundNormal=35,31,28
+94:DecorationFocus=195,128,86
+95:DecorationHover=219,154,104
+105:[Colors:View]
+107:BackgroundNormal=30,26,24
+108:DecorationFocus=195,128,86
+109:DecorationHover=219,154,104
+119:[Colors:Window]
+121:BackgroundNormal=35,31,28
+122:DecorationFocus=195,128,86
+123:DecorationHover=219,154,104
+
+--- teste anti-azul no tema Plasma local ---
+[OK] sem azul padrão no tema Plasma local
+
+============================================================
+ Resultado
+============================================================
+Barra/painel: layout preservado
+Tema da barra: MochaPanelKDEVisible
+Cores:         MochaDark
+Backup:        /media/mochafast/MochaArch/ativo/backups/antes-aplicar-cores-mocha-so-barra-20260628-173054
+Log:           /media/mochafast/MochaArch/ativo/logs/20260628-173054-aplica-cores-mocha-somente-na-barra.log
+============================================================

@@ -1,0 +1,237 @@
+
+============================================================
+ Mocha — atualizador Rust GUI Mocha + CachyOS transitório V8
+============================================================
+Base:       /media/mochafast/MochaArch
+Ativo:      /media/mochafast/MochaArch/ativo
+Rust proj:  /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-manager-rust-gui-mocha
+Helper:     /usr/local/lib/mocha/mocha-cachyos-transient-install
+Quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513
+Log:        /media/mochafast/MochaArch/ativo/logs/20260627-194513-atualizador-rust-gui-mocha-transitorio-v8.log
+
+[1] Quarentenando V7/V6/V5/V3 e atalhos ruins
+Movido para quarentena: /usr/local/bin/mocha-kernel-driver-manager -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-manager
+Movido para quarentena: /usr/local/bin/mocha-kernel-driver-updater -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-updater
+Movido para quarentena: /usr/local/bin/mocha-kernel-driver-reinstaller -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-reinstaller
+Movido para quarentena: /usr/local/bin/mocha-kernel-driver -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver
+Movido para quarentena: /usr/local/bin/mocha-kernel-driver-firstboot -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-firstboot
+Movido para quarentena: /usr/local/lib/mocha/mocha-cachyos-transient-install -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/lib/mocha/mocha-cachyos-transient-install
+Movido para quarentena: /usr/share/applications/mocha-kernel-driver-manager.desktop -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/share/applications/mocha-kernel-driver-manager.desktop
+Movido para quarentena: /etc/skel/Desktop/mocha-kernel-driver-manager.desktop -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+Movido para quarentena: /etc/xdg/autostart/mocha-kernel-driver-firstboot.desktop -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/etc/xdg/autostart/mocha-kernel-driver-firstboot.desktop
+Movido para quarentena: /home/mocha/Área de trabalho/mocha-kernel-driver-manager.desktop
+Movido para quarentena: /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager
+Movido para quarentena: /media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager -> /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager
+[OK] Versões anteriores removidas/quarentenadas.
+
+[2] Garantindo interface KDE kdialog
+[OK] kdialog disponível.
+
+[3] Criando helper transitório CachyOS
+[OK] Helper transitório instalado.
+
+[4] Criando Rust GUI V8
+[OK] Fonte Rust GUI V8 criada.
+
+[5] Compilando Rust V8
+[AVISO] cargo não existe. Instalando rust temporariamente para compilar.
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (5) compiler-rt-22.1.6-1  libgit2-1:1.9.4-1  lld-22.1.6-1  llhttp-9.3.1-1  rust-1:1.96.0-1
+
+Total Installed Size:  339.68 MiB
+
+:: Proceed with installation? [Y/n] 
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+installing compiler-rt...
+installing llhttp...
+installing libgit2...
+installing lld...
+installing rust...
+Optional dependencies for rust
+    gdb: rust-gdb script [installed]
+    lldb: rust-lldb script
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+   Compiling mocha-kernel-driver-manager v1.3.0 (/media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-manager-rust-gui-mocha)
+warning: unused import: `Stdio`
+ --> src/main.rs:6:29
+  |
+6 | use std::process::{Command, Stdio};
+  |                             ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `mocha-kernel-driver-manager` (bin "mocha-kernel-driver-manager") generated 1 warning (run `cargo fix --bin "mocha-kernel-driver-manager" -p mocha-kernel-driver-manager` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 7.42s
+[OK] Rust V8 compilado.
+
+[6] Instalando V8
+[OK] Instalado: /usr/local/bin/mocha-kernel-driver-manager
+
+[7] Recriando firstboot GUI, sem Konsole inicial
+[OK] Firstboot GUI instalado.
+
+[8] Recriando atalho desktop com interface, sem Terminal=true
+[OK] Atalho GUI recriado.
+
+[9] Regravando cópia canônica e payload Calamares
+[OK] Payload ativo V8 regravado.
+
+[10] Registrando V8 nos manuais
+[OK] Manual atualizado: /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+[OK] Manual atualizado: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+[OK] Manual atualizado: /media/vmstore/MochaArch/iso/manual/PLANO-B-MATRIZ-CALAM-LIVE-ISO.md
+
+[11] Removendo Rust temporário, se instalado só para compilar
+checking dependencies...
+:: kate optionally requires rust: Rust LSP support
+
+Packages (5) compiler-rt-22.1.6-1  libgit2-1:1.9.4-1  lld-22.1.6-1  llhttp-9.3.1-1  rust-1:1.96.0-1
+
+Total Removed Size:  339.68 MiB
+
+:: Do you want to remove these packages? [Y/n] 
+:: Processing package changes...
+removing rust...
+removing lld...
+removing libgit2...
+removing llhttp...
+removing compiler-rt...
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+
+[12] Validação final sem abrir GUI interativa
+Mocha — Kernel e Driver
+Interface Mocha/KDE com CachyOS transitório
+
+[CPU]
+Modelo: AMD Ryzen 7 5700G with Radeon Graphics
+Vendor: AuthenticAMD
+Nível x86-64: x86-64-v3
+Microcode recomendado: amd-ucode
+AVX: sim | AVX2: sim | AVX512: não | FMA: sim | AES: sim
+
+[Kernel atual]
+uname -r: 7.0.13-arch1-2
+Pacotes:
+  linux 7.0.13.arch1-2
+    linux-headers 7.0.13.arch1-2
+
+[GPU/driver atual]
+Vendor detectado: NVIDIA
+Módulo NVIDIA: não detectado
+lspci/kernel driver:
+  01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GB206 [GeForce RTX 5060 Ti] [10de:2d04] (rev a1)
+    Subsystem: Micro-Star International Co., Ltd. [MSI] Device [1462:5351]
+    Kernel modules: nouveau
+
+[Pacotes de vídeo instalados]
+  mesa 1:26.1.3-2
+    vulkan-icd-loader 1.4.350.1-1
+    vulkan-radeon 1:26.1.3-2
+    vulkan-intel 1:26.1.3-2
+    mesa 1:26.1.3-2
+    libva-intel-driver 2.4.5-1
+    nvidia-utils 610.43.02-3
+    egl-wayland 4:1.1.21-1
+    libxnvctrl 610.43.02-1
+    nvidia-settings 610.43.02-1
+    xf86-video-amdgpu 25.0.0-1
+
+[Plano sugerido pelo hardware]
+  amd-ucode
+  egl-wayland
+  lib32-mesa
+  lib32-nvidia-utils
+  lib32-vulkan-icd-loader
+  libva-utils
+  libxnvctrl
+  linux-cachyos
+  linux-cachyos-headers
+  linux-cachyos-nvidia-open
+  mesa
+  nvidia-settings
+  nvidia-utils
+  opencl-nvidia
+  vulkan-icd-loader
+  vulkan-tools
+
+[Regra de segurança]
+CachyOS será usado somente por pacman.conf temporário.
+/etc/pacman.conf não será editado.
+Não será executado pacman -Syu geral.
+
+[Disponível no CachyOS transitório]
+Consulta transitória falhou.
+
+STDOUT:
+[mocha-cachyos-transient] Canal CachyOS transitório detectado: v3
+[mocha-cachyos-transient] Sincronizando DB transitório em: /tmp/mocha-cachyos-transient.DdH2JU/db
+
+
+STDERR:
+error: you cannot perform this operation unless you are root.
+
+
+
+Binário final:
+-rwxr-xr-x 1 root root 424K Jun 27 19:45 /usr/local/bin/mocha-kernel-driver-manager
+/usr/local/bin/mocha-kernel-driver-manager: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=5dccbb50dfeec5101f7047ab9ae13c66c13ddd9b, stripped
+a7b4c30fb733e3c4a43c5edcd6ea313435c14b10852af4e0deaba52d40fdf877  /usr/local/bin/mocha-kernel-driver-manager
+
+Helper transitório:
+-rwxr-xr-x 1 root root 7.6K Jun 27 19:45 /usr/local/lib/mocha/mocha-cachyos-transient-install
+a66cd8f0e7a6e7c1fa765fe663dc25c27974f5e07e3fb41e6cad896add317515  /usr/local/lib/mocha/mocha-cachyos-transient-install
+
+Desktop entry:
+[Desktop Entry]
+Type=Application
+Name=Atualizar/Reinstalar Kernel e Driver Mocha
+Comment=Interface Mocha para instalar, reinstalar ou cancelar atualização de kernel e driver
+Exec=/usr/local/bin/mocha-kernel-driver-manager --gui
+Icon=preferences-system
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true
+
+Verificação pacman.conf:
+Hash: 8938d37ea01faafe28e01d96e9dbb5536448fcabbe5e758496d017f9031cef76
+[OK] Nenhum bloco CachyOS em /etc/pacman.conf
+
+Payload:
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/xdg/autostart/mocha-kernel-driver-firstboot.desktop
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-firstboot
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-manager
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-reinstaller
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-updater
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/lib/mocha/mocha-cachyos-transient-install
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+
+Quarentena:
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/etc/xdg/autostart/mocha-kernel-driver-firstboot.desktop
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/user-desktop/mocha-kernel-driver-manager.desktop
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-firstboot
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-manager
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-reinstaller
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/bin/mocha-kernel-driver-updater
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/local/lib/mocha/mocha-cachyos-transient-install
+/media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/share/applications/mocha-kernel-driver-manager.desktop
+
+============================================================
+[OK] V8 instalado.
+[OK] Atalho agora abre interface KDE/Mocha, não Konsole.
+[OK] Botões: Instalar, Reinstalar, Cancelar.
+[OK] CachyOS permanece transitório e não contamina pacman.conf.
+[OK] Payload ativo do Calamares regravado.
+============================================================

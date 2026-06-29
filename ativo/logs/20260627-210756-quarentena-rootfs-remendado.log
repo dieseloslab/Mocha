@@ -1,0 +1,11 @@
+
+============================================================
+ Mocha — quarentena do rootfs remendado
+============================================================
+Origem:  /media/vmstore/MochaArch/iso/build-rootfs-estado-atual-calamares-gamer-20260627-204738
+Destino: /media/vmstore/MochaArch/iso/quarentena-rootfs-remendado-20260627-210756
+Log:     /media/mochafast/MochaArch/ativo/logs/20260627-210756-quarentena-rootfs-remendado.log
+
+[OK] Rootfs remendado movido para quarentena.
+[OK] Não usar como base final.
+[OK] Log: /media/mochafast/MochaArch/ativo/logs/20260627-210756-quarentena-rootfs-remendado.log

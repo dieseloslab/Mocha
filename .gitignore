@@ -125,3 +125,16 @@ ativo/backups/**/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md*
 # Rust/build artifacts — não versionar
 **/target/
 target/
+/ativo/tmp/
+/ativo/auditorias/pre-rootfs/
+/ativo/**/tmp/
+*.iso
+*.sfs
+*.img
+*.qcow2
+*.raw
+*.vdi
+*.vmdk
+/ativo/logs/git/*-lfs-dryrun-final.txt
+/ativo/logs/git/*-lfs-dryrun-*.txt
+/ativo/logs/git/*.bundle

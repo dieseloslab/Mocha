@@ -1,0 +1,6 @@
+
+===== /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/packaging/mocha-firstboot-stack.desktop =====
+3:Name=Mocha Stack Optimizer
+4:GenericName=Mocha Kernel and Driver Optimizer
+5:Comment=Mostra kernel/driver atual e disponível, detecta arquitetura e casa NVIDIA
+6:Exec=konsole --hold -e /usr/local/bin/mocha-firstboot-stack

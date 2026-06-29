@@ -1,0 +1,173 @@
+
+============================================================
+ Mocha — corrigir helper CachyOS transitório V8.2
+============================================================
+Base:    /media/mochafast/MochaArch
+Ativo:   /media/mochafast/MochaArch/ativo
+Helper:  /usr/local/lib/mocha/mocha-cachyos-transient-install
+Log:     /media/mochafast/MochaArch/ativo/logs/20260627-195015-corrige-helper-cachyos-downloaduser-v82.log
+
+[1] Backup do helper atual
+
+[2] Aplicando patch: DownloadUser/sandbox removidos só do pacman.conf temporário
+
+[3] Instalando helper corrigido
+
+[4] Copiando helper corrigido para canônico e payload
+
+[5] Validação forte
+Mocha — Kernel e Driver
+Interface Mocha/KDE com CachyOS transitório
+
+[CPU]
+Modelo: AMD Ryzen 7 5700G with Radeon Graphics
+Vendor: AuthenticAMD
+Nível x86-64: x86-64-v3
+Microcode recomendado: amd-ucode
+AVX: sim | AVX2: sim | AVX512: não | FMA: sim | AES: sim
+
+[Kernel atual]
+uname -r: 7.0.13-arch1-2
+Pacotes:
+  linux 7.0.13.arch1-2
+    linux-headers 7.0.13.arch1-2
+
+[GPU/driver atual]
+Vendor detectado: NVIDIA
+Módulo NVIDIA: não detectado
+lspci/kernel driver:
+  01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GB206 [GeForce RTX 5060 Ti] [10de:2d04] (rev a1)
+    Subsystem: Micro-Star International Co., Ltd. [MSI] Device [1462:5351]
+    Kernel modules: nouveau
+
+[Pacotes de vídeo instalados]
+  mesa 1:26.1.3-2
+    vulkan-icd-loader 1.4.350.1-1
+    vulkan-radeon 1:26.1.3-2
+    vulkan-intel 1:26.1.3-2
+    mesa 1:26.1.3-2
+    libva-intel-driver 2.4.5-1
+    nvidia-utils 610.43.02-3
+    egl-wayland 4:1.1.21-1
+    libxnvctrl 610.43.02-1
+    nvidia-settings 610.43.02-1
+    xf86-video-amdgpu 25.0.0-1
+
+[Plano sugerido pelo hardware]
+  amd-ucode
+  egl-wayland
+  lib32-mesa
+  lib32-nvidia-utils
+  lib32-vulkan-icd-loader
+  libva-utils
+  libxnvctrl
+  linux-cachyos
+  linux-cachyos-headers
+  linux-cachyos-nvidia-open
+  mesa
+  nvidia-settings
+  nvidia-utils
+  opencl-nvidia
+  vulkan-icd-loader
+  vulkan-tools
+
+[Regra de segurança]
+CachyOS será usado somente por pacman.conf temporário.
+/etc/pacman.conf não será editado.
+Não será executado pacman -Syu geral.
+
+[Disponível no CachyOS transitório]
+[mocha-cachyos-transient] Canal CachyOS transitório detectado: v3
+[mocha-cachyos-transient] Chave CachyOS já presente.
+[mocha-cachyos-transient] Sincronizando DB transitório em: /tmp/mocha-cachyos-transient.j0xEQy/db
+:: Synchronizing package databases...
+ cachyos-v3 downloading...
+ cachyos-core-v3 downloading...
+ cachyos-extra-v3 downloading...
+ cachyos downloading...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+
+Pacotes solicitados:
+ - amd-ucode
+ - egl-wayland
+ - lib32-mesa
+ - lib32-nvidia-utils
+ - lib32-vulkan-icd-loader
+ - libva-utils
+ - libxnvctrl
+ - linux-cachyos
+ - linux-cachyos-headers
+ - linux-cachyos-nvidia-open
+ - mesa
+ - nvidia-settings
+ - nvidia-utils
+ - opencl-nvidia
+ - vulkan-icd-loader
+ - vulkan-tools
+
+Pacotes encontrados no canal transitório:
+ - amd-ucode
+ - egl-wayland
+ - lib32-mesa
+ - lib32-nvidia-utils
+ - lib32-vulkan-icd-loader
+ - libva-utils
+ - libxnvctrl
+ - linux-cachyos
+ - linux-cachyos-headers
+ - linux-cachyos-nvidia-open
+ - mesa
+ - nvidia-settings
+ - nvidia-utils
+ - opencl-nvidia
+ - vulkan-icd-loader
+ - vulkan-tools
+
+Versões disponíveis no canal transitório:
+ - amd-ucode: 20260622-1 [core]
+ - egl-wayland: 4 [extra]
+ - lib32-mesa: 1 [multilib]
+ - lib32-nvidia-utils: 610.43.02-1 [multilib]
+ - lib32-vulkan-icd-loader: 1.4.350.1-1 [multilib]
+ - libva-utils: 2.23.0-1 [extra]
+ - libxnvctrl: 610.43.02-1 [extra]
+ - linux-cachyos: 7.0.11-1 [cachyos]
+ - linux-cachyos-headers: 7.0.11-1 [cachyos]
+ - linux-cachyos-nvidia-open: 7.0.11-1 [cachyos]
+ - mesa: 1 [extra]
+ - nvidia-settings: 610.43.02-1 [extra]
+ - nvidia-utils: 610.43.02-3 [extra]
+ - opencl-nvidia: 610.43.02-3 [extra]
+ - vulkan-icd-loader: 1.4.350.1-1 [extra]
+ - vulkan-tools: 1.4.350.1-1 [extra]
+
+[OK] Consulta transitória concluída. Nada instalado.
+
+
+
+Helper corrigido:
+-rwxr-xr-x 1 root root 8.0K Jun 27 19:50 /usr/local/lib/mocha/mocha-cachyos-transient-install
+7c6e4ec19bd99516cb707613e737a417127fc1635644a0334bd41610c23e4f55  /usr/local/lib/mocha/mocha-cachyos-transient-install
+
+Verificação pacman.conf:
+Hash antes:  8938d37ea01faafe28e01d96e9dbb5536448fcabbe5e758496d017f9031cef76
+Hash depois: 8938d37ea01faafe28e01d96e9dbb5536448fcabbe5e758496d017f9031cef76
+[OK] Nenhum bloco CachyOS em /etc/pacman.conf
+
+Verificação de patch no helper:
+40:  sudo rm -rf "$WORK" >/dev/null 2>&1 || rm -rf "$WORK" >/dev/null 2>&1 || true
+104:        print "# Mocha transient only: avoid pacman 7 DownloadUser/alpm permission issues in temporary DB/cache."
+105:        print "DisableSandbox"
+116:    in_options && /^[[:space:]]*#?[[:space:]]*DownloadUser[[:space:]]*=/ {
+120:    in_options && /^[[:space:]]*#?[[:space:]]*DisableSandbox([[:space:]]|$)/ {
+124:    in_options && /^[[:space:]]*#?[[:space:]]*DisableSandboxFilesystem([[:space:]]|$)/ {
+128:    in_options && /^[[:space:]]*#?[[:space:]]*DisableSandboxSyscalls([[:space:]]|$)/ {
+
+============================================================
+[OK] V8.2 aplicado.
+[OK] Consulta CachyOS transitória corrigida.
+[OK] /etc/pacman.conf segue limpo.
+[OK] Helper corrigido foi copiado para payload e canônico.
+============================================================

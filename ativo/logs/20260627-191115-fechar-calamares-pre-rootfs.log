@@ -1,0 +1,17 @@
+
+============================================================
+ Mocha — fechar Calamares antes do rootfs
+============================================================
+Base: /media/mochafast/MochaArch
+Log:  /media/mochafast/MochaArch/ativo/logs/20260627-191115-fechar-calamares-pre-rootfs.log
+
+[1] Validando fontes canônicas
+[OK] Fontes canônicas existem
+
+[2] Instalando Calamares se não existir no PATH
+:: Synchronizing package databases...
+ core downloading...
+ extra downloading...
+ multilib downloading...
+error: target not found: calamares
+warning: 'calamares' is a file, did you mean -U/--upgrade instead of -S/--sync?

@@ -1,0 +1,102 @@
+
+============================================================
+ Mocha — forçar cores reais KDE/Plasma/SDDM
+============================================================
+Base:    /media/mochafast/MochaArch
+Usuário: hal
+Home:    /home/hal
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-171450-forca-cores-reais-kde-sddm.log
+
+[ESCOPO] Não altera formato, widgets, posição ou altura da barra.
+[ESCOPO] Corrige cor KDE, Plasma theme, payload e SDDM quando encontrado.
+
+
+============================================================
+ 1) Localizar fontes Mocha reais
+============================================================
+[OK] Cores fonte: /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+[OK] Tema fonte:  /media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
+
+============================================================
+ 2) Backup antes da correção
+============================================================
+[OK] backup: /home/hal/.config/kdeglobals
+[OK] backup: /home/hal/.config/plasmarc
+[OK] backup: /home/hal/.config/kwinrc
+[AVISO] ausente: /home/hal/.config/kscreenlockerrc
+[OK] backup: /etc/sddm.conf
+[OK] backup: /etc/sddm.conf.d
+[OK] Backup: /media/mochafast/MochaArch/ativo/backups/forca-cores-reais-antes-20260628-171450
+
+============================================================
+ 3) Recriar MochaDark.colors com paleta Mocha efetiva
+============================================================
+[OK] MochaDark reconstruído e instalado
+
+============================================================
+ 4) Reinstalar tema Plasma e embutir colors dentro dele
+============================================================
+[OK] Tema Plasma reinstalado com arquivo colors embutido
+
+============================================================
+ 5) Forçar KDE/Plasma sem alterar layout da barra
+============================================================
+The requested theme "MochaDark" is already set as the theme for the current Plasma session.
+The requested theme "MochaPanelSolidCanonico" is already set as the theme for the current Plasma session.
+[OK] KDE/Plasma apontado para Mocha
+
+============================================================
+ 6) SDDM: aplicar tema Mocha se existir
+============================================================
+[OK] SDDM apontado para tema: mocha
+
+============================================================
+ 7) Limpar caches e reiniciar shell visual
+============================================================
+[OK] plasmashell reiniciado
+
+============================================================
+ 8) Verificação final objetiva
+============================================================
+
+--- kdeglobals ---
+136:AccentColor=195,128,86
+137:ColorScheme=MochaDark
+138:ColorSchemeHash=9d38eb71ded8ff549da26d57d7cbab9164da243a
+140:accentColorFromWallpaper=false
+149:widgetStyle=Breeze
+
+--- plasmarc ---
+1:[Theme]
+2:name=MochaPanelSolidCanonico
+
+--- MochaDark instalado ---
+-rw-r--r-- 1 root root 3.5K Jun 28 17:14 /etc/skel/.local/share/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  3.5K Jun 28 17:14 /home/hal/.local/share/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  3.5K Jun 28 17:14 /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  3.5K Jun 28 17:14 /media/mochafast/MochaArch/ativo/kde/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  3.5K Jun 28 17:14 /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+-rw-r--r-- 1 root root 3.5K Jun 28 17:14 /usr/share/color-schemes/MochaDark.colors
+
+--- tema Plasma instalado ---
+1.5M	/media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
+1.5M	/media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico
+1.5M	/usr/share/plasma/desktoptheme/MochaPanelSolidCanonico
+1.5M	/home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
+1.5M	/etc/skel/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
+
+--- checagem anti-azul no MochaDark ---
+[OK] Nenhum azul padrão encontrado nos arquivos MochaDark aplicados.
+
+============================================================
+ Resultado
+============================================================
+Cores aplicadas: MochaDark
+Plasma theme:    MochaPanelSolidCanonico
+AccentColor:     195,128,86 / #c38056
+Backup:          /media/mochafast/MochaArch/ativo/backups/forca-cores-reais-antes-20260628-171450
+Log:             /media/mochafast/MochaArch/ativo/logs/20260628-171450-forca-cores-reais-kde-sddm.log
+
+IMPORTANTE: este script NÃO escreveu em plasma-org.kde.plasma.desktop-appletsrc.
+Se algum item ainda ficar azul, o azul está vindo de um SVG/QML específico do tema, não das chaves KDE.
+============================================================

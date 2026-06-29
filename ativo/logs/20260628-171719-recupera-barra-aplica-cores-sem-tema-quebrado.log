@@ -1,0 +1,30 @@
+
+============================================================
+ Mocha — recuperar barra e aplicar cores sem tema quebrado
+============================================================
+Base:    /media/mochafast/MochaArch
+Usuário: hal
+Home:    /home/hal
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-171719-recupera-barra-aplica-cores-sem-tema-quebrado.log
+
+[ESCOPO] Prioridade 1: recuperar barra/painel.
+[ESCOPO] Prioridade 2: aplicar cores MochaDark.
+[ESCOPO] Não usa MochaPanelSolidCanonico se ele estiver quebrando/invisibilizando o painel.
+
+
+============================================================
+ 1) Backup do estado quebrado
+============================================================
+[OK] backup: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+[OK] backup: /home/hal/.config/kdeglobals
+[OK] backup: /home/hal/.config/plasmarc
+[OK] Backup do estado atual: /media/mochafast/MochaArch/ativo/backups/estado-quebrado-barra-cores-20260628-171719
+
+============================================================
+ 2) Parar plasmashell para recuperar configuração
+============================================================
+[OK] plasmashell parado
+
+============================================================
+ 3) Procurar backup válido da barra/painel
+============================================================

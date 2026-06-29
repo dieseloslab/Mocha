@@ -1,0 +1,24 @@
+
+============================================================
+ Mocha — registrar correção canônica da barra azul no manual
+============================================================
+Manual: /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Backup: /media/mochafast/MochaArch/ativo/backups/manual-vivo-cor-barra-wallpaper-sudo-tee-20260628-174040
+Temp:   /tmp/mocha-secao-cor-barra-wallpaper-20260628-174040.md
+Log:    /media/mochafast/MochaArch/ativo/logs/20260628-174040-append-manual-cor-barra-wallpaper-sudo-tee.log
+
+[OK] backup criado com sudo
+[OK] seção acrescentada ao manual via sudo tee
+
+============================================================
+ Verificação
+============================================================
+9382:## CORREÇÃO CANÔNICA — KDE/PLASMA COM CORES MOCHA OK, MAS BARRA DE TAREFAS AINDA AZUL
+
+============================================================
+ Resultado
+============================================================
+Manual atualizado: /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Backup:            /media/mochafast/MochaArch/ativo/backups/manual-vivo-cor-barra-wallpaper-sudo-tee-20260628-174040
+Log:               /media/mochafast/MochaArch/ativo/logs/20260628-174040-append-manual-cor-barra-wallpaper-sudo-tee.log
+============================================================

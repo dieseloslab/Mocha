@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Atualizar Kernel e Driver Mocha
+GenericName=Mocha Kernel and Driver Optimizer
+Comment=Atualiza kernel CachyOS v3 e NVIDIA Open pareado
+Exec=konsole --hold -e /usr/local/bin/mocha-atualizar-kernel-driver --yes --reinstall
+Icon=system-software-update
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true

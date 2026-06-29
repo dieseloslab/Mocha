@@ -1,0 +1,90 @@
+
+============================================================
+ Mocha — corrigir wrapper MangoHud para caminho visível
+============================================================
+Usuário: mocha
+HOME:    /home/mocha
+Backup:  /home/mocha/.local/share/mocha/backups/wrapper-mangohud-userconf-final-20260627-234615
+Log:     /media/mochafast/MochaArch/ativo/logs/20260627-234615-fix-wrapper-mangohud-userconf-final.log
+
+[1] Backup
+[OK] Backup: /usr/local/bin/mocha-steam-game-run
+[OK] Backup: /usr/local/share/mocha/mangohud/MangoHud.conf
+[OK] Backup: /home/mocha/.config/MangoHud/MangoHud.conf
+
+[2] Recriando configuração Mocha canônica
+[OK] Mestre: /usr/local/share/mocha/mangohud/MangoHud.conf
+[OK] Config visível ao Steam Runtime: /home/mocha/.config/MangoHud/MangoHud.conf
+
+[3] Sobrescrevendo wrapper oficial
+[OK] Wrapper sobrescrito: /usr/local/bin/mocha-steam-game-run
+
+[4] Conferência objetiva
+
+Wrapper atual:
+------------------------------------------------------------
+#!/usr/bin/env bash
+set -e
+
+# Mocha — wrapper oficial dos jogos Steam
+# Linha oficial nas opções de inicialização:
+# /usr/local/bin/mocha-steam-game-run %command%
+
+MASTER_CONF="/usr/local/share/mocha/mangohud/MangoHud.conf"
+USER_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/MangoHud/MangoHud.conf"
+
+mkdir -p "$(dirname "$USER_CONF")"
+
+# O mestre canônico fica em /usr/local/share/mocha/mangohud/MangoHud.conf.
+# Para Steam Runtime/Proton, o caminho seguro e visível é ~/.config/MangoHud/MangoHud.conf.
+if [ -r "$MASTER_CONF" ]; then
+  cp -f "$MASTER_CONF" "$USER_CONF" 2>/dev/null || true
+fi
+
+unset MANGOHUD_CONFIG
+unset MANGOHUD_DLSYM
+
+export MANGOHUD_CONFIGFILE="$USER_CONF"
+
+# Proteção Alt+Tab/input.
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+export MouseWarpOverride=force
+export XMODIFIERS="@im=none"
+
+# Proibido aqui:
+# - MANGOHUD_CONFIG inline
+# - MANGOHUD_DLSYM
+# - gamescope
+# - vkBasalt
+# - gamemoderun
+# - alterações em Proton prefixes/compatdata/user.reg
+
+exec mangohud "$@"
+------------------------------------------------------------
+
+Config runtime:
+------------------------------------------------------------
+     1	# Mocha MangoHud — canônico
+     2	# Uma linha, sem gráficos.
+     3	# Ordem: FPS | frametime | CPU | GPU | RAM | VRAM | GameMode | HH:MM
+     4	
+     5	legacy_layout=0
+     6	horizontal
+     7	hud_no_margin
+     8	position=top-left
+     9	background_alpha=0.35
+    10	round_corners=8
+    11	font_size=18
+    12	
+    13	fps
+    14	frametime
+    15	cpu_stats
+    16	gpu_stats
+    17	ram
+    18	vram
+    19	gamemode
+    20	time
+    21	time_format=%H:%M
+------------------------------------------------------------
+[FALHA] Wrapper contém item proibido.

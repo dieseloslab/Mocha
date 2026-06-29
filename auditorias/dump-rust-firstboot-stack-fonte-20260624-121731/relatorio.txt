@@ -1,0 +1,1825 @@
+
+[2026-06-24 12:17:33] [1] Cargo.toml
+     1	[package]
+     2	name = "mocha-firstboot-stack"
+     3	version = "0.3.0"
+     4	edition = "2021"
+     5	description = "Mocha Stack Optimizer: dynamic CachyOS kernel and NVIDIA stack selector"
+     6	license = "MIT"
+     7	
+     8	[profile.release]
+     9	lto = "thin"
+    10	codegen-units = 1
+    11	strip = "symbols"
+    12	panic = "abort"
+
+[2026-06-24 12:17:33] [2] Desktop
+     1	[Desktop Entry]
+     2	Type=Application
+     3	Name=Mocha Stack Optimizer
+     4	GenericName=Mocha Kernel and Driver Optimizer
+     5	Comment=Mostra kernel/driver atual e disponível, detecta arquitetura e casa NVIDIA
+     6	Exec=konsole --hold -e /usr/local/bin/mocha-firstboot-stack
+     7	Icon=preferences-system-performance
+     8	Terminal=false
+     9	Categories=System;Settings;Utility;
+    10	StartupNotify=true
+
+[2026-06-24 12:17:33] [3] Fonte completo com numeros de linha
+     1	use std::env;
+     2	use std::fs::{self, OpenOptions};
+     3	use std::io::{self, Write};
+     4	use std::path::{Path, PathBuf};
+     5	use std::process::Command;
+     6	
+     7	const CACHY_KEY: &str = "F3B607488DB35A47";
+     8	const LOG_PATH: &str = "/var/log/mocha-firstboot-stack.log";
+     9	
+    10	#[derive(Clone, Debug)]
+    11	struct CpuProfile {
+    12	    label: String,
+    13	    arch_line: String,
+    14	    mirror_arch: String,
+    15	    optimized_repos: Vec<String>,
+    16	}
+    17	
+    18	#[derive(Clone, Debug)]
+    19	struct PackageTarget {
+    20	    repo: String,
+    21	    pkg: String,
+    22	    version: String,
+    23	    arch: String,
+    24	}
+    25	
+    26	impl PackageTarget {
+    27	    fn spec(&self) -> String {
+    28	        format!("{}/{}", self.repo, self.pkg)
+    29	    }
+    30	
+    31	    fn display(&self) -> String {
+    32	        format!("{} {} [{}]", self.spec(), self.version, self.arch)
+    33	    }
+    34	}
+    35	
+    36	struct Logger {
+    37	    file: fs::File,
+    38	}
+    39	
+    40	impl Logger {
+    41	    fn new() -> Result<Self, String> {
+    42	        let owner = env::var("SUDO_USER")
+    43	            .or_else(|_| env::var("USER"))
+    44	            .unwrap_or_else(|_| "root".to_string());
+    45	
+    46	        let _ = Command::new("sudo")
+    47	            .env("LC_ALL", "C")
+    48	            .env("LANG", "C")
+    49	            .arg("install")
+    50	            .arg("-m")
+    51	            .arg("0664")
+    52	            .arg("-o")
+    53	            .arg(&owner)
+    54	            .arg("-g")
+    55	            .arg(&owner)
+    56	            .arg("/dev/null")
+    57	            .arg(LOG_PATH)
+    58	            .status();
+    59	
+    60	        let file = OpenOptions::new()
+    61	            .create(true)
+    62	            .append(true)
+    63	            .open(LOG_PATH)
+    64	            .map_err(|e| format!("não consegui abrir log {}: {}", LOG_PATH, e))?;
+    65	
+    66	        Ok(Self { file })
+    67	    }
+    68	
+    69	    fn line<S: AsRef<str>>(&mut self, text: S) {
+    70	        let s = text.as_ref();
+    71	        println!("{}", s);
+    72	        let _ = writeln!(self.file, "{}", s);
+    73	        let _ = self.file.flush();
+    74	    }
+    75	
+    76	    fn raw<S: AsRef<str>>(&mut self, text: S) {
+    77	        let s = text.as_ref();
+    78	        print!("{}", s);
+    79	        let _ = write!(self.file, "{}", s);
+    80	        let _ = self.file.flush();
+    81	    }
+    82	}
+    83	
+    84	fn command_output(program: &str, args: &[&str]) -> Option<String> {
+    85	    let output = Command::new(program)
+    86	        .env("LC_ALL", "C")
+    87	        .env("LANG", "C")
+    88	        .args(args)
+    89	        .output()
+    90	        .ok()?;
+    91	
+    92	    if !output.status.success() {
+    93	        return None;
+    94	    }
+    95	
+    96	    Some(String::from_utf8_lossy(&output.stdout).trim().to_string())
+    97	}
+    98	
+    99	fn local_pkg_version(pkg: &str) -> Option<String> {
+   100	    let out = command_output("pacman", &["-Q", pkg])?;
+   101	    let mut parts = out.split_whitespace();
+   102	    let _name = parts.next()?;
+   103	    let version = parts.next()?;
+   104	    Some(version.to_string())
+   105	}
+   106	
+   107	fn current_kernel_runtime() -> String {
+   108	    command_output("uname", &["-r"]).unwrap_or_else(|| "indisponível".to_string())
+   109	}
+   110	
+   111	fn current_pkg_line(pkg: &str) -> String {
+   112	    match local_pkg_version(pkg) {
+   113	        Some(v) => format!("{} {}", pkg, v),
+   114	        None => format!("{} não instalado", pkg),
+   115	    }
+   116	}
+   117	
+   118	fn first_installed_pkg(pkgs: &[&str]) -> String {
+   119	    for pkg in pkgs {
+   120	        if let Some(v) = local_pkg_version(pkg) {
+   121	            return format!("{} {}", pkg, v);
+   122	        }
+   123	    }
+   124	
+   125	    "não instalado".to_string()
+   126	}
+   127	
+   128	fn run_capture(log: &mut Logger, program: &str, args: &[String]) -> Result<String, String> {
+   129	    log.line(format!("+ {} {}", program, args.join(" ")));
+   130	
+   131	    let output = Command::new(program)
+   132	        .env("LC_ALL", "C")
+   133	        .env("LANG", "C")
+   134	        .args(args)
+   135	        .output()
+   136	        .map_err(|e| format!("falha ao executar {}: {}", program, e))?;
+   137	
+   138	    let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+   139	    let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+   140	
+   141	    if !stdout.is_empty() {
+   142	        log.raw(&stdout);
+   143	    }
+   144	
+   145	    if !stderr.is_empty() {
+   146	        log.raw(&stderr);
+   147	    }
+   148	
+   149	    if output.status.success() {
+   150	        Ok(stdout)
+   151	    } else {
+   152	        Err(format!(
+   153	            "comando falhou: {} {}\nstderr: {}",
+   154	            program,
+   155	            args.join(" "),
+   156	            stderr.trim()
+   157	        ))
+   158	    }
+   159	}
+   160	
+   161	fn run(log: &mut Logger, program: &str, args: &[String]) -> Result<(), String> {
+   162	    run_capture(log, program, args).map(|_| ())
+   163	}
+   164	
+   165	fn sudo_capture(log: &mut Logger, args: &[String]) -> Result<String, String> {
+   166	    let mut v = Vec::new();
+   167	    v.push("env".to_string());
+   168	    v.push("LC_ALL=C".to_string());
+   169	    v.push("LANG=C".to_string());
+   170	    v.extend_from_slice(args);
+   171	    run_capture(log, "sudo", &v)
+   172	}
+   173	
+   174	fn sudo(log: &mut Logger, args: &[String]) -> Result<(), String> {
+   175	    sudo_capture(log, args).map(|_| ())
+   176	}
+   177	
+   178	fn sudo_plain(log: &mut Logger, args: &[String]) -> Result<(), String> {
+   179	    run(log, "sudo", args)
+   180	}
+   181	
+   182	fn progress(log: &mut Logger, pct: u8, msg: &str) {
+   183	    log.line(format!("[{:>3}%] {}", pct, msg));
+   184	}
+   185	
+   186	fn yes_no(question: &str, default_yes: bool) -> bool {
+   187	    let suffix = if default_yes { "[S/n]" } else { "[s/N]" };
+   188	    print!("{} {} ", question, suffix);
+   189	    let _ = io::stdout().flush();
+   190	
+   191	    let mut answer = String::new();
+   192	    if io::stdin().read_line(&mut answer).is_err() {
+   193	        return default_yes;
+   194	    }
+   195	
+   196	    let a = answer.trim().to_lowercase();
+   197	    if a.is_empty() {
+   198	        return default_yes;
+   199	    }
+   200	
+   201	    matches!(a.as_str(), "s" | "sim" | "y" | "yes")
+   202	}
+   203	
+   204	fn detect_cpu_profile(log: &mut Logger) -> CpuProfile {
+   205	    let help = run_capture(log, "/lib/ld-linux-x86-64.so.2", &[String::from("--help")])
+   206	        .unwrap_or_default();
+   207	
+   208	    let has_v4 = help
+   209	        .lines()
+   210	        .any(|l| l.contains("x86-64-v4") && l.contains("supported"));
+   211	
+   212	    let has_v3 = help
+   213	        .lines()
+   214	        .any(|l| l.contains("x86-64-v3") && l.contains("supported"));
+   215	
+   216	    if has_v4 {
+   217	        CpuProfile {
+   218	            label: "x86_64_v4".to_string(),
+   219	            arch_line: "Architecture = x86_64 x86_64_v4".to_string(),
+   220	            mirror_arch: "x86_64_v4".to_string(),
+   221	            optimized_repos: vec![
+   222	                "cachyos-v4".to_string(),
+   223	                "cachyos-core-v4".to_string(),
+   224	                "cachyos-extra-v4".to_string(),
+   225	            ],
+   226	        }
+   227	    } else if has_v3 {
+   228	        CpuProfile {
+   229	            label: "x86_64_v3".to_string(),
+   230	            arch_line: "Architecture = x86_64 x86_64_v3".to_string(),
+   231	            mirror_arch: "x86_64_v3".to_string(),
+   232	            optimized_repos: vec![
+   233	                "cachyos-v3".to_string(),
+   234	                "cachyos-core-v3".to_string(),
+   235	                "cachyos-extra-v3".to_string(),
+   236	            ],
+   237	        }
+   238	    } else {
+   239	        CpuProfile {
+   240	            label: "x86_64".to_string(),
+   241	            arch_line: "Architecture = x86_64".to_string(),
+   242	            mirror_arch: "x86_64".to_string(),
+   243	            optimized_repos: Vec::new(),
+   244	        }
+   245	    }
+   246	}
+   247	
+   248	fn strip_cachyos_blocks(conf: &str) -> String {
+   249	    let mut out = String::new();
+   250	    let mut skip = false;
+   251	
+   252	    for line in conf.lines() {
+   253	        let trimmed = line.trim();
+   254	
+   255	        if trimmed.starts_with("[cachyos") && trimmed.ends_with(']') {
+   256	            skip = true;
+   257	            continue;
+   258	        }
+   259	
+   260	        if trimmed.starts_with('[') && trimmed.ends_with(']') {
+   261	            skip = false;
+   262	        }
+   263	
+   264	        if !skip {
+   265	            out.push_str(line);
+   266	            out.push('\n');
+   267	        }
+   268	    }
+   269	
+   270	    out
+   271	}
+   272	
+   273	fn replace_architecture(conf: &str, arch_line: &str) -> Result<String, String> {
+   274	    if !conf.lines().any(|l| l.trim() == "[options]") {
+   275	        return Err("pacman.conf sem bloco [options]".to_string());
+   276	    }
+   277	
+   278	    let mut out = String::new();
+   279	    let mut in_options = false;
+   280	    let mut inserted = false;
+   281	
+   282	    for line in conf.lines() {
+   283	        let trimmed = line.trim();
+   284	
+   285	        if trimmed == "[options]" {
+   286	            in_options = true;
+   287	            out.push_str(line);
+   288	            out.push('\n');
+   289	            continue;
+   290	        }
+   291	
+   292	        if in_options && trimmed.starts_with('[') && trimmed.ends_with(']') {
+   293	            if !inserted {
+   294	                out.push_str(arch_line);
+   295	                out.push('\n');
+   296	                inserted = true;
+   297	            }
+   298	            in_options = false;
+   299	            out.push_str(line);
+   300	            out.push('\n');
+   301	            continue;
+   302	        }
+   303	
+   304	        if in_options && trimmed.starts_with("Architecture") {
+   305	            if !inserted {
+   306	                out.push_str(arch_line);
+   307	                out.push('\n');
+   308	                inserted = true;
+   309	            }
+   310	            continue;
+   311	        }
+   312	
+   313	        out.push_str(line);
+   314	        out.push('\n');
+   315	    }
+   316	
+   317	    if in_options && !inserted {
+   318	        out.push_str(arch_line);
+   319	        out.push('\n');
+   320	        inserted = true;
+   321	    }
+   322	
+   323	    if !inserted {
+   324	        return Err("não consegui inserir Architecture no pacman.conf temporário".to_string());
+   325	    }
+   326	
+   327	    Ok(out)
+   328	}
+   329	
+   330	fn write_temp_pacman_conf(
+   331	    log: &mut Logger,
+   332	    profile: &CpuProfile,
+   333	    work: &Path,
+   334	) -> Result<PathBuf, String> {
+   335	    let original = fs::read_to_string("/etc/pacman.conf")
+   336	        .map_err(|e| format!("não consegui ler /etc/pacman.conf: {}", e))?;
+   337	
+   338	    let sanitized = strip_cachyos_blocks(&original);
+   339	    let base = replace_architecture(&sanitized, &profile.arch_line)?;
+   340	
+   341	    let conf_path = work.join("pacman-cachyos-temporario.conf");
+   342	    let mirror_opt = work.join("mirrorlist-cachyos-otimizado");
+   343	    let mirror_x64 = work.join("mirrorlist-cachyos-x86_64");
+   344	
+   345	    let opt_servers = format!(
+   346	        "Server = https://mirror.cachyos.org/repo/{}/$repo\nServer = https://cdn.cachyos.org/repo/{}/$repo\nServer = https://cdn77.cachyos.org/repo/{}/$repo\n",
+   347	        profile.mirror_arch, profile.mirror_arch, profile.mirror_arch
+   348	    );
+   349	
+   350	    let x64_servers = "Server = https://mirror.cachyos.org/repo/x86_64/$repo\nServer = https://cdn.cachyos.org/repo/x86_64/$repo\nServer = https://cdn77.cachyos.org/repo/x86_64/$repo\n";
+   351	
+   352	    fs::write(&mirror_opt, opt_servers)
+   353	        .map_err(|e| format!("não consegui escrever mirrorlist otimizada: {}", e))?;
+   354	
+   355	    fs::write(&mirror_x64, x64_servers)
+   356	        .map_err(|e| format!("não consegui escrever mirrorlist x86_64: {}", e))?;
+   357	
+   358	    let mut temp = base;
+   359	    temp.push_str("\n# Mocha temporário — CachyOS restrito; não copiar para /etc/pacman.conf\n");
+   360	
+   361	    for repo in &profile.optimized_repos {
+   362	        temp.push_str(&format!("[{}]\nInclude = {}\n", repo, mirror_opt.display()));
+   363	    }
+   364	
+   365	    temp.push_str(&format!("[cachyos]\nInclude = {}\n", mirror_x64.display()));
+   366	
+   367	    fs::write(&conf_path, temp)
+   368	        .map_err(|e| format!("não consegui escrever pacman.conf temporário: {}", e))?;
+   369	
+   370	    log.line(format!("Arquitetura temporária: {}", profile.arch_line));
+   371	    log.line(format!("Arquivo temporário: {}", conf_path.display()));
+   372	
+   373	    Ok(conf_path)
+   374	}
+   375	
+   376	fn remove_persistent_cachyos(log: &mut Logger, stamp: &str) -> Result<(), String> {
+   377	    let original = fs::read_to_string("/etc/pacman.conf")
+   378	        .map_err(|e| format!("não consegui ler /etc/pacman.conf: {}", e))?;
+   379	
+   380	    let sanitized = strip_cachyos_blocks(&original);
+   381	
+   382	    if sanitized != original {
+   383	        sudo(
+   384	            log,
+   385	            &[
+   386	                "cp".to_string(),
+   387	                "-a".to_string(),
+   388	                "/etc/pacman.conf".to_string(),
+   389	                format!("/etc/pacman.conf.mocha-backup-{}", stamp),
+   390	            ],
+   391	        )?;
+   392	
+   393	        let tmp = format!("/tmp/mocha-pacman-sem-cachyos-{}.conf", stamp);
+   394	        fs::write(&tmp, sanitized).map_err(|e| format!("não consegui escrever {}: {}", tmp, e))?;
+   395	
+   396	        sudo(
+   397	            log,
+   398	            &[
+   399	                "install".to_string(),
+   400	                "-m".to_string(),
+   401	                "0644".to_string(),
+   402	                tmp,
+   403	                "/etc/pacman.conf".to_string(),
+   404	            ],
+   405	        )?;
+   406	
+   407	        log.line("CachyOS permanente removido de /etc/pacman.conf.");
+   408	    } else {
+   409	        log.line("OK: /etc/pacman.conf sem CachyOS permanente.");
+   410	    }
+   411	
+   412	    Ok(())
+   413	}
+   414	
+   415	fn package_info(log: &mut Logger, conf: &Path, repo: &str, pkg: &str) -> Result<String, String> {
+   416	    run_capture(
+   417	        log,
+   418	        "pacman",
+   419	        &[
+   420	            "--config".to_string(),
+   421	            conf.display().to_string(),
+   422	            "-Si".to_string(),
+   423	            format!("{}/{}", repo, pkg),
+   424	        ],
+   425	    )
+   426	}
+   427	
+   428	fn package_exists(log: &mut Logger, conf: &Path, repo: &str, pkg: &str) -> bool {
+   429	    package_info(log, conf, repo, pkg).is_ok()
+   430	}
+   431	
+   432	fn pkg_field(info: &str, field: &str) -> Result<String, String> {
+   433	    for line in info.lines() {
+   434	        if let Some((k, v)) = line.split_once(':') {
+   435	            if k.trim() == field {
+   436	                return Ok(v.trim().to_string());
+   437	            }
+   438	        }
+   439	    }
+   440	
+   441	    Err(format!("campo {} não encontrado no pacman -Si", field))
+   442	}
+   443	
+   444	fn find_package(
+   445	    log: &mut Logger,
+   446	    conf: &Path,
+   447	    repos: &[String],
+   448	    pkg: &str,
+   449	) -> Result<PackageTarget, String> {
+   450	    for repo in repos {
+   451	        if let Ok(info) = package_info(log, conf, repo, pkg) {
+   452	            let version = pkg_field(&info, "Version")?;
+   453	            let arch = pkg_field(&info, "Architecture")?;
+   454	
+   455	            return Ok(PackageTarget {
+   456	                repo: repo.clone(),
+   457	                pkg: pkg.to_string(),
+   458	                version,
+   459	                arch,
+   460	            });
+   461	        }
+   462	    }
+   463	
+   464	    Err(format!(
+   465	        "pacote não encontrado nos repositórios temporários: {}",
+   466	        pkg
+   467	    ))
+   468	}
+   469	
+   470	fn detect_nvidia(log: &mut Logger) -> bool {
+   471	    run_capture(log, "lspci", &[String::from("-nn")])
+   472	        .map(|s| s.lines().any(|l| l.to_lowercase().contains("nvidia")))
+   473	        .unwrap_or(false)
+   474	}
+   475	
+   476	fn validate_arch(target: &PackageTarget, profile: &CpuProfile) -> Result<(), String> {
+   477	    if target.arch == "x86_64" || target.arch == profile.label {
+   478	        Ok(())
+   479	    } else {
+   480	        Err(format!(
+   481	            "arquitetura recusada para {}: pacote={}, computador={}",
+   482	            target.spec(),
+   483	            target.arch,
+   484	            profile.label
+   485	        ))
+   486	    }
+   487	}
+   488	
+   489	fn build_plan(
+   490	    log: &mut Logger,
+   491	    conf: &Path,
+   492	    profile: &CpuProfile,
+   493	    nvidia: bool,
+   494	) -> Result<Vec<PackageTarget>, String> {
+   495	    let mut repos = profile.optimized_repos.clone();
+   496	    repos.push("cachyos".to_string());
+   497	
+   498	    let kernel = find_package(log, conf, &repos, "linux-cachyos")?;
+   499	    let headers = find_package(log, conf, &repos, "linux-cachyos-headers")?;
+   500	
+   501	    validate_arch(&kernel, profile)?;
+   502	    validate_arch(&headers, profile)?;
+   503	
+   504	    if kernel.version != headers.version {
+   505	        return Err(format!(
+   506	            "kernel e headers não estão casados: linux-cachyos={} headers={}",
+   507	            kernel.version, headers.version
+   508	        ));
+   509	    }
+   510	
+   511	    let mut targets = vec![kernel.clone(), headers];
+   512	
+   513	    if nvidia {
+   514	        let module = if package_exists(log, conf, &kernel.repo, "linux-cachyos-nvidia-open") {
+   515	            find_package(
+   516	                log,
+   517	                conf,
+   518	                &[kernel.repo.clone()],
+   519	                "linux-cachyos-nvidia-open",
+   520	            )?
+   521	        } else if package_exists(log, conf, &kernel.repo, "linux-cachyos-nvidia") {
+   522	            find_package(log, conf, &[kernel.repo.clone()], "linux-cachyos-nvidia")?
+   523	        } else {
+   524	            find_package(log, conf, &repos, "linux-cachyos-nvidia-open")
+   525	                .or_else(|_| find_package(log, conf, &repos, "linux-cachyos-nvidia"))?
+   526	        };
+   527	
+   528	        validate_arch(&module, profile)?;
+   529	
+   530	        if module.version != kernel.version {
+   531	            return Err(format!(
+   532	                "módulo NVIDIA do kernel não casa com o kernel: linux-cachyos={} módulo={}",
+   533	                kernel.version, module.version
+   534	            ));
+   535	        }
+   536	
+   537	        targets.push(module);
+   538	
+   539	        let x64_repos = vec![
+   540	            "cachyos".to_string(),
+   541	            "extra".to_string(),
+   542	            "multilib".to_string(),
+   543	        ];
+   544	
+   545	        for pkg in ["nvidia-utils", "lib32-nvidia-utils", "opencl-nvidia"] {
+   546	            let t = find_package(log, conf, &x64_repos, pkg)?;
+   547	            validate_arch(&t, profile)?;
+   548	            targets.push(t);
+   549	        }
+   550	    }
+   551	
+   552	    Ok(targets)
+   553	}
+   554	
+   555	fn find_target<'a>(targets: &'a [PackageTarget], pkg: &str) -> Option<&'a PackageTarget> {
+   556	    targets.iter().find(|t| t.pkg == pkg)
+   557	}
+   558	
+   559	fn available_line(targets: &[PackageTarget], pkg: &str) -> String {
+   560	    match find_target(targets, pkg) {
+   561	        Some(t) => t.display(),
+   562	        None => format!("{} indisponível", pkg),
+   563	    }
+   564	}
+   565	
+   566	fn available_video_module_line(targets: &[PackageTarget]) -> String {
+   567	    find_target(targets, "linux-cachyos-nvidia-open")
+   568	        .or_else(|| find_target(targets, "linux-cachyos-nvidia"))
+   569	        .map(|t| t.display())
+   570	        .unwrap_or_else(|| "módulo NVIDIA indisponível".to_string())
+   571	}
+   572	
+   573	fn show_current_vs_available(
+   574	    log: &mut Logger,
+   575	    profile: &CpuProfile,
+   576	    targets: &[PackageTarget],
+   577	    nvidia: bool,
+   578	) {
+   579	    log.line("");
+   580	    log.line("============================================================");
+   581	    log.line(" Stack atual vs disponível");
+   582	    log.line("============================================================");
+   583	    log.line(format!("Arquitetura detectada: {}", profile.label));
+   584	    log.line("");
+   585	
+   586	    log.line("Kernel:");
+   587	    log.line(format!(" - Em uso agora: {}", current_kernel_runtime()));
+   588	    log.line(format!(
+   589	        " - Pacote atual: {}",
+   590	        current_pkg_line("linux-cachyos")
+   591	    ));
+   592	    log.line(format!(
+   593	        " - Novo disponível: {}",
+   594	        available_line(targets, "linux-cachyos")
+   595	    ));
+   596	    log.line(format!(
+   597	        " - Headers atuais: {}",
+   598	        current_pkg_line("linux-cachyos-headers")
+   599	    ));
+   600	    log.line(format!(
+   601	        " - Headers disponíveis: {}",
+   602	        available_line(targets, "linux-cachyos-headers")
+   603	    ));
+   604	
+   605	    log.line("");
+   606	    if nvidia {
+   607	        log.line("Driver de vídeo NVIDIA:");
+   608	        log.line(format!(
+   609	            " - Módulo atual do kernel: {}",
+   610	            first_installed_pkg(&["linux-cachyos-nvidia-open", "linux-cachyos-nvidia"])
+   611	        ));
+   612	        log.line(format!(
+   613	            " - Módulo disponível do kernel: {}",
+   614	            available_video_module_line(targets)
+   615	        ));
+   616	        log.line(format!(
+   617	            " - nvidia-utils atual: {}",
+   618	            current_pkg_line("nvidia-utils")
+   619	        ));
+   620	        log.line(format!(
+   621	            " - nvidia-utils disponível: {}",
+   622	            available_line(targets, "nvidia-utils")
+   623	        ));
+   624	        log.line(format!(
+   625	            " - lib32-nvidia-utils atual: {}",
+   626	            current_pkg_line("lib32-nvidia-utils")
+   627	        ));
+   628	        log.line(format!(
+   629	            " - lib32-nvidia-utils disponível: {}",
+   630	            available_line(targets, "lib32-nvidia-utils")
+   631	        ));
+   632	        log.line(format!(
+   633	            " - opencl-nvidia atual: {}",
+   634	            current_pkg_line("opencl-nvidia")
+   635	        ));
+   636	        log.line(format!(
+   637	            " - opencl-nvidia disponível: {}",
+   638	            available_line(targets, "opencl-nvidia")
+   639	        ));
+   640	    } else {
+   641	        log.line("Driver de vídeo:");
+   642	        log.line(" - NVIDIA não detectada; stack NVIDIA não será instalado.");
+   643	    }
+   644	
+   645	    log.line("============================================================");
+   646	    log.line("");
+   647	}
+   648	
+   649	fn grub_default_entry_from_cfg(cfg: &str) -> Option<String> {
+   650	    let mut submenu = String::new();
+   651	
+   652	    for line in cfg.lines() {
+   653	        let trimmed = line.trim_start();
+   654	
+   655	        if trimmed.starts_with("submenu ") {
+   656	            if let Some(title) = trimmed.split('\'').nth(1) {
+   657	                submenu = title.to_string();
+   658	            }
+   659	        }
+   660	
+   661	        if trimmed.starts_with("menuentry ") {
+   662	            if let Some(title) = trimmed.split('\'').nth(1) {
+   663	                if title.contains("linux-cachyos")
+   664	                    && !title.to_lowercase().contains("bore")
+   665	                    && !title.to_lowercase().contains("fallback")
+   666	                {
+   667	                    if submenu.is_empty() {
+   668	                        return Some(title.to_string());
+   669	                    }
+   670	
+   671	                    return Some(format!("{}>{}", submenu, title));
+   672	                }
+   673	            }
+   674	        }
+   675	    }
+   676	
+   677	    None
+   678	}
+   679	
+   680	fn install_stack(
+   681	    log: &mut Logger,
+   682	    conf: &Path,
+   683	    targets: &[PackageTarget],
+   684	    reinstall: bool,
+   685	) -> Result<(), String> {
+   686	    let mut args = vec![
+   687	        "pacman".to_string(),
+   688	        "--config".to_string(),
+   689	        conf.display().to_string(),
+   690	        "-S".to_string(),
+   691	        "--noconfirm".to_string(),
+   692	    ];
+   693	
+   694	    if !reinstall {
+   695	        args.push("--needed".to_string());
+   696	    }
+   697	
+   698	    for target in targets {
+   699	        args.push(target.spec());
+   700	    }
+   701	
+   702	    sudo(log, &args)
+   703	}
+   704	
+   705	fn usage() {
+   706	    println!("Mocha Stack Optimizer");
+   707	    println!("Uso:");
+   708	    println!("  mocha-firstboot-stack");
+   709	    println!("  mocha-firstboot-stack --yes");
+   710	    println!("  mocha-firstboot-stack --yes --reinstall");
+   711	    println!();
+   712	    println!("Antes de instalar, mostra:");
+   713	    println!("  - kernel em uso e pacote linux-cachyos atual");
+   714	    println!("  - kernel CachyOS novo disponível para a arquitetura detectada");
+   715	    println!("  - driver NVIDIA atual e driver disponível correspondente");
+   716	    println!();
+   717	    println!("Sem --yes, pede confirmação antes de aplicar.");
+   718	    println!("Com --reinstall, reinstala o stack mesmo quando já estiver atualizado.");
+   719	}
+   720	
+   721	fn main() {
+   722	    let args: Vec<String> = env::args().collect();
+   723	
+   724	    if args.iter().any(|a| a == "--help" || a == "-h") {
+   725	        usage();
+   726	        return;
+   727	    }
+   728	
+   729	    let mut log = match Logger::new() {
+   730	        Ok(l) => l,
+   731	        Err(e) => {
+   732	            eprintln!("ERRO: {}", e);
+   733	            std::process::exit(1);
+   734	        }
+   735	    };
+   736	
+   737	    let assume_yes = args.iter().any(|a| a == "--yes" || a == "--noconfirm");
+   738	    let mut reinstall = args
+   739	        .iter()
+   740	        .any(|a| a == "--reinstall" || a == "--force-reinstall");
+   741	
+   742	    log.line("============================================================");
+   743	    log.line(" Mocha Stack Optimizer — kernel CachyOS/NVIDIA dinâmico");
+   744	    log.line(format!(" Log: {}", LOG_PATH));
+   745	    log.line("============================================================");
+   746	
+   747	    if let Err(e) = real_main(&mut log, assume_yes, &mut reinstall) {
+   748	        log.line(format!("[100%] Erro: {}", e));
+   749	        std::process::exit(1);
+   750	    }
+   751	
+   752	    log.line("[100%] Concluído. Reinicie para entrar no kernel CachyOS escolhido.");
+   753	}
+   754	
+   755	fn real_main(log: &mut Logger, assume_yes: bool, reinstall: &mut bool) -> Result<(), String> {
+   756	    let stamp = run_capture(log, "date", &[String::from("+%Y%m%d-%H%M%S")])
+   757	        .unwrap_or_else(|_| "sem-data".to_string())
+   758	        .trim()
+   759	        .to_string();
+   760	
+   761	    progress(log, 1, "Iniciando Mocha Stack Optimizer");
+   762	
+   763	    sudo_plain(log, &["-v".to_string()])?;
+   764	
+   765	    let work = PathBuf::from(format!("/tmp/mocha-firstboot-stack-{}", stamp));
+   766	    fs::create_dir_all(&work)
+   767	        .map_err(|e| format!("não consegui criar {}: {}", work.display(), e))?;
+   768	
+   769	    progress(
+   770	        log,
+   771	        5,
+   772	        "Removendo qualquer canal CachyOS permanente antes da atualização",
+   773	    );
+   774	    remove_persistent_cachyos(log, &stamp)?;
+   775	
+   776	    progress(log, 10, "Sincronizando bases oficiais Arch/Mocha");
+   777	    sudo(
+   778	        log,
+   779	        &[
+   780	            "pacman".to_string(),
+   781	            "-Syy".to_string(),
+   782	            "--noconfirm".to_string(),
+   783	        ],
+   784	    )?;
+   785	
+   786	    progress(log, 16, "Atualizando totalmente o sistema antes do kernel");
+   787	    sudo(
+   788	        log,
+   789	        &[
+   790	            "pacman".to_string(),
+   791	            "-Syu".to_string(),
+   792	            "--noconfirm".to_string(),
+   793	        ],
+   794	    )?;
+   795	
+   796	    progress(log, 30, "Detectando arquitetura do processador");
+   797	    let profile = detect_cpu_profile(log);
+   798	    log.line(format!("Arquitetura escolhida: {}", profile.label));
+   799	
+   800	    progress(
+   801	        log,
+   802	        38,
+   803	        "Importando chave CachyOS somente para esta transação",
+   804	    );
+   805	    sudo(
+   806	        log,
+   807	        &[
+   808	            "pacman-key".to_string(),
+   809	            "--recv-keys".to_string(),
+   810	            CACHY_KEY.to_string(),
+   811	            "--keyserver".to_string(),
+   812	            "keyserver.ubuntu.com".to_string(),
+   813	        ],
+   814	    )?;
+   815	
+   816	    sudo(
+   817	        log,
+   818	        &[
+   819	            "pacman-key".to_string(),
+   820	            "--lsign-key".to_string(),
+   821	            CACHY_KEY.to_string(),
+   822	        ],
+   823	    )?;
+   824	
+   825	    progress(log, 44, "Criando pacman.conf temporário restrito");
+   826	    let conf = write_temp_pacman_conf(log, &profile, &work)?;
+   827	
+   828	    progress(log, 50, "Sincronizando bases temporárias CachyOS");
+   829	    sudo(
+   830	        log,
+   831	        &[
+   832	            "sh".to_string(),
+   833	            "-c".to_string(),
+   834	            "rm -f /var/lib/pacman/sync/cachyos*.db /var/lib/pacman/sync/cachyos*.db.sig"
+   835	                .to_string(),
+   836	        ],
+   837	    )?;
+   838	
+   839	    sudo(
+   840	        log,
+   841	        &[
+   842	            "pacman".to_string(),
+   843	            "--config".to_string(),
+   844	            conf.display().to_string(),
+   845	            "-Syy".to_string(),
+   846	            "--noconfirm".to_string(),
+   847	        ],
+   848	    )?;
+   849	
+   850	    progress(log, 58, "Montando plano dinâmico de kernel/driver");
+   851	    let nvidia = detect_nvidia(log);
+   852	    log.line(format!(
+   853	        "GPU NVIDIA detectada: {}",
+   854	        if nvidia { "sim" } else { "não" }
+   855	    ));
+   856	
+   857	    let targets = build_plan(log, &conf, &profile, nvidia)?;
+   858	
+   859	    show_current_vs_available(log, &profile, &targets, nvidia);
+   860	
+   861	    log.line("Plano de instalação:");
+   862	    for t in &targets {
+   863	        log.line(format!(" - {}", t.display()));
+   864	    }
+   865	
+   866	    if !assume_yes {
+   867	        if !*reinstall {
+   868	            *reinstall = yes_no(
+   869	                "Reinstalar todo o stack mesmo se já estiver atualizado?",
+   870	                false,
+   871	            );
+   872	        }
+   873	
+   874	        if !yes_no("Aplicar este plano agora?", true) {
+   875	            return Err("operação cancelada pelo usuário".to_string());
+   876	        }
+   877	    }
+   878	
+   879	    progress(
+   880	        log,
+   881	        60,
+   882	        if *reinstall {
+   883	            "Reinstalando todo o stack escolhido"
+   884	        } else {
+   885	            "Instalando/atualizando somente o necessário"
+   886	        },
+   887	    );
+   888	
+   889	    install_stack(log, &conf, &targets, *reinstall)?;
+   890	
+   891	    progress(log, 78, "Regerando initramfs");
+   892	    sudo(log, &["mkinitcpio".to_string(), "-P".to_string()])?;
+   893	
+   894	    progress(
+   895	        log,
+   896	        86,
+   897	        "Regerando GRUB e definindo linux-cachyos não-Bore como default",
+   898	    );
+   899	
+   900	    if Path::new("/boot/grub").is_dir() {
+   901	        sudo(
+   902	            log,
+   903	            &[
+   904	                "sed".to_string(),
+   905	                "-i".to_string(),
+   906	                "s/^GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/".to_string(),
+   907	                "/etc/default/grub".to_string(),
+   908	            ],
+   909	        )?;
+   910	
+   911	        sudo(
+   912	            log,
+   913	            &[
+   914	                "grub-mkconfig".to_string(),
+   915	                "-o".to_string(),
+   916	                "/boot/grub/grub.cfg".to_string(),
+   917	            ],
+   918	        )?;
+   919	
+   920	        let cfg = sudo_capture(log, &["cat".to_string(), "/boot/grub/grub.cfg".to_string()])?;
+   921	
+   922	        if let Some(entry) = grub_default_entry_from_cfg(&cfg) {
+   923	            log.line(format!("GRUB default escolhido: {}", entry));
+   924	            sudo(log, &["grub-set-default".to_string(), entry])?;
+   925	        } else {
+   926	            log.line("AVISO: não encontrei entrada linux-cachyos não-Bore para grub-set-default.");
+   927	        }
+   928	    } else {
+   929	        log.line("AVISO: /boot/grub ausente; etapa GRUB pulada.");
+   930	    }
+   931	
+   932	    progress(
+   933	        log,
+   934	        94,
+   935	        "Garantindo que CachyOS não ficou permanente no pacman.conf",
+   936	    );
+   937	    remove_persistent_cachyos(log, &stamp)?;
+   938	
+   939	    progress(log, 98, "Verificação final");
+   940	    for pkg in [
+   941	        "linux-cachyos",
+   942	        "linux-cachyos-headers",
+   943	        "linux-cachyos-nvidia-open",
+   944	        "nvidia-utils",
+   945	        "lib32-nvidia-utils",
+   946	        "opencl-nvidia",
+   947	    ] {
+   948	        let _ = run_capture(log, "pacman", &["-Q".to_string(), pkg.to_string()]);
+   949	    }
+   950	
+   951	    Ok(())
+   952	}
+
+[2026-06-24 12:17:33] [4] Blocos criticos
+
+--- 200-380: arquitetura/repos/pacman.conf temporario ---
+   200	
+   201	    matches!(a.as_str(), "s" | "sim" | "y" | "yes")
+   202	}
+   203	
+   204	fn detect_cpu_profile(log: &mut Logger) -> CpuProfile {
+   205	    let help = run_capture(log, "/lib/ld-linux-x86-64.so.2", &[String::from("--help")])
+   206	        .unwrap_or_default();
+   207	
+   208	    let has_v4 = help
+   209	        .lines()
+   210	        .any(|l| l.contains("x86-64-v4") && l.contains("supported"));
+   211	
+   212	    let has_v3 = help
+   213	        .lines()
+   214	        .any(|l| l.contains("x86-64-v3") && l.contains("supported"));
+   215	
+   216	    if has_v4 {
+   217	        CpuProfile {
+   218	            label: "x86_64_v4".to_string(),
+   219	            arch_line: "Architecture = x86_64 x86_64_v4".to_string(),
+   220	            mirror_arch: "x86_64_v4".to_string(),
+   221	            optimized_repos: vec![
+   222	                "cachyos-v4".to_string(),
+   223	                "cachyos-core-v4".to_string(),
+   224	                "cachyos-extra-v4".to_string(),
+   225	            ],
+   226	        }
+   227	    } else if has_v3 {
+   228	        CpuProfile {
+   229	            label: "x86_64_v3".to_string(),
+   230	            arch_line: "Architecture = x86_64 x86_64_v3".to_string(),
+   231	            mirror_arch: "x86_64_v3".to_string(),
+   232	            optimized_repos: vec![
+   233	                "cachyos-v3".to_string(),
+   234	                "cachyos-core-v3".to_string(),
+   235	                "cachyos-extra-v3".to_string(),
+   236	            ],
+   237	        }
+   238	    } else {
+   239	        CpuProfile {
+   240	            label: "x86_64".to_string(),
+   241	            arch_line: "Architecture = x86_64".to_string(),
+   242	            mirror_arch: "x86_64".to_string(),
+   243	            optimized_repos: Vec::new(),
+   244	        }
+   245	    }
+   246	}
+   247	
+   248	fn strip_cachyos_blocks(conf: &str) -> String {
+   249	    let mut out = String::new();
+   250	    let mut skip = false;
+   251	
+   252	    for line in conf.lines() {
+   253	        let trimmed = line.trim();
+   254	
+   255	        if trimmed.starts_with("[cachyos") && trimmed.ends_with(']') {
+   256	            skip = true;
+   257	            continue;
+   258	        }
+   259	
+   260	        if trimmed.starts_with('[') && trimmed.ends_with(']') {
+   261	            skip = false;
+   262	        }
+   263	
+   264	        if !skip {
+   265	            out.push_str(line);
+   266	            out.push('\n');
+   267	        }
+   268	    }
+   269	
+   270	    out
+   271	}
+   272	
+   273	fn replace_architecture(conf: &str, arch_line: &str) -> Result<String, String> {
+   274	    if !conf.lines().any(|l| l.trim() == "[options]") {
+   275	        return Err("pacman.conf sem bloco [options]".to_string());
+   276	    }
+   277	
+   278	    let mut out = String::new();
+   279	    let mut in_options = false;
+   280	    let mut inserted = false;
+   281	
+   282	    for line in conf.lines() {
+   283	        let trimmed = line.trim();
+   284	
+   285	        if trimmed == "[options]" {
+   286	            in_options = true;
+   287	            out.push_str(line);
+   288	            out.push('\n');
+   289	            continue;
+   290	        }
+   291	
+   292	        if in_options && trimmed.starts_with('[') && trimmed.ends_with(']') {
+   293	            if !inserted {
+   294	                out.push_str(arch_line);
+   295	                out.push('\n');
+   296	                inserted = true;
+   297	            }
+   298	            in_options = false;
+   299	            out.push_str(line);
+   300	            out.push('\n');
+   301	            continue;
+   302	        }
+   303	
+   304	        if in_options && trimmed.starts_with("Architecture") {
+   305	            if !inserted {
+   306	                out.push_str(arch_line);
+   307	                out.push('\n');
+   308	                inserted = true;
+   309	            }
+   310	            continue;
+   311	        }
+   312	
+   313	        out.push_str(line);
+   314	        out.push('\n');
+   315	    }
+   316	
+   317	    if in_options && !inserted {
+   318	        out.push_str(arch_line);
+   319	        out.push('\n');
+   320	        inserted = true;
+   321	    }
+   322	
+   323	    if !inserted {
+   324	        return Err("não consegui inserir Architecture no pacman.conf temporário".to_string());
+   325	    }
+   326	
+   327	    Ok(out)
+   328	}
+   329	
+   330	fn write_temp_pacman_conf(
+   331	    log: &mut Logger,
+   332	    profile: &CpuProfile,
+   333	    work: &Path,
+   334	) -> Result<PathBuf, String> {
+   335	    let original = fs::read_to_string("/etc/pacman.conf")
+   336	        .map_err(|e| format!("não consegui ler /etc/pacman.conf: {}", e))?;
+   337	
+   338	    let sanitized = strip_cachyos_blocks(&original);
+   339	    let base = replace_architecture(&sanitized, &profile.arch_line)?;
+   340	
+   341	    let conf_path = work.join("pacman-cachyos-temporario.conf");
+   342	    let mirror_opt = work.join("mirrorlist-cachyos-otimizado");
+   343	    let mirror_x64 = work.join("mirrorlist-cachyos-x86_64");
+   344	
+   345	    let opt_servers = format!(
+   346	        "Server = https://mirror.cachyos.org/repo/{}/$repo\nServer = https://cdn.cachyos.org/repo/{}/$repo\nServer = https://cdn77.cachyos.org/repo/{}/$repo\n",
+   347	        profile.mirror_arch, profile.mirror_arch, profile.mirror_arch
+   348	    );
+   349	
+   350	    let x64_servers = "Server = https://mirror.cachyos.org/repo/x86_64/$repo\nServer = https://cdn.cachyos.org/repo/x86_64/$repo\nServer = https://cdn77.cachyos.org/repo/x86_64/$repo\n";
+   351	
+   352	    fs::write(&mirror_opt, opt_servers)
+   353	        .map_err(|e| format!("não consegui escrever mirrorlist otimizada: {}", e))?;
+   354	
+   355	    fs::write(&mirror_x64, x64_servers)
+   356	        .map_err(|e| format!("não consegui escrever mirrorlist x86_64: {}", e))?;
+   357	
+   358	    let mut temp = base;
+   359	    temp.push_str("\n# Mocha temporário — CachyOS restrito; não copiar para /etc/pacman.conf\n");
+   360	
+   361	    for repo in &profile.optimized_repos {
+   362	        temp.push_str(&format!("[{}]\nInclude = {}\n", repo, mirror_opt.display()));
+   363	    }
+   364	
+   365	    temp.push_str(&format!("[cachyos]\nInclude = {}\n", mirror_x64.display()));
+   366	
+   367	    fs::write(&conf_path, temp)
+   368	        .map_err(|e| format!("não consegui escrever pacman.conf temporário: {}", e))?;
+   369	
+   370	    log.line(format!("Arquitetura temporária: {}", profile.arch_line));
+   371	    log.line(format!("Arquivo temporário: {}", conf_path.display()));
+   372	
+   373	    Ok(conf_path)
+   374	}
+   375	
+   376	fn remove_persistent_cachyos(log: &mut Logger, stamp: &str) -> Result<(), String> {
+   377	    let original = fs::read_to_string("/etc/pacman.conf")
+   378	        .map_err(|e| format!("não consegui ler /etc/pacman.conf: {}", e))?;
+   379	
+   380	    let sanitized = strip_cachyos_blocks(&original);
+
+--- 376-570: limpeza Cachy/build plan/NVIDIA ---
+   376	fn remove_persistent_cachyos(log: &mut Logger, stamp: &str) -> Result<(), String> {
+   377	    let original = fs::read_to_string("/etc/pacman.conf")
+   378	        .map_err(|e| format!("não consegui ler /etc/pacman.conf: {}", e))?;
+   379	
+   380	    let sanitized = strip_cachyos_blocks(&original);
+   381	
+   382	    if sanitized != original {
+   383	        sudo(
+   384	            log,
+   385	            &[
+   386	                "cp".to_string(),
+   387	                "-a".to_string(),
+   388	                "/etc/pacman.conf".to_string(),
+   389	                format!("/etc/pacman.conf.mocha-backup-{}", stamp),
+   390	            ],
+   391	        )?;
+   392	
+   393	        let tmp = format!("/tmp/mocha-pacman-sem-cachyos-{}.conf", stamp);
+   394	        fs::write(&tmp, sanitized).map_err(|e| format!("não consegui escrever {}: {}", tmp, e))?;
+   395	
+   396	        sudo(
+   397	            log,
+   398	            &[
+   399	                "install".to_string(),
+   400	                "-m".to_string(),
+   401	                "0644".to_string(),
+   402	                tmp,
+   403	                "/etc/pacman.conf".to_string(),
+   404	            ],
+   405	        )?;
+   406	
+   407	        log.line("CachyOS permanente removido de /etc/pacman.conf.");
+   408	    } else {
+   409	        log.line("OK: /etc/pacman.conf sem CachyOS permanente.");
+   410	    }
+   411	
+   412	    Ok(())
+   413	}
+   414	
+   415	fn package_info(log: &mut Logger, conf: &Path, repo: &str, pkg: &str) -> Result<String, String> {
+   416	    run_capture(
+   417	        log,
+   418	        "pacman",
+   419	        &[
+   420	            "--config".to_string(),
+   421	            conf.display().to_string(),
+   422	            "-Si".to_string(),
+   423	            format!("{}/{}", repo, pkg),
+   424	        ],
+   425	    )
+   426	}
+   427	
+   428	fn package_exists(log: &mut Logger, conf: &Path, repo: &str, pkg: &str) -> bool {
+   429	    package_info(log, conf, repo, pkg).is_ok()
+   430	}
+   431	
+   432	fn pkg_field(info: &str, field: &str) -> Result<String, String> {
+   433	    for line in info.lines() {
+   434	        if let Some((k, v)) = line.split_once(':') {
+   435	            if k.trim() == field {
+   436	                return Ok(v.trim().to_string());
+   437	            }
+   438	        }
+   439	    }
+   440	
+   441	    Err(format!("campo {} não encontrado no pacman -Si", field))
+   442	}
+   443	
+   444	fn find_package(
+   445	    log: &mut Logger,
+   446	    conf: &Path,
+   447	    repos: &[String],
+   448	    pkg: &str,
+   449	) -> Result<PackageTarget, String> {
+   450	    for repo in repos {
+   451	        if let Ok(info) = package_info(log, conf, repo, pkg) {
+   452	            let version = pkg_field(&info, "Version")?;
+   453	            let arch = pkg_field(&info, "Architecture")?;
+   454	
+   455	            return Ok(PackageTarget {
+   456	                repo: repo.clone(),
+   457	                pkg: pkg.to_string(),
+   458	                version,
+   459	                arch,
+   460	            });
+   461	        }
+   462	    }
+   463	
+   464	    Err(format!(
+   465	        "pacote não encontrado nos repositórios temporários: {}",
+   466	        pkg
+   467	    ))
+   468	}
+   469	
+   470	fn detect_nvidia(log: &mut Logger) -> bool {
+   471	    run_capture(log, "lspci", &[String::from("-nn")])
+   472	        .map(|s| s.lines().any(|l| l.to_lowercase().contains("nvidia")))
+   473	        .unwrap_or(false)
+   474	}
+   475	
+   476	fn validate_arch(target: &PackageTarget, profile: &CpuProfile) -> Result<(), String> {
+   477	    if target.arch == "x86_64" || target.arch == profile.label {
+   478	        Ok(())
+   479	    } else {
+   480	        Err(format!(
+   481	            "arquitetura recusada para {}: pacote={}, computador={}",
+   482	            target.spec(),
+   483	            target.arch,
+   484	            profile.label
+   485	        ))
+   486	    }
+   487	}
+   488	
+   489	fn build_plan(
+   490	    log: &mut Logger,
+   491	    conf: &Path,
+   492	    profile: &CpuProfile,
+   493	    nvidia: bool,
+   494	) -> Result<Vec<PackageTarget>, String> {
+   495	    let mut repos = profile.optimized_repos.clone();
+   496	    repos.push("cachyos".to_string());
+   497	
+   498	    let kernel = find_package(log, conf, &repos, "linux-cachyos")?;
+   499	    let headers = find_package(log, conf, &repos, "linux-cachyos-headers")?;
+   500	
+   501	    validate_arch(&kernel, profile)?;
+   502	    validate_arch(&headers, profile)?;
+   503	
+   504	    if kernel.version != headers.version {
+   505	        return Err(format!(
+   506	            "kernel e headers não estão casados: linux-cachyos={} headers={}",
+   507	            kernel.version, headers.version
+   508	        ));
+   509	    }
+   510	
+   511	    let mut targets = vec![kernel.clone(), headers];
+   512	
+   513	    if nvidia {
+   514	        let module = if package_exists(log, conf, &kernel.repo, "linux-cachyos-nvidia-open") {
+   515	            find_package(
+   516	                log,
+   517	                conf,
+   518	                &[kernel.repo.clone()],
+   519	                "linux-cachyos-nvidia-open",
+   520	            )?
+   521	        } else if package_exists(log, conf, &kernel.repo, "linux-cachyos-nvidia") {
+   522	            find_package(log, conf, &[kernel.repo.clone()], "linux-cachyos-nvidia")?
+   523	        } else {
+   524	            find_package(log, conf, &repos, "linux-cachyos-nvidia-open")
+   525	                .or_else(|_| find_package(log, conf, &repos, "linux-cachyos-nvidia"))?
+   526	        };
+   527	
+   528	        validate_arch(&module, profile)?;
+   529	
+   530	        if module.version != kernel.version {
+   531	            return Err(format!(
+   532	                "módulo NVIDIA do kernel não casa com o kernel: linux-cachyos={} módulo={}",
+   533	                kernel.version, module.version
+   534	            ));
+   535	        }
+   536	
+   537	        targets.push(module);
+   538	
+   539	        let x64_repos = vec![
+   540	            "cachyos".to_string(),
+   541	            "extra".to_string(),
+   542	            "multilib".to_string(),
+   543	        ];
+   544	
+   545	        for pkg in ["nvidia-utils", "lib32-nvidia-utils", "opencl-nvidia"] {
+   546	            let t = find_package(log, conf, &x64_repos, pkg)?;
+   547	            validate_arch(&t, profile)?;
+   548	            targets.push(t);
+   549	        }
+   550	    }
+   551	
+   552	    Ok(targets)
+   553	}
+   554	
+   555	fn find_target<'a>(targets: &'a [PackageTarget], pkg: &str) -> Option<&'a PackageTarget> {
+   556	    targets.iter().find(|t| t.pkg == pkg)
+   557	}
+   558	
+   559	fn available_line(targets: &[PackageTarget], pkg: &str) -> String {
+   560	    match find_target(targets, pkg) {
+   561	        Some(t) => t.display(),
+   562	        None => format!("{} indisponível", pkg),
+   563	    }
+   564	}
+   565	
+   566	fn available_video_module_line(targets: &[PackageTarget]) -> String {
+   567	    find_target(targets, "linux-cachyos-nvidia-open")
+   568	        .or_else(|| find_target(targets, "linux-cachyos-nvidia"))
+   569	        .map(|t| t.display())
+   570	        .unwrap_or_else(|| "módulo NVIDIA indisponível".to_string())
+
+--- 740-960: fluxo principal de instalacao ---
+   740	        .any(|a| a == "--reinstall" || a == "--force-reinstall");
+   741	
+   742	    log.line("============================================================");
+   743	    log.line(" Mocha Stack Optimizer — kernel CachyOS/NVIDIA dinâmico");
+   744	    log.line(format!(" Log: {}", LOG_PATH));
+   745	    log.line("============================================================");
+   746	
+   747	    if let Err(e) = real_main(&mut log, assume_yes, &mut reinstall) {
+   748	        log.line(format!("[100%] Erro: {}", e));
+   749	        std::process::exit(1);
+   750	    }
+   751	
+   752	    log.line("[100%] Concluído. Reinicie para entrar no kernel CachyOS escolhido.");
+   753	}
+   754	
+   755	fn real_main(log: &mut Logger, assume_yes: bool, reinstall: &mut bool) -> Result<(), String> {
+   756	    let stamp = run_capture(log, "date", &[String::from("+%Y%m%d-%H%M%S")])
+   757	        .unwrap_or_else(|_| "sem-data".to_string())
+   758	        .trim()
+   759	        .to_string();
+   760	
+   761	    progress(log, 1, "Iniciando Mocha Stack Optimizer");
+   762	
+   763	    sudo_plain(log, &["-v".to_string()])?;
+   764	
+   765	    let work = PathBuf::from(format!("/tmp/mocha-firstboot-stack-{}", stamp));
+   766	    fs::create_dir_all(&work)
+   767	        .map_err(|e| format!("não consegui criar {}: {}", work.display(), e))?;
+   768	
+   769	    progress(
+   770	        log,
+   771	        5,
+   772	        "Removendo qualquer canal CachyOS permanente antes da atualização",
+   773	    );
+   774	    remove_persistent_cachyos(log, &stamp)?;
+   775	
+   776	    progress(log, 10, "Sincronizando bases oficiais Arch/Mocha");
+   777	    sudo(
+   778	        log,
+   779	        &[
+   780	            "pacman".to_string(),
+   781	            "-Syy".to_string(),
+   782	            "--noconfirm".to_string(),
+   783	        ],
+   784	    )?;
+   785	
+   786	    progress(log, 16, "Atualizando totalmente o sistema antes do kernel");
+   787	    sudo(
+   788	        log,
+   789	        &[
+   790	            "pacman".to_string(),
+   791	            "-Syu".to_string(),
+   792	            "--noconfirm".to_string(),
+   793	        ],
+   794	    )?;
+   795	
+   796	    progress(log, 30, "Detectando arquitetura do processador");
+   797	    let profile = detect_cpu_profile(log);
+   798	    log.line(format!("Arquitetura escolhida: {}", profile.label));
+   799	
+   800	    progress(
+   801	        log,
+   802	        38,
+   803	        "Importando chave CachyOS somente para esta transação",
+   804	    );
+   805	    sudo(
+   806	        log,
+   807	        &[
+   808	            "pacman-key".to_string(),
+   809	            "--recv-keys".to_string(),
+   810	            CACHY_KEY.to_string(),
+   811	            "--keyserver".to_string(),
+   812	            "keyserver.ubuntu.com".to_string(),
+   813	        ],
+   814	    )?;
+   815	
+   816	    sudo(
+   817	        log,
+   818	        &[
+   819	            "pacman-key".to_string(),
+   820	            "--lsign-key".to_string(),
+   821	            CACHY_KEY.to_string(),
+   822	        ],
+   823	    )?;
+   824	
+   825	    progress(log, 44, "Criando pacman.conf temporário restrito");
+   826	    let conf = write_temp_pacman_conf(log, &profile, &work)?;
+   827	
+   828	    progress(log, 50, "Sincronizando bases temporárias CachyOS");
+   829	    sudo(
+   830	        log,
+   831	        &[
+   832	            "sh".to_string(),
+   833	            "-c".to_string(),
+   834	            "rm -f /var/lib/pacman/sync/cachyos*.db /var/lib/pacman/sync/cachyos*.db.sig"
+   835	                .to_string(),
+   836	        ],
+   837	    )?;
+   838	
+   839	    sudo(
+   840	        log,
+   841	        &[
+   842	            "pacman".to_string(),
+   843	            "--config".to_string(),
+   844	            conf.display().to_string(),
+   845	            "-Syy".to_string(),
+   846	            "--noconfirm".to_string(),
+   847	        ],
+   848	    )?;
+   849	
+   850	    progress(log, 58, "Montando plano dinâmico de kernel/driver");
+   851	    let nvidia = detect_nvidia(log);
+   852	    log.line(format!(
+   853	        "GPU NVIDIA detectada: {}",
+   854	        if nvidia { "sim" } else { "não" }
+   855	    ));
+   856	
+   857	    let targets = build_plan(log, &conf, &profile, nvidia)?;
+   858	
+   859	    show_current_vs_available(log, &profile, &targets, nvidia);
+   860	
+   861	    log.line("Plano de instalação:");
+   862	    for t in &targets {
+   863	        log.line(format!(" - {}", t.display()));
+   864	    }
+   865	
+   866	    if !assume_yes {
+   867	        if !*reinstall {
+   868	            *reinstall = yes_no(
+   869	                "Reinstalar todo o stack mesmo se já estiver atualizado?",
+   870	                false,
+   871	            );
+   872	        }
+   873	
+   874	        if !yes_no("Aplicar este plano agora?", true) {
+   875	            return Err("operação cancelada pelo usuário".to_string());
+   876	        }
+   877	    }
+   878	
+   879	    progress(
+   880	        log,
+   881	        60,
+   882	        if *reinstall {
+   883	            "Reinstalando todo o stack escolhido"
+   884	        } else {
+   885	            "Instalando/atualizando somente o necessário"
+   886	        },
+   887	    );
+   888	
+   889	    install_stack(log, &conf, &targets, *reinstall)?;
+   890	
+   891	    progress(log, 78, "Regerando initramfs");
+   892	    sudo(log, &["mkinitcpio".to_string(), "-P".to_string()])?;
+   893	
+   894	    progress(
+   895	        log,
+   896	        86,
+   897	        "Regerando GRUB e definindo linux-cachyos não-Bore como default",
+   898	    );
+   899	
+   900	    if Path::new("/boot/grub").is_dir() {
+   901	        sudo(
+   902	            log,
+   903	            &[
+   904	                "sed".to_string(),
+   905	                "-i".to_string(),
+   906	                "s/^GRUB_DEFAULT=.*/GRUB_DEFAULT=saved/".to_string(),
+   907	                "/etc/default/grub".to_string(),
+   908	            ],
+   909	        )?;
+   910	
+   911	        sudo(
+   912	            log,
+   913	            &[
+   914	                "grub-mkconfig".to_string(),
+   915	                "-o".to_string(),
+   916	                "/boot/grub/grub.cfg".to_string(),
+   917	            ],
+   918	        )?;
+   919	
+   920	        let cfg = sudo_capture(log, &["cat".to_string(), "/boot/grub/grub.cfg".to_string()])?;
+   921	
+   922	        if let Some(entry) = grub_default_entry_from_cfg(&cfg) {
+   923	            log.line(format!("GRUB default escolhido: {}", entry));
+   924	            sudo(log, &["grub-set-default".to_string(), entry])?;
+   925	        } else {
+   926	            log.line("AVISO: não encontrei entrada linux-cachyos não-Bore para grub-set-default.");
+   927	        }
+   928	    } else {
+   929	        log.line("AVISO: /boot/grub ausente; etapa GRUB pulada.");
+   930	    }
+   931	
+   932	    progress(
+   933	        log,
+   934	        94,
+   935	        "Garantindo que CachyOS não ficou permanente no pacman.conf",
+   936	    );
+   937	    remove_persistent_cachyos(log, &stamp)?;
+   938	
+   939	    progress(log, 98, "Verificação final");
+   940	    for pkg in [
+   941	        "linux-cachyos",
+   942	        "linux-cachyos-headers",
+   943	        "linux-cachyos-nvidia-open",
+   944	        "nvidia-utils",
+   945	        "lib32-nvidia-utils",
+   946	        "opencl-nvidia",
+   947	    ] {
+   948	        let _ = run_capture(log, "pacman", &["-Q".to_string(), pkg.to_string()]);
+   949	    }
+   950	
+   951	    Ok(())
+   952	}
+
+[2026-06-24 12:17:33] [5] Instalacao atual em /usr/local
+
+===== /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue =====
+-rwxr-xr-x 1 root root 13K Jun 22 17:43 /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue
+/usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue: Bourne-Again shell script, Unicode text, UTF-8 text executable
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+sudo -v
+(
+  while true; do
+    sudo -n true || exit
+    sleep 30
+  done
+) &
+SUDO_KEEPALIVE_PID="$!"
+
+PACMAN_BACKUP=""
+PACMAN_FINAL_CLEAN=""
+WORK=""
+
+cleanup() {
+  rc=$?
+  set +e
+
+  if [ -n "${PACMAN_FINAL_CLEAN:-}" ] && [ -f "$PACMAN_FINAL_CLEAN" ]; then
+    sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf >/dev/null 2>&1 || true
+  elif [ -n "${PACMAN_BACKUP:-}" ] && [ -f "$PACMAN_BACKUP" ]; then
+    sudo cp -a "$PACMAN_BACKUP" /etc/pacman.conf >/dev/null 2>&1 || true
+  fi
+
+  kill "$SUDO_KEEPALIVE_PID" >/dev/null 2>&1 || true
+
+  if [ "$rc" -eq 0 ]; then
+    printf "\n[OK] Kernel Cachy v3 + NVIDIA Open pareado instalado. Reinicie com: sudo reboot\n"
+  else
+    printf "\n[FALHA] código %s. pacman.conf restaurado para Arch limpo/seguro.\n" "$rc" >&2
+  fi
+
+  exit "$rc"
+}
+trap cleanup EXIT
+
+fail() {
+  printf "[FALHA] %s\n" "$*" >&2
+  exit 1
+}
+
+log() {
+  printf "\n[%s] %s\n" "$(date "+%F %T")" "$*"
+}
+
+need_cmd() {
+  command -v "$1" >/dev/null 2>&1 || fail "Comando ausente: $1"
+}
+
+for c in sudo pacman pacman-key grep sed awk tee cp rm mkdir chmod chown install find sort date grub-mkconfig mkinitcpio getent systemctl ls modinfo; do
+  need_cmd "$c"
+done
+
+USER_TARGET="${SUDO_USER:-$USER}"
+HOME_TARGET="$(getent passwd "$USER_TARGET" | cut -d: -f6)"
+[ -n "$HOME_TARGET" ] && [ -d "$HOME_TARGET" ] || fail "Home do usuário alvo não encontrada: $USER_TARGET"
+
+TS="$(date +%Y%m%d-%H%M%S)"
+WORK="/tmp/mocha-repara-cachy-v3-x86-64-v3-$TS"
+mkdir -p "$WORK"
+
+PACMAN_BACKUP="/etc/pacman.conf.mocha-bak-repara-cachy-v3-$TS"
+sudo cp -a /etc/pacman.conf "$PACMAN_BACKUP"
+
+log "Limpando metadados quebrados do banco local do pacman."
+sudo find /var/lib/pacman/local -type f -name desc -exec sed -i '/^%INSTALLED_DB%$/,+2d' {} \;
+
+log "Corrigindo mirrorlist Arch e removendo mirror lento conhecido."
+sudo cp -a /etc/pacman.d/mirrorlist "/etc/pacman.d/mirrorlist.mocha-bak-$TS" 2>/dev/null || true
+if [ -f /etc/pacman.d/mirrorlist ]; then
+  sudo sed -i '/br\.mirrors\.cicku\.me/d' /etc/pacman.d/mirrorlist
+fi
+
+if [ ! -s /etc/pacman.d/mirrorlist ] || ! grep -Eq "^[[:space:]]*Server[[:space:]]*=" /etc/pacman.d/mirrorlist; then
+  {
+    printf "Server = https://geo.mirror.pkgbuild.com/\\$repo/os/\\$arch\n"
+    printf "Server = https://mirror.ufscar.br/archlinux/\\$repo/os/\\$arch\n"
+    printf "Server = https://mirror.rackspace.com/archlinux/\\$repo/os/\\$arch\n"
+  } | sudo tee /etc/pacman.d/mirrorlist >/dev/null
+fi
+
+log "Gerando pacman.conf Arch limpo para estado final."
+{
+  printf "[options]\n"
+  printf "HoldPkg = pacman glibc\n"
+  printf "Architecture = auto\n"
+  printf "CheckSpace\n"
+  printf "Color\n"
+  printf "ParallelDownloads = 5\n"
+  printf "SigLevel = Required DatabaseOptional\n"
+  printf "LocalFileSigLevel = Optional\n\n"
+  printf "[core]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[extra]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[multilib]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n"
+} > "$WORK/pacman.arch-clean"
+
+PACMAN_FINAL_CLEAN="$WORK/pacman.arch-clean"
+sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf
+
+log "Sincronizando Arch limpo."
+sudo pacman -Syy --noconfirm
+
+log "Garantindo pacman/keyring/certificados Arch."
+sudo pacman -S --needed --noconfirm pacman archlinux-keyring ca-certificates curl
+
+log "Importando chave CachyOS."
+sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver hkps://keyserver.ubuntu.com || sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver hkp://keyserver.ubuntu.com:80
+sudo pacman-key --lsign-key F3B607488DB35A47
+
+log "Instalando keyring e mirrorlists Cachy temporários."
+sudo pacman -U --needed --noconfirm \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-20240331-1-any.pkg.tar.zst" \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-27-1-any.pkg.tar.zst" \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v3-mirrorlist-27-1-any.pkg.tar.zst"
+
+[ -f /etc/pacman.d/cachyos-v3-mirrorlist ] || fail "Mirrorlist Cachy v3 ausente."
+[ -f /etc/pacman.d/cachyos-mirrorlist ] || fail "Mirrorlist Cachy base ausente."
+
+log "Entrando temporariamente no CachyOS v3 com arquitetura x86_64_v3 liberada."
+{
+  printf "[options]\n"
+  printf "HoldPkg = pacman glibc\n"
+  printf "Architecture = x86_64 x86_64_v3\n"
+  printf "CheckSpace\n"
+  printf "Color\n"
+  printf "ParallelDownloads = 5\n"
+  printf "SigLevel = Required DatabaseOptional\n"
+  printf "LocalFileSigLevel = Optional\n\n"
+  printf "[cachyos-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos-core-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos-extra-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos]\n"
+  printf "Include = /etc/pacman.d/cachyos-mirrorlist\n\n"
+  printf "[core]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[extra]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[multilib]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n"
+} > "$WORK/pacman.cachy-v3"
+
+sudo install -m 0644 "$WORK/pacman.cachy-v3" /etc/pacman.conf
+sudo pacman -Syy --noconfirm
+
+log "Validando pacotes obrigatórios do Cachy v3."
+for p in linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings opencl-nvidia egl-wayland libglvnd vulkan-icd-loader lib32-vulkan-icd-loader vulkan-tools; do
+  pacman -Si "$p" >/dev/null 2>&1 || fail "Pacote indisponível no Cachy v3: $p"
+done
+
+log "Removendo módulos NVIDIA conflitantes."
+REMOVE_LIST="$WORK/remove-nvidia.txt"
+: > "$REMOVE_LIST"
+
+for p in \
+  nvidia-open-dkms \
+  nvidia-dkms \
+  nvidia-open \
+  nvidia \
+  nvidia-lts \
+  nvidia-open-lts \
+  linux-cachyos-nvidia \
+  linux-cachyos-bore-nvidia \
+  linux-cachyos-eevdf-nvidia \
+  nvidia-580xx-dkms \
+  nvidia-580xx-open-dkms \
+  nvidia-580xx \
+  nvidia-580xx-open
+do
+  if pacman -Q "$p" >/dev/null 2>&1; then
+    printf "%s\n" "$p" >> "$REMOVE_LIST"
+  fi
+done
+
+pacman -Qq | while IFS= read -r pkg; do
+  if pacman -Qi "$pkg" 2>/dev/null | grep -Eq "^Provides[[:space:]]*:.*(^|[[:space:]])NVIDIA-MODULE([[:space:]]|$)"; then
+    printf "%s\n" "$pkg"
+  fi
+done >> "$REMOVE_LIST" || true
+
+sort -u -o "$REMOVE_LIST" "$REMOVE_LIST"
+
+if [ -s "$REMOVE_LIST" ]; then
+  sed "s/^/[REMOVE] /" "$REMOVE_LIST"
+  while IFS= read -r p; do
+    [ -n "$p" ] || continue
+    if pacman -Q "$p" >/dev/null 2>&1; then
+      sudo pacman -Rdd --noconfirm "$p" || true
+    fi
+  done < "$REMOVE_LIST"
+else
+  printf "[OK] Nenhum módulo NVIDIA conflitante instalado.\n"
+fi
+
+log "Instalando kernel Cachy v3 e NVIDIA Open pareado."
+sudo pacman -S --needed --noconfirm --overwrite '*' \
+  linux-cachyos \
+  linux-cachyos-headers \
+  linux-cachyos-nvidia-open \
+  nvidia-utils \
+  lib32-nvidia-utils \
+  nvidia-settings \
+  opencl-nvidia \
+  egl-wayland \
+  libglvnd \
+  vulkan-icd-loader \
+  lib32-vulkan-icd-loader \
+  vulkan-tools
+
+log "Removendo blacklists acidentais de NVIDIA."
+sudo mkdir -p /etc/modprobe.d
+sudo find /etc/modprobe.d -maxdepth 1 -type f -name "*.conf" -print0 | while IFS= read -r -d "" f; do
+
+[2026-06-24 12:17:33] [6] Estado atual do sistema relacionado
+
+pacman.conf repos Cachy:
+OK: sem Cachy ativo
+
+Pacotes kernel/NVIDIA:
+linux-cachyos 7.0.12-1
+linux-cachyos-headers 7.0.12-1
+linux-cachyos-nvidia-open 7.0.12-1
+nvidia-utils 610.43.02-3
+lib32-nvidia-utils 610.43.02-1
+opencl-nvidia 610.43.02-3
+
+Kernel rodando agora:
+7.0.12-1-cachyos
+
+Relatorio completo:
+/media/mochafast/MochaArch/auditorias/dump-rust-firstboot-stack-fonte-20260624-121731/relatorio.txt
+
+[OK] Dump do fonte concluido.
+Relatorio: /media/mochafast/MochaArch/auditorias/dump-rust-firstboot-stack-fonte-20260624-121731/relatorio.txt

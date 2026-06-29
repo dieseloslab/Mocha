@@ -1,0 +1,55 @@
+
+============================================================
+ Mocha — refazer programa Kernel/Driver com tema Mocha
+============================================================
+Log:    /media/mochafast/MochaArch/ativo/logs/20260627-202803-refaz-kernel-driver-tema-mocha.log
+Backup: /media/mochafast/MochaArch/ativo/backups/mocha-kernel-driver-tema-20260627-202803
+
+[1] Backup dos arquivos antigos, se existirem
+
+[2] Removendo atalhos antigos conhecidos
+
+[3] Gravando backend canônico de kernel/driver
+
+[4] Gravando lançador das ações
+
+[5] Gravando fonte Rust com interface Mocha própria
+
+[6] Garantindo dependências mínimas de compilação
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (5) compiler-rt-22.1.6-1  libgit2-1:1.9.4-1  lld-22.1.6-1  llhttp-9.3.1-1  rust-1:1.96.0-1
+
+Total Installed Size:  339.68 MiB
+
+:: Proceed with installation? [Y/n] 
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+installing compiler-rt...
+installing llhttp...
+installing libgit2...
+installing lld...
+installing rust...
+Optional dependencies for rust
+    gdb: rust-gdb script [installed]
+    lldb: rust-lldb script
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+warning: libx11-1.8.13-1 is up to date -- skipping
+ there is nothing to do
+
+[7] Compilando binário Rust com UI Mocha
+
+[8] Instalando wrapper principal
+
+[9] Criando ícone Mocha
+
+[10] Criando atalho correto no menu, Desktop e /etc/skel
+
+[11] Registrando no manual vivo, se existir
+bash: line 825: /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md: Permission denied

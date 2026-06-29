@@ -1,0 +1,65 @@
+
+============================================================
+ Mocha — criar MangoHud.conf canônico novo
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-230718-cria-mangohud-canonico-novo.log
+
+[1/4] Criando MangoHud.conf Mocha canônico...
+[OK] Backup do MangoHud.conf anterior: /usr/local/share/mocha/mangohud/MangoHud.conf.bak-20260627-230718
+[OK] MangoHud.conf canônico criado: /usr/local/share/mocha/mangohud/MangoHud.conf
+
+[2/4] Replicando para usuário atual e /etc/skel...
+[OK] Backup da config do usuário atual criado
+[OK] Config aplicada ao usuário atual
+[OK] Config aplicada em /etc/skel
+
+[3/4] Regravando wrapper Mocha sem mexer em Steam/Proton...
+[OK] Wrapper corrigido: /usr/local/bin/mocha-steam-game-run
+
+[4/4] Auditoria final...
+
+--- MangoHud.conf aplicado ---
+2:# Uma linha horizontal: FPS | latência | CPU | GPU | VRAM | hora | GameMode
+3:# Sem gráfico de frametime.
+5:legacy_layout=0
+6:horizontal
+19:vram_color=e0a070
+21:frametime_color=f4c49a
+26:fps
+27:frametime
+28:cpu_stats
+29:gpu_stats
+30:vram
+31:time
+32:time_format=%H:%M
+33:gamemode
+35:# Bloqueio do gráfico verde/linha de frametime
+36:frame_timing=0
+37:histogram=0
+38:graphs=
+
+--- Wrapper ---
+4:CONF="/usr/local/share/mocha/mangohud/MangoHud.conf"
+6:export MANGOHUD=1
+7:export MANGOHUD_CONFIGFILE="$CONF"
+10:export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+11:export WINE_MOUSE_WARP_OVERRIDE=force
+12:export MouseWarpOverride=force
+15:unset MANGOHUD_CONFIG
+16:unset MANGOHUD_DLSYM
+24:if ! command -v mangohud >/dev/null 2>&1; then
+28:if command -v gamemoderun >/dev/null 2>&1; then
+29:  exec gamemoderun env MANGOHUD_CONFIGFILE="$CONF" mangohud "$@"
+31:  exec env MANGOHUD_CONFIGFILE="$CONF" mangohud "$@"
+
+[OK] Wrapper sem MANGOHUD_CONFIG inline
+[OK] Hora/minuto presentes
+[OK] Gráfico de frametime bloqueado
+
+[OK] Concluído. Nada foi alterado na Steam ou no Proton.
+
+Use no jogo:
+
+  /usr/local/bin/mocha-steam-game-run %command%
+
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-230718-cria-mangohud-canonico-novo.log

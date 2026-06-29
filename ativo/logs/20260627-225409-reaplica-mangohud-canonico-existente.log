@@ -1,0 +1,67 @@
+
+============================================================
+ Mocha — reaplicar MangoHud canônico existente
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-225409-reaplica-mangohud-canonico-existente.log
+
+[1/5] Procurando arquivo canônico do MangoHud no projeto...
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/usr/local/share/mocha/mangohud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/backups/wrapper-mangohud-correcao-20260627-190756/usr/local/share/mocha/mangohud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/backups/wrapper-mangohud-correcao-20260627-190756/home/mocha/.config/MangoHud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/backups/wrapper-mangohud-correcao-20260627-190756/etc/skel/.config/MangoHud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/backups/wrapper-mangohud-correcao-20260627-190756/media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/usr/local/share/mocha/mangohud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/backups/wrapper-mangohud-correcao-20260627-190756/media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/etc/skel/.config/MangoHud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/assets/mocha-steam/config/MangoHud/MangoHud.conf
+Candidato: score=80 :: /media/mochafast/MochaArch/ativo/etc/skel/.config/MangoHud/MangoHud.conf
+Candidato: score=80 :: /media/mochafast/MochaArch/ativo/steam-mangohud-canonico/usr/local/share/mocha/mangohud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/usr/local/share/mocha/mangohud/MangoHud.conf
+Candidato: score=120 :: /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/etc/skel/.config/MangoHud/MangoHud.conf
+
+[ESCOLHIDO]
+/media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/usr/local/share/mocha/mangohud/MangoHud.conf
+Score: 120
+[OK] Arquivo canônico validado com hora/minuto
+
+[2/5] Instalando arquivo canônico no destino global...
+[OK] Backup criado: /usr/local/share/mocha/mangohud/MangoHud.conf.bak-20260627-225409
+[OK] Instalado em: /usr/local/share/mocha/mangohud/MangoHud.conf
+
+[3/5] Replicando para usuário atual, /etc/skel e usuários existentes...
+[OK] Usuário atual corrigido
+[OK] /etc/skel corrigido
+[OK] Usuário corrigido: mocha
+
+[4/5] Corrigindo wrapper para usar somente MANGOHUD_CONFIGFILE, sem config inline...
+[OK] Wrapper corrigido: /usr/local/bin/mocha-steam-game-run
+
+[5/5] Auditoria final...
+
+--- Arquivo canônico aplicado ---
+/usr/local/share/mocha/mangohud/MangoHud.conf
+
+--- Linhas de hora no MangoHud ---
+16:time
+17:time_format=%H:%M
+
+--- Wrapper ---
+5:export MANGOHUD_CONFIGFILE="/usr/local/share/mocha/mangohud/MangoHud.conf"
+8:export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+9:export WINE_MOUSE_WARP_OVERRIDE=force
+10:export MouseWarpOverride=force
+13:unset MANGOHUD_CONFIG
+20:if command -v gamemoderun >/dev/null 2>&1 && command -v mangohud >/dev/null 2>&1; then
+21:  exec gamemoderun mangohud "$@"
+22:elif command -v mangohud >/dev/null 2>&1; then
+23:  exec mangohud "$@"
+
+--- Verificação de erro conhecido ---
+[OK] Wrapper sem MANGOHUD_CONFIG inline
+[OK] Hora/minuto presentes no MangoHud canônico aplicado
+
+[OK] MangoHud canônico reaplicado.
+Feche totalmente o jogo e a Steam antes de testar novamente.
+Launch option correta:
+
+  /usr/local/bin/mocha-steam-game-run %command%
+
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-225409-reaplica-mangohud-canonico-existente.log

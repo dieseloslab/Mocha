@@ -1,0 +1,95 @@
+
+============================================================
+ Mocha — corrigir barra azul e wallpaper
+============================================================
+Usuário: hal
+Home:    /home/hal
+Tema:    MochaPanelSolidKDE
+Backup:  /media/mochafast/MochaArch/ativo/backups/antes-corrigir-barra-azul-wallpaper-20260628-173454
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-173454-corrige-barra-azul-wallpaper.log
+
+
+============================================================
+ 1) Backup do estado atual
+============================================================
+[OK] backup: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+[OK] backup: /home/hal/.config/plasmarc
+[OK] backup: /home/hal/.config/kdeglobals
+
+============================================================
+ 2) Encontrar esquema de cores Mocha
+============================================================
+[OK] MochaDark.colors: /home/hal/.local/share/color-schemes/MochaDark.colors
+
+============================================================
+ 3) Criar tema Plasma local com painel sólido Mocha
+============================================================
+[OK] tema Plasma local criado: /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE
+
+============================================================
+ 4) Aplicar tema da barra e accent color Mocha
+============================================================
+The requested theme "MochaPanelSolidKDE" is already set as the theme for the current Plasma session.
+The requested theme "MochaDark" is already set as the theme for the current Plasma session.
+[OK] tema da barra e accent color aplicados
+
+============================================================
+ 5) Encontrar wallpaper Mocha
+============================================================
+[OK] wallpaper encontrado: /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/wallpaper/mocha-wallpaper-canonico.png
+[OK] wallpaper instalado em: /home/hal/.local/share/wallpapers/Mocha/mocha-wallpaper.png
+
+============================================================
+ 6) Aplicar wallpaper no desktop Plasma
+============================================================
+[OK] pedido de wallpaper enviado ao Plasma
+
+============================================================
+ 7) Reiniciar somente plasmashell
+============================================================
+[OK] plasmashell rodando
+
+============================================================
+ 8) Verificação
+============================================================
+--- tema Plasma ativo ---
+1:[Theme]
+2:name=MochaPanelSolidKDE
+
+--- kdeglobals ---
+136:AccentColor=195,128,86
+137:ColorSchemeHash=2fa8defce7bd6a36ef29278d0cd642da7d4d878c
+139:accentColorFromWallpaper=false
+
+--- painel preservado ---
+29:plugin=org.kde.panel
+34:plugin=org.kde.plasma.digitalclock
+46:plugin=org.kde.plasma.kickoff
+61:plugin=org.kde.plasma.icontasks
+76:plugin=org.kde.plasma.systemtray
+
+--- wallpaper configurado no appletsrc ---
+17:wallpaperplugin=org.kde.image
+20:FillMode=2
+21:Image=file:///home/hal/.local/share/wallpapers/Mocha/mocha-wallpaper.png
+30:wallpaperplugin=org.kde.image
+79:wallpaperplugin=org.kde.image
+
+--- arquivos-chave do tema local ---
+-rw-r--r-- 1 hal hal 3.5K Jun 28 17:34 /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE/colors
+-rw-r--r-- 1 hal hal 1.1K Jun 28 17:34 /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE/widgets/panel-background.svg
+-rw-r--r-- 1 hal hal  329 Jun 28 17:34 /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE/widgets/panel-background.svgz
+-rw-r--r-- 1 hal hal 1.3K Jun 28 17:34 /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE/widgets/tasks.svg
+-rw-r--r-- 1 hal hal  380 Jun 28 17:34 /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidKDE/widgets/tasks.svgz
+
+--- anti-azul no tema Plasma local ---
+[OK] sem azul KDE padrão no tema Plasma local
+
+============================================================
+ Resultado
+============================================================
+Barra:     tema Plasma local sólido Mocha aplicado
+Wallpaper: /home/hal/.local/share/wallpapers/Mocha/mocha-wallpaper.png
+Backup:    /media/mochafast/MochaArch/ativo/backups/antes-corrigir-barra-azul-wallpaper-20260628-173454
+Log:       /media/mochafast/MochaArch/ativo/logs/20260628-173454-corrige-barra-azul-wallpaper.log
+============================================================

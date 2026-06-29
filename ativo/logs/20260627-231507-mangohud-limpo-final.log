@@ -1,0 +1,66 @@
+
+============================================================
+ Mocha — MangoHud limpo final
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-231507-mangohud-limpo-final.log
+
+[1/5] Restaurando /usr/bin/mangohud se ele foi transformado em shim...
+[OK] /usr/bin/mangohud restaurado a partir de /usr/lib/mocha/mangohud/mangohud-real
+
+[2/5] Criando configuração Mocha limpa, sem chaves de gráfico...
+[OK] Backup da config anterior: /usr/local/share/mocha/mangohud/MangoHud.conf.bak-20260627-231507
+[OK] Config Mocha limpa criada: /usr/local/share/mocha/mangohud/MangoHud.conf
+
+[3/5] Instalando a mesma config nos locais que MangoHud costuma ler...
+[OK] /home/mocha/.config/MangoHud/MangoHud.conf
+[OK] /etc/skel/.config/MangoHud/MangoHud.conf
+[OK] /etc/MangoHud/MangoHud.conf
+
+[4/5] Regravando wrapper para chamar MangoHud normal com MANGOHUD_CONFIGFILE...
+[OK] Wrapper corrigido: /usr/local/bin/mocha-steam-game-run
+
+[5/5] Auditoria final...
+
+--- Config aplicada ---
+2:# Uma linha horizontal.
+4:# Não usar frame_timing, histogram, graphs, full ou preset.
+6:legacy_layout=0
+7:horizontal
+20:vram_color=e0a070
+22:frametime_color=f4c49a
+26:gpu_stats
+27:cpu_stats
+28:fps
+29:frametime
+30:vram
+31:gamemode
+32:time
+33:time_format=%H:%M
+
+--- Wrapper ---
+4:CONF="/usr/local/share/mocha/mangohud/MangoHud.conf"
+6:export MANGOHUD=1
+7:export MANGOHUD_CONFIGFILE="$CONF"
+10:export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+11:export WINE_MOUSE_WARP_OVERRIDE=force
+12:export MouseWarpOverride=force
+14:unset MANGOHUD_CONFIG
+15:unset MANGOHUD_DLSYM
+21:if command -v gamemoderun >/dev/null 2>&1; then
+22:  exec gamemoderun env MANGOHUD_CONFIGFILE="$CONF" mangohud "$@"
+24:  exec env MANGOHUD_CONFIGFILE="$CONF" mangohud "$@"
+
+--- Comando mangohud real ---
+/usr/local/bin/mangohud
+-rwxr-xr-x 1 root root 514 Jun 27 23:13 /usr/local/bin/mangohud
+
+[OK] Config sem frame_timing/histogram/graphs/full/preset
+[OK] Wrapper sem MANGOHUD_CONFIG inline
+[OK] Hora/minuto presentes
+[OK] Concluído. Não foi alterado Steam, Proton ou compatdata.
+
+Teste usando exatamente:
+
+  /usr/local/bin/mocha-steam-game-run %command%
+
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-231507-mangohud-limpo-final.log

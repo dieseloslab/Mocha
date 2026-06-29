@@ -1,0 +1,192 @@
+
+===== BINARIO: /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/deps/mocha_firstboot_stack-f787a70cbfccca59 =====
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/deps/mocha_firstboot_stack-f787a70cbfccca59: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=bbc66188df373f61c6857498acd3cd54355fc7db, stripped
+)Server = https://mirror.cachyos.org/repo/
+Server = https://cdn.cachyos.org/repo/
+Server = https://cdn77.cachyos.org/repo/
+/etc/pacman.conf.mocha-backup-
+/tmp/mocha-pacman-sem-cachyos-
+GPU NVIDIA detectada: 
+o consegui escrever pacman.conf tempor
+4kernel e headers n
+o casados: linux-cachyos=
+[cachyos]
+o consegui escrever mirrorlist x86_64: 
+GRUB default escolhido: 
+o consegui escrever mirrorlist otimizada: 
+dulo NVIDIA do kernel n
+o casa com o kernel: linux-cachyos=
+o consegui ler /etc/pacman.conf: 
+o encontrado no pacman -Si
+grub-set-defaultentity not foundk
+{invalid syntax}.debug_types.dwohost unreachable/etc/pacman.confinvalid filename
+             at 																cachyos-extra-v3.debug_macro.dwo
+cachyos-extra-v4
+assertion failed: out_pos + 3 < out_slice.len()assertion failed: (source_pos + 3) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 1 < out_slice.len()assertion failed: (source_pos + 1) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 2 < out_slice.len()assertion failed: (source_pos + 2) & out_buf_size_mask < out_slice.len()Errorlinux-cachyoslinux-cachyos-headerslinux-cachyos-nvidia-openlinux-cachyos-nvidianvidia-utilslib32-nvidia-utilsopencl-nvidiaLC_ALLCVersionArchitecturepacmanlspcinvidia/lib/ld-linux-x86-64.so.2Architecture = x86_64Architecture = x86_64 x86_64_v3Architecture = x86_64 x86_64_v4x86-64-v4supportedx86-64-v3pacman.conf sem bloco [options]n
+o consegui inserir Architecture no pacman.conf tempor
+riopacman-cachyos-temporario.confmirrorlist-cachyos-otimizadomirrorlist-cachyos-x86_64Server = https://mirror.cachyos.org/repo/x86_64/$repo
+Server = https://cdn.cachyos.org/repo/x86_64/$repo
+Server = https://cdn77.cachyos.org/repo/x86_64/$repo
+ CachyOS restrito; n
+o copiar para /etc/pacman.conf
+OK: /etc/pacman.conf sem CachyOS permanente.install-mCachyOS permanente removido de /etc/pacman.conf.============================================================ Mocha Stack Optimizer 
+ kernel CachyOS/NVIDIA din
+do. Reinicie para entrar no kernel CachyOS escolhido.Mocha Stack Optimizer
+Iniciando Mocha Stack OptimizerRemovendo qualquer canal CachyOS permanente antes da atualiza
+oSincronizando bases oficiais Arch/MochaAtualizando totalmente o sistema antes do kernelDetectando arquitetura do processadorImportando chave CachyOS somente para esta transa
+okeyserver.ubuntu.comCriando pacman.conf tempor
+rias CachyOSrm -f /var/lib/pacman/sync/cachyos*.db /var/lib/pacman/sync/cachyos*.db.sigMontando plano din
+mico de kernel/driverPlano de instala
+rioReinstalando todo o stack escolhidoRegerando initramfsRegerando GRUB e definindo linux-cachyos n
+o-Bore como default/boot/grubAVISO: /boot/grub ausente; etapa GRUB pulada.s/^GRUB_DEFAULT=.*/GRUB_DEFAULT=saved//etc/default/grub/boot/grub/grub.cfgAVISO: n
+o encontrei entrada linux-cachyos n
+o-Bore para grub-set-default.Garantindo que CachyOS n
+o ficou permanente no pacman.confVerifica
+[cachyosH9
+cachyos-H
+cachyos-H
+pacman-kH
+grub-mkcI
+-cachyosH
+nvidia-uH
+l-nvidiaH
+
+===== BINARIO: /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/deps/mocha_firstboot_stack-a4d66cd4bacc70ca =====
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/deps/mocha_firstboot_stack-a4d66cd4bacc70ca: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=0911b803724954e5cdec74d4bfe9c2cd4c80922a, stripped
+vel do kernel: 
+)Server = https://mirror.cachyos.org/repo/
+Server = https://cdn.cachyos.org/repo/
+Server = https://cdn77.cachyos.org/repo/
+ - lib32-nvidia-utils atual: 
+/etc/pacman.conf.mocha-backup-
+ - opencl-nvidia dispon
+/tmp/mocha-pacman-sem-cachyos-
+GPU NVIDIA detectada: 
+o consegui escrever pacman.conf tempor
+ - opencl-nvidia atual: 
+4kernel e headers n
+o casados: linux-cachyos=
+ - nvidia-utils atual: 
+[cachyos]
+# - lib32-nvidia-utils dispon
+ - nvidia-utils dispon
+o consegui escrever mirrorlist x86_64: 
+GRUB default escolhido: 
+o consegui escrever mirrorlist otimizada: 
+dulo NVIDIA do kernel n
+o casa com o kernel: linux-cachyos=
+o consegui ler /etc/pacman.conf: 
+dulo atual do kernel: 
+o encontrado no pacman -Si
+hyos-nvidia-open--force-reinstal
+grub-set-defaultentity not foundk
+{invalid syntax}.debug_types.dwohost unreachable/etc/pacman.confinvalid filename
+             at 																cachyos-extra-v3.debug_macro.dwo
+cachyos-extra-v4
+assertion failed: out_pos + 3 < out_slice.len()assertion failed: (source_pos + 3) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 1 < out_slice.len()assertion failed: (source_pos + 1) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 2 < out_slice.len()assertion failed: (source_pos + 2) & out_buf_size_mask < out_slice.len()Errorlinux-cachyoslinux-cachyos-headerslinux-cachyos-nvidia-openlinux-cachyos-nvidianvidia-utilslib32-nvidia-utilsopencl-nvidiaLC_ALLCVersionArchitecturepacmanlspcinvidia-Q/lib/ld-linux-x86-64.so.2Architecture = x86_64Architecture = x86_64 x86_64_v3Architecture = x86_64 x86_64_v4x86-64-v3supportedx86-64-v4pacman.conf sem bloco [options]n
+o consegui inserir Architecture no pacman.conf tempor
+rio-runamepacman-cachyos-temporario.confmirrorlist-cachyos-otimizadomirrorlist-cachyos-x86_64Server = https://mirror.cachyos.org/repo/x86_64/$repo
+Server = https://cdn.cachyos.org/repo/x86_64/$repo
+Server = https://cdn77.cachyos.org/repo/x86_64/$repo
+ CachyOS restrito; n
+o copiar para /etc/pacman.conf
+OK: /etc/pacman.conf sem CachyOS permanente.install-mCachyOS permanente removido de /etc/pacman.conf.============================================================ Stack atual vs dispon
+velKernel:Driver de v
+deo: - NVIDIA n
+o detectada; stack NVIDIA n
+deo NVIDIA:m
+dulo NVIDIA indispon
+ kernel CachyOS/NVIDIA din
+do. Reinicie para entrar no kernel CachyOS escolhido.Mocha Stack Optimizer
+  - kernel em uso e pacote linux-cachyos atual
+  - kernel CachyOS novo dispon
+  - driver NVIDIA atual e driver dispon
+Iniciando Mocha Stack OptimizerRemovendo qualquer canal CachyOS permanente antes da atualiza
+oSincronizando bases oficiais Arch/MochaAtualizando totalmente o sistema antes do kernelDetectando arquitetura do processadorImportando chave CachyOS somente para esta transa
+okeyserver.ubuntu.comCriando pacman.conf tempor
+rias CachyOSrm -f /var/lib/pacman/sync/cachyos*.db /var/lib/pacman/sync/cachyos*.db.sigMontando plano din
+mico de kernel/driverPlano de instala
+rioReinstalando todo o stack escolhidoRegerando initramfsRegerando GRUB e definindo linux-cachyos n
+o-Bore como default/boot/grubAVISO: /boot/grub ausente; etapa GRUB pulada.s/^GRUB_DEFAULT=.*/GRUB_DEFAULT=saved//etc/default/grub/boot/grub/grub.cfgAVISO: n
+o encontrei entrada linux-cachyos n
+o-Bore para grub-set-default.Garantindo que CachyOS n
+o ficou permanente no pacman.confVerifica
+[cachyosH9
+cachyos-L
+cachyos-L
+pacman-kH
+pacman-kH
+grub-mkcH
+-cachyosH
+nvidia-uH
+l-nvidiaH
+
+===== BINARIO: /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/mocha-firstboot-stack =====
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/target/release/mocha-firstboot-stack: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=0911b803724954e5cdec74d4bfe9c2cd4c80922a, stripped
+vel do kernel: 
+)Server = https://mirror.cachyos.org/repo/
+Server = https://cdn.cachyos.org/repo/
+Server = https://cdn77.cachyos.org/repo/
+ - lib32-nvidia-utils atual: 
+/etc/pacman.conf.mocha-backup-
+ - opencl-nvidia dispon
+/tmp/mocha-pacman-sem-cachyos-
+GPU NVIDIA detectada: 
+o consegui escrever pacman.conf tempor
+ - opencl-nvidia atual: 
+4kernel e headers n
+o casados: linux-cachyos=
+ - nvidia-utils atual: 
+[cachyos]
+# - lib32-nvidia-utils dispon
+ - nvidia-utils dispon
+o consegui escrever mirrorlist x86_64: 
+GRUB default escolhido: 
+o consegui escrever mirrorlist otimizada: 
+dulo NVIDIA do kernel n
+o casa com o kernel: linux-cachyos=
+o consegui ler /etc/pacman.conf: 
+dulo atual do kernel: 
+o encontrado no pacman -Si
+hyos-nvidia-open--force-reinstal
+grub-set-defaultentity not foundk
+{invalid syntax}.debug_types.dwohost unreachable/etc/pacman.confinvalid filename
+             at 																cachyos-extra-v3.debug_macro.dwo
+cachyos-extra-v4
+assertion failed: out_pos + 3 < out_slice.len()assertion failed: (source_pos + 3) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 1 < out_slice.len()assertion failed: (source_pos + 1) & out_buf_size_mask < out_slice.len()assertion failed: out_pos + 2 < out_slice.len()assertion failed: (source_pos + 2) & out_buf_size_mask < out_slice.len()Errorlinux-cachyoslinux-cachyos-headerslinux-cachyos-nvidia-openlinux-cachyos-nvidianvidia-utilslib32-nvidia-utilsopencl-nvidiaLC_ALLCVersionArchitecturepacmanlspcinvidia-Q/lib/ld-linux-x86-64.so.2Architecture = x86_64Architecture = x86_64 x86_64_v3Architecture = x86_64 x86_64_v4x86-64-v3supportedx86-64-v4pacman.conf sem bloco [options]n
+o consegui inserir Architecture no pacman.conf tempor
+rio-runamepacman-cachyos-temporario.confmirrorlist-cachyos-otimizadomirrorlist-cachyos-x86_64Server = https://mirror.cachyos.org/repo/x86_64/$repo
+Server = https://cdn.cachyos.org/repo/x86_64/$repo
+Server = https://cdn77.cachyos.org/repo/x86_64/$repo
+ CachyOS restrito; n
+o copiar para /etc/pacman.conf
+OK: /etc/pacman.conf sem CachyOS permanente.install-mCachyOS permanente removido de /etc/pacman.conf.============================================================ Stack atual vs dispon
+velKernel:Driver de v
+deo: - NVIDIA n
+o detectada; stack NVIDIA n
+deo NVIDIA:m
+dulo NVIDIA indispon
+ kernel CachyOS/NVIDIA din
+do. Reinicie para entrar no kernel CachyOS escolhido.Mocha Stack Optimizer
+  - kernel em uso e pacote linux-cachyos atual
+  - kernel CachyOS novo dispon
+  - driver NVIDIA atual e driver dispon
+Iniciando Mocha Stack OptimizerRemovendo qualquer canal CachyOS permanente antes da atualiza
+oSincronizando bases oficiais Arch/MochaAtualizando totalmente o sistema antes do kernelDetectando arquitetura do processadorImportando chave CachyOS somente para esta transa
+okeyserver.ubuntu.comCriando pacman.conf tempor
+rias CachyOSrm -f /var/lib/pacman/sync/cachyos*.db /var/lib/pacman/sync/cachyos*.db.sigMontando plano din
+mico de kernel/driverPlano de instala
+rioReinstalando todo o stack escolhidoRegerando initramfsRegerando GRUB e definindo linux-cachyos n
+o-Bore como default/boot/grubAVISO: /boot/grub ausente; etapa GRUB pulada.s/^GRUB_DEFAULT=.*/GRUB_DEFAULT=saved//etc/default/grub/boot/grub/grub.cfgAVISO: n
+o encontrei entrada linux-cachyos n
+o-Bore para grub-set-default.Garantindo que CachyOS n
+o ficou permanente no pacman.confVerifica
+[cachyosH9
+cachyos-L
+cachyos-L
+pacman-kH
+pacman-kH
+grub-mkcH
+-cachyosH
+nvidia-uH
+l-nvidiaH

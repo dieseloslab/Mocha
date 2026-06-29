@@ -1,0 +1,157 @@
+
+============================================================
+ Mocha — fechamento Kernel/Driver com tema Mocha
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-202924-fecha-kernel-driver-tema-mocha-v2.log
+
+[1] Validando arquivos instalados
+-rwxr-xr-x 1 root root 174 Jun 27 20:28 /usr/local/bin/mocha-kernel-driver
+-rwxr-xr-x 1 root root 528896 Jun 27 20:28 /usr/local/lib/mocha/kernel-driver/mocha-kernel-driver-gui
+-rwxr-xr-x 1 root root 8388 Jun 27 20:28 /usr/local/lib/mocha/kernel-driver/mocha-kernel-driver-action.sh
+-rwxr-xr-x 1 root root 517 Jun 27 20:28 /usr/local/lib/mocha/kernel-driver/mocha-kernel-driver-launch-action.sh
+-rw-r--r-- 1 root root 249 Jun 27 20:28 /usr/share/applications/mocha-kernel-driver.desktop
+-rwxr-xr-x 1 mocha mocha 249 Jun 27 20:28 /home/mocha/Desktop/mocha-kernel-driver.desktop
+-rwxr-xr-x 1 root root 249 Jun 27 20:28 /etc/skel/Desktop/mocha-kernel-driver.desktop
+-rw-r--r-- 1 root root 510 Jun 27 20:28 /usr/share/pixmaps/mocha-kernel-driver.svg
+[OK] Arquivos principais existem.
+
+[2] Corrigindo permissões dos atalhos
+[OK] Atalho do Desktop e /etc/skel ajustados.
+
+[3] Preservando cópia canônica no diretório ativo e payload
+[OK] Cópia canônica preservada em:
+  /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver
+  /media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver
+
+[4] Registrando no manual vivo com sudo
+[OK] Manual vivo atualizado.
+
+[5] Removendo compilador Rust da matriz, se ficou instalado só para build
+checking dependencies...
+:: kate optionally requires rust: Rust LSP support
+
+Packages (5) compiler-rt-22.1.6-1  libgit2-1:1.9.4-1  lld-22.1.6-1  llhttp-9.3.1-1  rust-1:1.96.0-1
+
+Total Removed Size:  339.68 MiB
+
+:: Do you want to remove these packages? [Y/n] 
+:: Processing package changes...
+removing rust...
+removing lld...
+removing libgit2...
+removing llhttp...
+removing compiler-rt...
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+
+[6] Testando backend sem abrir instalação
+Mocha - Kernel e Driver
+Interface Mocha/KDE com CachyOS transitorio
+
+[CPU]
+Modelo: AMD Ryzen 7 5700G with Radeon Graphics
+Vendor: AuthenticAMD
+Nivel x86-64: x86-64-v3
+Microcode recomendado: amd-ucode
+AVX: sim | AVX2: sim | AVX512: nao | FMA: sim | AES: sim
+
+[Kernel atual]
+uname -r: 7.0.13-arch1-2
+Pacote: linux 7.0.13.arch1-2
+Pacote: linux-headers 7.0.13.arch1-2
+
+[GPU/driver atual]
+Vendor detectado: NVIDIA
+Modulos carregados:
+01:00.0 VGA compatible controller: NVIDIA Corporation GB206 [GeForce RTX 5060 Ti] (rev a1)
+  	Kernel modules: nouveau
+  	Kernel driver in use: snd_hda_intel
+  	Kernel modules: snd_hda_intel
+  	Kernel driver in use: xhci_hcd
+  	Kernel modules: xhci_pci
+  	Kernel driver in use: ahci
+  	Kernel modules: ahci
+  	Kernel driver in use: pcieport
+  	Kernel modules: shpchp
+  	Kernel driver in use: pcieport
+  	Kernel modules: shpchp
+
+[Pacotes de video instalados]
+Pacote: nvidia-utils 610.43.02-3
+Pacote: mesa 1:26.1.3-2
+Pacote: vulkan-radeon 1:26.1.3-2
+Pacote: vulkan-intel 1:26.1.3-2
+
+[Disponivel no canal transitorio]
+linux-cachyos indisponivel/no-cache
+linux-cachyos-headers indisponivel/no-cache
+linux-cachyos-nvidia-open indisponivel/no-cache
+linux-cachyos-nvidia indisponivel/no-cache
+nvidia-open-dkms 610.43.02-3
+nvidia-dkms indisponivel/no-cache
+nvidia-utils 610.43.02-3
+mesa 1
+vulkan-radeon 1
+vulkan-intel 1
+
+[Stack que sera usado]
+  linux-cachyos
+  linux-cachyos-headers
+  amd-ucode
+  nvidia-open-dkms
+  nvidia-utils
+  lib32-nvidia-utils
+  nvidia-settings
+  opencl-nvidia
+  egl-wayland
+  libxnvctrl
+
+[Acoes]
+Instalar: instala pacotes ausentes do stack detectado.
+Reinstalar: reinstala kernel, headers e driver detectado.
+O canal CachyOS e usado por config temporaria, sem gravar em /etc/pacman.conf.
+
+[7] Conferindo .desktop final
+
+--- Desktop usuário ---
+[Desktop Entry]
+Type=Application
+Name=Mocha — Kernel e Driver
+Comment=Atualizar ou reinstalar kernel e driver de vídeo
+Exec=/usr/local/bin/mocha-kernel-driver
+Icon=mocha-kernel-driver
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true
+
+--- Menu sistema ---
+[Desktop Entry]
+Type=Application
+Name=Mocha — Kernel e Driver
+Comment=Atualizar ou reinstalar kernel e driver de vídeo
+Exec=/usr/local/bin/mocha-kernel-driver
+Icon=mocha-kernel-driver
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true
+
+[8] Conferindo binário
+/usr/local/lib/mocha/kernel-driver/mocha-kernel-driver-gui: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, BuildID[sha1]=4a35e5a0773b7ce34e20e695041a3a8421227872, not stripped
+	linux-vdso.so.1 (0x00007f402b1dd000)
+	libX11.so.6 => /usr/lib/libX11.so.6 (0x00007f402b001000)
+	libgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f402afd4000)
+	libc.so.6 => /usr/lib/libc.so.6 (0x00007f402ac00000)
+	/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f402b1df000)
+	libxcb.so.1 => /usr/lib/libxcb.so.1 (0x00007f402afa9000)
+	libXau.so.6 => /usr/lib/libXau.so.6 (0x00007f402afa4000)
+	libXdmcp.so.6 => /usr/lib/libXdmcp.so.6 (0x00007f402af9a000)
+
+============================================================
+[OK] Fechamento concluído.
+
+Abra pelo Desktop:
+  Mocha — Kernel e Driver
+
+Ou pelo terminal:
+  mocha-kernel-driver
+============================================================

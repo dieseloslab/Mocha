@@ -1,0 +1,18 @@
+
+============================================================
+ Mocha — corrigir atualizador kernel/driver para Rust V2
+============================================================
+Base:      /media/mochafast/MochaArch
+Ativo:     /media/mochafast/MochaArch/ativo
+Fonte:     /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack
+Alt bin:   /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack
+Log:       /media/mochafast/MochaArch/ativo/logs/20260627-192341-corrige-atualizador-kernel-driver-rust-v2.log
+
+[1] Removendo o erro anterior da seleção automática
+Atual antes da correção:
+-rwxr-xr-x 1 root root 1006 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver-manager
+/usr/local/bin/mocha-kernel-driver-manager: Bourne-Again shell script, Unicode text, UTF-8 text executable
+2bd57c7c5863afba52cacbc116b55d57283f02ac41c3350f8925e131f2a4650f  /usr/local/bin/mocha-kernel-driver-manager
+
+[2] Forçando uso do projeto Rust correto
+[FALHA] Cargo/Rust não está instalado, mas a fonte Rust existe em: /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack

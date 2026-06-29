@@ -1,0 +1,130 @@
+
+============================================================
+ Mocha — continuar agressividade sem Flatpak
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-223247-continua-agressividade-sem-flatpak.log
+
+[1] Sysctl agressivo Mocha
+[OK] sysctl aplicado.
+
+[2] ZRAM zstd 100% RAM
+[OK] zram configurado.
+
+[3] THP madvise
+Created symlink '/etc/systemd/system/multi-user.target.wants/mocha-thp-madvise.service' -> '/etc/systemd/system/mocha-thp-madvise.service'.
+[OK] THP madvise aplicado.
+
+[4] CPU agressiva
+Created symlink '/etc/systemd/system/multi-user.target.wants/mocha-cpu-aggressive.service' -> '/etc/systemd/system/mocha-cpu-aggressive.service'.
+[OK] CPU em performance.
+
+[5] GPU agressiva
+Created symlink '/etc/systemd/system/multi-user.target.wants/mocha-gpu-aggressive.service' -> '/etc/systemd/system/mocha-gpu-aggressive.service'.
+[OK] GPU em política agressiva.
+
+[6] NVIDIA PowerMizer na sessão KDE
+[OK] PowerMizer configurado.
+
+[7] GameMode agressivo
+[OK] GameMode configurado.
+
+[8] TuneD latency-performance
+Created symlink '/etc/systemd/system/multi-user.target.wants/tuned.service' -> '/usr/lib/systemd/system/tuned.service'.
+[OK] TuneD ativo.
+
+[9] Serviços auxiliares
+[OK] Serviços auxiliares ativados.
+
+[10] MangoHud canônico
+[OK] MangoHud aplicado.
+
+============================================================
+ Conferência
+============================================================
+
+[TuneD]
+Current active profile: latency-performance
+
+[ZRAM]
+NAME           TYPE       SIZE   USED  PRIO
+/dev/nvme0n1p3 partition   17G 602.5M    -1
+/dev/zram0     partition 15.4G     0B 32767
+NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd         15.4G   4K   64B   20K         [SWAP]
+
+[CPU]
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor: performance
+/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor: performance
+
+[GPU]
+NVIDIA GeForce RTX 5060 Ti, Enabled, P5
+
+[Serviços]
+* tuned.service - Dynamic System Tuning Daemon
+     Loaded: loaded (/usr/lib/systemd/system/tuned.service; enabled; preset: disabled)
+     Active: active (running) since Sat 2026-06-27 22:32:50 -03; 2s ago
+ Invocation: 90a56ed96ff14b4f9120d3e498443f34
+       Docs: man:tuned(8)
+             man:tuned.conf(5)
+             man:tuned-adm(8)
+   Main PID: 12231 (tuned)
+      Tasks: 4 (limit: 18651)
+     Memory: 34M (peak: 34.7M)
+        CPU: 170ms
+     CGroup: /system.slice/tuned.service
+             `-12231 /usr/bin/python3 -Es /usr/bin/tuned -l -P
+
+Jun 27 22:32:50 derp-x8664 systemd[1]: Starting Dynamic System Tuning Daemon...
+Jun 27 22:32:50 derp-x8664 systemd[1]: Started Dynamic System Tuning Daemon.
+
+* mocha-cpu-aggressive.service - Mocha aggressive CPU policy
+     Loaded: loaded (/etc/systemd/system/mocha-cpu-aggressive.service; enabled; preset: disabled)
+     Active: active (exited) since Sat 2026-06-27 22:32:49 -03; 3s ago
+ Invocation: d7422a5202bf47e48779f24e00edd346
+   Main PID: 11835 (code=exited, status=0/SUCCESS)
+   Mem peak: 2M
+        CPU: 9ms
+
+Jun 27 22:32:49 derp-x8664 systemd[1]: Starting Mocha aggressive CPU policy...
+Jun 27 22:32:49 derp-x8664 systemd[1]: Finished Mocha aggressive CPU policy.
+
+* mocha-gpu-aggressive.service - Mocha aggressive GPU policy
+     Loaded: loaded (/etc/systemd/system/mocha-gpu-aggressive.service; enabled; preset: disabled)
+     Active: active (exited) since Sat 2026-06-27 22:32:49 -03; 3s ago
+ Invocation: da2b322bcc044b2ca49fd793c9a19dab
+   Main PID: 12053 (code=exited, status=0/SUCCESS)
+   Mem peak: 31.8M
+        CPU: 44ms
+
+Jun 27 22:32:49 derp-x8664 systemd[1]: Starting Mocha aggressive GPU policy...
+Jun 27 22:32:49 derp-x8664 systemd[1]: Finished Mocha aggressive GPU policy.
+
+* mocha-thp-madvise.service - Mocha THP madvise policy
+     Loaded: loaded (/etc/systemd/system/mocha-thp-madvise.service; enabled; preset: disabled)
+     Active: active (exited) since Sat 2026-06-27 22:32:48 -03; 4s ago
+ Invocation: 2cd121e51bac44b6acf6ef4232fa14f3
+   Main PID: 11617 (code=exited, status=0/SUCCESS)
+   Mem peak: 2.2M
+        CPU: 6ms
+
+Jun 27 22:32:48 derp-x8664 systemd[1]: Starting Mocha THP madvise policy...
+Jun 27 22:32:48 derp-x8664 systemd[1]: Finished Mocha THP madvise policy.
+
+============================================================
+ Concluído sem Flatpak.
+ Log: /media/mochafast/MochaArch/ativo/logs/20260627-223247-continua-agressividade-sem-flatpak.log
+============================================================

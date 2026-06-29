@@ -1,0 +1,72 @@
+
+============================================================
+ Mocha — fixar atualizador/reinstalador kernel/driver
+ Etapa obrigatória antes de criar rootfs
+============================================================
+Base: /media/mochafast/MochaArch
+Ativo: /media/mochafast/MochaArch/ativo
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-192031-fixa-atualizador-kernel-driver-pre-rootfs.log
+
+[1] Procurando programa já instalado ou salvo no diretório ativo
+
+[2] Fonte Rust detectada:
+    /media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack
+
+[3] Candidatos encontrados:
+ - /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/bin/mocha-firstboot-stack
+ - /media/mochafast/MochaArch/ativo/ferramentas/mocha-kernel-driver-updater/desktop/mocha-firstboot-stack.desktop
+ - /media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-verificar-nvidia-wayland-zen.sh
+ - /usr/bin/nvidia-settings
+ - /usr/local/bin/mocha-steam-client-tcp
+
+[4] Programa escolhido:
+    /media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-verificar-nvidia-wayland-zen.sh
+/media/mochafast/MochaArch/ativo/scripts/20260529-200013-mocha-verificar-nvidia-wayland-zen.sh: Bourne-Again shell script, Unicode text, UTF-8 text executable
+
+[5] Instalando binário canônico no sistema matriz
+[OK] Binário instalado: /usr/local/bin/mocha-kernel-driver-manager
+
+[6] Criando lançador de primeiro boot
+[OK] Firstboot instalado; usuário atual marcado como já processado para não abrir sozinho nesta sessão.
+
+[7] Criando atalhos de menu/Desktop/skel
+[OK] Atalhos criados.
+
+[8] Salvando cópia canônica no diretório ativo
+[OK] Fonte Rust preservado em: /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager/source
+[OK] Cópia canônica: /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager
+[OK] Payload ativo: /media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager
+
+[9] Registrando no manual
+[OK] Manual atualizado: /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+[OK] Manual atualizado: /media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+[OK] Manual atualizado: /media/vmstore/MochaArch/iso/manual/PLANO-B-MATRIZ-CALAM-LIVE-ISO.md
+
+[10] Validação final
+
+Binários:
+lrwxrwxrwx 1 root root   27 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver -> mocha-kernel-driver-manager
+-rwxr-xr-x 1 root root  517 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver-firstboot
+-rwxr-xr-x 1 root root 1006 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver-manager
+lrwxrwxrwx 1 root root   27 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver-reinstaller -> mocha-kernel-driver-manager
+lrwxrwxrwx 1 root root   27 Jun 27 19:20 /usr/local/bin/mocha-kernel-driver-updater -> mocha-kernel-driver-manager
+
+Desktop entries:
+-rwxr-xr-x 1 root  root  291 Jun 27 19:20 /etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+-rwxr-xr-x 1 mocha mocha 291 Jun 27 19:20 /home/mocha/Área de trabalho/mocha-kernel-driver-manager.desktop
+-rw-r--r-- 1 root  root  291 Jun 27 19:20 /usr/share/applications/mocha-kernel-driver-manager.desktop
+
+Payload ativo:
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/xdg/autostart/mocha-kernel-driver-firstboot.desktop
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-firstboot
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-manager
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-reinstaller
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/local/bin/mocha-kernel-driver-updater
+/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+
+============================================================
+[OK] Atualizador/reinstalador de kernel/driver fixado antes do rootfs.
+[OK] Agora o rootfs pode herdar esse programa corretamente.
+============================================================

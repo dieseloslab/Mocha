@@ -1,0 +1,12 @@
+
+============================================================
+ Mocha — corrigir usuário live diretamente no rootfs
+============================================================
+Rootfs: /media/vmstore/MochaArch/iso/build-rootfs-estado-atual-calamares-gamer-20260627-204738/rootfs
+Log:    /media/mochafast/MochaArch/ativo/logs/20260627-210208-corrige-usuario-live-rootfs-direto.log
+
+[1] Verificação:
+mocha:x:1000:982:Mocha Live:/home/mocha:/bin/bash
+wheel:x:998:mocha
+mocha::19800:0:99999:7:::
+cat: /media/vmstore/MochaArch/iso/build-rootfs-estado-atual-calamares-gamer-20260627-204738/rootfs/etc/sudoers.d/10-mocha-live: Permission denied

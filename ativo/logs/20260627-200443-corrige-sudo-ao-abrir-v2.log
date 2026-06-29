@@ -1,0 +1,58 @@
+
+============================================================
+ Mocha — corrigir sudo ao abrir sem tocar quarentena
+============================================================
+Base:  /media/mochafast/MochaArch
+Log:   /media/mochafast/MochaArch/ativo/logs/20260627-200443-corrige-sudo-ao-abrir-v2.log
+
+[1] Restaurando alteração indevida dentro de ativo/quarentena
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/user-desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v7-20260627-193945/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/user-desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Restaurado na quarentena: /media/mochafast/MochaArch/ativo/quarentena/atualizador-kernel-driver-pre-v8-20260627-194513/media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager/etc/skel/Desktop/mocha-kernel-driver-manager.desktop
+
+[2] Recriando lançador root correto
+[OK] Root exec instalado: /usr/local/lib/mocha/mocha-kernel-driver-manager-root-exec
+[OK] Comando público instalado: /usr/local/bin/mocha-kernel-driver-manager-root
+
+[3] Recriando política polkit
+[OK] Política instalada: /usr/share/polkit-1/actions/org.mocha.kernel-driver-manager.policy
+
+[4] Recriando atalhos corretos
+[OK] Atalho do menu atualizado: /usr/share/applications/mocha-kernel-driver-manager.desktop
+[OK] Atalho /etc/skel atualizado.
+
+[5] Sincronizando somente canônico e payload
+[OK] Sincronizado: /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager
+[OK] Sincronizado: /media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager
+
+[6] Registrando no manual com sudo tee
+[OK] Manual vivo atualizado.
+
+[7] Validação final
+
+Exec ativo no menu:
+6:Exec=/usr/local/bin/mocha-kernel-driver-manager-root
+
+Arquivos ativos:
+lrwxrwxrwx 1 root root   58 Jun 27 20:04 /usr/local/bin/mocha-kernel-driver-manager-root -> /usr/local/lib/mocha/mocha-kernel-driver-manager-root-exec
+-rwxr-xr-x 1 root root 1.3K Jun 27 20:04 /usr/local/lib/mocha/mocha-kernel-driver-manager-root-exec
+-rw-r--r-- 1 root root  299 Jun 27 20:04 /usr/share/applications/mocha-kernel-driver-manager.desktop
+-rw-r--r-- 1 root root  957 Jun 27 20:04 /usr/share/polkit-1/actions/org.mocha.kernel-driver-manager.policy
+
+============================================================
+[OK] Corrigido sem varrer quarentena.
+[OK] O menu/atalho chama o lançador que pede autenticação ao abrir.
+[OK] Canônico e payload atualizados.
+[OK] Manual registrado com sudo tee.
+============================================================

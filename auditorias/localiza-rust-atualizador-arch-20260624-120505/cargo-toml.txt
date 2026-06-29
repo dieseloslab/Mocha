@@ -1,0 +1,26 @@
+
+### ROOT: /media/mochafast/MochaArch
+/media/mochafast/MochaArch/auditorias/backup-stack-optimizer-atual-vs-disponivel-20260615-115818/projeto/Cargo.toml
+/media/mochafast/MochaArch/ativo/ferramentas/mocha-firstboot-stack/Cargo.toml
+/media/mochafast/MochaArch/calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-rs/Cargo.toml
+/media/mochafast/MochaArch/calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-sys/Cargo.toml
+
+### ROOT: /media/vmstore/MochaArch
+/media/vmstore/MochaArch/iso/auditorias/auditoria-profunda-referencias-20260621-000701/raw/EndeavourOS/rootfs/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/auditorias/auditoria-profunda-referencias-20260621-000701/raw/EndeavourOS/rootfs/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/auditorias/auditoria-profunda-referencias-20260621-000701/raw/CachyOS/rootfs/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/auditorias/auditoria-profunda-referencias-20260621-000701/raw/CachyOS/rootfs/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/work-endeavour-clone-20260621-093157/rootfs/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/work-endeavour-clone-20260621-093157/rootfs/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/work/x86_64/airootfs/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/work/x86_64/airootfs/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/plano-b-clone/rootfs-20260622-001216/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/plano-b-clone/rootfs-20260622-001216/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/plano-b-clone/rootfs-20260622-134706/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/plano-b-clone/rootfs-20260622-134706/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/iso/work-audita-corrige-calamares-20260624-065146/airootfs/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/iso/work-audita-corrige-calamares-20260624-065146/airootfs/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/auditorias/quarentena-snapshots-incompletos-20260610-225651/estado-reprodutivel-mocha-20260610-224745/calamares/fast-calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/auditorias/quarentena-snapshots-incompletos-20260610-225651/estado-reprodutivel-mocha-20260610-224745/calamares/fast-calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-sys/Cargo.toml
+/media/vmstore/MochaArch/auditorias/quarentena-bloat-snapshot-enxuto-v3-20260610-235807/calamares/fast-calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-rs/Cargo.toml
+/media/vmstore/MochaArch/auditorias/quarentena-bloat-snapshot-enxuto-v3-20260610-235807/calamares/fast-calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/git/libgit-sys/Cargo.toml

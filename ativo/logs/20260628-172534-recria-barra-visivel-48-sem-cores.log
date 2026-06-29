@@ -1,0 +1,60 @@
+
+============================================================
+ Mocha — recriar barra visível 48 px sem tocar nas cores
+============================================================
+Usuário: hal
+Home:    /home/hal
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-172534-recria-barra-visivel-48-sem-cores.log
+
+
+============================================================
+ 1) Backup do estado atual
+============================================================
+[OK] backup: /media/mochafast/MochaArch/ativo/backups/antes-recriar-barra-visivel-20260628-172534/plasma-org.kde.plasma.desktop-appletsrc
+
+============================================================
+ 2) Garantir qdbus6 e plasmashell vivos
+============================================================
+[OK] qdbus6 presente e plasmashell rodando
+
+============================================================
+ 3) Recriar painel inferior visível pelo Plasma
+============================================================
+[OK] comando de recriação enviado ao Plasma
+
+============================================================
+ 4) Reiniciar plasmashell para gravar e renderizar
+============================================================
+[OK] plasmashell reiniciado
+
+============================================================
+ 5) Verificação
+============================================================
+--- plasmashell ---
+13499 plasmashell
+
+--- painel no appletsrc ---
+28:plugin=org.kde.panel
+40:plugin=org.kde.plasma.icontasks
+33:plugin=org.kde.plasma.kickoff
+47:plugin=org.kde.plasma.marginsseparator
+55:plugin=org.kde.plasma.systemtray
+131:plugin=org.kde.plasma.digitalclock
+12:formfactor=0
+14:lastScreen=0
+15:location=0
+24:formfactor=2
+26:lastScreen=0
+27:location=4
+51:formfactor=0
+53:lastScreen=-1
+54:location=0
+
+============================================================
+ Resultado
+============================================================
+Barra recriada: inferior, visível, 48 px
+Cores:          não alteradas
+Backup:         /media/mochafast/MochaArch/ativo/backups/antes-recriar-barra-visivel-20260628-172534
+Log:            /media/mochafast/MochaArch/ativo/logs/20260628-172534-recria-barra-visivel-48-sem-cores.log
+============================================================

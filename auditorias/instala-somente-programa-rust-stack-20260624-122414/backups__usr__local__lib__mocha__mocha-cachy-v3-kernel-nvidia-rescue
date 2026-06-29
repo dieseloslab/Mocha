@@ -1,0 +1,337 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+sudo -v
+(
+  while true; do
+    sudo -n true || exit
+    sleep 30
+  done
+) &
+SUDO_KEEPALIVE_PID="$!"
+
+PACMAN_BACKUP=""
+PACMAN_FINAL_CLEAN=""
+WORK=""
+
+cleanup() {
+  rc=$?
+  set +e
+
+  if [ -n "${PACMAN_FINAL_CLEAN:-}" ] && [ -f "$PACMAN_FINAL_CLEAN" ]; then
+    sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf >/dev/null 2>&1 || true
+  elif [ -n "${PACMAN_BACKUP:-}" ] && [ -f "$PACMAN_BACKUP" ]; then
+    sudo cp -a "$PACMAN_BACKUP" /etc/pacman.conf >/dev/null 2>&1 || true
+  fi
+
+  kill "$SUDO_KEEPALIVE_PID" >/dev/null 2>&1 || true
+
+  if [ "$rc" -eq 0 ]; then
+    printf "\n[OK] Kernel Cachy v3 + NVIDIA Open pareado instalado. Reinicie com: sudo reboot\n"
+  else
+    printf "\n[FALHA] código %s. pacman.conf restaurado para Arch limpo/seguro.\n" "$rc" >&2
+  fi
+
+  exit "$rc"
+}
+trap cleanup EXIT
+
+fail() {
+  printf "[FALHA] %s\n" "$*" >&2
+  exit 1
+}
+
+log() {
+  printf "\n[%s] %s\n" "$(date "+%F %T")" "$*"
+}
+
+need_cmd() {
+  command -v "$1" >/dev/null 2>&1 || fail "Comando ausente: $1"
+}
+
+for c in sudo pacman pacman-key grep sed awk tee cp rm mkdir chmod chown install find sort date grub-mkconfig mkinitcpio getent systemctl ls modinfo; do
+  need_cmd "$c"
+done
+
+USER_TARGET="${SUDO_USER:-$USER}"
+HOME_TARGET="$(getent passwd "$USER_TARGET" | cut -d: -f6)"
+[ -n "$HOME_TARGET" ] && [ -d "$HOME_TARGET" ] || fail "Home do usuário alvo não encontrada: $USER_TARGET"
+
+TS="$(date +%Y%m%d-%H%M%S)"
+WORK="/tmp/mocha-repara-cachy-v3-x86-64-v3-$TS"
+mkdir -p "$WORK"
+
+PACMAN_BACKUP="/etc/pacman.conf.mocha-bak-repara-cachy-v3-$TS"
+sudo cp -a /etc/pacman.conf "$PACMAN_BACKUP"
+
+log "Limpando metadados quebrados do banco local do pacman."
+sudo find /var/lib/pacman/local -type f -name desc -exec sed -i '/^%INSTALLED_DB%$/,+2d' {} \;
+
+log "Corrigindo mirrorlist Arch e removendo mirror lento conhecido."
+sudo cp -a /etc/pacman.d/mirrorlist "/etc/pacman.d/mirrorlist.mocha-bak-$TS" 2>/dev/null || true
+if [ -f /etc/pacman.d/mirrorlist ]; then
+  sudo sed -i '/br\.mirrors\.cicku\.me/d' /etc/pacman.d/mirrorlist
+fi
+
+if [ ! -s /etc/pacman.d/mirrorlist ] || ! grep -Eq "^[[:space:]]*Server[[:space:]]*=" /etc/pacman.d/mirrorlist; then
+  {
+    printf "Server = https://geo.mirror.pkgbuild.com/\\$repo/os/\\$arch\n"
+    printf "Server = https://mirror.ufscar.br/archlinux/\\$repo/os/\\$arch\n"
+    printf "Server = https://mirror.rackspace.com/archlinux/\\$repo/os/\\$arch\n"
+  } | sudo tee /etc/pacman.d/mirrorlist >/dev/null
+fi
+
+log "Gerando pacman.conf Arch limpo para estado final."
+{
+  printf "[options]\n"
+  printf "HoldPkg = pacman glibc\n"
+  printf "Architecture = auto\n"
+  printf "CheckSpace\n"
+  printf "Color\n"
+  printf "ParallelDownloads = 5\n"
+  printf "SigLevel = Required DatabaseOptional\n"
+  printf "LocalFileSigLevel = Optional\n\n"
+  printf "[core]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[extra]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[multilib]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n"
+} > "$WORK/pacman.arch-clean"
+
+PACMAN_FINAL_CLEAN="$WORK/pacman.arch-clean"
+sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf
+
+log "Sincronizando Arch limpo."
+sudo pacman -Syy --noconfirm
+
+log "Garantindo pacman/keyring/certificados Arch."
+sudo pacman -S --needed --noconfirm pacman archlinux-keyring ca-certificates curl
+
+log "Importando chave CachyOS."
+sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver hkps://keyserver.ubuntu.com || sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver hkp://keyserver.ubuntu.com:80
+sudo pacman-key --lsign-key F3B607488DB35A47
+
+log "Instalando keyring e mirrorlists Cachy temporários."
+sudo pacman -U --needed --noconfirm \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-20240331-1-any.pkg.tar.zst" \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-27-1-any.pkg.tar.zst" \
+  "https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v3-mirrorlist-27-1-any.pkg.tar.zst"
+
+[ -f /etc/pacman.d/cachyos-v3-mirrorlist ] || fail "Mirrorlist Cachy v3 ausente."
+[ -f /etc/pacman.d/cachyos-mirrorlist ] || fail "Mirrorlist Cachy base ausente."
+
+log "Entrando temporariamente no CachyOS v3 com arquitetura x86_64_v3 liberada."
+{
+  printf "[options]\n"
+  printf "HoldPkg = pacman glibc\n"
+  printf "Architecture = x86_64 x86_64_v3\n"
+  printf "CheckSpace\n"
+  printf "Color\n"
+  printf "ParallelDownloads = 5\n"
+  printf "SigLevel = Required DatabaseOptional\n"
+  printf "LocalFileSigLevel = Optional\n\n"
+  printf "[cachyos-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos-core-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos-extra-v3]\n"
+  printf "Include = /etc/pacman.d/cachyos-v3-mirrorlist\n\n"
+  printf "[cachyos]\n"
+  printf "Include = /etc/pacman.d/cachyos-mirrorlist\n\n"
+  printf "[core]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[extra]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n\n"
+  printf "[multilib]\n"
+  printf "Include = /etc/pacman.d/mirrorlist\n"
+} > "$WORK/pacman.cachy-v3"
+
+sudo install -m 0644 "$WORK/pacman.cachy-v3" /etc/pacman.conf
+sudo pacman -Syy --noconfirm
+
+log "Validando pacotes obrigatórios do Cachy v3."
+for p in linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings opencl-nvidia egl-wayland libglvnd vulkan-icd-loader lib32-vulkan-icd-loader vulkan-tools; do
+  pacman -Si "$p" >/dev/null 2>&1 || fail "Pacote indisponível no Cachy v3: $p"
+done
+
+log "Removendo módulos NVIDIA conflitantes."
+REMOVE_LIST="$WORK/remove-nvidia.txt"
+: > "$REMOVE_LIST"
+
+for p in \
+  nvidia-open-dkms \
+  nvidia-dkms \
+  nvidia-open \
+  nvidia \
+  nvidia-lts \
+  nvidia-open-lts \
+  linux-cachyos-nvidia \
+  linux-cachyos-bore-nvidia \
+  linux-cachyos-eevdf-nvidia \
+  nvidia-580xx-dkms \
+  nvidia-580xx-open-dkms \
+  nvidia-580xx \
+  nvidia-580xx-open
+do
+  if pacman -Q "$p" >/dev/null 2>&1; then
+    printf "%s\n" "$p" >> "$REMOVE_LIST"
+  fi
+done
+
+pacman -Qq | while IFS= read -r pkg; do
+  if pacman -Qi "$pkg" 2>/dev/null | grep -Eq "^Provides[[:space:]]*:.*(^|[[:space:]])NVIDIA-MODULE([[:space:]]|$)"; then
+    printf "%s\n" "$pkg"
+  fi
+done >> "$REMOVE_LIST" || true
+
+sort -u -o "$REMOVE_LIST" "$REMOVE_LIST"
+
+if [ -s "$REMOVE_LIST" ]; then
+  sed "s/^/[REMOVE] /" "$REMOVE_LIST"
+  while IFS= read -r p; do
+    [ -n "$p" ] || continue
+    if pacman -Q "$p" >/dev/null 2>&1; then
+      sudo pacman -Rdd --noconfirm "$p" || true
+    fi
+  done < "$REMOVE_LIST"
+else
+  printf "[OK] Nenhum módulo NVIDIA conflitante instalado.\n"
+fi
+
+log "Instalando kernel Cachy v3 e NVIDIA Open pareado."
+sudo pacman -S --needed --noconfirm --overwrite '*' \
+  linux-cachyos \
+  linux-cachyos-headers \
+  linux-cachyos-nvidia-open \
+  nvidia-utils \
+  lib32-nvidia-utils \
+  nvidia-settings \
+  opencl-nvidia \
+  egl-wayland \
+  libglvnd \
+  vulkan-icd-loader \
+  lib32-vulkan-icd-loader \
+  vulkan-tools
+
+log "Removendo blacklists acidentais de NVIDIA."
+sudo mkdir -p /etc/modprobe.d
+sudo find /etc/modprobe.d -maxdepth 1 -type f -name "*.conf" -print0 | while IFS= read -r -d "" f; do
+  if grep -Eq "^[[:space:]]*blacklist[[:space:]]+nvidia(_drm|_modeset|_uvm)?([[:space:]]|$)" "$f"; then
+    sudo cp -a "$f" "$f.mocha-bak-$TS"
+    sudo sed -i -E "s/^[[:space:]]*(blacklist[[:space:]]+nvidia(_drm|_modeset|_uvm)?([[:space:]]|$).*)/# MOCHA removed: \1/" "$f"
+  fi
+done
+
+log "Configurando NVIDIA Wayland/modeset."
+{
+  printf "options nvidia_drm modeset=1 fbdev=1\n"
+  printf "options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/var/tmp\n"
+  printf "blacklist nouveau\n"
+} | sudo tee /etc/modprobe.d/99-mocha-nvidia.conf >/dev/null
+
+log "Regenerando initramfs."
+sudo mkinitcpio -P
+
+log "Definindo linux-cachyos como kernel padrão no GRUB."
+[ -e /boot/vmlinuz-linux-cachyos ] || fail "Não existe /boot/vmlinuz-linux-cachyos depois da instalação."
+[ -e /boot/initramfs-linux-cachyos.img ] || fail "Não existe /boot/initramfs-linux-cachyos.img depois da instalação."
+
+sudo cp -a /etc/default/grub "/etc/default/grub.mocha-bak-cachy-v3-default-$TS"
+
+if grep -q "^GRUB_TOP_LEVEL=" /etc/default/grub; then
+  sudo sed -i "s|^GRUB_TOP_LEVEL=.*|GRUB_TOP_LEVEL=\"/boot/vmlinuz-linux-cachyos\"|" /etc/default/grub
+else
+  printf "\nGRUB_TOP_LEVEL=\"/boot/vmlinuz-linux-cachyos\"\n" | sudo tee -a /etc/default/grub >/dev/null
+fi
+
+if grep -q "^GRUB_DEFAULT=" /etc/default/grub; then
+  sudo sed -i "s|^GRUB_DEFAULT=.*|GRUB_DEFAULT=0|" /etc/default/grub
+else
+  printf "GRUB_DEFAULT=0\n" | sudo tee -a /etc/default/grub >/dev/null
+fi
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+log "Saindo do CachyOS para evitar contaminação."
+sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf
+sudo pacman -Syy --noconfirm
+sudo pacman -Rns --noconfirm cachyos-keyring cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist >/dev/null 2>&1 || true
+
+log "Instalando atualizador canônico Mocha."
+sudo mkdir -p /usr/local/lib/mocha
+sudo cp -f "$0" /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue
+sudo chmod +x /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue
+
+{
+  printf "#!/usr/bin/env bash\n"
+  printf "exec sudo /usr/local/lib/mocha/mocha-cachy-v3-kernel-nvidia-rescue\n"
+} | sudo tee /usr/local/bin/mocha-atualiza-kernel-driver-video >/dev/null
+sudo chmod +x /usr/local/bin/mocha-atualiza-kernel-driver-video
+
+{
+  printf "#!/usr/bin/env bash\n"
+  printf "if command -v konsole >/dev/null 2>&1; then\n"
+  printf "  exec konsole --noclose -e bash -lc 'sudo /usr/local/bin/mocha-atualiza-kernel-driver-video; echo; read -r -p \"Pressione Enter para fechar...\"'\n"
+  printf "fi\n"
+  printf "exec /usr/local/bin/mocha-atualiza-kernel-driver-video\n"
+} | sudo tee /usr/local/bin/mocha-atualiza-kernel-driver-video-gui >/dev/null
+sudo chmod +x /usr/local/bin/mocha-atualiza-kernel-driver-video-gui
+
+log "Criando atalho no menu e na área de trabalho."
+sudo -u "$USER_TARGET" mkdir -p "$HOME_TARGET/.local/share/applications" "$HOME_TARGET/Desktop"
+
+{
+  printf "[Desktop Entry]\n"
+  printf "Type=Application\n"
+  printf "Name=Mocha - Atualizar Kernel e NVIDIA\n"
+  printf "Comment=Atualiza linux-cachyos e NVIDIA Open pareado usando CachyOS v3 temporariamente\n"
+  printf "Exec=/usr/local/bin/mocha-atualiza-kernel-driver-video-gui\n"
+  printf "Icon=system-software-update\n"
+  printf "Terminal=false\n"
+  printf "Categories=System;Settings;\n"
+  printf "StartupNotify=true\n"
+} | sudo -u "$USER_TARGET" tee "$HOME_TARGET/.local/share/applications/mocha-atualiza-kernel-driver-video.desktop" >/dev/null
+
+sudo -u "$USER_TARGET" cp -f "$HOME_TARGET/.local/share/applications/mocha-atualiza-kernel-driver-video.desktop" "$HOME_TARGET/Desktop/mocha-atualiza-kernel-driver-video.desktop"
+sudo chmod +x "$HOME_TARGET/Desktop/mocha-atualiza-kernel-driver-video.desktop" || true
+sudo chown "$USER_TARGET:$USER_TARGET" "$HOME_TARGET/Desktop/mocha-atualiza-kernel-driver-video.desktop"
+
+sudo mkdir -p /etc/skel/.local/share/applications /etc/skel/Desktop
+sudo cp -f "$HOME_TARGET/.local/share/applications/mocha-atualiza-kernel-driver-video.desktop" /etc/skel/.local/share/applications/
+sudo cp -f "$HOME_TARGET/.local/share/applications/mocha-atualiza-kernel-driver-video.desktop" /etc/skel/Desktop/
+sudo chmod +x /etc/skel/Desktop/mocha-atualiza-kernel-driver-video.desktop || true
+
+sudo systemctl enable sddm.service >/dev/null 2>&1 || true
+
+log "Conferência final."
+printf "\nPacotes kernel/NVIDIA:\n"
+pacman -Q linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings opencl-nvidia egl-wayland || true
+
+printf "\nArquivos de boot:\n"
+ls -lh /boot/vmlinuz-linux-cachyos /boot/initramfs-linux-cachyos.img 2>/dev/null || true
+
+printf "\nMódulo NVIDIA para kernel Cachy:\n"
+KVER="$(file /boot/vmlinuz-linux-cachyos 2>/dev/null | sed -n 's/.*version \([^ ]*\).*/\1/p' | head -n1 || true)"
+if [ -n "$KVER" ]; then
+  modinfo -k "$KVER" nvidia >/dev/null 2>&1 && printf "[OK] modinfo nvidia para %s\n" "$KVER" || printf "[AVISO] modinfo nvidia não confirmou kernel %s\n" "$KVER"
+else
+  printf "[AVISO] Não consegui extrair versão do /boot/vmlinuz-linux-cachyos.\n"
+fi
+
+printf "\nGRUB_TOP_LEVEL:\n"
+grep -n "^GRUB_TOP_LEVEL=" /etc/default/grub || true
+
+printf "\nRepos Cachy ativos no pacman.conf final:\n"
+if grep -n "^\[cachyos" /etc/pacman.conf; then
+  printf "[FALHA] Ainda há repo Cachy ativo. Verifique /etc/pacman.conf.\n"
+  exit 1
+else
+  printf "[OK] Nenhum repo Cachy ativo.\n"
+fi
+
+printf "\nAtalho criado:\n"
+printf "  %s/Desktop/mocha-atualiza-kernel-driver-video.desktop\n" "$HOME_TARGET"
+
+printf "\n[OK] Reinicie com: sudo reboot\n"

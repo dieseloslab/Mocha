@@ -1,0 +1,104 @@
+
+============================================================
+ Mocha — aplicar cores Mocha corrigindo permissão
+============================================================
+Base:    /media/mochafast/MochaArch
+Usuário: hal
+Home:    /home/hal
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-171231-aplica-cores-mocha-fix-permissao.log
+
+[ESCOPO] Não mexe em formato, altura, posição, widgets ou layout da barra.
+[ESCOPO] Só aplica MochaDark + MochaPanelSolidCanonico.
+
+============================================================
+ 1) Backup no FAST
+============================================================
+[OK] backup: /home/hal/.config/kdeglobals
+[OK] backup: /home/hal/.config/plasmarc
+[OK] Backup: /media/mochafast/MochaArch/ativo/backups/cores-mocha-fix-antes-20260628-171231
+
+============================================================
+ 2) Instalar MochaDark.colors com permissões corretas
+============================================================
+[OK] FAST canônico: /media/mochafast/MochaArch/ativo/kde/color-schemes/MochaDark.colors
+[OK] FAST payload:   /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/color-schemes/MochaDark.colors
+[OK] Sistema:        /usr/share/color-schemes/MochaDark.colors
+[OK] Usuário:        /home/hal/.local/share/color-schemes/MochaDark.colors
+
+============================================================
+ 3) Instalar MochaPanelSolidCanonico sem tocar no layout da barra
+============================================================
+[OK] Tema sistema: /usr/share/plasma/desktoptheme/MochaPanelSolidCanonico
+[OK] Tema usuário: /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
+
+============================================================
+ 4) Aplicar somente chaves de cor/tema
+============================================================
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+The requested theme "MochaDark" is already set as the theme for the current Plasma session.
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+The requested theme "MochaPanelSolidCanonico" is already set as the theme for the current Plasma session.
+
+============================================================
+ 5) Limpar cache Plasma/KSVG
+============================================================
+[OK] Cache limpo
+
+============================================================
+ 6) Reiniciar somente plasmashell
+============================================================
+[OK] plasmashell reiniciado
+
+============================================================
+ 7) Verificação final
+============================================================
+
+--- kdeglobals ---
+137:ColorScheme=MochaDark
+138:ColorSchemeHash=9d38eb71ded8ff549da26d57d7cbab9164da243a
+149:widgetStyle=Breeze
+
+--- plasmarc ---
+1:[Theme]
+2:name=MochaPanelSolidCanonico
+
+--- arquivos aplicados ---
+-rw-r--r-- 1 hal  hal  2.9K Jun 10 14:17 /home/hal/.local/share/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  2.9K Jun 10 14:17 /media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/color-schemes/MochaDark.colors
+-rw-r--r-- 1 hal  hal  2.9K Jun 10 14:17 /media/mochafast/MochaArch/ativo/kde/color-schemes/MochaDark.colors
+-rw-r--r-- 1 root root 2.9K Jun 28 17:12 /usr/share/color-schemes/MochaDark.colors
+
+--- tema aplicado ---
+1.5M	/media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
+1.5M	/media/mochafast/MochaArch/ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico
+1.5M	/usr/share/plasma/desktoptheme/MochaPanelSolidCanonico
+1.5M	/home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
+
+============================================================
+ Resultado
+============================================================
+Cores fonte:    /media/mochafast/MochaArch/ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+Tema fonte:     /media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
+Backup:         /media/mochafast/MochaArch/ativo/backups/cores-mocha-fix-antes-20260628-171231
+Log:            /media/mochafast/MochaArch/ativo/logs/20260628-171231-aplica-cores-mocha-fix-permissao.log
+
+Formato da barra preservado: este script não escreve em plasma-org.kde.plasma.desktop-appletsrc.
+============================================================

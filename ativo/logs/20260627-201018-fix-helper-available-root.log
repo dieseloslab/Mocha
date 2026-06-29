@@ -1,0 +1,42 @@
+
+============================================================
+ Mocha — corrigir consulta CachyOS com sudo ao abrir
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-201018-fix-helper-available-root.log
+
+[1] Backup do helper atual
+[OK] Backup: /media/mochafast/MochaArch/ativo/quarentena/helper-cachyos-20260627-201018/mocha-cachyos-transient-install.bak
+
+[2] Instalando helper corrigido
+[OK] Helper instalado: /usr/local/lib/mocha/mocha-cachyos-transient-install
+
+[3] Garantindo atalho com pkexec direto e sem auth_admin_keep
+[OK] Atalho/polkit reinstalados.
+
+[4] Sincronizando helper, atalho e polkit no canônico e payload
+[OK] Sincronizado: /media/mochafast/MochaArch/ativo/apps/mocha-kernel-driver-manager
+[OK] Sincronizado: /media/mochafast/MochaArch/ativo/calamares/payload/mocha-kernel-driver-manager
+
+[5] Limpando cache de menu KDE
+
+[6] Teste direto do helper corrigido
+[mocha-cachyos-transient] Canal CachyOS transitório detectado: v3
+[mocha-cachyos-transient] Consulta --available autenticada/root; nada será instalado.
+
+Pacotes solicitados:
+ - linux-cachyos
+ - linux-cachyos-headers
+ - linux-cachyos-nvidia-open
+ - nvidia-utils
+
+Sincronizando bancos temporários:
+:: Synchronizing package databases...
+error: could not open file /tmp/tmp.30YHgAYawn/db/sync/download-lLOW3X/cachyos-v3.db.part: Permission denied
+error: failed to setup a download payload for cachyos-v3.db
+error: failed to synchronize all databases (failed to retrieve some files)
+
+Log pacman:
+[2026-06-27T20:10:18-0300] [PACMAN] Running 'pacman --config /tmp/tmp.30YHgAYawn/pacman.conf --dbpath /tmp/tmp.30YHgAYawn/db --cachedir /tmp/tmp.30YHgAYawn/cache --logfile /tmp/tmp.30YHgAYawn/pacman.log -Sy --noconfirm'
+[2026-06-27T20:10:18-0300] [PACMAN] synchronizing package lists
+[FALHA] Falha ao sincronizar bancos temporários CachyOS/Arch.
+[FALHA] Teste do helper --available ainda falhou.

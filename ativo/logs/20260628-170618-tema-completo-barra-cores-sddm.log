@@ -1,0 +1,251 @@
+
+============================================================
+ Mocha — tema completo: barra, cores, wallpaper e SDDM
+============================================================
+FAST:    /media/mochafast/MochaArch
+VM:      /media/vmstore/MochaArch
+Manual:  /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Usuário: hal
+Home:    /home/hal
+Log:     /media/mochafast/MochaArch/ativo/logs/20260628-170618-tema-completo-barra-cores-sddm.log
+
+============================================================
+ 1) Leitura objetiva do manual vivo
+============================================================
+10:### Tema KDE/Plasma Mocha aprovado
+17:- ColorScheme: MochaDark.
+18:- Plasma theme: MochaPanelSolidCanonico.
+20:- Wallpaper: file:///media/mochafast/MochaArch/ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png.
+21:- Tema local: /home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico.
+23:Regra canônica: não basta aplicar o ColorScheme. Para painel, menu Kickoff, popups e widgets ficarem Mocha, o tema Plasma precisa ter os SVGZ reais ajustados. Os arquivos críticos são panel-background.svgz, dialogs/background.svgz, widgets/background.svgz, tooltip.svgz, viewitem.svgz, listitem.svgz, tasks.svgz, button.svgz, lineedit.svgz e frame.svgz, incluindo variantes opaque, solid e translucent quando existirem.
+25:Depois de alterar SVGZ do tema, limpar cache KSVG/Plasma, especialmente ~/.cache/ksvg-elements e ~/.cache/plasma_theme_MochaPanelSolidCanonico.kcache, reconstruir sycoca se disponível e reiniciar somente o plasmashell. Não reiniciar a máquina por dedução e não tocar em SDDM, GRUB, boot, kernel, firewall, Steam ou painel quando a tarefa for apenas cor do tema.
+27:Paleta canônica desta correção: fundo profundo #171412; fundo janela #1f201f; fundo painel #2f2924; fundo popup/menu #28231f; fundo botão #322a24; borda #5c4638; accent #c98758; hover #d99e68; accent claro #f4be82; texto #ece2d7; texto discreto #aea296.
+145:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+293:- Bluetooth aparecia duplicado na barra.
+294:- Volume aparecia duplicado na barra.
+345:### 3.6 Barra Win11/Mocha aprovada
+350:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/
+356:/media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+368:2. Validar pasta da barra aprovada.
+372:   - `plugin=org.kde.plasma.icontasks` ou `plugin=org.kde.plasma.taskmanager`
+384:- A barra Mocha/Win11 ficou correta.
+566:|    0   N/A  N/A            1487      G   /usr/bin/akonadi_control                  2MiB |
+635:      Tasks: 2 (limit: 18662)
+668:sddm.service                                 disabled        disabled
+750:        Max                                            : 16.48 W
+917:### Barra Win11/Mocha aprovada
+920:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+921:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+922:2026-05-29 15:33  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+927:63:plugin=org.kde.plasma.icontasks
+939:2026-05-28 22:56  1159 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+951:2026-05-29 15:29  1624 bytes  /media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+954:2026-05-29 15:29  3810 bytes  /media/mochafast/MochaArch/ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log
+955:2026-05-29 15:30  3891 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
+956:2026-05-29 15:32  824 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log
+957:2026-05-29 15:33  2039 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
+958:2026-05-29 15:33  2985 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+959:2026-05-29 15:33  835 bytes  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+1130:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+1131:2. Preservar Plasma Volume como controle de volume da barra.
+1151:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+1162:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+1163:2. Preservar Plasma Volume como controle de volume da barra.
+1206:- Ficar apenas um controle de volume na barra.
+1207:- Ficar apenas o Bluetooth do KDE/Bluedevil na barra.
+1231:Este estado deve ser tratado como baseline positivo atual antes de qualquer alteração visual ou de painel.
+1241:#### Fonte: `kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt`
+1249:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+1251:  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+1253:  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+1348:sddm.service                                 disabled        disabled
+1365:#### Fonte: `kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt`
+1373:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+1375:  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+1377:  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+1396:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+1397:2. Preservar Plasma Volume como controle de volume da barra.
+1417:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+1428:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+1429:2. Preservar Plasma Volume como controle de volume da barra.
+1472:- Ficar apenas um controle de volume na barra.
+1473:- Ficar apenas o Bluetooth do KDE/Bluedevil na barra.
+1528:Este estado deve ser tratado como baseline positivo atual antes de qualquer alteração visual ou de painel.
+1565:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || echo "sddm enabled: indisponível"
+1566:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || echo "sddm active: indisponível"
+1603:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || echo "sddm enabled: indisponível"
+1604:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || echo "sddm active: indisponível"
+1640:- Estado de `sddm.service`: enabled=`disabled`, active=`inactive`
+1646:2. Desabilitar `sddm.service` para evitar conflito com login manager antigo.
+1691:|    0   N/A  N/A            1487      G   /usr/bin/akonadi_control                  2MiB |
+1760:      Tasks: 2 (limit: 18662)
+1801:- Estado de `sddm.service`: enabled=`disabled`, active=`inactive`
+1807:2. Desabilitar `sddm.service` para evitar conflito com login manager antigo.
+1853:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || echo "sddm enabled: indisponível"
+1854:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || echo "sddm active: indisponível"
+1864:"$SUDO" systemctl disable --now sddm.service 2>/dev/null || true
+1872:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || true
+1873:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || true
+1906:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || echo "sddm enabled: indisponível"
+1907:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || echo "sddm active: indisponível"
+1917:"$SUDO" systemctl disable --now sddm.service 2>/dev/null || true
+1925:systemctl is-enabled sddm.service 2>/dev/null | sed 's/^/sddm enabled: /' || true
+1926:systemctl is-active sddm.service 2>/dev/null | sed 's/^/sddm active: /' || true
+1958:plasma-workspace-wallpapers 6.6.5-1
+2071:- Estado de `sddm.service`: enabled=`disabled`, active=`inactive`
+2077:2. Desabilitar `sddm.service` para evitar conflito com login manager antigo.
+2146:#### Fonte: `kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh`
+2156:echo "== MOCHA ARCH/KDE — restaurar barra Win11/Mocha aprovada =="
+2163:TARGET="$BASE/ativo/kde/barra-win11-aprovada"
+2166:BACKUP_DIR="$BASE/ativo/backups/plasma-barra"
+2171:LOG="$LOG_DIR/${TS}-restaurar-barra-win11-mocha-aprovada.log"
+2217:#### Fonte: `logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log`
+2225:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+2237:65:plugin=org.kde.plasma.icontasks
+2241:Barra Win11/Mocha aprovada restaurada.
+2243:  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+2245:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+2248:#### Fonte: `logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log`
+2263:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+2268:63:plugin=org.kde.plasma.icontasks
+2276:Assinatura da barra aprovada validada.
+2280:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+2282:== Executando restauração da barra aprovada ==
+2283:== MOCHA ARCH/KDE — restaurar barra Win11/Mocha aprovada ==
+2285:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+2297:65:plugin=org.kde.plasma.icontasks
+2301:Barra Win11/Mocha aprovada restaurada.
+2303:  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+2305:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+2309:  /media/mochafast/MochaArch/ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
+2311:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+2314:#### Fonte: `logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log`
+2327:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+2328:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+2332:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+2335:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+2336:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+2339:#### Fonte: `logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log`
+2351:== Procurando script aprovado da barra Mocha/KDE ==
+2387:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153031-plasma-org.kde.plasma.desktop-appletsrc.antes-barra-mocha
+2390:== Executando script documentado/aprovado da barra ==
+2394:== Reiniciando Plasma Shell para refletir a barra, se necessário ==
+2397:Barra Mocha aplicada usando:
+2400:  /media/mochafast/MochaArch/ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
+2402:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153031-plasma-org.kde.plasma.desktop-appletsrc.antes-barra-mocha
+2405:#### Fonte: `auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log`
+2426:/media/mochafast/MochaArch/ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
+2432:/media/mochafast/MochaArch/ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log
+2442:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+2443:2. Preservar Plasma Volume como controle de volume da barra.
+2463:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+2470:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+2471:2. Preservar Plasma Volume como controle de volume da barra.
+2628:#### Fonte: `logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log`
+2640:== Procurando script aprovado da barra Mocha/KDE ==
+2721:#### Fonte: `auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log`
+2768:# Mocha Arch/KDE — passo canônico: barra sem Bluetooth/volume duplicados
+2778:Na barra do KDE/Plasma havia duplicidade de:
+2785:A barra já tinha os applets nativos do KDE/Plasma:
+2814:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+2821:# Mocha Arch/KDE — passo canônico: barra sem Bluetooth/volume duplicados
+2831:Na barra do KDE/Plasma havia duplicidade de:
+2838:A barra já tinha os applets nativos do KDE/Plasma:
+2972:A barra apresentava volume duplicado.
+3147:plasma-workspace-wallpapers 6.6.5-1
+3156: Invocation: 040213ede68b4cc48886bc2a25c46bd6
+3160:      Tasks: 1 (limit: 18662)
+3208:### Barra Win11/Mocha KDE
+3210:#### Fonte: `kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh`
+3220:echo "== MOCHA ARCH/KDE — restaurar barra Win11/Mocha aprovada =="
+3227:TARGET="$BASE/ativo/kde/barra-win11-aprovada"
+3230:BACKUP_DIR="$BASE/ativo/backups/plasma-barra"
+3235:LOG="$LOG_DIR/${TS}-restaurar-barra-win11-mocha-aprovada.log"
+3260:if ! grep -Eq 'plugin=org\.kde\.plasma\.(icontasks|taskmanager)' "$APPROVED"; then
+3261:  echo "ERRO: arquivo aprovado sem icontasks/taskmanager. Abortando."
+3265:BACKUP="$BACKUP_DIR/${TS}-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11"
+3268:find "$BACKUP_DIR" -maxdepth 1 -type f -name '*plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11*' \
+3325:### Barra Win11/Mocha aprovada
+3328:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+3329:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+3330:2026-05-29 15:33  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+3335:63:plugin=org.kde.plasma.icontasks
+3347:2026-05-28 22:56  1159 bytes  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+3359:#### Fonte: `kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt`
+3366:MOCHA ARCH / KDE — BARRA ESTILO WINDOWS 11 APROVADA
+3377:- Mantém no máximo 2 backups do arquivo da barra.
+3379:- Centraliza Kickoff/Iniciar + icontasks/taskmanager.
+3386:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+3388:  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+3390:  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+3398:#### Fonte: `logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log`
+3406:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+3418:65:plugin=org.kde.plasma.icontasks
+3422:Barra Win11/Mocha aprovada restaurada.
+3424:  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+3426:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+3429:#### Fonte: `logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log`
+3444:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+3449:63:plugin=org.kde.plasma.icontasks
+3457:Assinatura da barra aprovada validada.
+3461:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
+3463:== Executando restauração da barra aprovada ==
+3464:== MOCHA ARCH/KDE — restaurar barra Win11/Mocha aprovada ==
+3466:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+3478:65:plugin=org.kde.plasma.icontasks
+3482:Barra Win11/Mocha aprovada restaurada.
+3484:  /media/mochafast/MochaArch/ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
+3486:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153335-plasma-org.kde.plasma.desktop-appletsrc.antes-restaurar-barra-win11
+3489:#### Fonte: `logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log`
+3502:2026-05-28 22:54  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+3503:2026-05-28 22:56  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+3507:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada
+3510:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
+3511:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+3523:17:wallpaperplugin=org.kde.image
+3525:26:wallpaperplugin=org.kde.image
+3530:60:plugin=org.kde.plasma.icontasks
+3533:78:wallpaperplugin=org.kde.image
+3564:      1 plugin=org.kde.plasma.icontasks
+3585:#### Fonte: `logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log`
+3597:== Procurando script aprovado da barra Mocha/KDE ==
+3629:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153031-plasma-org.kde.plasma.desktop-appletsrc.antes-barra-mocha
+3632:== Executando script documentado/aprovado da barra ==
+3636:== Reiniciando Plasma Shell para refletir a barra, se necessário ==
+3639:Barra Mocha aplicada usando:
+3642:  /media/mochafast/MochaArch/ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
+3644:  /media/mochafast/MochaArch/ativo/backups/plasma-barra/20260529-153031-plasma-org.kde.plasma.desktop-appletsrc.antes-barra-mocha
+3912:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+3913:2. Preservar Plasma Volume como controle de volume da barra.
+3933:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+3944:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+3945:2. Preservar Plasma Volume como controle de volume da barra.
+3988:- Ficar apenas um controle de volume na barra.
+3989:- Ficar apenas o Bluetooth do KDE/Bluedevil na barra.
+4013:Este estado deve ser tratado como baseline positivo atual antes de qualquer alteração visual ou de painel.
+4023:#### Fonte: `kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt`
+4031:  /media/mochafast/MochaArch/ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
+4033:  /media/mochafast/MochaArch/scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
+4035:  /home/hal/mocha-salvar-barra-win11-aprovada-20260528-225617.log
+4118:      Tasks: 2 (limit: 18662)
+4134:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+4135:2. Preservar Plasma Volume como controle de volume da barra.
+4155:#### Fonte: `documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md`
+4166:1. Preservar KDE/Bluedevil como Bluetooth visual da barra.
+
+============================================================
+ 2) Backup no FAST, não no HOME
+============================================================
+[OK] backup usuário: /home/hal/.config/kdeglobals
+[OK] backup usuário: /home/hal/.config/plasmarc
+[OK] backup usuário: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+[AVISO] ausente: /home/hal/.config/kscreenlockerrc
+[OK] backup /etc/sddm.conf.d
+[OK] backup /etc/sddm.conf
+[OK] backup tema Plasma do sistema
+[OK] backup temas SDDM Mocha existentes, se havia
+[OK] Backup completo: /media/mochafast/MochaArch/ativo/backups/tema-completo-antes-20260628-170618
+
+============================================================
+ 3) Localizar Plasma Style canônico fora do HOME
+============================================================

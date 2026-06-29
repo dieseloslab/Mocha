@@ -1,0 +1,378 @@
+
+============================================================
+ Mocha — resolver bloqueios antes dos commits
+============================================================
+Base: /media/mochafast/MochaArch
+Log:  /media/mochafast/MochaArch/ativo/logs/20260629-033057-resolve-bloqueios-pre-commit.log
+
+============================================================
+ 1) Snapshot de segurança antes de mexer
+============================================================
+[OK] Patch salvo em: /tmp/mocha-bloqueios-pre-commit-20260629-033057.patch
+
+============================================================
+ 2) Resolver typechange do manual
+============================================================
+Status atual:  T ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+[INFO] Typechange detectado no manual.
+[OK] Conteúdo atual preservado em:
+     /media/mochafast/MochaArch/ativo/docs/MANUAL-UNICO-VIVO-typechange-backup-20260629-033057.md
+Modo rastreado no HEAD: 120000
+Symlink rastreado aponta para:
+/media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+Alvo resolvido:
+/media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
+
+[INFO] Sincronizando conteúdo preservado para o alvo real do manual.
+[OK] Backup do alvo anterior:
+     /media/mochafast/MochaArch-Interno/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260629-033057
+[OK] Conteúdo atual aplicado no alvo real do manual.
+[OK] Entrada rastreada restaurada como symlink/objeto correto.
+
+============================================================
+ 3) Restaurar SVGZ deletados do tema Plasma
+============================================================
+warning: could not open directory 'ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/weather/': No such file or directory
+[CORRIGINDO] Restaurando: ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/weather/wind-arrows.svgz
+[CORRIGINDO] Restaurando: ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/timer.svgz
+
+============================================================
+ 4) Verificar deleções restantes
+============================================================
+[OK] Nenhuma deleção restante.
+
+============================================================
+ 5) Verificar typechange restante
+============================================================
+[OK] Nenhum typechange restante.
+
+============================================================
+ 6) Status final resumido
+============================================================
+ M ativo/assets/branding/avatar.png
+ M ativo/assets/branding/avatar/avatar.png
+ M ativo/assets/branding/wallpaper/Wall.png
+ M ativo/assets/mocha-steam/bin/mocha-steam-game-run
+ M ativo/etc/skel/.local/bin/mocha-steam-game-run
+ M ativo/kde/barra-win11-aprovada/20260529-200013-mocha-reaplicar-barra-aprovada-atual.sh
+ M ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual
+ M ativo/kde/esquemas-cores-aprovados/MochaDark.colors
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/dialogs/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/akonadi.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/akregator.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/amarok.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/applications.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/apport.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/audio.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/battery.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/bookmarks.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/cantata.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/computer.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/configure.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/device.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/disk.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/distribute.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/document.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/drive.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/edit.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/fcitx.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/go.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/ime.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/input.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kalarm.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kdeconnect.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/keyboard.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kget.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kgpg.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kleopatra.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/klipper.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kmail.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/konv_message.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/konversation.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kopete.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/korgac.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kpackagekit.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kruler.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kteatime.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/ktorrent.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kup.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/list.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/mail.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/media.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/mobile.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/network.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/notification.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/osd.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/phone.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/plasmavault.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/plasmavault_error.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/preferences.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/printer.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/quassel.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/search.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/slc.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/software.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/start.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/system.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/touchpad.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/user.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/video-card.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/video.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/view.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/vlc.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/wallet.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/window.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/yakuake.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/zoom.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/metadata.json
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/dialogs/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/widgets/panel-background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/widgets/tooltip.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/plasmarc
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/dialogs/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/panel-background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/tooltip.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/dialogs/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/panel-background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/tooltip.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/action-overlays.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/actionbutton.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/analog_meter.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/arrows.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/bar_meter_horizontal.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/bar_meter_vertical.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/branding.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/busywidget.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/button.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/calendar.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/checkmarks.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/clock.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/configuration-icons.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/containment-controls.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/dragger.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/frame.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/glowbar.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/line.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/lineedit.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/listitem.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/margins-highlight.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/media-delegate.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/menubaritem.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/monitor.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/notes.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/pager.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/panel-background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/picker.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/plasmoidheading.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/plot-background.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/radiobutton.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/scrollbar.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/scrollwidget.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/slider.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/switch.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tabbar.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tasks.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/toolbar.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tooltip.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/translucentbackground.svgz
+ M ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/viewitem.svgz
+ M ativo/software/perfis/mocha-gamer-default.flatpaklist
+ M ativo/software/perfis/mocha-gamer-default.pkglist
+ M calamares/base-calam-arch-installer-2026-06/usr/share/calamares/modules/users.conf
+ M calamares/base-calam-arch-installer-2026-06/usr/share/calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/etc-calamares/modules/users.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/etc-calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/usr-share-calamares/modules/users.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/usr-share-calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/etc-calamares/modules/users.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/etc-calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/usr-share-calamares/modules/users.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/usr-share-calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/etc-calamares/settings.conf
+ M calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/usr-share-calamares/settings.conf
+ M calamares/mocha-calamares/etc/calamares/modules/users.conf
+ M calamares/mocha-calamares/etc/calamares/settings.conf
+ M calamares/origem-calam-arch-installer-2026-06-20260605-112415/usr/share/calamares/modules/users.conf
+ M calamares/origem-calam-arch-installer-2026-06-20260605-112415/usr/share/calamares/settings.conf
+ M calamares/trabalho-mocha-calamares-20260605-112806/usr/share/calamares/modules/users.conf
+ M calamares/trabalho-mocha-calamares-20260605-112806/usr/share/calamares/settings.conf
+?? ativo/PLANO-B-MATRIZ-CALAM-LIVE-ISO.md
+?? ativo/apps/
+?? ativo/auditorias/pre-rootfs/
+?? ativo/calamares/
+?? ativo/docs/20260628-010600-wrapper-alt-tab-input-definitivo.md
+?? ativo/docs/20260628-010700-wrapper-alt-tab-input-definitivo.md
+?? ativo/docs/20260628-011105-wrapper-steam-canonico-alt-tab-input.md
+?? ativo/docs/MANUAL-UNICO-VIVO-typechange-backup-20260629-033057.md
+?? ativo/ferramentas/mocha-kernel-driver-manager-rust-gui-mocha/
+?? ativo/ferramentas/mocha-kernel-driver-manager-rust-hw-detect-transient/
+?? ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual-20260627-183751
+?? ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual-20260627-184000
+?? ativo/kde/color-schemes/
+?? ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/colors
+?? ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/metadata.desktop
+?? ativo/kde/plasma-style-barra-mocha/snapshots/
+?? ativo/kde/plasma-style-barra-mocha/svgz-criticos-MochaPanelSolidCanonico-20260627-183751/
+?? ativo/kde/plasma-style-barra-mocha/svgz-criticos-MochaPanelSolidCanonico-20260627-184000/
+?? ativo/kde/plasma-style-barra-mocha/svgz-criticos-atuais/
+?? ativo/logs/20260627-172232-restaurar-barra-win11-mocha-aprovada.log
+?? ativo/logs/20260627-173345-aplicar-tema-mocha-kde-sddm.log
+?? ativo/logs/20260627-191115-fechar-calamares-pre-rootfs.log
+?? ativo/logs/20260627-191607-fechar-calamares-pre-rootfs-v3.log
+?? ativo/logs/20260627-192031-fixa-atualizador-kernel-driver-pre-rootfs.log
+?? ativo/logs/20260627-192341-corrige-atualizador-kernel-driver-rust-v2.log
+?? ativo/logs/20260627-192604-corrige-atualizador-kernel-driver-rust-v3.log
+?? ativo/logs/20260627-193945-atualizador-rust-cachyos-transitorio-v7.log
+?? ativo/logs/20260627-194513-atualizador-rust-gui-mocha-transitorio-v8.log
+?? ativo/logs/20260627-194739-corrige-helper-cachyos-available-v81.log
+?? ativo/logs/20260627-195015-corrige-helper-cachyos-downloaduser-v82.log
+?? ativo/logs/20260627-195557-corrige-helper-cachyos-available-sem-sudo-v83.log
+?? ativo/logs/20260627-195908-corrige-helper-cachyos-v84.log
+?? ativo/logs/20260627-200250-kernel-driver-sudo-ao-abrir.log
+?? ativo/logs/20260627-200443-corrige-sudo-ao-abrir-v2.log
+?? ativo/logs/20260627-201018-fix-helper-available-root.log
+?? ativo/logs/20260627-201335-helper-root-simples-v2.log
+?? ativo/logs/20260627-202141-kernel-driver-desktop-canonico.log
+?? ativo/logs/20260627-202803-refaz-kernel-driver-tema-mocha.log
+?? ativo/logs/20260627-202924-fecha-kernel-driver-tema-mocha-v2.log
+?? ativo/logs/20260627-203738-fechamento-rootfs-calamares-final.log
+?? ativo/logs/20260627-204738-rootfs-estado-atual-calamares-gamer.log
+?? ativo/logs/20260627-205342-preserva-rootfs-reserva.log
+?? ativo/logs/20260627-205630-retoma-rootfs-aberto-gera-sfs-reserva.log
+?? ativo/logs/20260627-205836-finaliza-rootfs-sem-chroot-user.log
+?? ativo/logs/20260627-210052-finaliza-rootfs-corrige-gshadow-v2.log
+?? ativo/logs/20260627-210208-corrige-usuario-live-rootfs-direto.log
+?? ativo/logs/20260627-210425-confere-corrige-usuario-live-rootfs-v2.log
+?? ativo/logs/20260627-210522-audita-rootfs-live-pre-repack-v1.log
+?? ativo/logs/20260627-210756-quarentena-rootfs-remendado.log
+?? ativo/logs/20260627-211416-gera-rootfs-copia-tal-qual.log
+?? ativo/logs/20260627-222904-stack-gamer-agressivo.log
+?? ativo/logs/20260627-223247-continua-agressividade-sem-flatpak.log
+?? ativo/logs/20260627-224714-forca-mangohud-canonico.log
+?? ativo/logs/20260627-225059-fix-mangohud-alt-tab-input.log
+?? ativo/logs/20260627-225409-reaplica-mangohud-canonico-existente.log
+?? ativo/logs/20260627-225718-pega-conf-canonico-mangohud.log
+?? ativo/logs/20260627-230009-mangohud-canonico-real-v3.log
+?? ativo/logs/20260627-230416-mangohud-somente-wrapper-conf.log
+?? ativo/logs/20260627-230718-cria-mangohud-canonico-novo.log
+?? ativo/logs/20260627-230958-mangohud-shim-canonico.log
+?? ativo/logs/20260627-231303-mangohud-correto-final.log
+?? ativo/logs/20260627-231507-mangohud-limpo-final.log
+?? ativo/logs/20260627-231750-corrige-mangohud-canonico.log
+?? ativo/logs/20260627-232221-reset-total-mangohud-canonico.log
+?? ativo/logs/20260627-232618-reset-mangohud-linha-hora-minuto.log
+?? ativo/logs/20260627-232843-diagnostico-origem-mangohud.log
+?? ativo/logs/20260627-233523-fix-steam-launchoptions-fechada.log
+?? ativo/logs/20260627-233920-fix-mangohud-sem-dupla-injecao.log
+?? ativo/logs/20260627-234615-fix-wrapper-mangohud-userconf-final.log
+?? ativo/logs/20260627-234734-fix-wrapper-sem-falso-positivo.log
+?? ativo/logs/20260627-234919-final-mangohud-alt-tab.log
+?? ativo/logs/20260627-235102-corrige-tudo-sem-kwin-sem-borderless.log
+?? ativo/logs/20260627-235235-finaliza-wrapper-mangohud-input-v2.log
+?? ativo/logs/20260627-235551-wrapper-runtime-trace-v1.log
+?? ativo/logs/20260627-235931-apaga-e-puxa-wrapper-canonico-v1.log
+?? ativo/logs/20260628-000307-remove-mangohud-do-wrapper-v1.log
+?? ativo/logs/20260628-000956-restaura-wrapper-steam-alt-tab-canonico.log
+?? ativo/logs/20260628-001805-tira-proton-errado-alt-tab-limpo-v2.log
+?? ativo/logs/20260628-005821-restaura-wrapper-ultimo-bom-ou-minimo.log
+?? ativo/logs/20260628-010116-restaura-wrapper-alt-tab-definitivo-20260611.log
+?? ativo/logs/20260628-010955-fixa-wrapper-steam-canonico-alt-tab-multilocal.log
+?? ativo/logs/20260628-011105-continua-fixa-wrapper-canonico-alt-tab-v3.log
+?? ativo/logs/20260628-161841-atualiza-base-sem-kernel-driver.log
+?? ativo/logs/20260628-162314-pacotes-explicitos-antes.txt
+?? ativo/logs/20260628-162314-remove-apps-fora-stack-sem-sistema.log
+?? ativo/logs/20260628-162550-candidatos-remocao.txt
+?? ativo/logs/20260628-162550-limpeza-matriz-gamer-enxuta.log
+?? ativo/logs/20260628-162550-pacotes-explicitos-antes.txt
+?? ativo/logs/20260628-162915-candidatos-por-desktop.txt
+?? ativo/logs/20260628-162915-candidatos-por-lista.txt
+?? ativo/logs/20260628-162915-candidatos-remocao.txt
+?? ativo/logs/20260628-162915-desktops-quarentenados.txt
+?? ativo/logs/20260628-162915-flatpaks-removidos.txt
+?? ativo/logs/20260628-162915-limpeza-menu-apps-fora-stack-v3.log
+?? ativo/logs/20260628-162915-orfaos-detectados-nao-removidos.txt
+?? ativo/logs/20260628-162915-pacotes-explicitos-antes.txt
+?? ativo/logs/20260628-162915-pacotes-explicitos-depois.txt
+?? ativo/logs/20260628-162915-pacotes-nao-removidos.txt
+?? ativo/logs/20260628-162915-pacotes-removidos.txt
+?? ativo/logs/20260628-163252-cachyos-v3-kernel-nvidia-casado.log
+?? ativo/logs/20260628-163527-corrige-cachyos-v3-instala-casal.log
+?? ativo/logs/20260628-164249-aplica-tema-mocha-barra-48.log
+?? ativo/logs/20260628-164452-aplica-tema-instalado-barra-48.log
+?? ativo/logs/20260628-164736-restaura-tema-mocha-canonico-manual.log
+?? ativo/logs/20260628-164920-reinstala-spectacle-print.log
+?? ativo/logs/20260628-170618-tema-completo-barra-cores-sddm.log
+?? ativo/logs/20260628-171108-aplica-somente-cores-mocha.log
+?? ativo/logs/20260628-171231-aplica-cores-mocha-fix-permissao.log
+?? ativo/logs/20260628-171450-forca-cores-reais-kde-sddm.log
+?? ativo/logs/20260628-171719-recupera-barra-aplica-cores-sem-tema-quebrado.log
+?? ativo/logs/20260628-172134-aborta-tentativa-aplica-cores-direto.log
+?? ativo/logs/20260628-172346-restaura-barra-do-backup-exato.log
+?? ativo/logs/20260628-172534-recria-barra-visivel-48-sem-cores.log
+?? ativo/logs/20260628-172752-restaura-barra-padrao-kde-factory.log
+?? ativo/logs/20260628-173054-aplica-cores-mocha-somente-na-barra.log
+?? ativo/logs/20260628-173454-corrige-barra-azul-wallpaper.log
+?? ativo/logs/20260628-173945-append-manual-cor-barra-wallpaper-caixa-unica.log
+?? ativo/logs/20260628-174040-append-manual-cor-barra-wallpaper-sudo-tee.log
+?? ativo/logs/20260628-174554-instala-stack-gamer-mocha-canonico-alt-tab.log
+?? ativo/logs/20260628-174835-continua-stack-gamer-sem-conflito-pulse.log
+?? ativo/logs/20260629-032933-pre-commit-saneamento-auditoria.log
+?? ativo/logs/20260629-033057-resolve-bloqueios-pre-commit.log
+?? ativo/mocha-iso-canonico.env
+?? ativo/scripts/20260529-200013-mocha-reaplicar-barra-aprovada-atual.sh
+?? ativo/scripts/20260627-183751-mocha-reaplicar-tema-completo-usuarios.sh
+?? ativo/scripts/20260627-184000-mocha-reaplicar-tema-completo-usuarios.sh
+?? ativo/scripts/mocha-reaplicar-tema-completo-usuarios.sh
+?? ativo/steam-mangohud-canonico/
+?? ativo/steam-wrapper-canonico/
+?? ativo/tmp/
+?? ativo/usr/
+?? ativo/wrapper-steam/WRAPPER-STEAM-CANONICO-ALT-TAB-INPUT.md
+?? ativo/wrapper-steam/mocha-steam-game-run-canonico
+?? ativo/wrapper-steam/mocha-steam-game-run-canonico-alt-tab-input-20260611
+?? ativo/wrapper-steam/mocha-steam-game-run-canonico.sha256
+?? ativo/wrappers/
+?? auditorias/audita-rust-firstboot-stack-20260624-121550/
+?? auditorias/corrige-atalho-menu-stack-sem-executar-20260624-123227/
+?? auditorias/dump-rust-firstboot-stack-fonte-20260624-121731/
+?? auditorias/instala-somente-programa-rust-stack-20260624-122414/
+?? auditorias/localiza-rust-atualizador-arch-20260624-120505/
+?? calamares/base-calam-arch-installer-2026-06/usr/lib/calamares/mocha/
+?? calamares/base-calam-arch-installer-2026-06/usr/share/calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/base-calam-arch-installer-2026-06/usr/share/calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/etc-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/etc-calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/usr-share-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/origem-airootfs/usr-share-calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/etc-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/etc-calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/usr-share-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/textos/usr-share-calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/etc-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/etc-calamares/scripts/
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/usr-share-calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/yaml-configs/usr-share-calamares/scripts/
+?? calamares/mocha-calamares/etc/calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/mocha-calamares/etc/calamares/scripts/
+?? calamares/mocha-calamares/etc/skel/
+?? calamares/mocha-calamares/home/
+?? calamares/mocha-calamares/usr/lib/
+?? calamares/mocha-calamares/usr/local/
+?? calamares/origem-calam-arch-installer-2026-06-20260605-112415/usr/lib/calamares/mocha/
+?? calamares/origem-calam-arch-installer-2026-06-20260605-112415/usr/share/calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/origem-calam-arch-installer-2026-06-20260605-112415/usr/share/calamares/scripts/
+?? calamares/trabalho-mocha-calamares-20260605-112806/usr/lib/calamares/mocha/
+?? calamares/trabalho-mocha-calamares-20260605-112806/usr/share/calamares/modules/shellprocess_mocha_finaliza_usuario.conf
+?? calamares/trabalho-mocha-calamares-20260605-112806/usr/share/calamares/scripts/
+?? canonico/
+
+============================================================
+ Resultado
+============================================================
+[OK] Bloqueios tratados.
+[OK] Log: /media/mochafast/MochaArch/ativo/logs/20260629-033057-resolve-bloqueios-pre-commit.log
+[OK] Snapshot anterior: /tmp/mocha-bloqueios-pre-commit-20260629-033057.patch
+[OK] Backup do manual convertido: /media/mochafast/MochaArch/ativo/docs/MANUAL-UNICO-VIVO-typechange-backup-20260629-033057.md

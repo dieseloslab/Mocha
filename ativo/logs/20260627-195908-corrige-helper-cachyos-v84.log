@@ -1,0 +1,23 @@
+
+============================================================
+ Mocha — helper CachyOS transitório V8.4
+============================================================
+Base:    /media/mochafast/MochaArch
+Ativo:   /media/mochafast/MochaArch/ativo
+Helper:  /usr/local/lib/mocha/mocha-cachyos-transient-install
+Log:     /media/mochafast/MochaArch/ativo/logs/20260627-195908-corrige-helper-cachyos-v84.log
+
+[1] Backup do helper V8.3
+
+[2] Aplicando patch V8.4
+ - v3/v4/znver4/base passam a ser tratados como canal, não pacote
+ - --available continua sem sudo e sem pacman-key
+ - fallback para pacman -Si local, sem sudo, cobre pacotes Arch/multilib
+ - validação não falha mais por texto literal 'sem sudo/pacman-key'
+
+[3] Copiando V8.4 para canônico e payload
+
+[4] Validação direta do helper
+[mocha-cachyos-transient] Canal CachyOS transitório detectado: v3
+[mocha-cachyos-transient] Consulta --available sem sudo/pacman-key; nada será instalado.
+[FALHA] Helper --available v3 falhou.

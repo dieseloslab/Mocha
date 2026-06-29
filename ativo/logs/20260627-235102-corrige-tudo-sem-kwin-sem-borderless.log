@@ -1,0 +1,27 @@
+
+============================================================
+ Mocha — correção canônica wrapper/MangoHud/input
+============================================================
+Usuário: mocha
+HOME:    /home/mocha
+Backup:  /home/mocha/.local/share/mocha/backups/corrige-tudo-sem-kwin-sem-borderless-20260627-235102
+Log:     /media/mochafast/MochaArch/ativo/logs/20260627-235102-corrige-tudo-sem-kwin-sem-borderless.log
+
+[1] Fechando Steam/jogo para aplicar ambiente limpo
+[OK] Steam/jogo solicitados para encerramento.
+
+[2] Backup
+[OK] Backup: /usr/local/bin/mocha-steam-game-run
+[OK] Backup: /usr/local/share/mocha/mangohud/MangoHud.conf
+[OK] Backup: /home/mocha/.config/MangoHud/MangoHud.conf
+[OK] Backup: /home/mocha/.config/kwinrulesrc
+
+[3] Removendo regras KWin Mocha que não fazem parte da correção canônica
+[OK] Regras KWin Mocha removidas.
+
+[4] Recriando MangoHud canônico
+[OK] Mestre: /usr/local/share/mocha/mangohud/MangoHud.conf
+[OK] Runtime visível: /home/mocha/.config/MangoHud/MangoHud.conf
+
+[5] Recriando wrapper oficial limpo
+bash: line 260: syntax error near unexpected token `('

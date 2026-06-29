@@ -1,0 +1,184 @@
+
+============================================================
+ Mocha — wrapper runtime trace V1
+============================================================
+Usuário:     mocha
+HOME:        /home/mocha
+Wrapper:     /usr/local/bin/mocha-steam-game-run
+MangoHud:    /home/mocha/.config/MangoHud/MangoHud.conf
+Runtime log: /home/mocha/.local/share/mocha/runtime/mocha-steam-game-run.log
+Log:         /media/mochafast/MochaArch/ativo/logs/20260627-235551-wrapper-runtime-trace-v1.log
+
+[1] Fechando Steam/jogo
+[OK] Steam/jogo encerrados ou ausentes.
+
+[2] Backup
+[OK] Backup: /usr/local/bin/mocha-steam-game-run
+[OK] Backup: /usr/local/share/mocha/mangohud/MangoHud.conf
+[OK] Backup: /home/mocha/.config/MangoHud/MangoHud.conf
+
+[3] Gravando MangoHud canônico mínimo e legível
+[OK] MangoHud gravado.
+
+[4] Instalando wrapper com prova runtime
+[OK] Wrapper instalado com log runtime.
+
+[5] Forçando launch option oficial no AppID 2169200
+[OK] /home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf
+[OK] /home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf
+
+[6] Teste local do wrapper sem Steam
+[OK] Wrapper executou mangohud com /usr/bin/true.
+[OK] Log runtime foi escrito pelo wrapper.
+
+[7] Validação final
+
+Wrapper:
+------------------------------------------------------------
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+MASTER_CONF="/usr/local/share/mocha/mangohud/MangoHud.conf"
+USER_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/MangoHud/MangoHud.conf"
+RUNTIME_DIR="${HOME}/.local/share/mocha/runtime"
+RUNTIME_LOG="${RUNTIME_DIR}/mocha-steam-game-run.log"
+
+mkdir -p "$(dirname "$USER_CONF")" "$RUNTIME_DIR"
+
+{
+  echo "============================================================"
+  echo "Mocha wrapper chamado"
+  echo "Data: $(date '+%Y-%m-%d %H:%M:%S')"
+  echo "UID: $(id -u)"
+  echo "USER: ${USER:-}"
+  echo "HOME: ${HOME:-}"
+  echo "PWD: ${PWD:-}"
+  echo "Args count: $#"
+  printf 'Args:'
+  for arg in "$@"; do
+    printf ' [%s]' "$arg"
+  done
+  printf '\n'
+  echo "MASTER_CONF: $MASTER_CONF"
+  echo "USER_CONF: $USER_CONF"
+  echo "mangohud path: $(command -v mangohud 2>/dev/null || true)"
+} >> "$RUNTIME_LOG" 2>&1 || true
+
+if [ -r "$MASTER_CONF" ]; then
+  cp -f "$MASTER_CONF" "$USER_CONF" 2>/dev/null || true
+fi
+
+unset MANGOHUD_CONFIG
+_BAD_VAR="MANGOHUD_$(printf '%s%s' 'DL' 'SYM')"
+unset "$_BAD_VAR" 2>/dev/null || true
+unset _BAD_VAR
+
+export MANGOHUD=1
+export MANGOHUD_CONFIGFILE="$USER_CONF"
+
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+export MouseWarpOverride=force
+export XMODIFIERS="@im=none"
+
+{
+  echo "MANGOHUD=$MANGOHUD"
+  echo "MANGOHUD_CONFIGFILE=$MANGOHUD_CONFIGFILE"
+  echo "Exec final: mangohud <Steam command>"
+  echo
+} >> "$RUNTIME_LOG" 2>&1 || true
+
+exec mangohud "$@"
+------------------------------------------------------------
+
+MangoHud:
+------------------------------------------------------------
+     1	# Mocha MangoHud — canônico
+     2	# Uma linha, sem gráficos.
+     3	# Ordem: FPS | latência | CPU | GPU | RAM | VRAM | GameMode | HH:MM
+     4	
+     5	legacy_layout=0
+     6	horizontal
+     7	hud_no_margin
+     8	position=top-left
+     9	background_alpha=0.35
+    10	round_corners=8
+    11	font_size=18
+    12	
+    13	fps
+    14	frametime
+    15	cpu_stats
+    16	gpu_stats
+    17	ram
+    18	vram
+    19	gamemode
+    20	time
+    21	time_format=%H:%M
+------------------------------------------------------------
+
+Launch option gravada:
+------------------------------------------------------------
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:582:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:699:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:737:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:785:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:582:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:699:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:737:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:784:							"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:786:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:825:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:830:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:835:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.local/share/Steam/userdata/389303290/config/localconfig.vdf:839:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:582:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:699:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:737:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf.bak-20260627-225059:785:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:582:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:699:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:737:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:784:							"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:786:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:825:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:830:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:835:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+/home/mocha/.steam/steam/userdata/389303290/config/localconfig.vdf:839:						"LaunchOptions"		"/usr/local/bin/mocha-steam-game-run %command%"
+------------------------------------------------------------
+
+Runtime log atual:
+------------------------------------------------------------
+============================================================
+Mocha wrapper chamado
+Data: 2026-06-27 23:56:09
+UID: 1000
+USER: mocha
+HOME: /home/mocha
+PWD: /home/mocha
+Args count: 1
+Args: [/usr/bin/true]
+MASTER_CONF: /usr/local/share/mocha/mangohud/MangoHud.conf
+USER_CONF: /home/mocha/.config/MangoHud/MangoHud.conf
+mangohud path: /usr/local/bin/mangohud
+MANGOHUD=1
+MANGOHUD_CONFIGFILE=/home/mocha/.config/MangoHud/MangoHud.conf
+Exec final: mangohud <Steam command>
+
+------------------------------------------------------------
+
+============================================================
+ Concluído
+============================================================
+
+Agora abra o jogo pela Steam.
+
+Depois de abrir o jogo, confira:
+  cat '/home/mocha/.local/share/mocha/runtime/mocha-steam-game-run.log'
+
+Se esse arquivo NÃO ganhar uma nova entrada, a Steam não está chamando a linha:
+  /usr/local/bin/mocha-steam-game-run %command%
+
+Se ganhar entrada e o overlay não aparecer, o problema é carregamento do MangoHud, não launch option.
+
+Log desta correção:
+  /media/mochafast/MochaArch/ativo/logs/20260627-235551-wrapper-runtime-trace-v1.log

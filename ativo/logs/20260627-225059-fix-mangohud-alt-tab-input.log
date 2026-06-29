@@ -1,0 +1,66 @@
+
+============================================================
+ Mocha — corrigir MangoHud padrão + input após Alt+Tab
+============================================================
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-225059-fix-mangohud-alt-tab-input.log
+
+[1/6] Recriando MangoHud padrão Mocha sem gráfico...
+[OK] MangoHud canônico escrito em /usr/local/share/mocha/mangohud/MangoHud.conf
+
+[2/6] Aplicando configuração ao usuário atual, /etc/skel e usuários existentes...
+[OK] Usuário atual corrigido
+[OK] /etc/skel corrigido
+[OK] Usuário corrigido: mocha
+
+[3/6] Regravando wrapper Mocha com MangoHud forçado e fix de Alt+Tab/input...
+[OK] Wrapper regravado: /usr/local/bin/mocha-steam-game-run
+
+[4/6] Aplicando MouseWarpOverride=force nos prefixes Proton existentes...
+[OK] Prefixes Proton corrigidos: 3
+
+[5/6] Corrigindo opções de inicialização da Steam para usar wrapper Mocha...
+[OK] Arquivos localconfig.vdf verificados/corrigidos: 2
+
+[6/6] Auditoria final...
+
+--- Wrapper ---
+export MANGOHUD_CONFIGFILE="$CANON_CONF"
+export MANGOHUD_CONFIG="legacy_layout=false,horizontal,hud_no_margin,position=top-left,font_size=20,round_corners=8,background_alpha=0.42,alpha=1.0,background_color=1e1512,text_color=f4e4d4,gpu_color=d08a5b,cpu_color=c67a4a,vram_color=e0a070,frametime_color=f4c49a,engine_color=f4e4d4,wine_color=f4e4d4,fps,cpu_stats,gpu_stats,vram,ram,time,time_format=%H:%M,gamemode,frame_timing=0,histogram=0,toggle_hud=Shift_R+F12,toggle_logging=Shift_L+F2,upload_log=0,output_folder=/tmp"
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+export MouseWarpOverride=force
+  exec gamemoderun mangohud "$@"
+  exec mangohud "$@"
+
+--- MangoHud.conf ---
+# Sem gráfico de frametime.
+legacy_layout=false
+horizontal
+vram_color=e0a070
+frametime_color=f4c49a
+fps
+cpu_stats
+gpu_stats
+vram
+ram
+time
+time_format=%H:%M
+gamemode
+frame_timing=0
+histogram=0
+
+--- Launch option correta ---
+/usr/local/bin/mocha-steam-game-run %command%
+
+--- Verificação de proibidos no wrapper ---
+[AVISO] Ainda há termo proibido no wrapper. Verificar manualmente.
+
+[OK] Correção concluída.
+
+Feche totalmente o jogo e a Steam antes de testar de novo.
+Se a Steam ficar aberta, ela pode sobrescrever localconfig.vdf ao sair.
+Depois abra o jogo com:
+
+  /usr/local/bin/mocha-steam-game-run %command%
+
+Log: /media/mochafast/MochaArch/ativo/logs/20260627-225059-fix-mangohud-alt-tab-input.log
