@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+ENGINE="/usr/local/lib/mocha/mocha-kernel-driver-engine"
+TITLE="Mocha Stack Optimizer"
+LOGDIR="${XDG_CACHE_HOME:-$HOME/.cache}/mocha"
+mkdir -p "$LOGDIR"
+
+show_file() {
+  local file="$1"
+
+  if command -v kdialog >/dev/null 2>&1; then
+    kdialog --title "$TITLE" --textbox "$file" 1280 820
+  elif command -v konsole >/dev/null 2>&1; then
+    konsole --title "$TITLE" -e bash -lc "cat '$file'; echo; read -r -p 'Pressione Enter para fechar...'"
+  else
+    cat "$file"
+  fi
+}
+
+choose_action() {
+  if command -v kdialog >/dev/null 2>&1; then
+    kdialog --title "$TITLE" --menu "Escolha a ação:
+
+O relatório sempre mostra:
+- versão instalada
+- versão disponível
+- status
+
+Use Reinstalar/recasar quando o sistema estiver em dia, mas houver suspeita de módulo, initramfs, pacote ou driver mal casado." \
+      report "Ver relatório de versões" \
+      update "Atualizar kernel/driver se houver versão nova" \
+      reinstall "Reinstalar/recasar stack completa" \
+      quit "Sair"
+  else
+    echo
+    echo "Mocha Stack Optimizer"
+    echo
+    echo "1) Ver relatório de versões"
+    echo "2) Atualizar kernel/driver se houver versão nova"
+    echo "3) Reinstalar/recasar stack completa"
+    echo "4) Sair"
+    echo
+    read -r -p "Escolha: " opt
+    case "$opt" in
+      1) echo report ;;
+      2) echo update ;;
+      3) echo reinstall ;;
+      *) echo quit ;;
+    esac
+  fi
+}
+
+confirm_reinstall() {
+  if command -v kdialog >/dev/null 2>&1; then
+    kdialog --title "$TITLE" --yesno "Reinstalar/recasar a stack completa?
+
+Isto reinstala:
+- linux-cachyos
+- linux-cachyos-headers
+- linux-cachyos-nvidia-open
+- nvidia-utils
+- lib32-nvidia-utils
+- nvidia-settings
+- opencl-nvidia
+
+Também regenera initramfs e atualiza GRUB se existir.
+
+O repositório CachyOS continuará temporário."
+  else
+    echo
+    echo "Reinstalar/recasar a stack completa?"
+    read -r -p "Confirmar? [s/N] " ans
+    case "$ans" in
+      s|S|sim|SIM|y|Y|yes|YES) return 0 ;;
+      *) return 1 ;;
+    esac
+  fi
+}
+
+run_engine() {
+  local mode="$1"
+  local logfile="$LOGDIR/stack-optimizer-${mode}-$(date +%Y%m%d-%H%M%S).log"
+
+  set +e
+  if command -v pkexec >/dev/null 2>&1; then
+    pkexec "$ENGINE" "$mode" >"$logfile" 2>&1
+  else
+    sudo "$ENGINE" "$mode" >"$logfile" 2>&1
+  fi
+  rc="$?"
+  set -e
+
+  show_file "$logfile"
+  return "$rc"
+}
+
+while true; do
+  action="$(choose_action || true)"
+
+  case "$action" in
+    report)
+      run_engine check || true
+      ;;
+    update)
+      run_engine update || true
+      ;;
+    reinstall)
+      if confirm_reinstall; then
+        run_engine reinstall || true
+      fi
+      ;;
+    quit|"")
+      exit 0
+      ;;
+    *)
+      exit 0
+      ;;
+  esac
+done

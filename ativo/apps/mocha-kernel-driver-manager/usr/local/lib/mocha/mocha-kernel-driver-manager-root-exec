@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+REAL="/usr/local/bin/mocha-kernel-driver-manager"
+
+erro() {
+  msg="$1"
+  if command -v kdialog >/dev/null 2>&1; then
+    kdialog --error "$msg" --title "Mocha — Kernel e Driver" 2>/dev/null || true
+  fi
+  printf '[FALHA] %s\n' "$msg" >&2
+  exit 1
+}
+
+[ -x "$REAL" ] || erro "Programa real ausente: $REAL"
+
+quote_cmd() {
+  local out=""
+  local a
+  for a in "$@"; do
+    printf -v out "%s%q " "$out" "$a"
+  done
+  printf "%s" "$out"
+}
+
+if [ "$(id -u)" -ne 0 ]; then
+  SELF="/usr/local/lib/mocha/mocha-kernel-driver-manager-root-exec"
+
+  if command -v kdesu >/dev/null 2>&1; then
+    exec kdesu -c "$(quote_cmd "$SELF" "$@")"
+  fi
+
+  for KS in /usr/lib/kf6/kdesu /usr/lib/libexec/kf6/kdesu /usr/lib/kde4/libexec/kdesu; do
+    if [ -x "$KS" ]; then
+      exec "$KS" -c "$(quote_cmd "$SELF" "$@")"
+    fi
+  done
+
+  if command -v pkexec >/dev/null 2>&1; then
+    exec pkexec "$SELF" "$@"
+  fi
+
+  erro "Não encontrei kdesu nem pkexec para pedir autenticação ao abrir."
+fi
+
+export MOCHA_KERNEL_DRIVER_MANAGER_ELEVATED=1
+
+if [ -n "${PKEXEC_UID:-}" ]; then
+  export XDG_RUNTIME_DIR="/run/user/$PKEXEC_UID"
+  [ -S "$XDG_RUNTIME_DIR/wayland-0" ] && export WAYLAND_DISPLAY="wayland-0"
+  [ -z "${DISPLAY:-}" ] && export DISPLAY=":0"
+fi
+
+exec "$REAL" "$@"

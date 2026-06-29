@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+export QT_QPA_PLATFORMTHEME=kde
+export GTK_THEME=Mocha
+exec /usr/local/lib/mocha/kernel-driver/mocha-kernel-driver-gui

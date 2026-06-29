@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Mocha Kernel/Driver First Boot
+Comment=Interface Mocha para instalar/reinstalar kernel e driver no primeiro boot
+Exec=/usr/local/bin/mocha-kernel-driver-firstboot
+Icon=preferences-system
+Terminal=false
+NoDisplay=true
+OnlyShowIn=KDE;
+X-GNOME-Autostart-enabled=true
