@@ -1,0 +1,311 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+SELF="[mocha-cachyos-transient]"
+
+log()  { printf '%s %s\n' "$SELF" "$*"; }
+fail() { printf '[FALHA] %s\n' "$*" >&2; exit 1; }
+
+usage() {
+  cat >&2 <<'EOF'
+Uso:
+  mocha-cachyos-transient-install --available [v3|v4|znver4|base] pacote...
+  mocha-cachyos-transient-install --install   [v3|v4|znver4|base] pacote...
+  mocha-cachyos-transient-install --reinstall [v3|v4|znver4|base] pacote...
+EOF
+  exit 2
+}
+
+need_root() {
+  [ "$(id -u)" -eq 0 ] || fail "Abra pelo atalho Mocha — Kernel e Driver para autenticar antes de consultar/instalar."
+}
+
+cpu_channel() {
+  if /lib/ld-linux-x86-64.so.2 --help 2>/dev/null | grep -q 'x86-64-v4 (supported'; then
+    printf 'v4'
+  elif /lib/ld-linux-x86-64.so.2 --help 2>/dev/null | grep -q 'x86-64-v3 (supported'; then
+    printf 'v3'
+  else
+    printf 'base'
+  fi
+}
+
+MODE="${1:-}"
+case "$MODE" in
+  --available|--install|--reinstall) shift ;;
+  *) usage ;;
+esac
+
+CHANNEL=""
+case "${1:-}" in
+  --level)
+    [ "$#" -ge 2 ] || fail "--level sem valor."
+    CHANNEL="$2"
+    shift 2
+    ;;
+  v3|v4|znver4|base)
+    CHANNEL="$1"
+    shift
+    ;;
+esac
+
+[ -n "$CHANNEL" ] || CHANNEL="$(cpu_channel)"
+
+case "$CHANNEL" in
+  v3|v4|znver4|base) ;;
+  *) fail "Canal inválido: $CHANNEL" ;;
+esac
+
+PKGS=()
+for P in "$@"; do
+  case "$P" in
+    ""|v3|v4|znver4|base) ;;
+    *) PKGS+=("$P") ;;
+  esac
+done
+
+[ "${#PKGS[@]}" -gt 0 ] || fail "Nenhum pacote solicitado."
+
+case "$CHANNEL" in
+  base)
+    OPT_ARCH="x86_64"
+    OPT_REPOS=()
+    ;;
+  v3)
+    OPT_ARCH="x86_64_v3"
+    OPT_REPOS=("cachyos-v3" "cachyos-core-v3" "cachyos-extra-v3")
+    ;;
+  v4)
+    OPT_ARCH="x86_64_v4"
+    OPT_REPOS=("cachyos-v4" "cachyos-core-v4" "cachyos-extra-v4")
+    ;;
+  znver4)
+    OPT_ARCH="x86_64_v4"
+    OPT_REPOS=("cachyos-znver4" "cachyos-core-znver4" "cachyos-extra-znver4")
+    ;;
+esac
+
+TMPBASE="/var/tmp/mocha-cachyos-transient"
+mkdir -p "$TMPBASE"
+
+WORK="$(mktemp -d -p "$TMPBASE" run.XXXXXXXXXX)"
+trap 'rm -rf "$WORK" >/dev/null 2>&1 || true' EXIT
+
+chmod 755 "$TMPBASE" "$WORK"
+
+PACCONF="$WORK/pacman.conf"
+DBPATH="$WORK/db"
+CACHEDIR="$WORK/cache"
+PACLOG="$WORK/pacman.log"
+
+mkdir -p "$DBPATH/sync" "$CACHEDIR"
+chmod 777 "$DBPATH" "$DBPATH/sync" "$CACHEDIR"
+
+write_repo() {
+  local repo="$1"
+  local archdir="$2"
+  local mirrorfile="$3"
+  local siglevel="$4"
+
+  {
+    echo "[$repo]"
+    echo "SigLevel = $siglevel"
+    if [ -f "$mirrorfile" ]; then
+      echo "Include = $mirrorfile"
+    else
+      echo "Server = https://mirror.cachyos.org/repo/$archdir/\$repo"
+    fi
+    echo
+  } >> "$PACCONF"
+}
+
+write_pacconf() {
+  local siglevel="$1"
+
+  cat > "$PACCONF" <<EOF
+[options]
+Architecture = auto
+SigLevel = Required DatabaseOptional
+LocalFileSigLevel = Optional
+ParallelDownloads = 5
+CheckSpace
+DisableSandbox
+
+EOF
+
+  for R in "${OPT_REPOS[@]}"; do
+    case "$CHANNEL" in
+      v3) write_repo "$R" "$OPT_ARCH" "/etc/pacman.d/cachyos-v3-mirrorlist" "$siglevel" ;;
+      v4|znver4) write_repo "$R" "$OPT_ARCH" "/etc/pacman.d/cachyos-v4-mirrorlist" "$siglevel" ;;
+    esac
+  done
+
+  write_repo "cachyos" "x86_64" "/etc/pacman.d/cachyos-mirrorlist" "$siglevel"
+
+  awk '
+    BEGIN { skip=0 }
+    /^\[/ {
+      skip = ($0 == "[options]" || $0 ~ /^\[cachyos/)
+    }
+    skip == 0 {
+      if ($0 !~ /^IgnorePkg[[:space:]]*=/ &&
+          $0 !~ /^IgnoreGroup[[:space:]]*=/ &&
+          $0 !~ /^DownloadUser[[:space:]]*=/ &&
+          $0 !~ /^DisableSandbox[[:space:]]*$/) print
+    }
+  ' /etc/pacman.conf >> "$PACCONF"
+}
+
+print_requested() {
+  echo
+  echo "Pacotes solicitados:"
+  for P in "${PKGS[@]}"; do
+    printf ' - %s\n' "$P"
+  done
+}
+
+query_available() {
+  need_root
+
+  log "Canal CachyOS transitório detectado: $CHANNEL"
+  log "Consulta --available autenticada/root; nada será instalado."
+  log "/etc/pacman.conf não será editado."
+  print_requested
+
+  write_pacconf "Optional TrustAll"
+
+  echo
+  echo "Sincronizando bancos temporários:"
+  if ! pacman --config "$PACCONF" \
+      --dbpath "$DBPATH" \
+      --cachedir "$CACHEDIR" \
+      --logfile "$PACLOG" \
+      -Syy --noconfirm; then
+    echo
+    echo "Pacman.conf temporário:"
+    sed -n '1,220p' "$PACCONF" 2>/dev/null || true
+    echo
+    echo "Permissões temporárias:"
+    ls -ld "$WORK" "$DBPATH" "$DBPATH/sync" "$CACHEDIR" 2>/dev/null || true
+    echo
+    echo "Log pacman:"
+    sed -n '1,220p' "$PACLOG" 2>/dev/null || true
+    fail "Falha ao sincronizar bancos temporários."
+  fi
+
+  echo
+  echo "Versões disponíveis no canal transitório:"
+
+  FOUND=0
+  MISSING=0
+
+  for P in "${PKGS[@]}"; do
+    INFO="$(
+      pacman --config "$PACCONF" \
+        --dbpath "$DBPATH" \
+        --cachedir "$CACHEDIR" \
+        -Si "$P" 2>/dev/null | awk -F: '
+          /^Repository/ {repo=$2; gsub(/^[ \t]+|[ \t]+$/, "", repo)}
+          /^Version/ {ver=$2; gsub(/^[ \t]+|[ \t]+$/, "", ver)}
+          END {
+            if (ver != "") {
+              if (repo == "") repo="sync";
+              print ver "\t" repo;
+            }
+          }
+        '
+    )"
+
+    if [ -n "$INFO" ]; then
+      VER="$(printf '%s\n' "$INFO" | awk -F '\t' '{print $1}')"
+      REPO="$(printf '%s\n' "$INFO" | awk -F '\t' '{print $2}')"
+      printf '%s: %s (%s)\n' "$P" "$VER" "$REPO"
+      FOUND=$((FOUND + 1))
+    else
+      printf '%s: indisponível\n' "$P"
+      MISSING=$((MISSING + 1))
+    fi
+  done
+
+  echo
+  echo "Resumo:"
+  echo "Encontrados: $FOUND"
+  echo "Ausentes:    $MISSING"
+
+  echo
+  echo "[OK] Consulta transitória concluída. Nada instalado."
+}
+
+prepare_keyring_for_install() {
+  need_root
+
+  if pacman-key --list-keys F3B607488DB35A47 >/dev/null 2>&1; then
+    log "Chave CachyOS já presente."
+  else
+    log "Importando chave CachyOS F3B607488DB35A47."
+    pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+  fi
+
+  log "Assinando localmente chave CachyOS F3B607488DB35A47."
+  pacman-key --lsign-key F3B607488DB35A47 >/dev/null
+}
+
+cleanup_cachyos_sync_dbs() {
+  rm -f \
+    /var/lib/pacman/sync/cachyos*.db \
+    /var/lib/pacman/sync/cachyos*.db.sig \
+    /var/lib/pacman/sync/cachyos*.files \
+    /var/lib/pacman/sync/cachyos*.files.sig \
+    /var/lib/pacman/sync/download-*/cachyos* \
+    >/dev/null 2>&1 || true
+}
+
+install_or_reinstall() {
+  need_root
+
+  log "Canal CachyOS transitório detectado: $CHANNEL"
+  log "Modo: $MODE"
+  log "/etc/pacman.conf não será editado."
+  log "Não será executado pacman -Syu geral."
+  print_requested
+
+  prepare_keyring_for_install
+  write_pacconf "Required DatabaseOptional"
+
+  echo
+  echo "Sincronizando bancos com pacman.conf temporário:"
+  pacman --config "$PACCONF" -Sy --noconfirm
+
+  echo
+  echo "Instalando/reinstalando pacotes solicitados:"
+  if [ "$MODE" = "--install" ]; then
+    pacman --config "$PACCONF" -S --needed --noconfirm "${PKGS[@]}"
+  else
+    pacman --config "$PACCONF" -S --noconfirm "${PKGS[@]}"
+  fi
+
+  cleanup_cachyos_sync_dbs
+
+  if command -v mkinitcpio >/dev/null 2>&1; then
+    echo
+    echo "Regenerando initramfs:"
+    mkinitcpio -P || true
+  fi
+
+  if command -v grub-mkconfig >/dev/null 2>&1 && [ -d /boot/grub ]; then
+    echo
+    echo "Regenerando GRUB:"
+    grub-mkconfig -o /boot/grub/grub.cfg || true
+  fi
+
+  echo
+  echo "[OK] Operação transitória concluída."
+  echo "[OK] /etc/pacman.conf não foi editado."
+  echo "[OK] pacman -Syu geral não foi executado."
+}
+
+case "$MODE" in
+  --available) query_available ;;
+  --install|--reinstall) install_or_reinstall ;;
+esac

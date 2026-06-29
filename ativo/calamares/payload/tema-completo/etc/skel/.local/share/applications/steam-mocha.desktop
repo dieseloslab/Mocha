@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Steam (Mocha)
+Comment=Steam com perfil Mocha
+Exec=/usr/local/bin/mocha-steam-client-tcp %U
+Icon=steam
+Terminal=false
+Categories=Network;Game;
+StartupNotify=true

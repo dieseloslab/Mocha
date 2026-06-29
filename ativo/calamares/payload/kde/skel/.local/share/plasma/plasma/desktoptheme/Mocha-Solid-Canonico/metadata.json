@@ -1,0 +1,10 @@
+{
+  "KPlugin": {
+    "Id": "Mocha-Solid-Canonico",
+    "Name": "Mocha Solid Canonico",
+    "Description": "Tema Plasma Mocha sólido para painel e menu sem transparência",
+    "Version": "1.0",
+    "Category": "Plasma Theme"
+  },
+  "X-Plasma-API": "5.0"
+}

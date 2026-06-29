@@ -1,0 +1,5 @@
+[General]
+ColorScheme=MochaSolidCanonico
+
+[KDE]
+LookAndFeelPackage=org.kde.breezedark.desktop

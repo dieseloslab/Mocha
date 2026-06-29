@@ -1,0 +1,5 @@
+[Greeter]
+WallpaperPlugin=org.kde.image
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=file:///usr/share/backgrounds/mocha/mocha-lockscreen-20260628-194520.png

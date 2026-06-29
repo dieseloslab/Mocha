@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Atualizar ou Reinstalar Kernel e Driver Mocha
+Comment=Atualiza ou reinstala o kernel e o driver gráfico do Mocha
+Exec=konsole --hold -e sudo /usr/local/bin/mocha-kernel-driver-updater
+Icon=system-software-update
+Terminal=false
+Categories=System;

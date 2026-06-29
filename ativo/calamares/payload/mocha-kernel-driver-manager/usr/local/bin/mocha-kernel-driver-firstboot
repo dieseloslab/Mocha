@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -u
+
+CMDLINE="$(tr '\0' ' ' </proc/cmdline 2>/dev/null || true)"
+
+case "$CMDLINE" in
+  *archiso*|*boot=live*|*cow_spacesize*|*airootfs*)
+    exit 0
+    ;;
+esac
+
+[ -n "${WAYLAND_DISPLAY:-}${DISPLAY:-}" ] || exit 0
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/mocha"
+MARK="$STATE_DIR/kernel-driver-firstboot.done"
+[ -e "$MARK" ] && exit 0
+
+mkdir -p "$STATE_DIR"
+
+(
+  sleep 10
+  /usr/local/bin/mocha-kernel-driver-manager --gui
+  RC="$?"
+
+  if [ "$RC" -eq 0 ]; then
+    : > "$MARK"
+  fi
+) &
+
+exit 0

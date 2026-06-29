@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+exec steam -tcp "$@"
