@@ -26,7 +26,6 @@
 # GitHub Languages deve refletir código real do projeto.
 # Auditorias, logs, relatórios, snapshots de trabalho e documentação operacional
 # não devem dominar a barra pública de linguagens.
-
 auditorias/** linguist-generated
 logs/** linguist-generated
 relatorios/** linguist-documentation
@@ -37,7 +36,6 @@ receitas/** linguist-documentation
 ajustes/** linguist-documentation
 ATIVO-TRABALHO/** linguist-documentation
 ativo/** linguist-documentation
-
 *.log linguist-generated
 *.bak linguist-generated
 *.old linguist-generated
@@ -45,7 +43,6 @@ ativo/** linguist-documentation
 *.tmp linguist-generated
 *.backup linguist-generated
 *.pre-* linguist-generated
-
 # Scripts reais continuam detectáveis.
 scripts/** linguist-detectable
 calamares/** linguist-detectable
@@ -58,3 +55,22 @@ calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airoot
 calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/usr/share/sddm/themes/mocha/mocha-background.png -filter -diff -merge
 calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/var/lib/AccountsService/icons/mocha -filter -diff -merge
 calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha/usr/share/archiso/configs/baseline/airootfs/etc/skel/.face.icon -filter -diff -merge
+# MOCHA-NO-LFS-SMALL-ASSETS-BEGIN
+# Assets pequenos do tema/branding devem ficar no Git normal.
+# Não usar LFS para svgz/png pequenos do KDE/Calamares/branding.
+ativo/assets/branding/** -filter -diff -merge -text
+ativo/kde/** -filter -diff -merge -text
+ativo/calamares/payload/kde/** -filter -diff -merge -text
+# MOCHA-NO-LFS-SMALL-ASSETS-END
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/dialogs/background.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/background.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/button.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/frame.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/lineedit.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/listitem.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/panel-background.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/tasks.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/plasma/desktoptheme/MochaPanelSolidCanonico/widgets/viewitem.svgz !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/usr/share/backgrounds/mocha/mocha-lockscreen-20260628-194520.png !text !filter !merge !diff
+ativo/calamares/payload/tema-completo/wallpaper/mocha-wallpaper-canonico.png !text !filter !merge !diff
+ativo/calamares/payload/wallpaper/Wall.png !text !filter !merge !diff

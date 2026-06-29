@@ -53,7 +53,7 @@
       }
     ],
     "Category": "",
-    "Description": "Mocha local Plasma style with adjusted panel background",
+    "Description": "Breeze by the KDE VDG",
     "Description[ar]": "نسيم من مجموعة تصميم كِيدِي",
     "Description[az]": "KDE VDG tərəfindən Breeze İş mühiti görünüşü",
     "Description[be]": "Breeze ад KDE VDG",
@@ -103,7 +103,7 @@
     "EnabledByDefault": true,
     "Id": "MochaPanelSolidCanonico",
     "License": "LGPL",
-    "Name": "Mocha Panel Solid Canonico",
+    "Name": "MochaPanelSolidCanonico",
     "Name[ar]": "نسيم",
     "Name[az]": "Breeze",
     "Name[be]": "Breeze",
@@ -150,7 +150,7 @@
     "Name[vi]": "Breeze",
     "Name[zh_CN]": "Breeze 微风",
     "Name[zh_TW]": "Breeze",
-    "Version": "6.22.0",
+    "Version": "6.26.0",
     "Website": "https://www.kde.org/"
   },
   "X-Plasma-API": "5.0"
