@@ -1,1 +1,0 @@
-/ISO/arch/x86_64/airootfs.sfs
