@@ -8,7 +8,7 @@ Data: 2026-05-30T14:15:02-03:00
 - Confirmado que a origem desses runtimes é Flathub.
 - Comentado o bloco de repositórios CachyOS V3 em /etc/pacman.conf para evitar contaminação futura.
 - Adicionado IgnorePkg para linux-cachyos-bore-lto, linux-cachyos-bore-lto-nvidia-open, nvidia-utils e lib32-nvidia-utils.
-- Atualizado apenas o banco do pacman com pacman -Syy; nenhum pacote pacman foi atualizado.
+- Atualizado apenas o banco do pacman com pacman -Sy; nenhum pacote pacman foi atualizado.
 
 ## Regra operacional
 

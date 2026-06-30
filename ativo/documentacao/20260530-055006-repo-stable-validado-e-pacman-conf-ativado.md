@@ -13,7 +13,7 @@ Data: 20260530-055006
 - [mocha-testing] não foi habilitado.
 - [core], [extra] e [multilib] foram preservados quando já existiam.
 - Não foi executado pacman -Syu.
-- Foi executado somente pacman -Syy para sincronizar bancos.
+- Foi executado somente pacman -Sy para sincronizar bancos.
 
 ## Correção aplicada
 

@@ -4,7 +4,7 @@ Timestamp: 20260530-133009
 
 ## O que este comando fez
 
-- Sincronizou somente as bases dos repositórios com `pacman -Syy`.
+- Sincronizou somente as bases dos repositórios com `pacman -Sy`.
 - Procurou os pacotes reais em `cachyos-v3`, `cachyos-core-v3` e `cachyos-extra-v3`.
 - Não instalou pacote nenhum.
 - Não removeu pacote nenhum.
