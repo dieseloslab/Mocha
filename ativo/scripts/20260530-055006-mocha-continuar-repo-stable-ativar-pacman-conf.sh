@@ -227,8 +227,8 @@ awk '
 ' "$PACMAN_CONF"
 
 say "Sincronizando bancos sem atualizar pacotes"
-printf '%s\n' "Será executado apenas pacman -Syy. Não será executado pacman -Syu."
-"${SUDO[@]}" pacman -Syy
+printf '%s\n' "Será executado apenas pacman -Sy. Não será executado pacman -Syu."
+"${SUDO[@]}" pacman -Sy
 
 say "Listagem inicial do mocha-stable"
 pacman -Sl mocha-stable 2>/dev/null | head -n 30 || printf '%s\n' "mocha-stable ativo, mas vazio no momento."
@@ -250,7 +250,7 @@ append_doc "- Somente [mocha-stable] foi ativado."
 append_doc "- [mocha-testing] não foi habilitado."
 append_doc "- [core], [extra] e [multilib] foram preservados quando já existiam."
 append_doc "- Não foi executado pacman -Syu."
-append_doc "- Foi executado somente pacman -Syy para sincronizar bancos."
+append_doc "- Foi executado somente pacman -Sy para sincronizar bancos."
 append_doc ""
 append_doc "## Correção aplicada"
 append_doc ""

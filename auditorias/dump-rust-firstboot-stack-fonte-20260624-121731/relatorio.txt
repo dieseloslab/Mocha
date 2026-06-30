@@ -1687,7 +1687,7 @@ PACMAN_FINAL_CLEAN="$WORK/pacman.arch-clean"
 sudo install -m 0644 "$PACMAN_FINAL_CLEAN" /etc/pacman.conf
 
 log "Sincronizando Arch limpo."
-sudo pacman -Syy --noconfirm
+sudo pacman -Sy --noconfirm
 
 log "Garantindo pacman/keyring/certificados Arch."
 sudo pacman -S --needed --noconfirm pacman archlinux-keyring ca-certificates curl
@@ -1732,7 +1732,7 @@ log "Entrando temporariamente no CachyOS v3 com arquitetura x86_64_v3 liberada."
 } > "$WORK/pacman.cachy-v3"
 
 sudo install -m 0644 "$WORK/pacman.cachy-v3" /etc/pacman.conf
-sudo pacman -Syy --noconfirm
+sudo pacman -Sy --noconfirm
 
 log "Validando pacotes obrigatórios do Cachy v3."
 for p in linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings opencl-nvidia egl-wayland libglvnd vulkan-icd-loader lib32-vulkan-icd-loader vulkan-tools; do

@@ -73,7 +73,7 @@ pacman-conf --repo-list | grep -E '^cachyos|^core$|^extra$|^multilib$' || true
 
 say "Sincronizando SOMENTE as bases dos repositórios"
 printf '%s\n' "Isto baixa/atualiza bancos de pacotes. Não instala e não atualiza pacote nenhum."
-sudo pacman -Syy --noconfirm
+sudo pacman -Sy --noconfirm
 
 say "Confirmando bancos CachyOS locais"
 ls -lh /var/lib/pacman/sync/ | grep -E 'cachyos|core|extra|multilib' || true
@@ -154,7 +154,7 @@ say "Gerando documento"
   printf '# Auditoria Mocha Arch — procura correta do CachyOS BORE LTO NVIDIA\n\n'
   printf 'Timestamp: %s\n\n' "$TS"
   printf '## O que este comando fez\n\n'
-  printf -- '- Sincronizou somente as bases dos repositórios com `pacman -Syy`.\n'
+  printf -- '- Sincronizou somente as bases dos repositórios com `pacman -Sy`.\n'
   printf -- '- Procurou os pacotes reais em `cachyos-v3`, `cachyos-core-v3` e `cachyos-extra-v3`.\n'
   printf -- '- Não instalou pacote nenhum.\n'
   printf -- '- Não removeu pacote nenhum.\n'
