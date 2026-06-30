@@ -147,3 +147,13 @@ mocha-steam-game-run.bak-*
 *.bak-estado-quebrado-*
 *.bak-sem-exec-mangohud-*
 *.bak-funcional-confirmado-*
+# Mocha público — artefatos binários locais/não versionar
+*.zip
+*clonezilla*
+*clonezilla-live*
+MochaArch-Interno/
+importado-do-publico-nao-publicar/
+nao-publicar/
+não-publicar/
+privado/
+interno/
