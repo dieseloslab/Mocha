@@ -138,3 +138,12 @@ target/
 /ativo/logs/git/*-lfs-dryrun-final.txt
 /ativo/logs/git/*-lfs-dryrun-*.txt
 /ativo/logs/git/*.bundle
+
+# Backups locais MangoHud/wrapper
+MangoHud.conf.bak-*
+mocha-steam-game-run.bak-*
+*.bak-mangohud-*
+*.bak-layout-ferrou-*
+*.bak-estado-quebrado-*
+*.bak-sem-exec-mangohud-*
+*.bak-funcional-confirmado-*
