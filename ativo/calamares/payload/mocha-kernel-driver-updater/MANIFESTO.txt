@@ -1,0 +1,37 @@
+Mocha Kernel Driver Updater
+Data: 20260629-180811
+Destino: /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater
+
+Arquivos principais:
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/README.md
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/bin/mocha-kernel-driver-updater
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/bin/mocha-kernel-driver-updater-gui
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/desktop/mocha-kernel-driver-updater.desktop
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/scripts/REINSTALAR-MOCHA-KERNEL-DRIVER-UPDATER.sh
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/Cargo.lock
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/Cargo.toml
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/src/main.rs
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/target/.rustc_info.json
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/target/CACHEDIR.TAG
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/Cargo.lock
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/Cargo.toml
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/src/main.rs
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/target/.rustc_info.json
+/media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/target/CACHEDIR.TAG
+
+Checksums:
+0e0e824b59c6485c6215c159e41e2488428cc3e399a1fba8b107cee17437a721  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/desktop/mocha-kernel-driver-updater.desktop
+12a4914312e63b81266b29d673ddff7ad54a2b0031d7dbd30669e304835dfafd  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/Cargo.toml
+24856582f96b1f0007e1f9c6da53279042da75c630bc0c96e93d867c9dfb798d  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/target/.rustc_info.json
+24856582f96b1f0007e1f9c6da53279042da75c630bc0c96e93d867c9dfb798d  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/target/.rustc_info.json
+3e3e5b39e0a00275649a249051b2fb68ee1e5c45770ebe783b00b6d0beef220b  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/Cargo.lock
+6d9d1d216e0f83abc5e5662ca62c92b4f23009466b54fa27321a69acdb778bb2  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/target/CACHEDIR.TAG
+6d9d1d216e0f83abc5e5662ca62c92b4f23009466b54fa27321a69acdb778bb2  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/target/CACHEDIR.TAG
+8525155afaef49fc78d853a51d7f82d42b9ff04bcc588e1cd7db5a5106ccdf71  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/scripts/REINSTALAR-MOCHA-KERNEL-DRIVER-UPDATER.sh
+858f3b42ad5066cf17099f77e9eb7bdc435e6626431a308aefadb1e95c5700ca  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/Cargo.lock
+8d764207a9b56002e92c8fa5c9c0e235b237b63273d7365fe1faff481090fca2  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/bin/mocha-kernel-driver-updater-gui
+a0e2f820b99ab0f9c4429fda4c67c0c1d05502b4767787b2aa1d7666067b2e05  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/src/main.rs
+a8cf67492334df0166fcecd5e3d349d609ac60e0c55892b6ae91f628eaeed3c2  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater/Cargo.toml
+b9f6e5e56ec8492fe77591cd7fef2c9ce56d1f1cad353c2b07148f64dca969c6  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/README.md
+c4d7281164bdad78a24436eb916970ed64755b51e7c7c96e4afa97930388c0ff  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/bin/mocha-kernel-driver-updater
+cc490c4f0de2f5c2049f8d77b8358a2e5b889a3d6876d00fa1f8c6c0ae5677d5  /media/mochafast/MochaArch-Interno/ativo/programas/mocha-kernel-driver-updater/src/mocha-kernel-driver-updater-gui/src/main.rs
