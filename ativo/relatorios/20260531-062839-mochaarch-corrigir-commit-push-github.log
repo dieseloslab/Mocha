@@ -1,706 +1,0 @@
-
-== MOCHAARCH — correção limpa, auditoria, commit e push para GitHub ==
-
-== Verificando ferramentas necessárias ==
-OK: ferramentas necessárias já instaladas.
-
-== Testando SSH como dieseloslab ==
-Hi dieseloslab! You've successfully authenticated, but GitHub does not provide shell access.
-
-== Inicializando/configurando Git local ==
-user.name : Ricardo Kern Diesel
-user.email: ricardo.diesel@gmail.com
-author    : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219720 -0300
-committer : Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219720 -0300
-origin	git@github.com:dieseloslab/Mocha.git (fetch)
-origin	git@github.com:dieseloslab/Mocha.git (push)
-
-== Limpando índice parcial da tentativa anterior ==
-
-== Configurando Git LFS ==
-Updated Git hooks.
-Git LFS initialized.
-
-== Atualizando .gitignore seguro ==
-
-== Convertendo clones AUR auditados em snapshots comuns ==
-find: aviso: você especificou a opção global -mindepth após o argumento -path, mas as opções globais não são posicionais (ou seja, -mindepth afeta testes especificados antes disso assim como aqueles especificados após). Por favor, especifique opções globais antes de outros argumentos.
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-bottles
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-heroic-games-launcher-bin
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-lib32-vkbasalt
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-obs-vkcapture
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt
-Metadados .git movidos para quarentena: ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt-cli
-
-== Auditoria de arquivos ignorados críticos ==
-Backups e quarentenas serão preservados no disco, mas não serão enviados ao GitHub.
-.gitignore:27:**/backups/	ativo/backups
-.gitignore:25:**/_QUARENTENA/	_QUARENTENA
-.gitignore:26:**/quarentena/	quarentena
-
-== Auditoria contra nomes de prováveis segredos ==
-OK: nenhum arquivo candidato com nome de chave/segredo.
-
-== Auditoria contra conteúdo sensível ==
-OK: nenhum conteúdo sensível detectado nos candidatos.
-
-== Auditoria de arquivos maiores que 95 MiB ==
-OK: nenhum arquivo acima de 95 MiB candidato ao commit.
-
-== Status antes do commit ==
-?? .gitattributes
-?? .gitignore
-?? ATIVO-TRABALHO/
-?? ajustes/
-?? ativo/
-?? auditorias/
-?? logs/
-?? receitas/
-?? relatorios/
-?? reports/
-?? scripts/
-
-== Adicionando arquivos ao índice ==
-
-== Validando se não entrou gitlink/submodule acidental ==
-OK: nenhum repositório embutido no índice.
-
-== Validando arquivos grandes no índice ==
-OK: arquivos grandes no índice estão cobertos por LFS quando necessário.
-
-== Commit ==
-[main (root-commit) 14272ac] MochaArch: estado aprovado 20260531-062839
- 601 files changed, 130383 insertions(+)
- create mode 100644 .gitattributes
- create mode 100644 .gitignore
- create mode 100644 ATIVO-TRABALHO/manifestos/MANIFESTO-barra-kde-win11-aprovada-20260528-122730.txt
- create mode 100644 ATIVO-TRABALHO/relatorios/guardar-barra-kde-win11-aprovada-20260528-122730.txt
- create mode 100644 ATIVO-TRABALHO/relatorios/resumo-painel-kde-win11-aprovado-20260528-122730.txt
- create mode 100755 ATIVO-TRABALHO/scripts-aprovados/kde/mocha-kde-barra-win11-limpa-aprovada-20260528-122730.sh
- create mode 100644 ATIVO-TRABALHO/snapshots-aprovados/kde/plasma-org.kde.plasma.desktop-appletsrc.barra-win11-funcionando-20260528-122730.conf
- create mode 100644 ajustes/loja-flatpak-pamac-zen-20260528-132648/LOG-LOJA-FLATPAK-PAMAC-ZEN-20260528-132648.txt
- create mode 100644 ajustes/loja-flatpak-pamac-zen-corrigido-20260528-132839/LOG-LOJA-FLATPAK-PAMAC-ZEN-CORRIGIDO-20260528-132839.txt
- create mode 100644 ajustes/loja-flatpak-pamac-zen-corrigido-20260528-132839/RESUMO-LOJA-FLATPAK-PAMAC-ZEN-CORRIGIDO-20260528-132839.txt
- create mode 100644 ajustes/loja-flatpak-pamac-zen-corrigido-20260528-132839/kernel-zen-disponibilidade-20260528-132839.txt
- create mode 100644 ajustes/restaurar-dependencias-removidas-pamac-20260528-133145/LOG-RESTAURAR-DEPENDENCIAS-REMOVIDAS-PAMAC-20260528-133145.txt
- create mode 100644 ajustes/restaurar-dependencias-removidas-pamac-20260528-133145/RESUMO-RESTAURAR-DEPENDENCIAS-REMOVIDAS-PAMAC-20260528-133145.txt
- create mode 100644 ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
- create mode 100644 ativo/assets/branding/wallpaper/05fdb8fa-73e8-4d9b-a75e-6e1686f8e3ed.png
- create mode 100644 ativo/assets/branding/wallpaper/mocha-wallpaper-kdePCan-20260529-163403.png
- create mode 100644 ativo/assets/branding/wallpaper/mocha-wallpaper-kdePCan-20260529-1634032.png
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/LEIA-ME.txt
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/bluedevilglobalrc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/kded5rc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/kded6rc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/kdeglobals.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasma-applets-volume-bluetooth-systemtray.txt
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasma-localerc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasma-org.kde.plasma.desktop-appletsrc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/plasmashellrc.copia
- create mode 100644 ativo/auditorias/20260529-152416-plasma-duplicidade-bluetooth-volume/resumo-auditoria.txt
- create mode 100644 ativo/auditorias/20260529-152529-corrigir-blueman-auditar-volume/execucao.log
- create mode 100644 ativo/auditorias/20260529-152700-corrigir-kmix-volume-duplicado/execucao.log
- create mode 100644 ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/blueman.desktop.usuario.backup-20260529-152907
- create mode 100644 ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/execucao.log
- create mode 100644 ativo/auditorias/20260529-152907-canonizar-barra-sem-duplicidade/kmix_autostart.desktop.usuario.backup-20260529-152907
- create mode 100644 ativo/auditorias/20260529-162618-auditoria-tema-kde-deuterocanonico-wallpaper.md
- create mode 100644 ativo/auditorias/20260529-162826-fast-tema-kde-esquema-cores-wallpaper.md
- create mode 100644 ativo/auditorias/20260529-163403-aplicar-wallpaper-kdePCan.md
- create mode 100644 ativo/auditorias/20260529-164631-fast-procura-esquema-cores-tema-recente.md
- create mode 100644 ativo/auditorias/20260529-171302-fast-arquivos-com-cores-hex.md
- create mode 100644 ativo/auditorias/20260529-175752-aplicar-esquema-cores-kde-real.log
- create mode 100644 ativo/auditorias/20260529-175841-aplicar-esquema-cores-kde-corrigido.log
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/20260529-180130-auditoria-barra-plasma-cores.log
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/20260529-180130-cores-svg-painel.txt
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/20260529-180130-resumo-barra-plasma-cores.md
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/kdeglobals.snapshot-20260529-180130
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/plasma-org.kde.plasma.desktop-appletsrc.snapshot-20260529-180130
- create mode 100644 ativo/auditorias/20260529-180130-auditoria-barra-plasma-cores/plasmarc.snapshot-20260529-180130
- create mode 100644 ativo/auditorias/20260529-180309-plasma-style-barra-mocha/20260529-180309-plasma-style-barra-mocha.log
- create mode 100644 ativo/auditorias/20260529-180309-plasma-style-barra-mocha/panel-background-mocha.svg
- create mode 100644 ativo/auditorias/20260529-180309-plasma-style-barra-mocha/panel-background-original.svg
- create mode 100644 ativo/auditorias/20260529-180309-plasma-style-barra-mocha/plasmarc.before-20260529-180309
- create mode 100644 ativo/auditorias/20260529-210855-seguimento-manual-estado-real.md
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/00-execucao.log
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/01-repositorios-pacman.txt
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/02-helpers-aur-pamac.txt
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/03-pacotes-foreign-detalhados.txt
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/04-classificacao-repos.txt
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/05-pamac-config.txt
- create mode 100644 ativo/auditorias/20260529-212331-aur-repos-pamac-somente-leitura/RESUMO.md
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/00-execucao.log
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/01-repositorios-ativos.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/02-classificacao-repos.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/03-pacotes-foreign-fora-da-rotina-de-update.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/10-checkupdates-raw.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/10-checkupdates.log
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/11-atualizacoes-oficiais-todas.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/12-atualizacoes-sensiveis-bloqueadas-para-revisao.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/13-atualizacoes-candidatas-baixo-risco-revisar.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/14-referencia-ignore-nao-executar.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/15-estado-sensivel-atual.txt
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/RESUMO.md
- create mode 120000 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/checkupdates-db/local
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/checkupdates-db/sync/core.db
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/checkupdates-db/sync/extra.db
- create mode 100644 ativo/auditorias/20260529-212603-updates-oficiais-sem-aplicar/checkupdates-db/sync/multilib.db
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/00-execucao.log
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/01-pacman-explicitos.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/02-pacman-todos.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/03-pacotes-foreign-detalhados.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/04-flatpaks.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/05-desktop-entries.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/06-jogos-launchers-ferramentas-gamer.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/07-programas-para-revisao-edicao-final.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/08-steam-jogos-detectados.tsv
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/09-estado-mocha-sensivel-atual.txt
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/RESUMO.md
- create mode 120000 ativo/auditorias/20260529-212702-levantamento-programas-jogos/checkupdates-db-final/local
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/checkupdates-db-final/sync/core.db
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/checkupdates-db-final/sync/extra.db
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/checkupdates-db-final/sync/multilib.db
- create mode 100644 ativo/auditorias/20260529-212702-levantamento-programas-jogos/steam-libraries-detectadas.txt
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/00-execucao.log
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/01-estado-sensivel-atual.txt
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/02-atualizacoes-oficiais-raw.txt
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/02-checkupdates-stderr.txt
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/RESUMO.md
- create mode 120000 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/checkupdates-db/local
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/checkupdates-db/sync/core.db
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/checkupdates-db/sync/extra.db
- create mode 100644 ativo/auditorias/20260529-212825-atualizacoes-oficiais-seguras/checkupdates-db/sync/multilib.db
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/20260529-214720-auditoria-geral-repos-e-vmstore.md
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/manifests/candidatos-legado-nix-xu-cachy.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/manifests/mochaarch-arquivos-relevantes.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/manifests/pacotes-estrangeiros-aur.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/manifests/pacotes-explicitos.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/manifests/preservar-candidatos-ativos-aprovados.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/discos-mounts-espaco.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/du-errors.log
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/find-errors.log
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/mochaarch-fast-top-level-kib-ordenado-humano.tsv
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/mochaarch-fast-top-level-kib-ordenado.tsv
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/mochaarch-fast-top-level-kib.tsv
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/pacman-arquivos-config.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/pacman-conf-resolvido.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/pacotes-criticos-mocha.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/servicos-relevantes.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/sistema-kernel-os.txt
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/vmstore-top-level-kib-ordenado-humano.tsv
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/vmstore-top-level-kib-ordenado.tsv
- create mode 100644 ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/vmstore-top-level-kib.tsv
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-bottles/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-bottles/.gitignore
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-bottles/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-bottles/remove-flatpak-checks.patch
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk/LICENSE
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-gpu-screen-recorder-gtk/PKGBUILD
- create mode 100755 ativo/aur/pkgbuilds-auditados/20260530-102502-heroic-games-launcher-bin/.SRCINFO
- create mode 100755 ativo/aur/pkgbuilds-auditados/20260530-102502-heroic-games-launcher-bin/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper/.gitignore
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper/.nvchecker.toml
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-input-remapper/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-lib32-vkbasalt/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-lib32-vkbasalt/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-obs-vkcapture/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-obs-vkcapture/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer/.gitignore
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-oversteer/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin/protonup-qt
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-protonup-qt-bin/protonup-qt.desktop
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt-cli/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt-cli/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt/.SRCINFO
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt/PKGBUILD
- create mode 100644 ativo/aur/pkgbuilds-auditados/20260530-102502-vkbasalt/vkbasalt.install
- create mode 100644 ativo/documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md
- create mode 100644 ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
- create mode 100644 ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md
- create mode 100644 ativo/documentacao/20260529-152907-passo-canonico-barra-kde-sem-blueman-kmix-duplicados.md
- create mode 100644 ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
- create mode 100644 ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192447
- create mode 100644 ativo/documentacao/20260529-154304-MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md.bak-20260530-192624
- create mode 100644 ativo/documentacao/20260529-154451-wrapper-steam-auditoria-e-implantacao.md
- create mode 100644 ativo/documentacao/20260529-154612-wrapper-steam-corrigido-falso-positivo.md
- create mode 100644 ativo/documentacao/20260529-161327-auditoria-gamemode-on-off.md
- create mode 100644 ativo/documentacao/20260529-163403-wallpaper-kdePCan-aplicado.md
- create mode 100644 ativo/documentacao/20260529-172415-steam-launcher-mangohud-padrao-telemetria.md
- create mode 100644 ativo/documentacao/20260529-173139-steam-telemetria-ruim-nao-usar.md
- create mode 100644 ativo/documentacao/20260529-173325-coletor-externo-leve-jogo.md
- create mode 100644 ativo/documentacao/20260529-175841-esquema-cores-kde-mocha-solid-canonico-aplicado.md
- create mode 100644 ativo/documentacao/20260529-180309-plasma-style-barra-mocha-aplicado.md
- create mode 100644 ativo/documentacao/20260529-182750-zen-default-grub-seguro.md
- create mode 100644 ativo/documentacao/20260529-200013-pendencias-auditoria-pre-formatacao-corrigidas.md
- create mode 100644 ativo/documentacao/20260529-205629-base-jogos-wrapper-limpo-autostarts.md
- create mode 100644 ativo/documentacao/20260529-210324-login-manager-plasmalogin-aplicado-pendente-pos-boot.md
- create mode 100644 ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md
- create mode 100644 ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.backup-20260530-064832.md
- create mode 100644 ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.bak-20260530-102502
- create mode 100644 ativo/documentacao/20260529-211221-tema-mocha-aprovado-validado-e-manual-corrigido.md.bak-20260530-103445
- create mode 100644 ativo/documentacao/20260529-211408-wallpaper-e-barra-mocha-aplicados.md
- create mode 100644 ativo/documentacao/20260529-211622-MARCO-ESTADO-REPRODUZIDO-POS-FORMATACAO.md
- create mode 100644 ativo/documentacao/20260529-212702-levantamento-programas-jogos-atualizacao-zero.md
- create mode 100644 ativo/documentacao/20260529-212825-atualizacoes-oficiais-seguras.md
- create mode 100644 ativo/documentacao/20260529-214720-mudancas-feitas-auditoria-repos-e-limpeza-vmstore.md
- create mode 100644 ativo/documentacao/20260529-214720-proximos-passos-repos-proprio-mocha.md
- create mode 100644 ativo/documentacao/20260529-224555-repositorio-proprio-mocha-estrutura-criada.md
- create mode 100644 ativo/documentacao/20260529-234449-primeiro-pacote-repo-seguro-vmstore.md
- create mode 100644 ativo/documentacao/20260529-234741-repo-seguro-testing-stable-criado.md
- create mode 100644 ativo/documentacao/20260530-001926-pacote-mocha-pacman-policy.md
- create mode 100644 ativo/documentacao/20260530-055006-repo-stable-validado-e-pacman-conf-ativado.md
- create mode 100644 ativo/documentacao/20260530-055134-repo-stable-correcao-limpeza-tmp.md
- create mode 100644 ativo/documentacao/20260530-055250-auditoria-atualizacoes-sem-aplicar.md
- create mode 100644 ativo/documentacao/20260530-055358-atualizacao-controlada-apenas-mangohud.md
- create mode 100644 ativo/documentacao/20260530-060042-mangohud-padrao-mocha-fixado.md
- create mode 100644 ativo/documentacao/20260530-101522-mocha-gamer-essentials-politica.md
- create mode 100644 ativo/documentacao/20260530-102502-mocha-gamer-essentials-protonplus-politica.md
- create mode 100644 ativo/documentacao/20260530-104417-manual-instalacao-mocha-arch-em-ordem.md
- create mode 100644 ativo/documentacao/20260530-105437-backup-MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
- create mode 100644 ativo/documentacao/20260530-105437-manual-instalacao-mocha-arch-receita-agressividade-corrigida.md
- create mode 100644 ativo/documentacao/20260530-105856-receita-agressividade-teste-aplicada.md
- create mode 100644 ativo/documentacao/20260530-133009-procurar-cachyos-bore-lto-nvidia-corretamente.md
- create mode 100644 ativo/documentacao/20260530-134240-fixar-grub-cachyos-bore-lto-v3-permissao-corrigida.md
- create mode 100644 ativo/documentacao/20260530-135419-finalizar-boot-cachyos-bore-lto-nvidia-grub-revisado.md
- create mode 100644 ativo/documentacao/20260530-140409-finalizar-grub-cachyos-bore-lto.md
- create mode 100644 ativo/documentacao/20260530-141453-flatpak-update-cachy-desativado-nvidia-travado.md
- create mode 100644 ativo/documentacao/20260530-143848-finalizar-zen-default-grub.md
- create mode 100644 ativo/documentacao/20260530-154103-agressividade-normal-canonica-restaurada.md
- create mode 100644 ativo/documentacao/20260530-162055-vivaldi-nativo-plasma-browser-integration.md
- create mode 100644 ativo/documentacao/20260530-175039-vivaldi-tema-kde-mocha.md
- create mode 100644 ativo/documentacao/20260530-185945-vivaldi-tema-direto-preferences.md
- create mode 100644 ativo/documentacao/20260530-190158-restaurar-vivaldi-preferences.md
- create mode 100644 ativo/documentacao/20260530-190617-vivaldi-tema-importavel-canonico.md
- create mode 100644 ativo/documentacao/20260530-190851-vivaldi-tema-escuro-ajustado.md
- create mode 100644 ativo/documentacao/20260530-191138-vivaldi-tema-firefox-mocha.md
- create mode 100644 ativo/documentacao/20260530-191416-vivaldi-tema-firefox-certo.md
- create mode 100644 ativo/documentacao/MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
- create mode 100644 ativo/documentacao/Mocha-Vivaldi-Canonico.md
- create mode 100644 ativo/documentacao/Mocha-Vivaldi-Tema-Canonico.md
- create mode 100644 ativo/documentacao/manual-montagem-mochaarch.md
- create mode 100644 ativo/gaming/steam-launch-options/20260530-060042-launch-option-mangohud-gamemode-mocha.txt
- create mode 100644 ativo/gaming/steam-launch-options/launch-option-oficial-mangohud-gamemode-mocha.txt
- create mode 100755 ativo/kde/barra-win11-aprovada/20260529-153335-aplicar-barra-win11-mocha-aprovada.sh
- create mode 100755 ativo/kde/barra-win11-aprovada/20260529-200013-mocha-reaplicar-barra-aprovada-atual.sh
- create mode 100644 ativo/kde/barra-win11-aprovada/MANUAL-BARRA-WIN11-MOCHA-APROVADA.md
- create mode 100644 ativo/kde/barra-win11-aprovada/NOTA-BARRA-WIN11-APROVADA-20260528-225617.txt
- create mode 100644 ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-20260528-225617
- create mode 100644 ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual
- create mode 100644 ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual-20260529-200013
- create mode 100644 ativo/kde/busca-esquema-cores-20260529-175611/20260529-175611-arquivos-com-hex-ranqueados.tsv
- create mode 100644 ativo/kde/busca-esquema-cores-20260529-175611/20260529-175611-busca-esquema-cores-kde.log
- create mode 100644 ativo/kde/busca-esquema-cores-20260529-175611/20260529-175611-candidatos-arquivos.txt
- create mode 100644 ativo/kde/esquemas-cores-aprovados/20260529-200013-TABELA-CORES-MOCHA-SOLID-CANONICO.md
- create mode 100644 ativo/kde/esquemas-cores-aprovados/Mocha-Windows11.colors
- create mode 100644 ativo/kde/esquemas-cores-aprovados/MochaDark.colors
- create mode 100644 ativo/kde/esquemas-cores-aprovados/MochaKDE.colors
- create mode 100644 ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors
- create mode 100644 ativo/kde/esquemas-cores-aprovados/TABELA-CORES-MOCHA-SOLID-CANONICO.md
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/dialogs/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/akonadi.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/akregator.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/amarok.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/applications.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/apport.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/audio.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/battery.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/bookmarks.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/cantata.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/computer.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/configure.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/device.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/disk.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/distribute.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/document.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/drive.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/edit.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/fcitx.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/go.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/ime.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/input.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kalarm.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kdeconnect.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/keyboard.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kget.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kgpg.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kleopatra.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/klipper.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kmail.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/konv_message.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/konversation.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kopete.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/korgac.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kpackagekit.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kruler.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kteatime.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/ktorrent.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/kup.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/list.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/mail.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/media.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/mobile.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/network.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/notification.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/osd.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/phone.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/plasmavault.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/plasmavault_error.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/preferences.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/printer.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/quassel.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/search.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/slc.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/software.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/start.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/system.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/touchpad.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/user.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/video-card.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/video.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/view.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/vlc.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/wallet.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/window.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/yakuake.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/icons/zoom.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/metadata.json
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/dialogs/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/widgets/panel-background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/opaque/widgets/tooltip.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/plasmarc
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/dialogs/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/panel-background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/solid/widgets/tooltip.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/dialogs/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/panel-background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/translucent/widgets/tooltip.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/weather/wind-arrows.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/action-overlays.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/actionbutton.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/analog_meter.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/arrows.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/bar_meter_horizontal.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/bar_meter_vertical.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/branding.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/busywidget.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/button.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/calendar.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/checkmarks.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/clock.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/configuration-icons.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/containment-controls.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/dragger.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/frame.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/glowbar.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/line.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/lineedit.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/listitem.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/margins-highlight.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/media-delegate.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/menubaritem.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/monitor.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/notes.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/pager.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/panel-background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/picker.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/plasmoidheading.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/plot-background.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/radiobutton.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/scrollbar.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/scrollwidget.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/slider.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/switch.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tabbar.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tasks.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/timer.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/toolbar.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/tooltip.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/translucentbackground.svgz
- create mode 100644 ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico/widgets/viewitem.svgz
- create mode 100644 ativo/logs/20260529-153031-aplicar-barra-kde-mocha-aprovada.log
- create mode 100644 ativo/logs/20260529-153249-aplicar-barra-win11-aprovada-pasta-certa.log
- create mode 100644 ativo/logs/20260529-153335-aplicar-appletsrc-barra-win11-aprovada.log
- create mode 100644 ativo/logs/20260529-153335-restaurar-barra-win11-mocha-aprovada.log
- create mode 100644 ativo/logs/20260529-154304-auditoria-estado-atual-para-manual.md
- create mode 100644 ativo/logs/20260529-154304-criar-manual-vivo-definitivo-mocha-arch-kde.log
- create mode 100644 ativo/logs/20260529-154304-evidencias-extraidas-para-manual.md
- create mode 100644 ativo/logs/20260529-182141-kernel-zen-primeiro-da-lista.log
- create mode 100644 ativo/logs/20260529-182606-corrigir-grub-zen-primeiro.log
- create mode 100644 ativo/logs/20260529-182750-zen-verificar-e-marcar-default-seguro.log
- create mode 100644 ativo/logs/20260529-204737-auditoria-congelamento-pos-freeze.txt
- create mode 100644 ativo/logs/20260529-205047-reparo-zen-nvidia-sem-carregar.log
- create mode 100644 ativo/logs/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.log
- create mode 100644 ativo/logs/20260529-210324-login-manager-plasmalogin.log
- create mode 100644 ativo/logs/20260529-211221-corrigir-manual-e-reaplicar-tema.log
- create mode 100644 ativo/logs/20260529-211408-aplicar-wallpaper-e-barra-mocha.log
- create mode 100644 ativo/logs/20260529-211622-marco-estado-reproduzido-pos-formatacao.log
- create mode 100644 ativo/passos-canonicos/20260529-152907-passo-montagem-kde-desativar-blueman-kmix-autostart.md
- create mode 100644 ativo/relatorios/20260529-195748-auditoria-geral-pre-formatacao-mochaarch.md
- create mode 100644 ativo/relatorios/20260529-195748-checklist-pre-formatacao.tsv
- create mode 100644 ativo/relatorios/20260529-195748-hashes-arquivos-criticos.txt
- create mode 100644 ativo/relatorios/20260529-195748-manuais-encontrados.tsv
- create mode 100644 ativo/relatorios/20260529-195748-nomes-scripts.txt
- create mode 100644 ativo/relatorios/20260529-195748-pacotes-explicitos.txt
- create mode 100644 ativo/relatorios/20260529-195748-pacotes-instalados.txt
- create mode 100644 ativo/relatorios/20260529-200013-auditoria-corrigida-cobertura-manuais.md
- create mode 100644 ativo/relatorios/20260529-200013-corrigir-pendencias-auditoria-pre-formatacao.log
- create mode 100644 ativo/relatorios/20260529-205350-auditoria-seguimento-manual-pos-congelamento.md
- create mode 100644 ativo/relatorios/20260529-210324-login-manager-plasmalogin-auditoria.txt
- create mode 100644 ativo/relatorios/20260530-054640-pacman-conf-mocha-stable.log
- create mode 100644 ativo/relatorios/20260530-054856-criar-repo-stable-e-ativar-pacman-conf.log
- create mode 100644 ativo/relatorios/20260530-055006-continuar-repo-stable-ativar-pacman-conf.log
- create mode 100644 ativo/relatorios/20260530-055134-corrigir-limpeza-tmp-repo-stable.log
- create mode 100644 ativo/relatorios/20260530-055250-auditoria-atualizacoes-sem-aplicar.log
- create mode 100644 ativo/relatorios/20260530-055250-pacman-Qu-bruto.txt
- create mode 100644 ativo/relatorios/20260530-055250-pacman-Qu-classificado.tsv
- create mode 100644 ativo/relatorios/20260530-055250-pacotes-foreign-aur-ou-locais.txt
- create mode 100644 ativo/relatorios/20260530-055250-repositorios-ativos-pacman.txt
- create mode 100644 ativo/relatorios/20260530-055358-atualizacao-controlada-apenas-mangohud.log
- create mode 100644 ativo/relatorios/20260530-055358-mangohud-antes.txt
- create mode 100644 ativo/relatorios/20260530-055358-mangohud-depois.txt
- create mode 100644 ativo/relatorios/20260530-055358-mangohud-sync-repo.txt
- create mode 100644 ativo/relatorios/20260530-055358-pacman-Qu-antes-mangohud.txt
- create mode 100644 ativo/relatorios/20260530-055358-pacman-Qu-depois-mangohud.txt
- create mode 100644 ativo/relatorios/20260530-055358-pacotes-foreign-pos-mangohud.txt
- create mode 100644 ativo/relatorios/20260530-060042-fixar-mangohud-padrao-mocha-e-manual.log
- create mode 100644 ativo/relatorios/20260530-060042-mangohud-config-selecionado.txt
- create mode 100644 ativo/relatorios/20260530-060042-mangohud-configs-candidatos.txt
- create mode 100644 ativo/relatorios/20260530-060042-secao-manual-mangohud-mocha.txt
- create mode 100644 ativo/relatorios/20260530-064611-auditoria-documentacao-mangohud-grep.txt
- create mode 100644 ativo/relatorios/20260530-064611-auditoria-documentacao-mangohud-mocha.md
- create mode 100644 ativo/relatorios/20260530-064611-auditoria-mangohud-configs.txt
- create mode 100644 ativo/relatorios/20260530-064832-mangohud-mocha-configs-encontradas.txt
- create mode 100644 ativo/relatorios/20260530-064832-mangohud-mocha-documentacao-corrigida.md
- create mode 100644 ativo/relatorios/20260530-064832-mangohud-mocha-ocorrencias-documentacao.txt
- create mode 100644 ativo/relatorios/20260530-101522-mocha-gamer-essentials-auditoria.md
- create mode 100644 ativo/relatorios/20260530-101522-mocha-gamer-essentials-auditoria.tsv
- create mode 100644 ativo/relatorios/20260530-102502-aur-bottles.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-gpu-screen-recorder-gtk.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-heroic-games-launcher-bin.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-input-remapper.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-lib32-vkbasalt.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-obs-vkcapture.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-oversteer.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-protonup-qt-bin.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-vkbasalt-cli.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-aur-vkbasalt.SRCINFO
- create mode 100644 ativo/relatorios/20260530-102502-mocha-gamer-essentials-protonplus-install.log
- create mode 100644 ativo/relatorios/20260530-102502-mocha-gamer-essentials-protonplus-install.md
- create mode 100644 ativo/relatorios/20260530-102502-mocha-gamer-essentials-protonplus-install.tsv
- create mode 100644 ativo/relatorios/20260530-103445-regra-sudo-keepalive-instalacoes.md
- create mode 100644 ativo/relatorios/20260530-104417-indice-documentos-usados-no-manual.txt
- create mode 100644 ativo/relatorios/20260530-104417-organizar-manual-instalacao.log
- create mode 100644 ativo/relatorios/20260530-105437-corrigir-manual-receita-agressividade.log
- create mode 100644 ativo/relatorios/20260530-105437-estado-real-receita-agressividade.txt
- create mode 100644 ativo/relatorios/20260530-105437-leitura-manual-antes-da-correcao-agressividade.txt
- create mode 100644 ativo/relatorios/20260530-105856-aplicar-receita-agressividade-teste.log
- create mode 100644 ativo/relatorios/20260530-105856-estado-antes-agressividade-teste.txt
- create mode 100644 ativo/relatorios/20260530-105856-estado-depois-agressividade-teste.txt
- create mode 100644 ativo/relatorios/20260530-105856-leitura-manual-antes-agressividade-teste.txt
- create mode 100644 ativo/relatorios/20260530-121123-teste-cachyos-bore-lto-v3-nvidia-open.log
- create mode 100644 ativo/relatorios/20260530-132055-pacman-sp-cachyos-bore-lto-v3-corrigido.txt
- create mode 100644 ativo/relatorios/20260530-132055-teste-cachyos-bore-lto-v3-nvidia-open-corrigido.log
- create mode 100644 ativo/relatorios/20260530-132409-corrigir-architecture-cachyos-v3-e-instalar-bore-lto.log
- create mode 100644 ativo/relatorios/20260530-132409-pacman-sp-cachyos-bore-lto-v3-architecture-corrigida.txt
- create mode 100644 ativo/relatorios/20260530-132742-auditoria-cachyos-bore-lto-nvidia-sem-instalar.log
- create mode 100644 ativo/relatorios/20260530-133009-procurar-cachyos-bore-lto-nvidia-corretamente.log
- create mode 100644 ativo/relatorios/20260530-133633-instalar-cachyos-bore-lto-v3-driver-cachy.log
- create mode 100644 ativo/relatorios/20260530-133749-instalar-cachyos-bore-lto-v3-driver-cachy-corrigido.log
- create mode 100644 ativo/relatorios/20260530-134116-corrigir-boot-cachyos-bore-lto-v3-sem-reinstalar.log
- create mode 100644 ativo/relatorios/20260530-134240-fixar-grub-cachyos-bore-lto-v3-permissao-corrigida.log
- create mode 100644 ativo/relatorios/20260530-134600-corrigir-boot-cachyos-bore-lto-nvidia.log
- create mode 100644 ativo/relatorios/20260530-134828-finalizar-boot-cachyos-bore-lto-nvidia.log
- create mode 100644 ativo/relatorios/20260530-135127-finalizar-boot-cachyos-bore-lto-nvidia-corrigido.log
- create mode 100644 ativo/relatorios/20260530-135419-finalizar-boot-cachyos-bore-lto-nvidia-grub-revisado.log
- create mode 100644 ativo/relatorios/20260530-135727-casar-nvidia-somente-cachyos-bore-lto.log
- create mode 100644 ativo/relatorios/20260530-140200-reparar-cachyos-bore-lto-nvidia.log
- create mode 100644 ativo/relatorios/20260530-140409-finalizar-grub-cachyos-bore-lto.log
- create mode 100644 ativo/relatorios/20260530-141316-auditoria-updates-discover-flatpak-cachy.log
- create mode 100644 ativo/relatorios/20260530-141453-flatpak-update-cachy-desativado-nvidia-travado.log
- create mode 100644 ativo/relatorios/20260530-142741-rollback-zen-driver-nvidia.log
- create mode 100644 ativo/relatorios/20260530-143848-finalizar-zen-default-grub.log
- create mode 100644 ativo/relatorios/20260530-154103-mocha-agressividade-normal.log
- create mode 100644 ativo/relatorios/20260530-161834-remover-vivaldi-flatpak.log
- create mode 100644 ativo/relatorios/20260530-162055-instalar-vivaldi-nativo-remover-flatpak.log
- create mode 100644 ativo/relatorios/20260530-175039-vivaldi-tema-kde-mocha.log
- create mode 100644 ativo/relatorios/20260530-185922-vivaldi-tema-direto-preferences.log
- create mode 100644 ativo/relatorios/20260530-185945-vivaldi-tema-direto-preferences.log
- create mode 100644 ativo/relatorios/20260530-190158-restaurar-vivaldi-preferences.log
- create mode 100644 ativo/relatorios/20260530-190427-vivaldi-tema-importavel-limpo.log
- create mode 100644 ativo/relatorios/20260530-190617-vivaldi-tema-importavel-canonico.log
- create mode 100644 ativo/relatorios/20260530-190617-vivaldi-temas-antigos-apagados.txt
- create mode 100644 ativo/relatorios/20260530-190851-vivaldi-tema-escuro-ajustado.log
- create mode 100644 ativo/relatorios/20260530-190851-vivaldi-temas-antigos-apagados.txt
- create mode 100644 ativo/relatorios/20260530-191138-vivaldi-tema-firefox-mocha.log
- create mode 100644 ativo/relatorios/20260530-191138-vivaldi-temas-ruins-removidos.txt
- create mode 100644 ativo/relatorios/20260530-191416-vivaldi-tema-firefox-certo.log
- create mode 100644 ativo/relatorios/20260530-191416-vivaldi-temas-ruins-removidos.txt
- create mode 100644 ativo/relatorios/20260530-191758-vivaldi-tema-canonico-mocha.log
- create mode 100644 ativo/relatorios/20260530-191758-vivaldi-temas-antigos-removidos.txt
- create mode 100644 ativo/relatorios/20260530-192256-vivaldi-tema-mocha-certo.log
- create mode 100644 ativo/relatorios/20260530-192256-vivaldi-temas-antigos-removidos.txt
- create mode 100644 ativo/relatorios/20260530-192447-registrar-vivaldi-tema-manual.log
- create mode 100644 ativo/relatorios/20260530-192624-incluir-vivaldi-bitwarden-programas-manual.log
- create mode 100644 ativo/relatorios/20260531-062646-mochaarch-commit-push-github.log
- create mode 100644 ativo/relatorios/20260531-062839-mochaarch-corrigir-commit-push-github.log
- create mode 100755 ativo/scripts/20260529-150104-mocha-aplicar-login-plasma-manager.sh
- create mode 100755 ativo/scripts/20260529-152700-mocha-desativar-kmix-volume-duplicado.sh
- create mode 100755 ativo/scripts/20260529-152907-mocha-kde-desativar-blueman-kmix-autostart.sh
- create mode 100755 ativo/scripts/20260529-154304-mocha-adicionar-entrada-aprovada-ao-manual.sh
- create mode 100755 ativo/scripts/20260529-154612-mocha-instalar-wrapper-steam-limpo-corrigido.sh
- create mode 100755 ativo/scripts/20260529-163403-mocha-aplicar-wallpaper-kdePCan.sh
- create mode 100755 ativo/scripts/20260529-180309-reaplicar-plasma-style-barra-mocha.sh
- create mode 100755 ativo/scripts/20260529-200013-mocha-reaplicar-agressividade-energia-atual.sh
- create mode 100755 ativo/scripts/20260529-200013-mocha-reaplicar-wrapper-steam-limpo.sh
- create mode 100755 ativo/scripts/20260529-200013-mocha-verificar-nvidia-wayland-zen.sh
- create mode 100644 ativo/scripts/20260529-203750-montar-fast-vm-ler-manual.sh
- create mode 100644 ativo/scripts/20260529-204336-atualizar-manual-ler.sh
- create mode 100644 ativo/scripts/20260529-205047-reparar-zen-nvidia-sem-carregar.sh
- create mode 100755 ativo/scripts/20260529-205629-seguir-manual-base-jogos-wrapper-autostarts.sh
- create mode 100755 ativo/scripts/20260529-210324-mocha-ativar-plasma-login-manager.sh
- create mode 100755 ativo/scripts/20260529-210324-mocha-verificar-plasmalogin-pos-boot.sh
- create mode 100755 ativo/scripts/20260529-211221-corrigir-manual-e-reaplicar-tema.sh
- create mode 100755 ativo/scripts/20260529-211408-aplicar-wallpaper-e-barra-mocha.sh
- create mode 100755 ativo/scripts/20260529-211622-registrar-marco-pos-formatacao.sh
- create mode 100755 ativo/scripts/20260530-055006-mocha-continuar-repo-stable-ativar-pacman-conf.sh
- create mode 100755 ativo/scripts/20260530-055134-mocha-continuar-repo-stable-ativar-pacman-conf-corrigido.sh
- create mode 100755 ativo/scripts/20260530-055250-mocha-auditar-atualizacoes-sem-aplicar.sh
- create mode 100755 ativo/scripts/20260530-055358-mocha-atualizar-apenas-mangohud-controlado.sh
- create mode 100755 ativo/scripts/20260530-060042-mocha-fixar-mangohud-padrao-mocha-e-manual.sh
- create mode 100644 ativo/scripts/20260530-064832-mocha-corrigir-documentacao-mangohud.sh
- create mode 100755 ativo/scripts/20260530-101522-mocha-auditar-gamer-essentials.sh
- create mode 100755 ativo/scripts/20260530-102502-mocha-instalar-gamer-essentials-protonplus.sh
- create mode 100755 ativo/scripts/20260530-103445-mocha-registrar-regra-sudo-keepalive-instalacoes.sh
- create mode 100755 ativo/scripts/20260530-104417-mocha-organizar-manual-instalacao-ordem.sh
- create mode 100755 ativo/scripts/20260530-105437-mocha-ler-manual-e-corrigir-receita-agressividade.sh
- create mode 100755 ativo/scripts/20260530-105856-mocha-aplicar-receita-agressividade-teste.sh
- create mode 100755 ativo/scripts/20260530-105856-mocha-rollback-receita-agressividade-teste.sh
- create mode 100644 ativo/scripts/20260530-133009-mocha-procurar-cachyos-bore-lto-nvidia-corretamente.sh
- create mode 100644 ativo/scripts/20260530-134240-mocha-fixar-grub-cachyos-bore-lto-v3-permissao-corrigida.sh
- create mode 100644 ativo/scripts/20260530-135419-mocha-finalizar-boot-cachyos-bore-lto-nvidia-grub-revisado.sh
- create mode 100644 ativo/scripts/20260530-140409-mocha-finalizar-grub-cachyos-bore-lto.sh
- create mode 100644 ativo/scripts/20260530-143848-mocha-finalizar-zen-default-grub.sh
- create mode 100755 ativo/scripts/20260530-154103-mocha-restaurar-agressividade-normal.sh
- create mode 100755 ativo/scripts/20260530-162055-mocha-instalar-vivaldi-nativo-remover-flatpak.sh
- create mode 100644 ativo/scripts/20260530-175039-mocha-gerar-tema-vivaldi-com-cores-kde.sh
- create mode 100644 ativo/scripts/20260530-185945-mocha-aplicar-tema-direto-vivaldi-preferences.sh
- create mode 100644 ativo/scripts/20260530-190158-mocha-restaurar-vivaldi-preferences-quebrado.sh
- create mode 100644 ativo/scripts/20260530-190617-mocha-vivaldi-tema-importavel-canonico.sh
- create mode 100644 ativo/scripts/20260530-190851-mocha-vivaldi-tema-escuro-ajustado.sh
- create mode 100644 ativo/scripts/20260530-191416-mocha-vivaldi-tema-firefox-certo.sh
- create mode 100755 ativo/scripts/mocha-adicionar-entrada-aprovada-ao-manual.sh
- create mode 100755 ativo/scripts/mocha-aplicar-login-plasma-manager.sh
- create mode 100755 ativo/scripts/mocha-vivaldi-gerar-tema-canonico.py
- create mode 100755 ativo/scripts/mocha-vivaldi-gerar-tema-importavel-certo.py
- create mode 100644 ativo/steam-launcher-telemetria/linha-steam-atual-segura-20260529-173139.txt
- create mode 100644 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/amostras.tsv
- create mode 100644 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/coletor-console.log
- create mode 100755 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/coletor-externo-leve.sh
- create mode 100644 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/coletor.pid
- create mode 100644 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/eventos.log
- create mode 100755 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/parar-e-resumir.sh
- create mode 100644 ativo/telemetria-externa/20260529-173325-coletor-externo-leve/processos.log
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/PARAR
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/amostras.tsv
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/coletor.pid
- create mode 100755 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/coletor.sh
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/eventos.log
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/processos.log
- create mode 100644 ativo/telemetria/20260529-172426-steam-2169200-mangohud-mocha-gamemode/resumo-final.md
- create mode 100644 ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE-20260530-192256.zip
- create mode 100644 ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE-settings.json
- create mode 100644 ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE.zip
- create mode 100644 ativo/vivaldi/temas/Mocha-Vivaldi-IMPORTAR-ESTE.zip.sha256
- create mode 100755 ativo/wrapper-steam/mocha-steam-game-run-aprovado-candidato-20260529-154451
- create mode 100755 ativo/wrapper-steam/mocha-steam-game-run-aprovado-candidato-20260529-154612
- create mode 100644 auditorias/auditoria-sistema-endeavour-kde-20260528-123039/DIAGNOSTICO-COMPARATIVO-20260528-123039.txt
- create mode 100644 auditorias/auditoria-sistema-endeavour-kde-20260528-123039/RELATORIO-AUDITORIA-SISTEMA-20260528-123039.md
- create mode 100644 auditorias/auditoria-sistema-endeavour-kde-20260528-123039/pacman-pacotes-aur-foreign-20260528-123039.txt
- create mode 100644 auditorias/auditoria-sistema-endeavour-kde-20260528-123039/pacman-pacotes-nativos-20260528-123039.txt
- create mode 100644 auditorias/auditoria-sistema-endeavour-kde-20260528-123039/systemd-servicos-20260528-123039.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/RELATORIO-AUDITORIA-ISO-CALAM-20260529-131443.md
- create mode 100644 auditorias/iso-calam-20260529-131443/SHA256SUM-local-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/SHA512SUM-local-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/arquivos-assinatura-checksum-encontrados-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/arquivos-interessantes-iso-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/arvore-iso-maxdepth4-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/auditoria-iso-calam-20260529-131443.log
- create mode 100644 auditorias/iso-calam-20260529-131443/lista-completa-arquivos-iso-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-20260529-131443/squashfs-encontrados-20260529-131443.txt
- create mode 100644 auditorias/iso-calam-formato-real-20260529-131956/SHA256SUM-local-20260529-131956.txt
- create mode 100644 auditorias/iso-calam-formato-real-20260529-131956/auditoria-formato-real-calam-20260529-131956.log
- create mode 100644 auditorias/iso-calam-formato-real-20260529-131956/identificacao-rootfs-20260529-131956.txt
- create mode 100644 auditorias/iso-calam-formato-real-20260529-131956/rootfs-imagens-encontradas-20260529-131956.txt
- create mode 100644 auditorias/iso-calam-formato-real-20260529-131956/teste-squashfs-20260529-131956.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132336/SHA256SUM-local-20260529-132336.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132336/auditoria-calam-luks-real-20260529-132336.log
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132336/cryptsetup-open-20260529-132336.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132336/identificacao-rootfs-externo-20260529-132336.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132336/rootfs-imagens-encontradas-20260529-132336.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132720/SHA256SUM-local-20260529-132720.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132720/auditoria-calam-luks-real-20260529-132720.log
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132720/cryptsetup-open-20260529-132720.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132720/identificacao-rootfs-externo-20260529-132720.txt
- create mode 100644 auditorias/iso-calam-luks-real-20260529-132720/rootfs-imagens-encontradas-20260529-132720.txt
- create mode 100644 auditorias/iso-calam-rootfs-20260529-131644/auditoria-profunda-iso-calam-rootfs-20260529-131644.log
- create mode 100644 auditorias/iso-calam-rootfs-corrigido-20260529-131811/SHA256SUM-local-20260529-131811.txt
- create mode 100644 auditorias/iso-calam-rootfs-corrigido-20260529-131811/auditoria-profunda-calam-corrigida-20260529-131811.log
- create mode 100644 auditorias/iso-calam-rootfs-corrigido-20260529-131811/info-squashfs-20260529-131811.txt
- create mode 100644 auditorias/iso-calam-rootfs-corrigido-20260529-131811/squashfs-encontrados-20260529-131811.txt
- create mode 100755 auditorias/scripts/mocha-auditar-calam-rootfs-corrigido-20260529-131811.sh
- create mode 100644 logs/mocha-arch-login-wayland-nvidia-20260528-215308.log
- create mode 100644 receitas/receita-tudo-no-maximo-20260528-235745.txt
- create mode 100644 relatorios/mocha-arch-zen-ultimo-20260529-000046.log
- create mode 100644 reports/bootctl-list-20260528-142724.txt
- create mode 100644 reports/bootctl-status-20260528-142724.txt
- create mode 100644 reports/efibootmgr-after-20260528-142724.txt
- create mode 100644 reports/efibootmgr-before-20260528-142724.txt
- create mode 100644 reports/mocha-arch-base-limpa-20260528-224819.log
- create mode 100644 reports/mocha-arch-corrigir-boot-zen-default-20260528-142724.log
- create mode 100644 reports/mocha-arch-mangohud-uma-linha-colorido-20260528-150411.log
- create mode 100644 reports/mocha-arch-zen-agressivo-20260528-133547.log
- create mode 100644 reports/mocha-arch-zen-receita-wrapper-20260528-142427.log
- create mode 100644 reports/mocha-kde-barra-win11-aprovada-20260528-225449.log
- create mode 100644 reports/mocha-salvar-barra-win11-aprovada-20260528-225617.log
- create mode 100644 reports/sddm-wayland-nvidia-20260528-213910/mocha-fix-sddm-wayland-nvidia-20260528-213910.log
- create mode 100755 scripts/mocha-kde-barra-win11-aprovada-20260528-225617.sh
- create mode 100644 scripts/mocha-kde-barra-win11-aprovada-nota-20260528-225449.txt
-
-== Verificando branch remota ==
-Remoto sem branch main detectável ou repositório vazio.
-
-== Push ==
-Uploading LFS objects: 100% (124/124), 4.1 MB | 430 KB/s, done.
-Enumerating objects: 633, done.
-Counting objects:   0% (1/633)Counting objects:   1% (7/633)Counting objects:   2% (13/633)Counting objects:   3% (19/633)Counting objects:   4% (26/633)Counting objects:   5% (32/633)Counting objects:   6% (38/633)Counting objects:   7% (45/633)Counting objects:   8% (51/633)Counting objects:   9% (57/633)Counting objects:  10% (64/633)Counting objects:  11% (70/633)Counting objects:  12% (76/633)Counting objects:  13% (83/633)Counting objects:  14% (89/633)Counting objects:  15% (95/633)Counting objects:  16% (102/633)Counting objects:  17% (108/633)Counting objects:  18% (114/633)Counting objects:  19% (121/633)Counting objects:  20% (127/633)Counting objects:  21% (133/633)Counting objects:  22% (140/633)Counting objects:  23% (146/633)Counting objects:  24% (152/633)Counting objects:  25% (159/633)Counting objects:  26% (165/633)Counting objects:  27% (171/633)Counting objects:  28% (178/633)Counting objects:  29% (184/633)Counting objects:  30% (190/633)Counting objects:  31% (197/633)Counting objects:  32% (203/633)Counting objects:  33% (209/633)Counting objects:  34% (216/633)Counting objects:  35% (222/633)Counting objects:  36% (228/633)Counting objects:  37% (235/633)Counting objects:  38% (241/633)Counting objects:  39% (247/633)Counting objects:  40% (254/633)Counting objects:  41% (260/633)Counting objects:  42% (266/633)Counting objects:  43% (273/633)Counting objects:  44% (279/633)Counting objects:  45% (285/633)Counting objects:  46% (292/633)Counting objects:  47% (298/633)Counting objects:  48% (304/633)Counting objects:  49% (311/633)Counting objects:  50% (317/633)Counting objects:  51% (323/633)Counting objects:  52% (330/633)Counting objects:  53% (336/633)Counting objects:  54% (342/633)Counting objects:  55% (349/633)Counting objects:  56% (355/633)Counting objects:  57% (361/633)Counting objects:  58% (368/633)Counting objects:  59% (374/633)Counting objects:  60% (380/633)Counting objects:  61% (387/633)Counting objects:  62% (393/633)Counting objects:  63% (399/633)Counting objects:  64% (406/633)Counting objects:  65% (412/633)Counting objects:  66% (418/633)Counting objects:  67% (425/633)Counting objects:  68% (431/633)Counting objects:  69% (437/633)Counting objects:  70% (444/633)Counting objects:  71% (450/633)Counting objects:  72% (456/633)Counting objects:  73% (463/633)Counting objects:  74% (469/633)Counting objects:  75% (475/633)Counting objects:  76% (482/633)Counting objects:  77% (488/633)Counting objects:  78% (494/633)Counting objects:  79% (501/633)Counting objects:  80% (507/633)Counting objects:  81% (513/633)Counting objects:  82% (520/633)Counting objects:  83% (526/633)Counting objects:  84% (532/633)Counting objects:  85% (539/633)Counting objects:  86% (545/633)Counting objects:  87% (551/633)Counting objects:  88% (558/633)Counting objects:  89% (564/633)Counting objects:  90% (570/633)Counting objects:  91% (577/633)Counting objects:  92% (583/633)Counting objects:  93% (589/633)Counting objects:  94% (596/633)Counting objects:  95% (602/633)Counting objects:  96% (608/633)Counting objects:  97% (615/633)Counting objects:  98% (621/633)Counting objects:  99% (627/633)Counting objects: 100% (633/633)Counting objects: 100% (633/633), done.
-Delta compression using up to 16 threads
-Compressing objects:   0% (1/600)Compressing objects:   1% (6/600)Compressing objects:   2% (12/600)Compressing objects:   3% (18/600)Compressing objects:   4% (24/600)Compressing objects:   5% (30/600)Compressing objects:   6% (36/600)Compressing objects:   7% (42/600)Compressing objects:   8% (48/600)Compressing objects:   9% (54/600)Compressing objects:  10% (60/600)Compressing objects:  11% (66/600)Compressing objects:  12% (72/600)Compressing objects:  13% (78/600)Compressing objects:  14% (84/600)Compressing objects:  15% (90/600)Compressing objects:  16% (96/600)Compressing objects:  17% (102/600)Compressing objects:  18% (108/600)Compressing objects:  19% (114/600)Compressing objects:  20% (120/600)Compressing objects:  21% (126/600)Compressing objects:  22% (132/600)Compressing objects:  23% (138/600)Compressing objects:  24% (144/600)Compressing objects:  25% (150/600)Compressing objects:  26% (156/600)Compressing objects:  27% (162/600)Compressing objects:  28% (168/600)Compressing objects:  29% (174/600)Compressing objects:  30% (180/600)Compressing objects:  31% (186/600)Compressing objects:  32% (192/600)Compressing objects:  33% (198/600)Compressing objects:  34% (204/600)Compressing objects:  35% (210/600)Compressing objects:  36% (216/600)Compressing objects:  37% (222/600)Compressing objects:  38% (228/600)Compressing objects:  39% (234/600)Compressing objects:  40% (240/600)Compressing objects:  41% (246/600)Compressing objects:  42% (252/600)Compressing objects:  43% (258/600)Compressing objects:  44% (264/600)Compressing objects:  45% (270/600)Compressing objects:  46% (276/600)Compressing objects:  47% (282/600)Compressing objects:  48% (288/600)Compressing objects:  49% (294/600)Compressing objects:  50% (300/600)Compressing objects:  51% (306/600)Compressing objects:  52% (312/600)Compressing objects:  53% (318/600)Compressing objects:  54% (324/600)Compressing objects:  55% (330/600)Compressing objects:  56% (336/600)Compressing objects:  57% (342/600)Compressing objects:  58% (348/600)Compressing objects:  59% (354/600)Compressing objects:  60% (360/600)Compressing objects:  61% (366/600)Compressing objects:  62% (372/600)Compressing objects:  63% (378/600)Compressing objects:  64% (384/600)Compressing objects:  65% (390/600)Compressing objects:  66% (396/600)Compressing objects:  67% (402/600)Compressing objects:  68% (408/600)Compressing objects:  69% (414/600)Compressing objects:  70% (420/600)Compressing objects:  71% (426/600)Compressing objects:  72% (432/600)Compressing objects:  73% (438/600)Compressing objects:  74% (444/600)Compressing objects:  75% (450/600)Compressing objects:  76% (456/600)Compressing objects:  77% (462/600)Compressing objects:  78% (468/600)Compressing objects:  79% (474/600)Compressing objects:  80% (480/600)Compressing objects:  81% (486/600)Compressing objects:  82% (492/600)Compressing objects:  83% (498/600)Compressing objects:  84% (504/600)Compressing objects:  85% (510/600)Compressing objects:  86% (516/600)Compressing objects:  87% (522/600)Compressing objects:  88% (528/600)Compressing objects:  89% (534/600)Compressing objects:  90% (540/600)Compressing objects:  91% (546/600)Compressing objects:  92% (552/600)Compressing objects:  93% (558/600)Compressing objects:  94% (564/600)Compressing objects:  95% (570/600)Compressing objects:  96% (576/600)Compressing objects:  97% (582/600)Compressing objects:  98% (588/600)Compressing objects:  99% (594/600)Compressing objects: 100% (600/600)Compressing objects: 100% (600/600), done.
-Writing objects:   0% (1/633)Writing objects:   1% (7/633)Writing objects:   2% (13/633)Writing objects:   3% (19/633)Writing objects:   4% (26/633)Writing objects:   5% (32/633)Writing objects:   6% (38/633)Writing objects:   7% (45/633)Writing objects:   8% (51/633)Writing objects:   9% (57/633)Writing objects:  10% (64/633)Writing objects:  11% (71/633)Writing objects:  12% (76/633)Writing objects:  13% (83/633)Writing objects:  14% (89/633)Writing objects:  14% (93/633), 6.19 MiB | 4.45 MiB/sWriting objects:  15% (95/633), 6.19 MiB | 4.45 MiB/sWriting objects:  16% (102/633), 6.19 MiB | 4.45 MiB/sWriting objects:  17% (108/633), 6.19 MiB | 4.45 MiB/sWriting objects:  18% (114/633), 6.19 MiB | 4.45 MiB/sWriting objects:  19% (121/633), 6.19 MiB | 4.45 MiB/sWriting objects:  20% (128/633), 6.19 MiB | 4.45 MiB/sWriting objects:  21% (133/633), 6.19 MiB | 4.45 MiB/sWriting objects:  22% (140/633), 6.19 MiB | 4.45 MiB/sWriting objects:  23% (146/633), 6.19 MiB | 4.45 MiB/sWriting objects:  24% (152/633), 6.19 MiB | 4.45 MiB/sWriting objects:  25% (159/633), 6.19 MiB | 4.45 MiB/sWriting objects:  26% (165/633), 6.19 MiB | 4.45 MiB/sWriting objects:  27% (171/633), 6.19 MiB | 4.45 MiB/sWriting objects:  28% (178/633), 6.19 MiB | 4.45 MiB/sWriting objects:  29% (184/633), 6.19 MiB | 4.45 MiB/sWriting objects:  30% (190/633), 6.19 MiB | 4.45 MiB/sWriting objects:  31% (197/633), 6.19 MiB | 4.45 MiB/sWriting objects:  32% (203/633), 6.19 MiB | 4.45 MiB/sWriting objects:  33% (209/633), 6.19 MiB | 4.45 MiB/sWriting objects:  34% (216/633), 6.19 MiB | 4.45 MiB/sWriting objects:  35% (222/633), 6.19 MiB | 4.45 MiB/sWriting objects:  36% (228/633), 6.19 MiB | 4.45 MiB/sWriting objects:  37% (235/633), 6.19 MiB | 4.45 MiB/sWriting objects:  38% (241/633), 6.19 MiB | 4.45 MiB/sWriting objects:  39% (247/633), 6.19 MiB | 4.45 MiB/sWriting objects:  40% (254/633), 6.19 MiB | 4.45 MiB/sWriting objects:  41% (260/633), 6.19 MiB | 4.45 MiB/sWriting objects:  42% (266/633), 6.19 MiB | 4.45 MiB/sWriting objects:  43% (273/633), 6.19 MiB | 4.45 MiB/sWriting objects:  44% (279/633), 6.19 MiB | 4.45 MiB/sWriting objects:  45% (285/633), 6.19 MiB | 4.45 MiB/sWriting objects:  46% (292/633), 6.19 MiB | 4.45 MiB/sWriting objects:  47% (298/633), 6.19 MiB | 4.45 MiB/sWriting objects:  48% (304/633), 6.19 MiB | 4.45 MiB/sWriting objects:  49% (311/633), 6.19 MiB | 4.45 MiB/sWriting objects:  50% (317/633), 6.19 MiB | 4.45 MiB/sWriting objects:  51% (323/633), 6.19 MiB | 4.45 MiB/sWriting objects:  52% (330/633), 6.19 MiB | 4.45 MiB/sWriting objects:  53% (336/633), 6.19 MiB | 4.45 MiB/sWriting objects:  54% (342/633), 6.19 MiB | 4.45 MiB/sWriting objects:  55% (349/633), 6.19 MiB | 4.45 MiB/sWriting objects:  56% (355/633), 6.19 MiB | 4.45 MiB/sWriting objects:  57% (361/633), 6.19 MiB | 4.45 MiB/sWriting objects:  58% (368/633), 6.19 MiB | 4.45 MiB/sWriting objects:  59% (374/633), 6.19 MiB | 4.45 MiB/sWriting objects:  60% (380/633), 6.19 MiB | 4.45 MiB/sWriting objects:  61% (387/633), 6.19 MiB | 4.45 MiB/sWriting objects:  62% (393/633), 6.19 MiB | 4.45 MiB/sWriting objects:  63% (399/633), 6.19 MiB | 4.45 MiB/sWriting objects:  64% (406/633), 6.19 MiB | 4.45 MiB/sWriting objects:  65% (412/633), 6.19 MiB | 4.45 MiB/sWriting objects:  66% (418/633), 6.19 MiB | 4.45 MiB/sWriting objects:  67% (425/633), 6.19 MiB | 4.45 MiB/sWriting objects:  68% (431/633), 6.19 MiB | 4.45 MiB/sWriting objects:  69% (437/633), 6.19 MiB | 4.45 MiB/sWriting objects:  70% (444/633), 6.19 MiB | 4.45 MiB/sWriting objects:  71% (450/633), 6.19 MiB | 4.45 MiB/sWriting objects:  72% (456/633), 6.19 MiB | 4.45 MiB/sWriting objects:  73% (463/633), 6.19 MiB | 4.45 MiB/sWriting objects:  74% (469/633), 6.19 MiB | 4.45 MiB/sWriting objects:  75% (475/633), 6.19 MiB | 4.45 MiB/sWriting objects:  76% (482/633), 6.19 MiB | 4.45 MiB/sWriting objects:  77% (488/633), 6.19 MiB | 4.45 MiB/sWriting objects:  78% (494/633), 6.19 MiB | 4.45 MiB/sWriting objects:  79% (501/633), 6.19 MiB | 4.45 MiB/sWriting objects:  80% (507/633), 6.19 MiB | 4.45 MiB/sWriting objects:  81% (513/633), 6.19 MiB | 4.45 MiB/sWriting objects:  82% (520/633), 6.19 MiB | 4.45 MiB/sWriting objects:  83% (526/633), 6.19 MiB | 4.45 MiB/sWriting objects:  84% (532/633), 6.19 MiB | 4.45 MiB/sWriting objects:  85% (539/633), 6.19 MiB | 4.45 MiB/sWriting objects:  86% (545/633), 6.19 MiB | 4.45 MiB/sWriting objects:  87% (551/633), 6.19 MiB | 4.45 MiB/sWriting objects:  88% (558/633), 6.19 MiB | 4.45 MiB/sWriting objects:  89% (564/633), 6.19 MiB | 4.45 MiB/sWriting objects:  90% (570/633), 6.19 MiB | 4.45 MiB/sWriting objects:  91% (577/633), 6.19 MiB | 4.45 MiB/sWriting objects:  92% (583/633), 6.19 MiB | 4.45 MiB/sWriting objects:  93% (589/633), 6.19 MiB | 4.45 MiB/sWriting objects:  94% (596/633), 6.19 MiB | 4.45 MiB/sWriting objects:  95% (602/633), 6.19 MiB | 4.45 MiB/sWriting objects:  96% (608/633), 6.19 MiB | 4.45 MiB/sWriting objects:  97% (615/633), 6.19 MiB | 4.45 MiB/sWriting objects:  98% (621/633), 6.19 MiB | 4.45 MiB/sWriting objects:  99% (627/633), 6.19 MiB | 4.45 MiB/sWriting objects: 100% (633/633), 6.19 MiB | 4.45 MiB/sWriting objects: 100% (633/633), 9.41 MiB | 5.20 MiB/s, done.
-Total 633 (delta 48), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas:   0% (0/48)        remote: Resolving deltas:   2% (1/48)        remote: Resolving deltas:   4% (2/48)        remote: Resolving deltas:   6% (3/48)        remote: Resolving deltas:   8% (4/48)        remote: Resolving deltas:  10% (5/48)        remote: Resolving deltas:  12% (6/48)        remote: Resolving deltas:  14% (7/48)        remote: Resolving deltas:  16% (8/48)        remote: Resolving deltas:  18% (9/48)        remote: Resolving deltas:  20% (10/48)        remote: Resolving deltas:  22% (11/48)        remote: Resolving deltas:  25% (12/48)        remote: Resolving deltas:  27% (13/48)        remote: Resolving deltas:  29% (14/48)        remote: Resolving deltas:  31% (15/48)        remote: Resolving deltas:  33% (16/48)        remote: Resolving deltas:  35% (17/48)        remote: Resolving deltas:  37% (18/48)        remote: Resolving deltas:  39% (19/48)        remote: Resolving deltas:  41% (20/48)        remote: Resolving deltas:  43% (21/48)        remote: Resolving deltas:  45% (22/48)        remote: Resolving deltas:  47% (23/48)        remote: Resolving deltas:  50% (24/48)        remote: Resolving deltas:  52% (25/48)        remote: Resolving deltas:  54% (26/48)        remote: Resolving deltas:  56% (27/48)        remote: Resolving deltas:  58% (28/48)        remote: Resolving deltas:  60% (29/48)        remote: Resolving deltas:  62% (30/48)        remote: Resolving deltas:  64% (31/48)        remote: Resolving deltas:  66% (32/48)        remote: Resolving deltas:  68% (33/48)        remote: Resolving deltas:  70% (34/48)        remote: Resolving deltas:  72% (35/48)        remote: Resolving deltas:  75% (36/48)        remote: Resolving deltas:  77% (37/48)        remote: Resolving deltas:  79% (38/48)        remote: Resolving deltas:  81% (39/48)        remote: Resolving deltas:  83% (40/48)        remote: Resolving deltas:  85% (41/48)        remote: Resolving deltas:  87% (42/48)        remote: Resolving deltas:  89% (43/48)        remote: Resolving deltas:  91% (44/48)        remote: Resolving deltas:  93% (45/48)        remote: Resolving deltas:  95% (46/48)        remote: Resolving deltas:  97% (47/48)        remote: Resolving deltas: 100% (48/48)        remote: Resolving deltas: 100% (48/48), done.        
-To github.com:dieseloslab/Mocha.git
- * [new branch]      main -> main
-branch 'main' set up to track 'origin/main'.
-
-== Verificação final ==
- M ativo/relatorios/20260531-062839-mochaarch-corrigir-commit-push-github.log
-14272ac (HEAD -> main, origin/main) MochaArch: estado aprovado 20260531-062839
-
-OK: push concluído para git@github.com:dieseloslab/Mocha.git
-Identidade usada:
-  Ricardo Kern Diesel <ricardo.diesel@gmail.com> 1780219749 -0300
-
-== FIM DO COMANDO ==
-RESULTADO: OK
-Log: /media/mochafast/MochaArch/ativo/relatorios/20260531-062839-mochaarch-corrigir-commit-push-github.log

@@ -1,8 +1,0 @@
-
-============================================================
- Mocha — preservar rootfs atual como reserva
-============================================================
-Rootfs out: /media/vmstore/MochaArch/iso/rootfs-out
-Reserva:    /media/vmstore/MochaArch/iso/rootfs-reserva
-Log:        /media/mochafast/MochaArch/ativo/logs/20260627-205342-preserva-rootfs-reserva.log
-[FALHA] Nenhum .sfs encontrado em /media/vmstore/MochaArch/iso/rootfs-out

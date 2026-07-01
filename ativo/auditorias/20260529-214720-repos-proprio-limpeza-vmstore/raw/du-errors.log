@@ -1,7 +1,0 @@
-du: não foi possível ler diretório '/media/vmstore/legacy/kde-canonicos-antigos-20260523-173814/kdePCan.STAGING-20260523-025917/10-SISTEMA/etc-NetworkManager-system-connections': Permissão negada
-du: não foi possível ler diretório '/media/vmstore/legacy/kde-canonicos-antigos-20260523-173814/kdePCan.STAGING-20260523-030258/10-SISTEMA/etc-NetworkManager-system-connections': Permissão negada
-du: não foi possível ler diretório '/media/vmstore/Legacy/bkp/2026-04-18-221802/libvirt-images': Permissão negada
-du: não foi possível ler diretório '/media/vmstore/mocha-cache-private-keys/Xu709': Permissão negada
-du: não foi possível ler diretório '/media/vmstore/MochaCanonico-FAST-ANTIGO-PRE-PROMOCAO-20260519-160417/ATIVO-USAR-PRIMEIRO/estado-atual-autossuficiente-20260515-162144/01-ETC-NIXOS/etc-nixos/result/etc/cups/ssl': Permissão negada
-numfmt: número inválido: “/media/mochafast/MochaArch/ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/vmstore-top-level-kib-ordenado.tsv”
-numfmt: número inválido: “/media/mochafast/MochaArch/ativo/auditorias/20260529-214720-repos-proprio-limpeza-vmstore/raw/mochaarch-fast-top-level-kib-ordenado.tsv”

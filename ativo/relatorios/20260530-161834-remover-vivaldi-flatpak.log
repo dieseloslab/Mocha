@@ -1,8 +1,0 @@
-==== MOCHA — Remover Vivaldi Flatpak e preservar Vivaldi nativo ====
-
-[1/6] Obtendo sudo uma vez
-
-[2/6] Validando que o Vivaldi nativo existe antes de remover o Flatpak
-ERRO: vivaldi-stable não está instalado.
-Nada será removido para não deixar você sem Vivaldi nativo.
-Rode primeiro a correção do Vivaldi nativo/plasma-browser-integration.

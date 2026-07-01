@@ -1,60 +1,0 @@
-== 1/9 — Preflight ==
-Tema Plasma atual: default
-Esquema de cores atual: MochaSolidCanonico
-Arquivo de cores Mocha: /home/hal/.local/share/color-schemes/MochaSolidCanonico.colors
-
-== 2/9 — Localizando tema Plasma base ==
-Tema base: /usr/share/plasma/desktoptheme/default
-Arquivo base da barra: /usr/share/plasma/desktoptheme/default/widgets/panel-background.svgz
-
-== 3/9 — Extraindo cor Mocha do esquema KDE ==
-RGB base extraído: 51,41,31
-RGB da barra com leve clareamento: 79,70,62
-HEX aplicado na barra: #4f463e
-
-== 4/9 — Criando tema Plasma local Mocha ==
-          7,730   0%    0.00kB/s    0:00:00            7,730   0%    0.00kB/s    0:00:00 (xfr#1, to-chk=136/138)          7,925   0%  190.43kB/s    0:00:00 (xfr#2, to-chk=135/138)         11,026   0%    3.14MB/s    0:00:00 (xfr#3, to-chk=127/138)         12,540   1%    4.59MB/s    0:00:00 (xfr#4, to-chk=126/138)         13,261   1%    5.27MB/s    0:00:00 (xfr#5, to-chk=125/138)         17,400   1%    9.22MB/s    0:00:00 (xfr#6, to-chk=124/138)         18,410   1%   10.19MB/s    0:00:00 (xfr#7, to-chk=123/138)         19,594   1%   11.31MB/s    0:00:00 (xfr#8, to-chk=122/138)         21,028   1%   12.68MB/s    0:00:00 (xfr#9, to-chk=121/138)         25,751   2%   17.19MB/s    0:00:00 (xfr#10, to-chk=120/138)         26,669   2%   18.06MB/s    0:00:00 (xfr#11, to-chk=119/138)         28,180   2%   19.50MB/s    0:00:00 (xfr#12, to-chk=118/138)         29,800   2%   21.05MB/s    0:00:00 (xfr#13, to-chk=117/138)         30,627   2%   21.84MB/s    0:00:00 (xfr#14, to-chk=116/138)         32,303   2%   23.43MB/s    0:00:00 (xfr#15, to-chk=115/138)         33,335   2%   24.42MB/s    0:00:00 (xfr#16, to-chk=114/138)         33,806   2%   24.87MB/s    0:00:00 (xfr#17, to-chk=113/138)         35,416   2%   26.40MB/s    0:00:00 (xfr#18, to-chk=112/138)         36,033   2%   26.99MB/s    0:00:00 (xfr#19, to-chk=111/138)         36,454   3%   27.39MB/s    0:00:00 (xfr#20, to-chk=110/138)         55,956   4%   45.99MB/s    0:00:00 (xfr#21, to-chk=109/138)         56,509   4%   46.52MB/s    0:00:00 (xfr#22, to-chk=108/138)         71,785   5%   61.09MB/s    0:00:00 (xfr#23, to-chk=107/138)         74,515   6%   63.69MB/s    0:00:00 (xfr#24, to-chk=106/138)         76,041   6%   65.15MB/s    0:00:00 (xfr#25, to-chk=105/138)         81,754   6%   70.59MB/s    0:00:00 (xfr#26, to-chk=104/138)         83,172   6%   71.95MB/s    0:00:00 (xfr#27, to-chk=103/138)         84,572   7%   73.28MB/s    0:00:00 (xfr#28, to-chk=102/138)         85,024   7%   73.71MB/s    0:00:00 (xfr#29, to-chk=101/138)         87,546   7%   76.12MB/s    0:00:00 (xfr#30, to-chk=100/138)         89,058   7%   77.56MB/s    0:00:00 (xfr#31, to-chk=99/138)          90,553   7%   78.99MB/s    0:00:00 (xfr#32, to-chk=98/138)         92,303   7%   80.66MB/s    0:00:00 (xfr#33, to-chk=97/138)         93,712   7%   82.00MB/s    0:00:00 (xfr#34, to-chk=96/138)         95,114   7%   83.34MB/s    0:00:00 (xfr#35, to-chk=95/138)         96,424   8%   84.59MB/s    0:00:00 (xfr#36, to-chk=94/138)         98,100   8%   86.18MB/s    0:00:00 (xfr#37, to-chk=93/138)         99,003   8%   87.04MB/s    0:00:00 (xfr#38, to-chk=92/138)        100,422   8%   88.40MB/s    0:00:00 (xfr#39, to-chk=91/138)        101,231   8%   89.17MB/s    0:00:00 (xfr#40, to-chk=90/138)        101,741   8%   44.83MB/s    0:00:00 (xfr#41, to-chk=89/138)        102,175   8%   45.03MB/s    0:00:00 (xfr#42, to-chk=88/138)        103,439   8%   45.64MB/s    0:00:00 (xfr#43, to-chk=87/138)        104,760   8%   46.27MB/s    0:00:00 (xfr#44, to-chk=86/138)        105,345   8%   46.55MB/s    0:00:00 (xfr#45, to-chk=85/138)        121,923  10%   54.45MB/s    0:00:00 (xfr#46, to-chk=84/138)        123,043  10%   54.99MB/s    0:00:00 (xfr#47, to-chk=83/138)        131,626  10%   59.08MB/s    0:00:00 (xfr#48, to-chk=82/138)        133,575  11%   60.01MB/s    0:00:00 (xfr#49, to-chk=81/138)        134,083  11%   60.25MB/s    0:00:00 (xfr#50, to-chk=80/138)        134,604  11%   60.50MB/s    0:00:00 (xfr#51, to-chk=79/138)        136,134  11%   61.23MB/s    0:00:00 (xfr#52, to-chk=78/138)        137,592  11%   61.92MB/s    0:00:00 (xfr#53, to-chk=77/138)        139,021  11%   62.60MB/s    0:00:00 (xfr#54, to-chk=76/138)        140,204  11%   63.17MB/s    0:00:00 (xfr#55, to-chk=75/138)        142,172  11%   64.11MB/s    0:00:00 (xfr#56, to-chk=74/138)        143,973  11%   64.97MB/s    0:00:00 (xfr#57, to-chk=73/138)        145,143  12%   65.52MB/s    0:00:00 (xfr#58, to-chk=72/138)        152,004  12%   68.80MB/s    0:00:00 (xfr#59, to-chk=71/138)        153,386  12%   69.45MB/s    0:00:00 (xfr#60, to-chk=70/138)        154,761  12%   70.11MB/s    0:00:00 (xfr#61, to-chk=69/138)        155,886  12%   47.10MB/s    0:00:00 (xfr#62, to-chk=68/138)        158,567  13%   47.95MB/s    0:00:00 (xfr#63, to-chk=67/138)        159,489  13%   48.24MB/s    0:00:00 (xfr#64, to-chk=66/138)        160,493  13%   48.56MB/s    0:00:00 (xfr#65, to-chk=65/138)        161,939  13%   49.02MB/s    0:00:00 (xfr#66, to-chk=64/138)        162,841  13%   49.31MB/s    0:00:00 (xfr#67, to-chk=63/138)        163,900  13%   49.65MB/s    0:00:00 (xfr#68, to-chk=62/138)        165,878  13%   50.27MB/s    0:00:00 (xfr#69, to-chk=61/138)        168,130  13%   50.99MB/s    0:00:00 (xfr#70, to-chk=58/138)        170,430  14%   51.72MB/s    0:00:00 (xfr#71, to-chk=57/138)        172,627  14%   52.42MB/s    0:00:00 (xfr#72, to-chk=56/138)        175,595  14%   53.36MB/s    0:00:00 (xfr#73, to-chk=53/138)        178,663  14%   54.34MB/s    0:00:00 (xfr#74, to-chk=52/138)        181,749  15%   55.32MB/s    0:00:00 (xfr#75, to-chk=51/138)        184,683  15%   56.25MB/s    0:00:00 (xfr#76, to-chk=50/138)        187,746  15%   57.23MB/s    0:00:00 (xfr#77, to-chk=47/138)        192,978  16%   58.89MB/s    0:00:00 (xfr#78, to-chk=46/138)        196,170  16%   59.90MB/s    0:00:00 (xfr#79, to-chk=45/138)        199,205  16%   60.87MB/s    0:00:00 (xfr#80, to-chk=44/138)        201,369  16%   61.56MB/s    0:00:00 (xfr#81, to-chk=43/138)        203,758  16%   62.32MB/s    0:00:00 (xfr#82, to-chk=42/138)        205,429  17%   62.85MB/s    0:00:00 (xfr#83, to-chk=41/138)        211,928  17%   64.91MB/s    0:00:00 (xfr#84, to-chk=40/138)        213,276  17%   65.34MB/s    0:00:00 (xfr#85, to-chk=39/138)        217,550  18%   66.70MB/s    0:00:00 (xfr#86, to-chk=38/138)        219,389  18%   67.28MB/s    0:00:00 (xfr#87, to-chk=37/138)        221,225  18%   67.87MB/s    0:00:00 (xfr#88, to-chk=36/138)        222,863  18%   68.39MB/s    0:00:00 (xfr#89, to-chk=35/138)        226,127  18%   69.43MB/s    0:00:00 (xfr#90, to-chk=34/138)        233,301  19%   71.71MB/s    0:00:00 (xfr#91, to-chk=33/138)        234,419  19%   72.06MB/s    0:00:00 (xfr#92, to-chk=32/138)        235,185  19%   72.31MB/s    0:00:00 (xfr#93, to-chk=31/138)        250,176  20%   57.80MB/s    0:00:00 (xfr#94, to-chk=30/138)        256,375  21%   59.28MB/s    0:00:00 (xfr#95, to-chk=29/138)        259,359  21%   59.99MB/s    0:00:00 (xfr#96, to-chk=28/138)        261,520  21%   60.51MB/s    0:00:00 (xfr#97, to-chk=27/138)        264,951  22%   61.33MB/s    0:00:00 (xfr#98, to-chk=26/138)        265,567  22%   61.47MB/s    0:00:00 (xfr#99, to-chk=25/138)        266,327  22%   61.65MB/s    0:00:00 (xfr#100, to-chk=24/138)        269,411  22%   62.39MB/s    0:00:00 (xfr#101, to-chk=23/138)        272,964  22%   63.24MB/s    0:00:00 (xfr#102, to-chk=22/138)        275,094  22%   63.74MB/s    0:00:00 (xfr#103, to-chk=21/138)        279,420  23%   64.78MB/s    0:00:00 (xfr#104, to-chk=20/138)        281,328  23%   65.23MB/s    0:00:00 (xfr#105, to-chk=19/138)      1,145,499  95%  180.84MB/s    0:00:00 (xfr#106, to-chk=18/138)      1,150,758  95%  181.68MB/s    0:00:00 (xfr#107, to-chk=17/138)      1,153,409  95%  182.10MB/s    0:00:00 (xfr#108, to-chk=16/138)      1,156,580  96%  182.60MB/s    0:00:00 (xfr#109, to-chk=15/138)      1,160,157  96%  183.17MB/s    0:00:00 (xfr#110, to-chk=14/138)      1,161,589  96%  183.40MB/s    0:00:00 (xfr#111, to-chk=13/138)      1,162,673  96%  183.57MB/s    0:00:00 (xfr#112, to-chk=12/138)      1,164,361  96%  183.84MB/s    0:00:00 (xfr#113, to-chk=11/138)      1,167,054  97%  184.27MB/s    0:00:00 (xfr#114, to-chk=10/138)      1,168,569  97%  184.51MB/s    0:00:00 (xfr#115, to-chk=9/138)       1,171,393  97%  184.96MB/s    0:00:00 (xfr#116, to-chk=8/138)      1,173,717  97%  185.33MB/s    0:00:00 (xfr#117, to-chk=7/138)      1,176,088  97%  185.71MB/s    0:00:00 (xfr#118, to-chk=6/138)      1,182,840  98%  186.78MB/s    0:00:00 (xfr#119, to-chk=5/138)      1,190,994  99%  188.07MB/s    0:00:00 (xfr#120, to-chk=4/138)      1,191,716  99%  188.19MB/s    0:00:00 (xfr#121, to-chk=3/138)      1,194,737  99%  188.67MB/s    0:00:00 (xfr#122, to-chk=2/138)      1,198,055  99%  189.20MB/s    0:00:00 (xfr#123, to-chk=1/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  189.85MB/s    0:00:00 (xfr#124, to-chk=0/138)      1,202,171 100%  162.73MB/s    0:00:00 (xfr#124, to-chk=0/138)
-Tema local criado em:
-/home/hal/.local/share/plasma/desktoptheme/MochaPanelSolidCanonico
-
-== 5/9 — Ajustando metadata do tema local ==
-metadata.json ajustado.
-
-== 6/9 — Alterando somente o SVG/SVGZ da barra ==
-Antes, cores escuras no painel base:
-     14 #000000
-      1 #111111
-      2 #232629
-
-Depois, cor Mocha no painel local:
-      3 #4f463e
-
-== 7/9 — Salvando cópia ativa e script de reaplicação ==
-Cópia ativa:
-/media/mochafast/MochaArch/ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico
-Script reutilizável:
-/media/mochafast/MochaArch/ativo/scripts/20260529-180309-reaplicar-plasma-style-barra-mocha.sh
-
-== 8/9 — Aplicando tema Plasma local ==
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-The current Plasma session's theme has been set to MochaPanelSolidCanonico
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-plasmarc agora aponta para: MochaPanelSolidCanonico
-plasmashell reiniciado. Log temporário: /tmp/mocha-plasmashell-panel-theme-20260529-180309.log
-
-== 9/9 — Documentando ==
-Manual vivo atualizado:
-/media/mochafast/MochaArch/ativo/MANUAL-UNICO-VIVO-MONTAGEM-MOCHA-ARCH-KDE.md
-Documento:
-/media/mochafast/MochaArch/ativo/documentacao/20260529-180309-plasma-style-barra-mocha-aplicado.md
-
-Log:
-/media/mochafast/MochaArch/ativo/auditorias/20260529-180309-plasma-style-barra-mocha/20260529-180309-plasma-style-barra-mocha.log
-
-== CONCLUÍDO ==

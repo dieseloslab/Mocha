@@ -1,9 +1,0 @@
-Mocha launcher iniciado em 2026-05-29T17:24:26-03:00
-MangoHud config: /home/hal/.config/MangoHud/Mocha-MangoHud-FPS-Comparacao.conf
-SteamAppId: 2169200
-Comando recebido:
- /home/hal/.local/share/Steam/ubuntu12_32/steam-launch-wrapper -- /home/hal/.local/share/Steam/ubuntu12_32/reaper SteamLaunch AppId=2169200 -- /home/hal/.local/share/Steam/steamapps/common/SteamLinuxRuntime_4/_v2-entry-point --verb=waitforexitandrun -- /home/hal/.local/share/Steam/steamapps/common/Proton\ -\ Experimental/proton waitforexitandrun /home/hal/.local/share/Steam/steamapps/common/Sniper\ Elite\ Resistance/launcher/SniperResistance.exe
-Executando: gamemoderun mangohud %command%
-Coletor iniciado em 2026-05-29T17:24:26-03:00
-Jogo/comando terminou com código: 0
-Coletor encerrado em 2026-05-29T17:29:08-03:00
