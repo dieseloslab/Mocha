@@ -157,3 +157,6 @@ nao-publicar/
 não-publicar/
 privado/
 interno/
+# Mocha: artefatos locais de auditoria/build
+auditorias/
+apps/mocha-updater/mocha-updater-build-fix.log
