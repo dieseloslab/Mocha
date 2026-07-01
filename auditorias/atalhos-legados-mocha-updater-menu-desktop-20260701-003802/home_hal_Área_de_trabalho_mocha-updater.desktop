@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Mocha Updater
+GenericName=Atualizador Mocha
+Comment=Inventário seguro do sistema, kernel e driver; modo dry-run
+Exec=konsole --hold -e bash -lc '/media/mochafast/MochaArch/tools/mocha-updater-rs/target/release/mocha-updater inventario; echo; read -rp "Pressione Enter para fechar..." _'
+Icon=system-software-update
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true
+Keywords=mocha;update;kernel;driver;nvidia;cachyos;zen;inventario;
+
