@@ -1,0 +1,126 @@
+[INFO] Captura inicial do sistema...
+============================================================
+ Mocha — resumo inicial
+============================================================
+
+Data: 2026-07-01T11:04:09-03:00
+Kernel: 7.1.1-2-cachyos
+
+Pacotes:
+linux-cachyos 7.1.1-2
+linux-cachyos-headers 7.1.1-2
+linux-cachyos-nvidia-open 7.1.1-2
+nvidia-utils 610.43.02-3
+linux 7.0.14.arch1-1
+
+CPU:
+CPU(s): 16
+On-line CPU(s) list: 0-15
+Vendor ID: AuthenticAMD
+Model name: AMD Ryzen 7 5700G with Radeon Graphics
+Thread(s) per core: 2
+Core(s) per socket: 8
+Socket(s): 1
+CPU(s) scaling MHz: 95%
+Flags: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca fsrm debug_swap
+NUMA node0 CPU(s): 0-15
+
+Memória:
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       7.4Gi       817Mi       439Mi       8.0Gi       8.0Gi
+Swap:           32Gi       1.2Gi        31Gi
+
+GameMode inicial:
+gamemode is active
+
+TuneD:
+Current active profile: mocha-latency-performance
+Verification failed, current system settings differ from the preset profile.
+You can mostly fix this by restarting the TuneD daemon, e.g.:
+  systemctl restart tuned
+or
+  service tuned restart
+Sometimes (if some plugins like bootloader are used) a reboot may be required.
+See TuneD log file ('/var/log/tuned/tuned.log') for details.
+
+NVIDIA inicial:
+Wed Jul  1 11:04:09 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5060 Ti     On  |   00000000:01:00.0  On |                  N/A |
+|  0%   58C    P0            111W /  180W |    4839MiB /  16311MiB |     67%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1077    C+G   /usr/bin/kwin_wayland                    29MiB |
+|    0   N/A  N/A            1152      G   /usr/bin/Xwayland                         2MiB |
+|    0   N/A  N/A            1204      G   /usr/bin/plasmashell                     58MiB |
+|    0   N/A  N/A            1450      G   /usr/lib/firefox/firefox                170MiB |
+|    0   N/A  N/A            2827      G   ...share/Steam/ubuntu12_32/steam          4MiB |
+|    0   N/A  N/A            3041      G   ./steamwebhelper                         22MiB |
+|    0   N/A  N/A            3069    C+G   ...am/ubuntu12_64/steamwebhelper          5MiB |
+|    0   N/A  N/A           77371      G   C:\windows\system32\explorer.exe          2MiB |
+|    0   N/A  N/A           77589    C+G   ...bin\sniperresistance_dx12.exe       4187MiB |
++-----------------------------------------------------------------------------------------+
+
+nvidia-settings inicial:
+
+  Attribute 'GPUPowerMizerMode' ([gpu:0]): 0.
+    Valid values for 'GPUPowerMizerMode' are: 0, 1 and 2.
+    'GPUPowerMizerMode' can use the following target types: GPU.
+
+
+  Attribute 'GPUGraphicsClockOffsetAllPerformanceLevels' ([gpu:0]): 50.
+    The valid values for 'GPUGraphicsClockOffsetAllPerformanceLevels' are in the range -1000 - 1000 (inclusive).
+    'GPUGraphicsClockOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+
+  Attribute 'GPUMemoryTransferRateOffsetAllPerformanceLevels' ([gpu:0]): 250.
+    The valid values for 'GPUMemoryTransferRateOffsetAllPerformanceLevels' are in the range -2000 - 6000 (inclusive).
+    'GPUMemoryTransferRateOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+
+============================================================
+ Resumo estatístico
+============================================================
+
+Amostras: 60
+GameMode ativo: 100.0% das amostras
+GPU util média/máx: 74.8% / 88.0%
+CPU busy média/máx: 44.6% / 49.0%
+Power média/máx: 118.6W / 133.3W
+Temperatura média/máx: 57.8C / 62.0C
+VRAM média/máx: 7581MiB / 8385MiB
+P0: 60 amostras
+Não-P0: 0 amostras
+
+============================================================
+ Final GameMode/NVIDIA
+============================================================
+gamemode is active
+
+
+  Attribute 'GPUPowerMizerMode' ([gpu:0]): 0.
+    Valid values for 'GPUPowerMizerMode' are: 0, 1 and 2.
+    'GPUPowerMizerMode' can use the following target types: GPU.
+
+
+  Attribute 'GPUGraphicsClockOffsetAllPerformanceLevels' ([gpu:0]): 50.
+    The valid values for 'GPUGraphicsClockOffsetAllPerformanceLevels' are in the range -1000 - 1000 (inclusive).
+    'GPUGraphicsClockOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+
+  Attribute 'GPUMemoryTransferRateOffsetAllPerformanceLevels' ([gpu:0]): 250.
+    The valid values for 'GPUMemoryTransferRateOffsetAllPerformanceLevels' are in the range -2000 - 6000 (inclusive).
+    'GPUMemoryTransferRateOffsetAllPerformanceLevels' can use the following target types: GPU.
+

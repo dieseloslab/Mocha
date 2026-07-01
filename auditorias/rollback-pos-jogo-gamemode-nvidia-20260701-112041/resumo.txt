@@ -1,0 +1,40 @@
+============================================================
+ Mocha — conferir rollback pós-jogo GameMode/NVIDIA
+============================================================
+
+Data: 2026-07-01T11:20:41-03:00
+Kernel: 7.1.1-2-cachyos
+Saída: /media/mochafast/MochaArch/auditorias/rollback-pos-jogo-gamemode-nvidia-20260701-112041
+
+GameMode:
+gamemode is inactive
+
+NVIDIA:
+NVIDIA GeForce RTX 5060 Ti, P8, 420, 405, 11.84, 37, 2, 451, 16311
+
+Offsets NVIDIA:
+
+  Attribute 'GPUGraphicsClockOffsetAllPerformanceLevels' ([gpu:0]): 0.
+    The valid values for 'GPUGraphicsClockOffsetAllPerformanceLevels' are in the range -1000 - 1000 (inclusive).
+    'GPUGraphicsClockOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+  Attribute 'GPUMemoryTransferRateOffsetAllPerformanceLevels' ([gpu:0]): 0.
+    The valid values for 'GPUMemoryTransferRateOffsetAllPerformanceLevels' are in the range -2000 - 6000 (inclusive).
+    'GPUMemoryTransferRateOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+============================================================
+ Resultado objetivo
+============================================================
+
+[OK] GameMode inativo pós-jogo.
+[OK] GPU fora de P0 pós-jogo: P8.
+[OK] Offset GPU revertido para 0.
+[OK] Offset memória revertido para 0.
+[INFO] Power pós-jogo: 11.84W
+[INFO] Temperatura pós-jogo: 37C
+[INFO] Utilização GPU pós-jogo: 2%
+
+============================================================
+APROVADO: rollback pós-jogo GameMode/NVIDIA correto.
+============================================================
+[OK] Resumo salvo em: /media/mochafast/MochaArch/auditorias/rollback-pos-jogo-gamemode-nvidia-20260701-112041/resumo.txt

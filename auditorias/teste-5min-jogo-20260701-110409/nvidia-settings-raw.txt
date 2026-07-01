@@ -1,0 +1,15 @@
+
+  Attribute 'GPUPowerMizerMode' ([gpu:0]): 0.
+    Valid values for 'GPUPowerMizerMode' are: 0, 1 and 2.
+    'GPUPowerMizerMode' can use the following target types: GPU.
+
+
+  Attribute 'GPUGraphicsClockOffsetAllPerformanceLevels' ([gpu:0]): 50.
+    The valid values for 'GPUGraphicsClockOffsetAllPerformanceLevels' are in the range -1000 - 1000 (inclusive).
+    'GPUGraphicsClockOffsetAllPerformanceLevels' can use the following target types: GPU.
+
+
+  Attribute 'GPUMemoryTransferRateOffsetAllPerformanceLevels' ([gpu:0]): 250.
+    The valid values for 'GPUMemoryTransferRateOffsetAllPerformanceLevels' are in the range -2000 - 6000 (inclusive).
+    'GPUMemoryTransferRateOffsetAllPerformanceLevels' can use the following target types: GPU.
+

@@ -1,0 +1,79 @@
+/usr/lib/tuned/functions:217:CPUSPEED_ORIG_GOV="${STORAGE}/cpuspeed-governor-%s${STORAGE_SUFFIX}"
+/usr/lib/tuned/functions:220:# set CPU governor setting and store the old settings
+/usr/lib/tuned/functions:221:# usage: set_cpu_governor governor
+/usr/lib/tuned/functions:222:set_cpu_governor() {
+/usr/lib/tuned/functions:223:	governor=$1
+/usr/lib/tuned/functions:226:	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+/usr/lib/tuned/functions:229:			gov_file=/sys/devices/system/cpu/$cpu/cpufreq/scaling_governor
+/usr/lib/tuned/functions:234:				echo $governor > $gov_file
+/usr/lib/tuned/functions:240:# re-enable previous CPU governor settings
+/usr/lib/tuned/functions:241:# usage: restore_cpu_governor
+/usr/lib/tuned/functions:242:restore_cpu_governor() {
+/usr/lib/tuned/functions:243:	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+/usr/lib/tuned/functions:248:			if [ -e $cpufreq_dir/scaling_governor ]; then
+/usr/lib/tuned/functions:250:					cat $save_file > $cpufreq_dir/scaling_governor
+/usr/lib/tuned/functions:253:					echo userspace > $cpufreq_dir/scaling_governor
+/usr/lib/tuned/profiles/accelerator-performance/tuned.conf:9:governor=performance
+/usr/lib/tuned/profiles/accelerator-performance/tuned.conf:12:boost=1
+/usr/lib/tuned/profiles/accelerator-performance/tuned.conf:45:# The swappiness parameter controls the tendency of the kernel to move
+/usr/lib/tuned/profiles/accelerator-performance/tuned.conf:51:vm.swappiness=10
+/usr/lib/tuned/profiles/atomic-guest/tuned.conf:7:include=virtual-guest
+/usr/lib/tuned/profiles/atomic-host/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/aws/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/balanced/tuned.conf:13:governor=schedutil|ondemand|powersave
+/usr/lib/tuned/profiles/balanced/tuned.conf:16:boost=1
+/usr/lib/tuned/profiles/balanced-battery/tuned.conf:7:include=balanced
+/usr/lib/tuned/profiles/balanced-battery/tuned.conf:11:boost=1
+/usr/lib/tuned/profiles/cpu-partitioning/tuned.conf:6:include=network-latency
+/usr/lib/tuned/profiles/cpu-partitioning/tuned.conf:10:include=/etc/tuned/cpu-partitioning-variables.conf
+/usr/lib/tuned/profiles/cpu-partitioning-powersave/tuned.conf:6:include=cpu-partitioning
+/usr/lib/tuned/profiles/cpu-partitioning-powersave/tuned.conf:10:include=/etc/tuned/cpu-partitioning-powersave-variables.conf
+/usr/lib/tuned/profiles/desktop/tuned.conf:7:include=balanced
+/usr/lib/tuned/profiles/desktop-powersave/tuned.conf:7:include=server-powersave
+/usr/lib/tuned/profiles/enterprise-storage/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/hpc-compute/tuned.conf:7:description=Configures virtual memory, CPU governors, and network settings for HPC compute workloads.
+/usr/lib/tuned/profiles/hpc-compute/tuned.conf:8:include=latency-performance
+/usr/lib/tuned/profiles/laptop-ac-powersave/tuned.conf:7:include=desktop-powersave
+/usr/lib/tuned/profiles/laptop-battery-powersave/tuned.conf:7:include=powersave
+/usr/lib/tuned/profiles/latency-performance/tuned.conf:10:governor=performance
+/usr/lib/tuned/profiles/latency-performance/tuned.conf:13:boost=1
+/usr/lib/tuned/profiles/latency-performance/tuned.conf:33:# The swappiness parameter controls the tendency of the kernel to move
+/usr/lib/tuned/profiles/latency-performance/tuned.conf:39:vm.swappiness=10
+/usr/lib/tuned/profiles/mssql/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/mssql/tuned.conf:19:vm.swappiness=1
+/usr/lib/tuned/profiles/network-latency/tuned.conf:7:include=latency-performance
+/usr/lib/tuned/profiles/network-throughput/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/openshift/tuned.conf:7:include=${f:virt_check:virtual-guest:throughput-performance}
+/usr/lib/tuned/profiles/openshift-control-plane/tuned.conf:7:include=openshift
+/usr/lib/tuned/profiles/openshift-node/tuned.conf:7:include=openshift
+/usr/lib/tuned/profiles/oracle/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/oracle/tuned.conf:10:vm.swappiness = 10
+/usr/lib/tuned/profiles/postgresql/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/postgresql/tuned.conf:19:# The dirty_background_ratio and dirty_ratio controls percentage of memory
+/usr/lib/tuned/profiles/postgresql/tuned.conf:33:# The swappiness parameter controls the tendency of the kernel to move
+/usr/lib/tuned/profiles/postgresql/tuned.conf:39:vm.swappiness=3
+/usr/lib/tuned/profiles/powersave/tuned.conf:9:governor=schedutil|conservative|powersave
+/usr/lib/tuned/profiles/powersave/tuned.conf:12:boost=0
+/usr/lib/tuned/profiles/realtime-virtual-guest/tuned.conf:7:include=realtime
+/usr/lib/tuned/profiles/realtime-virtual-guest/tuned.conf:11:include=/etc/tuned/realtime-virtual-guest-variables.conf
+/usr/lib/tuned/profiles/realtime-virtual-host/tuned.conf:11:include=realtime
+/usr/lib/tuned/profiles/realtime-virtual-host/tuned.conf:15:include=/etc/tuned/realtime-virtual-host-variables.conf
+/usr/lib/tuned/profiles/sap-hana/tuned.conf:10:governor=performance
+/usr/lib/tuned/profiles/sap-hana/tuned.conf:13:boost=1
+/usr/lib/tuned/profiles/sap-hana/tuned.conf:23:vm.swappiness = 10
+/usr/lib/tuned/profiles/sap-hana-kvm-guest/tuned.conf:6:include=sap-hana
+/usr/lib/tuned/profiles/sap-netweaver/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/spectrumscale-ece/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/spectrumscale-ece/tuned.conf:10:governor=performance
+/usr/lib/tuned/profiles/spectrumscale-ece/tuned.conf:13:boost=1
+/usr/lib/tuned/profiles/spectrumscale-ece/tuned.conf:21:vm.swappiness=10
+/usr/lib/tuned/profiles/spindown-disk/tuned.conf:36:vm.swappiness=30
+/usr/lib/tuned/profiles/throughput-performance/tuned.conf:12:governor=performance
+/usr/lib/tuned/profiles/throughput-performance/tuned.conf:16:boost=1
+/usr/lib/tuned/profiles/throughput-performance/tuned.conf:58:# The swappiness parameter controls the tendency of the kernel to move
+/usr/lib/tuned/profiles/throughput-performance/tuned.conf:64:vm.swappiness=10
+/usr/lib/tuned/profiles/virtual-guest/tuned.conf:7:include=throughput-performance
+/usr/lib/tuned/profiles/virtual-guest/tuned.conf:23:vm.swappiness = 30
+/usr/lib/tuned/profiles/virtual-host/tuned.conf:7:include=throughput-performance
+/etc/tuned/profiles/mocha-latency-performance/tuned.conf:3:include=latency-performance
+/etc/tuned/profiles/mocha-latency-performance/tuned.conf:9:vm.swappiness=133

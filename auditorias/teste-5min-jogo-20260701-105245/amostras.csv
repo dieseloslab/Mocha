@@ -1,0 +1,1 @@
+timestamp,elapsed_s,gamemode_active,gpu_name,driver,pstate,gpu_clock_mhz,mem_clock_mhz,power_w,temp_c,gpu_util_pct,vram_used_mib,vram_total_mib,ram_used_mib,ram_total_mib,load1,load5,load15,cpu_busy_pct
