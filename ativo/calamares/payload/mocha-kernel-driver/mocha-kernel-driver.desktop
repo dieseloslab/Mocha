@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Mocha — Kernel e Driver
-Comment=Atualizar ou reinstalar kernel e driver de vídeo
-Exec=/usr/local/bin/mocha-kernel-driver
-Icon=mocha-kernel-driver
-Terminal=false
-Categories=System;Settings;
-StartupNotify=true

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Atualizador Mocha Kernel e Driver
-Comment=Atualiza kernel CachyOS, driver de vídeo e stack gamer
-Exec=/usr/local/bin/mocha-kernel-driver-updater-gui
-Icon=preferences-system
-Terminal=false
-Categories=System;Settings;
-StartupNotify=true
