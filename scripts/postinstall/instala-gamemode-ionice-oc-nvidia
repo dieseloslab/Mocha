@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+sudo -v
+
+ok()   { printf '[OK] %s\n' "$*"; }
+warn() { printf '[AVISO] %s\n' "$*"; }
+fail() { printf '[FALHA] %s\n' "$*"; exit 1; }
+
+SRC_BASE="/media/mochafast/MochaArch/scripts/performance/gamemode-ionice-oc-nvidia"
+FILES="$SRC_BASE/files"
+MANIFEST="$SRC_BASE/manifest-files.txt"
+
+[ -d "$FILES" ] || fail "Pacote de arquivos ausente: $FILES"
+[ -f "$MANIFEST" ] || fail "Manifesto ausente: $MANIFEST"
+
+echo
+echo "============================================================"
+echo " Mocha — instalar GameMode ionice + OC NVIDIA"
+echo "============================================================"
+
+echo
+echo "Instalando pacotes base, se disponíveis:"
+timeout 120s sudo pacman -S --needed --noconfirm gamemode lib32-gamemode nvidia-settings nvidia-utils util-linux procps-ng 2>/dev/null || warn "Pacman falhou/expirou; seguindo com restauração dos arquivos versionados."
+
+echo
+echo "Restaurando arquivos versionados:"
+while IFS= read -r abs; do
+  [ -n "$abs" ] || continue
+  src="$FILES$abs"
+
+  if [ ! -e "$src" ]; then
+    warn "Fonte ausente no pacote: $src"
+    continue
+  fi
+
+  sudo mkdir -p "$(dirname "$abs")"
+  sudo cp -a "$src" "$abs"
+
+  case "$abs" in
+    /usr/local/lib/mocha/*.sh)
+      sudo chmod 0755 "$abs"
+      ;;
+    /etc/sudoers.d/*)
+      sudo chmod 0440 "$abs"
+      timeout 10s sudo visudo -cf "$abs"
+      ;;
+  esac
+
+  ok "Restaurado: $abs"
+done < "$MANIFEST"
+
+echo
+echo "Validando sudoers global:"
+timeout 15s sudo visudo -c || warn "visudo expirou/falhou."
+
+echo
+echo "Recarregando systemd/gamemoded:"
+timeout 20s sudo systemctl daemon-reload || true
+timeout 20s sudo systemctl restart gamemoded.service 2>/dev/null || true
+
+echo
+echo "Estado GameMode com timeout:"
+timeout 8s gamemoded -s || warn "gamemoded -s não respondeu ou falhou."
+
+ok "GameMode ionice + OC NVIDIA restaurado."

@@ -1,0 +1,8 @@
+5:[general]
+7:desiredgov=performance
+9:softrealtime=auto
+10:renice=10
+11:ioprio=0
+14:[custom]
+15:start=/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
+16:end=/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh

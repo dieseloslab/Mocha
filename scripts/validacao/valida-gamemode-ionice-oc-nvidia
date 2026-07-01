@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+run_t() {
+  local seconds="$1"
+  shift
+
+  echo
+  echo "+ timeout ${seconds}s $*"
+  timeout "${seconds}s" "$@" || echo "[AVISO] comando falhou ou expirou: $*"
+}
+
+echo
+echo "============================================================"
+echo " Mocha — validar GameMode ionice + OC NVIDIA sem travar"
+echo "============================================================"
+
+echo
+echo "GameMode:"
+command -v gamemoded || true
+run_t 8 gamemoded -s
+
+echo
+echo "Systemd gamemoded:"
+run_t 8 systemctl is-active gamemoded.service
+run_t 8 systemctl is-enabled gamemoded.service
+
+echo
+echo "Config GameMode:"
+ls -l /etc/gamemode.ini /usr/share/gamemode/gamemode.ini 2>/dev/null || true
+
+echo
+echo "Trechos relevantes de /etc/gamemode.ini:"
+grep -nE '^\[|start|end|script|renice|ioprio|softrealtime|desiredgov|gpu|nvidia|nv_powermizer|apply_gpu' /etc/gamemode.ini 2>/dev/null || true
+
+echo
+echo "Scripts GameMode/OC esperados:"
+ls -l \
+  /usr/local/lib/mocha/gamemode-start-agressivo-oc.sh \
+  /usr/local/lib/mocha/gamemode-end-agressivo-oc.sh \
+  2>/dev/null || true
+
+echo
+echo "Sudoers relacionados:"
+run_t 8 sudo grep -RniE 'gamemode-start-agressivo-oc|gamemode-end-agressivo-oc|nvidia-settings|GPUGraphicsClockOffset|GPUMemoryTransferRateOffset|GPUPowerMizerMode|mocha.*nvidia|nvidia.*oc|oc.*nvidia' /etc/sudoers.d
+
+echo
+echo "NVIDIA:"
+run_t 10 nvidia-smi
+
+echo
+echo "NVIDIA attributes:"
+run_t 8 nvidia-settings -q '[gpu:0]/GPUPowerMizerMode'
+run_t 8 nvidia-settings -q '[gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels'
+run_t 8 nvidia-settings -q '[gpu:0]/GPUMemoryTransferRateOffsetAllPerformanceLevels'
+
+echo
+echo "Observação:"
+echo "Para validar aplicação real do OC, rode este validador com jogo aberto via Steam (Mocha)."
+echo "Esperado durante jogo/GameMode: offsets aplicados."
+echo "Esperado após fechar jogo: offsets revertidos para 0."
+
+echo
+echo "[OK] Validação concluída."
