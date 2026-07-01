@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+sudo -v
+
+ok()   { printf '[OK] %s\n' "$*"; }
+fail() { printf '[FALHA] %s\n' "$*"; exit 1; }
+
+SRC_CANDIDATES=(
+  "/media/mochafast/MochaArch/scripts/repos/mocha-repos-maintain"
+  "/media/vmstore/MochaArch/scripts/repos/mocha-repos-maintain"
+  "/media/vmstore/mocha-repo/scripts/mocha-repos-maintain"
+)
+
+SRC=""
+
+for candidate in "${SRC_CANDIDATES[@]}"; do
+  if [ -f "$candidate" ]; then
+    SRC="$candidate"
+    break
+  fi
+done
+
+[ -n "$SRC" ] || fail "Não encontrei mocha-repos-maintain em scripts/."
+
+sudo install -Dm0755 "$SRC" /usr/local/sbin/mocha-repos-maintain
+
+sudo tee /etc/systemd/system/mocha-repos-maintain.service >/dev/null <<'SERVICE_EOF'
+[Unit]
+Description=Mocha repo maintenance for kernel and NVIDIA packages
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/mocha-repos-maintain
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+SERVICE_EOF
+
+sudo tee /etc/systemd/system/mocha-repos-maintain.timer >/dev/null <<'TIMER_EOF'
+[Unit]
+Description=Weekly Mocha repo maintenance for kernel and NVIDIA packages
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=30min
+
+[Install]
+WantedBy=timers.target
+TIMER_EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now mocha-repos-maintain.timer
+
+ok "mocha-repos-maintain instalado e timer semanal ativado."

@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+ok()   { printf '[OK] %s\n' "$*"; }
+warn() { printf '[AVISO] %s\n' "$*"; }
+fail() { printf '[FALHA] %s\n' "$*"; exit 1; }
+
+PRIMARY="/media/vmstore/mocha-repo"
+SECONDARY="/media/vmstore/MochaRepos"
+
+STAMP="$(date +%Y%m%d-%H%M%S)"
+BASE="$PRIMARY"
+POOL="$BASE/local/kernel-driver/x86_64_v3"
+SNAP="$BASE/snapshots/kernel-driver/$STAMP"
+MANIFEST_BASE="$BASE/manifests"
+MANIFEST="$MANIFEST_BASE/$STAMP"
+LOGBASE="$BASE/logs"
+LOG="$LOGBASE/mocha-repos-maintain-$STAMP.log"
+DOWNLOAD="$BASE/incoming/kernel-driver-$STAMP"
+DB="$POOL/mocha-kernel-driver.db.tar.gz"
+
+PKGS=(
+  cachyos-keyring
+  cachyos-mirrorlist
+  cachyos-v3-mirrorlist
+  cachyos-v4-mirrorlist
+  linux
+  linux-headers
+  linux-cachyos
+  linux-cachyos-headers
+  linux-cachyos-nvidia-open
+  nvidia-utils
+  nvidia-settings
+  linux-firmware
+  linux-firmware-nvidia
+  vulkan-icd-loader
+  vulkan-tools
+)
+
+[ -d "$PRIMARY" ] || fail "Repo principal ausente: $PRIMARY"
+
+mkdir -p "$POOL" "$SNAP" "$MANIFEST" "$LOGBASE" "$DOWNLOAD"
+
+exec > >(tee -a "$LOG") 2>&1
+
+echo
+echo "============================================================"
+echo " Mocha — manutenção repo kernel/driver"
+echo "============================================================"
+echo "Data: $(date -Is)"
+echo "Repo principal: $PRIMARY"
+echo "Repo secundário: $SECONDARY"
+echo "Pool local: $POOL"
+echo "Snapshot: $SNAP"
+echo "Manifesto: $MANIFEST"
+echo "Log: $LOG"
+
+echo
+echo "Sistema atual:"
+uname -a || true
+pacman -Q linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils nvidia-settings 2>/dev/null || true
+
+echo
+echo "Copiando pacotes relevantes do cache local do pacman:"
+if [ -d /var/cache/pacman/pkg ]; then
+  find /var/cache/pacman/pkg -maxdepth 1 -type f \( \
+    -iname 'linux*.pkg.tar.zst' -o \
+    -iname '*cachyos*.pkg.tar.zst' -o \
+    -iname 'nvidia*.pkg.tar.zst' -o \
+    -iname 'vulkan*.pkg.tar.zst' \
+  \) -print0 \
+  | while IFS= read -r -d '' f; do
+      cp -n "$f" "$POOL/" 2>/dev/null || true
+      cp -n "$f" "$SNAP/" 2>/dev/null || true
+    done
+fi
+
+echo
+echo "Baixando versões atuais dos pacotes críticos para o repo local:"
+if command -v pacman >/dev/null 2>&1; then
+  sudo pacman -Syw --cachedir "$DOWNLOAD" --noconfirm "${PKGS[@]}" || warn "Download via pacman falhou ou ficou parcial; mantendo inventário do que já existe."
+  find "$DOWNLOAD" -maxdepth 1 -type f -name '*.pkg.tar.zst' -print0 2>/dev/null \
+  | while IFS= read -r -d '' f; do
+      cp -n "$f" "$POOL/" 2>/dev/null || true
+      cp -n "$f" "$SNAP/" 2>/dev/null || true
+    done
+fi
+
+echo
+echo "Preservando pacotes já existentes em snapshots/repos antigos:"
+for repo in "$PRIMARY" "$SECONDARY"; do
+  [ -d "$repo" ] || continue
+  find "$repo" -type f \( \
+    -iname 'linux-cachyos-*.pkg.tar.zst' -o \
+    -iname 'linux-cachyos-headers-*.pkg.tar.zst' -o \
+    -iname 'linux-cachyos-nvidia-open-*.pkg.tar.zst' -o \
+    -iname 'nvidia-utils*.pkg.tar.zst' -o \
+    -iname 'nvidia-settings*.pkg.tar.zst' \
+  \) -print0 2>/dev/null \
+  | while IFS= read -r -d '' f; do
+      cp -n "$f" "$POOL/" 2>/dev/null || true
+    done
+done
+
+echo
+echo "Gerando banco local do repo kernel/driver:"
+if command -v repo-add >/dev/null 2>&1; then
+  (
+    cd "$POOL"
+    rm -f mocha-kernel-driver.db mocha-kernel-driver.files
+    repo-add "$DB" ./*.pkg.tar.zst
+    ln -sf mocha-kernel-driver.db.tar.gz mocha-kernel-driver.db
+    [ -f mocha-kernel-driver.files.tar.gz ] && ln -sf mocha-kernel-driver.files.tar.gz mocha-kernel-driver.files || true
+  )
+else
+  warn "repo-add não encontrado; banco local não foi regenerado."
+fi
+
+echo
+echo "Criando manifestos:"
+{
+  echo "Mocha — manutenção repo kernel/driver"
+  echo "Data: $(date -Is)"
+  echo
+  echo "Kernel em uso:"
+  uname -r || true
+  echo
+  echo "Pacotes instalados:"
+  pacman -Q linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils nvidia-settings 2>/dev/null || true
+} > "$MANIFEST/00-sistema-atual.txt"
+
+{
+  echo "[PRIMARY] $PRIMARY"
+  [ -d "$PRIMARY" ] && echo "OK" || echo "AUSENTE"
+  echo
+  echo "[SECONDARY] $SECONDARY"
+  [ -d "$SECONDARY" ] && echo "OK" || echo "AUSENTE"
+  echo
+  echo "[POOL] $POOL"
+  echo "[SNAPSHOT] $SNAP"
+  echo "[LOG] $LOG"
+} > "$MANIFEST/01-locais.txt"
+
+find "$POOL" -maxdepth 1 -type f -name '*.pkg.tar.zst' 2>/dev/null \
+  | sort -V \
+  > "$MANIFEST/02-pool-caminhos.txt"
+
+sed 's#.*/##' "$MANIFEST/02-pool-caminhos.txt" \
+  | sort -V \
+  | uniq \
+  > "$MANIFEST/03-pool-nomes.txt"
+
+{
+  echo "Trincas linux-cachyos completas no pool:"
+  echo
+  awk '
+    /^linux-cachyos-[0-9]/ {
+      x=$0
+      sub(/^linux-cachyos-/, "", x)
+      sub(/-x86_64(_v[34])?\.pkg\.tar\.zst$/, "", x)
+      k[x]=1
+    }
+    /^linux-cachyos-headers-[0-9]/ {
+      x=$0
+      sub(/^linux-cachyos-headers-/, "", x)
+      sub(/-x86_64(_v[34])?\.pkg\.tar\.zst$/, "", x)
+      h[x]=1
+    }
+    /^linux-cachyos-nvidia-open-[0-9]/ {
+      x=$0
+      sub(/^linux-cachyos-nvidia-open-/, "", x)
+      sub(/-x86_64(_v[34])?\.pkg\.tar\.zst$/, "", x)
+      n[x]=1
+    }
+    END {
+      for (v in k) {
+        if (h[v] && n[v]) print v
+      }
+    }
+  ' "$MANIFEST/03-pool-nomes.txt" | sort -V
+} > "$MANIFEST/04-trincas-completas.txt"
+
+{
+  echo "Resumo:"
+  echo
+  echo "Kernel em uso:"
+  uname -r || true
+  echo
+  echo "Pacotes instalados:"
+  pacman -Q linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open 2>/dev/null || true
+  echo
+  echo "Trincas completas disponíveis:"
+  cat "$MANIFEST/04-trincas-completas.txt"
+} > "$MANIFEST/05-resumo.txt"
+
+ln -sfn "$MANIFEST" "$MANIFEST_BASE/latest-kernel-driver"
+
+echo
+echo "Resumo final:"
+cat "$MANIFEST/05-resumo.txt"
+
+ok "Manutenção concluída."
+ok "Manifesto: $MANIFEST"
+ok "Log: $LOG"
