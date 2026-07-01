@@ -399,3 +399,128 @@ Partes del proyecto pueden depender de licencias específicas de los softwares, 
 - Sitio oficial: https://dieseloslab.org
 - Proyecto: Mocha
 - Organización: Diesel OS Lab
+
+
+## Manutenção semanal dos repositórios locais
+
+Marcador: MOCHA-REPOS-SEMANAIS-KERNEL-DRIVER
+
+Regra básica: o Mocha deve manter semanalmente o stack de kernel, headers, NVIDIA e componentes gráficos/performance alinhado no repositório local. O cache do pacman não conta como repositório canônico; ele pode ser fonte de importação, mas o pacote só é considerado preservado quando estiver no repo local.
+
+Repositório local principal:
+
+    /media/vmstore/mocha-repo/
+
+Pool canônico kernel/driver:
+
+    /media/vmstore/mocha-repo/local/kernel-driver/x86_64_v3/
+
+Snapshots semanais:
+
+    /media/vmstore/mocha-repo/snapshots/kernel-driver/
+
+Manifesto mais recente:
+
+    /media/vmstore/mocha-repo/manifests/latest-kernel-driver
+
+Rotina semanal canônica:
+
+    /usr/local/sbin/mocha-repos-maintain
+    mocha-repos-maintain.service
+    mocha-repos-maintain.timer
+
+Stack mínimo a manter alinhado:
+
+    linux-cachyos
+    linux-cachyos-headers
+    linux-cachyos-nvidia-open
+    nvidia-utils
+    nvidia-settings
+    linux-firmware
+    linux-firmware-nvidia
+    vulkan-icd-loader
+    vulkan-tools
+    cachyos-keyring
+    cachyos-mirrorlist
+    cachyos-v3-mirrorlist
+    cachyos-v4-mirrorlist
+
+Regra de troca de kernel: nunca trocar para uma versão que exista apenas no cache do pacman. A versão só é apta se existir no repo-only a trinca completa:
+
+    linux-cachyos-VERSAO-x86_64_v3.pkg.tar.zst
+    linux-cachyos-headers-VERSAO-x86_64_v3.pkg.tar.zst
+    linux-cachyos-nvidia-open-VERSAO-x86_64_v3.pkg.tar.zst
+
+Conferência rápida:
+
+    systemctl is-enabled mocha-repos-maintain.timer
+    systemctl is-active mocha-repos-maintain.timer
+    systemctl list-timers --all | grep -F mocha-repos-maintain
+    readlink -f /media/vmstore/mocha-repo/manifests/latest-kernel-driver
+    cat /media/vmstore/mocha-repo/manifests/latest-kernel-driver/04-trincas-completas.txt
+
+Estado confirmado em 2026-06-30: rotina semanal ativa e trincas completas disponíveis no repo para 7.0.11-1, 7.0.12-1, 7.1.1-2 e 7.1.2-3.
+
+
+## Regra de scripts aprovados
+
+Marcador: MOCHA-REGRA-SCRIPTS-APROVADOS
+
+Todo procedimento aprovado no Projeto Mocha deve ter duas partes:
+
+1. entrada no manual;
+2. script correspondente salvo em `scripts/`.
+
+O manual deve sempre citar o caminho exato do script canônico e o comando para evocá-lo. Não basta registrar “fazer assim” quando o procedimento for reaplicável em nova formatação, reinstalação, matriz, ISO ou rotina pós-install do Calamares.
+
+Pasta canônica no FAST:
+
+    /media/mochafast/MochaArch/scripts/
+
+Espelho quando aplicável no VMSTORE:
+
+    /media/vmstore/MochaArch/scripts/
+
+Scripts auxiliares do repositório local:
+
+    /media/vmstore/mocha-repo/scripts/
+
+Índice dos scripts aprovados:
+
+    /media/mochafast/MochaArch/scripts/README-SCRIPTS-APROVADOS-MOCHA.md
+
+Regra para pós-install do Calamares: qualquer rotina que deva sobreviver à formatação precisa ter script em `scripts/postinstall/` ou ser chamada por um script dessa pasta.
+
+Caso atual já canonizado:
+
+    /media/mochafast/MochaArch/scripts/repos/mocha-repos-maintain
+    /media/mochafast/MochaArch/scripts/postinstall/instala-mocha-repos-maintain
+
+## GameMode agressivo, ionice e OC NVIDIA
+
+Marcador: MOCHA-GAMEMODE-IONICE-OC-CANONICO
+
+O stack de performance aprovado do Mocha deve ser versionado como script e reaplicável no pós-install. Ele inclui GameMode agressivo, ionice/ioprio quando configurado, scripts start/end do GameMode, helper/sudoers do OC NVIDIA e reversão do OC ao sair do jogo.
+
+Pacote canônico versionado:
+
+    /media/mochafast/MochaArch/scripts/performance/gamemode-ionice-oc-nvidia/
+
+Instalador pós-install:
+
+    /media/mochafast/MochaArch/scripts/postinstall/instala-gamemode-ionice-oc-nvidia
+
+Validador:
+
+    /media/mochafast/MochaArch/scripts/validacao/valida-gamemode-ionice-oc-nvidia
+
+Aplicação manual:
+
+    bash /media/mochafast/MochaArch/scripts/postinstall/instala-gamemode-ionice-oc-nvidia
+
+Validação:
+
+    bash /media/mochafast/MochaArch/scripts/validacao/valida-gamemode-ionice-oc-nvidia
+
+Regra: não recriar GameMode/OC do zero quando houver estado funcional aprovado. Restaurar o pacote canônico, validar GameMode, validar NVIDIA e confirmar que os offsets são aplicados durante jogo e revertidos após fechar o jogo.
+
