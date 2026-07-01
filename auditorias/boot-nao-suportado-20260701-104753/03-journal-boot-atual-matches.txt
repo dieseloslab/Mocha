@@ -1,0 +1,305 @@
+Jul 01 10:45:49.934002 Mocha kernel: BIOS-e820: [mem 0x000000000a200000-0x000000000a20cfff]  ACPI NVS
+Jul 01 10:45:49.934057 Mocha kernel: BIOS-e820: [mem 0x00000000c42ad000-0x00000000c4424fff]  ACPI data
+Jul 01 10:45:49.934064 Mocha kernel: BIOS-e820: [mem 0x00000000c4425000-0x00000000c5bd1fff]  ACPI NVS
+Jul 01 10:45:49.934354 Mocha kernel: efi: ACPI=0xc4424000 ACPI 2.0=0xc4424014 TPMFinalLog=0xc4b87000 SMBIOS=0xc69f1000 SMBIOS 3.0=0xc69f0000 MEMATTR=0xc0cfb018 ESRT=0xc0b7fe98 INITRD=0xbb58b598 RNG=0xc4405c18 TPMEventLog=0xc42ff018 
+Jul 01 10:45:49.934513 Mocha kernel: DMI: ASUS System Product Name/PRIME A520M-E, BIOS 3636 01/04/2026
+Jul 01 10:45:49.934630 Mocha kernel: Secure boot disabled
+Jul 01 10:45:49.934649 Mocha kernel: ACPI: Early table checksum verification disabled
+Jul 01 10:45:49.934657 Mocha kernel: ACPI: RSDP 0x00000000C4424014 000024 (v02 ALASKA)
+Jul 01 10:45:49.934665 Mocha kernel: ACPI: XSDT 0x00000000C4423728 0000C4 (v01 ALASKA A M I    01072009 AMI  01000013)
+Jul 01 10:45:49.934673 Mocha kernel: ACPI: FACP 0x00000000C4415000 000114 (v06 ALASKA A M I    01072009 AMI  00010013)
+Jul 01 10:45:49.934683 Mocha kernel: ACPI: DSDT 0x00000000C440A000 00AC09 (v02 ALASKA A M I    01072009 INTL 20120913)
+Jul 01 10:45:49.934691 Mocha kernel: ACPI: FACS 0x00000000C4BB7000 000040
+Jul 01 10:45:49.934699 Mocha kernel: ACPI: SSDT 0x00000000C441B000 0072B0 (v02 AMD    Artic    00000002 MSFT 04000000)
+Jul 01 10:45:49.934708 Mocha kernel: ACPI: SSDT 0x00000000C4417000 003B8E (v02 AMD    AMD AOD  00000001 INTL 20120913)
+Jul 01 10:45:49.934716 Mocha kernel: ACPI: SSDT 0x00000000C4416000 000221 (v02 ALASKA CPUSSDT  01072009 AMI  01072009)
+Jul 01 10:45:49.934725 Mocha kernel: ACPI: FIDT 0x00000000C4409000 00009C (v01 ALASKA A M I    01072009 AMI  00010013)
+Jul 01 10:45:49.934733 Mocha kernel: ACPI: MCFG 0x00000000C4407000 00003C (v01 ALASKA A M I    01072009 MSFT 00010013)
+Jul 01 10:45:49.934740 Mocha kernel: ACPI: HPET 0x00000000C4406000 000038 (v01 ALASKA A M I    01072009 AMI  00000005)
+Jul 01 10:45:49.934747 Mocha kernel: ACPI: BGRT 0x00000000C4404000 000038 (v01 ALASKA A M I    01072009 AMI  00010013)
+Jul 01 10:45:49.934756 Mocha kernel: ACPI: WPBT 0x00000000C431B000 00003C (v01 ALASKA A M I    00000001 ASUS 00000001)
+Jul 01 10:45:49.934763 Mocha kernel: ACPI: TPM2 0x00000000C431A000 00004C (v04 ALASKA A M I    00000001 AMI  00000000)
+Jul 01 10:45:49.934770 Mocha kernel: ACPI: SSDT 0x00000000C4316000 0035A4 (v02 AMD    AmdTable 00000001 AMD  00000001)
+Jul 01 10:45:49.934777 Mocha kernel: ACPI: CRAT 0x00000000C4315000 000EE8 (v01 AMD    AmdTable 00000001 AMD  00000001)
+Jul 01 10:45:49.934784 Mocha kernel: ACPI: CDIT 0x00000000C4314000 000029 (v01 AMD    AmdTable 00000001 AMD  00000001)
+Jul 01 10:45:49.934791 Mocha kernel: ACPI: SSDT 0x00000000C4313000 000259 (v02 AMD    ArticDGP 00000001 INTL 20120913)
+Jul 01 10:45:49.934798 Mocha kernel: ACPI: SSDT 0x00000000C430F000 003E6E (v02 AMD    ArticN   00000001 INTL 20120913)
+Jul 01 10:45:49.934804 Mocha kernel: ACPI: WSMT 0x00000000C430E000 000028 (v01 ALASKA A M I    01072009 AMI  00010013)
+Jul 01 10:45:49.934813 Mocha kernel: ACPI: APIC 0x00000000C430D000 00015E (v04 ALASKA A M I    01072009 AMI  00010013)
+Jul 01 10:45:49.934820 Mocha kernel: ACPI: SSDT 0x00000000C430C000 00007D (v02 AMD    ArticDIS 00000001 INTL 20120913)
+Jul 01 10:45:49.934827 Mocha kernel: ACPI: SSDT 0x00000000C430B000 0000BF (v01 AMD    AmdTable 00001000 INTL 20120913)
+Jul 01 10:45:49.934834 Mocha kernel: ACPI: FPDT 0x00000000C430A000 000044 (v01 ALASKA A M I    01072009 AMI  01000013)
+Jul 01 10:45:49.934841 Mocha kernel: ACPI: Reserving FACP table memory at [mem 0xc4415000-0xc4415113]
+Jul 01 10:45:49.934848 Mocha kernel: ACPI: Reserving DSDT table memory at [mem 0xc440a000-0xc4414c08]
+Jul 01 10:45:49.934855 Mocha kernel: ACPI: Reserving FACS table memory at [mem 0xc4bb7000-0xc4bb703f]
+Jul 01 10:45:49.934865 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc441b000-0xc44222af]
+Jul 01 10:45:49.934871 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc4417000-0xc441ab8d]
+Jul 01 10:45:49.934878 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc4416000-0xc4416220]
+Jul 01 10:45:49.934885 Mocha kernel: ACPI: Reserving FIDT table memory at [mem 0xc4409000-0xc440909b]
+Jul 01 10:45:49.934892 Mocha kernel: ACPI: Reserving MCFG table memory at [mem 0xc4407000-0xc440703b]
+Jul 01 10:45:49.934899 Mocha kernel: ACPI: Reserving HPET table memory at [mem 0xc4406000-0xc4406037]
+Jul 01 10:45:49.934906 Mocha kernel: ACPI: Reserving BGRT table memory at [mem 0xc4404000-0xc4404037]
+Jul 01 10:45:49.934912 Mocha kernel: ACPI: Reserving WPBT table memory at [mem 0xc431b000-0xc431b03b]
+Jul 01 10:45:49.934919 Mocha kernel: ACPI: Reserving TPM2 table memory at [mem 0xc431a000-0xc431a04b]
+Jul 01 10:45:49.934926 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc4316000-0xc43195a3]
+Jul 01 10:45:49.934932 Mocha kernel: ACPI: Reserving CRAT table memory at [mem 0xc4315000-0xc4315ee7]
+Jul 01 10:45:49.934939 Mocha kernel: ACPI: Reserving CDIT table memory at [mem 0xc4314000-0xc4314028]
+Jul 01 10:45:49.934946 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc4313000-0xc4313258]
+Jul 01 10:45:49.934954 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc430f000-0xc4312e6d]
+Jul 01 10:45:49.934961 Mocha kernel: ACPI: Reserving WSMT table memory at [mem 0xc430e000-0xc430e027]
+Jul 01 10:45:49.934967 Mocha kernel: ACPI: Reserving APIC table memory at [mem 0xc430d000-0xc430d15d]
+Jul 01 10:45:49.934973 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc430c000-0xc430c07c]
+Jul 01 10:45:49.934980 Mocha kernel: ACPI: Reserving SSDT table memory at [mem 0xc430b000-0xc430b0be]
+Jul 01 10:45:49.934987 Mocha kernel: ACPI: Reserving FPDT table memory at [mem 0xc430a000-0xc430a043]
+Jul 01 10:45:49.935014 Mocha kernel: ACPI: PM-Timer IO Port: 0x808
+Jul 01 10:45:49.935021 Mocha kernel: ACPI: LAPIC_NMI (acpi_id[0xff] high edge lint[0x1])
+Jul 01 10:45:49.935042 Mocha kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Jul 01 10:45:49.935053 Mocha kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 low level)
+Jul 01 10:45:49.935060 Mocha kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+Jul 01 10:45:49.935067 Mocha kernel: ACPI: HPET id: 0x10228201 base: 0xfed00000
+Jul 01 10:45:49.935639 Mocha kernel: ACPI: Core revision 20251212
+Jul 01 10:45:49.935801 Mocha kernel: Spectre V2 : Enabling Restricted Speculation for firmware calls
+Jul 01 10:45:49.936023 Mocha kernel: MCE: In-kernel MCE decoding enabled.
+Jul 01 10:45:49.936096 Mocha kernel: ACPI: PM: Registering ACPI NVS region [mem 0x0a200000-0x0a20cfff] (53248 bytes)
+Jul 01 10:45:49.936102 Mocha kernel: ACPI: PM: Registering ACPI NVS region [mem 0xc4425000-0xc5bd1fff] (24825856 bytes)
+Jul 01 10:45:49.936230 Mocha kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Jul 01 10:45:49.936250 Mocha kernel: virt/tdx: TDX not supported by the host platform
+Jul 01 10:45:49.936314 Mocha kernel: ACPI: Added _OSI(Module Device)
+Jul 01 10:45:49.936320 Mocha kernel: ACPI: Added _OSI(Processor Device)
+Jul 01 10:45:49.936326 Mocha kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Jul 01 10:45:49.936332 Mocha kernel: ACPI: 9 ACPI AML tables successfully acquired and loaded
+Jul 01 10:45:49.936338 Mocha kernel: ACPI: [Firmware Bug]: BIOS _OSI(Linux) query ignored
+Jul 01 10:45:49.936345 Mocha kernel: ACPI: \_SB_: platform _OSC: OS support mask [006e7eff]
+Jul 01 10:45:49.936351 Mocha kernel: ACPI: Interpreter enabled
+Jul 01 10:45:49.936358 Mocha kernel: ACPI: PM: (supports S0 S3 S4 S5)
+Jul 01 10:45:49.936364 Mocha kernel: ACPI: Using IOAPIC for interrupt routing
+Jul 01 10:45:49.936370 Mocha kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Jul 01 10:45:49.936382 Mocha kernel: ACPI: Enabled 4 GPEs in block 00 to 1F
+Jul 01 10:45:49.936388 Mocha kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Jul 01 10:45:49.936553 Mocha kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+Jul 01 10:45:49.936688 Mocha kernel: acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug SHPCHotplug PME LTR DPC]
+Jul 01 10:45:49.936813 Mocha kernel: acpi PNP0A08:00: _OSC: OS now controls [AER PCIeCapability]
+Jul 01 10:45:49.936932 Mocha kernel: acpi PNP0A08:00: [Firmware Info]: ECAM [mem 0xf0000000-0xf7ffffff] for domain 0000 [bus 00-7f] only partially covers this bridge
+Jul 01 10:45:49.953532 Mocha kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 0
+Jul 01 10:45:49.953539 Mocha kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 0
+Jul 01 10:45:49.953545 Mocha kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 0
+Jul 01 10:45:49.953552 Mocha kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 0
+Jul 01 10:45:49.953558 Mocha kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 0
+Jul 01 10:45:49.953564 Mocha kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 0
+Jul 01 10:45:49.953571 Mocha kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 0
+Jul 01 10:45:49.953577 Mocha kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 0
+Jul 01 10:45:49.953583 Mocha kernel: iommu: Default domain type: Translated
+Jul 01 10:45:49.953591 Mocha kernel: iommu: DMA domain TLB invalidation policy: lazy mode
+Jul 01 10:45:49.953610 Mocha kernel: ACPI: bus type USB registered
+Jul 01 10:45:49.953616 Mocha kernel: usbcore: registered new interface driver usbfs
+Jul 01 10:45:49.953622 Mocha kernel: usbcore: registered new interface driver hub
+Jul 01 10:45:49.953628 Mocha kernel: usbcore: registered new device driver usb
+Jul 01 10:45:49.953688 Mocha kernel: PCI: Using ACPI for IRQ routing
+Jul 01 10:45:49.954284 Mocha kernel: acpi PNP0C01:00: Reserved [mem 0xf0000000-0xf7ffffff]
+Jul 01 10:45:49.954415 Mocha kernel: acpi PNP0C02:00: Reserved [mem 0xfeb80000-0xfebfffff]
+Jul 01 10:45:49.954555 Mocha kernel: acpi PNP0C02:01: Could not reserve [mem 0x1000000000000 window]
+Jul 01 10:45:49.954701 Mocha kernel: acpi PNP0C02:02: Reserved [mem 0xfd100000-0xfd1fffff]
+Jul 01 10:45:49.954844 Mocha kernel: acpi PNP0C02:03: Reserved [io  0x0290-0x029f]
+Jul 01 10:45:49.954978 Mocha kernel: acpi PNP0C02:03: Reserved [io  0x0200-0x021f]
+Jul 01 10:45:49.955107 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0010-0x001f]
+Jul 01 10:45:49.955234 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0022-0x003f]
+Jul 01 10:45:49.955359 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0063]
+Jul 01 10:45:49.955483 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0065]
+Jul 01 10:45:49.955607 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0067-0x006f]
+Jul 01 10:45:49.955777 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0072-0x007f]
+Jul 01 10:45:49.955904 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0080]
+Jul 01 10:45:49.956027 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0084-0x0086]
+Jul 01 10:45:49.956152 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0088]
+Jul 01 10:45:49.956276 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x008c-0x008e]
+Jul 01 10:45:49.956399 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x0090-0x009f]
+Jul 01 10:45:49.956522 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x00a2-0x00bf]
+Jul 01 10:45:49.956649 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x00b1]
+Jul 01 10:45:49.956777 Mocha kernel: acpi PNP0C02:04: Skipped [io  0x00e0-0x00ef]
+Jul 01 10:45:49.956905 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x04d0-0x04d1]
+Jul 01 10:45:49.957029 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x040b]
+Jul 01 10:45:49.957152 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x04d6]
+Jul 01 10:45:49.957276 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c00-0x0c01]
+Jul 01 10:45:49.957405 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c14]
+Jul 01 10:45:49.957529 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c50-0x0c51]
+Jul 01 10:45:49.957656 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c52]
+Jul 01 10:45:49.957786 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c6c]
+Jul 01 10:45:49.957914 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0c6f]
+Jul 01 10:45:49.958038 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0cd8-0x0cdf]
+Jul 01 10:45:49.958162 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0800-0x089f]
+Jul 01 10:45:49.958286 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0b00-0x0b0f]
+Jul 01 10:45:49.958410 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0b20-0x0b3f]
+Jul 01 10:45:49.958535 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0900-0x090f]
+Jul 01 10:45:49.958666 Mocha kernel: acpi PNP0C02:04: Reserved [io  0x0910-0x091f]
+Jul 01 10:45:49.958833 Mocha kernel: acpi PNP0C02:04: Could not reserve [mem 0xfec00000-0xfec00fff]
+Jul 01 10:45:49.958993 Mocha kernel: acpi PNP0C02:04: Could not reserve [mem 0xfec01000-0xfec01fff]
+Jul 01 10:45:49.959119 Mocha kernel: acpi PNP0C02:04: Reserved [mem 0xfedc0000-0xfedc0fff]
+Jul 01 10:45:49.959243 Mocha kernel: acpi PNP0C02:04: Reserved [mem 0xfee00000-0xfee00fff]
+Jul 01 10:45:49.959370 Mocha kernel: acpi PNP0C02:04: Could not reserve [mem 0xfed80000-0xfed8ffff]
+Jul 01 10:45:49.959495 Mocha kernel: acpi PNP0C02:04: Reserved [mem 0xfec10000-0xfec10fff]
+Jul 01 10:45:49.959618 Mocha kernel: acpi PNP0C02:04: Reserved [mem 0xff000000-0xffffffff]
+Jul 01 10:45:49.959626 Mocha kernel: pnp: PnP ACPI init
+Jul 01 10:45:49.959772 Mocha kernel: pnp: PnP ACPI: found 1 devices
+Jul 01 10:45:49.959778 Mocha kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Jul 01 10:45:49.965837 Mocha kernel: integrity: Platform Keyring initialized
+Jul 01 10:45:49.965908 Mocha kernel: input: Power Button as /devices/platform/PNP0C0C:00/input/input0
+Jul 01 10:45:49.965914 Mocha kernel: ACPI: button: Power Button [PWRB]
+Jul 01 10:45:49.965920 Mocha kernel: input: Power Button as /devices/platform/LNXPWRBN:00/input/input1
+Jul 01 10:45:49.965927 Mocha kernel: ACPI: button: Power Button [PWRF]
+Jul 01 10:45:49.966076 Mocha kernel: tpm_crb_acpi MSFT0101:00: Disabling hwrng
+Jul 01 10:45:49.967417 Mocha kernel: ACPI: bus type drm_connector registered
+Jul 01 10:45:49.967664 Mocha kernel: xhci_hcd 0000:02:00.0: new USB bus registered, assigned bus number 1
+Jul 01 10:45:49.968030 Mocha kernel: xhci_hcd 0000:02:00.0: new USB bus registered, assigned bus number 2
+Jul 01 10:45:49.968155 Mocha kernel: xhci_hcd 0000:02:00.0: Host supports USB 3.1 Enhanced SuperSpeed
+Jul 01 10:45:49.968275 Mocha kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.01
+Jul 01 10:45:49.968384 Mocha kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.968490 Mocha kernel: usb usb1: Product: xHCI Host Controller
+Jul 01 10:45:49.968594 Mocha kernel: usb usb1: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.968702 Mocha kernel: usb usb1: SerialNumber: 0000:02:00.0
+Jul 01 10:45:49.968846 Mocha kernel: hub 1-0:1.0: USB hub found
+Jul 01 10:45:49.969121 Mocha kernel: usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+Jul 01 10:45:49.969231 Mocha kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.01
+Jul 01 10:45:49.969337 Mocha kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.969442 Mocha kernel: usb usb2: Product: xHCI Host Controller
+Jul 01 10:45:49.969546 Mocha kernel: usb usb2: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.969653 Mocha kernel: usb usb2: SerialNumber: 0000:02:00.0
+Jul 01 10:45:49.969798 Mocha kernel: hub 2-0:1.0: USB hub found
+Jul 01 10:45:49.970186 Mocha kernel: xhci_hcd 0000:09:00.3: new USB bus registered, assigned bus number 3
+Jul 01 10:45:49.970555 Mocha kernel: xhci_hcd 0000:09:00.3: new USB bus registered, assigned bus number 4
+Jul 01 10:45:49.970682 Mocha kernel: xhci_hcd 0000:09:00.3: Host supports USB 3.1 Enhanced SuperSpeed
+Jul 01 10:45:49.970797 Mocha kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.01
+Jul 01 10:45:49.970905 Mocha kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.971009 Mocha kernel: usb usb3: Product: xHCI Host Controller
+Jul 01 10:45:49.971114 Mocha kernel: usb usb3: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.971219 Mocha kernel: usb usb3: SerialNumber: 0000:09:00.3
+Jul 01 10:45:49.971358 Mocha kernel: hub 3-0:1.0: USB hub found
+Jul 01 10:45:49.971629 Mocha kernel: usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+Jul 01 10:45:49.971746 Mocha kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.01
+Jul 01 10:45:49.971852 Mocha kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.971955 Mocha kernel: usb usb4: Product: xHCI Host Controller
+Jul 01 10:45:49.972060 Mocha kernel: usb usb4: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.972164 Mocha kernel: usb usb4: SerialNumber: 0000:09:00.3
+Jul 01 10:45:49.972302 Mocha kernel: hub 4-0:1.0: USB hub found
+Jul 01 10:45:49.972691 Mocha kernel: xhci_hcd 0000:09:00.4: new USB bus registered, assigned bus number 5
+Jul 01 10:45:49.973058 Mocha kernel: xhci_hcd 0000:09:00.4: new USB bus registered, assigned bus number 6
+Jul 01 10:45:49.973187 Mocha kernel: xhci_hcd 0000:09:00.4: Host supports USB 3.1 Enhanced SuperSpeed
+Jul 01 10:45:49.973297 Mocha kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.01
+Jul 01 10:45:49.973406 Mocha kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.973510 Mocha kernel: usb usb5: Product: xHCI Host Controller
+Jul 01 10:45:49.973614 Mocha kernel: usb usb5: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.973721 Mocha kernel: usb usb5: SerialNumber: 0000:09:00.4
+Jul 01 10:45:49.973859 Mocha kernel: hub 5-0:1.0: USB hub found
+Jul 01 10:45:49.974132 Mocha kernel: usb usb6: We don't know the algorithms for LPM for this host, disabling LPM.
+Jul 01 10:45:49.974243 Mocha kernel: usb usb6: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.01
+Jul 01 10:45:49.974347 Mocha kernel: usb usb6: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 01 10:45:49.974450 Mocha kernel: usb usb6: Product: xHCI Host Controller
+Jul 01 10:45:49.974554 Mocha kernel: usb usb6: Manufacturer: Linux 7.1.1-2-cachyos xhci-hcd
+Jul 01 10:45:49.974661 Mocha kernel: usb usb6: SerialNumber: 0000:09:00.4
+Jul 01 10:45:49.974801 Mocha kernel: hub 6-0:1.0: USB hub found
+Jul 01 10:45:49.974953 Mocha kernel: usbcore: registered new interface driver usbserial_generic
+Jul 01 10:45:49.974959 Mocha kernel: usbserial: USB Serial support registered for generic
+Jul 01 10:45:49.975724 Mocha kernel: usbcore: registered new interface driver usbhid
+Jul 01 10:45:49.975731 Mocha kernel: usbhid: USB HID core driver
+Jul 01 10:45:49.975785 Mocha kernel: microcode: Current revision: 0x0a500014
+Jul 01 10:45:49.975888 Mocha kernel: integrity: Loaded X.509 cert 'ASUSTeK MotherBoard SW Key Certificate: da83b990422ebc8c441f8d8b039a65a2'
+Jul 01 10:45:49.975901 Mocha kernel: integrity: Loaded X.509 cert 'ASUSTeK Notebook SW Key Certificate: b8e581e4df77a5bb4282d5ccfc00c071'
+Jul 01 10:45:49.976147 Mocha kernel: usb 1-1: new full-speed USB device number 2 using xhci_hcd
+Jul 01 10:45:49.976291 Mocha kernel: usb 3-1: new full-speed USB device number 2 using xhci_hcd
+Jul 01 10:45:49.976437 Mocha kernel: usb 6-1: new SuperSpeed USB device number 2 using xhci_hcd
+Jul 01 10:45:49.976553 Mocha kernel: usb 6-1: New USB device found, idVendor=152d, idProduct=0583, bcdDevice=32.02
+Jul 01 10:45:49.976669 Mocha kernel: usb 6-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jul 01 10:45:49.976781 Mocha kernel: usb 6-1: Product: JMicron 
+Jul 01 10:45:49.976895 Mocha kernel: usb 6-1: Manufacturer: JMicron 
+Jul 01 10:45:49.977010 Mocha kernel: usb 6-1: SerialNumber: DD564198838A1
+Jul 01 10:45:49.977126 Mocha kernel: usb 3-1: New USB device found, idVendor=2357, idProduct=0604, bcdDevice= 2.00
+Jul 01 10:45:49.977242 Mocha kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jul 01 10:45:49.977353 Mocha kernel: usb 3-1: Product: TP-Link UB5A Adapter
+Jul 01 10:45:49.977464 Mocha kernel: usb 3-1: Manufacturer:  
+Jul 01 10:45:49.977574 Mocha kernel: usb 3-1: SerialNumber: E848B8C84000
+Jul 01 10:45:49.977739 Mocha kernel: usb 1-1: not running at top speed; connect to a high speed hub
+Jul 01 10:45:49.977863 Mocha kernel: usb 1-1: New USB device found, idVendor=046d, idProduct=c08b, bcdDevice=74.00
+Jul 01 10:45:49.977977 Mocha kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jul 01 10:45:49.978088 Mocha kernel: usb 1-1: Product: G502 HERO Gaming Mouse
+Jul 01 10:45:49.978198 Mocha kernel: usb 1-1: Manufacturer: Logitech
+Jul 01 10:45:49.978308 Mocha kernel: usb 1-1: SerialNumber: 205F38E33245
+Jul 01 10:45:49.978317 Mocha kernel: input: Logitech G502 HERO Gaming Mouse as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-1/1-1:1.0/0003:046D:C08B.0001/input/input2
+Jul 01 10:45:49.978474 Mocha kernel: hid-generic 0003:046D:C08B.0001: input,hidraw0: USB HID v1.11 Mouse [Logitech G502 HERO Gaming Mouse] on usb-0000:02:00.0-1/input0
+Jul 01 10:45:49.978492 Mocha kernel: input: Logitech G502 HERO Gaming Mouse Keyboard as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-1/1-1:1.1/0003:046D:C08B.0002/input/input3
+Jul 01 10:45:49.979806 Mocha kernel: hid-generic 0003:046D:C08B.0002: input,hiddev96,hidraw1: USB HID v1.11 Keyboard [Logitech G502 HERO Gaming Mouse] on usb-0000:02:00.0-1/input1
+Jul 01 10:45:49.979952 Mocha kernel: usb 1-5: new low-speed USB device number 3 using xhci_hcd
+Jul 01 10:45:49.980097 Mocha kernel: usb 1-5: New USB device found, idVendor=04d9, idProduct=1836, bcdDevice= 0.01
+Jul 01 10:45:49.980208 Mocha kernel: usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Jul 01 10:45:49.980319 Mocha kernel: usb 1-5: Product: Mechanical Keyboard
+Jul 01 10:45:49.980430 Mocha kernel: usb 1-5: Manufacturer: LogoTech
+Jul 01 10:45:49.980439 Mocha kernel: input: LogoTech Mechanical Keyboard as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-5/1-5:1.0/0003:04D9:1836.0003/input/input6
+Jul 01 10:45:49.980593 Mocha kernel: hid-generic 0003:04D9:1836.0003: input,hidraw2: USB HID v1.11 Keyboard [LogoTech Mechanical Keyboard] on usb-0000:02:00.0-5/input0
+Jul 01 10:45:49.980603 Mocha kernel: input: LogoTech Mechanical Keyboard Consumer Control as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-5/1-5:1.1/0003:04D9:1836.0004/input/input7
+Jul 01 10:45:49.980610 Mocha kernel: input: LogoTech Mechanical Keyboard System Control as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-5/1-5:1.1/0003:04D9:1836.0004/input/input8
+Jul 01 10:45:49.980616 Mocha kernel: input: LogoTech Mechanical Keyboard as /devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-5/1-5:1.1/0003:04D9:1836.0004/input/input9
+Jul 01 10:45:49.980769 Mocha kernel: hid-generic 0003:04D9:1836.0004: input,hidraw3: USB HID v1.11 Keyboard [LogoTech Mechanical Keyboard] on usb-0000:02:00.0-5/input1
+Jul 01 10:45:49.982209 Mocha kernel: usb 6-1: UAS is ignored for this device, using usb-storage instead
+Jul 01 10:45:49.982356 Mocha kernel: usb-storage 6-1:1.0: USB Mass Storage device detected
+Jul 01 10:45:49.982501 Mocha kernel: usb-storage 6-1:1.0: Quirks match for vid 152d pid 0583: 800000
+Jul 01 10:45:49.982649 Mocha kernel: scsi host6: usb-storage 6-1:1.0
+Jul 01 10:45:49.982658 Mocha kernel: usbcore: registered new interface driver usb-storage
+Jul 01 10:45:49.982667 Mocha kernel: usbcore: registered new interface driver uas
+Jul 01 10:45:49.984108 Mocha systemd[1]: systemd 261.1-1-arch running in system mode (+PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +LIBARCHIVE)
+Jul 01 10:45:49.984377 Mocha systemd[1]: TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.984385 Mocha systemd[1]: Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki
+Jul 01 10:45:49.984520 Mocha systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+Jul 01 10:45:49.984544 Mocha systemd[1]: TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.984552 Mocha systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.984566 Mocha systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.984572 Mocha systemd[1]: TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Jul 01 10:45:49.984579 Mocha systemd[1]: TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.984725 Mocha systemd[1]: TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:49.999698 Mocha kernel: nvidia: loading out-of-tree module taints kernel.
+Jul 01 10:45:50.108666 Mocha kernel: nvidia-nvlink: Nvlink Core is being initialized, major device number 237
+Jul 01 10:45:50.111682 Mocha kernel: nvidia 0000:01:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+Jul 01 10:45:50.124650 Mocha kernel: NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  610.43.02  Release Build  (notroot@)  Tue Jun 23 21:58:06 UTC 2026
+Jul 01 10:45:50.176919 Mocha systemd-modules-load[384]: Inserted module 'nvidia_uvm'
+Jul 01 10:45:51.142859 Mocha mtp-probe[518]: checking bus 6, device 2: "/sys/devices/pci0000:00/0000:00:08.1/0000:09:00.4/usb6/6-1"
+Jul 01 10:45:51.142859 Mocha mtp-probe[515]: checking bus 1, device 2: "/sys/devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-1"
+Jul 01 10:45:51.142860 Mocha mtp-probe[516]: checking bus 1, device 3: "/sys/devices/pci0000:00/0000:00:02.1/0000:02:00.0/usb1/1-5"
+Jul 01 10:45:51.203655 Mocha kernel: input: PC Speaker as /devices/platform/pcspkr/input/input10
+Jul 01 10:45:51.268834 Mocha kernel: asus_wmi: failed to register LPS0 sleep handler in asus-wmi
+Jul 01 10:45:51.268857 Mocha kernel: asus_wmi: Initialization: 0x0
+Jul 01 10:45:51.268872 Mocha kernel: asus_wmi: BIOS WMI version: 0.9
+Jul 01 10:45:51.268889 Mocha kernel: asus_wmi: SFUN value: 0x0
+Jul 01 10:45:51.268911 Mocha kernel: eeepc-wmi eeepc-wmi: Detected ASUSWMI, use DCTS
+Jul 01 10:45:51.272658 Mocha kernel: input: Eee PC WMI hotkeys as /devices/platform/eeepc-wmi/input/input11
+Jul 01 10:45:51.274652 Mocha kernel: nvidia-modeset: Loading NVIDIA UNIX Open Kernel Mode Setting Driver for x86_64  610.43.02  Release Build  (notroot@)  Tue Jun 23 21:58:03 UTC 2026
+Jul 01 10:45:51.302655 Mocha kernel: [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+Jul 01 10:45:51.318188 Mocha kernel: usbcore: registered new interface driver btusb
+Jul 01 10:45:51.348658 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input18
+Jul 01 10:45:51.348728 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input19
+Jul 01 10:45:51.348746 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input20
+Jul 01 10:45:51.348763 Mocha kernel: input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0/input21
+Jul 01 10:45:52.868541 Mocha systemd[1]: Condition check resulted in /dev/tpmrm0 being skipped.
+Jul 01 10:45:52.868632 Mocha systemd[1]: Reached target Trusted Platform Module.
+Jul 01 10:45:52.870023 Mocha systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+Jul 01 10:45:52.870080 Mocha systemd[1]: TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:52.870096 Mocha systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:52.870728 Mocha systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:52.870741 Mocha systemd[1]: TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Jul 01 10:45:52.870752 Mocha systemd[1]: TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:52.870783 Mocha systemd[1]: TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:52.944817 Mocha kernel: [drm] Initialized nvidia-drm 0.0.0 for 0000:01:00.0 on minor 1
+Jul 01 10:45:52.955695 Mocha kernel: nvidia 0000:01:00.0: vgaarb: deactivate vga console
+Jul 01 10:45:52.961858 Mocha systemd[1]: Started Weekly Mocha repo maintenance for kernel and NVIDIA packages.
+Jul 01 10:45:52.968099 Mocha systemd[1]: TPM PCR Barrier (Initialization) skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:53.017655 Mocha kernel: fbcon: nvidia-drmdrmfb (fb0) is primary device
+Jul 01 10:45:53.075653 Mocha kernel: nvidia 0000:01:00.0: [drm] fb0: nvidia-drmdrmfb frame buffer device
+Jul 01 10:45:53.087495 Mocha systemd[1]: Starting NVIDIA Persistence Daemon...
+Jul 01 10:45:53.094604 Mocha systemd[1]: TPM PCR Barrier (User) skipped, unmet condition check ConditionSecurity=measured-os
+Jul 01 10:45:53.094713 Mocha nvidia-persistenced[691]: Started (691)
+Jul 01 10:45:53.100323 Mocha systemd[1]: Started NVIDIA Persistence Daemon.
+Jul 01 10:45:53.121921 Mocha NetworkManager[683]: <info>  [1782913553.1219] manager[0x55f77c3a8590]: monitoring kernel firmware directory '/lib/firmware'.
+Jul 01 10:45:53.616283 Mocha systemd[1]: Starting Mocha NVIDIA maximum power policy...
+Jul 01 10:45:53.938871 Mocha systemd[1]: Finished Mocha NVIDIA maximum power policy.
+Jul 01 10:45:55.065639 Mocha wireplumber[945]: s-monitors: PipeWire's BlueZ MIDI SPA missing or broken. Bluetooth not supported.
+Jul 01 10:45:55.091674 Mocha systemd[1]: Startup finished in 8.867s (firmware) + 4.391s (loader) + 3.247s (kernel) + 5.851s (userspace) = 22.357s.
+Jul 01 10:46:00.849557 Mocha wireplumber[1129]: s-monitors: PipeWire's BlueZ MIDI SPA missing or broken. Bluetooth not supported.
+Jul 01 10:46:00.996936 Mocha kwin_wayland_wrapper[1162]: > Warning:          Unsupported maximum keycode 709, clipping.
+Jul 01 10:46:08.305478 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+Jul 01 10:46:08.357854 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+Jul 01 10:46:08.584885 Mocha blueman-applet[2019]: blueman-applet 10.46.08 WARNING  PluginManager:93 load_plugin: Failed to start plugin GameControllerWakelock: Only X11 platform is supported

@@ -1,0 +1,16 @@
+# Mocha — GameMode agressivo + OC leve NVIDIA
+# Corrigido em: 20260630-101248
+# Rollback: /media/mochafast/MochaArch/auditorias/corrige-gamemode-oc-root-helper-20260630-101248/rollback-corrige-gamemode-oc-root-helper.sh
+
+[general]
+reaper_freq=5
+desiredgov=performance
+desiredprof=performance
+softrealtime=auto
+renice=10
+ioprio=0
+inhibit_screensaver=1
+
+[custom]
+start=/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
+end=/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh

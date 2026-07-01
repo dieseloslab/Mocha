@@ -1,0 +1,17 @@
+Data: 2026-06-30T19:55:41-03:00
+Kernel ainda em uso antes do reboot: 7.1.2-3-cachyos
+
+Pacotes críticos depois:
+linux 7.0.14.arch1-1
+linux-headers 7.0.14.arch1-1
+linux-cachyos 7.1.1-2
+linux-cachyos-headers 7.1.1-2
+linux-cachyos-nvidia-open 7.1.1-2
+nvidia-utils 610.43.02-3
+lib32-nvidia-utils 610.43.02-1
+nvidia-settings 610.43.02-1
+opencl-nvidia 610.43.02-3
+lib32-opencl-nvidia 610.43.02-1
+
+IgnorePkg:
+11:IgnorePkg = egl-wayland lib32-nvidia-utils libxnvctrl linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-settings nvidia-utils opencl-nvidia

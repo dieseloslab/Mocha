@@ -1,0 +1,67 @@
+============================================================
+ Mocha — investigação de mensagem 'não suportado no boot'
+============================================================
+Data: 2026-07-01T10:47:53-03:00
+
+Kernel:
+Linux Mocha 7.1.1-2-cachyos #1 SMP PREEMPT_DYNAMIC Tue, 23 Jun 2026 21:38:08 +0000 x86_64 GNU/Linux
+
+Cmdline:
+BOOT_IMAGE=/boot/vmlinuz-linux-cachyos root=UUID=5df32761-bd78-4c2c-9ab5-73c19dd75c3e rw zswap.enabled=0
+
+CPU:
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           48 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  16
+On-line CPU(s) list:                     0-15
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 7 5700G with Radeon Graphics
+CPU family:                              25
+Model:                                   80
+Thread(s) per core:                      2
+Core(s) per socket:                      8
+Socket(s):                               1
+Stepping:                                0
+Microcode version:                       0xa500014
+Frequency boost:                         enabled
+CPU(s) scaling MHz:                      83%
+CPU max MHz:                             4673.8232
+CPU min MHz:                             422.3340
+BogoMIPS:                                7600.35
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca fsrm debug_swap
+Virtualization:                          AMD-V
+L1d cache:                               256 KiB (8 instances)
+L1i cache:                               256 KiB (8 instances)
+L2 cache:                                4 MiB (8 instances)
+L3 cache:                                16 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-15
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+
+GPU:
+GPU 0: NVIDIA GeForce RTX 5060 Ti (UUID: GPU-733d78c3-b037-1472-ec6b-944f533f70c0)
+
+Boots disponíveis:
+IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
+-13 664c134d3f464f45b4ab39ad4efbe576 Mon 2026-06-29 14:26:42 -03 Mon 2026-06-29 14:27:11 -03
+-12 8b86c7f7ca2d497fb4320238b0a2efdc Mon 2026-06-29 17:43:53 -03 Mon 2026-06-29 17:52:32 -03
+-11 6cd5a515a4f54421bb166a50e5fbbaee Mon 2026-06-29 17:53:59 -03 Mon 2026-06-29 22:21:51 -03
+-10 493ecc8aada64aaea22a6b1f295f1302 Mon 2026-06-29 22:21:51 -03 Tue 2026-06-30 00:35:13 -03
+ -9 7994fcb3e41446199b0f24e4056d5824 Tue 2026-06-30 00:35:34 -03 Tue 2026-06-30 04:06:07 -03
+ -8 190feb2504c04cf29d547e20805678f1 Tue 2026-06-30 09:47:05 -03 Tue 2026-06-30 17:47:19 -03
+ -7 68995326aa504b70a5e74333ed9989fb Tue 2026-06-30 17:50:02 -03 Tue 2026-06-30 19:21:06 -03
+ -6 a9ef4f25090a4efc974412cdbdefca4e Tue 2026-06-30 19:21:28 -03 Tue 2026-06-30 20:55:24 -03
+ -5 a86ce449b09f4f70977e47bd845c85c0 Tue 2026-06-30 20:55:43 -03 Tue 2026-06-30 21:19:04 -03
+ -4 fc006abb2a354c7f941b973a1b611c5a Tue 2026-06-30 21:19:32 -03 Wed 2026-07-01 01:08:30 -03
+ -3 98462ee1749c429aa2764784d4c9b88e Wed 2026-07-01 09:00:02 -03 Wed 2026-07-01 09:29:36 -03
+ -2 7c8fdab0503442df9f3c280f404dcfdf Wed 2026-07-01 09:29:58 -03 Wed 2026-07-01 10:14:28 -03
+ -1 90aec9d9e6c84adeb3c5121c6517e4db Wed 2026-07-01 10:14:48 -03 Wed 2026-07-01 10:45:30 -03
+  0 cc4285ccd0a34b4b9bd129f8b72ebfeb Wed 2026-07-01 10:45:49 -03 Wed 2026-07-01 10:47:53 -03

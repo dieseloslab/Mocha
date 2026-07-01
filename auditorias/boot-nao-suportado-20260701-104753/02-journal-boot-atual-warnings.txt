@@ -1,0 +1,305 @@
+Jul 01 10:45:49.936250 Mocha kernel: virt/tdx: TDX not supported by the host platform
+Jul 01 10:45:49.982209 Mocha kernel: usb 6-1: UAS is ignored for this device, using usb-storage instead
+Jul 01 10:45:49.999698 Mocha kernel: nvidia: loading out-of-tree module taints kernel.
+Jul 01 10:45:50.111649 Mocha kernel: 
+Jul 01 10:45:50.124650 Mocha kernel: NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  610.43.02  Release Build  (notroot@)  Tue Jun 23 21:58:06 UTC 2026
+Jul 01 10:45:51.268834 Mocha kernel: asus_wmi: failed to register LPS0 sleep handler in asus-wmi
+Jul 01 10:45:53.130582 Mocha bluetoothd[686]: Failed to set default system config for hci0
+Jul 01 10:45:53.549801 Mocha dbus-broker-launch[679]: Activation request for 'org.freedesktop.home1' failed: The systemd unit 'dbus-org.freedesktop.home1.service' could not be found.
+Jul 01 10:45:54.568597 Mocha sddm-helper-start-wayland[905]: "Accepting client connections on sockets: QList(\"wayland-0\")\n"
+Jul 01 10:45:54.591225 Mocha dbus-broker-launch[926]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Jul 01 10:45:54.594566 Mocha dbus-broker-launch[926]: Service file '/usr/share//dbus-1/services/org.kde.kscreen.service' is not named after the D-Bus name 'org.kde.KScreen'.
+Jul 01 10:45:54.595124 Mocha dbus-broker-launch[926]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Jul 01 10:45:54.674673 Mocha sddm-helper-start-wayland[905]: "kwin_xkbcommon: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:13:28: this compose sequence already exists; overriding\nkwin_xkbcommon: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:14:28: this compose sequence already exists; overriding\nkwin_xkbcommon: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:16:34: this compose sequence already exists; overriding\nkwin_xkbcommon: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:17:34: this compose sequence already exists; overriding\nkwin_xkbcommon: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:19:39: a sequence already exists which is a prefix of this sequence; overriding\n"
+Jul 01 10:45:55.065853 Mocha wireplumber[945]: pw.resource: can't create node: Arquivo ou diretório inexistente
+Jul 01 10:45:55.065859 Mocha wireplumber[945]: wp-node: failed to create node from factory 'spa-node-factory'
+Jul 01 10:45:55.145165 Mocha sddm-greeter-qt6[925]: QObject::installEventFilter(): Cannot filter events for objects in a different thread.
+Jul 01 10:45:55.432696 Mocha sddm-greeter-qt6[925]: QQuickView(0x55ecf15517c0) already has a shell integration. Call QWindow::close() first and show it again.
+Jul 01 10:45:56.031538 Mocha dbus-broker-launch[679]: Activation request for 'org.freedesktop.resolve1' failed: The systemd unit 'dbus-org.freedesktop.resolve1.service' could not be found.
+Jul 01 10:45:59.473913 Mocha sddm-greeter-qt6[925]: file:///usr/share/sddm/themes/mocha/Main.qml:241:17 Parameter "username" is not declared. Injection of parameters into signal handlers is deprecated. Use JavaScript functions with formal parameters instead.
+Jul 01 10:45:59.665029 Mocha sddm-helper-start-wayland[905]: "kwin_scene_opengl: Could not delete render time query because no context is current\n"
+Jul 01 10:45:59.939931 Mocha dbus-broker-launch[1060]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Jul 01 10:45:59.940013 Mocha dbus-broker-launch[1060]: Service file '/usr/share//dbus-1/services/org.kde.kscreen.service' is not named after the D-Bus name 'org.kde.KScreen'.
+Jul 01 10:45:59.940043 Mocha dbus-broker-launch[1060]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Jul 01 10:46:00.203654 Mocha kernel: block nvme0n1: No UUID available providing old NGUID
+Jul 01 10:46:00.580305 Mocha kwin_wayland[1077]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:13:28: this compose sequence already exists; overriding
+Jul 01 10:46:00.580311 Mocha kwin_wayland[1077]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:14:28: this compose sequence already exists; overriding
+Jul 01 10:46:00.580316 Mocha kwin_wayland[1077]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:16:34: this compose sequence already exists; overriding
+Jul 01 10:46:00.580320 Mocha kwin_wayland[1077]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:17:34: this compose sequence already exists; overriding
+Jul 01 10:46:00.580325 Mocha kwin_wayland[1077]: XKB: /usr/share/X11/locale/pt_BR.UTF-8/Compose:19:39: a sequence already exists which is a prefix of this sequence; overriding
+Jul 01 10:46:00.849603 Mocha wireplumber[1129]: pw.resource: can't create node: Arquivo ou diretório inexistente
+Jul 01 10:46:00.849608 Mocha wireplumber[1129]: wp-node: failed to create node from factory 'spa-node-factory'
+Jul 01 10:46:01.173848 Mocha kded6[1191]: QDBusObjectPath: invalid path "/modules/wpad-detector"
+Jul 01 10:46:01.173857 Mocha kded6[1191]: The kded module name "wpad-detector" is invalid!
+Jul 01 10:46:01.185164 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185174 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185212 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185219 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185243 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185250 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185272 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185279 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185300 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185307 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185328 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185334 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/close.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185355 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185361 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185383 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185389 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185410 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185416 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185437 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185444 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185464 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185470 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185491 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185498 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185522 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185529 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185554 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185560 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185589 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185595 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185618 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185624 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185651 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185658 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185681 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185687 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/maximize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185709 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185715 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185736 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185742 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185762 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185768 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185789 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185795 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185816 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185822 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185845 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svg', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.185851 Mocha kded6[1191]: Cannot open file '/home/hal/.local/share/aurorae/themes/MochaPanelSolidCanonico/minimize.svgz', because: Não existe o arquivo ou pasta
+Jul 01 10:46:01.315005 Mocha systemd[995]: app-org.kde.plasma.bigscreen.inputhandler@a97a4e5d94174454a201a712344481be.service: Failed with result 'exit-code'.
+Jul 01 10:46:01.342387 Mocha kded6[1191]: Failed to connect to Bolt manager DBus interface: 
+Jul 01 10:46:01.352134 Mocha kconf_update[1350]: /usr/share/kconf_update/webenginepart.upd defined Version=5 but Version=6 was expected
+Jul 01 10:46:01.416850 Mocha dbus-broker-launch[679]: Activation request for 'org.freedesktop.ModemManager1' failed: The systemd unit 'dbus-org.freedesktop.ModemManager1.service' could not be found.
+Jul 01 10:46:01.417261 Mocha kded6[1191]: Failed enumerating MM objects: "org.freedesktop.DBus.Error.NameHasNoOwner" 
+                                           "Could not activate remote peer 'org.freedesktop.ModemManager1': activation request failed: unknown unit"
+Jul 01 10:46:01.453110 Mocha plasmashell[1204]: Member visible of the object PlasmaQuick::Dialog overrides a member of the base object. Consider renaming it or adding final or override specifier
+Jul 01 10:46:01.474463 Mocha kded6[1191]: PendingCall Error: "The name is not activatable"
+Jul 01 10:46:01.476999 Mocha kded6[1191]: No object for name "alsa_output.pci-0000_01_00.1.hdmi-stereo.monitor"
+Jul 01 10:46:01.507739 Mocha plasmashell[1204]: Member enabled of the object DeclarativeDropArea overrides a member of the base object. Consider renaming it or adding final or override specifier
+Jul 01 10:46:02.411571 Mocha plasmashell[1204]: Connecting to deprecated signal QDBusConnectionInterface::serviceOwnerChanged(QString,QString,QString)
+Jul 01 10:46:02.716056 Mocha plasmashell[1204]: No object for name "alsa_output.pci-0000_01_00.1.hdmi-stereo.monitor"
+Jul 01 10:46:08.196155 Mocha org_kde_powerdevil[1231]: [  1231] Watching for DPMS state changes unimplemented
+Jul 01 10:46:08.196359 Mocha org_kde_powerdevil[1231]: [  1231][  6.929409] Time since library initialized:   6.929408 seconds
+Jul 01 10:46:08.196361 Mocha org_kde_powerdevil[1231]: [  1231][  6.929412] Extra delay starting dw_start_watch_displays: 0 millisec
+Jul 01 10:46:08.281771 Mocha backlighthelper[2003]: no kernel backlight interface found
+Jul 01 10:46:08.305478 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+Jul 01 10:46:08.305494 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.backlighthelper.brightness failed
+Jul 01 10:46:08.350992 Mocha org_kde_powerdevil[1231]: Handle button events action could not check for screen configuration
+Jul 01 10:46:08.357854 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+Jul 01 10:46:08.405338 Mocha /usr/lib/xdg-desktop-portal[2042]: Choosing gtk.portal for org.freedesktop.impl.portal.Lockdown as a last-resort fallback
+Jul 01 10:46:08.431593 Mocha DiscoverNotifier[2050]: couldn't load "/usr/lib/qt6/plugins/discover-notifier/DiscoverPackageKitNotifier.so" because "Não foi possível carregar a biblioteca /usr/lib/qt6/plugins/discover-notifier/DiscoverPackageKitNotifier.so: libpackagekitqt6.so.2: não é possível abrir arquivo compartilhado: Arquivo ou diretório inexistente"
+Jul 01 10:46:08.454021 Mocha pulseaudio[1172]: Failed to open connection to session manager: None of the authentication protocols specified are supported
+Jul 01 10:46:08.454031 Mocha pulseaudio[1172]: Failed to load module "module-x11-xsmp" (argument: "display=:0 xauthority=/run/user/1000/xauth_LbnklQ session_manager=local/Mocha:@/tmp/.ICE-unix/1189,unix/Mocha:/tmp/.ICE-unix/1189"): initialization failed.
+Jul 01 10:46:08.454724 Mocha systemd[995]: app-pulseaudio@autostart.service: Failed with result 'exit-code'.
+Jul 01 10:46:08.564991 Mocha ksmserver[1189]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.ksmserver'")
+Jul 01 10:46:08.565233 Mocha gmenudbusmenuproxy[1228]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.gmenudbusmenuproxy'")
+Jul 01 10:46:08.565450 Mocha xembedsniproxy[1232]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.xembedsniproxy'")
+Jul 01 10:46:08.566228 Mocha polkit-kde-authentication-agent-1[1230]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Unable to open /proc/1230/root")
+Jul 01 10:46:08.567974 Mocha kded6[1191]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kded6'")
+Jul 01 10:46:08.569506 Mocha org_kde_powerdevil[1231]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.org_kde_powerdevil'")
+Jul 01 10:46:08.569852 Mocha kclockd[2028]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kclockd'")
+Jul 01 10:46:08.571331 Mocha polkit-kde-authentication-agent-1[1230]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Unable to open /proc/1230/root")
+Jul 01 10:46:08.571351 Mocha xdg-desktop-portal-kde[2112]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.571365 Mocha kdeconnectd[1421]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.571583 Mocha kclockd[2028]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kclockd'")
+Jul 01 10:46:08.572272 Mocha kaccess[1229]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.572475 Mocha xembedsniproxy[1232]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.xembedsniproxy'")
+Jul 01 10:46:08.572728 Mocha gmenudbusmenuproxy[1228]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.gmenudbusmenuproxy'")
+Jul 01 10:46:08.573003 Mocha kded6[1191]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kded6'")
+Jul 01 10:46:08.573201 Mocha ksmserver[1189]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.ksmserver'")
+Jul 01 10:46:08.573216 Mocha org_kde_powerdevil[1231]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.573239 Mocha ksecretd[1041]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.573245 Mocha DiscoverNotifier[2050]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.573577 Mocha plasmashell[1204]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Jul 01 10:46:08.660443 Mocha akonadi_control[2128]: Connecting to deprecated signal QDBusConnectionInterface::serviceOwnerChanged(QString,QString,QString)
+Jul 01 10:46:08.662626 Mocha akonadi_control[2128]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.akonadi_control'")
+Jul 01 10:46:08.688782 Mocha akonadiserver[2135]: Connecting to deprecated signal QDBusConnectionInterface::serviceOwnerChanged(QString,QString,QString)
+Jul 01 10:46:08.712239 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_archivemail_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.713707 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_followupreminder_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.715850 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_mailfilter_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.715912 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_mailmerge_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.717789 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_sendlater_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.717846 Mocha akonadi_control[2128]: Reference to unknown agent type "akonadi_unifiedmailbox_agent" in agentsrc, creating a fake entry.
+Jul 01 10:46:08.776347 Mocha akonadi_migration_agent[2150]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.akonadi_migration_agent'")
+Jul 01 10:46:08.780739 Mocha akonadi_maildispatcher_agent[2149]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.akonadi_maildispatcher_agent'")
+Jul 01 10:46:08.790424 Mocha akonadi_newmailnotifier_agent[2151]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.akonadi_newmailnotifier_agent'")
+Jul 01 10:46:08.818914 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.818964 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.818990 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819262 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819351 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819386 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819431 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819458 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819779 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_followupreminder_agent"  has no agent account interface.
+Jul 01 10:46:08.819958 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820014 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820174 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820431 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820457 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820486 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820505 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820535 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820873 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_contacts_resource_0"  has no agent account interface.
+Jul 01 10:46:08.820967 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821203 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821305 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821478 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821500 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821518 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821554 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.821677 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.822022 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_migration_agent"  has no agent account interface.
+Jul 01 10:46:08.822055 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822357 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822386 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822505 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822719 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822746 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822849 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.822949 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.823321 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailfilter_agent"  has no agent account interface.
+Jul 01 10:46:08.823456 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.823671 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.823700 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.823741 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824071 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824105 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824143 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824181 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824634 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.824673 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_archivemail_agent"  has no agent account interface.
+Jul 01 10:46:08.824741 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.824761 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.824857 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825150 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825188 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825239 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825276 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825676 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.825732 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.825780 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildispatcher_agent"  has no agent account interface.
+Jul 01 10:46:08.825888 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.825934 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826084 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826201 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826286 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826330 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826692 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.826745 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.826870 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.826898 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_unifiedmailbox_agent"  has no agent account interface.
+Jul 01 10:46:08.826930 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827183 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827257 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827311 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827338 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827742 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.827849 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.827907 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.827932 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_indexing_agent"  has no agent account interface.
+Jul 01 10:46:08.827950 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828235 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828256 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828377 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828422 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828800 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.828888 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.828924 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.828950 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_sendlater_agent"  has no agent account interface.
+Jul 01 10:46:08.828968 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.829296 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.829318 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.829474 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.829496 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.829834 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.829921 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830002 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830046 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830100 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_mailmerge_agent"  has no agent account interface.
+Jul 01 10:46:08.830366 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830483 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830565 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830690 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.830908 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831073 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831104 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831122 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831143 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_newmailnotifier_agent"  has no agent account interface.
+Jul 01 10:46:08.831328 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831543 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831580 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831720 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.831991 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832156 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832196 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_ical_resource_0"  has no agent account interface.
+Jul 01 10:46:08.832231 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832248 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832530 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832576 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832722 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.832757 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.833028 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833064 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833087 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_birthdays_resource"  has no agent account interface.
+Jul 01 10:46:08.833175 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833210 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833503 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833713 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833856 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.833892 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.834253 Mocha akonadi_control[2128]: Agent instance (agentInstanceAccountId)  "akonadi_maildir_resource_0"  has no agent account interface.
+Jul 01 10:46:08.844236 Mocha kalendarac[2051]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.kalendarac'")
+Jul 01 10:46:08.845022 Mocha kalendarac[2051]: endResetModel called on Akonadi::CalendarModel(0x561e12cffc20, name = "ETM") without calling beginResetModel first
+Jul 01 10:46:08.845031 Mocha kalendarac[2051]: endResetModel called on Akonadi::KColumnFilterProxyModel(0x561e12e88270, name = "Remove columns") without calling beginResetModel first
+Jul 01 10:46:08.845037 Mocha kalendarac[2051]: endResetModel called on Akonadi::CollectionFilterProxyModel(0x561e12e86660, name = "Only show collections") without calling beginResetModel first
+Jul 01 10:46:08.845044 Mocha kalendarac[2051]: endResetModel called on Akonadi::CheckableProxyModel(0x561e12e5ba50, name = "Add checkboxes") without calling beginResetModel first
+Jul 01 10:46:08.845050 Mocha kalendarac[2051]: endResetModel called on KSelectionProxyModel(0x561e12e5cc50, name = "Only show items of selected collection") without calling beginResetModel first
+Jul 01 10:46:08.845057 Mocha kalendarac[2051]: endResetModel called on Akonadi::CalFilterProxyModel(0x561e12e5dc60, name = "KCalendarCore::CalFilter filtering") without calling beginResetModel first
+Jul 01 10:46:08.845062 Mocha kalendarac[2051]: endResetModel called on Akonadi::CalFilterPartStatusProxyModel(0x561e12e5f1e0, name = "PartStatus filtering") without calling beginResetModel first
+Jul 01 10:46:08.845067 Mocha kalendarac[2051]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x561e12e91da0, name = "Show headers") without calling beginResetModel first
+Jul 01 10:46:08.845078 Mocha kalendarac[2051]: endResetModel called on KSelectionProxyModel(0x561e12e5cc50, name = "Only show items of selected collection") without calling beginResetModel first
+Jul 01 10:46:08.845083 Mocha kalendarac[2051]: endResetModel called on Akonadi::CalFilterProxyModel(0x561e12e5dc60, name = "KCalendarCore::CalFilter filtering") without calling beginResetModel first
+Jul 01 10:46:08.845088 Mocha kalendarac[2051]: endResetModel called on Akonadi::CalFilterPartStatusProxyModel(0x561e12e5f1e0, name = "PartStatus filtering") without calling beginResetModel first
+Jul 01 10:46:08.845092 Mocha kalendarac[2051]: endResetModel called on Akonadi::EntityMimeTypeFilterModel(0x561e12e91da0, name = "Show headers") without calling beginResetModel first
+Jul 01 10:46:08.998759 Mocha kactivitymanagerd[1225]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.ActivityManager'")
+Jul 01 10:46:08.999427 Mocha kactivitymanagerd[1225]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.ActivityManager'")
+Jul 01 10:46:28.261134 Mocha accounts-daemon[2320]: Unable to open /etc/tcb: Arquivo ou diretório inexistente
+Jul 01 10:46:28.262700 Mocha accounts-daemon[2320]: couldn't list homed users: GDBus.Error:org.freedesktop.DBus.Error.NameHasNoOwner: Could not activate remote peer 'org.freedesktop.home1': activation request failed: unknown unit
+Jul 01 10:47:01.302239 Mocha drkonqi-coredump-launcher[2353]: Unable to find file for pid 24192 expected at "kcrash-metadata/wine-preloader.6cd5a515a4f54421bb166a50e5fbbaee.24192.ini"
+Jul 01 10:47:01.356737 Mocha drkonqi-coredump-launcher[2357]: Unable to find file for pid 2169 expected at "kcrash-metadata/wine-preloader.493ecc8aada64aaea22a6b1f295f1302.2169.ini"
+Jul 01 10:47:01.410486 Mocha drkonqi-coredump-launcher[2365]: Unable to find file for pid 2946 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.2946.ini"
+Jul 01 10:47:01.464028 Mocha drkonqi-coredump-launcher[2371]: Unable to find file for pid 23474 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.23474.ini"
+Jul 01 10:47:01.515857 Mocha drkonqi-coredump-launcher[2377]: Unable to find file for pid 28094 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.28094.ini"
+Jul 01 10:47:01.575529 Mocha drkonqi-coredump-launcher[2383]: Unable to find file for pid 34876 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.34876.ini"
+Jul 01 10:47:01.631896 Mocha drkonqi-coredump-launcher[2389]: Unable to find file for pid 40160 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.40160.ini"
+Jul 01 10:47:01.687799 Mocha drkonqi-coredump-launcher[2395]: Unable to find file for pid 45163 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.45163.ini"
+Jul 01 10:47:01.741123 Mocha drkonqi-coredump-launcher[2401]: Unable to find file for pid 49097 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.49097.ini"
+Jul 01 10:47:01.793901 Mocha drkonqi-coredump-launcher[2407]: Unable to find file for pid 61950 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.61950.ini"
+Jul 01 10:47:01.847999 Mocha drkonqi-coredump-launcher[2413]: Unable to find file for pid 67888 expected at "kcrash-metadata/wine-preloader.7994fcb3e41446199b0f24e4056d5824.67888.ini"
+Jul 01 10:47:01.903574 Mocha drkonqi-coredump-launcher[2419]: Unable to find file for pid 4184 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.4184.ini"
+Jul 01 10:47:01.957372 Mocha drkonqi-coredump-launcher[2425]: Unable to find file for pid 8149 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.8149.ini"
+Jul 01 10:47:02.012219 Mocha drkonqi-coredump-launcher[2431]: Unable to find file for pid 9772 expected at "kcrash-metadata/wine64-preloader.190feb2504c04cf29d547e20805678f1.9772.ini"
+Jul 01 10:47:02.064840 Mocha drkonqi-coredump-launcher[2437]: Unable to find file for pid 11069 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.11069.ini"
+Jul 01 10:47:02.117758 Mocha drkonqi-coredump-launcher[2443]: Unable to find file for pid 15837 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.15837.ini"
+Jul 01 10:47:02.176293 Mocha drkonqi-coredump-launcher[2449]: Unable to find file for pid 20866 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.20866.ini"
+Jul 01 10:47:02.229920 Mocha drkonqi-coredump-launcher[2456]: Unable to find file for pid 24872 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.24872.ini"
+Jul 01 10:47:02.285296 Mocha drkonqi-coredump-launcher[2462]: Unable to find file for pid 29361 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.29361.ini"
+Jul 01 10:47:02.340522 Mocha drkonqi-coredump-launcher[2468]: Unable to find file for pid 31468 expected at "kcrash-metadata/wine64-preloader.190feb2504c04cf29d547e20805678f1.31468.ini"
+Jul 01 10:47:02.395747 Mocha drkonqi-coredump-launcher[2474]: Unable to find file for pid 33609 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.33609.ini"
+Jul 01 10:47:02.448372 Mocha drkonqi-coredump-launcher[2480]: Unable to find file for pid 39934 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.39934.ini"
+Jul 01 10:47:02.508151 Mocha drkonqi-coredump-launcher[2486]: Unable to find file for pid 90158 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.90158.ini"
+Jul 01 10:47:02.563982 Mocha drkonqi-coredump-launcher[2492]: Unable to find file for pid 92886 expected at "kcrash-metadata/wine-preloader.190feb2504c04cf29d547e20805678f1.92886.ini"

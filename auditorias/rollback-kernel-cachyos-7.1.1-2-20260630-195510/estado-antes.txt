@@ -1,0 +1,24 @@
+Data: 2026-06-30T19:55:10-03:00
+Kernel antes: 7.1.2-3-cachyos
+
+Pacotes críticos antes:
+linux 7.0.14.arch1-1
+linux-headers 7.0.14.arch1-1
+linux-cachyos 7.1.2-3
+linux-cachyos-headers 7.1.2-3
+linux-cachyos-nvidia-open 7.1.2-3
+nvidia-utils 610.43.02-3
+lib32-nvidia-utils 610.43.02-1
+nvidia-settings 610.43.02-1
+opencl-nvidia 610.43.02-3
+lib32-opencl-nvidia 610.43.02-1
+
+NVIDIA antes:
+name, driver_version, pstate, clocks.current.graphics [MHz], clocks.current.memory [MHz], power.draw [W], power.limit [W], temperature.gpu
+NVIDIA GeForce RTX 5060 Ti, 610.43.02, P8, 705 MHz, 810 MHz, 14.68 W, 180.00 W, 38
+
+GameMode antes:
+gamemode is inactive
+
+tuned antes:
+Current active profile: latency-performance

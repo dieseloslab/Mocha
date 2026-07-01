@@ -1,0 +1,44 @@
+============================================================
+ DIAGNÓSTICO CURTO
+============================================================
+
+Arquivos gerados em:
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753
+
+Mensagens exatas encontradas no boot atual:
+------------------------------------------------------------
+Jul 01 10:45:49.936250 Mocha kernel: virt/tdx: TDX not supported by the host platform
+Jul 01 10:45:55.065639 Mocha wireplumber[945]: s-monitors: PipeWire's BlueZ MIDI SPA missing or broken. Bluetooth not supported.
+Jul 01 10:46:00.849557 Mocha wireplumber[1129]: s-monitors: PipeWire's BlueZ MIDI SPA missing or broken. Bluetooth not supported.
+Jul 01 10:46:00.996936 Mocha kwin_wayland_wrapper[1162]: > Warning:          Unsupported maximum keycode 709, clipping.
+Jul 01 10:46:08.305478 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+Jul 01 10:46:08.357854 Mocha org_kde_powerdevil[1231]: org.kde.powerdevil.chargethresholdhelper.getthreshold failed "Charge thresholds are not supported by the kernel for this hardware"
+
+Mensagens exatas encontradas no dmesg:
+------------------------------------------------------------
+Nenhuma ocorrência direta encontrada no dmesg.
+
+Possíveis áreas relacionadas:
+------------------------------------------------------------
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:ACPI
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:ASUS
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:Firmware
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:NVIDIA
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:NVRM
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:NVidia
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:TPM
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:WMI
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:acpi
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:asus
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:firmware
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:iommu
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:microcode
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:nvidia
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:tpm
+/media/mochafast/MochaArch/auditorias/boot-nao-suportado-20260701-104753/03-journal-boot-atual-matches.txt:wmi
+
+Falhas systemd:
+------------------------------------------------------------
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
