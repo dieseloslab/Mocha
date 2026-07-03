@@ -160,3 +160,5 @@ interno/
 # Mocha: artefatos locais de auditoria/build
 auditorias/
 apps/mocha-updater/mocha-updater-build-fix.log
+ativo/logs/*.log
+ativo/quarentena/

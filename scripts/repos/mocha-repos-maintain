@@ -7,7 +7,7 @@ warn() { printf '[AVISO] %s\n' "$*"; }
 fail() { printf '[FALHA] %s\n' "$*"; exit 1; }
 
 PRIMARY="/media/vmstore/mocha-repo"
-SECONDARY="/media/vmstore/MochaRepos"
+SECONDARY="/media/vmstore/MochaArch/repo"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BASE="$PRIMARY"
