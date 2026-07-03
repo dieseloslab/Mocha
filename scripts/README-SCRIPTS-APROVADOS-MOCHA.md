@@ -45,7 +45,7 @@ Regra de segurança: kernel só pode ser instalado se existir no repo-only a tri
 ## Mocha Updater GUI real sem terminal V4 — 20260701-005434
 
 Script canônico:
-- /media/mochafast/MochaArch/scripts/mocha-updater-gui-real-sem-terminal-v4.sh
+- /media/mochafast/MochaArch/scripts/mocha-updater-lqx-dkms-canonico-v2.sh
 
 Função:
 - recompila o Mocha Updater;
@@ -68,7 +68,7 @@ Ações reais:
 ## Mocha Updater layout final V5 — 20260701-005910
 
 Script canônico:
-- /media/mochafast/MochaArch/scripts/mocha-updater-layout-final-v5.sh
+- /media/mochafast/MochaArch/scripts/mocha-updater-lqx-dkms-canonico-v2.sh
 
 Função:
 - remove sidebar que espremia conteúdo;
@@ -84,7 +84,7 @@ Função:
 ## Mocha Updater status de usuário V6 — 20260701-010636
 
 Script canônico:
-- /media/mochafast/MochaArch/scripts/mocha-updater-status-usuario-v6.sh
+- /media/mochafast/MochaArch/scripts/mocha-updater-lqx-dkms-canonico-v2.sh
 
 Função:
 - substitui log cru por status compreensível para usuário final;

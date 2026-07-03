@@ -70,15 +70,15 @@ TXT = {
         "system_check": "Procurar atualizações",
         "system_update": "Atualizar sistema",
         "kernel_check": "Analisar hardware",
-        "kernel_install": "Instalar kernel Mocha estável",
-        "rollback_btn": "Restaurar kernel Mocha estável",
+        "kernel_install": "Instalar kernel Mocha recomendado",
+        "rollback_btn": "Restaurar kernel Mocha recomendado",
         "summary": "Resumo",
         "system_desc": "Atualiza o sistema sem mexer no kernel e no driver NVIDIA. Kernel e driver ficam em uma área separada.",
-        "kernel_desc": "Detecta CPU/GPU e só instala o conjunto kernel/driver quando você pedir explicitamente.",
-        "rollback_desc": "Restaura o conjunto estável do Mocha quando um kernel novo se comportar mal.",
+        "kernel_desc": "Detecta CPU/GPU e instala o conjunto LQX/DKMS somente quando você pedir explicitamente.",
+        "rollback_desc": "Restaura o conjunto recomendado LQX/DKMS do Mocha quando um kernel novo se comportar mal.",
         "about_text": "Mocha Updater usa tema Mocha e fluxo gráfico. O usuário vê cards, listas e botões; logs brutos não aparecem na tela principal.",
         "confirm_title": "Confirmar ação sensível",
-        "confirm_text": "Esta ação mexe em kernel/driver. Use apenas quando quiser trocar ou restaurar o conjunto casado do Mocha.",
+        "confirm_text": "Esta ação mexe em kernel/driver. Use apenas quando quiser instalar ou restaurar o conjunto recomendado LQX/DKMS do Mocha.",
         "auth_note": "A autenticação de administrador usa Polkit/pkexec. Nenhum terminal será aberto.",
         "no_updates": "Sistema em dia",
         "updates_available": "{} disponíveis",
@@ -117,15 +117,15 @@ TXT = {
         "system_check": "Check updates",
         "system_update": "Update system",
         "kernel_check": "Analyze hardware",
-        "kernel_install": "Install stable Mocha kernel",
-        "rollback_btn": "Restore stable Mocha kernel",
+        "kernel_install": "Install recommended Mocha kernel",
+        "rollback_btn": "Restore recommended Mocha kernel",
         "summary": "Summary",
         "system_desc": "Updates the system without changing kernel or NVIDIA driver. Kernel and driver are handled separately.",
-        "kernel_desc": "Detects CPU/GPU and installs the kernel/driver pair only when explicitly requested.",
-        "rollback_desc": "Restores the stable Mocha set when a newer kernel misbehaves.",
+        "kernel_desc": "Detects CPU/GPU and installs the LQX/DKMS pair only when explicitly requested.",
+        "rollback_desc": "Restores the recommended LQX/DKMS Mocha set when a newer kernel misbehaves.",
         "about_text": "Mocha Updater uses Mocha theme and graphical flow. Users see cards, lists and buttons; raw logs are not shown on the main screen.",
         "confirm_title": "Confirm sensitive action",
-        "confirm_text": "This action changes kernel/driver. Use only when you want to change or restore the paired Mocha stack.",
+        "confirm_text": "This action changes kernel/driver. Use only to install or restore the recommended LQX/DKMS Mocha stack.",
         "auth_note": "Administrator authentication uses Polkit/pkexec. No terminal will be opened.",
         "no_updates": "System up to date",
         "updates_available": "{} available",
@@ -164,12 +164,12 @@ TXT = {
         "system_check": "Chercher les mises à jour",
         "system_update": "Mettre à jour le système",
         "kernel_check": "Analyser le matériel",
-        "kernel_install": "Installer le noyau Mocha stable",
-        "rollback_btn": "Restaurer le noyau Mocha stable",
+        "kernel_install": "Installer le noyau Mocha recommandé",
+        "rollback_btn": "Restaurer le noyau Mocha recommandé",
         "summary": "Résumé",
         "system_desc": "Met à jour le système sans changer le noyau ni le pilote NVIDIA.",
-        "kernel_desc": "Détecte CPU/GPU et installe l’ensemble noyau/pilote seulement sur demande explicite.",
-        "rollback_desc": "Restaure l’ensemble stable Mocha si un nouveau noyau pose problème.",
+        "kernel_desc": "Détecte CPU/GPU et installe l’ensemble LQX/DKMS seulement sur demande explicite.",
+        "rollback_desc": "Restaure l’ensemble Mocha recommandé LQX/DKMS si un nouveau noyau pose problème.",
         "about_text": "Mocha Updater utilise le thème Mocha et un flux graphique. Les journaux bruts ne sont pas affichés.",
         "confirm_title": "Confirmer l’action sensible",
         "confirm_text": "Cette action modifie noyau/pilote. À utiliser seulement pour restaurer l’ensemble Mocha.",
@@ -211,15 +211,15 @@ TXT = {
         "system_check": "Buscar actualizaciones",
         "system_update": "Actualizar sistema",
         "kernel_check": "Analizar hardware",
-        "kernel_install": "Instalar kernel Mocha estable",
-        "rollback_btn": "Restaurar kernel Mocha estable",
+        "kernel_install": "Instalar kernel Mocha recomendado",
+        "rollback_btn": "Restaurar kernel Mocha recomendado",
         "summary": "Resumen",
         "system_desc": "Actualiza el sistema sin cambiar kernel ni driver NVIDIA.",
-        "kernel_desc": "Detecta CPU/GPU e instala el conjunto kernel/driver solo con pedido explícito.",
-        "rollback_desc": "Restaura el conjunto estable de Mocha si un kernel nuevo se comporta mal.",
+        "kernel_desc": "Detecta CPU/GPU e instala el conjunto LQX/DKMS solo con pedido explícito.",
+        "rollback_desc": "Restaura el conjunto recomendado LQX/DKMS de Mocha si un kernel nuevo se comporta mal.",
         "about_text": "Mocha Updater usa tema Mocha y flujo gráfico. Los logs brutos no aparecen en la pantalla principal.",
         "confirm_title": "Confirmar acción sensible",
-        "confirm_text": "Esta acción cambia kernel/driver. Úsela solo para restaurar el conjunto Mocha.",
+        "confirm_text": "Esta acción cambia kernel/driver. Úsela solo para instalar o restaurar el conjunto recomendado LQX/DKMS de Mocha.",
         "auth_note": "La autenticación usa Polkit/pkexec. No se abrirá ninguna terminal.",
         "no_updates": "Sistema al día",
         "updates_available": "{} disponibles",
@@ -374,7 +374,7 @@ def parse_kernel(raw):
     gpu = "NVIDIA" if "NVIDIA" in raw else T["gpu_missing"]
     installed = []
     for line in raw.splitlines():
-        if line.startswith(("linux-cachyos ", "linux-cachyos-headers ", "linux-cachyos-nvidia-open ", "nvidia-utils ")):
+        if line.startswith(("linux-lqx ", "linux-lqx-headers ", "nvidia-open-dkms ", "nvidia-utils ", "lib32-nvidia-utils ", "linux-cachyos ", "linux-cachyos-headers ", "linux-cachyos-nvidia-open ")):
             installed.append(line.strip())
 
     return {
@@ -683,7 +683,7 @@ else
 fi
 echo
 echo "Pacotes kernel/NVIDIA:"
-pacman -Q linux linux-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open linux-cachyos-lts linux-cachyos-lts-headers linux-cachyos-lts-nvidia-open nvidia-utils lib32-nvidia-utils opencl-nvidia nvidia-settings 2>/dev/null || true
+pacman -Q linux linux-headers linux-lqx linux-lqx-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings 2>/dev/null || true
 echo
 echo "Atualizações pendentes:"
 if command -v checkupdates >/dev/null 2>&1; then

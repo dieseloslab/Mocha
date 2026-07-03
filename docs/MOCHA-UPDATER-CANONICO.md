@@ -1,84 +1,34 @@
-# Mocha Updater — fluxo canônico
+# Mocha Updater canônico
 
-## Caminho canônico
+Estado canônico atual:
+- Frontend Qt/Python aprovado.
+- Visual com cards, botões e aba separada de Detalhes técnicos.
+- Idiomas suportados: português, inglês, francês e espanhol; outros locales caem para inglês.
+- Atualização geral conserva kernel e driver NVIDIA.
+- Guia Kernel / Driver usa explicitamente o conjunto recomendado LQX/DKMS.
+- Kernel recomendado: linux-lqx.
+- Headers recomendados: linux-lqx-headers.
+- Driver NVIDIA recomendado: nvidia-open-dkms com nvidia-utils e lib32-nvidia-utils.
+- CachyOS permanece como histórico/fallback auditável e não deve ser apresentado como padrão estável.
 
-O Mocha Updater vive no projeto público em:
+Caminhos:
+- App fonte: /media/mochafast/MochaArch/apps/mocha-updater
+- Frontend: /media/mochafast/MochaArch/apps/mocha-updater/frontend/mocha-updater-qt.py
+- Backend: /media/mochafast/MochaArch/apps/mocha-updater/scripts/mocha-updater-action-v1.sh
+- Script de validação/manutenção: /media/mochafast/MochaArch/scripts/mocha-updater-lqx-dkms-canonico-v2.sh
+- Executável: /usr/local/bin/mocha-updater
+- Menu Sistema/KDE: /usr/share/applications/mocha-updater.desktop
+- Atalho de teste no Desktop: ~/Desktop/mocha-updater.desktop
 
-    apps/mocha-updater
+Proibições:
+- Não voltar para Rust/egui simples reprovado.
+- Não voltar para kdialog, zenity, whiptail, prompt ou menu textual como interface principal.
+- Não mostrar log bruto na tela principal.
+- Não acoplar scan/limpeza de VMSTORE/FAST no fluxo de update.
+- Não reinstaurar CachyOS como padrão silencioso do Mocha Updater.
 
-Ele é o aplicativo gráfico canônico para:
-
-- atualização geral do sistema;
-- atualização de Flatpaks quando disponíveis;
-- verificação conservadora de mirrors;
-- área separada para kernel/driver de vídeo casados;
-- detecção de CPU/GPU antes de recomendar kernel;
-- evitar conversão indevida do sistema para CachyOS;
-- oferecer rollback/fallback quando kernel ou driver se comportarem mal.
-
-## Regra de interface
-
-A interface principal deve ser orientada a usuário comum:
-
-- cards;
-- listas visuais;
-- botões claros de ação/cancelamento;
-- abas/áreas separadas;
-- nenhum fluxo principal baseado em log bruto.
-
-Logs técnicos podem existir, mas devem ficar em uma área separada de detalhes técnicos.
-
-## Idiomas
-
-O aplicativo deve suportar apenas:
-
-- português;
-- inglês;
-- francês;
-- espanhol.
-
-O idioma segue o locale do sistema quando começar com `pt`, `en`, `fr` ou `es`.
-
-Qualquer outro idioma deve cair automaticamente para inglês.
-
-## Visual
-
-A identidade visual aprovada é mocha escuro/neutro:
-
-- café/mocha escuro;
-- cobre discreto;
-- texto creme suave;
-- evitar laranja/amarelo forte como cor dominante.
-
-## Atalhos
-
-O Mocha Updater deve possuir:
-
-    /usr/share/applications/mocha-updater.desktop
-
-Categoria KDE/menu:
-
-    System;Settings;
-
-Quando aplicável em ambiente de teste, também pode existir um atalho canônico na área de trabalho do usuário.
-
-Atalhos antigos, duplicados, inúteis ou ultrapassados devem ser removidos para evitar confusão.
-
-## Scripts canônicos
-
-Instalação local/teste:
-
-    sudo bash /media/mochafast/MochaArch/scripts/mocha-instala-updater-canonico-v1.sh
-
-Validação:
-
-    bash /media/mochafast/MochaArch/scripts/mocha-testa-updater-canonico-v1.sh
-
-## Commits
-
-Alterações do Mocha Updater devem ser commitadas granularmente:
-
-1. app/interface;
-2. atalhos/instalação;
-3. documentação;
-4. auditorias internas, quando existirem, apenas no repo interno.
+Fluxo:
+- Sistema: update geral com kernel/NVIDIA ignorados.
+- Kernel / Driver: diagnóstico e instalação explícita do conjunto LQX/DKMS.
+- Rollback: reinstala o conjunto recomendado LQX/DKMS.
+- Detalhes técnicos: relatório bruto separado da tela principal.

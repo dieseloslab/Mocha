@@ -3,213 +3,194 @@ set -Eeuo pipefail
 export LC_ALL=C
 
 ACTION="${1:-}"
-GUI_CONFIRMED="${2:-}"
-STAMP="$(date +%Y%m%d-%H%M%S)"
-
-if [ "$(id -u)" -eq 0 ]; then
-  LOGDIR="/var/log/mocha-updater"
-else
-  BASE="${XDG_STATE_HOME:-$HOME/.local/state}"
-  LOGDIR="$BASE/mocha-updater/logs"
-fi
-
-mkdir -p "$LOGDIR"
-LOG="$LOGDIR/${ACTION:-acao-desconhecida}-$STAMP.log"
-
-exec > >(tee -a "$LOG") 2>&1
 
 ok()   { printf '[OK] %s\n' "$*"; }
-warn() { printf '[AVISO] %s\n' "$*"; }
-fail() { printf '[FALHA] %s\n' "$*"; exit 1; }
-
-need_root() {
-  [ "$(id -u)" -eq 0 ] || fail "Esta ação precisa rodar como root."
-}
+info() { printf '[INFO] %s\n' "$*"; }
+warn() { printf '[WARN] %s\n' "$*"; }
+fail() { printf '[ERRO] %s\n' "$*" >&2; exit 1; }
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
+as_root() {
+  if [ "${EUID:-$(id -u)}" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
 print_header() {
-  echo "============================================================"
-  echo " Mocha Updater — $1"
-  echo "============================================================"
-  echo
-  echo "Data: $(date -Is)"
-  echo "Usuário: $(id -un)"
-  echo "Log: $LOG"
-  echo
+  printf '\n===== %s =====\n' "$1"
 }
 
 kernel_ignore_args() {
-  printf '%s\n' \
-    --ignore linux \
-    --ignore linux-headers \
-    --ignore linux-cachyos \
-    --ignore linux-cachyos-headers \
-    --ignore linux-cachyos-nvidia-open \
-    --ignore linux-cachyos-lts \
-    --ignore linux-cachyos-lts-headers \
-    --ignore linux-cachyos-lts-nvidia-open \
-    --ignore nvidia \
-    --ignore nvidia-open \
-    --ignore nvidia-utils \
-    --ignore lib32-nvidia-utils \
-    --ignore opencl-nvidia \
-    --ignore lib32-opencl-nvidia \
-    --ignore nvidia-settings
-}
+  local pkgs=(
+    linux
+    linux-headers
+    linux-lts
+    linux-lts-headers
+    linux-zen
+    linux-zen-headers
+    linux-hardened
+    linux-hardened-headers
+    linux-lqx
+    linux-lqx-headers
+    linux-cachyos
+    linux-cachyos-headers
+    linux-cachyos-nvidia-open
+    linux-cachyos-lts
+    linux-cachyos-lts-headers
+    linux-cachyos-lts-nvidia-open
+    nvidia
+    nvidia-dkms
+    nvidia-open
+    nvidia-open-dkms
+    nvidia-utils
+    lib32-nvidia-utils
+    opencl-nvidia
+    lib32-opencl-nvidia
+    nvidia-settings
+  )
 
-detect_cpu_level() {
-  if /lib64/ld-linux-x86-64.so.2 --help 2>/dev/null | grep -q 'x86-64-v4.*supported'; then
-    echo "x86-64-v4"
-  elif /lib64/ld-linux-x86-64.so.2 --help 2>/dev/null | grep -q 'x86-64-v3.*supported'; then
-    echo "x86-64-v3"
-  elif grep -qm1 ' avx2 ' /proc/cpuinfo 2>/dev/null; then
-    echo "x86-64-v3-provavel"
-  else
-    echo "x86-64-v2-ou-basico"
-  fi
+  local p
+  for p in "${pkgs[@]}"; do
+    printf -- '--ignore\n%s\n' "$p"
+  done
 }
 
 has_nvidia_gpu() {
   lspci -nn 2>/dev/null | grep -Eiq 'nvidia'
 }
 
-confirm_kernel_action() {
-  echo
-  echo "Esta ação mexe em kernel/driver."
-  echo "Ela é separada do update geral para evitar conversão ou troca acidental."
-  echo
+show_pkg_candidate() {
+  local pkg="$1"
+  local repo spec
+  local repos=(
+    mocha-lqx
+    mocha-liquorix
+    mocha-kernel-liquorix
+    mocha-local-lqx
+    mocha
+    core
+    extra
+    multilib
+  )
 
-  if [ "${GUI_CONFIRMED:-}" = "--gui-confirmed" ]; then
-    ok "Confirmação recebida pela interface gráfica"
+  for repo in "${repos[@]}"; do
+    spec="${repo}/${pkg}"
+    if pacman -Si "$spec" >/dev/null 2>&1; then
+      pacman -Si "$spec" 2>/dev/null | awk -F': ' '/^(Repository|Name|Version|Architecture)/ {print}'
+      return 0
+    fi
+  done
+
+  if pacman -Si "$pkg" >/dev/null 2>&1; then
+    pacman -Si "$pkg" 2>/dev/null | awk -F': ' '/^(Repository|Name|Version|Architecture)/ {print}'
     return 0
   fi
 
-  printf "Digite SIM para continuar: "
-  read -r ans
-  [ "$ans" = "SIM" ] || fail "Cancelado pelo usuário."
+  warn "Pacote nao encontrado nos repos configurados: $pkg"
+  return 1
 }
 
-regen_boot() {
-  echo
-  echo "Regenerando initramfs/GRUB quando disponível..."
-  if have mkinitcpio; then
-    mkinitcpio -P || fail "mkinitcpio falhou"
+pkg_spec() {
+  local pkg="$1"
+  local repo spec
+  local repos=(
+    mocha-lqx
+    mocha-liquorix
+    mocha-kernel-liquorix
+    mocha-local-lqx
+    mocha
+    core
+    extra
+    multilib
+  )
+
+  for repo in "${repos[@]}"; do
+    spec="${repo}/${pkg}"
+    if pacman -Si "$spec" >/dev/null 2>&1; then
+      printf '%s\n' "$spec"
+      return 0
+    fi
+  done
+
+  if pacman -Si "$pkg" >/dev/null 2>&1; then
+    printf '%s\n' "$pkg"
+    return 0
   fi
-  if have grub-mkconfig && [ -d /boot/grub ]; then
-    grub-mkconfig -o /boot/grub/grub.cfg || fail "grub-mkconfig falhou"
-  fi
-  ok "Boot regenerado"
+
+  return 1
 }
 
-install_mocha_stable_core() {
-  CPU_LEVEL="$(detect_cpu_level)"
-  echo "CPU detectada: $CPU_LEVEL"
-
-  case "$CPU_LEVEL" in
-    x86-64-v3*|x86-64-v4*) ok "CPU compatível com pacote v3/provável" ;;
-    *) fail "CPU não parece compatível com x86-64-v3. Abortando para segurança." ;;
-  esac
-
-  echo
-  echo "Backup pré-transação:"
-  BK="/var/backups/mocha-updater/kernel-driver-pre-$STAMP"
-  mkdir -p "$BK"
-  pacman -Q > "$BK/pacman-Q.txt"
-  pacman -Qqe > "$BK/pacman-Qqe.txt"
-  cp -a /boot "$BK/boot-copy" 2>/dev/null || warn "Não foi possível copiar /boot inteiro"
-  ok "Backup salvo em $BK"
-
-  echo
-  echo "Validando repo Mocha..."
-  pacman -Si mocha/linux-cachyos mocha/linux-cachyos-headers >/dev/null || fail "Repo/pacotes Mocha linux-cachyos indisponíveis"
-
-  PKGS=(mocha/linux-cachyos mocha/linux-cachyos-headers)
-
-  if has_nvidia_gpu; then
-    echo "GPU NVIDIA detectada: instalando driver casado do kernel Mocha."
-    pacman -Si mocha/linux-cachyos-nvidia-open >/dev/null || fail "mocha/linux-cachyos-nvidia-open indisponível"
-    PKGS+=(mocha/linux-cachyos-nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings opencl-nvidia lib32-opencl-nvidia egl-wayland libxnvctrl)
-  else
-    warn "GPU NVIDIA não detectada. Instalando apenas kernel/headers."
+detect_x86_64_levels() {
+  if [ -x /lib/ld-linux-x86-64.so.2 ]; then
+    /lib/ld-linux-x86-64.so.2 --help 2>/dev/null | grep -E 'x86-64-v[234].*supported' || true
   fi
-
-  echo
-  echo "Instalando:"
-  printf '  %s\n' "${PKGS[@]}"
-  echo
-
-  pacman -S --needed --noconfirm "${PKGS[@]}" || fail "Instalação kernel/driver falhou"
-
-  regen_boot
-
-  echo
-  echo "Estado final:"
-  uname -r || true
-  pacman -Q linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-utils 2>/dev/null || true
-  timeout 8 nvidia-smi 2>/dev/null || true
-
-  ok "Kernel/driver Mocha estável aplicado. Reinicie antes de validar FPS."
 }
 
 action_system_check() {
-  print_header "verificação geral sem alterações"
+  print_header "diagnostico geral"
 
   echo "Sistema:"
-  uname -a || true
-  cat /etc/os-release 2>/dev/null || true
-  echo
+  printf '  Host: %s\n' "$(hostnamectl --static 2>/dev/null || hostname)"
+  printf '  Kernel atual: %s\n' "$(uname -r)"
+  printf '  Data: %s\n' "$(date '+%Y-%m-%d %H:%M:%S %z')"
 
+  echo
+  echo "CPU:"
+  lscpu 2>/dev/null | grep -E '^(Model name|Architecture|CPU\(s\)|Vendor ID)' || true
+
+  echo
+  echo "GPU:"
+  lspci -nn 2>/dev/null | grep -Ei 'vga|3d|display|nvidia|amd|intel' || true
+
+  echo
   echo "Pacman lock:"
   if [ -e /var/lib/pacman/db.lck ]; then
     ls -l /var/lib/pacman/db.lck
-    warn "Há lock do pacman. Não rode update enquanto existir."
+    warn "Ha lock do pacman. Nao rode update enquanto existir."
   else
     ok "Sem lock do pacman"
   fi
-  echo
 
-  echo "Pacotes instalados relevantes:"
-  pacman -Q linux linux-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open linux-cachyos-lts linux-cachyos-lts-headers linux-cachyos-lts-nvidia-open nvidia-utils lib32-nvidia-utils opencl-nvidia nvidia-settings 2>/dev/null || true
   echo
+  echo "Pacotes kernel/NVIDIA:"
+  pacman -Q \
+    linux linux-headers \
+    linux-lqx linux-lqx-headers \
+    linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open \
+    nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings \
+    2>/dev/null || true
 
-  echo "Atualizações pendentes:"
+  echo
+  echo "Atualizacoes pacman:"
   if have checkupdates; then
-    checkupdates || true
+    checkupdates 2>/dev/null || true
   else
-    pacman -Qu || true
+    pacman -Qu 2>/dev/null || true
   fi
-  echo
 
+  echo
   echo "Flatpak:"
   if have flatpak; then
     flatpak remote-ls --updates 2>/dev/null || true
   else
     warn "flatpak ausente"
   fi
-  echo
 
+  echo
   echo "NVIDIA:"
-  timeout 8 nvidia-smi 2>/dev/null || warn "nvidia-smi indisponível"
-  echo
-
-  echo "Kernel atual:"
-  uname -r
-  echo
-
-  ok "Verificação concluída sem alterar o sistema"
+  timeout 8 nvidia-smi 2>/dev/null || warn "nvidia-smi indisponivel"
 }
 
 action_system_update() {
-  need_root
   print_header "update geral conservador"
-
-  echo "Update geral NÃO troca kernel/driver NVIDIA."
-  echo "Pacotes de kernel/driver serão ignorados e tratados na guia própria."
-  echo
+  echo "Update geral NAO troca kernel/driver NVIDIA."
+  echo "Kernel e driver ficam bloqueados aqui e sao tratados na guia Kernel / Driver."
 
   mapfile -t IGN < <(kernel_ignore_args)
-  pacman -Syu --needed "${IGN[@]}" || fail "pacman -Syu conservador falhou"
+  as_root pacman -Syu --needed --noconfirm "${IGN[@]}" || fail "pacman -Syu conservador falhou"
 
   if have flatpak; then
     flatpak update -y || fail "flatpak update falhou"
@@ -217,83 +198,177 @@ action_system_update() {
     warn "flatpak ausente"
   fi
 
-  ok "Update geral conservador concluído"
+  ok "Update geral concluido sem trocar kernel/driver"
 }
 
 action_kernel_check() {
-  print_header "diagnóstico kernel/driver"
+  print_header "diagnostico kernel/driver"
 
+  echo "Kernel atual:"
+  uname -r
+
+  echo
   echo "CPU:"
-  lscpu 2>/dev/null || true
-  echo
-  echo "Nível detectado:"
-  detect_cpu_level
-  echo
+  lscpu 2>/dev/null | grep -E '^(Model name|Architecture|CPU\(s\)|Vendor ID)' || true
 
+  echo
+  echo "Niveis x86-64 suportados:"
+  detect_x86_64_levels || true
+
+  echo
   echo "GPU:"
-  lspci -nnk 2>/dev/null | grep -EA4 -i 'vga|3d|display' || true
-  echo
+  lspci -nn 2>/dev/null | grep -Ei 'vga|3d|display|nvidia|amd|intel' || true
 
+  echo
   echo "NVIDIA runtime:"
   timeout 8 nvidia-smi 2>/dev/null || true
-  echo
 
+  echo
   echo "Pacotes instalados:"
-  pacman -Q linux linux-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open linux-cachyos-lts linux-cachyos-lts-headers linux-cachyos-lts-nvidia-open nvidia-utils lib32-nvidia-utils opencl-nvidia nvidia-settings 2>/dev/null || true
-  echo
+  pacman -Q \
+    linux linux-headers \
+    linux-lqx linux-lqx-headers \
+    linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open \
+    nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings \
+    2>/dev/null || true
 
-  echo "Candidatos do repo Mocha:"
-  pacman -Si mocha/linux-cachyos mocha/linux-cachyos-headers mocha/linux-cachyos-nvidia-open 2>/dev/null | grep -E '^(Repository|Name|Version|Architecture)' || warn "Pacotes mocha/linux-cachyos não encontrados via pacman -Si"
   echo
+  echo "Candidatos recomendados LQX/DKMS:"
+  show_pkg_candidate linux-lqx || true
+  show_pkg_candidate linux-lqx-headers || true
+  if has_nvidia_gpu; then
+    show_pkg_candidate nvidia-open-dkms || true
+    show_pkg_candidate nvidia-utils || true
+    show_pkg_candidate lib32-nvidia-utils || true
+  fi
 
-  echo "Módulos carregados:"
+  echo
+  echo "Modulos NVIDIA/Nouveau:"
   lsmod | grep -E '^nvidia|^nouveau' || true
+
+  echo
+  echo "Bootloader:"
+  if [ -d /boot/grub ]; then
+    echo "GRUB detectado em /boot/grub"
+    grep -E '^GRUB_DEFAULT=|^GRUB_SAVEDEFAULT=' /etc/default/grub 2>/dev/null || true
+  else
+    warn "GRUB nao detectado em /boot/grub"
+  fi
+}
+
+install_lqx_stack() {
+  local stamp bk
+  stamp="$(date +%Y%m%d-%H%M%S)"
+  bk="/var/backups/mocha-updater/lqx-dkms-pre-${stamp}"
+
+  print_header "instalar/restaurar kernel Mocha recomendado LQX + NVIDIA DKMS"
+
+  echo "Esta acao mexe em kernel/driver."
+  echo "Conjunto recomendado atual:"
+  echo "  linux-lqx"
+  echo "  linux-lqx-headers"
+  echo "  nvidia-open-dkms + NVIDIA userspace, quando houver GPU NVIDIA"
   echo
 
-  ok "Diagnóstico concluído"
+  as_root mkdir -p "$bk"
+  pacman -Q > "${bk}/pacman-Q.txt" 2>/dev/null || true
+  pacman -Qqe > "${bk}/pacman-Qqe.txt" 2>/dev/null || true
+  cp -a /etc/pacman.conf "${bk}/pacman.conf" 2>/dev/null || true
+  cp -a /etc/default/grub "${bk}/grub-default" 2>/dev/null || true
+  cp -a /boot/grub/grub.cfg "${bk}/grub.cfg" 2>/dev/null || true
+  uname -a > "${bk}/uname-a.txt" 2>/dev/null || true
+  timeout 8 nvidia-smi > "${bk}/nvidia-smi.txt" 2>&1 || true
+
+  echo "Backup pre-kernel salvo em: $bk"
+
+  local required optional pkg spec
+  required=(linux-lqx linux-lqx-headers)
+
+  if has_nvidia_gpu; then
+    required+=(nvidia-open-dkms nvidia-utils lib32-nvidia-utils)
+    optional=(nvidia-settings opencl-nvidia lib32-opencl-nvidia egl-wayland libxnvctrl)
+  else
+    optional=()
+    warn "GPU NVIDIA nao detectada. Instalando apenas kernel/headers LQX."
+  fi
+
+  local install_specs=()
+
+  echo
+  echo "Validando pacotes obrigatorios:"
+  for pkg in "${required[@]}"; do
+    spec="$(pkg_spec "$pkg")" || fail "Pacote obrigatorio indisponivel: $pkg"
+    echo "  $pkg -> $spec"
+    install_specs+=("$spec")
+  done
+
+  echo
+  echo "Validando pacotes opcionais:"
+  for pkg in "${optional[@]}"; do
+    if spec="$(pkg_spec "$pkg")"; then
+      echo "  $pkg -> $spec"
+      install_specs+=("$spec")
+    else
+      warn "Opcional indisponivel: $pkg"
+    fi
+  done
+
+  echo
+  echo "Instalando conjunto:"
+  printf '  %s\n' "${install_specs[@]}"
+
+  as_root pacman -S --needed --noconfirm "${install_specs[@]}" || fail "Instalacao LQX/DKMS falhou"
+
+  if have dkms; then
+    as_root dkms autoinstall || warn "dkms autoinstall retornou erro; verificar detalhes tecnicos"
+  fi
+
+  if have mkinitcpio; then
+    as_root mkinitcpio -P || fail "mkinitcpio -P falhou"
+  fi
+
+  if have grub-mkconfig && [ -d /boot/grub ]; then
+    as_root grub-mkconfig -o /boot/grub/grub.cfg || fail "grub-mkconfig falhou"
+  fi
+
+  if [ -x /media/mochafast/MochaArch/scripts/mocha-define-lqx-padrao-boot-v3.sh ]; then
+    echo
+    echo "Aplicando script canonico de boot LQX:"
+    as_root bash /media/mochafast/MochaArch/scripts/mocha-define-lqx-padrao-boot-v3.sh || warn "Script de boot LQX retornou erro; verificar manualmente"
+  else
+    warn "Script de boot LQX v3 nao encontrado. O GRUB foi regenerado, mas o default pode precisar de ajuste manual."
+  fi
+
+  echo
+  echo "Validacao pos-instalacao:"
+  pacman -Q linux-lqx linux-lqx-headers nvidia-open-dkms nvidia-utils lib32-nvidia-utils 2>/dev/null || true
+  timeout 8 nvidia-smi 2>/dev/null || true
+
+  ok "Kernel Mocha recomendado LQX/DKMS instalado/restaurado"
+  echo "Reinicie para validar o kernel ativo com: uname -r"
 }
 
 action_kernel_install_mocha_stable() {
-  need_root
-  print_header "instalar/restaurar kernel Mocha estável casado"
-  confirm_kernel_action
-  install_mocha_stable_core
+  install_lqx_stack
 }
 
 action_rollback_mocha_stable() {
-  need_root
-  print_header "rollback para kernel Mocha estável"
-  confirm_kernel_action
-
-  echo "Este rollback reinstala o trio estável do repo Mocha:"
-  echo "  mocha/linux-cachyos"
-  echo "  mocha/linux-cachyos-headers"
-  echo "  mocha/linux-cachyos-nvidia-open, se houver NVIDIA"
-  echo
-
-  install_mocha_stable_core
+  print_header "rollback para conjunto Mocha recomendado"
+  install_lqx_stack
 }
 
 action_logs() {
-  print_header "logs recentes"
-
-  echo "Logs do usuário:"
-  find "${XDG_STATE_HOME:-$HOME/.local/state}/mocha-updater/logs" -maxdepth 1 -type f -printf '%TY-%Tm-%Td %TH:%TM %p\n' 2>/dev/null | sort | tail -n 40 || true
-  echo
-
-  echo "Logs root:"
-  find /var/log/mocha-updater -maxdepth 1 -type f -printf '%TY-%Tm-%Td %TH:%TM %p\n' 2>/dev/null | sort | tail -n 40 || true
-  echo
-
+  print_header "logs tecnicos recentes"
   echo "Pacman kernel/driver recente:"
-  grep -Ei 'linux-cachyos|nvidia|kernel|mkinitcpio|grub' /var/log/pacman.log 2>/dev/null | tail -n 120 || true
-  echo
+  grep -Ei 'linux-lqx|linux-cachyos|nvidia|kernel|dkms|mkinitcpio|grub' /var/log/pacman.log 2>/dev/null | tail -n 160 || true
 
-  echo "Boots disponíveis:"
-  find /boot -maxdepth 2 -type f \( -name 'vmlinuz-*' -o -name 'initramfs-*' -o -name 'grub.cfg' \) -printf '%p\n' 2>/dev/null | sort || true
   echo
+  echo "DKMS:"
+  dkms status 2>/dev/null || true
 
-  ok "Coleta de logs concluída"
+  echo
+  echo "Boot:"
+  find /boot -maxdepth 3 -type f 2>/dev/null | grep -Ei 'vmlinuz|initramfs|grub.cfg' | sort || true
 }
 
 case "$ACTION" in

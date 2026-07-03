@@ -186,3 +186,117 @@ Critério esperado no sistema instalado:
 
 <!-- MOCHA:BLUETOOTH-TRAY-DUPLICADO:END -->
 
+<!-- MOCHA:KERNEL-CANONICO:INICIO -->
+## Kernel canônico atual
+
+Padrão atual do Mocha: Liquorix / linux-lqx.
+
+Na montagem e instalação padrão do Mocha, instalar por padrão:
+
+    linux-lqx
+    linux-lqx-headers
+
+Para NVIDIA, usar DKMS junto ao kernel lqx:
+
+    nvidia-open-dkms
+    nvidia-utils
+    lib32-nvidia-utils
+
+Regra operacional:
+
+- linux-lqx é o kernel canônico atual do Mocha.
+- linux-lqx-headers deve ser instalado junto com linux-lqx.
+- O repo local canônico do lqx fica no VMSTORE:
+  /media/vmstore/mocha-repo/local/kernel-liquorix/x86_64
+- Nome do repo pacman local:
+  mocha-lqx
+- O repo Liquorix/lqx é repo-arquivo: baixar versões novas, mas nunca apagar versões antigas automaticamente.
+- CachyOS fica como alternativa/teste/rollback, não como padrão enquanto lqx estiver aprovado.
+- O Mocha Updater deve recomendar linux-lqx como kernel principal enquanto esta decisão estiver vigente.
+<!-- MOCHA:KERNEL-CANONICO:FIM -->
+
+<!-- MOCHA:REPO-LQX-SEMANAL:INICIO -->
+## Atualização semanal do repo Liquorix/lqx
+
+O repo Liquorix/lqx possui atualização semanal via systemd timer.
+
+Script executável do sistema:
+    /usr/local/sbin/mocha-atualiza-repo-liquorix-arquivo
+
+Cópia canônica no FAST:
+    /media/mochafast/MochaArch/scripts/repos/mocha-atualiza-repo-liquorix-arquivo-v1.sh
+
+Service:
+    /etc/systemd/system/mocha-repo-liquorix-update.service
+
+Timer:
+    /etc/systemd/system/mocha-repo-liquorix-update.timer
+
+Agenda:
+    segunda-feira, 04:30, com atraso aleatório de até 30 minutos
+
+Repo atualizado:
+    /media/vmstore/mocha-repo/local/kernel-liquorix/x86_64
+
+Nome do repo pacman:
+    mocha-lqx
+
+Modo semanal:
+    update
+
+Modo de reparo sem download:
+    rebuild-only
+
+Comando manual para atualizar agora:
+    sudo /usr/local/sbin/mocha-atualiza-repo-liquorix-arquivo update
+
+Comando manual para apenas regenerar o banco:
+    sudo /usr/local/sbin/mocha-atualiza-repo-liquorix-arquivo rebuild-only
+
+Regra:
+- baixar novas versões quando existirem;
+- nunca apagar versões antigas automaticamente;
+- manter manifesto;
+- manter snapshot;
+- não usar repo-add --files.
+<!-- MOCHA:REPO-LQX-SEMANAL:FIM -->
+
+## Reparo da substituição Liquorix/NVIDIA - 20260702-200647
+
+Correção aplicada porque a primeira quarentena fez a parte principal, mas teve dois defeitos:
+
+- referencias-antes.txt e referencias-depois.txt falharam por Permission denied;
+- scripts de boot/instalação foram classificados de forma ampla demais como se fossem apenas sync de repo.
+
+Mapeamento canônico corrigido:
+
+- mocha-audita-repo-liquorix-remoto-nvidia-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-audita-repo-liquorix-remoto-nvidia-v2.sh
+- mocha-corrige-default-liquorix-grub-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-define-lqx-padrao-boot-v3.sh
+- mocha-define-liquorix-padrao-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-define-lqx-padrao-boot-v3.sh
+- mocha-instala-liquorix-nvidia-open-dkms-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-instala-lqx-nvidia-casado-v2.sh
+- mocha-liquorix-repo-binario-nvidia-dkms-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-sincroniza-repo-liquorix-somente-lqx-v1.sh
+- mocha-separa-repo-lqx-nvidia-v1.sh -> /media/mochafast/MochaArch/scripts/mocha-sincroniza-repo-liquorix-somente-lqx-v1.sh
+
+Regra corrigida:
+
+- Sync semanal Liquorix só atualiza/cacheia linux-lqx, linux-lqx-headers e opcionalmente linux-lqx-docs.
+- Instalação LQX + NVIDIA usa script próprio: /media/mochafast/MochaArch/scripts/mocha-instala-lqx-nvidia-casado-v2.sh
+- Boot/default LQX usa script próprio: /media/mochafast/MochaArch/scripts/mocha-define-lqx-padrao-boot-v3.sh
+- NVIDIA continua em repo próprio: /media/vmstore/mocha-repo/local/nvidia/x86_64
+- Liquorix continua em repo próprio: /media/vmstore/mocha-repo/local/kernel-liquorix/x86_64
+
+Auditoria original:
+
+- /media/vmstore/MochaArch/auditorias/quarentena-substituicao-scripts-lqx-nvidia-20260702-164718
+
+Auditoria deste reparo:
+
+- /media/vmstore/MochaArch/auditorias/repara-quarentena-lqx-nvidia-20260702-200647
+
+## 20260703-114819 — Mocha Updater LQX/DKMS canônico
+
+- Frontend Qt/Python preservado como interface canônica.
+- Backend ajustado para tratar linux-lqx + linux-lqx-headers como kernel recomendado.
+- NVIDIA ajustado para nvidia-open-dkms + nvidia-utils + lib32-nvidia-utils.
+- CachyOS deixa de ser apresentado como padrão estável; permanece como histórico/fallback.
+- Scripts antigos do updater movidos para quarentena em /media/mochafast/MochaArch/ativo/quarentena/mocha-updater-scripts-legados-20260703-114819.
