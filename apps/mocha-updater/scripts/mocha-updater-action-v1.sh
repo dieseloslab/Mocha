@@ -25,37 +25,27 @@ print_header() {
 
 kernel_ignore_args() {
   local pkgs=(
-    linux
-    linux-headers
-    linux-lts
-    linux-lts-headers
-    linux-zen
-    linux-zen-headers
-    linux-hardened
-    linux-hardened-headers
-    linux-lqx
-    linux-lqx-headers
-    linux-cachyos
-    linux-cachyos-headers
-    linux-cachyos-nvidia-open
-    linux-cachyos-lts
-    linux-cachyos-lts-headers
-    linux-cachyos-lts-nvidia-open
-    nvidia
-    nvidia-dkms
-    nvidia-open
+    linux linux-headers
+    linux-lts linux-lts-headers
+    linux-zen linux-zen-headers
+    linux-hardened linux-hardened-headers
+    linux-lqx linux-lqx-headers
     nvidia-open-dkms
-    nvidia-utils
-    lib32-nvidia-utils
-    opencl-nvidia
-    lib32-opencl-nvidia
-    nvidia-settings
+    nvidia-dkms
+    nvidia-utils lib32-nvidia-utils
+    opencl-nvidia lib32-opencl-nvidia
+    nvidia-settings libxnvctrl egl-wayland
+    linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open
+    linux-cachyos-lts linux-cachyos-lts-headers linux-cachyos-lts-nvidia-open
   )
 
+  local args=()
   local p
   for p in "${pkgs[@]}"; do
-    printf -- '--ignore\n%s\n' "$p"
+    args+=(--ignore "$p")
   done
+
+  printf '%s\n' "${args[@]}"
 }
 
 has_nvidia_gpu() {
@@ -159,7 +149,6 @@ action_system_check() {
   pacman -Q \
     linux linux-headers \
     linux-lqx linux-lqx-headers \
-    linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open \
     nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings \
     2>/dev/null || true
 
@@ -228,7 +217,6 @@ action_kernel_check() {
   pacman -Q \
     linux linux-headers \
     linux-lqx linux-lqx-headers \
-    linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open \
     nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings \
     2>/dev/null || true
 
@@ -317,7 +305,7 @@ install_lqx_stack() {
   echo "Instalando conjunto:"
   printf '  %s\n' "${install_specs[@]}"
 
-  as_root pacman -S --needed --noconfirm "${install_specs[@]}" || fail "Instalacao LQX/DKMS falhou"
+  as_root pacman -S --noconfirm "${install_specs[@]}" || fail "Instalacao LQX/DKMS falhou"
 
   if have dkms; then
     as_root dkms autoinstall || warn "dkms autoinstall retornou erro; verificar detalhes tecnicos"
@@ -360,7 +348,7 @@ action_rollback_mocha_stable() {
 action_logs() {
   print_header "logs tecnicos recentes"
   echo "Pacman kernel/driver recente:"
-  grep -Ei 'linux-lqx|linux-cachyos|nvidia|kernel|dkms|mkinitcpio|grub' /var/log/pacman.log 2>/dev/null | tail -n 160 || true
+  grep -Ei 'linux-lqx|nvidia|kernel|dkms|mkinitcpio|grub' /var/log/pacman.log 2>/dev/null | tail -n 160 || true
 
   echo
   echo "DKMS:"
