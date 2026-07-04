@@ -173,8 +173,9 @@ wallpaperplugin=org.kde.image
 
 [Containments][25][Wallpaper][org.kde.image][General]
 FillMode=2
-Image=file:///media/mochafast/MochaArch/ativo/assets/branding/wallpaper/Wall.png
+Image=file:///usr/share/backgrounds/mocha/Wall.png
 
+PreviewImage=file:///usr/share/backgrounds/mocha/Wall.png
 [ScreenMapping]
 itemsOnDisabledScreens=
 screenMapping=desktop:/steam.desktop,0,b05ad1f4-e3c1-4a39-aa7b-91ade9a6ac17,desktop:/mocha-kernel-driver-manager.desktop,0,99ce8e95-4abc-4ef6-996b-8b0114c802bc

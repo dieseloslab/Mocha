@@ -1,2 +1,3 @@
 [Greeter][Wallpaper][org.kde.image][General]
-Image=file:///media/mochafast/MochaArch/ativo/assets/branding/wallpaper/Wall.png
+Image=file:///usr/share/backgrounds/mocha/Wall.png
+PreviewImage=file:///usr/share/backgrounds/mocha/Wall.png
