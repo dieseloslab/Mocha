@@ -88,3 +88,22 @@ mocha-kde-barra-layout-aprovado
 
 Formato/layout da barra e cor/paleta continuam separados. Este script é somente para layout/formato da barra. A cor deve vir do tema/paleta KDE Mocha canônica.
 <!-- MOCHA-BARRA-KDE-SCRIPT-APROVADO-END -->
+
+<!-- MOCHA-PONTEIRO-AGRESSIVIDADE-VIGENTE-20260704-INICIO -->
+## Agressividade vigente aprovada — 2026-07-04
+
+A referência versionada para a agressividade vigente fica em:
+
+    docs/AGRESSIVIDADE-VIGENTE-MOCHA-20260704.md
+
+Pontos essenciais:
+
+    vm.swappiness=150
+    TuneD profile: mocha-latency-performance
+    GameMode start: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
+    GameMode end: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+    OC NVIDIA efetivo: /etc/mocha/nvidia-game-oc.conf
+    OC aprovado: core +50 / mem +250
+
+Não voltar automaticamente para presets antigos de agressividade.
+<!-- MOCHA-PONTEIRO-AGRESSIVIDADE-VIGENTE-20260704-FIM -->
