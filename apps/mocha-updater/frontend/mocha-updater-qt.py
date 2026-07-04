@@ -1,1073 +1,590 @@
 #!/usr/bin/env python3
 import os
 import re
-import subprocess
 import sys
+import shutil
+import subprocess
 from datetime import datetime
-from pathlib import Path
 
-from PyQt6.QtCore import Qt, QProcess, QTimer, pyqtSignal
-from PyQt6.QtGui import QCursor, QIcon, QPixmap
-from PyQt6.QtWidgets import (
-    QApplication,
-    QDialog,
-    QFileDialog,
-    QFrame,
-    QGridLayout,
-    QHBoxLayout,
-    QLabel,
-    QListWidget,
-    QListWidgetItem,
-    QMainWindow,
-    QMessageBox,
-    QPlainTextEdit,
-    QProgressBar,
-    QPushButton,
-    QScrollArea,
-    QStackedWidget,
-    QVBoxLayout,
-    QWidget,
-)
+QT_API = None
+try:
+    from PySide6.QtCore import Qt, QThread, Signal, QTimer
+    from PySide6.QtWidgets import (
+        QApplication, QWidget, QMainWindow, QLabel, QPushButton, QVBoxLayout,
+        QHBoxLayout, QGridLayout, QTextEdit, QProgressBar, QFrame, QStackedWidget
+    )
+    QT_API = "PySide6"
+except Exception:
+    try:
+        from PyQt6.QtCore import Qt, QThread, pyqtSignal as Signal, QTimer
+        from PyQt6.QtWidgets import (
+            QApplication, QWidget, QMainWindow, QLabel, QPushButton, QVBoxLayout,
+            QHBoxLayout, QGridLayout, QTextEdit, QProgressBar, QFrame, QStackedWidget
+        )
+        QT_API = "PyQt6"
+    except Exception as e:
+        print("ERRO: PySide6/PyQt6 não encontrado:", e, file=sys.stderr)
+        sys.exit(1)
 
-ACTION = "/usr/local/lib/mocha/mocha-updater/mocha-updater-action"
-ICON = "/usr/share/icons/hicolor/scalable/apps/mocha-updater.svg"
+APP_TITLE = "Mocha Updater"
 
-ROOT_ACTIONS = {"system-update", "kernel-install-mocha-stable", "rollback-mocha-stable"}
-CONFIRM_ACTIONS = {"kernel-install-mocha-stable", "rollback-mocha-stable"}
-
-def detect_lang():
-    raw = (os.environ.get("LANG") or os.environ.get("LC_MESSAGES") or "en").lower()
-    if raw.startswith("pt"):
-        return "pt"
-    if raw.startswith("fr"):
-        return "fr"
-    if raw.startswith("es"):
-        return "es"
-    return "en"
-
-LANG = detect_lang()
-
-TXT = {
-    "pt": {
-        "title": "Mocha Updater",
-        "subtitle": "Atualização segura, sem trocar kernel por acidente",
-        "system": "Sistema",
-        "kernel": "Kernel / Driver",
-        "rollback": "Rollback",
-        "about": "Sobre",
-        "kernel_card": "Kernel",
-        "gpu_card": "GPU",
-        "driver_card": "Driver NVIDIA",
-        "updates_card": "Updates",
-        "flatpak_card": "Flatpak",
-        "unknown": "Aguardando",
-        "ready": "Pronto",
-        "checking": "Verificando...",
-        "running": "Executando...",
-        "done": "Concluído",
-        "failed": "Falhou",
-        "refresh": "Verificar estado",
-        "system_check": "Procurar atualizações",
-        "system_update": "Atualizar sistema",
-        "kernel_check": "Analisar hardware",
-        "kernel_install": "Instalar kernel Mocha recomendado",
-        "rollback_btn": "Restaurar kernel Mocha recomendado",
-        "summary": "Resumo",
-        "system_desc": "Atualiza o sistema sem mexer no kernel e no driver NVIDIA. Kernel e driver ficam em uma área separada.",
-        "kernel_desc": "Instala/reinstala o kernel Mocha recomendado. Usa Liquorix para LQX; em máquinas NVIDIA, recasa também o driver DKMS e os utilitários pelos repos oficiais do Arch.",
-        "rollback_desc": "Restaura o último conjunto Mocha aprovado quando um kernel novo se comportar mal.",
-        "about_text": "Mocha Updater usa tema Mocha e fluxo gráfico. O usuário vê cards, listas e botões; logs brutos não aparecem na tela principal.",
-        "confirm_title": "Confirmar ação sensível",
-        "confirm_text": "Esta ação mexe em kernel/driver. Use apenas quando quiser instalar, recasar ou restaurar o conjunto Mocha aprovado.",
-        "auth_note": "A autenticação de administrador usa Polkit/pkexec. Nenhum terminal será aberto.",
-        "no_updates": "Sistema em dia",
-        "updates_available": "{} disponíveis",
-        "updates_title": "Atualizações disponíveis",
-        "updates_subtitle": "{} atualizações encontradas. Selecione Atualizar para aplicar o update geral conservador.",
-        "update_now": "Atualizar",
-        "cancel": "Cancelar",
-        "close": "Fechar",
-        "no_updates_dialog": "Nenhuma atualização pendente foi encontrada.",
-        "gpu_ok": "NVIDIA detectada",
-        "gpu_missing": "Não detectada",
-        "driver_ok": "Ativo",
-        "flatpak_empty": "Sem updates",
-        "update_started": "Atualização iniciada. Aguarde a conclusão.",
-        "update_finished": "Atualização concluída.",
-    },
-    "en": {
-        "title": "Mocha Updater",
-        "subtitle": "Safe updates without accidental kernel changes",
-        "system": "System",
-        "kernel": "Kernel / Driver",
-        "rollback": "Rollback",
-        "about": "About",
-        "kernel_card": "Kernel",
-        "gpu_card": "GPU",
-        "driver_card": "NVIDIA Driver",
-        "updates_card": "Updates",
-        "flatpak_card": "Flatpak",
-        "unknown": "Waiting",
-        "ready": "Ready",
-        "checking": "Checking...",
-        "running": "Running...",
-        "done": "Done",
-        "failed": "Failed",
-        "refresh": "Check state",
-        "system_check": "Check updates",
-        "system_update": "Update system",
-        "kernel_check": "Analyze hardware",
-        "kernel_install": "Install recommended Mocha kernel",
-        "rollback_btn": "Restore recommended Mocha kernel",
-        "summary": "Summary",
-        "system_desc": "Updates the system without changing kernel or NVIDIA driver. Kernel and driver are handled separately.",
-        "kernel_desc": "Installs/reinstalls the recommended Mocha kernel. Uses Liquorix for LQX; on NVIDIA machines, also rebuilds DKMS and userspace from official Arch repositories.",
-        "rollback_desc": "Restores the last approved Mocha set when a newer kernel misbehaves.",
-        "about_text": "Mocha Updater uses Mocha theme and graphical flow. Users see cards, lists and buttons; raw logs are not shown on the main screen.",
-        "confirm_title": "Confirm sensitive action",
-        "confirm_text": "This action changes kernel/driver. Use only to install, rebuild, or restore the approved Mocha stack.",
-        "auth_note": "Administrator authentication uses Polkit/pkexec. No terminal will be opened.",
-        "no_updates": "System up to date",
-        "updates_available": "{} available",
-        "updates_title": "Available updates",
-        "updates_subtitle": "{} updates found. Select Update to apply the conservative general update.",
-        "update_now": "Update",
-        "cancel": "Cancel",
-        "close": "Close",
-        "no_updates_dialog": "No pending updates were found.",
-        "gpu_ok": "NVIDIA detected",
-        "gpu_missing": "Not detected",
-        "driver_ok": "Active",
-        "flatpak_empty": "No updates",
-        "update_started": "Update started. Wait for completion.",
-        "update_finished": "Update finished.",
-    },
-    "fr": {
-        "title": "Mocha Updater",
-        "subtitle": "Mises à jour sûres sans changement accidentel de noyau",
-        "system": "Système",
-        "kernel": "Noyau / Pilote",
-        "rollback": "Retour",
-        "about": "À propos",
-        "kernel_card": "Noyau",
-        "gpu_card": "GPU",
-        "driver_card": "Pilote NVIDIA",
-        "updates_card": "Mises à jour",
-        "flatpak_card": "Flatpak",
-        "unknown": "En attente",
-        "ready": "Prêt",
-        "checking": "Vérification...",
-        "running": "Exécution...",
-        "done": "Terminé",
-        "failed": "Échec",
-        "refresh": "Vérifier l’état",
-        "system_check": "Chercher les mises à jour",
-        "system_update": "Mettre à jour le système",
-        "kernel_check": "Analyser le matériel",
-        "kernel_install": "Installer le noyau Mocha recommandé",
-        "rollback_btn": "Restaurer le noyau Mocha recommandé",
-        "summary": "Résumé",
-        "system_desc": "Met à jour le système sans changer le noyau ni le pilote NVIDIA.",
-        "kernel_desc": "Installe/réinstalle le noyau Mocha recommandé. Utilise Liquorix pour LQX; sur les machines NVIDIA, reconstruit aussi DKMS et les utilitaires depuis les dépôts officiels Arch.",
-        "rollback_desc": "Restaure le dernier ensemble Mocha approuvé si un nouveau noyau pose problème.",
-        "about_text": "Mocha Updater utilise le thème Mocha et un flux graphique. Les journaux bruts ne sont pas affichés.",
-        "confirm_title": "Confirmer l’action sensible",
-        "confirm_text": "Cette action modifie noyau/pilote. À utiliser seulement pour installer, reconstruire ou restaurer l’ensemble Mocha approuvé.",
-        "auth_note": "L’authentification administrateur utilise Polkit/pkexec. Aucun terminal ne sera ouvert.",
-        "no_updates": "Système à jour",
-        "updates_available": "{} disponibles",
-        "updates_title": "Mises à jour disponibles",
-        "updates_subtitle": "{} mises à jour trouvées. Sélectionnez Mettre à jour pour appliquer l’opération.",
-        "update_now": "Mettre à jour",
-        "cancel": "Annuler",
-        "close": "Fermer",
-        "no_updates_dialog": "Aucune mise à jour en attente.",
-        "gpu_ok": "NVIDIA détectée",
-        "gpu_missing": "Non détectée",
-        "driver_ok": "Actif",
-        "flatpak_empty": "Aucune mise à jour",
-        "update_started": "Mise à jour lancée. Attendez la fin.",
-        "update_finished": "Mise à jour terminée.",
-    },
-    "es": {
-        "title": "Mocha Updater",
-        "subtitle": "Actualización segura sin cambiar kernel por accidente",
-        "system": "Sistema",
-        "kernel": "Kernel / Controlador",
-        "rollback": "Reversión",
-        "about": "Acerca de",
-        "kernel_card": "Kernel",
-        "gpu_card": "GPU",
-        "driver_card": "Driver NVIDIA",
-        "updates_card": "Updates",
-        "flatpak_card": "Flatpak",
-        "unknown": "Esperando",
-        "ready": "Listo",
-        "checking": "Verificando...",
-        "running": "Ejecutando...",
-        "done": "Concluido",
-        "failed": "Falló",
-        "refresh": "Verificar estado",
-        "system_check": "Buscar actualizaciones",
-        "system_update": "Actualizar sistema",
-        "kernel_check": "Analizar hardware",
-        "kernel_install": "Instalar kernel Mocha recomendado",
-        "rollback_btn": "Restaurar kernel Mocha recomendado",
-        "summary": "Resumen",
-        "system_desc": "Actualiza el sistema sin cambiar kernel ni driver NVIDIA.",
-        "kernel_desc": "Instala/reinstala el kernel Mocha recomendado. Usa Liquorix para LQX; en máquinas NVIDIA, también recompila DKMS y utilidades desde los repositorios oficiales de Arch.",
-        "rollback_desc": "Restaura el último conjunto Mocha aprobado si un kernel nuevo se comporta mal.",
-        "about_text": "Mocha Updater usa tema Mocha y flujo gráfico. Los logs brutos no aparecen en la pantalla principal.",
-        "confirm_title": "Confirmar acción sensible",
-        "confirm_text": "Esta acción cambia kernel/driver. Úsela solo para instalar, recompilar o restaurar el conjunto Mocha aprobado.",
-        "auth_note": "La autenticación usa Polkit/pkexec. No se abrirá ninguna terminal.",
-        "no_updates": "Sistema al día",
-        "updates_available": "{} disponibles",
-        "updates_title": "Actualizaciones disponibles",
-        "updates_subtitle": "{} actualizaciones encontradas. Seleccione Actualizar para aplicar la operación.",
-        "update_now": "Actualizar",
-        "cancel": "Cancelar",
-        "close": "Cerrar",
-        "no_updates_dialog": "No hay actualizaciones pendientes.",
-        "gpu_ok": "NVIDIA detectada",
-        "gpu_missing": "No detectada",
-        "driver_ok": "Activo",
-        "flatpak_empty": "Sin updates",
-        "update_started": "Actualización iniciada. Espere la conclusión.",
-        "update_finished": "Actualización concluida.",
-    },
+KERNEL_PKGS = {
+    "linux", "linux-headers",
+    "linux-lts", "linux-lts-headers",
+    "linux-zen", "linux-zen-headers",
+    "linux-lqx", "linux-lqx-headers",
+    "linux-cachyos", "linux-cachyos-headers",
+    "linux-cachyos-nvidia-open",
 }
-EXTRA_TXT = {
-    "pt": {
-        "details": "Detalhes técnicos",
-        "tech_desc": "Área avançada para diagnóstico, suporte e manutenção. O usuário comum não precisa mexer aqui.",
-        "tech_refresh": "Atualizar relatório técnico",
-        "tech_copy": "Copiar relatório",
-        "tech_save": "Salvar relatório",
-        "tech_ready": "Relatório técnico pronto.",
-        "tech_empty": "Nenhum relatório carregado.",
-        "tech_saved": "Relatório salvo.",
-        "tech_copied": "Relatório copiado.",
-        "tech_generating": "Gerando relatório técnico...",
-    },
-    "en": {
-        "details": "Technical details",
-        "tech_desc": "Advanced area for diagnostics, support and maintenance. Regular users do not need this.",
-        "tech_refresh": "Refresh technical report",
-        "tech_copy": "Copy report",
-        "tech_save": "Save report",
-        "tech_ready": "Technical report ready.",
-        "tech_empty": "No report loaded.",
-        "tech_saved": "Report saved.",
-        "tech_copied": "Report copied.",
-        "tech_generating": "Generating technical report...",
-    },
-    "fr": {
-        "details": "Détails techniques",
-        "tech_desc": "Zone avancée pour diagnostic, support et maintenance. L’utilisateur standard n’en a pas besoin.",
-        "tech_refresh": "Actualiser le rapport technique",
-        "tech_copy": "Copier le rapport",
-        "tech_save": "Enregistrer le rapport",
-        "tech_ready": "Rapport technique prêt.",
-        "tech_empty": "Aucun rapport chargé.",
-        "tech_saved": "Rapport enregistré.",
-        "tech_copied": "Rapport copié.",
-        "tech_generating": "Génération du rapport technique...",
-    },
-    "es": {
-        "details": "Detalles técnicos",
-        "tech_desc": "Área avanzada para diagnóstico, soporte y mantenimiento. El usuario común no necesita esto.",
-        "tech_refresh": "Actualizar informe técnico",
-        "tech_copy": "Copiar informe",
-        "tech_save": "Guardar informe",
-        "tech_ready": "Informe técnico listo.",
-        "tech_empty": "Ningún informe cargado.",
-        "tech_saved": "Informe guardado.",
-        "tech_copied": "Informe copiado.",
-        "tech_generating": "Generando informe técnico...",
-    },
+NVIDIA_PKGS = {
+    "nvidia-open-dkms", "nvidia-dkms", "nvidia-open",
+    "nvidia-utils", "lib32-nvidia-utils", "nvidia-settings",
+    "nvidia-prime", "opencl-nvidia",
 }
 
-for _lang, _vals in EXTRA_TXT.items():
-    TXT.setdefault(_lang, TXT["en"]).update(_vals)
+def run(cmd, timeout=10):
+    try:
+        p = subprocess.run(
+            cmd, shell=True, text=True,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            timeout=timeout
+        )
+        return p.returncode, p.stdout.strip()
+    except subprocess.TimeoutExpired:
+        return 124, "timeout"
 
-T = TXT.get(LANG, TXT["en"])
+def first_line(text):
+    return (text or "").splitlines()[0].strip() if text else ""
 
-def block_between(raw, start, end):
-    lines = raw.splitlines()
-    out = []
-    active = False
-    for line in lines:
-        if line.strip() == start:
-            active = True
-            continue
-        if active and line.strip() == end:
-            break
-        if active:
-            out.append(line)
-    return "\n".join(out).strip()
+def pkg_installed(pkg):
+    return run(f"pacman -Q {pkg} >/dev/null 2>&1", timeout=4)[0] == 0
 
-def line_after(raw, marker):
-    lines = raw.splitlines()
-    for i, line in enumerate(lines):
-        if line.strip() == marker:
-            for nxt in lines[i + 1:]:
-                val = nxt.strip()
-                if val:
-                    return val
+def pkg_version(pkg):
+    rc, out = run(f"pacman -Q {pkg} 2>/dev/null", timeout=4)
+    if rc == 0 and out:
+        parts = out.split()
+        if len(parts) >= 2:
+            return parts[1]
     return ""
 
-def parse_update_line(line):
-    if " -> " not in line:
-        return None
-    left, new = line.split(" -> ", 1)
-    parts = left.rsplit(" ", 1)
-    if len(parts) != 2:
-        return {"name": left.strip(), "old": "", "new": new.strip()}
-    return {"name": parts[0].strip(), "old": parts[1].strip(), "new": new.strip()}
+def detect_kernel():
+    rc, kernel = run("uname -r", timeout=4)
+    kernel = kernel if rc == 0 and kernel else "indisponível"
 
-def parse_system(raw):
-    kernel = line_after(raw, "Kernel atual:")
-    updates_block = block_between(raw, "Atualizações pendentes:", "Flatpak:")
-    update_items = []
-    for line in updates_block.splitlines():
-        line = line.strip()
-        item = parse_update_line(line)
-        if item:
-            update_items.append(item)
+    lqx_pkg = pkg_version("linux-lqx")
+    lqx_headers = pkg_version("linux-lqx-headers")
 
-    gpu = T["gpu_missing"]
-    for line in raw.splitlines():
-        if "NVIDIA GeForce" in line:
-            m = re.search(r"NVIDIA GeForce[^\|]+", line)
-            gpu = m.group(0).strip() if m else T["gpu_ok"]
-            break
+    if "lqx" in kernel:
+        title = "LQX ativo"
+    else:
+        title = "Ativo"
 
-    m = re.search(r"NVIDIA-SMI\s+([0-9.]+)", raw)
-    driver = f"{T['driver_ok']} · {m.group(1)}" if m else T["unknown"]
+    details = kernel
+    if lqx_pkg:
+        details += f" | linux-lqx {lqx_pkg}"
+    if lqx_headers and lqx_headers != lqx_pkg:
+        details += f" | headers {lqx_headers}"
 
-    flatpak_block = block_between(raw, "Flatpak:", "NVIDIA:")
-    flatpak = T["flatpak_empty"] if not flatpak_block.strip() else flatpak_block.splitlines()[0].strip()
+    return title, details
 
-    updates = T["no_updates"] if not update_items else T["updates_available"].format(len(update_items))
+def detect_gpu():
+    rc, name = run("nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null | head -n1", timeout=5)
+    if rc == 0 and name:
+        return "NVIDIA", name
 
-    summary = "\n".join([
-        f"Kernel: {kernel or T['unknown']}",
-        f"{T['updates_card']}: {updates}",
-        f"GPU: {gpu}",
-        f"{T['driver_card']}: {driver}",
-        f"Flatpak: {flatpak}",
-    ])
+    rc, lspci = run("lspci 2>/dev/null | grep -Ei 'vga|3d|display' | head -n1", timeout=5)
+    if lspci:
+        short = re.sub(r"^.*: ", "", lspci)
+        if "NVIDIA" in short.upper():
+            return "NVIDIA", short
+        return "GPU", short
 
-    return {
-        "kernel": kernel or T["unknown"],
-        "gpu": gpu,
-        "driver": driver,
-        "updates": updates,
-        "flatpak": flatpak,
-        "updates_items": update_items,
-        "summary": summary,
-    }
+    return "GPU", "não detectada"
 
-def parse_kernel(raw):
-    cpu_level = line_after(raw, "Nível detectado:") or T["unknown"]
-    gpu = "NVIDIA" if "NVIDIA" in raw else T["gpu_missing"]
-    installed = []
-    for line in raw.splitlines():
-        if line.startswith(("linux-lqx ", "linux-lqx-headers ", "nvidia-open-dkms ", "nvidia-utils ", "lib32-nvidia-utils ", "linux-cachyos ", "linux-cachyos-headers ", "linux-cachyos-nvidia-open ")):
-            installed.append(line.strip())
+def detect_nvidia():
+    rc, ver = run("nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | head -n1", timeout=5)
+    if rc == 0 and ver:
+        return "Ativo", ver
 
-    return {
-        "kernel": installed[0] if installed else T["unknown"],
-        "gpu": gpu,
-        "driver": T["driver_ok"] if "nvidia" in raw.lower() else T["unknown"],
-        "updates": "Diagnóstico OK" if "[OK]" in raw else T["unknown"],
-        "flatpak": "-",
-        "updates_items": [],
-        "summary": f"CPU: {cpu_level}\nGPU: {gpu}\nConjunto: {'; '.join(installed[:4]) if installed else T['unknown']}",
-    }
+    rc, modver = run("modinfo -F version nvidia 2>/dev/null | head -n1", timeout=5)
+    if rc == 0 and modver:
+        return "Módulo presente", modver
+
+    rc, lspci = run("lspci 2>/dev/null | grep -Ei 'nvidia' | head -n1", timeout=5)
+    if rc == 0 and lspci:
+        return "GPU detectada", "driver inativo"
+
+    return "Ausente", "-"
+
+def detect_updates():
+    if shutil.which("checkupdates"):
+        rc, out = run("checkupdates 2>/dev/null || true", timeout=30)
+        lines = [x for x in out.splitlines() if x.strip()]
+        filtered = []
+        held = []
+        for line in lines:
+            name = line.split()[0]
+            if name in KERNEL_PKGS or name in NVIDIA_PKGS or name.startswith("nvidia-"):
+                held.append(name)
+            else:
+                filtered.append(name)
+        if filtered:
+            return f"{len(filtered)} pendente(s)", f"{len(held)} kernel/driver separado(s)"
+        if held:
+            return "Sistema em dia", f"{len(held)} kernel/driver separado(s)"
+        return "Sistema em dia", "pacman"
+    return "Indisponível", "pacman-contrib/checkupdates ausente"
+
+def detect_flatpak():
+    if not shutil.which("flatpak"):
+        return "Ausente", "flatpak não instalado"
+
+    rc_apps, apps = run("flatpak list --app --columns=application 2>/dev/null || true", timeout=15)
+    rc_run, runtimes = run("flatpak list --runtime --columns=application 2>/dev/null || true", timeout=15)
+
+    app_count = len([x for x in apps.splitlines() if x.strip()])
+    runtime_count = len([x for x in runtimes.splitlines() if x.strip()])
+
+    rc_breeze, breeze = run("flatpak list --runtime --columns=application,branch,arch 2>/dev/null | grep -E '^org\\.gtk\\.Gtk3theme\\.Breeze\\b' | head -n1 || true", timeout=15)
+    if breeze:
+        return "OK", f"{app_count} app(s), {runtime_count} runtime(s), Breeze GTK presente"
+
+    return "OK", f"{app_count} app(s), {runtime_count} runtime(s)"
+
+class Worker(QThread):
+    line = Signal(str)
+    progress = Signal(int, str)
+    done = Signal(int)
+
+    def __init__(self, script):
+        super().__init__()
+        self.script = script
+
+    def run(self):
+        p = subprocess.Popen(
+            ["bash", "-lc", self.script],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1
+        )
+        for raw in p.stdout:
+            line = raw.rstrip("\n")
+            m = re.match(r"^MOCHA_PROGRESS[ \t]+([0-9]{1,3})[ \t]+(.*)$", line)
+            if m:
+                pct = max(0, min(100, int(m.group(1))))
+                self.progress.emit(pct, m.group(2))
+            else:
+                self.line.emit(line)
+        p.wait()
+        self.done.emit(p.returncode)
 
 class Card(QFrame):
-    clicked = pyqtSignal()
-
-    def __init__(self, title, value, clickable=False):
+    def __init__(self, title):
         super().__init__()
-        self.setObjectName("Card")
-        self.clickable = clickable
-        if clickable:
-            self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-            self.setProperty("clickable", True)
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(16, 14, 16, 14)
-        layout.setSpacing(6)
-
+        self.setObjectName("card")
         self.title = QLabel(title)
-        self.title.setObjectName("CardTitle")
-        self.value = QLabel(value)
-        self.value.setObjectName("CardValue")
+        self.title.setObjectName("cardTitle")
+        self.value = QLabel("...")
+        self.value.setObjectName("cardValue")
         self.value.setWordWrap(True)
+        self.detail = QLabel("")
+        self.detail.setObjectName("cardDetail")
+        self.detail.setWordWrap(True)
 
-        layout.addWidget(self.title)
-        layout.addWidget(self.value)
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(12, 10, 12, 10)
+        lay.setSpacing(4)
+        lay.addWidget(self.title)
+        lay.addWidget(self.value)
+        lay.addWidget(self.detail)
 
-    def set_value(self, value):
-        self.value.setText(value)
-
-    def mousePressEvent(self, event):
-        if self.clickable and event.button() == Qt.MouseButton.LeftButton:
-            self.clicked.emit()
-        super().mousePressEvent(event)
-
-class UpdatesDialog(QDialog):
-    update_clicked = pyqtSignal()
-
-    def __init__(self, updates, parent=None):
-        super().__init__(parent)
-        self.updates = updates
-        self.setWindowTitle(T["updates_title"])
-        self.setMinimumSize(620, 480)
-        if Path(ICON).exists():
-            self.setWindowIcon(QIcon(ICON))
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(18, 18, 18, 18)
-        layout.setSpacing(12)
-
-        title = QLabel(T["updates_title"])
-        title.setObjectName("DialogTitle")
-        layout.addWidget(title)
-
-        subtitle = QLabel(T["updates_subtitle"].format(len(updates)))
-        subtitle.setWordWrap(True)
-        subtitle.setObjectName("DialogSubtitle")
-        layout.addWidget(subtitle)
-
-        self.list = QListWidget()
-        self.list.setObjectName("UpdateList")
-        for item in updates:
-            text = f"{item['name']}\n{item['old']}  →  {item['new']}"
-            li = QListWidgetItem(text)
-            li.setSizeHint(li.sizeHint())
-            self.list.addItem(li)
-        layout.addWidget(self.list, 1)
-
-        buttons = QHBoxLayout()
-        buttons.addStretch()
-
-        cancel = QPushButton(T["cancel"])
-        cancel.clicked.connect(self.reject)
-        buttons.addWidget(cancel)
-
-        update = QPushButton(T["update_now"])
-        update.setProperty("danger", True)
-        update.clicked.connect(self.accept_update)
-        buttons.addWidget(update)
-
-        layout.addLayout(buttons)
-
-    def accept_update(self):
-        self.update_clicked.emit()
-        self.accept()
-
-class ActionPage(QWidget):
-    def __init__(self, desc):
-        super().__init__()
-        self.layout = QVBoxLayout(self)
-        self.layout.setContentsMargins(18, 18, 18, 18)
-        self.layout.setSpacing(14)
-
-        label = QLabel(desc)
-        label.setWordWrap(True)
-        label.setObjectName("Description")
-        self.layout.addWidget(label)
-
-    def add_action(self, text, callback, danger=False):
-        btn = QPushButton(text)
-        btn.setMinimumHeight(48)
-        btn.setProperty("danger", danger)
-        btn.clicked.connect(callback)
-        self.layout.addWidget(btn)
-        return btn
+    def set(self, value, detail=""):
+        self.value.setText(str(value))
+        self.detail.setText(str(detail))
 
 class MochaUpdater(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.proc = None
-        self.current_action = ""
-        self.raw_last = ""
-        self.last_updates = []
-
-        self.setWindowTitle(T["title"])
-        self.setMinimumSize(1120, 760)
-        if Path(ICON).exists():
-            self.setWindowIcon(QIcon(ICON))
+        self.setWindowTitle(APP_TITLE)
+        self.resize(1180, 780)
+        self.worker = None
+        self.cards = {}
 
         root = QWidget()
         self.setCentralWidget(root)
-        outer = QVBoxLayout(root)
-        outer.setContentsMargins(20, 20, 20, 20)
-        outer.setSpacing(14)
+        main = QVBoxLayout(root)
+        main.setContentsMargins(20, 18, 20, 14)
+        main.setSpacing(14)
 
-        header = QHBoxLayout()
-        if Path(ICON).exists():
-            logo = QLabel()
-            logo.setPixmap(QPixmap(ICON).scaled(62, 62, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
-            header.addWidget(logo)
-
+        top = QHBoxLayout()
         title_box = QVBoxLayout()
-        title = QLabel(T["title"])
-        title.setObjectName("Title")
-        subtitle = QLabel(T["subtitle"])
-        subtitle.setObjectName("Subtitle")
+        title = QLabel("Mocha Updater")
+        title.setObjectName("title")
+        subtitle = QLabel("Atualização segura, sem trocar kernel por acidente")
+        subtitle.setObjectName("subtitle")
         title_box.addWidget(title)
         title_box.addWidget(subtitle)
-        header.addLayout(title_box)
-        header.addStretch()
-
-        refresh = QPushButton(T["refresh"])
-        refresh.clicked.connect(lambda: self.run_action("system-check"))
-        header.addWidget(refresh)
-        outer.addLayout(header)
+        top.addLayout(title_box)
+        top.addStretch(1)
+        self.btn_refresh = QPushButton("Verificar estado")
+        self.btn_refresh.clicked.connect(self.refresh_status)
+        top.addWidget(self.btn_refresh)
+        main.addLayout(top)
 
         grid = QGridLayout()
         grid.setSpacing(12)
-
-        self.card_kernel = Card(T["kernel_card"], T["unknown"])
-        self.card_gpu = Card(T["gpu_card"], T["unknown"])
-        self.card_driver = Card(T["driver_card"], T["unknown"])
-        self.card_updates = Card(T["updates_card"], T["unknown"], clickable=True)
-        self.card_flatpak = Card(T["flatpak_card"], T["unknown"])
-
-        self.card_updates.clicked.connect(self.show_updates_dialog)
-
-        grid.addWidget(self.card_kernel, 0, 0)
-        grid.addWidget(self.card_gpu, 0, 1)
-        grid.addWidget(self.card_driver, 0, 2)
-        grid.addWidget(self.card_updates, 0, 3)
-        grid.addWidget(self.card_flatpak, 0, 4)
-        outer.addLayout(grid)
+        for i, key in enumerate(["KERNEL", "GPU", "DRIVER NVIDIA", "UPDATES", "FLATPAK"]):
+            card = Card(key)
+            self.cards[key] = card
+            grid.addWidget(card, 0, i)
+        grid.setColumnStretch(4, 2)
+        main.addLayout(grid)
 
         body = QHBoxLayout()
         body.setSpacing(14)
-        outer.addLayout(body, 1)
 
         nav = QVBoxLayout()
-        body.addLayout(nav, 0)
-
+        nav.setSpacing(10)
         self.stack = QStackedWidget()
-        body.addWidget(self.stack, 1)
-
-        for label, index in [(T["system"], 0), (T["kernel"], 1), (T["rollback"], 2), (T["details"], 3), (T["about"], 4)]:
-            b = QPushButton(label)
-            b.setMinimumWidth(180)
-            b.setMinimumHeight(44)
-            b.setProperty("nav", True)
-            b.clicked.connect(lambda _=False, i=index: self.stack.setCurrentIndex(i))
+        self.nav_buttons = []
+        pages = [
+            ("Sistema", self.page_system()),
+            ("Kernel / Driver", self.page_kernel()),
+            ("Rollback", self.page_rollback()),
+            ("Detalhes técnicos", self.page_details()),
+            ("Sobre", self.page_about()),
+        ]
+        for idx, (name, page) in enumerate(pages):
+            b = QPushButton(name)
+            b.setObjectName("navButton")
+            b.clicked.connect(lambda checked=False, n=idx: self.stack.setCurrentIndex(n))
             nav.addWidget(b)
-        nav.addStretch()
+            self.nav_buttons.append(b)
+            self.stack.addWidget(page)
+        nav.addStretch(1)
 
-        page_system = ActionPage(T["system_desc"])
-        page_system.add_action(T["system_check"], lambda: self.run_action("system-check"))
-        page_system.add_action(T["system_update"], lambda: self.show_updates_dialog(), danger=True)
-        page_system.layout.addStretch()
+        body.addLayout(nav, 0)
+        body.addWidget(self.stack, 1)
+        main.addLayout(body, 1)
 
-        page_kernel = ActionPage(T["kernel_desc"])
-        page_kernel.add_action(T["kernel_check"], lambda: self.run_action("kernel-check"))
-        page_kernel.add_action(T["kernel_install"], lambda: self.run_action("kernel-install-mocha-stable"), danger=True)
-        page_kernel.layout.addStretch()
-
-        page_rollback = ActionPage(T["rollback_desc"])
-        page_rollback.add_action(T["rollback_btn"], lambda: self.run_action("rollback-mocha-stable"), danger=True)
-        page_rollback.layout.addStretch()
-
-        page_details = QWidget()
-        details_layout = QVBoxLayout(page_details)
-        details_layout.setContentsMargins(18, 18, 18, 18)
-        details_layout.setSpacing(12)
-
-        tech_desc = QLabel(T["tech_desc"])
-        tech_desc.setObjectName("Description")
-        tech_desc.setWordWrap(True)
-        details_layout.addWidget(tech_desc)
-
-        tech_buttons = QHBoxLayout()
-
-        tech_refresh = QPushButton(T["tech_refresh"])
-        tech_refresh.clicked.connect(self.refresh_technical_report)
-        tech_buttons.addWidget(tech_refresh)
-
-        tech_copy = QPushButton(T["tech_copy"])
-        tech_copy.clicked.connect(self.copy_technical_report)
-        tech_buttons.addWidget(tech_copy)
-
-        tech_save = QPushButton(T["tech_save"])
-        tech_save.clicked.connect(self.save_technical_report)
-        tech_buttons.addWidget(tech_save)
-
-        tech_buttons.addStretch()
-        details_layout.addLayout(tech_buttons)
-
-        self.tech_summary = QLabel(T["tech_empty"])
-        self.tech_summary.setObjectName("TechSummary")
-        details_layout.addWidget(self.tech_summary)
-
-        self.tech_text = QPlainTextEdit()
-        self.tech_text.setObjectName("TechDetails")
-        self.tech_text.setReadOnly(True)
-        self.tech_text.setPlainText(T["tech_empty"])
-        details_layout.addWidget(self.tech_text, 1)
-
-        page_about = QWidget()
-        about_layout = QVBoxLayout(page_about)
-        about_layout.setContentsMargins(18, 18, 18, 18)
-        about = QLabel(T["about_text"])
-        about.setObjectName("Description")
-        about.setWordWrap(True)
-        about_layout.addWidget(about)
-        about_layout.addStretch()
-
-        self.stack.addWidget(page_system)
-        self.stack.addWidget(page_kernel)
-        self.stack.addWidget(page_rollback)
-        self.stack.addWidget(page_details)
-        self.stack.addWidget(page_about)
-
-        result_panel = QFrame()
-        result_panel.setObjectName("ResultPanel")
-        result_layout = QVBoxLayout(result_panel)
-        result_layout.setContentsMargins(16, 14, 16, 14)
-        result_layout.setSpacing(10)
-
-        result_title = QLabel(T["summary"])
-        result_title.setObjectName("SectionTitle")
-        result_layout.addWidget(result_title)
-
-        self.summary = QLabel(T["ready"])
-        self.summary.setObjectName("Summary")
-        self.summary.setWordWrap(True)
-        result_layout.addWidget(self.summary)
+        self.log = QTextEdit()
+        self.log.setReadOnly(True)
+        self.log.setObjectName("log")
+        self.log.setMinimumHeight(145)
+        main.addWidget(self.log)
 
         self.progress = QProgressBar()
         self.progress.setRange(0, 100)
         self.progress.setValue(0)
-        self.progress.setTextVisible(False)
-        result_layout.addWidget(self.progress)
+        main.addWidget(self.progress)
 
-        outer.addWidget(result_panel)
+        self.statusBar().showMessage("Concluído")
+        self.apply_style()
+        QTimer.singleShot(100, self.refresh_status)
 
-        self.statusBar().showMessage(T["ready"])
-        QTimer.singleShot(300, lambda: self.run_action("system-check"))
+    def panel(self, text):
+        w = QFrame()
+        w.setObjectName("panel")
+        lay = QVBoxLayout(w)
+        lay.setContentsMargins(18, 18, 18, 18)
+        msg = QLabel(text)
+        msg.setWordWrap(True)
+        lay.addWidget(msg)
+        return w, lay
 
-    def make_technical_report(self):
-        cmd = r"""
-echo "============================================================"
-echo "Mocha Updater — relatório técnico"
-echo "============================================================"
-echo
-echo "Data:"
-date -Is
-echo
-echo "Sistema:"
-uname -a
-cat /etc/os-release 2>/dev/null || true
-echo
-echo "Kernel ativo:"
-uname -r
-echo
-echo "Pacman lock:"
-if [ -e /var/lib/pacman/db.lck ]; then
-  ls -l /var/lib/pacman/db.lck
-else
-  echo "sem lock"
-fi
-echo
-echo "Pacotes kernel/NVIDIA:"
-pacman -Q linux linux-headers linux-lqx linux-lqx-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-open-dkms nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia nvidia-settings 2>/dev/null || true
-echo
-echo "Atualizações pendentes:"
+    def page_system(self):
+        w, lay = self.panel("Atualiza o sistema sem mexer no kernel e no driver NVIDIA. Kernel e driver ficam em uma etapa separada.")
+        b1 = QPushButton("Procurar atualizações")
+        b2 = QPushButton("Atualizar sistema")
+        b1.clicked.connect(self.action_check_updates)
+        b2.clicked.connect(self.action_update_system)
+        lay.addWidget(b1)
+        lay.addWidget(b2)
+        lay.addStretch(1)
+        return w
+
+    def page_kernel(self):
+        w, lay = self.panel("Instala ou reinstala o kernel Mocha recomendado. Em máquinas NVIDIA, recasa também o driver DKMS e utilitários NVIDIA.")
+        b1 = QPushButton("Instalar / reinstalar kernel Mocha recomendado")
+        b2 = QPushButton("Regerar initramfs e GRUB")
+        b1.clicked.connect(self.action_kernel_driver)
+        b2.clicked.connect(self.action_regen_boot)
+        lay.addWidget(b1)
+        lay.addWidget(b2)
+        lay.addStretch(1)
+        return w
+
+    def page_rollback(self):
+        w, lay = self.panel("Rollback não executa troca cega de kernel. Primeiro lista kernels instalados e estado do bootloader.")
+        b = QPushButton("Listar kernels instalados")
+        b.clicked.connect(self.action_list_kernels)
+        lay.addWidget(b)
+        lay.addStretch(1)
+        return w
+
+    def page_details(self):
+        w, lay = self.panel("Mostra estado técnico real lido por comandos locais.")
+        b = QPushButton("Gerar detalhes técnicos")
+        b.clicked.connect(self.action_details)
+        lay.addWidget(b)
+        lay.addStretch(1)
+        return w
+
+    def page_about(self):
+        w, lay = self.panel("Mocha Updater — frontend local do Mocha. Esta versão corrige leitura imediata de kernel, resumo Flatpak e barra determinada.")
+        lay.addStretch(1)
+        return w
+
+    def apply_style(self):
+        self.setStyleSheet("""
+        QMainWindow, QWidget {
+            background: #15100d;
+            color: #e8d8c3;
+            font-size: 14px;
+        }
+        QLabel#title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #ead8be;
+        }
+        QLabel#subtitle {
+            color: #bda48d;
+        }
+        QFrame#card, QFrame#panel {
+            border: 1px solid #5b4235;
+            border-radius: 14px;
+            background: #211713;
+        }
+        QLabel#cardTitle {
+            font-size: 12px;
+            font-weight: 700;
+            color: #c8ad91;
+            background: #100b09;
+            padding: 3px;
+        }
+        QLabel#cardValue {
+            font-size: 16px;
+            font-weight: 800;
+            color: #f0dfc9;
+        }
+        QLabel#cardDetail {
+            color: #d0b89d;
+            font-size: 12px;
+        }
+        QPushButton {
+            background: #5a3d31;
+            border: 1px solid #8a6654;
+            border-radius: 10px;
+            color: #f2e1cc;
+            padding: 12px;
+            font-weight: 700;
+        }
+        QPushButton:hover {
+            background: #6f493c;
+        }
+        QPushButton#navButton {
+            text-align: left;
+            min-width: 160px;
+        }
+        QTextEdit#log {
+            background: #120d0b;
+            border: 1px solid #5b4235;
+            border-radius: 10px;
+            color: #e8d8c3;
+            font-family: monospace;
+        }
+        QProgressBar {
+            border: 1px solid #5b4235;
+            border-radius: 8px;
+            background: #120d0b;
+            height: 18px;
+            text-align: center;
+        }
+        QProgressBar::chunk {
+            border-radius: 8px;
+            background: #b89478;
+        }
+        """)
+
+    def refresh_status(self):
+        k, kd = detect_kernel()
+        gpu, gpud = detect_gpu()
+        nv, nvd = detect_nvidia()
+        up, upd = detect_updates()
+        fp, fpd = detect_flatpak()
+
+        self.cards["KERNEL"].set(k, kd)
+        self.cards["GPU"].set(gpu, gpud)
+        self.cards["DRIVER NVIDIA"].set(nv, nvd)
+        self.cards["UPDATES"].set(up, upd)
+        self.cards["FLATPAK"].set(fp, fpd)
+
+        self.log.setPlainText(
+            "Resumo\n"
+            f"Kernel: {k} - {kd}\n"
+            f"GPU: {gpu} - {gpud}\n"
+            f"Driver NVIDIA: {nv} - {nvd}\n"
+            f"Updates: {up} - {upd}\n"
+            f"Flatpak: {fp} - {fpd}\n"
+        )
+        self.progress.setValue(100)
+        self.statusBar().showMessage("Estado atualizado")
+
+    def run_script(self, script):
+        if self.worker and self.worker.isRunning():
+            self.append_log("ERRO: já existe uma operação em execução.")
+            return
+        self.progress.setValue(0)
+        self.statusBar().showMessage("Executando")
+        self.worker = Worker(script)
+        self.worker.line.connect(self.append_log)
+        self.worker.progress.connect(self.set_progress)
+        self.worker.done.connect(self.finished)
+        self.worker.start()
+
+    def append_log(self, line):
+        self.log.append(line)
+
+    def set_progress(self, pct, msg):
+        self.progress.setValue(pct)
+        self.statusBar().showMessage(msg)
+        self.append_log(f"[{pct}%] {msg}")
+
+    def finished(self, rc):
+        self.progress.setValue(100 if rc == 0 else self.progress.value())
+        self.statusBar().showMessage("Concluído" if rc == 0 else f"Falhou: código {rc}")
+        self.append_log(f"Processo finalizado com código {rc}")
+        self.refresh_status()
+
+    def action_check_updates(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 5 Iniciando checagem"
+echo "== pacman/checkupdates =="
 if command -v checkupdates >/dev/null 2>&1; then
-  checkupdates || true
+  checkupdates 2>/dev/null || true
 else
-  pacman -Qu || true
+  echo "checkupdates ausente; instale pacman-contrib para checagem sem pacman -Sy."
 fi
+echo "MOCHA_PROGRESS 55 Checando Flatpak"
 echo
-echo "Flatpak:"
+echo "== flatpak =="
 if command -v flatpak >/dev/null 2>&1; then
   flatpak remote-ls --updates 2>/dev/null || true
 else
   echo "flatpak ausente"
 fi
+echo "MOCHA_PROGRESS 100 Checagem concluída"
+''')
+
+    def action_update_system(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 5 Preparando atualização segura"
+IGNORE=()
+for p in linux linux-headers linux-lts linux-lts-headers linux-zen linux-zen-headers linux-lqx linux-lqx-headers linux-cachyos linux-cachyos-headers linux-cachyos-nvidia-open nvidia-open-dkms nvidia-dkms nvidia-open nvidia-utils lib32-nvidia-utils nvidia-settings nvidia-prime opencl-nvidia; do
+  if pacman -Q "$p" >/dev/null 2>&1; then
+    IGNORE+=(--ignore "$p")
+  fi
+done
+echo "Pacotes preservados desta etapa: ${IGNORE[*]:-(nenhum)}"
+echo "MOCHA_PROGRESS 20 Rodando pacman -Syu com kernel/driver separados"
+sudo pacman -Syu --noconfirm "${IGNORE[@]}"
+echo "MOCHA_PROGRESS 78 Atualizando Flatpak"
+if command -v flatpak >/dev/null 2>&1; then
+  flatpak update -y || true
+fi
+echo "MOCHA_PROGRESS 100 Atualização de sistema concluída"
+''')
+
+    def action_kernel_driver(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 5 Instalando/reinstalando LQX"
+sudo pacman -Sy --noconfirm linux-lqx linux-lqx-headers
+echo "MOCHA_PROGRESS 45 Verificando NVIDIA"
+if lspci 2>/dev/null | grep -qi nvidia; then
+  echo "NVIDIA detectada: recasando DKMS/utilitários"
+  sudo pacman -S --needed --noconfirm nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
+  if command -v dkms >/dev/null 2>&1; then
+    sudo dkms autoinstall || true
+  fi
+else
+  echo "NVIDIA não detectada: driver NVIDIA não será instalado."
+fi
+echo "MOCHA_PROGRESS 78 Regerando initramfs"
+sudo mkinitcpio -P
+echo "MOCHA_PROGRESS 90 Regerando GRUB, se existir"
+if [ -d /boot/grub ] && command -v grub-mkconfig >/dev/null 2>&1; then
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+echo "MOCHA_PROGRESS 100 Kernel/driver concluído"
+''')
+
+    def action_regen_boot(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 20 Regerando initramfs"
+sudo mkinitcpio -P
+echo "MOCHA_PROGRESS 75 Regerando GRUB, se existir"
+if [ -d /boot/grub ] && command -v grub-mkconfig >/dev/null 2>&1; then
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
+else
+  echo "GRUB não detectado em /boot/grub."
+fi
+echo "MOCHA_PROGRESS 100 Boot regenerado"
+''')
+
+    def action_list_kernels(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 20 Lendo kernel ativo"
+echo "Kernel ativo:"
+uname -r
 echo
-echo "GPU PCI:"
-lspci -nnk 2>/dev/null | grep -EA4 -i 'vga|3d|display' || true
+echo "Pacotes de kernel instalados:"
+pacman -Q | grep -E '^(linux|linux-lts|linux-zen|linux-lqx|linux-cachyos)( |-|$)' || true
 echo
-echo "NVIDIA-SMI:"
-timeout 8 nvidia-smi 2>/dev/null || true
+echo "Boot entries:"
+if command -v bootctl >/dev/null 2>&1; then bootctl list 2>/dev/null || true; fi
+if [ -d /boot/grub ]; then find /boot -maxdepth 3 -type f | grep -Ei 'vmlinuz|initramfs|grub.cfg' | sort; fi
+echo "MOCHA_PROGRESS 100 Lista concluída"
+''')
+
+    def action_details(self):
+        self.run_script(r'''
+set -Eeuo pipefail
+echo "MOCHA_PROGRESS 10 Coletando detalhes"
+echo "== data =="
+date
 echo
-echo "Módulos NVIDIA/Nouveau:"
-lsmod | grep -E '^nvidia|^nouveau' || true
+echo "== kernel =="
+uname -a
 echo
-echo "Mocha Updater:"
-ls -l /usr/local/bin/mocha-updater 2>/dev/null || true
-ls -l /usr/local/lib/mocha/mocha-updater/mocha-updater-action 2>/dev/null || true
+echo "== pacotes kernel/nvidia =="
+pacman -Q linux-lqx linux-lqx-headers nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings 2>/dev/null || true
 echo
-echo "Atalhos Mocha Updater:"
-find /usr/share/applications /etc/skel/Desktop "/etc/skel/Área de Trabalho" "$HOME/Desktop" "$HOME/Área de Trabalho" -maxdepth 1 -type f -name 'mocha-updater.desktop' -printf '%m %u:%g %p\n' 2>/dev/null | sort || true
+echo "== nvidia-smi =="
+nvidia-smi 2>/dev/null || true
 echo
-echo "Git status público:"
-git -C /media/mochafast/MochaArch status --short 2>/dev/null || true
-"""
-        try:
-            out = subprocess.run(
-                ["bash", "-lc", cmd],
-                text=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                timeout=25,
-            )
-            return out.stdout.strip() or T["tech_empty"]
-        except Exception as exc:
-            return f"erro: {exc}"
-
-    def refresh_technical_report(self):
-        self.tech_summary.setText(T["tech_generating"])
-        QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
-        try:
-            report = self.make_technical_report()
-            self.tech_text.setPlainText(report)
-            self.tech_summary.setText(T["tech_ready"])
-        finally:
-            QApplication.restoreOverrideCursor()
-
-    def copy_technical_report(self):
-        text = self.tech_text.toPlainText().strip()
-        if not text:
-            text = T["tech_empty"]
-        QApplication.clipboard().setText(text)
-        self.tech_summary.setText(T["tech_copied"])
-
-    def save_technical_report(self):
-        text = self.tech_text.toPlainText().strip()
-        if not text or text == T["tech_empty"]:
-            text = self.make_technical_report()
-            self.tech_text.setPlainText(text)
-
-        stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        default_dir = Path("/media/vmstore/MochaArch/auditorias")
-        if not default_dir.exists():
-            default_dir = Path.home()
-
-        default_path = str(default_dir / f"mocha-updater-relatorio-tecnico-{stamp}.txt")
-        path, _ = QFileDialog.getSaveFileName(
-            self,
-            T["tech_save"],
-            default_path,
-            "Text files (*.txt);;All files (*)",
-        )
-        if not path:
-            return
-
-        Path(path).write_text(text)
-        self.tech_summary.setText(f"{T['tech_saved']} {path}")
-
-    def set_cards(self, parsed):
-        self.card_kernel.set_value(parsed.get("kernel", T["unknown"]))
-        self.card_gpu.set_value(parsed.get("gpu", T["unknown"]))
-        self.card_driver.set_value(parsed.get("driver", T["unknown"]))
-        self.card_updates.set_value(parsed.get("updates", T["unknown"]))
-        self.card_flatpak.set_value(parsed.get("flatpak", T["unknown"]))
-        self.last_updates = parsed.get("updates_items", [])
-        self.summary.setText(parsed.get("summary", T["done"]))
-
-    def show_updates_dialog(self):
-        if not self.last_updates:
-            QMessageBox.information(self, T["updates_title"], T["no_updates_dialog"])
-            return
-
-        dialog = UpdatesDialog(self.last_updates, self)
-        dialog.update_clicked.connect(lambda: self.run_action("system-update"))
-        dialog.exec()
-
-    def confirm_if_needed(self, action):
-        if action not in CONFIRM_ACTIONS:
-            return True
-        msg = QMessageBox(self)
-        msg.setWindowTitle(T["confirm_title"])
-        msg.setText(T["confirm_text"])
-        msg.setInformativeText(T["auth_note"])
-        msg.setIcon(QMessageBox.Icon.Warning)
-        msg.setStandardButtons(QMessageBox.StandardButton.Cancel | QMessageBox.StandardButton.Ok)
-        msg.setDefaultButton(QMessageBox.StandardButton.Cancel)
-        return msg.exec() == QMessageBox.StandardButton.Ok
-
-    def run_action(self, action):
-        if self.proc and self.proc.state() != QProcess.ProcessState.NotRunning:
-            return
-
-        if not self.confirm_if_needed(action):
-            return
-
-        self.current_action = action
-        self.raw_last = ""
-
-        if action == "system-update":
-            self.summary.setText(T["update_started"])
-        else:
-            self.summary.setText(T["checking"] if action in ("system-check", "kernel-check") else T["running"])
-
-        self.progress.setRange(0, 0)
-        self.statusBar().showMessage(f"{T['running']}: {action}")
-
-        self.proc = QProcess(self)
-        self.proc.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
-        self.proc.readyReadStandardOutput.connect(self.collect_output)
-        self.proc.finished.connect(self.finish_action)
-
-        if action in ROOT_ACTIONS:
-            args = [ACTION, action]
-            if action in CONFIRM_ACTIONS:
-                args.append("--gui-confirmed")
-            self.proc.start("pkexec", args)
-        else:
-            self.proc.start(ACTION, [action])
-
-    def collect_output(self):
-        data = bytes(self.proc.readAllStandardOutput()).decode(errors="replace")
-        self.raw_last += data
-
-    def finish_action(self, code, status):
-        self.progress.setRange(0, 100)
-        self.progress.setValue(100 if code == 0 else 0)
-
-        if self.current_action == "system-check":
-            self.set_cards(parse_system(self.raw_last))
-        elif self.current_action == "kernel-check":
-            self.set_cards(parse_kernel(self.raw_last))
-        elif self.current_action == "system-update":
-            if code == 0:
-                self.summary.setText(T["update_finished"])
-                QTimer.singleShot(500, lambda: self.run_action("system-check"))
-            else:
-                self.summary.setText(f"{T['failed']} — exit {code}")
-        else:
-            self.summary.setText(T["done"] if code == 0 else f"{T['failed']} — exit {code}")
-
-        self.statusBar().showMessage(T["done"] if code == 0 else T["failed"])
+echo "== dkms =="
+dkms status 2>/dev/null || true
+echo
+echo "== flatpak resumo =="
+if command -v flatpak >/dev/null 2>&1; then
+  echo "Apps: $(flatpak list --app --columns=application 2>/dev/null | sed '/^$/d' | wc -l)"
+  echo "Runtimes: $(flatpak list --runtime --columns=application 2>/dev/null | sed '/^$/d' | wc -l)"
+  flatpak list --runtime --columns=application,branch,arch 2>/dev/null | grep -E '^org\.gtk\.Gtk3theme\.Breeze\b' || true
+fi
+echo "MOCHA_PROGRESS 100 Detalhes concluídos"
+''')
 
 def main():
     app = QApplication(sys.argv)
-    app.setApplicationName(T["title"])
-
-    app.setStyleSheet("""
-    QWidget {
-        background: #15110f;
-        color: #e8ded2;
-        font-family: Noto Sans, Inter, Sans;
-        font-size: 14px;
-    }
-
-    QMainWindow {
-        background: #15110f;
-    }
-
-    QLabel#Title {
-        font-size: 32px;
-        font-weight: 900;
-        color: #d8c3aa;
-    }
-
-    QLabel#Subtitle {
-        font-size: 15px;
-        color: #aa9784;
-    }
-
-    QLabel#CardTitle {
-        color: #a99684;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    QLabel#CardValue {
-        color: #eee3d7;
-        font-size: 16px;
-        font-weight: 800;
-    }
-
-    QLabel#Description {
-        background: #211916;
-        border: 1px solid #4c3930;
-        border-radius: 18px;
-        padding: 18px;
-        color: #e8ded2;
-        font-size: 16px;
-    }
-
-    QLabel#SectionTitle {
-        color: #d8c3aa;
-        font-size: 17px;
-        font-weight: 900;
-    }
-
-    QLabel#Summary {
-        color: #e8ded2;
-        font-size: 15px;
-        background: transparent;
-        padding: 4px;
-    }
-
-    QLabel#DialogTitle {
-        font-size: 24px;
-        font-weight: 900;
-        color: #d8c3aa;
-    }
-
-    QLabel#DialogSubtitle {
-        color: #aa9784;
-        font-size: 14px;
-    }
-
-    QFrame#Card {
-        background: #201815;
-        border: 1px solid #4c3930;
-        border-radius: 18px;
-    }
-
-    QFrame#Card[clickable="true"] {
-        border: 1px solid #7c6251;
-        background: #241b17;
-    }
-
-    QFrame#Card[clickable="true"]:hover {
-        background: #2b201b;
-        border: 1px solid #9b7b66;
-    }
-
-    QFrame#ResultPanel {
-        background: #1d1613;
-        border: 1px solid #4c3930;
-        border-radius: 18px;
-    }
-
-    QPushButton {
-        background: #4b352b;
-        color: #eee3d7;
-        border: 1px solid #715749;
-        border-radius: 14px;
-        padding: 11px 16px;
-        font-weight: 800;
-    }
-
-    QPushButton:hover {
-        background: #5a4034;
-        border: 1px solid #8a6b59;
-    }
-
-    QPushButton:pressed {
-        background: #382720;
-    }
-
-    QPushButton[danger="true"] {
-        background: #5a302d;
-        border: 1px solid #84514b;
-        color: #f0dfd8;
-    }
-
-    QPushButton[danger="true"]:hover {
-        background: #6a3935;
-        border: 1px solid #9b625a;
-    }
-
-    QPushButton[nav="true"] {
-        text-align: left;
-        background: #201815;
-        border: 1px solid #4c3930;
-        color: #e8ded2;
-    }
-
-    QPushButton[nav="true"]:hover {
-        background: #2b201b;
-        border: 1px solid #6d5143;
-    }
-
-    QStackedWidget {
-        background: #1d1613;
-        border: 1px solid #4c3930;
-        border-radius: 18px;
-    }
-
-    QProgressBar {
-        background: #100c0a;
-        border: 1px solid #4c3930;
-        border-radius: 9px;
-        height: 12px;
-    }
-
-    QProgressBar::chunk {
-        background: #8b6f5b;
-        border-radius: 9px;
-    }
-
-    QListWidget#UpdateList {
-        background: #100c0a;
-        color: #e8ded2;
-        border: 1px solid #4c3930;
-        border-radius: 14px;
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    QListWidget#UpdateList::item {
-        background: #201815;
-        border: 1px solid #4c3930;
-        border-radius: 10px;
-        padding: 10px;
-        margin: 4px;
-    }
-
-    QListWidget#UpdateList::item:selected {
-        background: #4b352b;
-        color: #eee3d7;
-        border: 1px solid #8a6b59;
-    }
-
-    QLabel#TechSummary {
-        color: #aa9784;
-        font-size: 13px;
-        padding: 4px;
-    }
-
-    QPlainTextEdit#TechDetails {
-        background: #100c0a;
-        color: #d8c9bb;
-        border: 1px solid #4c3930;
-        border-radius: 14px;
-        padding: 12px;
-        font-family: JetBrains Mono, Noto Sans Mono, monospace;
-        font-size: 12px;
-    }
-
-    QDialog {
-        background: #15110f;
-    }
-
-    QStatusBar {
-        background: #15110f;
-        color: #aa9784;
-    }
-
-    QMessageBox {
-        background: #15110f;
-    }
-    """)
-
     win = MochaUpdater()
     win.show()
     sys.exit(app.exec())
 
 if __name__ == "__main__":
-    if not Path(ACTION).exists():
-        print(f"Backend ausente: {ACTION}", file=sys.stderr)
-        sys.exit(1)
     main()
