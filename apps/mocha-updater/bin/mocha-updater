@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+exec /usr/bin/python /media/mochafast/MochaArch/apps/mocha-updater/frontend/mocha-updater-qt.py "$@"

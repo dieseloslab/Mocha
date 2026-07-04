@@ -1,0 +1,8 @@
+# Mocha — candidatos a remover
+# NÃO aplicar sem revisão. Esta lista serve para auditoria.
+
+gamescope
+vkbasalt
+discover
+plasma-welcome
+welcome

@@ -1,0 +1,12 @@
+MOCHA KDE — barra Windows 11 aprovada
+Timestamp: 20260528-225449
+Arquivo ajustado: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc
+Backup local: /home/hal/.config/plasma-org.kde.plasma.desktop-appletsrc.mocha-backup-20260528-225449
+Log: /home/hal/mocha-kde-barra-win11-aprovada-20260528-225449.log
+
+Lógica aprovada:
+- preservar applets não-centrais à esquerda;
+- inserir dois org.kde.plasma.panelspacer expansíveis;
+- centralizar Kickoff/Iniciar + icontasks/taskmanager;
+- manter systemtray/digitalclock/showdesktop à direita;
+- reiniciar somente plasmashell.

@@ -1,0 +1,22 @@
+# Mocha — revisar caso a caso
+# Entram aqui pacotes de instalação Arch normal que podem ser úteis ou ruído.
+
+# KDE extras
+ark
+gwenview
+spectacle
+kcalc
+kcharselect
+elisa
+dragon
+kamoso
+
+# Navegadores
+firefox
+chromium
+
+# Ferramentas
+partitionmanager
+gparted
+reflector
+timeshift
