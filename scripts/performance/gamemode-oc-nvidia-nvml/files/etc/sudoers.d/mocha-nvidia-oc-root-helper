@@ -1,0 +1,2 @@
+# Mocha NVIDIA OC root helper
+%wheel ALL=(root) NOPASSWD: /usr/local/lib/mocha/mocha-nvidia-oc-root-helper *
