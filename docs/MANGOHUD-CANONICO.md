@@ -1,55 +1,30 @@
-# MangoHud canônico Mocha
+# MangoHud canônico do Mocha
 
-Estado aprovado em jogo real em 2026-07-03.
+Estado canônico vigente:
 
-## Regra bloqueante
+- Config ativa em runtime: `${HOME}/.config/MangoHud/mocha-active.conf`
+- Wrapper Steam/Proton: `/usr/local/bin/mocha-steam-game-run`
+- Variável obrigatória no wrapper: `MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"`
+- O Steam/Proton deve receber sempre `${HOME}/.config/MangoHud/mocha-active.conf`.
+- Não usar configuração inline antiga como fonte principal do Mocha.
+- Não usar caminho fixo de usuário.
+- Não usar configuração global antiga como runtime canônico.
+- Para novos usuários, entregar a configuração em `/etc/skel/.config/MangoHud/mocha-active.conf`.
 
-O relógio do overlay deve mostrar minutos obrigatoriamente em `HH:MM`.
+Contrato visual aprovado:
 
-## Causa confirmada
+- Uma linha.
+- Sem gráficos.
+- Sem histogramas.
+- Sem tabelas/colunas.
+- Ordem esperada: FPS, latência, CPU, GPU, VRAM, hora em HH:MM e indicador GameMode.
 
-O jogo lia corretamente:
+Contrato do wrapper:
 
-- `MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/MangoHud.conf`
-- `time_format="%H:%M"`
-
-O erro visual era layout/fonte: `font_size=22`, `table_columns=20` e hora no fim da linha faziam o campo ser cortado, aparecendo só a hora.
-
-## Configuração aprovada
-
-- `font_size=18`
-- sem `table_columns`
-- sem `MANGOHUD_CONFIG` inline
-- wrapper exporta somente `MANGOHUD=1` e `MANGOHUD_CONFIGFILE`
-- `time_format="%H:%M"`
-- MangoHud em uma linha
-- itens visuais: hora, FPS, frametime, CPU uso/temp/freq, GPU uso/temp/core/mem, VRAM, RAM, GameMode
-
-## Caminhos canônicos de runtime
-
-- `/usr/local/share/mocha/mangohud/MangoHud.conf`
-- `/home/hal/.config/MangoHud/MangoHud.conf`
-- `/etc/skel/.config/MangoHud/MangoHud.conf`
-- `/usr/local/bin/mocha-steam-game-run`
-
-## Proibido voltar
-
-- não usar `font_size=22`
-- não usar `table_columns=20`
-- não exportar `MANGOHUD_CONFIG` inline
-- não diagnosticar pelo nome de wrapper sem auditar conteúdo real e ambiente do processo
-
-## Auditoria
-
-Rodar:
-
-    mocha-mangohud-auditar
-
-Resultado esperado em processo de jogo:
-
-    MANGOHUD=1
-    MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/MangoHud.conf
-
-Não deve aparecer:
-
-    MANGOHUD_CONFIG=...
+- Preservar correções de Alt+Tab/input.
+- Preservar `SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`.
+- Preservar `MouseWarpOverride=force`.
+- Exportar `MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"`.
+- Limpar `MANGOHUD_CONFIG`.
+- Limpar `MANGOHUD_DLSYM`.
+- Manter `MANGOHUD_DLSYM` proibido no wrapper canônico.

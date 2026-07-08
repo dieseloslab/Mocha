@@ -1,1 +1,1 @@
-MANGOHUD_CONFIGFILE=/home/hal/.config/MangoHud/Mocha-MangoHud.conf mangohud gamemoderun %command%
+/usr/local/bin/mocha-steam-game-run %command%

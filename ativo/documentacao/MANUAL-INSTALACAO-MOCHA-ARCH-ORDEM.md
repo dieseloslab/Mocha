@@ -1,5 +1,34 @@
 # Manual de instalação do Mocha Arch — ordem de instalação
 
+<!-- MOCHA-CANONICO-MANGOHUD-GAMEMODE-NVIDIA-OC:BEGIN -->
+## Mocha canonico - MangoHud e GameMode NVIDIA OC
+
+### MangoHud aprovado
+
+- Config ativa em runtime: ${HOME}/.config/MangoHud/mocha-active.conf.
+- O wrapper Steam/Proton deve exportar MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf".
+- Layout aprovado: uma linha, sem telemetria grafica extra.
+- Ordem visual aprovada: FPS, latencia, CPU, GPU, VRAM, hora HH:MM e indicador GameMode.
+- Validacao aceita: teste visual real dentro do jogo usando o wrapper Steam Mocha aprovado.
+
+### GameMode NVIDIA OC aprovado
+
+- OC NVIDIA existe somente durante GameMode.
+- Metodo aprovado em Wayland/NVIDIA: NVML executado por helper root.
+- Helper aprovado: /usr/local/lib/mocha/mocha-nvidia-oc-root-helper.
+- Hook start aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system.
+- Hook end aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system.
+- Start aplica core +50 e memoria +250.
+- End reverte core 0 e memoria 0.
+- Sudoers necessario: /etc/sudoers.d/mocha-nvidia-oc-root-helper.
+- A validacao deve limpar os logs antes do teste para evitar falso negativo por tentativa antiga.
+
+### Regra para futura instalacao
+
+- Quem montar o Mocha deve aplicar apenas este fluxo canonico.
+- Entradas antigas removidas deste manual ficam no Manual Legado.
+- Manual Legado: ativo/documentacao/MANUAL-LEGADO-INFORMACOES-ULTRAPASSADAS.md.
+<!-- MOCHA-CANONICO-MANGOHUD-GAMEMODE-NVIDIA-OC:END -->
 Gerado em: 20260530-104417
 Manual atual fixo: /media/mochafast/MochaArch/ativo/documentacao/MANUAL-INSTALACAO-MOCHA-ARCH-ORDEM.md
 Manual histórico desta rodada: /media/mochafast/MochaArch/ativo/documentacao/20260530-104417-manual-instalacao-mocha-arch-em-ordem.md
@@ -434,7 +463,7 @@ O melhor resultado observado anteriormente incluiu teste sem nenhuma Launch Opti
 
 - Índice gerado em: 20260530-104417
 - Diretório: /media/mochafast/MochaArch/ativo/documentacao
-- 
+-
 - 2026-05-29 15:01  /media/mochafast/MochaArch/ativo/documentacao/20260529-150104-login-plasma-manager-esquema-aprovado.md
 - 2026-05-29 15:24  /media/mochafast/MochaArch/ativo/documentacao/20260529-152416-baseline-superior-endeavour-steam-overlay-kde.md
 - 2026-05-29 15:27  /media/mochafast/MochaArch/ativo/documentacao/20260529-152700-volume-duplicado-corrigido-kmix-desativado.md
@@ -508,3 +537,74 @@ Relatórios:
 - /media/mochafast/MochaArch/ativo/relatorios/20260530-105856-estado-depois-agressividade-teste.txt
 - /media/mochafast/MochaArch/ativo/documentacao/20260530-105856-receita-agressividade-teste-aplicada.md
 - Rollback: /media/mochafast/MochaArch/ativo/scripts/20260530-105856-mocha-rollback-receita-agressividade-teste.sh
+
+
+<!-- MOCHA-MANGOHUD-STEAM-RUNTIME-CONF-START -->
+## MangoHud aprovado — Steam Runtime / Proton / wrapper Alt+Tab
+
+Estado aprovado pelo teste real em jogo Steam/Proton em 2026-07-04:
+
+- Esta é a configuração que funciona perfeitamente com o wrapper Alt+Tab do Mocha.
+- Caminho ativo funcional do MangoHud no wrapper:
+  - variável: MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"
+  - arquivo real por usuário: ~/.config/MangoHud/mocha-active.conf
+- Motivo: dentro do Steam Runtime / pressure-vessel, o processo do jogo pode não aplicar visualmente o /usr/local/share/... do host.
+- A validação correta é fechar e abrir novamente o jogo.
+- Não depender de reload_cfg, Shift_L+F4 ou recarga em processo vivo.
+- Steam aberta pelo atalho normal steam %U não garante herança da configuração Mocha.
+- A abertura correta é via Steam Mocha ou launch option que use mocha-steam-game-run %command%.
+
+Wrapper Steam Mocha / Alt+Tab deve preservar a lógica de input/Alt+Tab e exportar apenas o ambiente MangoHud necessário:
+
+    export MANGOHUD=1
+    export MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"
+    unset MANGOHUD_CONFIG
+    unset MANGOHUD_DLSYM
+
+Proibido no wrapper/config MangoHud:
+- MANGOHUD_CONFIG= inline
+- MANGOHUD_DLSYM
+
+- gamescope
+- vkBasalt
+- graphs
+
+Config aprovada:
+
+    legacy_layout=0
+    horizontal
+    hud_no_margin
+    position=top-left
+    font_size=17
+    round_corners=0
+    background_alpha=0.35
+    alpha=1.0
+
+    time
+    time_format="%H:%M"
+    time_no_label
+
+    fps
+    frametime
+    cpu_stats
+    cpu_temp
+    cpu_mhz
+    gpu_stats
+    gpu_temp
+    gpu_core_clock
+    gpu_mem_clock
+    vram
+    ram
+    gamemode
+
+    toggle_hud=Shift_R+F12
+    reload_cfg=none
+
+Regra operacional:
+
+- Se o MangoHud voltar ao padrão, primeiro verificar o ambiente do processo e o namespace com /proc/<PID>/root.
+- Não recriar wrapper.
+- Não insistir em Shift_L+F4.
+- Não voltar para /usr/local/share/... como caminho primário.
+- Ajuste de fonte aprovado: font_size=17.
+<!-- MOCHA-MANGOHUD-STEAM-RUNTIME-CONF-END -->

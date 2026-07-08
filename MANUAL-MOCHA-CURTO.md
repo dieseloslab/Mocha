@@ -1,3 +1,32 @@
+<!-- MOCHA-CANONICO-MANGOHUD-GAMEMODE-NVIDIA-OC:BEGIN -->
+## Mocha canonico - MangoHud e GameMode NVIDIA OC
+
+### MangoHud aprovado
+
+- Config ativa em runtime: ${HOME}/.config/MangoHud/mocha-active.conf.
+- O wrapper Steam/Proton deve exportar MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf".
+- Layout aprovado: uma linha, sem telemetria grafica extra.
+- Ordem visual aprovada: FPS, latencia, CPU, GPU, VRAM, hora HH:MM e indicador GameMode.
+- Validacao aceita: teste visual real dentro do jogo usando o wrapper Steam Mocha aprovado.
+
+### GameMode NVIDIA OC aprovado
+
+- OC NVIDIA existe somente durante GameMode.
+- Metodo aprovado em Wayland/NVIDIA: NVML executado por helper root.
+- Helper aprovado: /usr/local/lib/mocha/mocha-nvidia-oc-root-helper.
+- Hook start aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system.
+- Hook end aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system.
+- Start aplica core +50 e memoria +250.
+- End reverte core 0 e memoria 0.
+- Sudoers necessario: /etc/sudoers.d/mocha-nvidia-oc-root-helper.
+- A validacao deve limpar os logs antes do teste para evitar falso negativo por tentativa antiga.
+
+### Regra para futura instalacao
+
+- Quem montar o Mocha deve aplicar apenas este fluxo canonico.
+- Entradas antigas removidas deste manual ficam no Manual Legado.
+- Manual Legado: ativo/documentacao/MANUAL-LEGADO-INFORMACOES-ULTRAPASSADAS.md.
+<!-- MOCHA-CANONICO-MANGOHUD-GAMEMODE-NVIDIA-OC:END -->
 <!-- MOCHA_TUNED_LATENCY_PERFORMANCE_START -->
 ## TuneD canônico Mocha: mocha-latency-performance
 
@@ -119,8 +148,6 @@ Critério de aprovação pós-jogo:
 
 - `gamemode is inactive`;
 - GPU fora de `P0`, normalmente `P8` ou `P3`;
-- `GPUGraphicsClockOffsetAllPerformanceLevels = 0`;
-- `GPUMemoryTransferRateOffsetAllPerformanceLevels = 0`;
 - power baixo em idle;
 - clocks baixos em idle.
 
@@ -147,7 +174,6 @@ Resultado de referência aprovado em 2026-07-01:
     - VRAM 409/16311 MiB
     - offsets NVIDIA revertidos para 0/0
 
-Observação: `GPUPowerMizerMode` pode consultar como `0`. Não tratar isso como falha enquanto o comportamento real estiver correto: P0 durante jogo, offsets aplicados durante jogo, clocks altos durante jogo e rollback para offsets `0/0` após fechar o jogo.
 
 <!-- MOCHA:ROLLBACK-GAMEMODE-NVIDIA:END -->
 
@@ -370,3 +396,278 @@ SDDM:
   background=/usr/share/backgrounds/mocha/Wall.png
 ```
 <!-- MOCHA-WALLPAPER-CANONICO-2026-07-04:END -->
+
+<!-- MOCHA-STACK-GAMER-CANONICO:INI -->
+## Stack gamer/software gamer canônico do Mocha
+
+Lista canônica aprovada em 2026-07-04. Lutris não faz parte desta lista.
+
+### Launchers / lojas / bibliotecas
+
+- Steam
+- Steam Mocha
+- Faugus Launcher
+- Heroic Games Launcher
+- Legendary
+- Bottles
+
+### Proton / Wine / prefixos
+
+- ProtonPlus
+- ProtonUp
+- ProtonUp-Qt
+- Protontricks
+- Wine
+- Wine-Staging
+- Winetricks
+- Wine-GE / Proton-GE
+- componentes Proton necessários
+
+### Overlay / runtime / performance
+
+- MangoHud
+- GameMode
+- Gamescope
+- vkBasalt
+- GOverlay
+- LACT
+- TuneD
+
+### Vulkan / GPU / driver
+
+- Vulkan
+- utilitários Vulkan
+- componentes Vulkan 64 bits
+- componentes Vulkan 32 bits
+- drivers NVIDIA
+- utilitários NVIDIA
+- DKMS NVIDIA
+
+### Controles / periféricos / input
+
+- input-remapper
+- antimicrox
+- oversteer
+- piper
+- ferramentas de mapeamento de mouse
+- ferramentas de mapeamento de controle
+- ferramentas de volante
+
+### Aplicativos aprovados no perfil gamer
+
+- OBS
+- Kdenlive
+- OnlyOffice
+
+### Suporte do ecossistema Mocha
+
+- Mocha Updater
+- KDE Discover
+- Flatpak
+- Flathub
+- UFW / GUFW
+
+### Jogos casuais aprovados
+
+- kmahjongg
+- kpat
+- kigo
+
+### Regras
+
+- Lutris não é item canônico.
+- ProtonPlus é item explícito e obrigatório.
+- ProtonUp e ProtonUp-Qt permanecem aprovados.
+- Gamescope, vkBasalt e GOverlay fazem parte do stack gamer, mesmo que o wrapper Steam padrão não force esses recursos.
+- KDE Discover fica preservado como suporte a Flatpak.
+- Drivers/utilitários/DKMS NVIDIA entram quando houver GPU NVIDIA.
+- Fonte auxiliar: `ativo/software/perfis/mocha-stack-gamer-canonico.txt`.
+<!-- MOCHA-STACK-GAMER-CANONICO:FIM -->
+
+<!-- MOCHA-CANONICO-SOFTWARE-E-LIMPEZA-INICIO -->
+
+## Regra canônica Mocha — software que fica e limpeza obrigatória
+
+Registro operacional atualizado em 2026-07-04.
+
+### Canônicos que devem ser preservados
+
+Em conversões Arch → Mocha e limpezas de menu/software, estes itens são canônicos ou suporte canônico e não devem ser removidos por engano:
+
+- Firefox.
+- Steam.
+- Steam Mocha.
+- Faugus Launcher.
+- Heroic Games Launcher.
+- Legendary.
+- Bottles.
+- ProtonPlus.
+- ProtonUp.
+- ProtonUp-Qt.
+- Protontricks.
+- Wine.
+- Wine-Staging.
+- Winetricks.
+- Wine-GE / Proton-GE quando aplicável.
+- MangoHud.
+- GameMode.
+- Gamescope.
+- vkBasalt.
+- GOverlay.
+- LACT.
+- TuneD.
+- Vulkan e utilitários Vulkan.
+- Componentes Vulkan 64 bits e 32 bits.
+- Componentes Proton necessários.
+- Drivers NVIDIA.
+- Utilitários NVIDIA.
+- DKMS NVIDIA quando aplicável ao kernel usado.
+- input-remapper.
+- antimicrox.
+- oversteer.
+- piper.
+- Ferramentas de mapeamento de mouse.
+- Ferramentas de mapeamento de controle.
+- Ferramentas de volante.
+- OBS.
+- Kdenlive.
+- OnlyOffice.
+- Mocha Updater.
+- KDE Discover, limitado ao suporte/gerenciamento de Flatpak.
+- Flatpak.
+- Flathub.
+- UFW / GUFW.
+- kmahjongg.
+- kpat.
+- kigo.
+
+Observação bloqueante: Gamescope, vkBasalt e GOverlay fazem parte do stack gamer Mocha. Eles não fazem parte do wrapper Steam Mocha obrigatório, mas não devem ser removidos em limpeza do stack gamer.
+
+### Remoção obrigatória do que não é Mocha
+
+Toda conversão Arch → Mocha deve remover, ocultar ou quarentenar software, atalhos, widgets e entradas de menu que não façam parte do Mocha canônico, especialmente quando poluírem o menu ou duplicarem funções.
+
+Itens explicitamente não canônicos ou removíveis quando aparecerem:
+
+- Falkon.
+- Konqueror.
+- Angelfish.
+- KDE Connect, quando mantido apenas por dependência de lixo não canônico.
+- plasma-bigscreen.
+- Launchers duplicados ou antigos que concorram com Steam Mocha.
+- Entradas de menu duplicadas, quebradas, genéricas ou não aprovadas.
+- Applets soltos duplicados de Volume/Bluetooth na barra.
+- Widgets de painel que dupliquem funções já presentes no System Tray.
+
+Regra de painel: a barra canônica deve expor apenas uma entrada de áudio/volume e uma entrada de Bluetooth, preferencialmente via System Tray. Applets soltos `org.kde.plasma.volume` e `org.kde.plasma.bluetooth` fora do System Tray devem ser removidos quando causarem duplicidade.
+
+<!-- MOCHA-CANONICO-SOFTWARE-E-LIMPEZA-FIM -->
+
+<!-- MOCHA-WRAPPER-STEAM-CANONICO-ALT-TAB-INPUT:BEGIN -->
+## Mocha — Wrapper Steam canônico para Alt+Tab/input
+
+**Registro:** `20260628-011105`
+
+Este é o **verdadeiro wrapper Steam canônico do Mocha para Alt+Tab/input**.
+
+**Fonte canônica:**
+
+`/media/mochafast/MochaArch/auditorias/backup-audio-alt-tab-definitivo-20260611-203707/mocha-steam-game-run.bak`
+
+**Destino runtime:**
+
+`/usr/local/bin/mocha-steam-game-run`
+
+**Linha oficial dos jogos Steam:**
+
+`/usr/local/bin/mocha-steam-game-run %command%`
+
+**SHA256 canônico:**
+
+`3d58607f9f7c3bd1aaa8e3924a9f4eb7e1f13531bf64c10fd5587aec271b0235`
+
+### Regra operacional obrigatória
+
+- Este é o wrapper Steam canônico único para Alt+Tab/input.
+- Não substituir por wrapper mínimo criado em 2026-06-28 ou posterior.
+- Não escolher automaticamente o backup mais recente.
+- Para perda de input após Alt+Tab, restaurar este wrapper primeiro.
+- Separar Alt+Tab/input de MangoHud.
+- Não mexer em prefixos Proton, `user.reg`, `compatdata` ou `localconfig` da Steam como primeira tentativa.
+- Não promover outro wrapper como canônico sem validação explícita e registro manual novo.
+
+### Comando de restauração canônico
+
+`sudo install -Dm755 /media/mochafast/MochaArch/auditorias/backup-audio-alt-tab-definitivo-20260611-203707/mocha-steam-game-run.bak /usr/local/bin/mocha-steam-game-run`
+<!-- MOCHA-WRAPPER-STEAM-CANONICO-ALT-TAB-INPUT:END -->
+
+
+<!-- MOCHA-MANGOHUD-STEAM-RUNTIME-CONF-START -->
+## MangoHud aprovado — Steam Runtime / Proton / wrapper Alt+Tab
+
+Estado aprovado pelo teste real em jogo Steam/Proton em 2026-07-04:
+
+- Esta é a configuração que funciona perfeitamente com o wrapper Alt+Tab do Mocha.
+- Caminho ativo funcional do MangoHud no wrapper:
+  - variável: MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"
+  - arquivo real por usuário: ~/.config/MangoHud/mocha-active.conf
+- Motivo: dentro do Steam Runtime / pressure-vessel, o processo do jogo pode não aplicar visualmente o /usr/local/share/... do host.
+- A validação correta é fechar e abrir novamente o jogo.
+- Não depender de reload_cfg, Shift_L+F4 ou recarga em processo vivo.
+- Steam aberta pelo atalho normal steam %U não garante herança da configuração Mocha.
+- A abertura correta é via Steam Mocha ou launch option que use mocha-steam-game-run %command%.
+
+Wrapper Steam Mocha / Alt+Tab deve preservar a lógica de input/Alt+Tab e exportar apenas o ambiente MangoHud necessário:
+
+    export MANGOHUD=1
+    export MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"
+    unset MANGOHUD_CONFIG
+    unset MANGOHUD_DLSYM
+
+Proibido no wrapper/config MangoHud:
+- MANGOHUD_CONFIG= inline
+- MANGOHUD_DLSYM
+
+- gamescope
+- vkBasalt
+- graphs
+
+Config aprovada:
+
+    legacy_layout=0
+    horizontal
+    hud_no_margin
+    position=top-left
+    font_size=17
+    round_corners=0
+    background_alpha=0.35
+    alpha=1.0
+
+    time
+    time_format="%H:%M"
+    time_no_label
+
+    fps
+    frametime
+    cpu_stats
+    cpu_temp
+    cpu_mhz
+    gpu_stats
+    gpu_temp
+    gpu_core_clock
+    gpu_mem_clock
+    vram
+    ram
+    gamemode
+
+    toggle_hud=Shift_R+F12
+    reload_cfg=none
+
+Regra operacional:
+
+- Se o MangoHud voltar ao padrão, primeiro verificar o ambiente do processo e o namespace com /proc/<PID>/root.
+- Não recriar wrapper.
+- Não insistir em Shift_L+F4.
+- Não voltar para /usr/local/share/... como caminho primário.
+- Ajuste de fonte aprovado: font_size=17.
+<!-- MOCHA-MANGOHUD-STEAM-RUNTIME-CONF-END -->
