@@ -1,5 +1,0 @@
-#!/bin/bash
-rm -f -r /tmp/calamares-root-aaaaaaaa/var/cache/pacman/pkg/*
-sleep 10
-umount /tmp/calamares-root-aaaaaaaa
-rm -f -r /root/.cache/calamares/session.log

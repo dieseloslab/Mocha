@@ -1,7 +1,0 @@
-# Syntax is YAML 1.2
----
-type:       "job"
-name:       "pamac"
-interface:  "process"
-command:    "/usr/lib/calamares/modules/pamac/pamac"
-timeout:    86400

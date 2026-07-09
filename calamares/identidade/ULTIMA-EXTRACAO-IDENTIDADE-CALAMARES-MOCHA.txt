@@ -1,6 +1,0 @@
-/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953
-/media/mochafast/MochaArch/calamares/aplicacoes/airootfs-mocha-calamares-aplicado-v2-20260605-153305/airootfs-mocha
-/media/mochafast/MochaArch/calamares/overlays/overlay-iso-calamares-mocha-20260605-152406
-/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/manifestos/indice-textos-editaveis.tsv
-/media/mochafast/MochaArch/calamares/identidade/extracao-identidade-calamares-mocha-20260605-153953/proposta/ROTEIRO-IDENTIDADE-CALAMARES-MOCHA.md
-/media/mochafast/MochaArch/auditorias/mocha-extrai-branding-textos-calamares-20260605-153953.log

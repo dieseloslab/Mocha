@@ -1,7 +1,0 @@
-# Syntax is YAML 1.2
----
-type:       "job"
-name:       "terminal"
-interface:  "process"
-command:    "/usr/lib/calamares/modules/terminal/terminal"
-timeout:    86400
