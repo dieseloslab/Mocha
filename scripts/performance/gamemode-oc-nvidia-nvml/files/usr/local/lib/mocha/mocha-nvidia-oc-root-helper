@@ -5,20 +5,13 @@ ACTION="${1:-status}"
 CONF="/etc/mocha/nvidia-game-oc.conf"
 LOG="/var/log/mocha-nvidia-game-oc.log"
 
-mkdir -p /var/log
-
-CORE_OFFSET=50
-MEMORY_TRANSFER_RATE_OFFSET=250
 GPU_INDEX=0
+CORE_OFFSET=50
+MEMORY_TRANSFER_RATE_OFFSET=200
 
-if [ -f "$CONF" ]; then
-  # shellcheck disable=SC1090
-  . "$CONF"
-fi
+[ -f "$CONF" ] && . "$CONF"
 
-log() {
-  printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG"
-}
+mkdir -p /var/log
 
 case "$ACTION" in
   start|apply|end|reset|stop|status) ;;
@@ -28,131 +21,160 @@ case "$ACTION" in
     ;;
 esac
 
-python3 - "$ACTION" "$GPU_INDEX" "$CORE_OFFSET" "$MEMORY_TRANSFER_RATE_OFFSET" <<'PY' 2>&1 | tee -a /var/log/mocha-nvidia-game-oc.log
-import ctypes
-import sys
-import os
-import time
+log() {
+  printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG"
+}
 
-action = sys.argv[1]
-gpu_index = int(sys.argv[2])
-core_offset = int(sys.argv[3])
-mem_offset = int(sys.argv[4])
+detect_target_user() {
+  if [ -n "${SUDO_USER:-}" ] && [ "${SUDO_USER:-root}" != "root" ]; then
+    printf '%s\n' "$SUDO_USER"
+    return 0
+  fi
 
-def load_nvml():
-    last = None
-    for name in ("libnvidia-ml.so.1", "libnvidia-ml.so"):
-        try:
-            return ctypes.CDLL(name), name
-        except OSError as e:
-            last = e
-    raise RuntimeError(f"não carregou libnvidia-ml: {last}")
+  if [ -n "${MOCHA_TARGET_USER:-}" ]; then
+    printf '%s\n' "$MOCHA_TARGET_USER"
+    return 0
+  fi
 
-nvml, libname = load_nvml()
+  loginctl list-users --no-legend 2>/dev/null | awk '$2 != "root" {print $2; exit}'
+}
 
-def get_symbol(name, required=True):
-    try:
-        return getattr(nvml, name)
-    except AttributeError:
-        if required:
-            raise RuntimeError(f"símbolo NVML ausente: {name}")
-        return None
+TARGET_USER="$(detect_target_user)"
+TARGET_UID="$(id -u "$TARGET_USER" 2>/dev/null || printf '')"
 
-error_string = get_symbol("nvmlErrorString", required=False)
-if error_string is not None:
-    error_string.argtypes = [ctypes.c_int]
-    error_string.restype = ctypes.c_char_p
+find_env_value() {
+  key="$1"
 
-def err_name(code):
-    if code == 0:
-        return "NVML_SUCCESS"
-    if error_string is not None:
-        try:
-            s = error_string(code)
-            if s:
-                return s.decode("utf-8", "replace")
-        except Exception:
-            pass
-    return f"NVML_ERROR_{code}"
+  if [ -z "${TARGET_USER:-}" ]; then
+    return 1
+  fi
 
-def check(code, what):
-    if code != 0:
-        raise RuntimeError(f"{what}: {err_name(code)} ({code})")
+  for pid in $(pgrep -u "$TARGET_USER" -f 'plasmashell|kwin_wayland|ksmserver|steam|Xwayland|gamescope|Heroic|legendary|faugus' 2>/dev/null | head -40); do
+    [ -r "/proc/$pid/environ" ] || continue
+    value="$(tr '\0' '\n' < "/proc/$pid/environ" 2>/dev/null | awk -F= -v k="$key" '$1 == k {print substr($0, length(k) + 2); exit}')"
+    if [ -n "$value" ]; then
+      printf '%s\n' "$value"
+      return 0
+    fi
+  done
 
-init = get_symbol("nvmlInit_v2", required=False) or get_symbol("nvmlInit")
-shutdown = get_symbol("nvmlShutdown", required=False)
-get_handle = get_symbol("nvmlDeviceGetHandleByIndex_v2", required=False) or get_symbol("nvmlDeviceGetHandleByIndex")
+  return 1
+}
 
-set_gpc = get_symbol("nvmlDeviceSetGpcClkVfOffset")
-set_mem = get_symbol("nvmlDeviceSetMemClkVfOffset")
+DISPLAY_USE="${DISPLAY:-}"
+XAUTHORITY_USE="${XAUTHORITY:-}"
+WAYLAND_DISPLAY_USE="${WAYLAND_DISPLAY:-}"
+XDG_RUNTIME_DIR_USE="${XDG_RUNTIME_DIR:-}"
 
-get_gpc = get_symbol("nvmlDeviceGetGpcClkVfOffset", required=False)
-get_mem = get_symbol("nvmlDeviceGetMemClkVfOffset", required=False)
-
-init.restype = ctypes.c_int
-get_handle.argtypes = [ctypes.c_uint, ctypes.POINTER(ctypes.c_void_p)]
-get_handle.restype = ctypes.c_int
-
-set_gpc.argtypes = [ctypes.c_void_p, ctypes.c_int]
-set_gpc.restype = ctypes.c_int
-set_mem.argtypes = [ctypes.c_void_p, ctypes.c_int]
-set_mem.restype = ctypes.c_int
-
-if get_gpc is not None:
-    get_gpc.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_int)]
-    get_gpc.restype = ctypes.c_int
-if get_mem is not None:
-    get_mem.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_int)]
-    get_mem.restype = ctypes.c_int
-
-print("================================================================")
-print(time.strftime("%F %T"), f"NVML action={action} lib={libname} gpu_index={gpu_index} uid={os.geteuid()}")
-
-check(init(), "nvmlInit")
-
-dev = ctypes.c_void_p()
-check(get_handle(ctypes.c_uint(gpu_index), ctypes.byref(dev)), "nvmlDeviceGetHandleByIndex")
-
-def query(label):
-    if get_gpc is not None:
-        v = ctypes.c_int()
-        r = get_gpc(dev, ctypes.byref(v))
-        print(f"{label}_GPC_OFFSET={v.value if r == 0 else err_name(r)}")
-    else:
-        print(f"{label}_GPC_OFFSET_QUERY=simbolo_ausente")
-
-    if get_mem is not None:
-        v = ctypes.c_int()
-        r = get_mem(dev, ctypes.byref(v))
-        print(f"{label}_MEM_OFFSET={v.value if r == 0 else err_name(r)}")
-    else:
-        print(f"{label}_MEM_OFFSET_QUERY=simbolo_ausente")
-
-query("BEFORE")
-
-if action in ("start", "apply"):
-    check(set_gpc(dev, ctypes.c_int(core_offset)), f"nvmlDeviceSetGpcClkVfOffset={core_offset}")
-    check(set_mem(dev, ctypes.c_int(mem_offset)), f"nvmlDeviceSetMemClkVfOffset={mem_offset}")
-    print(f"NVML_START_OK core={core_offset} mem={mem_offset}")
-    query("AFTER")
-
-elif action in ("end", "reset", "stop"):
-    check(set_gpc(dev, ctypes.c_int(0)), "nvmlDeviceSetGpcClkVfOffset=0")
-    check(set_mem(dev, ctypes.c_int(0)), "nvmlDeviceSetMemClkVfOffset=0")
-    print("NVML_END_OK core=0 mem=0")
-    query("AFTER")
-
-elif action == "status":
-    print("NVML_STATUS_OK")
-    query("STATUS")
-
-if shutdown is not None:
-    shutdown()
-PY
-
-RC="${PIPESTATUS[0]}"
-
-if [ "$RC" -ne 0 ]; then
-  log "ERRO: helper NVML action=$ACTION rc=$RC"
-  exit "$RC"
+if [ -z "$DISPLAY_USE" ]; then
+  DISPLAY_USE="$(find_env_value DISPLAY 2>/dev/null || true)"
 fi
+
+if [ -z "$XAUTHORITY_USE" ]; then
+  XAUTHORITY_USE="$(find_env_value XAUTHORITY 2>/dev/null || true)"
+fi
+
+if [ -z "$WAYLAND_DISPLAY_USE" ]; then
+  WAYLAND_DISPLAY_USE="$(find_env_value WAYLAND_DISPLAY 2>/dev/null || true)"
+fi
+
+if [ -z "$XDG_RUNTIME_DIR_USE" ]; then
+  XDG_RUNTIME_DIR_USE="$(find_env_value XDG_RUNTIME_DIR 2>/dev/null || true)"
+fi
+
+if [ -z "$XDG_RUNTIME_DIR_USE" ] && [ -n "$TARGET_UID" ] && [ -d "/run/user/$TARGET_UID" ]; then
+  XDG_RUNTIME_DIR_USE="/run/user/$TARGET_UID"
+fi
+
+if [ -z "$XAUTHORITY_USE" ] && [ -n "$XDG_RUNTIME_DIR_USE" ] && [ -d "$XDG_RUNTIME_DIR_USE" ]; then
+  XAUTHORITY_USE="$(find "$XDG_RUNTIME_DIR_USE" -maxdepth 1 -type f -name 'xauth_*' 2>/dev/null | head -1 || true)"
+fi
+
+if [ -z "$DISPLAY_USE" ]; then
+  for d in :1 :0; do
+    sock="/tmp/.X11-unix/X${d#:}"
+    if [ -S "$sock" ]; then
+      DISPLAY_USE="$d"
+      break
+    fi
+  done
+fi
+
+export DISPLAY="$DISPLAY_USE"
+[ -n "$XAUTHORITY_USE" ] && export XAUTHORITY="$XAUTHORITY_USE"
+[ -n "$WAYLAND_DISPLAY_USE" ] && export WAYLAND_DISPLAY="$WAYLAND_DISPLAY_USE"
+[ -n "$XDG_RUNTIME_DIR_USE" ] && export XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR_USE"
+
+{
+  printf '\n'
+  printf '================================================================\n'
+  printf '%s NVC action=%s target_user=%s uid=%s gpu=%s core=%s mem=%s\n' "$(date '+%F %T')" "$ACTION" "${TARGET_USER:-}" "${TARGET_UID:-}" "$GPU_INDEX" "$CORE_OFFSET" "$MEMORY_TRANSFER_RATE_OFFSET"
+  printf 'DISPLAY=%s\n' "${DISPLAY:-}"
+  printf 'XAUTHORITY=%s\n' "${XAUTHORITY:-}"
+  printf 'WAYLAND_DISPLAY=%s\n' "${WAYLAND_DISPLAY:-}"
+  printf 'XDG_RUNTIME_DIR=%s\n' "${XDG_RUNTIME_DIR:-}"
+} >> "$LOG"
+
+if ! command -v nvidia-settings >/dev/null 2>&1; then
+  log "ERRO: nvidia-settings ausente"
+  exit 127
+fi
+
+if [ -z "${DISPLAY:-}" ]; then
+  log "ERRO: DISPLAY nao detectado para NV-CONTROL"
+  exit 10
+fi
+
+run_ns() {
+  log "nvidia-settings $*"
+  nvidia-settings "$@" 2>&1 | tee -a "$LOG"
+  return "${PIPESTATUS[0]}"
+}
+
+query_state() {
+  run_ns \
+    -q "[gpu:${GPU_INDEX}]/GPUPowerMizerMode" \
+    -q "[gpu:${GPU_INDEX}]/GPUGraphicsClockOffsetAllPerformanceLevels" \
+    -q "[gpu:${GPU_INDEX}]/GPUMemoryTransferRateOffsetAllPerformanceLevels" \
+    -q "[gpu:${GPU_INDEX}]/GPUCurrentClockFreqsString"
+}
+
+RC=0
+
+case "$ACTION" in
+  start|apply)
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUPowerMizerMode=1" || true
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUGraphicsClockOffsetAllPerformanceLevels=${CORE_OFFSET}" || RC=1
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUMemoryTransferRateOffsetAllPerformanceLevels=${MEMORY_TRANSFER_RATE_OFFSET}" || RC=1
+    query_state || true
+
+    if [ "$RC" -eq 0 ]; then
+      echo "NVC_START_OK core=${CORE_OFFSET} mem=${MEMORY_TRANSFER_RATE_OFFSET}"
+      log "NVC_START_OK core=${CORE_OFFSET} mem=${MEMORY_TRANSFER_RATE_OFFSET}"
+    else
+      echo "NVC_START_FAIL core=${CORE_OFFSET} mem=${MEMORY_TRANSFER_RATE_OFFSET}" >&2
+      log "ERRO: NVC_START_FAIL core=${CORE_OFFSET} mem=${MEMORY_TRANSFER_RATE_OFFSET}"
+      exit "$RC"
+    fi
+    ;;
+  end|reset|stop)
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUGraphicsClockOffsetAllPerformanceLevels=0" || RC=1
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUMemoryTransferRateOffsetAllPerformanceLevels=0" || RC=1
+    run_ns -a "[gpu:${GPU_INDEX}]/GPUPowerMizerMode=0" || true
+    query_state || true
+
+    if [ "$RC" -eq 0 ]; then
+      echo "NVC_END_OK core=0 mem=0"
+      log "NVC_END_OK core=0 mem=0"
+    else
+      echo "NVC_END_FAIL" >&2
+      log "ERRO: NVC_END_FAIL"
+      exit "$RC"
+    fi
+    ;;
+  status)
+    query_state
+    echo "NVC_STATUS_OK"
+    log "NVC_STATUS_OK"
+    ;;
+esac

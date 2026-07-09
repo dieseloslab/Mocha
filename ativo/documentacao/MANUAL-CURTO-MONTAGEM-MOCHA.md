@@ -12,11 +12,11 @@
 ### GameMode NVIDIA OC aprovado
 
 - OC NVIDIA existe somente durante GameMode.
-- Metodo aprovado em Wayland/NVIDIA: NVML executado por helper root.
+- Metodo aprovado em Wayland/NVIDIA: NV-CONTROL via nvidia-settings executado por helper root.
 - Helper aprovado: /usr/local/lib/mocha/mocha-nvidia-oc-root-helper.
 - Hook start aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system.
 - Hook end aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system.
-- Start aplica core +50 e memoria +250.
+- Start aplica core +50 e transfer-rate +400, equivalente a +200 MHz visivel em memclock.
 - End reverte core 0 e memoria 0.
 - Sudoers necessario: /etc/sudoers.d/mocha-nvidia-oc-root-helper.
 - A validacao deve limpar os logs antes do teste para evitar falso negativo por tentativa antiga.
@@ -130,7 +130,7 @@ Pontos essenciais:
     GameMode start: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
     GameMode end: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
     OC NVIDIA efetivo: /etc/mocha/nvidia-game-oc.conf
-    OC aprovado: core +50 / mem +250
+    OC aprovado: core +50 / transfer-rate +400, equivalente a +200 MHz visivel em memclock
 
 Não voltar automaticamente para presets antigos de agressividade.
 <!-- MOCHA-PONTEIRO-AGRESSIVIDADE-VIGENTE-20260704-FIM -->
@@ -205,7 +205,7 @@ Regra operacional:
 
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_START -->
 
-## GameMode OC NVIDIA NVML — canônico
+## GameMode OC NVIDIA — canônico
 
 Validado em runtime em 2026-07-05 no host `derp-x8664`.
 
@@ -273,15 +273,15 @@ Proibido usar como método canônico novo:
 
 `gamemode-end-agressivo-oc.sh`
 
-`nvidia-settings -a`
+`nvidia-settings -a` solto fora do helper root atual
 
-`GPUGraphicsClockOffset`
+`GPUGraphicsClockOffset` solto fora do helper root atual
 
-`GPUMemoryTransferRateOffset`
+`GPUMemoryTransferRateOffset` solto fora do helper root atual
 
-`GPUPowerMizerMode`
+`GPUPowerMizerMode` solto fora do helper root atual
 
-Não substituir o helper NVML por wrapper improvisado.
+Não substituir o helper root atual por wrapper improvisado.
 
 Não documentar nova alteração como canônica sem teste real de runtime e aprovação explícita.
 
