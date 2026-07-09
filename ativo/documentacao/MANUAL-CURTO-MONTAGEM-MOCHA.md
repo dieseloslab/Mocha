@@ -384,7 +384,7 @@ Regra canônica:
 
 - OC NVIDIA deve existir somente durante o jogo.
 - O acionamento deve ocorrer somente junto com GameMode.
-- Perfil aprovado: core +50 e mem +250.
+- Perfil aprovado: core +50 e transfer-rate +400, equivalente a +200 MHz visível em memclock.
 - O encerramento do GameMode deve remover o OC e devolver core/mem ao estado neutro.
 
 Não aplicar OC permanente solto.
@@ -452,6 +452,140 @@ Critério:
 - `FAIL=0`: Mocha funcional aprovado pelos critérios auditados.
 - `FAIL=1`: existe falta, divergência, staged indevido, artefato ausente ou risco de descaracterização.
 <!-- MOCHA:COBERTURA-FUNCIONAL-RUNTIME-APROVADO:END -->
+
+<!-- MOCHA:KDE-TEMA-PAINEL-SDDM-LOCKSCREEN-OPERACIONAL:BEGIN -->
+## KDE, tema, painel, wallpaper, SDDM e lockscreen — mapa operacional
+
+Status: obrigatório na montagem do Mocha.
+
+Objetivo desta etapa:
+
+Deixar o manual curto como mapa operacional de montagem, sem substituir os artefatos reais aprovados. Este bloco aponta quais scripts e payloads devem ser usados para reproduzir o visual Mocha aprovado: tema KDE/Plasma, painel estilo Windows 11, wallpaper, SDDM/login e trava de tela.
+
+Regra canônica:
+
+- Não recriar tema, painel, wallpaper, SDDM ou lockscreen por aproximação.
+- Não substituir artefato aprovado por equivalente parecido.
+- Não editar runtime por inferência.
+- Usar os scripts, snapshots e payloads reais listados abaixo.
+- Antes de canonizar mudança, auditar o runtime atual aprovado e comparar contra estes caminhos.
+
+### Painel estilo Windows 11
+
+Artefatos aprovados:
+
+- script de reaplicação:
+  `ativo/kde/barra-win11-aprovada/20260529-200013-mocha-reaplicar-barra-aprovada-atual.sh`
+- snapshot/layout aprovado:
+  `ativo/kde/barra-win11-aprovada/plasma-org.kde.plasma.desktop-appletsrc-aprovado-atual`
+- manual específico do painel:
+  `ativo/kde/barra-win11-aprovada/MANUAL-BARRA-WIN11-MOCHA-APROVADA.md`
+
+Como montar:
+
+- aplicar o painel pelo script aprovado acima;
+- validar o resultado contra o snapshot/layout aprovado;
+- não reconstruir painel manualmente se o snapshot real existir;
+- validar ausência de duplicidade de applets soltos que concorram com o System Tray.
+
+### Tema KDE/Plasma e cores
+
+Artefatos aprovados:
+
+- esquema de cores principal:
+  `ativo/kde/esquemas-cores-aprovados/MochaSolidCanonico.colors`
+- esquema auxiliar presente no payload:
+  `ativo/kde/color-schemes/MochaDark.colors`
+- desktop theme Plasma:
+  `ativo/kde/plasma-style-barra-mocha/MochaPanelSolidCanonico`
+- payload Calamares de configuração:
+  `ativo/calamares/payload/tema-completo/config/kdeglobals`
+  `ativo/calamares/payload/tema-completo/config/plasma-org.kde.plasma.desktop-appletsrc`
+  `ativo/calamares/payload/tema-completo/config/plasmarc`
+
+Como montar:
+
+- usar o payload de tema completo como fonte da instalação;
+- aplicar/reaplicar em usuários com:
+  `ativo/scripts/mocha-reaplicar-tema-completo-usuarios.sh`
+- no fluxo Calamares/finalizador, usar:
+  `ativo/calamares/scripts/mocha-finaliza-tema-completo-usuarios.sh`
+- não gerar novo esquema de cores se os arquivos aprovados acima existirem.
+
+### Wallpaper
+
+Artefatos aprovados:
+
+- wallpaper canônico no repo:
+  `ativo/kde/wallpapers/mocha-wallpaper-canonico.png`
+- wallpaper no payload Calamares:
+  `ativo/calamares/payload/tema-completo/wallpaper/mocha-wallpaper-canonico.png`
+
+Como montar:
+
+- usar o mesmo wallpaper canônico para desktop, login e lockscreen quando o payload assim determinar;
+- não trocar por imagem parecida;
+- validar o caminho instalado em `/usr/share/wallpapers/mocha-wallpaper-canonico.png` quando estiver auditando runtime.
+
+### SDDM / login
+
+Artefatos e runtime esperados:
+
+- tema SDDM Mocha instalado em:
+  `/usr/share/sddm/themes/mocha`
+- arquivos esperados no tema instalado:
+  `/usr/share/sddm/themes/mocha/theme.conf`
+  `/usr/share/sddm/themes/mocha/theme.conf.user`
+  `/usr/share/sddm/themes/mocha/Background.qml`
+  `/usr/share/sddm/themes/mocha/mocha-wallpaper.png`
+- override esperado:
+  `/etc/sddm.conf.d/99-mocha-theme.conf`
+
+Como montar:
+
+- instalar/copiar o tema SDDM Mocha real;
+- apontar o SDDM para o tema Mocha via override;
+- preservar Wayland/Plasma conforme regra vigente;
+- não usar tema Breeze genérico como substituto visual do Mocha.
+
+### Lockscreen / trava de tela
+
+Artefatos aprovados:
+
+- config no payload principal:
+  `ativo/calamares/payload/tema-completo/config/kscreenlockerrc`
+- config para skel:
+  `ativo/calamares/payload/tema-completo/etc/skel/.config/kscreenlockerrc`
+- config XDG:
+  `ativo/calamares/payload/tema-completo/etc/xdg/kscreenlockerrc`
+
+Como montar:
+
+- copiar/aplicar `kscreenlockerrc` do payload aprovado;
+- validar runtime em `/home/<usuario>/.config/kscreenlockerrc`;
+- validar base para novos usuários em `/etc/skel/.config/kscreenlockerrc`;
+- não configurar lockscreen por memória nem por aproximação visual.
+
+### Validação mínima desta etapa
+
+A montagem só deve ser aceita se a auditoria confirmar:
+
+- script do painel aprovado existe e passa em `bash -n`;
+- snapshot/layout aprovado do painel existe;
+- esquemas de cores aprovados existem;
+- desktop theme `MochaPanelSolidCanonico` existe;
+- wallpaper canônico existe no repo e no payload;
+- finalizadores de tema existem e passam em `bash -n`;
+- SDDM usa tema Mocha real;
+- `kscreenlockerrc` existe no payload, em XDG/skel e no runtime auditado;
+- nada foi substituído por artefato parecido.
+
+Critério:
+
+- `FAIL=0`: caminhos reais comprovados e coerentes com o runtime/payload aprovado.
+- `FAIL=1`: arquivo ausente, script inválido, stage indevido, runtime divergente ou risco de descaracterização.
+<!-- MOCHA:KDE-TEMA-PAINEL-SDDM-LOCKSCREEN-OPERACIONAL:END -->
+
 
 
 <!-- MOCHA:SYSTRAY-DUPLICIDADE-PREREQ:BEGIN -->
