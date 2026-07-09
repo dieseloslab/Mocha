@@ -203,6 +203,59 @@ Regra operacional:
 - Ajuste de fonte aprovado: font_size=17.
 <!-- MOCHA-MANGOHUD-STEAM-RUNTIME-CONF-END -->
 
+<!-- MOCHA:STEAM-LAUNCHOPTIONS-JOGOS-NOVOS:BEGIN -->
+## Steam Mocha — LaunchOptions em jogos novos
+
+Status: obrigatório na montagem do Mocha.
+
+Objetivo desta etapa:
+
+Garantir que jogos Steam/Proton recém-instalados também recebam a LaunchOptions canônica do Mocha, e não apenas jogos antigos que já estavam configurados.
+
+LaunchOptions canônica:
+
+    /usr/local/bin/mocha-steam-game-run %command%
+
+Regra de montagem:
+
+- O Mocha deve deixar o Steam preparado para aplicar a LaunchOptions canônica em jogos novos.
+- A validação da montagem não pode aceitar somente jogos antigos já configurados.
+- A auditoria precisa detectar AppID sem `LaunchOptions` e confirmar que o fluxo Steam Mocha adiciona a linha canônica.
+- Ao fechar e reabrir o Steam Mocha, jogo novo sem `LaunchOptions` deve receber:
+  `/usr/local/bin/mocha-steam-game-run %command%`
+- Se um jogo novo permanecer sem essa linha, a montagem do Steam Mocha está incompleta.
+
+Relação com o wrapper:
+
+- O wrapper global obrigatório continua sendo:
+  `/usr/local/bin/mocha-steam-game-run`
+- A LaunchOptions deve chamar esse wrapper, não uma cópia local improvisada.
+- Não substituir por gamescope.
+- Não substituir por vkBasalt.
+- Não usar MANGOHUD_DLSYM.
+- Não recriar wrapper parecido quando o wrapper aprovado existir no runtime/snapshot.
+
+Validação obrigatória durante a montagem:
+
+    1. Fechar completamente o Steam.
+    2. Identificar ou criar um caso de AppID Steam/Proton sem LaunchOptions canônica.
+    3. Abrir o Steam pelo fluxo Steam Mocha aprovado.
+    4. Fechar e reabrir o Steam Mocha quando necessário para persistência no `localconfig.vdf`.
+    5. Conferir se o AppID novo recebeu:
+       /usr/local/bin/mocha-steam-game-run %command%
+    6. Abrir o jogo.
+    7. Confirmar MangoHud em uma linha.
+    8. Confirmar indicador GameMode.
+    9. Confirmar que o OC NVIDIA via GameMode só atua durante o jogo.
+
+Critério de aprovação:
+
+- Jogo antigo com LaunchOptions canônica: necessário, mas insuficiente.
+- Jogo novo recebendo a LaunchOptions canônica automaticamente: obrigatório.
+- Steam Mocha sem autoinserção para jogo novo: reprova a montagem.
+<!-- MOCHA:STEAM-LAUNCHOPTIONS-JOGOS-NOVOS:END -->
+
+
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_START -->
 
 ## GameMode OC NVIDIA — canônico
@@ -286,6 +339,120 @@ Não substituir o helper root atual por wrapper improvisado.
 Não documentar nova alteração como canônica sem teste real de runtime e aprovação explícita.
 
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_END -->
+
+<!-- MOCHA:COBERTURA-FUNCIONAL-RUNTIME-APROVADO:BEGIN -->
+## Cobertura funcional Mocha — runtime aprovado
+
+Status: obrigatório para considerar o Mocha pronto sobre sistema-base instalado.
+
+Esta seção não substitui os blocos específicos de Steam, MangoHud, GameMode, TuneD, KDE, tema ou repositório. Ela consolida os pontos que a auditoria final deve encontrar no manual curto.
+
+### MangoHud canônico
+
+Caminhos aprovados que devem estar documentados:
+
+- `/usr/local/share/mocha/mangohud/MangoHud.conf`
+- `/home/hal/.config/MangoHud/mocha-active.conf`
+- `/etc/skel/.config/MangoHud/mocha-active.conf`
+
+A exibição aprovada do MangoHud deve permanecer em uma linha e cobrir:
+
+- FPS
+- latência
+- CPU
+- GPU
+- temperatura
+- MHz
+- VRAM
+- hora HH:MM
+- indicador GameMode
+
+Não substituir por gamescope.
+Não substituir por vkBasalt.
+Não usar MANGOHUD_DLSYM.
+
+### GameMode + OC NVIDIA canônico
+
+Artefatos obrigatórios já validados em runtime:
+
+- `/etc/gamemode.ini`
+- `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+- `/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+- `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+
+Regra canônica:
+
+- OC NVIDIA deve existir somente durante o jogo.
+- O acionamento deve ocorrer somente junto com GameMode.
+- Perfil aprovado: core +50 e mem +250.
+- O encerramento do GameMode deve remover o OC e devolver core/mem ao estado neutro.
+
+Não aplicar OC permanente solto.
+Não trocar o helper NVML por wrapper improvisado.
+Não recriar artefato parecido quando o runtime/snapshot aprovado existir.
+
+### TuneD / agressividade / memória
+
+Perfil obrigatório:
+
+- `mocha-latency-performance`
+
+Parâmetros que devem estar documentados para validação:
+
+- `swappiness=150`
+- `vfs_cache_pressure=50`
+- `page-cluster=0`
+- `dirty_background_bytes`
+- `dirty_bytes`
+- `max_map_count`
+- `zram`
+- `THP`
+
+A validação deve confirmar o perfil ativo e o runtime antes de qualquer reparo. Não alterar TuneD/agressividade por inferência ou memória quando o sistema atual aprovado puder ser auditado.
+
+### Repositório fallback local/publicável
+
+Caminho canônico local:
+
+- `/media/vmstore/mocha-repo`
+
+Função canônica:
+
+- servir como repositório de fallback para kernels, drivers NVIDIA e pacotes relacionados que precisem de rollback seguro;
+- ser publicável futuramente para usuários do Mocha;
+- permitir retorno a versões anteriores quando uma atualização quebrar FPS, boot, driver ou stack gamer.
+
+Regra de atualização:
+
+- adicionar somente pacotes novos ausentes;
+- reindexar com `repo-add`;
+- usar `repo-add` sem `-R`;
+- não apagar pacotes antigos;
+- não podar versões antigas;
+- não usar limpeza automática destrutiva;
+- atualização periódica por script/agendador a cada 2 ou 3 dias, depois de o script ser auditado e aprovado.
+
+### Validação final de Mocha pronto
+
+A validação final deve imprimir um VEREDITO explícito e terminar com `FAIL=0` somente se todos os pontos obrigatórios forem confirmados.
+
+Itens mínimos do VEREDITO:
+
+- Steam Mocha abre pelo fluxo correto.
+- LaunchOptions canônica existe para jogos antigos e jogos Steam/Proton recém-instalados.
+- MangoHud aparece em uma linha com os campos aprovados.
+- GameMode ativa durante o jogo.
+- OC NVIDIA atua somente durante o jogo.
+- TuneD está no perfil `mocha-latency-performance`.
+- Repo fallback `/media/vmstore/mocha-repo` existe e segue regra incremental sem remoção.
+- KDE, painel, systray, tema, wallpaper e SDDM estão coerentes com o runtime aprovado.
+
+Critério:
+
+- `FAIL=0`: Mocha funcional aprovado pelos critérios auditados.
+- `FAIL=1`: existe falta, divergência, staged indevido, artefato ausente ou risco de descaracterização.
+<!-- MOCHA:COBERTURA-FUNCIONAL-RUNTIME-APROVADO:END -->
+
 
 <!-- MOCHA:SYSTRAY-DUPLICIDADE-PREREQ:BEGIN -->
 ## Pré-requisito de montagem — systray sem duplicidade de volume e Bluetooth
