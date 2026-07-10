@@ -1,5 +1,6 @@
+a1931485550ae90d23ba00f752be652c0b3925342d75b07da6c3fb9dd26e090b  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/etc/gamemode.ini
 430a9367eca354ddc03e0b31b60eed10af77c1fe2add0c123f6d978a4d4a15aa  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/etc/mocha/nvidia-game-oc.conf
 63d3545c1cad0151be56c2932f56dea538693b50600f67f8020ceeda85864bb5  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/etc/sudoers.d/mocha-nvidia-oc-root-helper
-49ddac5121cc42fbf58a91167dc4ec9a7903f0897ba82b5742c911fb66d0074e  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/usr/local/lib/mocha/mocha-nvidia-oc-root-helper
-8e81f3b2b57b30e027e54f1096d8cb515d182bac2343a6ed784e9cb534c05294  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+efa4cbf3b414f29351cd66a04713e6f011a67128525e5d5cdae09b596c36a3f5  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/usr/local/lib/mocha/mocha-nvidia-oc-root-helper
 fffc494f2f74f0f589e92d4cba310970b548a383149fe19e31d9760415f5a45a  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
+8e81f3b2b57b30e027e54f1096d8cb515d182bac2343a6ed784e9cb534c05294  /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/files/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system

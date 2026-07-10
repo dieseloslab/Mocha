@@ -1,33 +1,37 @@
-# GameMode OC NVIDIA — payload de instalacao
+# GameMode OC NVIDIA — espelho do runtime aprovado
 
-Status: payload interno sincronizado a partir do runtime local atual.
+Este diretório preserva o modelo que está funcionando no sistema Mocha.
 
-Nome historico do diretorio:
-- gamemode-oc-nvidia-nvml
+## Cadeia ativa
 
-Regra operacional:
-- OC NVIDIA existe somente durante GameMode.
-- Nao aplicar OC NVIDIA permanente solto.
-- Nao substituir helper, hooks ou configuracao por equivalente improvisado.
-- Nao reinstalar no runtime sem auditoria previa.
-- Nao canonizar alteracao nova em manual sem teste real e aprovacao explicita.
+`/etc/gamemode.ini` chama:
 
-Arquivos runtime que este payload instala:
-- /etc/mocha/nvidia-game-oc.conf
-- /etc/sudoers.d/mocha-nvidia-oc-root-helper
-- /usr/local/lib/mocha/mocha-nvidia-oc-root-helper
-- /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
-- /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+- `/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
+- `/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
 
-Integracao esperada em /etc/gamemode.ini:
-- start=/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
-- end=/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+Esses dois caminhos são links simbólicos de compatibilidade para:
 
-Validacao obrigatoria:
-- /etc/gamemode.ini deve apontar start/end para os hooks authority-system.
-- /etc/sudoers.d/mocha-nvidia-oc-root-helper deve passar em visudo -cf.
-- offsets devem ativar apenas durante GameMode e reverter ao final.
-- validar em jogo real antes de documentar nova mudanca como canonica.
+- `/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+- `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
 
-Aplicacao:
-- executar ./mocha-aplica-gamemode-oc-nvidia-nvml.sh somente quando a auditoria indicar que o runtime precisa ser reimplantado.
+Os hooks chamam:
+
+- `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+
+Arquivos complementares:
+
+- `/etc/mocha/nvidia-game-oc.conf`
+- `/etc/sudoers.d/mocha-nvidia-oc-root-helper`
+
+O payload deve preservar os links simbólicos como links. Não deve
+convertê-los em cópias regulares nem substituir os caminhos definidos no
+`gamemode.ini` por inferência.
+
+## Aplicação
+
+Executar:
+
+`./mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+
+O instalador copia o `gamemode.ini` aprovado, os arquivos regulares e os
+links simbólicos, preservando os modos registrados no payload.

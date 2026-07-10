@@ -6,8 +6,8 @@ TS="$(date +%Y%m%d-%H%M%S)"
 PKG_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 AUD="/media/mochafast/MochaArch-Interno/ativo/auditorias/reaplica-gamemode-oc-nvidia-nvml-$TS"
 
-START_HOOK="/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system"
-END_HOOK="/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system"
+START_HOOK="/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh"
+END_HOOK="/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh"
 
 sudo -v || exit 1
 mkdir -p "$AUD" || exit 1
@@ -34,6 +34,20 @@ install_payload_file() {
 
   sudo mkdir -p "$(dirname "$dest")" || return 1
 
+  if [ -L "$src" ]; then
+    target="$(readlink -- "$src")" || return 1
+
+    if sudo test -e "$dest" || sudo test -L "$dest"; then
+      sudo rm -f -- "$dest" || return 1
+    fi
+
+    sudo ln -s -- "$target" "$dest" || return 1
+    sudo chown -h root:root "$dest" || return 1
+
+    echo "INSTALADO_LINK: $dest -> $target"
+    return 0
+  fi
+
   case "$dest" in
     /etc/sudoers.d/mocha-nvidia-oc-root-helper)
       sudo install -o root -g root -m 0440 "$src" "$dest" || return 1
@@ -55,7 +69,7 @@ install_payload_file() {
 
 while IFS= read -r -d '' src; do
   install_payload_file "$src" || FAIL=1
-done < <(find "$PKG_DIR/files" -type f -print0 | sort -z)
+done < <(find "$PKG_DIR/files" \( -type f -o -type l \) -print0 | sort -z)
 
 if sudo test -f "/etc/sudoers.d/mocha-nvidia-oc-root-helper"; then
   sudo visudo -cf "/etc/sudoers.d/mocha-nvidia-oc-root-helper" >/dev/null 2>&1 || FAIL=1

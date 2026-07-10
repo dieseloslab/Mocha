@@ -11,15 +11,26 @@
 
 ### GameMode NVIDIA OC aprovado
 
-- OC NVIDIA existe somente durante GameMode.
-- Metodo aprovado em Wayland/NVIDIA: NV-CONTROL via nvidia-settings executado por helper root.
-- Helper aprovado: /usr/local/lib/mocha/mocha-nvidia-oc-root-helper.
-- Hook start aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system.
-- Hook end aprovado: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system.
-- Start aplica core +50 e transfer-rate +400, equivalente a +200 MHz visivel em memclock.
-- End reverte core 0 e memoria 0.
-- Sudoers necessario: /etc/sudoers.d/mocha-nvidia-oc-root-helper.
-- A validacao deve limpar os logs antes do teste para evitar falso negativo por tentativa antiga.
+- O OC NVIDIA existe somente durante o GameMode.
+- O `/etc/gamemode.ini` chama os aliases:
+  - `/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
+  - `/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
+- Os aliases são links simbólicos de compatibilidade para:
+  - `/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+  - `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+- Os hooks reais chamam:
+  - `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+- Configuração efetiva:
+  - `/etc/mocha/nvidia-game-oc.conf`
+- Perfil aprovado:
+  - core `+50`;
+  - transfer-rate `+400`, equivalente a aproximadamente `+200 MHz` visível no memclock.
+- O encerramento do GameMode reverte core e memória para `0`.
+- Sudoers necessário:
+  - `/etc/sudoers.d/mocha-nvidia-oc-root-helper`
+- O payload deve preservar os aliases como links simbólicos.
+- Não substituir os aliases pelos alvos reais por inferência.
+- A validação deve limpar ou separar logs antigos para não confundir uma tentativa anterior com o teste atual.
 
 ### Regra para futura instalacao
 
@@ -123,16 +134,21 @@ A referência versionada para a agressividade vigente fica em:
 
     docs/AGRESSIVIDADE-VIGENTE-MOCHA-20260704.md
 
+A cadeia GameMode/OC abaixo foi revalidada no runtime e nos payloads em 2026-07-10.
+
 Pontos essenciais:
 
     vm.swappiness=150
     TuneD profile: mocha-latency-performance
-    GameMode start: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
-    GameMode end: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+    GameMode start alias: /usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
+    GameMode start target: /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
+    GameMode end alias: /usr/local/lib/mocha/gamemode-end-agressivo-oc.sh
+    GameMode end target: /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
     OC NVIDIA efetivo: /etc/mocha/nvidia-game-oc.conf
-    OC aprovado: core +50 / transfer-rate +400, equivalente a +200 MHz visivel em memclock
+    OC aprovado: core +50 / transfer-rate +400 / aproximadamente +200 MHz visível no memclock
 
 Não voltar automaticamente para presets antigos de agressividade.
+Não converter os aliases simbólicos em arquivos regulares.
 <!-- MOCHA-PONTEIRO-AGRESSIVIDADE-VIGENTE-20260704-FIM -->
 
 
@@ -257,14 +273,13 @@ Critério de aprovação:
 
 
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_START -->
+## GameMode OC NVIDIA — espelho do runtime aprovado
 
-## GameMode OC NVIDIA — canônico
+Cadeia revalidada em runtime e sincronizada nos payloads público e interno em 2026-07-10.
 
-Validado em runtime em 2026-07-05 no host `derp-x8664`.
+O OC NVIDIA do Mocha deve existir somente durante o GameMode. Não aplicar OC permanente solto.
 
-O OC NVIDIA do Mocha deve ser aplicado somente junto com GameMode. Não aplicar OC permanente solto.
-
-Pacote canônico:
+Nome histórico do payload:
 
 `gamemode-oc-nvidia-nvml`
 
@@ -276,11 +291,17 @@ Caminho interno:
 
 `/media/mochafast/MochaArch-Interno/ativo/performance/gamemode-oc-nvidia-nvml`
 
-Instalador:
+Instalador público:
 
-`mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+`/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/mocha-aplica-gamemode-oc-nvidia-nvml.sh`
 
-Arquivos runtime canônicos:
+Instalador interno:
+
+`/media/mochafast/MochaArch-Interno/ativo/performance/gamemode-oc-nvidia-nvml/mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+
+Arquivos runtime preservados pelo payload:
+
+`/etc/gamemode.ini`
 
 `/etc/mocha/nvidia-game-oc.conf`
 
@@ -292,15 +313,49 @@ Arquivos runtime canônicos:
 
 `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
 
-Integração obrigatória em `/etc/gamemode.ini`:
+Aliases simbólicos preservados pelo payload:
+
+`/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
+
+`/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
+
+Integração efetiva em `/etc/gamemode.ini`:
 
 `[custom]`
 
-`start=/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+`start=/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
 
-`end=/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+`end=/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
+
+Resolução dos aliases:
+
+`/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh -> /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+
+`/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh -> /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+
+Os aliases são caminhos de compatibilidade ativos. Não são implementações antigas a remover.
+
+Os hooks `authority-system` continuam sendo os executáveis reais chamados pelos aliases.
+
+Os hooks chamam:
+
+`/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+
+Perfil efetivo aprovado:
+
+`GPU_INDEX=0`
+
+`CORE_OFFSET=50`
+
+`MEMORY_TRANSFER_RATE_OFFSET=400`
+
+O transfer-rate `+400` corresponde a aproximadamente `+200 MHz` visível no memclock.
+
+Ao terminar o GameMode, core e memória devem retornar para `0`.
 
 Permissões validadas:
+
+`root:root 644 /etc/gamemode.ini`
 
 `root:root 644 /etc/mocha/nvidia-game-oc.conf`
 
@@ -312,32 +367,21 @@ Permissões validadas:
 
 `root:root 755 /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
 
-`root:root 644 /etc/gamemode.ini`
+Os aliases devem permanecer links simbólicos com proprietário `root:root` e com os alvos absolutos registrados acima.
 
 O sudoers precisa passar em:
 
 `visudo -cf /etc/sudoers.d/mocha-nvidia-oc-root-helper`
 
-Proibido usar como método canônico novo:
+Regra do payload:
 
-`gamemode-ionice-oc-nvidia`
-
-`gamemode-start-agressivo-oc.sh`
-
-`gamemode-end-agressivo-oc.sh`
-
-`nvidia-settings -a` solto fora do helper root atual
-
-`GPUGraphicsClockOffset` solto fora do helper root atual
-
-`GPUMemoryTransferRateOffset` solto fora do helper root atual
-
-`GPUPowerMizerMode` solto fora do helper root atual
-
-Não substituir o helper root atual por wrapper improvisado.
-
-Não documentar nova alteração como canônica sem teste real de runtime e aprovação explícita.
-
+- copiar `/etc/gamemode.ini` exatamente;
+- instalar arquivos regulares com seus modos registrados;
+- preservar os aliases como links simbólicos;
+- não converter links em cópias regulares;
+- não trocar os caminhos definidos no `gamemode.ini` por inferência;
+- não substituir helper, hooks ou configuração por equivalente improvisado;
+- não documentar nova alteração como canônica sem teste real e aprovação.
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_END -->
 
 <!-- MOCHA:COBERTURA-FUNCIONAL-RUNTIME-APROVADO:BEGIN -->
@@ -376,20 +420,32 @@ Não usar MANGOHUD_DLSYM.
 Artefatos obrigatórios já validados em runtime:
 
 - `/etc/gamemode.ini`
+- `/etc/mocha/nvidia-game-oc.conf`
+- `/etc/sudoers.d/mocha-nvidia-oc-root-helper`
 - `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+- `/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
+- `/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
 - `/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
 - `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+
+Cadeia ativa:
+
+- `/etc/gamemode.ini` chama os aliases `gamemode-start-agressivo-oc.sh` e `gamemode-end-agressivo-oc.sh`.
+- Os aliases permanecem links simbólicos para os hooks `authority-system`.
+- Os hooks reais chamam o helper root aprovado.
+- O payload de montagem deve preservar os links simbólicos e o `gamemode.ini` aprovado.
 
 Regra canônica:
 
 - OC NVIDIA deve existir somente durante o jogo.
 - O acionamento deve ocorrer somente junto com GameMode.
-- Perfil aprovado: core +50 e transfer-rate +400, equivalente a +200 MHz visível em memclock.
-- O encerramento do GameMode deve remover o OC e devolver core/mem ao estado neutro.
+- Perfil aprovado: core `+50` e transfer-rate `+400`, equivalente a aproximadamente `+200 MHz` visível no memclock.
+- O encerramento do GameMode deve remover o OC e devolver core/memória ao estado neutro.
 
 Não aplicar OC permanente solto.
-Não trocar o helper NVML por wrapper improvisado.
-Não recriar artefato parecido quando o runtime/snapshot aprovado existir.
+Não trocar o helper por wrapper improvisado.
+Não substituir aliases por cópias regulares.
+Não recriar artefato parecido quando o runtime ou payload aprovado existir.
 
 ### TuneD / agressividade / memória
 

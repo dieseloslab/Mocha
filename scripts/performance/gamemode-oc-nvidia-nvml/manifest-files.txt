@@ -1,5 +1,8 @@
+/etc/gamemode.ini
 /etc/mocha/nvidia-game-oc.conf
 /etc/sudoers.d/mocha-nvidia-oc-root-helper
 /usr/local/lib/mocha/mocha-nvidia-oc-root-helper
 /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
 /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
+/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh
