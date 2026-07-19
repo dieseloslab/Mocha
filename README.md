@@ -1,131 +1,79 @@
 <div align="center">
 
-<img src="assets/mocha-linux-banner.webp" alt="Mocha Linux" width="100%">
+<img src="ativo/assets/branding/avatar/avatar.png" alt="Avatar oficial do Mocha Linux" width="190">
 
 # Mocha Linux
 
-**Português · English · Español · Français**
+**Linux feito para jogar. Feito para ajudar.**
 
-[Português](#português) · [English](#english) · [Español](#español) · [Français](#français)
+Distribuição baseada em Arch Linux, criada para jogos, produtividade e uso diário, com identidade própria, alto desempenho e ferramentas gráficas de atualização e recuperação.
+
+[Site oficial](https://dieseloslab.org/) · [Versões](https://github.com/dieseloslab/Mocha/releases) · [Problemas e sugestões](https://github.com/dieseloslab/Mocha/issues)
+
+**Português** · [English](README.en.md) · [Español](README.es.md) · [Français](README.fr.md)
 
 </div>
 
 ---
 
-## Português
+## O que diferencia o Mocha
 
-**Linux feito para jogar. Feito para ajudar.**
+- **Grande desempenho em jogos:** projetado para competir com Windows e outras distribuições gamers e capaz de superá-los em diversos jogos e cenários testados na mesma máquina.
+- **Kernel Mocha LQX:** kernel baseado no projeto Liquorix, preparado com foco em baixa latência, responsividade e desempenho.
+- **Rollback para a última configuração válida:** atualizações críticas podem ser revertidas quando kernel, drivers ou componentes essenciais provocarem falhas.
+- **Partição de recuperação dedicada:** ambiente independente para diagnóstico, reparo e restauração do sistema principal.
+- **Interface gráfica completa:** atualização, manutenção, recuperação e escolha de componentes sem exigir que o usuário dependa do terminal.
+- **Base para jogos pronta:** Steam, Proton, GameMode, MangoHud e drivers selecionados e validados pelo projeto.
 
-Mocha Linux é uma distribuição voltada a jogos, produtividade e uso diário, com identidade própria, ferramentas gráficas de recuperação e uma base técnica focada em desempenho e estabilidade.
+## Desempenho sem números inventados
 
-### Principais recursos
+O Mocha Linux vem sendo comparado, na mesma máquina, com Windows e outras distribuições voltadas a jogos. O sistema apresentou vantagem em vários cenários e permaneceu competitivo nos demais.
 
-- **Kernel Mocha LQX**, baseado no projeto Liquorix, com foco em baixa latência e desempenho.
-- **Rollback seguro** para retornar à última configuração válida após falhas em atualizações.
-- **Partição de recuperação dedicada** para diagnóstico, reparo e restauração em ambiente independente.
-- Steam, Proton, GameMode, MangoHud e drivers selecionados para jogos.
-- Interface gráfica completa para atualização, recuperação e manutenção.
+Resultados numéricos só serão publicados acompanhados de hardware, versões, configurações e metodologia reproduzível. O desempenho real varia conforme jogo, driver e equipamento.
 
-### Desempenho sem números inventados
+## Atualização e recuperação
 
-O Mocha Linux foi comparado extensivamente com Windows e outras distribuições voltadas a jogos. Em diversos cenários reais, apresentou vantagem; nos demais, manteve desempenho competitivo. Resultados dependem do hardware, dos drivers, do jogo e da configuração. Números só serão publicados quando houver metodologia e documentação reproduzíveis.
+A proposta do Mocha é permitir atualizações importantes com uma rota clara de retorno. Caso uma atualização de kernel, driver ou componente essencial cause problemas, o sistema poderá retornar à última configuração validada.
 
-### Missão social T21
+A partição de recuperação complementa esse mecanismo com um ambiente gráfico independente, capaz de diagnosticar, reparar e restaurar a instalação principal.
 
-O projeto mantém uma missão social ligada à conscientização, ao acolhimento e à visibilidade da Trissomia 21. As iniciativas sociais são desenvolvidas com transparência, parcerias responsáveis e de acordo com a capacidade e os recursos disponíveis.
+## Causa social T21
 
-### Apoio ao projeto
+O Mocha não é apenas um projeto técnico. O projeto mantém uma causa social ligada à **Trissomia 21**, com foco em conscientização, inclusão, visibilidade, acolhimento e apoio a iniciativas responsáveis.
 
-O apoio recebido pelo Ko-fi é **apoio voluntário ao projeto de software** e ajuda a manter infraestrutura, desenvolvimento, testes, documentação e manutenção. Não é apresentado como doação beneficente nem como contribuição dedutível de impostos. A missão social T21 é comunicada separadamente, sem promessa de percentual fixo ou repasse automático.
+A manutenção do próprio projeto — infraestrutura, desenvolvimento, testes, documentação e distribuição — é necessária para que o Mocha possa crescer e ampliar seu impacto social de maneira sustentável e transparente.
 
----
+## Apoie o projeto
 
-## English
+O apoio voluntário ajuda a manter servidores, desenvolvimento, testes, empacotamento, documentação e manutenção. A missão social T21 é apresentada com transparência e desenvolvida conforme os recursos disponíveis e as parcerias responsáveis do projeto.
 
-**Built to play. Built to help.**
+Consulte o [site oficial](https://dieseloslab.org/) para conhecer as formas atuais de apoio.
 
-Mocha Linux is a distribution for gaming, productivity and everyday use, with its own visual identity, graphical recovery tools and a technical foundation focused on performance and stability.
+## Estado do projeto
 
-### Main features
+O Mocha Linux está em desenvolvimento ativo. Kernels, drivers, interfaces, ferramentas e procedimentos de recuperação continuam sendo testados e documentados antes da publicação de uma versão estável.
 
-- **Mocha LQX kernel**, based on the Liquorix project and focused on low latency and performance.
-- **Safe rollback** to the last valid configuration after update failures.
-- **Dedicated recovery partition** for diagnosis, repair and restoration in an independent environment.
-- Steam, Proton, GameMode, MangoHud and gaming-focused driver selection.
-- A complete graphical interface for updates, recovery and maintenance.
+## Conteúdo deste repositório
 
-### Performance without fabricated figures
+Este repositório reúne a parte pública e reproduzível do projeto:
 
-Mocha Linux has been extensively compared with Windows and other gaming-focused distributions. It led in several real-world scenarios and remained competitive in the others. Results depend on hardware, drivers, game and configuration. Figures will only be published with reproducible methodology and documentation.
+- código-fonte e interfaces;
+- scripts e receitas de montagem;
+- configurações e políticas;
+- documentação técnica;
+- recursos visuais;
+- testes, relatórios publicáveis e ferramentas de manutenção.
 
-### T21 social mission
+Caches locais, segredos, chaves privadas, imagens completas de discos e artefatos grandes de compilação permanecem fora do GitHub.
 
-The project maintains a social mission focused on Trisomy 21 awareness, inclusion and visibility. Social initiatives are developed transparently, through responsible partnerships and according to available capacity and resources.
+## Créditos
 
-### Supporting the project
-
-Ko-fi payments are **voluntary support for the software project** and help sustain infrastructure, development, testing, documentation and maintenance. They are not presented as charitable or tax-deductible donations. The T21 social mission is communicated separately, with no promise of a fixed percentage or automatic transfer.
-
----
-
-## Español
-
-**Hecho para jugar. Hecho para ayudar.**
-
-Mocha Linux es una distribución para juegos, productividad y uso diario, con identidad propia, herramientas gráficas de recuperación y una base técnica centrada en rendimiento y estabilidad.
-
-### Recursos principales
-
-- **Kernel Mocha LQX**, basado en el proyecto Liquorix y orientado a baja latencia y rendimiento.
-- **Rollback seguro** a la última configuración válida después de fallos de actualización.
-- **Partición de recuperación dedicada** para diagnóstico, reparación y restauración en un entorno independiente.
-- Steam, Proton, GameMode, MangoHud y controladores seleccionados para juegos.
-- Interfaz gráfica completa para actualización, recuperación y mantenimiento.
-
-### Rendimiento sin cifras inventadas
-
-Mocha Linux fue comparado extensamente con Windows y otras distribuciones orientadas a juegos. Obtuvo ventaja en diversos escenarios reales y se mantuvo competitivo en los demás. Los resultados dependen del hardware, los controladores, el juego y la configuración. Solo se publicarán cifras con metodología y documentación reproducibles.
-
-### Misión social T21
-
-El proyecto mantiene una misión social centrada en la concienciación, la inclusión y la visibilidad de la Trisomía 21. Las iniciativas se desarrollan con transparencia, alianzas responsables y de acuerdo con la capacidad y los recursos disponibles.
-
-### Apoyo al proyecto
-
-Los pagos por Ko-fi son **apoyo voluntario al proyecto de software** y ayudan a mantener infraestructura, desarrollo, pruebas, documentación y mantenimiento. No se presentan como donaciones benéficas ni deducibles de impuestos. La misión social T21 se comunica por separado, sin prometer un porcentaje fijo ni una transferencia automática.
-
----
-
-## Français
-
-**Conçu pour jouer. Conçu pour aider.**
-
-Mocha Linux est une distribution destinée au jeu, à la productivité et à l’usage quotidien, avec une identité propre, des outils graphiques de récupération et une base technique axée sur les performances et la stabilité.
-
-### Fonctions principales
-
-- **Noyau Mocha LQX**, basé sur le projet Liquorix et axé sur la faible latence et les performances.
-- **Retour arrière sûr** vers la dernière configuration valide après l’échec d’une mise à jour.
-- **Partition de récupération dédiée** au diagnostic, à la réparation et à la restauration dans un environnement indépendant.
-- Steam, Proton, GameMode, MangoHud et sélection de pilotes pour le jeu.
-- Interface graphique complète pour les mises à jour, la récupération et la maintenance.
-
-### Des performances sans chiffres inventés
-
-Mocha Linux a été largement comparé à Windows et à d’autres distributions orientées jeu. Il a pris l’avantage dans plusieurs scénarios réels et est resté compétitif dans les autres. Les résultats dépendent du matériel, des pilotes, du jeu et de la configuration. Des chiffres ne seront publiés qu’avec une méthodologie et une documentation reproductibles.
-
-### Mission sociale T21
-
-Le projet porte une mission sociale axée sur la sensibilisation, l’inclusion et la visibilité de la trisomie 21. Les initiatives sociales sont développées avec transparence, au moyen de partenariats responsables et selon les capacités et ressources disponibles.
-
-### Soutenir le projet
-
-Les paiements Ko-fi constituent un **soutien volontaire au projet logiciel** et contribuent à l’infrastructure, au développement, aux tests, à la documentation et à la maintenance. Ils ne sont pas présentés comme des dons caritatifs ni comme des contributions déductibles des impôts. La mission sociale T21 est communiquée séparément, sans promesse de pourcentage fixe ni de transfert automatique.
+O Mocha é construído sobre Linux, Arch Linux, KDE Plasma e o ecossistema de software livre, além de projetos como Liquorix, Steam, Proton, Wine, GameMode e MangoHud. Cada componente externo conserva sua própria licença.
 
 ---
 
 <div align="center">
 
-[Website](https://www.dieseloslab.org/) · [Issues](https://github.com/dieseloslab/Mocha/issues) · [Releases](https://github.com/dieseloslab/Mocha/releases) · `suporte@dieseloslab.org`
+[Diesel OS Lab](https://dieseloslab.org/) · [GitHub](https://github.com/dieseloslab/Mocha) · `suporte@dieseloslab.org`
 
 </div>
