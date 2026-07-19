@@ -34,32 +34,20 @@ install_payload_file() {
 
   sudo mkdir -p "$(dirname "$dest")" || return 1
 
-  if [ -L "$src" ]; then
-    target="$(readlink -- "$src")" || return 1
-
-    if sudo test -e "$dest" || sudo test -L "$dest"; then
-      sudo rm -f -- "$dest" || return 1
-    fi
-
-    sudo ln -s -- "$target" "$dest" || return 1
-    sudo chown -h root:root "$dest" || return 1
-
-    echo "INSTALADO_LINK: $dest -> $target"
-    return 0
-  fi
-
   case "$dest" in
-    /etc/sudoers.d/mocha-nvidia-oc-root-helper)
+    /etc/sudoers.d/mocha-nvidia-oc-root-helper|/etc/sudoers.d/mocha-gamemode-system76-authority)
       sudo install -o root -g root -m 0440 "$src" "$dest" || return 1
+      sudo visudo -cf "$dest" >/dev/null 2>&1 || return 1
       ;;
-    /usr/local/lib/mocha/mocha-nvidia-oc-root-helper|/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system|/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system)
+    /usr/local/lib/mocha/mocha-nvidia-oc-root-helper|/usr/local/sbin/mocha-system76-authority-helper|/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system|/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system|/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh|/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh)
       sudo install -o root -g root -m 0755 "$src" "$dest" || return 1
       ;;
-    /etc/mocha/nvidia-game-oc.conf)
+    /etc/mocha/nvidia-game-oc.conf|/etc/mocha/gamemode/legacy-start-system.cmd|/etc/mocha/gamemode/legacy-end-system.cmd|/etc/gamemode.ini)
       sudo install -o root -g root -m 0644 "$src" "$dest" || return 1
       ;;
     *)
-      sudo install -o root -g root -m 0644 "$src" "$dest" || return 1
+      echo "FALHA: destino não previsto no payload: $dest"
+      return 1
       ;;
   esac
 

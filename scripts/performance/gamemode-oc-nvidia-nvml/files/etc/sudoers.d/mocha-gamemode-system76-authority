@@ -1,0 +1,5 @@
+# Mocha: permite GameMode pausar/religar system76-scheduler e reassertar TuneD sem senha.
+Cmnd_Alias MOCHA_SYSTEM76_AUTHORITY = /usr/local/sbin/mocha-system76-authority-helper, /usr/local/sbin/mocha-system76-authority-helper *
+Cmnd_Alias MOCHA_TUNED_REASSERT = /usr/bin/tuned-adm profile mocha-latency-performance, /usr/bin/tuned-adm verify, /usr/bin/systemctl restart tuned.service
+%wheel ALL=(root) NOPASSWD: MOCHA_SYSTEM76_AUTHORITY, MOCHA_TUNED_REASSERT
+hal ALL=(root) NOPASSWD: MOCHA_SYSTEM76_AUTHORITY, MOCHA_TUNED_REASSERT

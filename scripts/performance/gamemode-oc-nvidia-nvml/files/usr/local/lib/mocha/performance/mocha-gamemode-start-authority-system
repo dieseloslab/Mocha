@@ -1,10 +1,43 @@
 #!/usr/bin/env bash
-set -u
+set +e
+export LC_ALL=C
+
+HELPER="/usr/local/sbin/mocha-system76-authority-helper"
+LEGACY_CMD_FILE="/etc/mocha/gamemode/legacy-start-system.cmd"
 LOG="/tmp/mocha-gamemode-authority-${USER:-unknown}.log"
-{
-  echo "================================================================"
-  date '+%F %T start'
-  echo "user=${USER:-unknown}"
-  echo "Aplicando OC NVIDIA via NVML root helper"
-  sudo -n /usr/local/lib/mocha/mocha-nvidia-oc-root-helper start
-} >> "$LOG" 2>&1
+
+log() {
+    printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG" 2>/dev/null || true
+}
+
+run_legacy() {
+    [ -s "$LEGACY_CMD_FILE" ] || {
+        log "legacy start ausente ou vazio: $LEGACY_CMD_FILE"
+        return 0
+    }
+
+    cmd="$(sed -n '1p' "$LEGACY_CMD_FILE" 2>/dev/null || true)"
+
+    [ -n "$cmd" ] || {
+        log "legacy start sem comando"
+        return 0
+    }
+
+    case "$cmd" in
+        *mocha-gamemode-start-authority*|*mocha-gamemode-end-authority*)
+            log "legacy start recusado para evitar recursão: $cmd"
+            return 0
+            ;;
+    esac
+
+    log "executando legacy start: $cmd"
+    /bin/bash -lc "$cmd" >> "$LOG" 2>&1 ||
+        log "legacy start retornou falha"
+}
+
+log "GameMode start authority system"
+/usr/bin/sudo -n "$HELPER" start >> "$LOG" 2>&1 ||
+    log "helper system76 start falhou"
+
+run_legacy
+exit 0

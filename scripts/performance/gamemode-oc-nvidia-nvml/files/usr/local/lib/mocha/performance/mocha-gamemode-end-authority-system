@@ -1,13 +1,74 @@
 #!/usr/bin/env bash
-set -u
+set +e
+export LC_ALL=C
+
+HELPER="/usr/local/sbin/mocha-system76-authority-helper"
+LEGACY_CMD_FILE="/etc/mocha/gamemode/legacy-end-system.cmd"
+PROFILE="mocha-latency-performance"
 LOG="/tmp/mocha-gamemode-authority-${USER:-unknown}.log"
-{
-  echo "================================================================"
-  date '+%F %T end'
-  echo "user=${USER:-unknown}"
-  echo "Revertendo OC NVIDIA via NVML root helper"
-  sudo -n /usr/local/lib/mocha/mocha-nvidia-oc-root-helper end
-  if command -v tuned-adm >/dev/null 2>&1; then
-    sudo -n tuned-adm profile mocha-latency-performance || true
-  fi
-} >> "$LOG" 2>&1
+
+log() {
+    printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG" 2>/dev/null || true
+}
+
+run_legacy() {
+    [ -s "$LEGACY_CMD_FILE" ] || {
+        log "legacy end ausente ou vazio: $LEGACY_CMD_FILE"
+        return 0
+    }
+
+    cmd="$(sed -n '1p' "$LEGACY_CMD_FILE" 2>/dev/null || true)"
+
+    [ -n "$cmd" ] || {
+        log "legacy end sem comando"
+        return 0
+    }
+
+    case "$cmd" in
+        *mocha-gamemode-start-authority*|*mocha-gamemode-end-authority*)
+            log "legacy end recusado para evitar recursão: $cmd"
+            return 0
+            ;;
+    esac
+
+    log "executando legacy end: $cmd"
+    /bin/bash -lc "$cmd" >> "$LOG" 2>&1 ||
+        log "legacy end retornou falha"
+}
+
+reassert_tuned() {
+    log "reassert TuneD profile: $PROFILE"
+
+    /usr/bin/sudo -n /usr/bin/tuned-adm profile "$PROFILE" \
+        >> "$LOG" 2>&1 ||
+        log "tuned-adm profile falhou"
+
+    if ! /usr/bin/sudo -n /usr/bin/tuned-adm verify \
+        >> "$LOG" 2>&1
+    then
+        log "tuned verify falhou; reiniciando tuned"
+
+        /usr/bin/sudo -n /usr/bin/systemctl restart tuned.service \
+            >> "$LOG" 2>&1 ||
+            log "restart tuned falhou"
+
+        /usr/bin/sudo -n /usr/bin/tuned-adm profile "$PROFILE" \
+            >> "$LOG" 2>&1 ||
+            log "tuned-adm profile pós-restart falhou"
+
+        /usr/bin/sudo -n /usr/bin/tuned-adm verify \
+            >> "$LOG" 2>&1 ||
+            log "tuned verify ainda falhou"
+    fi
+}
+
+log "GameMode end authority system V2"
+
+run_legacy
+reassert_tuned
+
+/usr/bin/sudo -n "$HELPER" end >> "$LOG" 2>&1 ||
+    log "helper system76 end falhou"
+
+reassert_tuned
+exit 0

@@ -1,8 +1,12 @@
 /etc/gamemode.ini
+/etc/mocha/gamemode/legacy-end-system.cmd
+/etc/mocha/gamemode/legacy-start-system.cmd
 /etc/mocha/nvidia-game-oc.conf
+/etc/sudoers.d/mocha-gamemode-system76-authority
 /etc/sudoers.d/mocha-nvidia-oc-root-helper
-/usr/local/lib/mocha/mocha-nvidia-oc-root-helper
-/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
-/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
-/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
 /usr/local/lib/mocha/gamemode-end-agressivo-oc.sh
+/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh
+/usr/local/lib/mocha/mocha-nvidia-oc-root-helper
+/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
+/usr/local/sbin/mocha-system76-authority-helper

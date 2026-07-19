@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export LC_ALL=C
+
+ACTION="${1:-status}"
+
+STATE_ROOT="/run/mocha"
+STATE_DIR="$STATE_ROOT/gamemode-authority"
+LOCK="$STATE_ROOT/gamemode-authority.lock"
+CONF_DIR="/etc/mocha/gamemode"
+SERVICE_FILE="$CONF_DIR/system76-service.name"
+LOG="/var/log/mocha-gamemode-system76-authority.log"
+
+log() {
+  printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG" 2>/dev/null || true
+}
+
+discover_service() {
+  local svc units candidate
+
+  if [ -r "$SERVICE_FILE" ]; then
+    svc="$(sed -n '1p' "$SERVICE_FILE" | tr -d '[:space:]')"
+    if [ -n "$svc" ]; then
+      printf '%s\n' "$svc"
+      return 0
+    fi
+  fi
+
+  units="$(systemctl list-unit-files --type=service --no-pager --no-legend 2>/dev/null | awk '{print $1}' || true)"
+
+  for candidate in \
+    com.system76.Scheduler.service \
+    system76-scheduler.service
+  do
+    if printf '%s\n' "$units" | grep -Fxq "$candidate"; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+mkdir -p "$STATE_ROOT"
+exec 9>"$LOCK"
+flock -x 9
+
+mkdir -p "$STATE_DIR"
+
+COUNT_FILE="$STATE_DIR/count"
+ACTIVE_FILE="$STATE_DIR/active"
+WAS_ACTIVE_FILE="$STATE_DIR/system76-was-active"
+SERVICE_STATE_FILE="$STATE_DIR/system76-service"
+
+read_count() {
+  local n
+  n="$(cat "$COUNT_FILE" 2>/dev/null || printf '0')"
+  case "$n" in
+    ''|*[!0-9]*) n=0 ;;
+  esac
+  printf '%s\n' "$n"
+}
+
+write_count() {
+  printf '%s\n' "$1" > "$COUNT_FILE"
+}
+
+case "$ACTION" in
+  start)
+    svc="$(discover_service || true)"
+    count="$(read_count)"
+
+    if [ "$count" -eq 0 ]; then
+      date '+%F %T' > "$ACTIVE_FILE"
+
+      if [ -n "${svc:-}" ]; then
+        printf '%s\n' "$svc" > "$SERVICE_STATE_FILE"
+
+        if systemctl is-active --quiet "$svc"; then
+          printf 'active\n' > "$WAS_ACTIVE_FILE"
+          log "GameMode start: stopping $svc"
+          systemctl stop "$svc" || log "GameMode start: failed to stop $svc"
+        else
+          printf 'inactive\n' > "$WAS_ACTIVE_FILE"
+          log "GameMode start: $svc was not active"
+        fi
+      else
+        printf 'none\n' > "$WAS_ACTIVE_FILE"
+        log "GameMode start: no system76 scheduler service found"
+      fi
+    fi
+
+    count=$((count + 1))
+    write_count "$count"
+    log "GameMode start: authority count=$count"
+    ;;
+
+  end)
+    count="$(read_count)"
+    if [ "$count" -gt 0 ]; then
+      count=$((count - 1))
+    else
+      count=0
+    fi
+    write_count "$count"
+    log "GameMode end: authority count=$count"
+
+    if [ "$count" -eq 0 ]; then
+      svc="$(cat "$SERVICE_STATE_FILE" 2>/dev/null || discover_service || true)"
+      was="$(cat "$WAS_ACTIVE_FILE" 2>/dev/null || printf 'none')"
+
+      if [ -n "${svc:-}" ] && [ "$was" = "active" ]; then
+        log "GameMode end: starting $svc"
+        systemctl start "$svc" || log "GameMode end: failed to start $svc"
+      else
+        log "GameMode end: not starting system76 scheduler; previous state=$was service=${svc:-none}"
+      fi
+
+      rm -f "$ACTIVE_FILE" "$WAS_ACTIVE_FILE" "$SERVICE_STATE_FILE" "$COUNT_FILE"
+    fi
+    ;;
+
+  status)
+    svc="$(cat "$SERVICE_STATE_FILE" 2>/dev/null || discover_service || true)"
+    count="$(read_count)"
+    was="$(cat "$WAS_ACTIVE_FILE" 2>/dev/null || printf 'none')"
+
+    printf 'service=%s\n' "${svc:-none}"
+    printf 'count=%s\n' "$count"
+    printf 'was_active=%s\n' "$was"
+    printf 'marker=%s\n' "$([ -e "$ACTIVE_FILE" ] && printf active || printf inactive)"
+
+    if [ -n "${svc:-}" ]; then
+      systemctl is-active "$svc" || true
+      systemctl is-enabled "$svc" || true
+    fi
+    ;;
+
+  *)
+    printf '[FALHA] ação inválida: %s\n' "$ACTION" >&2
+    exit 2
+    ;;
+esac
