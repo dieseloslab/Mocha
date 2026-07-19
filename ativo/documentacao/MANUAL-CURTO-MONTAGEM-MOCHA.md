@@ -273,115 +273,74 @@ Critério de aprovação:
 
 
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_START -->
-## GameMode OC NVIDIA — espelho do runtime aprovado
 
-Cadeia revalidada em runtime e sincronizada nos payloads público e interno em 2026-07-10.
+## GameMode, system76-scheduler, TuneD e OC NVIDIA — cadeia canônica
 
-O OC NVIDIA do Mocha deve existir somente durante o GameMode. Não aplicar OC permanente solto.
+Solução validada em teste real em **2026-07-11 23:30:18 -03**, no host `derp-x8664`, kernel `7.0.14-lqx1-1-lqx`.
 
-Nome histórico do payload:
+### Contrato obrigatório de exclusão
 
-`gamemode-oc-nvidia-nvml`
+1. Fora de jogo, `com.system76.Scheduler.service` permanece `enabled` e `active`.
+2. Quando o primeiro cliente entra no GameMode, o wrapper start chama o helper de autoridade, registra que o scheduler estava ativo, para o `system76-scheduler` e então executa o start legacy das otimizações e do OC.
+3. Enquanto houver cliente GameMode, o scheduler permanece inativo e o contador da autoridade fica maior que zero.
+4. Quando o último cliente sai, o wrapper end executa primeiro o end legacy, restaurando o OC para `core 0 / memória 0`; depois reasserta o TuneD `mocha-latency-performance`, restaura o scheduler somente se ele estava ativo antes e reasserta o TuneD novamente.
+5. GameMode e `system76-scheduler` não devem permanecer ativos simultaneamente.
 
-Caminho público:
+### Cadeia canônica preservada
 
-`/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml`
+- Payload público: `/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml`
+- Payload interno: `/media/mochafast/MochaArch-Interno/ativo/performance/gamemode-oc-nvidia-nvml`
+- Instalador: `/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+- Unidade do scheduler: `/usr/lib/systemd/system/com.system76.Scheduler.service`
+- Seletor da unidade: `/etc/mocha/gamemode/system76-service.name`
+- Helper da autoridade: `/usr/local/sbin/mocha-system76-authority-helper`
+- Sudoers da autoridade: `/etc/sudoers.d/mocha-gamemode-system76-authority`
+- Wrapper start: `/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+- Wrapper end: `/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
+- Start legacy real: `/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
+- End legacy real: `/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
+- Ponte start legacy: `/etc/mocha/gamemode/legacy-start-system.cmd`
+- Ponte end legacy: `/etc/mocha/gamemode/legacy-end-system.cmd`
+- Configuração do GameMode: `/etc/gamemode.ini`
+- Estado da autoridade: `/run/mocha/gamemode-authority`
+- Log da autoridade: `/var/log/mocha-gamemode-system76-authority.log`
+- Log dos wrappers: `/tmp/mocha-gamemode-authority-$USER.log`
 
-Caminho interno:
+### Integração obrigatória em `/etc/gamemode.ini`
 
-`/media/mochafast/MochaArch-Interno/ativo/performance/gamemode-oc-nvidia-nvml`
+~~~ini
+[custom]
+start=/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
+end=/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system
+~~~
 
-Instalador público:
+Os scripts com nome `agressivo-oc` são os artefatos legacy reais chamados pelos wrappers. Eles não devem ser apontados diretamente pelo GameMode.
 
-`/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+### OC temporário aprovado
 
-Instalador interno:
+- Entrada do GameMode: `core +50` e `MEMORY_TRANSFER_RATE_OFFSET=400`, com efeito real esperado em torno de `+200 MHz` na memória.
+- Saída do GameMode: `core 0 / memória 0`.
+- O OC não é permanente e não deve ser aplicado no boot.
 
-`/media/mochafast/MochaArch-Interno/ativo/performance/gamemode-oc-nvidia-nvml/mocha-aplica-gamemode-oc-nvidia-nvml.sh`
+### Hashes do runtime aprovado
 
-Arquivos runtime preservados pelo payload:
+- `bd41359ec63ebd5b2686b5da4dd707b4dfaab40e5b0e86d8ba39d34bfd74ef1c` — `/etc/gamemode.ini`
+- `58a8e4dc6a4916c9178814086551f3f44bdba7b7a39caf6fcd47d7ba38eec5bb` — `/usr/local/sbin/mocha-system76-authority-helper`
+- `7a817389836af6f9c49d5a44ce8204bc5f0fa70497d5a463e4e7a3ba830ca1a2` — wrapper start
+- `7be2a646fe45250794e84dea8fdd0bf48c7a13821452571b29dc15eacae03adb` — wrapper end
+- `fffc494f2f74f0f589e92d4cba310970b548a383149fe19e31d9760415f5a45a` — start legacy
+- `8e81f3b2b57b30e027e54f1096d8cb515d182bac2343a6ed784e9cb534c05294` — end legacy
 
-`/etc/gamemode.ini`
+A regressão conhecida do `/etc/gamemode.ini`, que apontava diretamente para os scripts legacy, possui SHA256 `a1931485550ae90d23ba00f752be652c0b3925342d75b07da6c3fb9dd26e090b` e não deve ser restaurada.
 
-`/etc/mocha/nvidia-game-oc.conf`
+### Resultado já aprovado
 
-`/etc/sudoers.d/mocha-nvidia-oc-root-helper`
+Durante o GameMode: GameMode ativo, scheduler inativo e contador positivo.
 
-`/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
+Após a saída do último cliente: GameMode inativo, scheduler ativo, contador zero, OC em `0/0`, TuneD `mocha-latency-performance` validado e nenhum novo coredump do scheduler.
 
-`/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
+Não substituir helper, wrappers, scripts legacy, sudoers, seletor, unidade ou caminhos por equivalentes aproximados. Qualquer alteração futura exige nova validação antes de atualizar este bloco.
 
-`/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
-
-Aliases simbólicos preservados pelo payload:
-
-`/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
-
-`/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
-
-Integração efetiva em `/etc/gamemode.ini`:
-
-`[custom]`
-
-`start=/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh`
-
-`end=/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh`
-
-Resolução dos aliases:
-
-`/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh -> /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
-
-`/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh -> /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
-
-Os aliases são caminhos de compatibilidade ativos. Não são implementações antigas a remover.
-
-Os hooks `authority-system` continuam sendo os executáveis reais chamados pelos aliases.
-
-Os hooks chamam:
-
-`/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
-
-Perfil efetivo aprovado:
-
-`GPU_INDEX=0`
-
-`CORE_OFFSET=50`
-
-`MEMORY_TRANSFER_RATE_OFFSET=400`
-
-O transfer-rate `+400` corresponde a aproximadamente `+200 MHz` visível no memclock.
-
-Ao terminar o GameMode, core e memória devem retornar para `0`.
-
-Permissões validadas:
-
-`root:root 644 /etc/gamemode.ini`
-
-`root:root 644 /etc/mocha/nvidia-game-oc.conf`
-
-`root:root 440 /etc/sudoers.d/mocha-nvidia-oc-root-helper`
-
-`root:root 755 /usr/local/lib/mocha/mocha-nvidia-oc-root-helper`
-
-`root:root 755 /usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system`
-
-`root:root 755 /usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system`
-
-Os aliases devem permanecer links simbólicos com proprietário `root:root` e com os alvos absolutos registrados acima.
-
-O sudoers precisa passar em:
-
-`visudo -cf /etc/sudoers.d/mocha-nvidia-oc-root-helper`
-
-Regra do payload:
-
-- copiar `/etc/gamemode.ini` exatamente;
-- instalar arquivos regulares com seus modos registrados;
-- preservar os aliases como links simbólicos;
-- não converter links em cópias regulares;
-- não trocar os caminhos definidos no `gamemode.ini` por inferência;
-- não substituir helper, hooks ou configuração por equivalente improvisado;
-- não documentar nova alteração como canônica sem teste real e aprovação.
 <!-- MOCHA_MANUAL_CURTO_GAMEMODE_OC_NVIDIA_NVML_END -->
 
 <!-- MOCHA:COBERTURA-FUNCIONAL-RUNTIME-APROVADO:BEGIN -->
@@ -960,3 +919,16 @@ Depois de aplicar o snapshot em uma instalação nova:
 - Não fazer stage, commit ou push por consequência desta seção.
 - Promoção deste snapshot de candidato para canônico final exige teste visual/runtime e aprovação explícita.
 <!-- MOCHA:RUNTIME-REPRODUTIVEL:FIM -->
+
+
+<!-- MOCHA:BEGIN AUTORIDADE_GAMEMODE_SYSTEM76_SEM_OC_CURTO_V1 -->
+## GameMode e system76-scheduler — autoridade sem OC
+
+- Script: `/media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/mocha-restaura-autoridade-gamemode-system76-sem-oc.sh`
+- SHA256: `76c1c84d89b0d6e3f78ccee262b2757b009f6f5e795d26a891b21257cd0cfcd0`
+- Contrato: scheduler ativo fora do jogo; GameMode ativo interrompe o scheduler; ao encerrar o último cliente, o scheduler volta e o perfil `mocha-latency-performance` é reafirmado.
+- OC NVIDIA: não habilitado e não chamado.
+- Execução: `bash /media/mochafast/MochaArch/scripts/performance/gamemode-oc-nvidia-nvml/mocha-restaura-autoridade-gamemode-system76-sem-oc.sh`
+- Resultado aprovado: `AUTORIDADE_GAMEMODE_SYSTEM76_SEM_OC_APROVADA`.
+<!-- MOCHA:END AUTORIDADE_GAMEMODE_SYSTEM76_SEM_OC_CURTO_V1 -->
+

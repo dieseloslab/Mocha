@@ -76,7 +76,6 @@ vm.page-cluster = 0
 vm.dirty_background_bytes = 67108864
 vm.dirty_bytes = 268435456
 vm.max_map_count = 8388608
-kernel.sched_autogroup_enabled = 1
 ~~~
 
 ### Wrapper Steam Mocha
