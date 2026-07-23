@@ -16,7 +16,7 @@ ApplicationWindow {
     color: "#211610"
 
     property int currentPage: 0
-    property string operationMessage: "Nenhuma operação em execução"
+    property string operationMessage: backend.statusMessage
 
     readonly property color backgroundColor: "#211610"
     readonly property color panelColor: "#2A1B14"
@@ -34,10 +34,7 @@ ApplicationWindow {
     MochaBackend {
         id: backend
 
-        Component.onCompleted: {
-            backend.refreshSystemStatus()
-            window.operationMessage = backend.statusMessage
-        }
+        Component.onCompleted: backend.refreshSystemStatus()
     }
 
     component MochaLogo: Item {
@@ -278,6 +275,8 @@ ApplicationWindow {
         required property string descriptionText
         required property string buttonText
         property bool dangerous: false
+        property bool actionEnabled: true
+        signal triggered()
 
         Layout.fillWidth: true
         Layout.preferredHeight: 184
@@ -319,11 +318,58 @@ ApplicationWindow {
                 text: operationPanel.buttonText
                 emphasized: !operationPanel.dangerous
 
-                onClicked: {
-                    window.operationMessage =
-                        operationPanel.titleText
-                        + ": operação selecionada"
-                }
+                enabled: operationPanel.actionEnabled && !backend.operationRunning
+                onClicked: operationPanel.triggered()
+            }
+        }
+    }
+
+    component OcActionCard: Rectangle {
+        id: ocActionCard
+
+        required property string titleText
+        required property string descriptionText
+        required property string buttonText
+        property bool dangerous: false
+        signal triggered()
+
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        Layout.minimumWidth: 210
+        radius: 14
+        color: window.elevatedColor
+        border.width: 1
+        border.color: ocActionCard.dangerous ? window.warningColor : window.borderColor
+
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: 18
+            spacing: 12
+
+            Text {
+                Layout.fillWidth: true
+                text: ocActionCard.titleText
+                color: ocActionCard.dangerous ? window.warningColor : window.primaryTextColor
+                font.pixelSize: 17
+                font.weight: Font.DemiBold
+                wrapMode: Text.WordWrap
+            }
+
+            Text {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                text: ocActionCard.descriptionText
+                color: window.secondaryTextColor
+                font.pixelSize: 12
+                wrapMode: Text.WordWrap
+            }
+
+            MochaButton {
+                Layout.fillWidth: true
+                text: ocActionCard.buttonText
+                emphasized: !ocActionCard.dangerous
+                enabled: !backend.operationRunning
+                onClicked: ocActionCard.triggered()
             }
         }
     }
@@ -415,6 +461,12 @@ ApplicationWindow {
 
                 NavItem {
                     pageIndex: 4
+                    label: "Mocha OC"
+                    description: "Overclock somente no GameMode"
+                }
+
+                NavItem {
+                    pageIndex: 5
                     label: "Rollback"
                     description: "Restaurar um estado anterior"
                 }
@@ -559,10 +611,8 @@ ApplicationWindow {
                                     text: "Verificar atualizações"
                                     emphasized: true
 
-                                    onClicked: {
-                                        window.operationMessage =
-                                            "Verificação de atualizações selecionada"
-                                    }
+                                    enabled: !backend.operationRunning
+                                    onClicked: backend.checkGeneralUpdates()
                                 }
 
                                 MochaButton {
@@ -579,7 +629,7 @@ ApplicationWindow {
                                     text: "Abrir rollback"
 
                                     onClicked: {
-                                        window.currentPage = 4
+                                        window.currentPage = 5
                                     }
                                 }
                             }
@@ -608,9 +658,7 @@ ApplicationWindow {
 
                                     Text {
                                         Layout.fillWidth: true
-                                        text:
-                                            "O histórico apresenta verificações, atualizações, "
-                                            + "recasamentos e restaurações executados pelo Mocha Update."
+                                        text: backend.activityText
                                         color: window.secondaryTextColor
                                         font.pixelSize: 13
                                         wrapMode: Text.WordWrap
@@ -638,10 +686,9 @@ ApplicationWindow {
 
                             OperationPanel {
                                 titleText: "Examinar atualizações disponíveis"
-                                descriptionText:
-                                    "A verificação apresenta pacotes, versões e "
-                                    + "possíveis conflitos antes de qualquer alteração."
+                                descriptionText: backend.generalUpdateSummary
                                 buttonText: "Examinar"
+                                onTriggered: backend.checkGeneralUpdates()
                             }
 
                             OperationPanel {
@@ -650,6 +697,7 @@ ApplicationWindow {
                                     "Kernel, headers e driver gráfico permanecem em "
                                     + "um fluxo separado e protegido."
                                 buttonText: "Atualizar sistema"
+                                onTriggered: backend.applyGeneralUpdate()
                             }
 
                             Item {
@@ -676,23 +724,29 @@ ApplicationWindow {
 
                                 StatusCard {
                                     titleText: "Kernel atual"
-                                    valueText: "7.1.3-lqx3-1-lqx"
-                                    detailText: "linux-lqx"
+                                    valueText: backend.kernelVersion
+                                    detailText: backend.kernelPackage
                                 }
 
                                 StatusCard {
                                     titleText: "Driver atual"
-                                    valueText: "610.43.03"
-                                    detailText: "nvidia-open-dkms"
+                                    valueText: backend.driverVersion
+                                    detailText: backend.driverDetail
                                 }
                             }
 
                             OperationPanel {
                                 titleText: "Procurar novo conjunto compatível"
-                                descriptionText:
-                                    "A análise valida repositórios, headers, DKMS, "
-                                    + "initramfs e compatibilidade antes da instalação."
-                                buttonText: "Examinar conjunto"
+                                descriptionText: backend.kernelUpdateSummary
+                                buttonText: backend.kernelUpdateReady
+                                            ? "Atualizar conjunto"
+                                            : "Examinar conjunto"
+                                onTriggered: {
+                                    if (backend.kernelUpdateReady)
+                                        backend.applyKernelDriverUpdate()
+                                    else
+                                        backend.checkKernelDriver()
+                                }
                             }
 
                             Item {
@@ -719,7 +773,8 @@ ApplicationWindow {
                                     "O recasamento reinstala kernel, headers e driver, "
                                     + "reconstrói DKMS, regenera initramfs e atualiza "
                                     + "o bootloader."
-                                buttonText: "Preparar recasamento"
+                                buttonText: "Recasar conjunto"
+                                onTriggered: backend.remarryKernelDriver()
                             }
 
                             Rectangle {
@@ -757,6 +812,85 @@ ApplicationWindow {
                             spacing: 18
 
                             PageTitle {
+                                titleText: "Mocha OC"
+                                descriptionText:
+                                    "Controla o perfil NVIDIA validado do Mocha. O overclock "
+                                    + "é aplicado somente enquanto o GameMode estiver ativo."
+                            }
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 14
+
+                                StatusCard {
+                                    titleText: "Estado do Mocha OC"
+                                    valueText: backend.ocStatus
+                                    detailText: backend.ocMode
+                                    valueColor: backend.ocStatus === "Desativado"
+                                                ? window.secondaryTextColor
+                                                : window.successColor
+                                }
+
+                                StatusCard {
+                                    titleText: "Perfil validado"
+                                    valueText: "+50 MHz GPU"
+                                    detailText: "+400 no controlador de memória (cerca de +200 MHz no clock real)"
+                                    valueColor: window.accentSoftColor
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                spacing: 14
+
+                                OcActionCard {
+                                    titleText: "Ativar OC nesta sessão"
+                                    descriptionText:
+                                        "Habilita o perfil somente nos jogos que ativarem o "
+                                        + "GameMode. A preferência desaparece no próximo "
+                                        + "reinício e os valores normais retornam ao sair do jogo."
+                                    buttonText: "Ativar OC"
+                                    onTriggered: backend.enableOcSession()
+                                }
+
+                                OcActionCard {
+                                    titleText: "Ativar OC permanentemente no GameMode"
+                                    descriptionText:
+                                        "Mantém a preferência após reinicializações. O OC "
+                                        + "continua restrito ao período em que o GameMode "
+                                        + "estiver ativo."
+                                    buttonText: "Ativar OC permanentemente"
+                                    onTriggered: backend.enableOcPersistent()
+                                }
+
+                                OcActionCard {
+                                    titleText: "Desativar totalmente o OC"
+                                    descriptionText:
+                                        "Remove os modos temporário e persistente e restaura "
+                                        + "imediatamente os offsets normais da GPU e da memória."
+                                    buttonText: "Desativar totalmente"
+                                    dangerous: true
+                                    onTriggered: backend.disableOc()
+                                }
+                            }
+
+                            Text {
+                                Layout.fillWidth: true
+                                text: backend.ocDetail
+                                color: window.secondaryTextColor
+                                font.pixelSize: 12
+                                wrapMode: Text.WordWrap
+                            }
+                        }
+                    }
+
+                    Item {
+                        ColumnLayout {
+                            anchors.fill: parent
+                            spacing: 18
+
+                            PageTitle {
                                 titleText: "Rollback"
                                 descriptionText:
                                     "Restaura um ponto anterior validado e apresenta "
@@ -764,20 +898,21 @@ ApplicationWindow {
                             }
 
                             OperationPanel {
-                                titleText: "Localizar pontos de restauração"
-                                descriptionText:
-                                    "A lista apresenta snapshots válidos, datas, "
-                                    + "descrições e estado de inicialização."
-                                buttonText: "Procurar snapshots"
+                                titleText: "Localizar restauração mais recente"
+                                descriptionText: backend.rollbackSummary
+                                buttonText: "Verificar snapshots"
+                                onTriggered: backend.checkRollbacks()
                             }
 
                             OperationPanel {
-                                titleText: "Restaurar estado selecionado"
-                                descriptionText:
-                                    "A restauração permanece bloqueada até que um "
-                                    + "snapshot válido seja escolhido e verificado."
+                                titleText: "Restaurar estado validado"
+                                descriptionText: backend.rollbackReady
+                                    ? backend.rollbackSummary
+                                    : "A restauração permanece bloqueada até que o snapshot mais recente seja localizado e validado."
                                 buttonText: "Restaurar"
                                 dangerous: true
+                                actionEnabled: backend.rollbackReady
+                                onTriggered: backend.applySelectedRollback()
                             }
 
                             Item {
@@ -803,8 +938,8 @@ ApplicationWindow {
                         spacing: 14
 
                         BusyIndicator {
-                            running: false
-                            visible: false
+                            running: backend.operationRunning
+                            visible: backend.operationRunning
                         }
 
                         Text {
@@ -819,7 +954,7 @@ ApplicationWindow {
                             Layout.preferredWidth: 210
                             from: 0
                             to: 100
-                            value: 0
+                            value: backend.operationProgress
                         }
                     }
                 }

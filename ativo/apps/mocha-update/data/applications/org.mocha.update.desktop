@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Mocha Update
+Comment=Central gráfica de atualização e recuperação do Mocha
+Exec=/usr/bin/mocha-update
+Icon=system-software-update
+Terminal=false
+Categories=System;Settings;
+Keywords=update;kernel;driver;rollback;mocha;
+StartupNotify=true

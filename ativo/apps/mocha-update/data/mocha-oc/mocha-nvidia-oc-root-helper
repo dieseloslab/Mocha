@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+HELPER='/usr/lib/mocha-update/mocha-update-helper'
+
+[[ -x "$HELPER" ]] || {
+    printf 'ERRO: helper do Mocha Update ausente: %s\n' "$HELPER" >&2
+    exit 1
+}
+
+case "${1:-}" in
+    start)
+        exec "$HELPER" oc-runtime-start
+        ;;
+    end|reset|stop)
+        exec "$HELPER" oc-runtime-end
+        ;;
+    status)
+        exec "$HELPER" oc-runtime-status
+        ;;
+    *)
+        printf 'uso: %s {start|end|reset|stop|status}\n' "$0" >&2
+        exit 2
+        ;;
+esac
