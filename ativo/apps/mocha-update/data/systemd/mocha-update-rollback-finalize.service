@@ -1,0 +1,16 @@
+[Unit]
+Description=Finaliza um rollback integral do Mocha Update
+After=local-fs.target lvm2-monitor.service
+RequiresMountsFor=/home /boot
+ConditionPathExists=/boot/.mocha-update/rollback-pending.conf
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/mocha-update/mocha-snapshot-admin finalize-rollback
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/boot /var/lib/mocha-update /run/lock
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

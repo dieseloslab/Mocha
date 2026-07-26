@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Sobre este sistema
+Name[pt_BR]=Sobre este sistema
+Comment=Informações e apoio ao Mocha Linux
+Comment[pt_BR]=Informações e apoio ao Mocha Linux
+Exec=/usr/bin/mocha-update --about
+Icon=system-help
+Terminal=false
+Categories=System;Settings;
+Keywords=about;system;mocha;support;apoio;mercado pago;
+StartupNotify=true

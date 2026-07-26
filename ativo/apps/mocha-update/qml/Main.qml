@@ -471,6 +471,12 @@ ApplicationWindow {
                     description: "Restaurar um estado anterior"
                 }
 
+                NavItem {
+                pageIndex: 6
+                label: "Sobre o Mocha"
+                description: "Sistema e apoio"
+                }
+
                 Item {
                     Layout.fillHeight: true
                 }
@@ -885,39 +891,17 @@ ApplicationWindow {
                         }
                     }
 
-                    Item {
-                        ColumnLayout {
+                    Item { // MOCHA_SNAPSHOT_MANAGER_V11
+                    SnapshotManager {
+                    anchors.fill: parent
+                    hostWindow: window
+                    }
+                    }
+
+                    Item { // MOCHA_SUPPORT_PAGE_V13
+                        SupportPage {
                             anchors.fill: parent
-                            spacing: 18
-
-                            PageTitle {
-                                titleText: "Rollback"
-                                descriptionText:
-                                    "Restaura um ponto anterior validado e apresenta "
-                                    + "o resumo das alterações revertidas."
-                            }
-
-                            OperationPanel {
-                                titleText: "Localizar restauração mais recente"
-                                descriptionText: backend.rollbackSummary
-                                buttonText: "Verificar snapshots"
-                                onTriggered: backend.checkRollbacks()
-                            }
-
-                            OperationPanel {
-                                titleText: "Restaurar estado validado"
-                                descriptionText: backend.rollbackReady
-                                    ? backend.rollbackSummary
-                                    : "A restauração permanece bloqueada até que o snapshot mais recente seja localizado e validado."
-                                buttonText: "Restaurar"
-                                dangerous: true
-                                actionEnabled: backend.rollbackReady
-                                onTriggered: backend.applySelectedRollback()
-                            }
-
-                            Item {
-                                Layout.fillHeight: true
-                            }
+                            hostWindow: window
                         }
                     }
                 }
@@ -957,6 +941,20 @@ ApplicationWindow {
                             value: backend.operationProgress
                         }
                     }
+                }
+            }
+        }
+    }
+
+    Timer { // MOCHA_ABOUT_ARGUMENT_V13
+        interval: 0
+        running: true
+        repeat: false
+        onTriggered: {
+            for (let index = 0; index < Qt.application.arguments.length; ++index) {
+                if (Qt.application.arguments[index] === "--about") {
+                    window.currentPage = 6
+                    break
                 }
             }
         }
