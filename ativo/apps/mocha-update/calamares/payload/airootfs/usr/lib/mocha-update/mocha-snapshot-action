@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+URL="${1:-}"
+[[ "$URL" == mocha-snapshot-action://* ]] || exit 64
+
+PAYLOAD="${URL#mocha-snapshot-action://}"
+ACTION="${PAYLOAD%%/*}"
+ENCODED="${PAYLOAD#*/}"
+
+[[ "$ENCODED" =~ ^([A-Za-z0-9._~:+/-]|%[0-9A-Fa-f]{2})*$ ]] || exit 64
+[[ "${ENCODED,,}" != *'%00'* ]] || exit 64
+KEY="$(printf '%b' "${ENCODED//%/\\x}")"
+[[ "$KEY" != *$'\n'* && "$KEY" != *$'\r'* ]] || exit 64
+
+case "$ACTION" in
+    create)
+        [[ "$KEY" == manual ]] || exit 64
+        COMMAND=(create manual)
+        SUCCESS='Ponto de restauração real criado e validado.'
+        ;;
+    index)
+        [[ "$KEY" == refresh ]] || exit 64
+        COMMAND=(index)
+        SUCCESS='Lista de pontos de restauração atualizada.'
+        ;;
+    preflight)
+        [[ "$KEY" == catalog:mocha-update-* ]] || exit 64
+        COMMAND=(preflight "$KEY")
+        SUCCESS='Ponto completo: volumes, /boot, EFI e checksums estão íntegros.'
+        ;;
+    restore)
+        [[ "$KEY" == catalog:mocha-update-* ]] || exit 64
+        COMMAND=(restore "$KEY")
+        SUCCESS='Rollback agendado. Reinicie o computador para concluir.'
+        ;;
+    delete)
+        case "$KEY" in
+            catalog:mocha-update-*|orphan:*/*) ;;
+            *) exit 64 ;;
+        esac
+        COMMAND=(delete "$KEY")
+        SUCCESS='Ponto de restauração removido.'
+        ;;
+    *)
+        exit 64
+        ;;
+esac
+
+set +e
+OUTPUT="$(
+    pkexec /usr/lib/mocha-update/mocha-snapshot-admin "${COMMAND[@]}" 2>&1
+)"
+STATUS=$?
+set -e
+
+if (( STATUS == 0 )); then
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send -a 'Mocha Update' 'Mocha Update' "$SUCCESS"
+    fi
+    exit 0
+fi
+
+MESSAGE="$(
+    printf '%s\n' "$OUTPUT" |
+        sed -n 's/^ERRO=//p' |
+        tail -n 1
+)"
+[[ -n "$MESSAGE" ]] || MESSAGE='A operação foi cancelada ou recusada.'
+if command -v notify-send >/dev/null 2>&1; then
+    notify-send -u critical -a 'Mocha Update' 'Mocha Update — erro' "$MESSAGE"
+fi
+printf '%s\n' "$OUTPUT" >&2
+exit "$STATUS"

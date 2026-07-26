@@ -1,0 +1,203 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+export LC_ALL=C
+export PATH='/usr/local/sbin:/usr/local/bin:/usr/bin'
+
+STATE='/var/lib/mocha-update'
+PENDING="$STATE/pending-boot-restore.conf"
+
+ROLLBACK_ID=''
+ROLLBACK_DIR=''
+EMERGENCY_DIR=''
+EFI_ARCHIVE_PRESENT=0
+RESTORE_STARTED=0
+
+log() {
+    printf 'MOCHA_BOOT_RESTORE: %s\n' "$*"
+}
+
+valid_id() {
+    [[ "$1" =~ ^mocha-update-[A-Za-z0-9._-]+$ ]]
+}
+
+exact_mount() {
+    local target="$1"
+    [[ "$(findmnt -n -o TARGET -T "$target" 2>/dev/null || true)" == "$target" ]]
+}
+
+clear_tree() {
+    local target="$1"
+
+    if [[ "$target" == '/boot' ]] && exact_mount /boot/efi; then
+        find /boot \
+            -xdev \
+            -mindepth 1 \
+            -maxdepth 1 \
+            ! -path /boot/efi \
+            -exec rm -rf -- {} +
+    else
+        find "$target" \
+            -xdev \
+            -mindepth 1 \
+            -maxdepth 1 \
+            -exec rm -rf -- {} +
+    fi
+}
+
+archive_tree() {
+    local target="$1"
+    local archive="$2"
+
+    tar \
+        -C "$target" \
+        --one-file-system \
+        --numeric-owner \
+        -cpf "$archive" \
+        .
+}
+
+extract_tree() {
+    local target="$1"
+    local archive="$2"
+
+    tar \
+        -C "$target" \
+        --numeric-owner \
+        -xpf "$archive"
+}
+
+rollback_emergency() {
+    local original_rc="$1"
+
+    trap - ERR
+    set +e
+
+    log "falha durante a restauração; iniciando recuperação do estado encontrado no boot"
+
+    if [[ -n "$EMERGENCY_DIR" && -f "$EMERGENCY_DIR/boot-current.tar" ]]; then
+        clear_tree /boot
+        extract_tree /boot "$EMERGENCY_DIR/boot-current.tar"
+    fi
+
+    if (( EFI_ARCHIVE_PRESENT == 1 )) &&
+        [[ -n "$EMERGENCY_DIR" && -f "$EMERGENCY_DIR/efi-current.tar" ]]; then
+        clear_tree /boot/efi
+        extract_tree /boot/efi "$EMERGENCY_DIR/efi-current.tar"
+    fi
+
+    sync
+
+    if [[ -f "$PENDING" ]]; then
+        mv -f -- "$PENDING" "${PENDING}.failed-$(date '+%Y%m%d-%H%M%S')"
+    fi
+
+    log "recuperação emergencial concluída; código original=$original_rc"
+    exit "$original_rc"
+}
+
+trap 'rc=$?; rollback_emergency "$rc"' ERR
+
+[[ "$EUID" -eq 0 ]] || {
+    log 'este helper exige EUID 0'
+    exit 1
+}
+
+[[ -f "$PENDING" ]] || exit 0
+
+ROLLBACK_ID="$(
+    awk -F= '$1 == "ROLLBACK_ID" {print $2; exit}' "$PENDING" |
+        tr -d '\r\n'
+)"
+valid_id "$ROLLBACK_ID" || {
+    log "identificador inválido no marcador: $ROLLBACK_ID"
+    exit 1
+}
+
+ROLLBACK_DIR="$STATE/rollbacks/$ROLLBACK_ID"
+[[ -d "$ROLLBACK_DIR" ]] || {
+    log "diretório do rollback ausente: $ROLLBACK_DIR"
+    exit 1
+}
+
+[[ -f "$ROLLBACK_DIR/boot.tar" ]] || {
+    log 'backup boot.tar ausente'
+    exit 1
+}
+[[ -f "$ROLLBACK_DIR/boot.sha256" ]] || {
+    log 'checksum boot.sha256 ausente'
+    exit 1
+}
+
+sha256sum --check --strict "$ROLLBACK_DIR/boot.sha256"
+tar -tf "$ROLLBACK_DIR/boot.tar" >/dev/null
+
+if [[ -f "$ROLLBACK_DIR/efi.tar" ]]; then
+    EFI_ARCHIVE_PRESENT=1
+    [[ -f "$ROLLBACK_DIR/efi.sha256" ]] || {
+        log 'checksum efi.sha256 ausente'
+        exit 1
+    }
+    sha256sum --check --strict "$ROLLBACK_DIR/efi.sha256"
+    tar -tf "$ROLLBACK_DIR/efi.tar" >/dev/null
+fi
+
+exact_mount /boot || {
+    log '/boot não está montado como ponto separado'
+    exit 1
+}
+
+if (( EFI_ARCHIVE_PRESENT == 1 )); then
+    exact_mount /boot/efi || {
+        log '/boot/efi não está montado como ponto separado'
+        exit 1
+    }
+fi
+
+EMERGENCY_DIR="$ROLLBACK_DIR/boot-restore-emergency-$(date '+%Y%m%d-%H%M%S')"
+install -d -o root -g root -m 0700 "$EMERGENCY_DIR"
+
+archive_tree /boot "$EMERGENCY_DIR/boot-current.tar"
+sha256sum "$EMERGENCY_DIR/boot-current.tar" \
+    > "$EMERGENCY_DIR/boot-current.sha256"
+
+if (( EFI_ARCHIVE_PRESENT == 1 )); then
+    archive_tree /boot/efi "$EMERGENCY_DIR/efi-current.tar"
+    sha256sum "$EMERGENCY_DIR/efi-current.tar" \
+        > "$EMERGENCY_DIR/efi-current.sha256"
+fi
+
+RESTORE_STARTED=1
+log "restaurando /boot do rollback $ROLLBACK_ID"
+
+clear_tree /boot
+extract_tree /boot "$ROLLBACK_DIR/boot.tar"
+
+if (( EFI_ARCHIVE_PRESENT == 1 )); then
+    clear_tree /boot/efi
+    extract_tree /boot/efi "$ROLLBACK_DIR/efi.tar"
+fi
+
+[[ -s /boot/grub/grub.cfg ]] || {
+    log '/boot/grub/grub.cfg ausente após restauração'
+    exit 1
+}
+
+compgen -G '/boot/vmlinuz-*' >/dev/null || {
+    log 'nenhuma imagem vmlinuz encontrada após restauração'
+    exit 1
+}
+
+if (( EFI_ARCHIVE_PRESENT == 1 )); then
+    find /boot/efi -xdev -mindepth 1 -print -quit | grep -q . || {
+        log 'a EFI ficou vazia após restauração'
+        exit 1
+    }
+fi
+
+sync
+rm -f -- "$PENDING"
+trap - ERR
+
+log "restauração de /boot e EFI concluída para $ROLLBACK_ID"
+exit 0

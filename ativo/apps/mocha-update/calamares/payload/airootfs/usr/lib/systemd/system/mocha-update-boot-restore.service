@@ -1,0 +1,13 @@
+[Unit]
+Description=Mocha Update - restauração transacional de /boot e EFI
+After=local-fs.target
+RequiresMountsFor=/boot /var/lib/mocha-update
+Before=multi-user.target
+ConditionPathExists=/var/lib/mocha-update/pending-boot-restore.conf
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/mocha-update/mocha-boot-restore
+
+[Install]
+WantedBy=multi-user.target

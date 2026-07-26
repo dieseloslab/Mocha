@@ -1,0 +1,12 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Mocha: criando ou reutilizando um ponto de restauração completo em Rust...
+When = PreTransaction
+Exec = /usr/lib/mocha-update/mocha-snapshot-admin create-pacman
+AbortOnFail

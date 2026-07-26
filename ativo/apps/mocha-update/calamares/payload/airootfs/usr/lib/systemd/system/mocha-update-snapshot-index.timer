@@ -1,0 +1,11 @@
+[Unit]
+Description=Atualiza periodicamente os pontos do Mocha Update
+
+[Timer]
+OnBootSec=3s
+OnUnitActiveSec=15s
+AccuracySec=1s
+Unit=mocha-update-snapshot-index.service
+
+[Install]
+WantedBy=timers.target

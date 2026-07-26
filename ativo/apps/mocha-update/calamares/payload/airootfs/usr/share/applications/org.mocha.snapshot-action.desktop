@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Mocha Snapshot Action
+NoDisplay=true
+Exec=/usr/lib/mocha-update/mocha-snapshot-action %u
+MimeType=x-scheme-handler/mocha-snapshot-action;
+Terminal=false

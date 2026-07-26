@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Mocha Update
+GenericName=Atualizador do sistema
+Comment=Central gráfica de atualização e recuperação do Mocha
+Exec=/usr/bin/mocha-update
+TryExec=/usr/bin/mocha-update
+Icon=system-software-update
+Terminal=false
+Categories=System;
+Keywords=update;kernel;driver;rollback;mocha;
+StartupNotify=true
+X-KDE-StartupNotify=true
+DBusActivatable=false
+NoDisplay=false

@@ -1,0 +1,14 @@
+[Unit]
+Description=Atualiza o índice de pontos do Mocha Update pelo backend Rust
+After=local-fs.target lvm2-monitor.service
+RequiresMountsFor=/home /boot
+ConditionPathExists=/usr/lib/mocha-update/mocha-snapshot-admin
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/mocha-update/mocha-snapshot-admin index
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/mocha-update /run/lock
+NoNewPrivileges=true
