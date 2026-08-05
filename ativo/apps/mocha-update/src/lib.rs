@@ -5,3 +5,4 @@ pub mod protocol;
 
 /// Mantém o módulo CXX-Qt ligado ao executável gráfico.
 pub fn initialize_qml_backend() {}
+pub mod update_catalog;

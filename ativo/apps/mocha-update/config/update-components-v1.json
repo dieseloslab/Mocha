@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "components": [
+    {
+      "id": "mocha-update",
+      "kind": "application",
+      "install_root": "/opt/mocha-update/releases",
+      "launcher": "/usr/bin/mocha-update",
+      "requires_root": true,
+      "validator": ["{payload}/mocha-update", "--self-test"]
+    },
+    {
+      "id": "mocha-steam-wrapper",
+      "kind": "component",
+      "install_root": "/usr/lib/mocha/components/mocha-steam-wrapper/releases",
+      "launcher": "/usr/local/bin/mocha-steam-game-run",
+      "requires_root": true,
+      "validator": ["bash", "-n", "{payload}/mocha-steam-game-run"]
+    },
+    {
+      "id": "mocha-support-content",
+      "kind": "content",
+      "install_root": "/var/lib/mocha-update/content/support/releases",
+      "launcher": null,
+      "requires_root": true,
+      "validator": ["python3", "-m", "json.tool", "{payload}/support.json"]
+    },
+    {
+      "id": "mocha-sponsors-content",
+      "kind": "content",
+      "install_root": "/var/lib/mocha-update/content/sponsors/releases",
+      "launcher": null,
+      "requires_root": true,
+      "validator": ["python3", "-m", "json.tool", "{payload}/sponsors.json"]
+    }
+  ]
+}

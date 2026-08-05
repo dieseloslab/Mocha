@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "components": {
+    "mocha-update": "0.1.0",
+    "mocha-steam-wrapper": "1.0.0",
+    "mocha-support-content": "2026.7.24"
+  }
+}

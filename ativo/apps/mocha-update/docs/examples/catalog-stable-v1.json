@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "channel": "stable",
+  "generated_at": "2026-08-03T20:24:00-03:00",
+  "minimum_catalog_client": 1,
+  "items": [
+    {
+      "id": "mocha-update",
+      "kind": "application",
+      "version": "0.2.0",
+      "architecture": "x86_64",
+      "artifact": "stable/application/mocha-update/0.2.0/mocha-update-0.2.0-x86_64.tar.zst",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "size": 2100000,
+      "release_notes": [
+        "Motor inicial de atualizações Mocha",
+        "Classificação de aplicativo, componente e conteúdo"
+      ],
+      "requires_app_restart": true,
+      "requires_reboot": false,
+      "minimum_mocha_update": ">=0.1.0"
+    },
+    {
+      "id": "mocha-steam-wrapper",
+      "kind": "component",
+      "version": "1.0.1",
+      "architecture": "any",
+      "artifact": "stable/component/mocha-steam-wrapper/1.0.1/mocha-steam-wrapper-1.0.1-any.tar.zst",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "size": 64000,
+      "release_notes": [
+        "Exemplo de correção do wrapper da Steam"
+      ],
+      "requires_app_restart": false,
+      "requires_reboot": false,
+      "minimum_mocha_update": ">=0.1.0"
+    },
+    {
+      "id": "mocha-support-content",
+      "kind": "content",
+      "version": "2026.8.3",
+      "architecture": "any",
+      "artifact": "stable/content/mocha-support-content/2026.8.3/mocha-support-content-2026.8.3-any.tar.zst",
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "size": 12000,
+      "release_notes": [
+        "Exemplo de atualização de links de apoio"
+      ],
+      "requires_app_restart": false,
+      "requires_reboot": false,
+      "minimum_mocha_update": ">=0.1.0"
+    }
+  ]
+}

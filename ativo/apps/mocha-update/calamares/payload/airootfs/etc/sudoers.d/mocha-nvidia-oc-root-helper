@@ -1,0 +1,3 @@
+# Mocha OC — comandos fixos acionados pelos hooks aprovados do GameMode.
+Cmnd_Alias MOCHA_NVIDIA_OC = /usr/local/lib/mocha/mocha-nvidia-oc-root-helper start, /usr/local/lib/mocha/mocha-nvidia-oc-root-helper end, /usr/local/lib/mocha/mocha-nvidia-oc-root-helper reset, /usr/local/lib/mocha/mocha-nvidia-oc-root-helper stop, /usr/local/lib/mocha/mocha-nvidia-oc-root-helper status
+%wheel ALL=(root) NOPASSWD: MOCHA_NVIDIA_OC

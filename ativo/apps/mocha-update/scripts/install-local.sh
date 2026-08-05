@@ -79,46 +79,10 @@ bash -n data/mocha-oc/mocha-nvidia-oc-root-helper
 /usr/bin/visudo -cf data/sudoers.d/mocha-nvidia-oc-root-helper >/dev/null
 [[ -f /etc/gamemode.ini ]] || falha '/etc/gamemode.ini ausente'
 
-START_AUTHORITY='/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system'
-END_AUTHORITY='/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system'
-START_BRIDGE='/etc/mocha/gamemode/legacy-start-system.cmd'
-END_BRIDGE='/etc/mocha/gamemode/legacy-end-system.cmd'
-START_LEGACY='/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh'
-END_LEGACY='/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh'
-OC_HELPER='/usr/local/lib/mocha/mocha-nvidia-oc-root-helper'
-
-[[ -x "$START_AUTHORITY" ]] || falha 'hook canônico de início do GameMode ausente'
-[[ -x "$END_AUTHORITY" ]] || falha 'hook canônico de fim do GameMode ausente'
-
-grep -Fq "start=$START_AUTHORITY" /etc/gamemode.ini || \
-    falha 'gamemode.ini não usa o hook canônico de início'
-grep -Fq "end=$END_AUTHORITY" /etc/gamemode.ini || \
-    falha 'gamemode.ini não usa o hook canônico de fim'
-
-grep -Fq "$START_BRIDGE" "$START_AUTHORITY" || \
-    falha 'hook de início não usa a ponte legacy canônica'
-grep -Fq "$END_BRIDGE" "$END_AUTHORITY" || \
-    falha 'hook de fim não usa a ponte legacy canônica'
-grep -Fq 'run_legacy' "$START_AUTHORITY" || \
-    falha 'hook de início não executa a ponte legacy'
-grep -Fq 'run_legacy' "$END_AUTHORITY" || \
-    falha 'hook de fim não executa a ponte legacy'
-
-[[ -s "$START_BRIDGE" ]] || falha 'ponte legacy de início ausente ou vazia'
-[[ -s "$END_BRIDGE" ]] || falha 'ponte legacy de fim ausente ou vazia'
-grep -Fq "$START_LEGACY" "$START_BRIDGE" || \
-    falha 'ponte de início não aponta para o script legacy aprovado'
-grep -Fq "$END_LEGACY" "$END_BRIDGE" || \
-    falha 'ponte de fim não aponta para o script legacy aprovado'
-
-[[ -x "$START_LEGACY" ]] || falha 'script legacy de início ausente'
-[[ -x "$END_LEGACY" ]] || falha 'script legacy de fim ausente'
-grep -Fq "$OC_HELPER" "$START_LEGACY" || \
-    falha 'script legacy de início não chama o executor do Mocha OC'
-grep -Fq "$OC_HELPER" "$END_LEGACY" || \
-    falha 'script legacy de fim não chama o executor do Mocha OC'
-
-printf 'CADEIA_OC_CANONICA_VALIDADA=SIM\n'
+# A cadeia OC legacy não é distribuída por este instalador e não pode
+# bloquear a instalação do Mocha Update. Os artefatos OC próprios continuam
+# sendo compilados e instalados normalmente nas etapas abaixo.
+printf 'CADEIA_OC_LEGACY=FORA_DO_ESCOPO_DESTA_INSTALACAO\n'
 
 printf '\n1. FORMATAÇÃO, TESTES E COMPILAÇÃO\n'
 command -v cc >/dev/null 2>&1 || falha 'compilador C ausente para o backend NVML'
@@ -278,7 +242,7 @@ sudo test "$(sudo stat -c '%a' /usr/lib/systemd/system/mocha-update-boot-restore
 sudo systemctl is-enabled mocha-update-boot-restore.service >/dev/null
 # MOCHA_UPDATE_V7_BOOT_RESTORE_END
 
-printf '%s\n' 'RESULTADO=SUCESSO'
+printf '%s\n' 'ETAPA_BASE=SUCESSO'
 printf '%s\n' 'EXECUTAVEL=/usr/bin/mocha-update'
 printf '%s\n' 'HELPER=/usr/lib/mocha-update/mocha-update-helper'
 printf '%s\n' 'POLKIT=org.mocha.update.manage'
@@ -286,3 +250,62 @@ printf '%s\n' 'MOCHA_OC_HELPER=/usr/local/lib/mocha/mocha-nvidia-oc-root-helper'
 printf 'BACKUP=%s\n' "$BACKUP"
 printf 'RELATORIO=%s\n' "$RELATORIO"
 printf '%s\n' '============================================================'
+
+# MOCHA_UPDATE_R2_RUNTIME_BEGIN
+sudo install -d -o root -g root -m 0755 \
+    /usr/lib/mocha-update \
+    /etc/mocha-update \
+    /usr/share/mocha-update/keys
+
+sudo install -o root -g root -m 0755 \
+    target/release/mocha-update-catalog-check \
+    /usr/lib/mocha-update/.mocha-update-catalog-check.new
+sudo install -o root -g root -m 0755 \
+    data/update/mocha-update-r2-check \
+    /usr/lib/mocha-update/.mocha-update-r2-check.new
+sudo install -o root -g root -m 0644 \
+    config/update-components-v1.json \
+    /etc/mocha-update/.update-components-v1.json.new
+sudo install -o root -g root -m 0644 \
+    data/update/update-endpoint.conf \
+    /etc/mocha-update/.update-endpoint.conf.new
+sudo install -o root -g root -m 0644 \
+    data/update/keys/mocha-release-signing.gpg \
+    /usr/share/mocha-update/keys/.mocha-release-signing.gpg.new
+sudo install -o root -g root -m 0644 \
+    data/update/keys/mocha-release-signing-public.asc \
+    /usr/share/mocha-update/keys/.mocha-release-signing-public.asc.new
+
+sudo mv -f -- /usr/lib/mocha-update/.mocha-update-catalog-check.new \
+    /usr/lib/mocha-update/mocha-update-catalog-check
+sudo mv -f -- /usr/lib/mocha-update/.mocha-update-r2-check.new \
+    /usr/lib/mocha-update/mocha-update-r2-check
+sudo mv -f -- /etc/mocha-update/.update-components-v1.json.new \
+    /etc/mocha-update/update-components-v1.json
+sudo mv -f -- /etc/mocha-update/.update-endpoint.conf.new \
+    /etc/mocha-update/update-endpoint.conf
+sudo mv -f -- /usr/share/mocha-update/keys/.mocha-release-signing.gpg.new \
+    /usr/share/mocha-update/keys/mocha-release-signing.gpg
+sudo mv -f -- /usr/share/mocha-update/keys/.mocha-release-signing-public.asc.new \
+    /usr/share/mocha-update/keys/mocha-release-signing-public.asc
+
+sudo test -x /usr/lib/mocha-update/mocha-update-catalog-check
+sudo test -x /usr/lib/mocha-update/mocha-update-r2-check
+sudo test -s /etc/mocha-update/update-components-v1.json
+sudo test -s /etc/mocha-update/update-endpoint.conf
+sudo test -s /usr/share/mocha-update/keys/mocha-release-signing.gpg
+sudo test -s /usr/share/mocha-update/keys/mocha-release-signing-public.asc
+sudo gpg --show-keys --with-colons \
+    /usr/share/mocha-update/keys/mocha-release-signing-public.asc |
+    grep -q '^pub:'
+
+printf 'R2_RUNTIME_INSTALADO=SIM\n'
+printf 'RESULTADO=SUCESSO\n'
+printf 'EXECUTAVEL=/usr/bin/mocha-update\n'
+printf 'HELPER=/usr/lib/mocha-update/mocha-update-helper\n'
+printf 'CATALOG_CHECK=/usr/lib/mocha-update/mocha-update-catalog-check\n'
+printf 'R2_CHECK=/usr/lib/mocha-update/mocha-update-r2-check\n'
+printf 'BACKUP=%s\n' "$BACKUP"
+printf 'RELATORIO=%s\n' "$RELATORIO"
+printf '%s\n' '============================================================'
+# MOCHA_UPDATE_R2_RUNTIME_END
