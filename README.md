@@ -66,6 +66,20 @@ Este repositório reúne a parte pública e reproduzível do projeto:
 
 Caches locais, segredos, chaves privadas, imagens completas de discos e artefatos grandes de compilação permanecem fora do GitHub.
 
+## Licenças, compatibilidade e uso por outras distribuições
+
+O Mocha Linux é formado por componentes de diferentes origens. Cada kernel, biblioteca, programa, script, recurso visual e componente externo conserva sua própria licença e suas respectivas condições de uso, modificação e redistribuição. A presença de um arquivo neste repositório não substitui nem altera a licença aplicável a ele.
+
+Alguns componentes mantidos pelo projeto Mocha são modificados, compilados e validados como parte de um conjunto integrado. Isso inclui componentes fundamentais do sistema, como kernel, bibliotecas e ferramentas de atualização e recuperação. Utilizá-los isoladamente ou em outra distribuição, sem avaliar suas dependências e diferenças de empacotamento, pode causar incompatibilidades graves e até impedir a inicialização ou o funcionamento do sistema.
+
+Os repositórios binários, servidores de atualização e demais serviços de infraestrutura do Mocha são dimensionados e financiados para atender aos usuários do próprio projeto. Eles não devem ser adicionados como fonte de pacotes, espelhados ou utilizados automaticamente por outras distribuições sem autorização prévia. O consumo não autorizado em larga escala pode gerar custos que reduziriam os recursos disponíveis para o desenvolvimento do Mocha e para sua missão social ligada ao apoio e à inclusão de crianças com Trissomia 21.
+
+Isso não significa que desejamos impedir a colaboração. Pelo contrário: teremos satisfação em conversar com mantenedores e desenvolvedores interessados em utilizar, adaptar ou estudar componentes do Mocha. Podemos ajudar a identificar a licença aplicável, as dependências necessárias, a forma adequada de integração e, quando possível, uma maneira segura de compartilhamento que não comprometa a infraestrutura do projeto.
+
+Antes de integrar componentes próprios do Mocha, redistribuir seus pacotes ou utilizar seus repositórios e serviços, entre em contato pelo endereço `suporte@dieseloslab.org`. Assim poderemos colaborar para evitar incompatibilidades técnicas, problemas de licenciamento e custos inesperados para qualquer uma das partes.
+
+O uso de componentes externos distribuídos pelo Mocha permanece sujeito exclusivamente às licenças de seus respectivos autores. Marcas, nomes, identidade visual e materiais próprios do Mocha também podem estar sujeitos a condições específicas.
+
 ## Créditos
 
 O Mocha é construído sobre Linux, Arch Linux, KDE Plasma e o ecossistema de software livre, além de projetos como Liquorix, Steam, Proton, Wine, GameMode e MangoHud. Cada componente externo conserva sua própria licença.
