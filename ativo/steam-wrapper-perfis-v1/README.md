@@ -29,9 +29,9 @@ Compatibilidade aplicada pela V1:
 - Proton Valve/Experimental e ferramentas desconhecidas: nenhum seletor
   específico, preservando o comportamento original.
 
-Os perfis iniciais são `690790` (DiRT Rally 2.0, DXVK) e `1029690`
-(Sniper Elite 5, VKD3D). Nenhum limite de FPS, Wayland, HDR, Reflex ou WoW64 é
-ativado nesses perfis.
+Os perfis iniciais são `690790` (DiRT Rally 2.0, DXVK), `1029690`
+(Sniper Elite 5, VKD3D) e `2169200` (Sniper Elite: Resistance, VKD3D).
+Nenhum limite de FPS, Wayland, HDR, Reflex ou WoW64 é ativado nesses perfis.
 
 O registro de seleção fica em
 `~/.local/state/mocha/steam-profiles.log`.
