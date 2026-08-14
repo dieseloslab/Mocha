@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+# Mocha Steam — carregador seguro de perfis por AppID.
+# Este arquivo deve ser carregado pelo wrapper frontal com `source`.
+
+mocha_profile_appid=''
+for mocha_profile_candidate in \
+    "${SteamAppId:-}" \
+    "${SteamGameId:-}" \
+    "${STEAM_COMPAT_APP_ID:-}"; do
+    if [[ "$mocha_profile_candidate" =~ ^[0-9]+$ ]]; then
+        mocha_profile_appid="$mocha_profile_candidate"
+        break
+    fi
+done
+
+[[ -n "$mocha_profile_appid" ]] || return 0 2>/dev/null || exit 0
+
+mocha_profile_tool_path="${STEAM_COMPAT_TOOL_PATHS%%:*}"
+if [[ -z "$mocha_profile_tool_path" ]]; then
+    for mocha_profile_argument in "$@"; do
+        if [[ "$mocha_profile_argument" == */proton ]]; then
+            mocha_profile_tool_path="${mocha_profile_argument%/proton}"
+            break
+        fi
+    done
+fi
+
+mocha_profile_tool_name="${mocha_profile_tool_path##*/}"
+mocha_profile_tool_lower="${mocha_profile_tool_name,,}"
+mocha_profile_family='other'
+case "$mocha_profile_tool_lower" in
+    *dwproton*|*dw-proton*) mocha_profile_family='dw' ;;
+    ge-proton*|ge_proton*|*proton-ge*) mocha_profile_family='ge' ;;
+    em-*|*proton-em*|*proton_em*) mocha_profile_family='em' ;;
+    *experimental*|proton\ *) mocha_profile_family='valve' ;;
+esac
+
+MOCHA_PROFILE_NAME='Padrão Mocha'
+MOCHA_DXVK_LOWLATENCY=0
+MOCHA_VKD3D_LOWLATENCY=0
+MOCHA_VKREFLEX=0
+MOCHA_LOW_LATENCY_LAYER=0
+MOCHA_FRAME_RATE=0
+MOCHA_WOW64=0
+
+mocha_profile_read_file() {
+    local mocha_profile_file="$1"
+    local mocha_profile_line mocha_profile_key mocha_profile_value
+
+    [[ -f "$mocha_profile_file" && ! -L "$mocha_profile_file" ]] || return 0
+
+    while IFS= read -r mocha_profile_line || [[ -n "$mocha_profile_line" ]]; do
+        [[ "$mocha_profile_line" =~ ^[[:space:]]*(#|$) ]] && continue
+        [[ "$mocha_profile_line" == *=* ]] || continue
+        mocha_profile_key="${mocha_profile_line%%=*}"
+        mocha_profile_value="${mocha_profile_line#*=}"
+        mocha_profile_key="${mocha_profile_key//[[:space:]]/}"
+        mocha_profile_value="${mocha_profile_value#\"}"
+        mocha_profile_value="${mocha_profile_value%\"}"
+
+        case "$mocha_profile_key" in
+            MOCHA_PROFILE_NAME)
+                [[ ${#mocha_profile_value} -le 80 && "$mocha_profile_value" =~ ^[[:alnum:][:space:]_.+:-]+$ ]] && \
+                    MOCHA_PROFILE_NAME="$mocha_profile_value"
+                ;;
+            MOCHA_DXVK_LOWLATENCY|MOCHA_VKD3D_LOWLATENCY|MOCHA_VKREFLEX|MOCHA_LOW_LATENCY_LAYER|MOCHA_WOW64)
+                [[ "$mocha_profile_value" == 0 || "$mocha_profile_value" == 1 ]] && \
+                    printf -v "$mocha_profile_key" '%s' "$mocha_profile_value"
+                ;;
+            MOCHA_FRAME_RATE)
+                if [[ "$mocha_profile_value" =~ ^[0-9]{1,4}$ ]] && ((10#$mocha_profile_value <= 1000)); then
+                    MOCHA_FRAME_RATE="$((10#$mocha_profile_value))"
+                fi
+                ;;
+        esac
+    done < "$mocha_profile_file"
+}
+
+mocha_profile_read_file "/usr/local/share/mocha/steam-profiles/${mocha_profile_appid}.conf"
+mocha_profile_user_root="${XDG_CONFIG_HOME:-$HOME/.config}/mocha/steam-profiles"
+mocha_profile_read_file "${mocha_profile_user_root}/${mocha_profile_appid}.conf"
+
+case "$mocha_profile_family" in
+    dw)
+        ((MOCHA_DXVK_LOWLATENCY)) && export PROTON_DXVK_LOWLATENCY=1
+        ((MOCHA_VKD3D_LOWLATENCY)) && export PROTON_VKD3D_LOWLATENCY=1
+        ((MOCHA_VKREFLEX)) && export DXVK_NVAPI_VKREFLEX=1
+        ((MOCHA_LOW_LATENCY_LAYER)) && export LOW_LATENCY_LAYER=1
+        if ((MOCHA_FRAME_RATE > 0)); then
+            export DXVK_FRAME_RATE="$MOCHA_FRAME_RATE"
+            export VKD3D_FRAME_RATE="$MOCHA_FRAME_RATE"
+        fi
+        ((MOCHA_WOW64)) && export PROTON_USE_WOW64=1
+        ;;
+    ge)
+        ((MOCHA_VKREFLEX)) && export DXVK_NVAPI_VKREFLEX=1
+        ((MOCHA_LOW_LATENCY_LAYER)) && export LOW_LATENCY_LAYER=1
+        if ((MOCHA_FRAME_RATE > 0)); then
+            export DXVK_FRAME_RATE="$MOCHA_FRAME_RATE"
+            export VKD3D_FRAME_RATE="$MOCHA_FRAME_RATE"
+        fi
+        ((MOCHA_WOW64)) && export PROTON_USE_WOW64=1
+        ;;
+    em)
+        ((MOCHA_WOW64)) && export PROTON_USE_WOW64=1
+        ;;
+esac
+
+mocha_profile_state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/mocha"
+mkdir -p -- "$mocha_profile_state_dir" 2>/dev/null || :
+printf '[%s] appid=%s proton=%s familia=%s perfil=%s dxvk_ll=%s vkd3d_ll=%s vkreflex=%s layer=%s fps=%s wow64=%s\n' \
+    "$(date --iso-8601=seconds)" \
+    "$mocha_profile_appid" \
+    "${mocha_profile_tool_name:-desconhecido}" \
+    "$mocha_profile_family" \
+    "$MOCHA_PROFILE_NAME" \
+    "$MOCHA_DXVK_LOWLATENCY" \
+    "$MOCHA_VKD3D_LOWLATENCY" \
+    "$MOCHA_VKREFLEX" \
+    "$MOCHA_LOW_LATENCY_LAYER" \
+    "$MOCHA_FRAME_RATE" \
+    "$MOCHA_WOW64" \
+    >>"$mocha_profile_state_dir/steam-profiles.log" 2>/dev/null || :
+
+unset mocha_profile_appid mocha_profile_candidate mocha_profile_argument
+unset mocha_profile_tool_path mocha_profile_tool_name mocha_profile_tool_lower mocha_profile_family
+unset mocha_profile_user_root mocha_profile_state_dir
+unset -f mocha_profile_read_file
