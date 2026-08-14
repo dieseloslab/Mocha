@@ -111,6 +111,7 @@ baixar 'usr/local/bin/mocha-steam-game-run' "$temporario/mocha-steam-game-run"
 baixar 'usr/local/lib/mocha/mocha-steam-profile-loader' "$temporario/mocha-steam-profile-loader"
 baixar 'usr/local/share/mocha/steam-profiles/690790.conf' "$temporario/690790.conf"
 baixar 'usr/local/share/mocha/steam-profiles/1029690.conf' "$temporario/1029690.conf"
+baixar 'usr/local/share/mocha/steam-profiles/2169200.conf' "$temporario/2169200.conf"
 baixar 'README.md' "$temporario/README.md"
 
 printf '%s\n' '[3/8] Verificação criptográfica e sintática'
@@ -130,7 +131,8 @@ verificar_hash "$temporario/mocha-steam-game-run" "$hash_wrapper_novo"
 verificar_hash "$temporario/mocha-steam-profile-loader" 'a96d1f2601e75802e76c538496786ea674277af92bc06dcb8294527c9ff27209'
 verificar_hash "$temporario/690790.conf" 'b84ea47864e82dcebfea0656c81cf2db82486b5eadfaffc3b8a0b2e7fd4f3fd0'
 verificar_hash "$temporario/1029690.conf" '83f591e76408e2a61b131eeb334ea64d876515841797360e2e1d35f2326d8f8a'
-verificar_hash "$temporario/README.md" 'fd1f39653f8d68f5318b25d67cd8e4839a978f5aef65365931b9b9b5cb70c623'
+verificar_hash "$temporario/2169200.conf" '44146f7a5711bd2c9f9d7da878796bc8e70590cd4dd1da0b4026912882e94eb8'
+verificar_hash "$temporario/README.md" '7cbc07a3bd24fbc5f717ea739e77b7bf544148b3cbd668babd41c1634878b321'
 bash -n "$temporario/mocha-steam-game-run"
 bash -n "$temporario/mocha-steam-profile-loader"
 
@@ -155,6 +157,9 @@ sudo install -o root -g root -m 0644 -- \
     "$temporario/1029690.conf" \
     /usr/local/share/mocha/steam-profiles/1029690.conf
 sudo install -o root -g root -m 0644 -- \
+    "$temporario/2169200.conf" \
+    /usr/local/share/mocha/steam-profiles/2169200.conf
+sudo install -o root -g root -m 0644 -- \
     "$temporario/README.md" \
     /usr/local/share/doc/mocha/WRAPPER-STEAM-PERFIS.md
 sudo install -o root -g root -m 0755 -- \
@@ -174,6 +179,8 @@ HOME="$casa" SteamAppId=690790 STEAM_COMPAT_TOOL_PATHS='/teste/GE-Proton11-5' \
     bash -c 'set -Eeuo pipefail; source /usr/local/lib/mocha/mocha-steam-profile-loader; [[ -z ${PROTON_DXVK_LOWLATENCY:-} ]]'
 HOME="$casa" SteamAppId=1029690 STEAM_COMPAT_TOOL_PATHS='/teste/EM-10.0-37-HDR+' \
     bash -c 'set -Eeuo pipefail; source /usr/local/lib/mocha/mocha-steam-profile-loader; [[ -z ${PROTON_VKD3D_LOWLATENCY:-} ]]'
+HOME="$casa" SteamAppId=2169200 STEAM_COMPAT_TOOL_PATHS='/teste/DW-Proton' \
+    bash -c 'set -Eeuo pipefail; source /usr/local/lib/mocha/mocha-steam-profile-loader; [[ ${PROTON_VKD3D_LOWLATENCY:-} == 1 ]]; [[ -z ${PROTON_DXVK_LOWLATENCY:-} ]]'
 
 printf '%s\n' '[7/8] Verificação final de integridade'
 [[ "$(sha256sum -- "$wrapper_atual" | awk '{print $1}')" == "$hash_wrapper_novo" ]]
