@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "components": {
+    "mocha-update": "0.2.0"
+  }
+}
