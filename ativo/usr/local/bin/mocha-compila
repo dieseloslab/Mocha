@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+umask 077
+
+if [[ "${MOCHA_COMPILA_EM_ESCOPO:-0}" != 1 ]]; then
+    unidade="mocha-compila-${USER}-${$}"
+    exec /usr/bin/systemd-run \
+        --user \
+        --scope \
+        --quiet \
+        --collect \
+        --unit="$unidade" \
+        --property=MemoryHigh=12G \
+        --property=CPUWeight=100 \
+        --property=IOWeight=100 \
+        --setenv=MOCHA_COMPILA_EM_ESCOPO=1 \
+        -- "$0" "$@"
+fi
+
+[[ "$#" -gt 0 ]] || {
+    printf '%s\n' \
+        'Uso: mocha-compila <comando de compilação e argumentos>' \
+        'Exemplo: mocha-compila makepkg -sric'
+    exit 64
+}
+
+documentos="$(xdg-user-dir DOCUMENTS 2>/dev/null || true)"
+[[ -n "$documentos" ]] || documentos="$HOME/Documentos"
+mkdir -p -- "$documentos"
+relatorio="$documentos/mocha-compila-$(date +%Y%m%d-%H%M%S).txt"
+
+ativo=0
+filho=''
+monitor=''
+
+encerra() {
+    rc=$?
+    [[ -n "$monitor" ]] && kill "$monitor" 2>/dev/null || true
+    [[ -n "$monitor" ]] && wait "$monitor" 2>/dev/null || true
+    printf 'FIM=%s\nRELATORIO=%s\n' \
+        "$(date --iso-8601=seconds)" "$relatorio"
+    exit "$rc"
+}
+
+descendentes() {
+    local fila pid filho_pid
+    fila=("$1")
+
+    while ((${#fila[@]})); do
+        pid="${fila[0]}"
+        fila=("${fila[@]:1}")
+        printf '%s\n' "$pid"
+
+        while IFS= read -r filho_pid; do
+            [[ -n "$filho_pid" ]] && fila+=("$filho_pid")
+        done < <(/usr/bin/pgrep -P "$pid" 2>/dev/null || true)
+    done
+}
+
+gamemode_ativo() {
+    LC_ALL=C /usr/bin/gamemoded -s 2>&1 |
+        sed -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' |
+        grep -Eiq 'gamemode[[:space:]]+is[[:space:]]+currently[[:space:]]+activated[.!]?'
+}
+
+aplica_prioridade() {
+    local modo="$1"
+    local -a pids=()
+
+    mapfile -t pids < <(descendentes "$filho")
+    ((${#pids[@]})) || return 0
+
+    case "$modo" in
+        normal)
+            /usr/bin/renice -n 5 -p "${pids[@]}" >/dev/null 2>&1 || true
+            /usr/bin/ionice -c 2 -n 6 -p "${pids[@]}" >/dev/null 2>&1 || true
+            ;;
+        jogo)
+            /usr/bin/renice -n 19 -p "${pids[@]}" >/dev/null 2>&1 || true
+            /usr/bin/ionice -c 3 -p "${pids[@]}" >/dev/null 2>&1 || true
+            ;;
+        *)
+            return 64
+            ;;
+    esac
+}
+
+monitorar() {
+    local novo
+
+    while kill -0 "$filho" 2>/dev/null; do
+        if gamemode_ativo; then
+            novo=1
+        else
+            novo=0
+        fi
+
+        if [[ "$novo" -ne "$ativo" ]]; then
+            ativo="$novo"
+            if [[ "$ativo" -eq 1 ]]; then
+                aplica_prioridade jogo
+                printf 'EVENTO=%s PERFIL=jogo COMPILACAO=nice19,io-ociosa\n' \
+                    "$(date --iso-8601=seconds)" >> "$relatorio"
+            else
+                aplica_prioridade normal
+                printf 'EVENTO=%s PERFIL=normal COMPILACAO=nice5,io-best-effort-6\n' \
+                    "$(date --iso-8601=seconds)" >> "$relatorio"
+            fi
+        else
+            (( ativo )) && aplica_prioridade jogo || aplica_prioridade normal
+        fi
+
+        sleep 2
+    done
+}
+
+trap encerra EXIT
+
+printf 'MOCHA — COMPILAÇÃO COM GUARDA ADAPTATIVA\n'
+printf 'INICIO=%s\nCOMANDO=' "$(date --iso-8601=seconds)"
+printf '%q ' "$@"
+printf '\nMEMORY_HIGH=12G\n'
+
+"$@" &
+filho="$!"
+
+if gamemode_ativo; then
+    ativo=1
+    aplica_prioridade jogo
+    printf 'EVENTO=%s PERFIL=inicial-jogo\n' "$(date --iso-8601=seconds)"
+else
+    aplica_prioridade normal
+    printf 'EVENTO=%s PERFIL=inicial-normal\n' "$(date --iso-8601=seconds)"
+fi
+
+monitorar &
+monitor="$!"
+
+wait "$filho"
