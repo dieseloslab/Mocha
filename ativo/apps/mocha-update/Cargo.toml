@@ -1,6 +1,6 @@
 [package]
 name = "mocha-update"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "GPL-3.0-or-later"
 description = "Central gráfica de atualização e recuperação do Mocha"
