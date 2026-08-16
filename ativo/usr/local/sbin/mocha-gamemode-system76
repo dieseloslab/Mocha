@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+unidade='com.system76.Scheduler.service'
+
+case "${1:-}" in
+    game-start)
+        exec /usr/bin/systemctl stop "$unidade"
+        ;;
+    game-end)
+        exec /usr/bin/systemctl start "$unidade"
+        ;;
+    *)
+        printf '%s\n' 'ERRO: ação recusada.' >&2
+        exit 64
+        ;;
+esac

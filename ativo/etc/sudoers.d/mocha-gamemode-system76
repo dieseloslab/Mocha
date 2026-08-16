@@ -1,0 +1,1 @@
+hal ALL=(root) NOPASSWD: /usr/local/sbin/mocha-gamemode-system76 game-start, /usr/local/sbin/mocha-gamemode-system76 game-end
