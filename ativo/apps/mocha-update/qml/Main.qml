@@ -686,8 +686,9 @@ ApplicationWindow {
                             PageTitle {
                                 titleText: "Atualização do Sistema"
                                 descriptionText:
-                                    "Atualiza os pacotes normais do sistema sem alterar "
-                                    + "deliberadamente o kernel e o driver gráfico."
+                                    "Consulta pacotes, Flatpak e o catálogo R2 stable em "
+                                    + "https://updates.dieseloslab.org. Kernel e driver usam "
+                                    + "exclusivamente o repositório separado."
                             }
 
                             OperationPanel {
@@ -700,8 +701,9 @@ ApplicationWindow {
                             OperationPanel {
                                 titleText: "Aplicar atualização geral"
                                 descriptionText:
-                                    "Kernel, headers e driver gráfico permanecem em "
-                                    + "um fluxo separado e protegido."
+                                    "Instala pacotes gerais e componentes Mocha autorizados, "
+                                    + "com catálogo assinado e SHA-256. Kernel e driver não "
+                                    + "são tratados por esta operação."
                                 buttonText: "Atualizar sistema"
                                 onTriggered: backend.applyGeneralUpdate()
                             }
@@ -720,8 +722,8 @@ ApplicationWindow {
                             PageTitle {
                                 titleText: "Kernel e Driver"
                                 descriptionText:
-                                    "Atualização conjunta e controlada do kernel, "
-                                    + "headers e pilha do driver gráfico."
+                                    "Consulte e instale os canais Mocha e Arch separadamente. "
+                                    + "Nenhum kernel instalado é removido automaticamente."
                             }
 
                             RowLayout {
@@ -742,16 +744,30 @@ ApplicationWindow {
                             }
 
                             OperationPanel {
-                                titleText: "Procurar novo conjunto compatível"
+                                titleText: "Kernel Mocha (LQX)"
                                 descriptionText: backend.kernelUpdateSummary
                                 buttonText: backend.kernelUpdateReady
-                                            ? "Atualizar conjunto"
-                                            : "Examinar conjunto"
+                                            ? "Instalar ou atualizar Mocha"
+                                            : "Consultar canal Mocha"
                                 onTriggered: {
                                     if (backend.kernelUpdateReady)
                                         backend.applyKernelDriverUpdate()
                                     else
                                         backend.checkKernelDriver()
+                                }
+                            }
+
+                            OperationPanel {
+                                titleText: "Kernel padrão Arch"
+                                descriptionText: backend.archKernelUpdateSummary
+                                buttonText: backend.archKernelUpdateReady
+                                            ? "Instalar ou atualizar Arch"
+                                            : "Consultar canal Arch"
+                                onTriggered: {
+                                    if (backend.archKernelUpdateReady)
+                                        backend.applyArchKernel()
+                                    else
+                                        backend.checkArchKernel()
                                 }
                             }
 
@@ -769,16 +785,16 @@ ApplicationWindow {
                             PageTitle {
                                 titleText: "Recasar Kernel e Driver"
                                 descriptionText:
-                                    "Reinstala o conjunto atualmente selecionado sem "
-                                    + "executar uma atualização geral."
+                                    "Reconstrói o NVIDIA DKMS para o kernel iniciado, "
+                                    + "seja Mocha, Arch ou outro kernel com headers válidos."
                             }
 
                             OperationPanel {
                                 titleText: "Recasar conjunto atual"
                                 descriptionText:
-                                    "O recasamento reinstala kernel, headers e driver, "
-                                    + "reconstrói DKMS, regenera initramfs e atualiza "
-                                    + "o bootloader."
+                                    "Não troca pacotes de kernel. Usa o kernel iniciado, "
+                                    + "valida seus headers, recompila o NVIDIA DKMS, "
+                                    + "regenera initramfs e atualiza o bootloader."
                                 buttonText: "Recasar conjunto"
                                 onTriggered: backend.remarryKernelDriver()
                             }
@@ -934,11 +950,26 @@ ApplicationWindow {
                             elide: Text.ElideRight
                         }
 
-                        ProgressBar {
+                        Rectangle {
                             Layout.preferredWidth: 210
-                            from: 0
-                            to: 100
-                            value: backend.operationProgress
+                            Layout.preferredHeight: 8
+                            radius: 4
+                            color: window.borderColor
+                            clip: true
+
+                            Rectangle {
+                                width: parent.width
+                                    * Math.max(
+                                        0,
+                                        Math.min(
+                                            100,
+                                            backend.operationProgress
+                                        )
+                                    ) / 100
+                                height: parent.height
+                                radius: parent.radius
+                                color: window.accentColor
+                            }
                         }
                     }
                 }

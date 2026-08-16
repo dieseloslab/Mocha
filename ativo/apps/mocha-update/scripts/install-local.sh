@@ -39,7 +39,7 @@ printf '%s\n' 'INTERFACE_APROVADA=PRESERVADA'
 printf '%s\n' 'BACKEND_REAL=SIM'
 printf '%s\n' 'REPOSITORIO_KERNEL=mocha-kernel'
 printf '%s\n' 'USA_LINUX_LQX=NAO'
-printf '%s\n' 'ATUALIZA_PROPRIO_APLICATIVO=NAO'
+printf '%s\n' 'ATUALIZA_PROPRIO_APLICATIVO=SIM_VIA_R2_ASSINADO'
 printf '%s\n' 'MOCHA_OC=GAMEMODE_CORE_50_MEMORY_400'
 
 for ferramenta in cargo rustfmt sudo pkg-config; do
@@ -63,6 +63,13 @@ FERRAMENTAS_RUNTIME=(
     /usr/bin/lvconvert
     /usr/bin/lvremove
     /usr/bin/gpg
+    /usr/bin/gpgv
+    /usr/bin/curl
+    /usr/bin/sha256sum
+    /usr/bin/bsdtar
+    /usr/bin/python3
+    /usr/bin/rsync
+    /usr/bin/flock
     /usr/bin/sync
     /usr/bin/date
     /usr/bin/nvidia-settings
@@ -309,3 +316,34 @@ printf 'BACKUP=%s\n' "$BACKUP"
 printf 'RELATORIO=%s\n' "$RELATORIO"
 printf '%s\n' '============================================================'
 # MOCHA_UPDATE_R2_RUNTIME_END
+
+# MOCHA_UPDATE_R2_ESTADO_LOCAL_BEGIN
+sudo install -d -o root -g root -m 0755 /var/lib/mocha-update
+sudo install -o root -g root -m 0644 \
+    config/installed-components-v1.json \
+    /var/lib/mocha-update/installed-components-v1.json
+sudo /usr/lib/mocha-update/mocha-update-r2-check \
+    --validate-config /etc/mocha-update/update-endpoint.conf >/dev/null
+printf 'R2_ESTADO_LOCAL_INSTALADO=SIM\n'
+printf 'R2_CANAL_TECNICO=stable\n'
+# MOCHA_UPDATE_R2_ESTADO_LOCAL_END
+
+# MOCHA_UPDATE_R2_ENGINE_INTEGRATION_BEGIN
+bash -n data/update/mocha-update-r2-check
+bash -n data/update/mocha-update-r2-engine
+sudo install -o root -g root -m 0755 \
+    data/update/mocha-update-r2-engine \
+    /usr/lib/mocha-update/.mocha-update-r2-engine.new
+sudo mv -f -- /usr/lib/mocha-update/.mocha-update-r2-engine.new \
+    /usr/lib/mocha-update/mocha-update-r2-engine
+sudo test -x /usr/lib/mocha-update/mocha-update-r2-engine
+sudo /usr/lib/mocha-update/mocha-update-r2-engine self-test
+if ! sudo test -s /var/lib/mocha-update/installed-components-v1.json; then
+    sudo install -d -o root -g root -m 0755 /var/lib/mocha-update
+    sudo install -o root -g root -m 0644 \
+        config/installed-components-v1.json \
+        /var/lib/mocha-update/installed-components-v1.json
+fi
+printf 'R2_ENGINE=/usr/lib/mocha-update/mocha-update-r2-engine\n'
+printf 'R2_APLICACAO_INTEGRADA=SIM\n'
+# MOCHA_UPDATE_R2_ENGINE_INTEGRATION_END

@@ -32,6 +32,7 @@ const ENV: &str = "/usr/bin/env";
 const DATE: &str = "/usr/bin/date";
 const NVIDIA_SETTINGS: &str = "/usr/bin/nvidia-settings";
 const GAMEMODED: &str = "/usr/bin/gamemoded";
+const R2_ENGINE: &str = "/usr/lib/mocha-update/mocha-update-r2-engine";
 
 const OC_SESSION_MARKER: &str = "/run/mocha-update/mocha-oc-session.enabled";
 const OC_PERSISTENT_CONFIG: &str = "/etc/mocha/nvidia-game-oc.conf";
@@ -239,8 +240,17 @@ fn run() -> i32 {
     };
 
     reporter.data("operation", operation.argument());
-    reporter.data("repository", REPOSITORY_NAME);
-    reporter.data("repository_url", REPOSITORY_URL);
+    if matches!(operation, Operation::CheckGeneral | Operation::ApplyGeneral) {
+        reporter.data("repository", "mocha-updates");
+        reporter.data("repository_url", "https://updates.dieseloslab.org");
+        reporter.data("repository_channel", "stable");
+    } else if operation.argument().contains("kernel") {
+        reporter.data("repository", REPOSITORY_NAME);
+        reporter.data("repository_url", REPOSITORY_URL);
+    } else {
+        reporter.data("repository", "local");
+        reporter.data("repository_url", "local");
+    }
 
     let _operation_lock = if operation.requires_root() {
         match OperationLock::acquire() {
@@ -256,6 +266,8 @@ fn run() -> i32 {
         Operation::ApplyGeneral => apply_general(&mut reporter),
         Operation::CheckKernel => check_kernel(&mut reporter),
         Operation::ApplyKernel => apply_kernel(&mut reporter),
+        Operation::CheckArchKernel => check_arch_kernel(&mut reporter),
+        Operation::ApplyArchKernel => apply_arch_kernel(&mut reporter),
         Operation::Remarry => remarry(&mut reporter),
         Operation::CheckRollbacks => check_rollbacks(&mut reporter),
         Operation::ApplyRollback => match rollback_id {
@@ -769,14 +781,52 @@ fn desktop_environment(user: &InvokingUser) -> BTreeMap<String, String> {
     values
 }
 
+fn run_r2_engine(
+    reporter: &mut Reporter,
+    mode: &str,
+) -> Result<std::collections::BTreeMap<String, String>, String> {
+    require_tools(&[R2_ENGINE])?;
+    let output = reporter.required(&format!("fluxo R2 {mode}"), R2_ENGINE, &[mode.to_owned()])?;
+
+    let mut values = std::collections::BTreeMap::new();
+
+    for line in output.lines() {
+        if let Some((key, value)) = line.split_once('=') {
+            if key.starts_with("R2_") {
+                values.insert(key.to_owned(), value.to_owned());
+            }
+        }
+    }
+
+    if values.get("R2_RESULT").map(String::as_str) != Some("SUCCESS") {
+        return Err(format!("o motor R2 não confirmou sucesso no modo {mode}"));
+    }
+
+    Ok(values)
+}
+
+fn required_r2_value(
+    values: &std::collections::BTreeMap<String, String>,
+    key: &str,
+) -> Result<String, String> {
+    values
+        .get(key)
+        .cloned()
+        .ok_or_else(|| format!("o motor R2 não informou {key}"))
+}
+
 fn check_general(reporter: &mut Reporter) -> Result<String, String> {
-    require_tools(&[PACMAN, CHECKUPDATES])?;
-    reporter.progress(10, "Consultando atualizações de pacotes");
+    require_tools(&[PACMAN, CHECKUPDATES, R2_ENGINE])?;
+
+    reporter.progress(8, "Consultando atualizações de pacotes");
+
     let updates = available_package_updates(reporter, false)?;
+
     let normal: Vec<_> = updates
         .iter()
         .filter(|update| !is_protected_general_package(&update.name))
         .collect();
+
     let protected: Vec<_> = updates
         .iter()
         .filter(|update| is_protected_general_package(&update.name))
@@ -784,181 +834,241 @@ fn check_general(reporter: &mut Reporter) -> Result<String, String> {
 
     reporter.data("general_update_count", &normal.len().to_string());
     reporter.data("protected_update_count", &protected.len().to_string());
-    reporter.data("general_update_summary", &summarize_updates(&normal));
 
-    reporter.progress(55, "Consultando aplicativos Flatpak");
+    reporter.progress(45, "Consultando aplicativos Flatpak");
+
     let flatpak_count = flatpak_update_count(reporter);
     reporter.data("flatpak_update_count", &flatpak_count.to_string());
 
-    reporter.progress(100, "Verificação concluída");
-    Ok(format!(
-        "{} pacote(s) normal(is) e {} aplicativo(s) Flatpak disponíveis; kernel, NVIDIA e o próprio Mocha Update permanecem protegidos",
-        normal.len(), flatpak_count
-    ))
+    reporter.progress(68, "Consultando o catálogo R2 stable assinado");
+
+    let r2 = run_r2_engine(reporter, "check")?;
+
+    let r2_count = required_r2_value(&r2, "R2_AVAILABLE_COUNT")?
+        .parse::<usize>()
+        .map_err(|error| format!("contagem R2 inválida: {error}"))?;
+
+    let r2_summary = required_r2_value(&r2, "R2_SUMMARY")?;
+
+    reporter.data("r2_update_count", &r2_count.to_string());
+    reporter.data("r2_update_summary", &r2_summary);
+
+    let summary = format!(
+        "{} pacote(s) normal(is), {} aplicativo(s) Flatpak; {}; kernel e driver permanecem no fluxo separado",
+        normal.len(),
+        flatpak_count,
+        r2_summary
+    );
+
+    reporter.data("general_update_summary", &summary);
+    reporter.progress(100, "Verificação geral e R2 concluída");
+
+    Ok(summary)
 }
 
 fn apply_general(reporter: &mut Reporter) -> Result<String, String> {
-    require_tools(&[PACMAN, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC])?;
+    require_tools(&[PACMAN, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC, R2_ENGINE])?;
+
     ensure_pacman_unlocked()?;
+
     reporter.progress(
         5,
-        "Validando separação entre atualização geral e conjunto gráfico",
+        "Validando separação entre atualização geral, R2, kernel e driver",
     );
 
     let before = installed_versions(PROTECTED_GENERAL_PACKAGES, reporter)?;
     let pending = available_package_updates(reporter, true)?;
+
+    let protected_pending: Vec<_> = pending
+        .iter()
+        .filter(|update| is_protected_general_package(&update.name))
+        .collect();
+
     let normal_count = pending
         .iter()
         .filter(|update| !is_protected_general_package(&update.name))
         .count();
 
-    reporter.progress(15, "Criando ponto de restauração LVM");
+    reporter.progress(13, "Criando ponto de restauração LVM");
+
     let rollback = create_rollback_snapshot(reporter, "system")?;
     reporter.data("created_rollback_id", &rollback.id);
 
-    reporter.progress(30, "Atualizando pacotes normais do sistema");
-    let mut args = vec!["-Syu".to_owned(), "--noconfirm".to_owned()];
-    for package in PROTECTED_GENERAL_PACKAGES {
-        args.push("--ignore".to_owned());
-        args.push((*package).to_owned());
+    reporter.progress(27, "Atualizando pacotes normais do sistema");
+
+    let mut ignored = PROTECTED_GENERAL_PACKAGES
+        .iter()
+        .map(|package| (*package).to_owned())
+        .collect::<Vec<_>>();
+
+    for update in protected_pending {
+        if !ignored.contains(&update.name) {
+            ignored.push(update.name.clone());
+        }
     }
+
+    let mut args = vec!["-Syu".to_owned(), "--noconfirm".to_owned()];
+
+    for package in &ignored {
+        args.push("--ignore".to_owned());
+        args.push(package.clone());
+    }
+
     reporter.required("atualização geral do Pacman", PACMAN, &args)?;
 
-    reporter.progress(78, "Atualizando aplicativos Flatpak do sistema");
+    reporter.progress(68, "Atualizando aplicativos Flatpak do sistema");
     update_system_flatpaks(reporter)?;
-    reporter.progress(86, "Atualizando aplicativos Flatpak do usuário");
+
+    reporter.progress(76, "Atualizando aplicativos Flatpak do usuário");
     update_user_flatpaks(reporter)?;
 
     reporter.progress(
-        92,
-        "Confirmando que kernel, driver e aplicativo não foram alterados",
+        84,
+        "Confirmando que kernel, driver e pacotes protegidos não foram alterados",
     );
+
     let after = installed_versions(PROTECTED_GENERAL_PACKAGES, reporter)?;
+
     if before != after {
         return Err(format!(
-            "a proteção detectou alteração inesperada no kernel, no driver ou no aplicativo; restaure o ponto {}",
+            "a proteção detectou alteração inesperada no kernel, no driver ou em pacote protegido; restaure o ponto {}",
             rollback.id
         ));
     }
 
-    reporter.progress(100, "Atualização geral concluída");
-    Ok(format!(
-        "atualização geral concluída para {} pacote(s); kernel, driver e Mocha Update permaneceram inalterados",
-        normal_count
-    ))
+    reporter.progress(90, "Baixando e instalando componentes autorizados do R2");
+
+    let r2 = run_r2_engine(reporter, "apply")?;
+
+    let r2_count = required_r2_value(&r2, "R2_INSTALLED_COUNT")?
+        .parse::<usize>()
+        .map_err(|error| format!("contagem de instalação R2 inválida: {error}"))?;
+
+    let restart_app = required_r2_value(&r2, "R2_RESTART_APP")? == "SIM";
+
+    let reboot = required_r2_value(&r2, "R2_REBOOT")? == "SIM";
+
+    reporter.data("r2_installed_count", &r2_count.to_string());
+
+    if reboot {
+        reporter.data("reboot_required", "true");
+    }
+
+    reporter.progress(100, "Atualização geral e R2 concluída");
+
+    let mut message = format!(
+        "atualização geral concluída para {} pacote(s) e {} componente(s) R2; kernel e driver permaneceram inalterados; ponto {} preservado",
+        normal_count,
+        r2_count,
+        rollback.id
+    );
+
+    if restart_app {
+        message.push_str("; feche e abra novamente o Mocha Update");
+    }
+
+    if reboot {
+        message.push_str("; reinicialização solicitada pelo componente atualizado");
+    }
+
+    Ok(message)
 }
 
 fn check_kernel(reporter: &mut Reporter) -> Result<String, String> {
-    require_tools(&[PACMAN, CHECKUPDATES, "/usr/bin/vercmp"])?;
-    reporter.progress(10, "Validando o repositório próprio mocha-kernel");
+    require_tools(&[PACMAN])?;
+    reporter.progress(10, "Validando o canal próprio mocha-kernel");
     validate_repository_configuration()?;
 
-    reporter.progress(22, "Atualizando a leitura de versões disponíveis");
-    let updates = available_package_updates(reporter, false)?;
-    let general_pending = updates
-        .iter()
-        .filter(|update| !is_protected_general_package(&update.name))
-        .count();
-    reporter.data(
-        "general_pending_before_kernel",
-        &general_pending.to_string(),
-    );
-
-    reporter.progress(
-        38,
-        "Comparando o conjunto Mocha instalado com o repositório",
-    );
-    let mut installed = BTreeMap::new();
-    let mut candidates = BTreeMap::new();
+    reporter.progress(35, "Consultando o kernel Mocha disponível");
     let mut changed_packages = Vec::new();
-
-    let mut stack_packages = KERNEL_PACKAGES.to_vec();
-    stack_packages.extend_from_slice(NVIDIA_REQUIRED_PACKAGES);
-    for &package in NVIDIA_OPTIONAL_PACKAGES {
-        if package_installed(package, reporter)? {
-            stack_packages.push(package);
-        }
-    }
-
-    for package in stack_packages {
+    let mut installed_kernel = "não instalado".to_owned();
+    let mut candidate_kernel = String::new();
+    for &package in KERNEL_PACKAGES {
         let info = sync_package_info(package, reporter)?;
-        if KERNEL_PACKAGES.contains(&package) && info.repository != REPOSITORY_NAME {
+        if info.repository != REPOSITORY_NAME {
             return Err(format!(
                 "{package} foi encontrado no repositório {}, não em {}",
                 info.repository, REPOSITORY_NAME
             ));
         }
-
         let installed_version = package_version(package, reporter)?;
-        let candidate_version = updates
-            .iter()
-            .find(|update| update.name == package)
-            .map(|update| update.new.clone())
-            .unwrap_or(info.version);
-
-        let needs_change = match installed_version.as_deref() {
-            Some(current) => version_compare(&candidate_version, current)? > 0,
-            None => true,
-        };
-        if needs_change {
+        if package == "linux-mocha-lqx" {
+            installed_kernel = installed_version
+                .clone()
+                .unwrap_or_else(|| "não instalado".to_owned());
+            candidate_kernel = info.version.clone();
+        }
+        // Uma troca de família ou uma versão Mocha anterior é uma escolha válida.
+        // Portanto, igualdade, e não ordem numérica, define se há ação pendente.
+        if installed_version.as_deref() != Some(info.version.as_str()) {
             changed_packages.push(package.to_owned());
         }
-        installed.insert(
-            package.to_owned(),
-            installed_version.unwrap_or_else(|| "não instalado".to_owned()),
-        );
-        candidates.insert(package.to_owned(), candidate_version);
     }
-
-    let installed_kernel = installed
-        .get("linux-mocha-lqx")
-        .cloned()
-        .unwrap_or_else(|| "não instalado".to_owned());
-    let candidate_kernel = candidates
-        .get("linux-mocha-lqx")
-        .cloned()
-        .ok_or_else(|| "versão candidata de linux-mocha-lqx não identificada".to_owned())?;
-    let installed_driver = installed
-        .get("nvidia-open-dkms")
-        .cloned()
-        .unwrap_or_else(|| "não instalado".to_owned());
-    let candidate_driver = candidates
-        .get("nvidia-open-dkms")
-        .cloned()
-        .ok_or_else(|| "versão candidata de nvidia-open-dkms não identificada".to_owned())?;
 
     reporter.data("kernel_installed_package_version", &installed_kernel);
     reporter.data("kernel_candidate_version", &candidate_kernel);
-    reporter.data("driver_installed_package_version", &installed_driver);
-    reporter.data("driver_candidate_version", &candidate_driver);
-    reporter.data(
-        "kernel_stack_change_count",
-        &changed_packages.len().to_string(),
-    );
-
-    let ready = general_pending == 0 && !changed_packages.is_empty();
+    let ready = !changed_packages.is_empty();
     reporter.data("kernel_update_ready", if ready { "true" } else { "false" });
 
-    let summary = if general_pending > 0 {
+    let summary = if ready {
         format!(
-            "há {general_pending} atualização(ões) geral(is) pendente(s); conclua a atualização geral antes do conjunto"
-        )
-    } else if ready {
-        format!(
-            "{} pacote(s) do conjunto requer(em) atualização ou reparo; kernel {} e NVIDIA {}",
-            changed_packages.len(),
+            "Mocha instalado: {}; Mocha disponível: {}. {} pacote(s) serão instalados ou ajustados; o kernel em uso não limita esta escolha.",
+            installed_kernel,
             candidate_kernel,
-            candidate_driver
+            changed_packages.len(),
         )
     } else {
         format!(
-            "conjunto atual já corresponde ao repositório: kernel {} e NVIDIA {}",
-            installed_kernel, installed_driver
+            "Kernel Mocha já corresponde ao canal Mocha: {}",
+            installed_kernel
         )
     };
 
     reporter.data("kernel_update_summary", &summary);
     reporter.progress(100, "Verificação do conjunto concluída");
+    Ok(summary)
+}
+
+fn check_arch_kernel(reporter: &mut Reporter) -> Result<String, String> {
+    require_tools(&[PACMAN])?;
+    reporter.progress(20, "Consultando o canal oficial do Arch");
+    let packages = ["linux", "linux-headers", "nvidia-open-dkms"];
+    let mut changed = Vec::new();
+    let mut installed_kernel = "não instalado".to_owned();
+    let mut candidate_kernel = String::new();
+    for package in packages {
+        let info = sync_package_info(package, reporter)?;
+        if info.repository == REPOSITORY_NAME {
+            return Err(format!(
+                "{package} não pode ser obtido do repositório Mocha"
+            ));
+        }
+        let installed = package_version(package, reporter)?;
+        if package == "linux" {
+            installed_kernel = installed
+                .clone()
+                .unwrap_or_else(|| "não instalado".to_owned());
+            candidate_kernel = info.version.clone();
+        }
+        if installed.as_deref() != Some(info.version.as_str()) {
+            changed.push(package);
+        }
+    }
+    let ready = !changed.is_empty();
+    reporter.data(
+        "arch_kernel_update_ready",
+        if ready { "true" } else { "false" },
+    );
+    let summary = if ready {
+        format!(
+            "Arch instalado: {}; Arch disponível: {}. O kernel Arch pode coexistir com o Mocha e não remove o outro.",
+            installed_kernel, candidate_kernel
+        )
+    } else {
+        format!("Kernel padrão Arch já está no canal oficial: {installed_kernel}")
+    };
+    reporter.data("arch_kernel_update_summary", &summary);
+    reporter.progress(100, "Consulta do canal Arch concluída");
     Ok(summary)
 }
 
@@ -1024,6 +1134,70 @@ fn apply_kernel(reporter: &mut Reporter) -> Result<String, String> {
 
     Ok(format!(
         "kernel e driver atualizados; ponto de restauração {} preservado; reinicialização necessária",
+        rollback.id
+    ))
+}
+
+fn apply_arch_kernel(reporter: &mut Reporter) -> Result<String, String> {
+    require_tools(&[
+        PACMAN, DKMS, MKINITCPIO, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC,
+    ])?;
+    ensure_pacman_unlocked()?;
+    reporter.progress(8, "Sincronizando os bancos oficiais do Arch");
+    reporter.required(
+        "sincronização dos bancos do Pacman",
+        PACMAN,
+        &["-Syy".to_owned(), "--noconfirm".to_owned()],
+    )?;
+
+    reporter.progress(20, "Validando os pacotes linux e linux-headers do Arch");
+    for package in ["linux", "linux-headers", "nvidia-open-dkms"] {
+        let info = sync_package_info(package, reporter)?;
+        if info.repository == REPOSITORY_NAME {
+            return Err(format!(
+                "{package} não pode ser instalado pelo repositório Mocha"
+            ));
+        }
+    }
+
+    reporter.progress(30, "Criando ponto de restauração LVM");
+    let rollback = create_rollback_snapshot(reporter, "arch-kernel")?;
+    reporter.data("created_rollback_id", &rollback.id);
+
+    reporter.progress(44, "Instalando o kernel padrão Arch, headers e driver DKMS");
+    reporter.required(
+        "instalação do kernel padrão Arch",
+        PACMAN,
+        &[
+            "-S".to_owned(),
+            "--noconfirm".to_owned(),
+            "linux".to_owned(),
+            "linux-headers".to_owned(),
+            "nvidia-open-dkms".to_owned(),
+        ],
+    )?;
+    reporter.progress(
+        68,
+        "Reconstruindo módulos DKMS para todos os kernels instalados",
+    );
+    reporter.required("reconstrução DKMS", DKMS, &["autoinstall".to_owned()])?;
+    reporter.progress(80, "Regenerando initramfs");
+    reporter.required("regeneração do initramfs", MKINITCPIO, &["-P".to_owned()])?;
+    reporter.progress(90, "Atualizando o bootloader");
+    update_bootloader(reporter)?;
+
+    for package in ["linux", "linux-headers", "nvidia-open-dkms"] {
+        if package_version(package, reporter)?.is_none() {
+            return Err(format!("validação falhou: {package} não está instalado"));
+        }
+    }
+    reporter.data("reboot_required", "true");
+    reporter.progress(
+        100,
+        "Kernel padrão Arch instalado sem remover outros kernels",
+    );
+    Ok(format!(
+        "kernel padrão Arch instalado ou atualizado; kernel Mocha preservado; ponto {} preservado; escolha o kernel no GRUB ao reiniciar",
         rollback.id
     ))
 }
@@ -1430,6 +1604,139 @@ fn remarry(reporter: &mut Reporter) -> Result<String, String> {
     Ok(format!(
         "kernel {} e NVIDIA {} recasados usando os arquivos já instalados, sem troca de pacotes; ponto {} preservado; reinicialização recomendada",
         kernel_release, dkms_version, rollback.id
+    ))
+}
+
+fn remarry_current_kernel(reporter: &mut Reporter) -> Result<String, String> {
+    require_tools(&[
+        PACMAN, DKMS, DEPMOD, MODINFO, MKINITCPIO, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC,
+    ])?;
+    ensure_pacman_unlocked()?;
+
+    let kernel_release = command_text("/usr/bin/uname", &["-r"])
+        .map_err(|error| format!("não foi possível identificar o kernel iniciado: {error}"))?;
+    let modules_dir = PathBuf::from("/usr/lib/modules").join(&kernel_release);
+    let build_link = modules_dir.join("build");
+    if !modules_dir.is_dir() || !build_link.is_dir() {
+        return Err(format!(
+            "o kernel iniciado {kernel_release} não possui headers compiláveis em {}; instale os headers da mesma família antes de recasar",
+            build_link.display()
+        ));
+    }
+
+    let pkgbase = modules_dir.join("pkgbase");
+    let owner = Command::new(PACMAN)
+        .args(["-Qo", pkgbase.to_string_lossy().as_ref()])
+        .output()
+        .map_err(|error| format!("falha ao identificar o pacote do kernel iniciado: {error}"))?;
+    if !owner.status.success() {
+        return Err(format!(
+            "não foi possível identificar o pacote proprietário de {}",
+            pkgbase.display()
+        ));
+    }
+    let kernel_owner = String::from_utf8_lossy(&owner.stdout).trim().to_owned();
+
+    let nvidia_version = package_version("nvidia-open-dkms", reporter)?
+        .ok_or_else(|| "nvidia-open-dkms não está instalado".to_owned())?;
+    let dkms_source = PathBuf::from(format!("/usr/src/nvidia-{nvidia_version}/dkms.conf"));
+    if !dkms_source.is_file() {
+        return Err(format!(
+            "fonte DKMS NVIDIA ausente: {}",
+            dkms_source.display()
+        ));
+    }
+
+    reporter.record(&format!(
+        "REMARRY_CURRENT_KERNEL={} OWNER={} HEADERS={} NVIDIA={}",
+        kernel_release,
+        kernel_owner,
+        build_link.display(),
+        nvidia_version
+    ));
+    reporter.progress(25, "Criando ponto de restauração antes do recasamento");
+    let rollback = create_rollback_snapshot(reporter, "remarry-current-kernel")?;
+    reporter.data("created_rollback_id", &rollback.id);
+
+    reporter.progress(45, "Compilando NVIDIA DKMS para o kernel iniciado");
+    reporter.required(
+        "compilação do NVIDIA DKMS",
+        DKMS,
+        &[
+            "build".to_owned(),
+            "--force".to_owned(),
+            "-m".to_owned(),
+            "nvidia".to_owned(),
+            "-v".to_owned(),
+            nvidia_version.clone(),
+            "-k".to_owned(),
+            kernel_release.clone(),
+        ],
+    )?;
+    reporter.progress(63, "Instalando módulos NVIDIA para o kernel iniciado");
+    reporter.required(
+        "instalação do NVIDIA DKMS",
+        DKMS,
+        &[
+            "install".to_owned(),
+            "--force".to_owned(),
+            "-m".to_owned(),
+            "nvidia".to_owned(),
+            "-v".to_owned(),
+            nvidia_version.clone(),
+            "-k".to_owned(),
+            kernel_release.clone(),
+        ],
+    )?;
+    reporter.progress(75, "Atualizando dependências e initramfs");
+    reporter.required(
+        "atualização do depmod",
+        DEPMOD,
+        &["-a".to_owned(), kernel_release.clone()],
+    )?;
+    reporter.required("regeneração do initramfs", MKINITCPIO, &["-P".to_owned()])?;
+    reporter.progress(88, "Atualizando o bootloader");
+    update_bootloader(reporter)?;
+
+    let status = reporter.required(
+        "validação do estado DKMS",
+        DKMS,
+        &[
+            "status".to_owned(),
+            "-m".to_owned(),
+            "nvidia".to_owned(),
+            "-v".to_owned(),
+            nvidia_version.clone(),
+            "-k".to_owned(),
+            kernel_release.clone(),
+        ],
+    )?;
+    if !status.to_ascii_lowercase().contains("installed") {
+        return Err(format!(
+            "o NVIDIA DKMS não foi instalado para {kernel_release}: {status}"
+        ));
+    }
+    for module in ["nvidia", "nvidia_modeset", "nvidia_drm", "nvidia_uvm"] {
+        let vermagic = reporter.required(
+            &format!("validação do módulo {module}"),
+            MODINFO,
+            &[
+                "-k".to_owned(),
+                kernel_release.clone(),
+                "-F".to_owned(),
+                "vermagic".to_owned(),
+                module.to_owned(),
+            ],
+        )?;
+        if vermagic.split_whitespace().next() != Some(kernel_release.as_str()) {
+            return Err(format!("vermagic inválido para {module}: {vermagic}"));
+        }
+    }
+    reporter.data("reboot_required", "true");
+    reporter.progress(100, "Recasamento concluído para o kernel iniciado");
+    Ok(format!(
+        "NVIDIA {} recasado para o kernel iniciado {}; ponto {} preservado; reinicialização recomendada",
+        nvidia_version, kernel_release, rollback.id
     ))
 }
 
@@ -1938,9 +2245,9 @@ fn update_bootloader(reporter: &mut Reporter) -> Result<(), String> {
         )?;
         let config = fs::read_to_string("/boot/grub/grub.cfg")
             .map_err(|error| format!("não foi possível validar /boot/grub/grub.cfg: {error}"))?;
-        if !config.contains("vmlinuz-linux-mocha-lqx") {
+        if !config.contains("vmlinuz-linux") {
             return Err(
-                "o GRUB foi regenerado, mas não contém a entrada do kernel Mocha lqx".to_owned(),
+                "o GRUB foi regenerado, mas não contém nenhuma entrada de kernel Linux".to_owned(),
             );
         }
         return Ok(());

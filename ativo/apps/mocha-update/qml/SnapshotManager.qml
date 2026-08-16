@@ -331,6 +331,7 @@ Item {
         id: confirmation
         modal: true
         anchors.centerIn: parent
+        width: 520
         title: pendingAction === "restore"
             ? "Confirmar restauração"
             : "Confirmar exclusão"
@@ -339,7 +340,6 @@ Item {
         onAccepted: root.executePendingAction()
 
         contentItem: Text {
-            width: 480
             padding: 18
             wrapMode: Text.WordWrap
             color: "#f3e7de"
