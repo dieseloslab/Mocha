@@ -2,6 +2,10 @@ use std::path::{Path, PathBuf};
 
 pub const REPOSITORY_NAME: &str = "mocha-kernel";
 pub const REPOSITORY_URL: &str = "https://repo.dieseloslab.org/stable/x86_64";
+
+pub const R2_REPOSITORY_NAME: &str = "mocha-updates";
+pub const R2_REPOSITORY_URL: &str = "https://updates.dieseloslab.org";
+pub const R2_CHANNEL: &str = "stable";
 pub const REPOSITORY_FINGERPRINT: &str = "CC16C3925C923E1826860641CB1EFF2340CBAB47";
 
 pub const KERNEL_PACKAGES: &[&str] = &[
@@ -42,6 +46,8 @@ pub enum Operation {
     ApplyGeneral,
     CheckKernel,
     ApplyKernel,
+    CheckArchKernel,
+    ApplyArchKernel,
     Remarry,
     CheckRollbacks,
     ApplyRollback,
@@ -58,6 +64,8 @@ impl Operation {
             Self::ApplyGeneral => "apply-general",
             Self::CheckKernel => "check-kernel",
             Self::ApplyKernel => "apply-kernel",
+            Self::CheckArchKernel => "check-arch-kernel",
+            Self::ApplyArchKernel => "apply-arch-kernel",
             Self::Remarry => "remarry",
             Self::CheckRollbacks => "check-rollbacks",
             Self::ApplyRollback => "apply-rollback",
@@ -74,6 +82,7 @@ impl Operation {
             Self::ApplyGeneral
                 | Self::CheckRollbacks
                 | Self::ApplyKernel
+                | Self::ApplyArchKernel
                 | Self::Remarry
                 | Self::ApplyRollback
                 | Self::EnableOcSession
@@ -88,6 +97,8 @@ impl Operation {
             Self::ApplyGeneral => "Atualização geral",
             Self::CheckKernel => "Verificação de kernel e driver",
             Self::ApplyKernel => "Atualização de kernel e driver",
+            Self::CheckArchKernel => "Verificação do kernel padrão Arch",
+            Self::ApplyArchKernel => "Instalação do kernel padrão Arch",
             Self::Remarry => "Recasamento de kernel e driver",
             Self::CheckRollbacks => "Verificação de pontos de restauração",
             Self::ApplyRollback => "Rollback",
@@ -108,6 +119,8 @@ impl TryFrom<&str> for Operation {
             "apply-general" => Ok(Self::ApplyGeneral),
             "check-kernel" => Ok(Self::CheckKernel),
             "apply-kernel" => Ok(Self::ApplyKernel),
+            "check-arch-kernel" => Ok(Self::CheckArchKernel),
+            "apply-arch-kernel" => Ok(Self::ApplyArchKernel),
             "remarry" => Ok(Self::Remarry),
             "check-rollbacks" => Ok(Self::CheckRollbacks),
             "apply-rollback" => Ok(Self::ApplyRollback),
@@ -170,7 +183,17 @@ pub fn parse_helper_event(line: &str) -> Option<HelperEvent> {
 }
 
 pub fn is_protected_general_package(package: &str) -> bool {
+    let package = package.trim();
     PROTECTED_GENERAL_PACKAGES.contains(&package)
+        // A atualização comum nunca administra kernels.  A lista explícita
+        // acima documenta os pacotes suportados; estes prefixos fecham a
+        // lacuna para variantes instaladas (por exemplo linux-lqx).
+        || package == "linux"
+        || package.starts_with("linux-")
+        || package.starts_with("nvidia")
+        || package.starts_with("lib32-nvidia")
+        || package.starts_with("opencl-nvidia")
+        || package == "mocha-update"
 }
 
 pub fn safe_snapshot_id(value: &str) -> bool {
@@ -260,6 +283,10 @@ mod tests {
         assert!(is_protected_general_package("linux-mocha-lqx"));
         assert!(is_protected_general_package("nvidia-open-dkms"));
         assert!(is_protected_general_package("mocha-update"));
+        assert!(is_protected_general_package("linux-lqx"));
+        assert!(is_protected_general_package("linux-cachyos"));
+        assert!(is_protected_general_package("linux-headers"));
+        assert!(is_protected_general_package("nvidia-open-beta-dkms"));
         assert!(!is_protected_general_package("firefox"));
     }
 
