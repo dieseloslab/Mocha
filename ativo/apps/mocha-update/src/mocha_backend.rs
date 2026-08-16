@@ -29,6 +29,11 @@ mod ffi {
         #[qproperty(QString, activity_text, cxx_name = "activityText")]
         #[qproperty(QString, general_update_summary, cxx_name = "generalUpdateSummary")]
         #[qproperty(QString, kernel_update_summary, cxx_name = "kernelUpdateSummary")]
+        #[qproperty(
+            QString,
+            arch_kernel_update_summary,
+            cxx_name = "archKernelUpdateSummary"
+        )]
         #[qproperty(QString, rollback_summary, cxx_name = "rollbackSummary")]
         #[qproperty(QString, oc_status, cxx_name = "ocStatus")]
         #[qproperty(QString, oc_mode, cxx_name = "ocMode")]
@@ -37,6 +42,7 @@ mod ffi {
         #[qproperty(QString, log_path, cxx_name = "logPath")]
         #[qproperty(bool, operation_running, cxx_name = "operationRunning")]
         #[qproperty(bool, kernel_update_ready, cxx_name = "kernelUpdateReady")]
+        #[qproperty(bool, arch_kernel_update_ready, cxx_name = "archKernelUpdateReady")]
         #[qproperty(bool, rollback_ready, cxx_name = "rollbackReady")]
         #[qproperty(bool, reboot_required, cxx_name = "rebootRequired")]
         #[qproperty(i32, operation_progress, cxx_name = "operationProgress")]
@@ -61,6 +67,14 @@ mod ffi {
         #[qinvokable]
         #[cxx_name = "applyKernelDriverUpdate"]
         fn apply_kernel_driver_update(self: Pin<&mut MochaBackend>);
+
+        #[qinvokable]
+        #[cxx_name = "checkArchKernel"]
+        fn check_arch_kernel(self: Pin<&mut MochaBackend>);
+
+        #[qinvokable]
+        #[cxx_name = "applyArchKernel"]
+        fn apply_arch_kernel(self: Pin<&mut MochaBackend>);
 
         #[qinvokable]
         #[cxx_name = "remarryKernelDriver"]
@@ -106,6 +120,7 @@ pub struct MochaBackendRust {
     activity_text: QString,
     general_update_summary: QString,
     kernel_update_summary: QString,
+    arch_kernel_update_summary: QString,
     rollback_summary: QString,
     oc_status: QString,
     oc_mode: QString,
@@ -114,6 +129,7 @@ pub struct MochaBackendRust {
     log_path: QString,
     operation_running: bool,
     kernel_update_ready: bool,
+    arch_kernel_update_ready: bool,
     rollback_ready: bool,
     reboot_required: bool,
     operation_progress: i32,
@@ -136,6 +152,7 @@ impl Default for MochaBackendRust {
             ),
             general_update_summary: QString::from("Verificação ainda não executada"),
             kernel_update_summary: QString::from("Conjunto ainda não examinado"),
+            arch_kernel_update_summary: QString::from("Canal Arch ainda não examinado"),
             rollback_summary: QString::from("Pontos de restauração ainda não examinados"),
             oc_status: QString::from("Lendo configuração"),
             oc_mode: QString::from("Mocha OC ainda não examinado"),
@@ -146,6 +163,7 @@ impl Default for MochaBackendRust {
             log_path: QString::default(),
             operation_running: false,
             kernel_update_ready: false,
+            arch_kernel_update_ready: false,
             rollback_ready: false,
             reboot_required: false,
             operation_progress: 0,
@@ -176,6 +194,14 @@ impl ffi::MochaBackend {
 
     pub fn apply_kernel_driver_update(self: Pin<&mut Self>) {
         start_operation(self, Operation::ApplyKernel, None);
+    }
+
+    pub fn check_arch_kernel(self: Pin<&mut Self>) {
+        start_operation(self, Operation::CheckArchKernel, None);
+    }
+
+    pub fn apply_arch_kernel(self: Pin<&mut Self>) {
+        start_operation(self, Operation::ApplyArchKernel, None);
     }
 
     pub fn remarry_kernel_driver(self: Pin<&mut Self>) {
@@ -233,6 +259,9 @@ fn start_operation(
     match operation {
         Operation::CheckKernel | Operation::ApplyKernel | Operation::ApplyGeneral => {
             qobject.as_mut().set_kernel_update_ready(false);
+        }
+        Operation::CheckArchKernel | Operation::ApplyArchKernel => {
+            qobject.as_mut().set_arch_kernel_update_ready(false);
         }
         Operation::CheckRollbacks => {
             qobject.as_mut().set_rollback_ready(false);
@@ -380,6 +409,12 @@ fn apply_helper_data(mut backend: Pin<&mut ffi::MochaBackend>, key: &str, value:
             .as_mut()
             .set_kernel_update_summary(QString::from(value)),
         "kernel_update_ready" => backend.as_mut().set_kernel_update_ready(value == "true"),
+        "arch_kernel_update_summary" => backend
+            .as_mut()
+            .set_arch_kernel_update_summary(QString::from(value)),
+        "arch_kernel_update_ready" => backend
+            .as_mut()
+            .set_arch_kernel_update_ready(value == "true"),
         "selected_rollback_id" => {
             backend
                 .as_mut()
