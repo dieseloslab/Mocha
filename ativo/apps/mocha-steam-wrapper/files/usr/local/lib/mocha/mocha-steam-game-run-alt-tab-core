@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+umask 077
+
+if [ "$#" -eq 0 ]; then
+    echo "ERRO: nenhum comando de jogo foi recebido." >&2
+    exit 64
+fi
+
+export PROTON_ENABLE_WAYLAND=0
+export PROTON_USE_WAYLAND=0
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+
+valor_registro_presente() {
+    local arquivo="$1"
+    local secao="$2"
+    local nome="$3"
+    local valor="$4"
+    local procurado="\"$nome\"=\"$valor\""
+    local prefixo_nome="\"$nome\"="
+    local linha
+    local dentro=0
+    local secoes=0
+    local exatos=0
+    local conflitos=0
+
+    [ -r "$arquivo" ] || return 1
+
+    while IFS= read -r linha || [ -n "$linha" ]; do
+        if [[ "$linha" == "[$secao]"* ]]; then
+            secoes=$((secoes + 1))
+            dentro=1
+            continue
+        fi
+        if [[ "$linha" == \[* ]]; then
+            dentro=0
+            continue
+        fi
+        if [ "$dentro" -eq 1 ] && [[ "$linha" == "$prefixo_nome"* ]]; then
+            if [ "$linha" = "$procurado" ]; then
+                exatos=$((exatos + 1))
+            else
+                conflitos=$((conflitos + 1))
+            fi
+        fi
+    done < "$arquivo"
+
+    [ "$secoes" -eq 1 ] && [ "$exatos" -eq 1 ] && [ "$conflitos" -eq 0 ]
+}
+
+prefixo_validado() {
+    local user_reg="$1"
+    valor_registro_presente "$user_reg" 'Software\\Wine\\X11 Driver' 'UseTakeFocus' 'N' &&
+    valor_registro_presente "$user_reg" 'Software\\Wine\\DirectInput' 'MouseWarpOverride' 'force'
+}
+
+marcador_valido() {
+    local marcador="$1"
+    local user_reg="$2"
+    local marker_value=""
+
+    [ -f "$marcador" ] && [ ! -L "$marcador" ] && [ -r "$user_reg" ] || return 1
+    IFS= read -r marker_value < "$marcador" || marker_value=""
+    [ "$marker_value" = 'mocha-input-fix-v2' ]
+}
+
+criar_marcador_atomico() {
+    local prefixo="$1"
+    local marcador="$2"
+    local temporario
+
+    [ -d "$prefixo" ] && [ ! -L "$prefixo" ] || return 1
+    temporario="$(mktemp "$prefixo/.mocha-input-fix-v2.tmp.XXXXXX")" || return 1
+    if ! printf '%s\n' 'mocha-input-fix-v2' > "$temporario"; then
+        rm -f -- "$temporario"
+        return 1
+    fi
+    if ! mv -fT -- "$temporario" "$marcador"; then
+        rm -f -- "$temporario"
+        return 1
+    fi
+}
+
+corrigir_prefixo_proton() {
+    local compat_data
+    local prefixo
+    local user_reg
+    local marcador
+    local lockfile
+    local proton=""
+    local argumento
+    local resultado=0
+
+    compat_data="${STEAM_COMPAT_DATA_PATH:-}"
+    [ -n "$compat_data" ] || return 0
+
+    prefixo="$compat_data/pfx"
+    user_reg="$prefixo/user.reg"
+    marcador="$prefixo/.mocha-input-fix-v2"
+    lockfile="$compat_data/.mocha-input-fix.lock"
+
+    # Fast path: o selo acompanha o próprio pfx e desaparece se ele for recriado.
+    if marcador_valido "$marcador" "$user_reg"; then
+        return 0
+    fi
+
+    # Só usa o Proton que já veio no comando real de lançamento da Steam.
+    for argumento in "$@"; do
+        case "$argumento" in
+            */proton)
+                if [ -x "$argumento" ]; then
+                    proton="$argumento"
+                    break
+                fi
+                ;;
+        esac
+    done
+    [ -n "$proton" ] || return 0
+
+    mkdir -p -- "$compat_data"
+    exec 9>"$lockfile"
+    if ! flock -w 30 9; then
+        echo "AVISO: não foi possível obter o bloqueio do prefixo Proton." >&2
+        exec 9>&-
+        return 0
+    fi
+
+    # Outro processo pode ter terminado a correção enquanto aguardávamos o lock.
+    if marcador_valido "$marcador" "$user_reg"; then
+        exec 9>&-
+        return 0
+    fi
+
+    # Prefixo já correto: apenas sela, sem abrir reg.exe.
+    if prefixo_validado "$user_reg"; then
+        criar_marcador_atomico "$prefixo" "$marcador" || :
+        exec 9>&-
+        return 0
+    fi
+
+    echo "MochaArch: aplicando correção automática de input ao prefixo Proton." >&2
+
+    if ! timeout 60s "$proton" run reg.exe add \
+        'HKCU\Software\Wine\X11 Driver' \
+        /v UseTakeFocus /t REG_SZ /d N /f >/dev/null 2>&1; then
+        resultado=1
+    fi
+
+    if ! timeout 60s "$proton" run reg.exe add \
+        'HKCU\Software\Wine\DirectInput' \
+        /v MouseWarpOverride /t REG_SZ /d force /f >/dev/null 2>&1; then
+        resultado=1
+    fi
+
+    # Nunca confiar apenas no exit code do reg.exe: reler o user.reg antes do selo.
+    if [ "$resultado" -eq 0 ] && prefixo_validado "$user_reg"; then
+        criar_marcador_atomico "$prefixo" "$marcador" || :
+    else
+        rm -f -- "$marcador" 2>/dev/null || :
+        echo "AVISO: a correção automática do prefixo não foi validada; o jogo será iniciado normalmente." >&2
+    fi
+
+    exec 9>&-
+    return 0
+}
+
+corrigir_prefixo_proton "$@"
+if command -v gamemoderun >/dev/null 2>&1; then
+    exec gamemoderun "$@"
+fi
+
+exec "$@"

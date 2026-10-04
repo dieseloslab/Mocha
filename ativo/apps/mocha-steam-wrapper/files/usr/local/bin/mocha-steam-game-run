@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Mocha Steam Game Run — wrapper frontal canônico.
+# O core preserva o wrapper Alt+Tab confirmado.
+# Este frontal força o formato canônico do MangoHud.
+
+export MANGOHUD=1
+export MANGOHUD_CONFIGFILE="${HOME}/.config/MangoHud/mocha-active.conf"
+unset MANGOHUD_CONFIG
+unset MANGOHUD_DLSYM
+
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export WINE_MOUSE_WARP_OVERRIDE=force
+
+MOCHA_PROFILE_LOADER='/usr/local/lib/mocha/mocha-steam-profile-loader'
+if [[ -r "$MOCHA_PROFILE_LOADER" && ! -L "$MOCHA_PROFILE_LOADER" ]]; then
+  # shellcheck source=/usr/local/lib/mocha/mocha-steam-profile-loader
+  source "$MOCHA_PROFILE_LOADER" "$@"
+fi
+unset MOCHA_PROFILE_LOADER
+
+if [ "${MOCHA_MANGOHUD_DEBUG:-0}" = "1" ]; then
+  printf 'MANGOHUD=%s\n' "${MANGOHUD:-}"
+  printf 'MANGOHUD_CONFIGFILE=%s\n' "${MANGOHUD_CONFIGFILE:-}"
+  printf 'MANGOHUD_CONFIG=%s\n' "${MANGOHUD_CONFIG:-}"
+  printf 'CORE=%s\n' "/usr/local/lib/mocha/mocha-steam-game-run-alt-tab-core"
+  exit 0
+fi
+
+exec "/usr/local/lib/mocha/mocha-steam-game-run-alt-tab-core" "$@"
