@@ -162,3 +162,9 @@ auditorias/
 apps/mocha-updater/mocha-updater-build-fix.log
 ativo/logs/*.log
 ativo/quarentena/
+
+# Fontes Rust do Mocha Update devem ser versionados; builds continuam ignorados.
+!/ativo/apps/mocha-update/src/
+!/ativo/apps/mocha-update/src/**
+# Cópias temporárias da consolidação permanecem locais.
+/ativo/.mocha-update-correcao-*/
