@@ -39,6 +39,9 @@ for source in sorted((project / 'data/mocha-oc/chain').rglob('*')):
         target.chmod(0o755 if str(relative).startswith('usr/') else 0o644)
 if (payload / 'etc/mocha/nvidia-game-oc.conf').exists():
     raise SystemExit('ERRO: payload não pode distribuir preferência permanente de OC')
+legacy_backup = payload / 'usr/lib/mocha-update/mocha-update-helper.backup-v70-20260726-143956'
+if legacy_backup.exists():
+    legacy_backup.unlink()
 hashes = []
 manifest = ['# Runtime consolidado: kernel real e OC NVML com habilitação manual']
 for path in sorted(payload.rglob('*')):

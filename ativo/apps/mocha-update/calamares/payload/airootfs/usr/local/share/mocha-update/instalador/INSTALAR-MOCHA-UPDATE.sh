@@ -118,6 +118,17 @@ done
 }
 
 for arquivo in \
+    "$PAYLOAD/usr/local/lib/mocha/mocha-nvidia-oc-nvml" \
+    "$PAYLOAD/usr/local/lib/mocha/mocha-nvidia-oc-root-helper" \
+    "$PAYLOAD/etc/sudoers.d/mocha-nvidia-oc-root-helper" \
+    "$PAYLOAD/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system" \
+    "$PAYLOAD/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system" \
+    "$PAYLOAD/etc/mocha/gamemode/legacy-start-system.cmd" \
+    "$PAYLOAD/etc/mocha/gamemode/legacy-end-system.cmd" \
+    "$PAYLOAD/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh" \
+    "$PAYLOAD/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh" \
+    "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" \
+    "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" \
     "$PAYLOAD/usr/bin/mocha-update" \
     "$PAYLOAD/usr/lib/mocha-update/mocha-update-helper" \
     "$PAYLOAD/usr/lib/mocha-update/mocha-snapshot-admin" \
@@ -214,7 +225,9 @@ done < <(
 )
 
 COPIA_INICIADA=1
-rsync -aH --chown=0:0 -- "$PAYLOAD/" /
+rsync -aH --chown=0:0 --exclude=/etc/gamemode.ini -- "$PAYLOAD/" /
+python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" "$PAYLOAD" /
+bash "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" /
 
 install -d -o root -g root -m 0755 \
     /var/lib/mocha-update \

@@ -25,7 +25,7 @@ ALVO="$(realpath -e -- "$1")"
     exit 1
 }
 
-for comando in install realpath rsync systemctl; do
+for comando in install realpath rsync systemctl python3 visudo; do
     command -v "$comando" >/dev/null 2>&1 || {
         printf 'ERRO: comando obrigatório ausente no ambiente live: %s\n' \
             "$comando" >&2
@@ -34,6 +34,17 @@ for comando in install realpath rsync systemctl; do
 done
 
 for arquivo in \
+    "$PAYLOAD/usr/local/lib/mocha/mocha-nvidia-oc-nvml" \
+    "$PAYLOAD/usr/local/lib/mocha/mocha-nvidia-oc-root-helper" \
+    "$PAYLOAD/etc/sudoers.d/mocha-nvidia-oc-root-helper" \
+    "$PAYLOAD/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system" \
+    "$PAYLOAD/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system" \
+    "$PAYLOAD/etc/mocha/gamemode/legacy-start-system.cmd" \
+    "$PAYLOAD/etc/mocha/gamemode/legacy-end-system.cmd" \
+    "$PAYLOAD/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh" \
+    "$PAYLOAD/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh" \
+    "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" \
+    "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" \
     "$PAYLOAD/usr/bin/mocha-update" \
     "$PAYLOAD/usr/lib/mocha-update/mocha-update-helper" \
     "$PAYLOAD/usr/lib/mocha-update/mocha-snapshot-admin" \
@@ -55,7 +66,9 @@ done
     exit 1
 }
 
-rsync -aH --chown=0:0 -- "$PAYLOAD/" "$ALVO/"
+rsync -aH --chown=0:0 --exclude=/etc/gamemode.ini -- "$PAYLOAD/" "$ALVO/"
+python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" "$PAYLOAD" "$ALVO"
+bash "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" "$ALVO"
 
 install -d -o root -g root -m 0755 \
     "$ALVO/var/lib/mocha-update" \
