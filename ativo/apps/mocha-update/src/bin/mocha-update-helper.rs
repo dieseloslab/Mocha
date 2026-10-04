@@ -312,7 +312,10 @@ impl OcMode {
 }
 
 fn current_oc_mode() -> OcMode {
-    if Path::new(OC_PERSISTENT_CONFIG).is_file() {
+    if fs::read_to_string(OC_PERSISTENT_CONFIG)
+        .map(|contents| mocha_update::kernel_inventory::persistent_oc_enabled(&contents))
+        .unwrap_or(false)
+    {
         OcMode::Persistent
     } else if Path::new(OC_SESSION_MARKER).is_file() {
         OcMode::Session
@@ -400,13 +403,7 @@ fn disable_oc(reporter: &mut Reporter) -> Result<String, String> {
         }
     }
     reporter.progress(55, "Restaurando os clocks normais");
-    match restore_oc_offsets() {
-        Ok(()) => {}
-        Err(error) if !Path::new(NVIDIA_SETTINGS).is_file() => {
-            reporter.record(&format!("OC_RESET_SKIPPED={error}"));
-        }
-        Err(error) => return Err(error),
-    }
+    restore_oc_offsets()?;
     emit_oc_state(reporter);
     reporter.progress(100, "Mocha OC totalmente desativado");
     Ok("Mocha OC desativado; offsets de GPU e memória restaurados ao modo normal".to_owned())
@@ -418,9 +415,19 @@ fn validate_oc_integration() -> Result<(), String> {
     const START_LEGACY: &str = "/usr/local/lib/mocha/gamemode-start-agressivo-oc.sh";
     const END_LEGACY: &str = "/usr/local/lib/mocha/gamemode-end-agressivo-oc.sh";
 
-    require_tools(&[NVIDIA_SETTINGS, GAMEMODED, RUNUSER, ENV])?;
+    require_tools(&[
+        GAMEMODED,
+        RUNUSER,
+        ENV,
+        "/usr/local/lib/mocha/mocha-nvidia-oc-nvml",
+        "/usr/bin/visudo",
+    ])?;
 
-    for path in [OC_ROOT_HELPER, GAMEMODE_CONFIG] {
+    for path in [
+        OC_ROOT_HELPER,
+        GAMEMODE_CONFIG,
+        "/etc/sudoers.d/mocha-nvidia-oc-root-helper",
+    ] {
         if !Path::new(path).is_file() {
             return Err(format!(
                 "integração obrigatória do Mocha OC ausente: {path}"
@@ -1005,6 +1012,7 @@ fn check_kernel(reporter: &mut Reporter) -> Result<String, String> {
         }
     }
 
+    installed_kernel = mocha_update::kernel_inventory::installed_mocha_summary()?;
     reporter.data("kernel_installed_package_version", &installed_kernel);
     reporter.data("kernel_candidate_version", &candidate_kernel);
     let ready = !changed_packages.is_empty();
@@ -1012,7 +1020,7 @@ fn check_kernel(reporter: &mut Reporter) -> Result<String, String> {
 
     let summary = if ready {
         format!(
-            "Mocha instalado: {}; Mocha disponível: {}. {} pacote(s) serão instalados ou ajustados; o kernel em uso não limita esta escolha.",
+            "Kernels Mocha instalados: {}. Canal mocha-kernel (linux-mocha-lqx): {}. {} pacote(s) do canal serão instalados ou ajustados; os kernels existentes serão preservados.",
             installed_kernel,
             candidate_kernel,
             changed_packages.len(),
@@ -1203,411 +1211,6 @@ fn apply_arch_kernel(reporter: &mut Reporter) -> Result<String, String> {
 }
 
 fn remarry(reporter: &mut Reporter) -> Result<String, String> {
-    // MOCHA_REMARRY_DKMS_INSTALLED_V66
-    fn installed_package_files(package: &str) -> Result<Vec<String>, String> {
-        let output = Command::new(PACMAN)
-            .args(["-Qql", package])
-            .output()
-            .map_err(|error| {
-                format!("falha ao consultar os arquivos instalados de {package}: {error}")
-            })?;
-
-        if !output.status.success() {
-            let stderr = String::from_utf8_lossy(&output.stderr).trim().to_owned();
-            return Err(format!(
-                "não foi possível consultar os arquivos instalados de {package}: {stderr}"
-            ));
-        }
-
-        let files = String::from_utf8_lossy(&output.stdout)
-            .lines()
-            .map(str::trim)
-            .filter(|line| !line.is_empty())
-            .map(str::to_owned)
-            .collect::<Vec<_>>();
-
-        if files.is_empty() {
-            return Err(format!(
-                "o pacote instalado {package} não publicou sua lista de arquivos"
-            ));
-        }
-
-        Ok(files)
-    }
-
-    fn normalized_package_path(path: &str) -> &str {
-        path.trim().trim_start_matches('/').trim_end_matches('/')
-    }
-
-    fn kernel_releases(files: &[String]) -> Vec<String> {
-        let mut releases = files
-            .iter()
-            .filter_map(|path| {
-                let normalized = normalized_package_path(path);
-                let rest = normalized.strip_prefix("usr/lib/modules/")?;
-                let (release, tail) = rest.split_once('/')?;
-                (!release.is_empty()
-                    && (tail == "pkgbase" || tail == "vmlinuz" || tail.starts_with("kernel/")))
-                .then_some(release.to_owned())
-            })
-            .collect::<Vec<_>>();
-
-        releases.sort();
-        releases.dedup();
-        releases
-    }
-
-    fn nvidia_dkms_versions(files: &[String]) -> Vec<String> {
-        let mut versions = files
-            .iter()
-            .filter_map(|path| {
-                let normalized = normalized_package_path(path);
-                let rest = normalized.strip_prefix("usr/src/nvidia-")?;
-                rest.strip_suffix("/dkms.conf").map(str::to_owned)
-            })
-            .collect::<Vec<_>>();
-
-        versions.sort();
-        versions.dedup();
-        versions
-    }
-
-    fn required_output(program: &str, args: &[&str], label: &str) -> Result<String, String> {
-        let output = Command::new(program)
-            .args(args)
-            .output()
-            .map_err(|error| format!("falha ao executar {label}: {error}"))?;
-
-        if !output.status.success() {
-            let stderr = String::from_utf8_lossy(&output.stderr).trim().to_owned();
-            return Err(format!("{label} falhou: {stderr}"));
-        }
-
-        Ok(String::from_utf8_lossy(&output.stdout).trim().to_owned())
-    }
-
-    fn installed_package_version(package: &str) -> Result<String, String> {
-        let output = required_output(
-            PACMAN,
-            &["-Q", package],
-            &format!("consulta do pacote {package}"),
-        )?;
-        let mut fields = output.split_whitespace();
-        let installed_name = fields
-            .next()
-            .ok_or_else(|| format!("resposta vazia ao consultar {package}"))?;
-        let version = fields
-            .next()
-            .ok_or_else(|| format!("versão ausente ao consultar {package}"))?;
-
-        if installed_name != package || fields.next().is_some() {
-            return Err(format!(
-                "resposta inesperada ao consultar {package}: {output}"
-            ));
-        }
-
-        Ok(version.to_owned())
-    }
-
-    require_tools(&[
-        PACMAN, DKMS, DEPMOD, MODINFO, MKINITCPIO, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC,
-    ])?;
-    ensure_pacman_unlocked()?;
-
-    reporter.progress(5, "Lendo o conjunto exato já instalado");
-    let packages = installed_kernel_driver_packages(reporter)?;
-    let before = installed_versions_strings(&packages, reporter)?;
-
-    let kernel_package_version = installed_package_version("linux-mocha-lqx")?;
-    let headers_package_version = installed_package_version("linux-mocha-lqx-headers")?;
-    let nvidia_package_version = installed_package_version("nvidia-open-dkms")?;
-
-    if kernel_package_version != headers_package_version {
-        return Err(format!(
-            "kernel e headers instalados não correspondem: linux-mocha-lqx {kernel_package_version}; linux-mocha-lqx-headers {headers_package_version}"
-        ));
-    }
-
-    reporter.progress(12, "Validando o kernel e os headers instalados");
-    let kernel_files = installed_package_files("linux-mocha-lqx")?;
-    let releases = kernel_releases(&kernel_files);
-    if releases.len() != 1 {
-        return Err(format!(
-            "o pacote linux-mocha-lqx deveria identificar exatamente um kernel instalado; encontrados: {}",
-            if releases.is_empty() {
-                "nenhum".to_owned()
-            } else {
-                releases.join(", ")
-            }
-        ));
-    }
-    let kernel_release = releases[0].clone();
-    let modules_dir = PathBuf::from("/usr/lib/modules").join(&kernel_release);
-    let build_link = modules_dir.join("build");
-    let vmlinuz = Path::new("/boot/vmlinuz-linux-mocha-lqx");
-
-    if !modules_dir.is_dir() {
-        return Err(format!(
-            "diretório do kernel instalado ausente: {}",
-            modules_dir.display()
-        ));
-    }
-    if !build_link.is_dir() {
-        return Err(format!(
-            "headers instalados ausentes ou com link build inválido: {}",
-            build_link.display()
-        ));
-    }
-    if !vmlinuz.is_file() {
-        return Err(format!(
-            "imagem do kernel instalada ausente: {}",
-            vmlinuz.display()
-        ));
-    }
-
-    let build_target = fs::canonicalize(&build_link).map_err(|error| {
-        format!(
-            "não foi possível resolver {}: {error}",
-            build_link.display()
-        )
-    })?;
-    let headers_makefile = build_target.join("Makefile");
-    let headers_release_file = build_target.join("include/config/kernel.release");
-    if !headers_makefile.is_file() {
-        return Err(format!(
-            "Makefile dos headers ausente: {}",
-            headers_makefile.display()
-        ));
-    }
-    if !headers_release_file.is_file() {
-        return Err(format!(
-            "kernel.release dos headers ausente: {}",
-            headers_release_file.display()
-        ));
-    }
-
-    let headers_kernel_release = fs::read_to_string(&headers_release_file)
-        .map_err(|error| {
-            format!(
-                "não foi possível ler {}: {error}",
-                headers_release_file.display()
-            )
-        })?
-        .trim()
-        .to_owned();
-    if headers_kernel_release != kernel_release {
-        return Err(format!(
-            "kernel.release dos headers diverge do kernel instalado: esperado={kernel_release}; encontrado={headers_kernel_release}"
-        ));
-    }
-
-    let headers_files = installed_package_files("linux-mocha-lqx-headers")?;
-    for required_header in [&headers_makefile, &headers_release_file] {
-        let required_text = required_header.to_string_lossy();
-        let required_normalized = required_text.trim_start_matches('/').trim_end_matches('/');
-        let header_owns_file = headers_files
-            .iter()
-            .any(|path| normalized_package_path(path) == required_normalized);
-
-        if !header_owns_file {
-            return Err(format!(
-                "arquivo de headers não pertence a linux-mocha-lqx-headers: {}",
-                required_header.display()
-            ));
-        }
-    }
-
-    reporter.record(&format!(
-        "REMARRY_KERNEL={} KERNEL_PACKAGE_VERSION={} HEADERS={} HEADERS_TARGET={} HEADERS_KERNEL_RELEASE={}",
-        kernel_release,
-        kernel_package_version,
-        build_link.display(),
-        build_target.display(),
-        headers_kernel_release
-    ));
-
-    reporter.progress(20, "Validando o código-fonte NVIDIA DKMS instalado");
-    let nvidia_files = installed_package_files("nvidia-open-dkms")?;
-    let dkms_versions = nvidia_dkms_versions(&nvidia_files);
-    if dkms_versions.len() != 1 {
-        return Err(format!(
-            "nvidia-open-dkms deveria identificar exatamente uma fonte DKMS instalada; encontradas: {}",
-            if dkms_versions.is_empty() {
-                "nenhuma".to_owned()
-            } else {
-                dkms_versions.join(", ")
-            }
-        ));
-    }
-    let dkms_version = dkms_versions[0].clone();
-    let dkms_conf = PathBuf::from(format!("/usr/src/nvidia-{dkms_version}/dkms.conf"));
-    if !dkms_conf.is_file() {
-        return Err(format!(
-            "fonte NVIDIA DKMS instalada incompleta: {}",
-            dkms_conf.display()
-        ));
-    }
-    reporter.record(&format!(
-        "REMARRY_NVIDIA_PACKAGE_VERSION={} DKMS_VERSION={} DKMS_CONF={}",
-        nvidia_package_version,
-        dkms_version,
-        dkms_conf.display()
-    ));
-
-    reporter.progress(28, "Criando ponto de restauração LVM e backup do boot");
-    let rollback = create_rollback_snapshot(reporter, "remarry")?;
-    reporter.data("created_rollback_id", &rollback.id);
-
-    reporter.progress(
-        42,
-        "Compilando novamente o NVIDIA DKMS para o kernel instalado",
-    );
-    reporter.required(
-        "compilação forçada do NVIDIA DKMS",
-        DKMS,
-        &[
-            "build".to_owned(),
-            "--force".to_owned(),
-            "-m".to_owned(),
-            "nvidia".to_owned(),
-            "-v".to_owned(),
-            dkms_version.clone(),
-            "-k".to_owned(),
-            kernel_release.clone(),
-        ],
-    )?;
-
-    reporter.progress(62, "Instalando novamente os módulos NVIDIA compilados");
-    reporter.required(
-        "instalação forçada do NVIDIA DKMS",
-        DKMS,
-        &[
-            "install".to_owned(),
-            "--force".to_owned(),
-            "-m".to_owned(),
-            "nvidia".to_owned(),
-            "-v".to_owned(),
-            dkms_version.clone(),
-            "-k".to_owned(),
-            kernel_release.clone(),
-        ],
-    )?;
-
-    reporter.progress(72, "Atualizando dependências dos módulos do kernel");
-    reporter.required(
-        "atualização do depmod",
-        DEPMOD,
-        &["-a".to_owned(), kernel_release.clone()],
-    )?;
-
-    reporter.progress(80, "Regenerando o initramfs");
-    reporter.required("regeneração do initramfs", MKINITCPIO, &["-P".to_owned()])?;
-
-    reporter.progress(88, "Atualizando o bootloader");
-    update_bootloader(reporter)?;
-
-    reporter.progress(93, "Validando o casamento exato do NVIDIA");
-    let dkms_status = required_output(
-        DKMS,
-        &[
-            "status",
-            "-m",
-            "nvidia",
-            "-v",
-            &dkms_version,
-            "-k",
-            &kernel_release,
-        ],
-        "consulta do estado DKMS",
-    )?;
-    if !dkms_status.contains("installed") {
-        return Err(format!(
-            "o DKMS não confirmou o NVIDIA como instalado para {kernel_release}: {dkms_status}"
-        ));
-    }
-    reporter.record(&format!("REMARRY_DKMS_STATUS={dkms_status}"));
-
-    // V70_CANONICAL_MODULE_PATH_VALIDATION
-    let expected_module_base =
-        std::fs::canonicalize(format!("/usr/lib/modules/{kernel_release}")).map_err(|error| {
-            format!(
-                "não foi possível normalizar a árvore de módulos do kernel                  {kernel_release}: {error}"
-            )
-        })?;
-
-    for module in ["nvidia", "nvidia_modeset", "nvidia_drm", "nvidia_uvm"] {
-        let module_path = required_output(
-            MODINFO,
-            &["-k", &kernel_release, "-n", module],
-            &format!("localização do módulo {module}"),
-        )?;
-        let module_path_real = std::fs::canonicalize(&module_path).map_err(|error| {
-            format!(
-                "não foi possível normalizar o caminho do módulo {module}:                  {module_path}: {error}"
-            )
-        })?;
-
-        if !module_path_real.starts_with(&expected_module_base) {
-            return Err(format!(
-                "o módulo {module} não pertence ao kernel {kernel_release}:                  informado={module_path}; real={}",
-                module_path_real.display()
-            ));
-        }
-
-        let vermagic = required_output(
-            MODINFO,
-            &["-k", &kernel_release, "-F", "vermagic", module],
-            &format!("vermagic do módulo {module}"),
-        )?;
-        let vermagic_release = vermagic.split_whitespace().next().unwrap_or("");
-
-        if vermagic_release != kernel_release {
-            return Err(format!(
-                "o vermagic do módulo {module} não corresponde ao kernel                  {kernel_release}: {vermagic}"
-            ));
-        }
-
-        reporter.record(&format!(
-            "REMARRY_MODULE={} KERNEL={} PATH={} REAL_PATH={} VERMAGIC={}",
-            module,
-            kernel_release,
-            module_path,
-            module_path_real.display(),
-            vermagic
-        ));
-    }
-
-    let module_version = required_output(
-        MODINFO,
-        &["-k", &kernel_release, "-F", "version", "nvidia"],
-        "leitura da versão do módulo NVIDIA",
-    )?;
-    if module_version != dkms_version {
-        return Err(format!(
-            "a versão do módulo NVIDIA diverge da fonte DKMS: módulo={module_version}; DKMS={dkms_version}"
-        ));
-    }
-
-    reporter.progress(97, "Confirmando que nenhum pacote mudou de versão");
-    let after = installed_versions_strings(&packages, reporter)?;
-    if before != after {
-        return Err(format!(
-            "o recasamento detectou mudança de versão; restaure o ponto {}",
-            rollback.id
-        ));
-    }
-
-    validate_installed_kernel_driver(reporter)?;
-    reporter.data("reboot_required", "true");
-    reporter.progress(100, "Recasamento concluído sem depender do cache");
-
-    Ok(format!(
-        "kernel {} e NVIDIA {} recasados usando os arquivos já instalados, sem troca de pacotes; ponto {} preservado; reinicialização recomendada",
-        kernel_release, dkms_version, rollback.id
-    ))
-}
-
-fn remarry_current_kernel(reporter: &mut Reporter) -> Result<String, String> {
     require_tools(&[
         PACMAN, DKMS, DEPMOD, MODINFO, MKINITCPIO, FINDMNT, LVS, LVCREATE, LVREMOVE, SYNC,
     ])?;
@@ -1624,21 +1227,38 @@ fn remarry_current_kernel(reporter: &mut Reporter) -> Result<String, String> {
         ));
     }
 
-    let pkgbase = modules_dir.join("pkgbase");
-    let owner = Command::new(PACMAN)
-        .args(["-Qo", pkgbase.to_string_lossy().as_ref()])
-        .output()
-        .map_err(|error| format!("falha ao identificar o pacote do kernel iniciado: {error}"))?;
-    if !owner.status.success() {
+    let identity = mocha_update::kernel_inventory::identify_kernel(&kernel_release)?;
+    let kernel_owner = format!("{} {}", identity.package, identity.version);
+    let headers =
+        fs::canonicalize(&build_link).map_err(|error| format!("headers inválidos: {error}"))?;
+    if !headers.starts_with("/usr/src") && !headers.starts_with("/usr/lib/modules") {
         return Err(format!(
-            "não foi possível identificar o pacote proprietário de {}",
-            pkgbase.display()
+            "headers fora da instalação do sistema: {}",
+            headers.display()
         ));
     }
-    let kernel_owner = String::from_utf8_lossy(&owner.stdout).trim().to_owned();
+    let headers_release = fs::read_to_string(headers.join("include/config/kernel.release"))
+        .map_err(|error| format!("kernel.release dos headers ausente: {error}"))?;
+    if headers_release.trim() != kernel_release {
+        return Err("headers não correspondem ao kernel iniciado".to_owned());
+    }
+    let headers_owner = mocha_update::kernel_inventory::package_owner(&headers.join("Makefile"))?;
+    if headers_owner != format!("{}-headers", identity.package)
+        || mocha_update::kernel_inventory::package_version(&headers_owner)? != identity.version
+    {
+        return Err("pacote de headers não corresponde ao kernel iniciado".to_owned());
+    }
 
-    let nvidia_version = package_version("nvidia-open-dkms", reporter)?
-        .ok_or_else(|| "nvidia-open-dkms não está instalado".to_owned())?;
+    let nvidia_version = mocha_update::kernel_inventory::nvidia_dkms_version()?;
+    for package in NVIDIA_REQUIRED_PACKAGES {
+        let version = package_version(package, reporter)?
+            .ok_or_else(|| format!("pacote NVIDIA ausente: {package}"))?;
+        if mocha_update::kernel_inventory::upstream_version(&version) != nvidia_version {
+            return Err(format!(
+                "versão incompatível: {package} {version}; DKMS {nvidia_version}"
+            ));
+        }
+    }
     let dkms_source = PathBuf::from(format!("/usr/src/nvidia-{nvidia_version}/dkms.conf"));
     if !dkms_source.is_file() {
         return Err(format!(
@@ -1711,7 +1331,11 @@ fn remarry_current_kernel(reporter: &mut Reporter) -> Result<String, String> {
             kernel_release.clone(),
         ],
     )?;
-    if !status.to_ascii_lowercase().contains("installed") {
+    if !mocha_update::kernel_inventory::dkms_module_installed(
+        &status,
+        &nvidia_version,
+        &kernel_release,
+    ) {
         return Err(format!(
             "o NVIDIA DKMS não foi instalado para {kernel_release}: {status}"
         ));
@@ -2189,25 +1813,28 @@ fn validate_installed_kernel_driver(reporter: &mut Reporter) -> Result<(), Strin
         }
     }
 
-    let module_releases = fs::read_dir("/usr/lib/modules")
-        .map_err(|error| format!("não foi possível ler /usr/lib/modules: {error}"))?
-        .filter_map(Result::ok)
-        .filter_map(|entry| {
-            let file_type = entry.file_type().ok()?;
-            if !file_type.is_dir() {
-                return None;
+    let kernel_files = reporter.required(
+        "arquivos do kernel do canal",
+        PACMAN,
+        &["-Qql".to_owned(), "linux-mocha-lqx".to_owned()],
+    )?;
+    let mut module_releases = Vec::new();
+    for line in kernel_files.lines() {
+        let normalized = line.trim().trim_start_matches('/');
+        if let Some(tail) = normalized.strip_prefix("usr/lib/modules/") {
+            if let Some(release) = tail.strip_suffix("/pkgbase") {
+                if !release.contains('/') && !module_releases.iter().any(|r| r == release) {
+                    module_releases.push(release.to_owned());
+                }
             }
-            let name = entry.file_name().into_string().ok()?;
-            let lower = name.to_ascii_lowercase();
-            (lower.contains("mocha") && lower.contains("lqx")).then_some(name)
-        })
-        .collect::<Vec<_>>();
+        }
+    }
     if module_releases.is_empty() {
         return Err("nenhuma árvore de módulos do kernel Mocha lqx foi encontrada".to_owned());
     }
 
     let dkms = reporter.required("estado DKMS", DKMS, &["status".to_owned()])?;
-    let dkms_lower = dkms.to_ascii_lowercase();
+    let nvidia_version = mocha_update::kernel_inventory::nvidia_dkms_version()?;
     for release in &module_releases {
         let build_path = Path::new("/usr/lib/modules").join(release).join("build");
         if !build_path.exists() {
@@ -2215,10 +1842,7 @@ fn validate_installed_kernel_driver(reporter: &mut Reporter) -> Result<(), Strin
                 "os headers não criaram o caminho de compilação para {release}"
             ));
         }
-        if !dkms_lower.contains("nvidia")
-            || !dkms_lower.contains(&release.to_ascii_lowercase())
-            || !dkms_lower.contains("installed")
-        {
+        if !mocha_update::kernel_inventory::dkms_module_installed(&dkms, &nvidia_version, release) {
             return Err(format!(
                 "a validação DKMS não encontrou o módulo NVIDIA instalado para {release}"
             ));

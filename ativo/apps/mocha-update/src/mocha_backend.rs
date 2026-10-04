@@ -143,7 +143,7 @@ impl Default for MochaBackendRust {
             desktop_session: QString::from("Carregando sessão gráfica"),
             kernel_version: QString::from("Carregando kernel"),
             kernel_detail: QString::from("Leitura local do sistema"),
-            kernel_package: QString::from("linux-mocha-lqx"),
+            kernel_package: QString::from("Identificando pacote do kernel"),
             driver_version: QString::from("Carregando driver"),
             driver_detail: QString::from("Leitura local do sistema"),
             status_message: QString::from("Lendo o estado atual do sistema"),
@@ -439,9 +439,9 @@ fn apply_system_status(mut backend: Pin<&mut ffi::MochaBackend>) {
     let desktop_session = desktop_session();
     let kernel_version = command_output("/usr/bin/uname", &["-r"])
         .unwrap_or_else(|| "Kernel não identificado".to_owned());
-    let kernel_package = installed_package_version("linux-mocha-lqx")
-        .map(|version| format!("linux-mocha-lqx {version}"))
-        .unwrap_or_else(|| "linux-mocha-lqx não instalado".to_owned());
+    let kernel_package = crate::kernel_inventory::identify_kernel(&kernel_version)
+        .map(|kernel| format!("{} {}", kernel.package, kernel.version))
+        .unwrap_or_else(|error| format!("Pacote do kernel não identificado: {error}"));
     let kernel_detail = kernel_detail(&kernel_version);
     let driver_version = nvidia_version()
         .map(|version| format!("NVIDIA {version}"))
@@ -479,7 +479,9 @@ fn apply_system_status(mut backend: Pin<&mut ffi::MochaBackend>) {
 }
 
 fn local_oc_status() -> (String, String, String) {
-    let persistent = std::path::Path::new("/etc/mocha/nvidia-game-oc.conf").is_file();
+    let persistent = fs::read_to_string("/etc/mocha/nvidia-game-oc.conf")
+        .map(|contents| crate::kernel_inventory::persistent_oc_enabled(&contents))
+        .unwrap_or(false);
     let session = std::path::Path::new("/run/mocha-update/mocha-oc-session.enabled").is_file();
     let runtime = std::path::Path::new("/run/mocha-update/mocha-oc-runtime.conf").is_file();
     let (status, mode) = if persistent {
