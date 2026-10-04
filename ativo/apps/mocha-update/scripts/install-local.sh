@@ -72,7 +72,6 @@ FERRAMENTAS_RUNTIME=(
     /usr/bin/flock
     /usr/bin/sync
     /usr/bin/date
-    /usr/bin/nvidia-settings
     /usr/bin/gamemoded
     /usr/bin/runuser
     /usr/bin/env
@@ -86,10 +85,7 @@ bash -n data/mocha-oc/mocha-nvidia-oc-root-helper
 /usr/bin/visudo -cf data/sudoers.d/mocha-nvidia-oc-root-helper >/dev/null
 [[ -f /etc/gamemode.ini ]] || falha '/etc/gamemode.ini ausente'
 
-# A cadeia OC legacy não é distribuída por este instalador e não pode
-# bloquear a instalação do Mocha Update. Os artefatos OC próprios continuam
-# sendo compilados e instalados normalmente nas etapas abaixo.
-printf 'CADEIA_OC_LEGACY=FORA_DO_ESCOPO_DESTA_INSTALACAO\n'
+printf 'CADEIA_OC_LEGACY=INCLUIDA_NA_ENTREGA\n'
 
 printf '\n1. FORMATAÇÃO, TESTES E COMPILAÇÃO\n'
 command -v cc >/dev/null 2>&1 || falha 'compilador C ausente para o backend NVML'
@@ -188,6 +184,9 @@ sudo mv -f -- \
 if command -v update-desktop-database >/dev/null 2>&1; then
     sudo update-desktop-database /usr/share/applications
 fi
+
+sudo -n python3 scripts/install-oc-chain.py data/mocha-oc/chain /
+sudo -n bash calamares/VALIDAR-MOCHA-OC.sh /
 
 printf '\n5. VALIDAÇÃO DA INSTALAÇÃO\n'
 sudo test -O /usr/bin/mocha-update
