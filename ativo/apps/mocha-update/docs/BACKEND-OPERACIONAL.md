@@ -24,7 +24,7 @@ Não existe execução por shell, entrada de comando livre, escolha arbitrária 
 
 1. A atualização geral não instala nem atualiza kernels, a pilha NVIDIA ou o próprio pacote `mocha-update`.
 2. O fluxo de kernel utiliza exclusivamente o repositório `mocha-kernel` e os pacotes `linux-mocha-lqx`, `linux-mocha-lqx-headers` e `linux-mocha-lqx-docs`.
-3. O recasamento reinstala arquivos exatos do cache e não muda versões.
+3. O recasamento identifica o pacote do kernel iniciado, confere o pacote e a versão dos headers e recompila o NVIDIA DKMS instalado, sem depender do cache.
 4. Toda alteração administrativa cria snapshots thin dos volumes distintos usados por `/` e `/home`, além de backup SHA-256 de `/boot` e da EFI separada.
 5. `/` e `/home` precisam ser thin LVM; `/boot` permanece linear/ext4 e é protegido por backup de arquivos, sem bloquear a operação.
 6. O rollback só aceita snapshots criados e registrados pelo próprio Mocha Update.

@@ -21,7 +21,7 @@ O executor aceita somente operações previamente definidas. A interface não po
 - `polkit` (`pkexec`);
 - `lvm2` com volumes thin para os pontos protegidos;
 - `dkms`, `mkinitcpio`, `grub` e `gnupg`;
-- `gamemode`, `nvidia-settings`, `sudo` e os hooks canônicos do Mocha;
+- `gamemode`, `nvidia-utils` (NVML), `sudo` e os hooks canônicos do Mocha;
 - pilha Qt 6 necessária pela interface.
 
 ## Fluxos operacionais
@@ -36,7 +36,7 @@ Usa exclusivamente o repositório `mocha-kernel`. Valida a seção do repositór
 
 ### Recasar Kernel e Driver
 
-Reinstala exatamente as versões atualmente instaladas usando os arquivos correspondentes no cache do Pacman. A operação é bloqueada quando algum pacote exato não está disponível, impedindo troca silenciosa de versão. Em seguida, reconstrói DKMS, initramfs e GRUB.
+Identifica o kernel iniciado pelo pacote proprietário no Pacman, confere headers e sua versão, e reconstrói NVIDIA DKMS, initramfs e GRUB usando os arquivos instalados. Não depende do cache de pacotes. Os headers devem estar instalados em /usr, com independência dos discos de apoio.
 
 
 ### Mocha OC
@@ -47,7 +47,7 @@ Controla o perfil NVIDIA validado de `+50 MHz` no clock da GPU e `+400` no contr
 - **Ativar OC permanentemente no GameMode:** grava a preferência em `/etc/mocha/nvidia-game-oc.conf`, mas os offsets continuam sendo aplicados apenas entre os hooks de início e fim do GameMode.
 - **Desativar totalmente:** remove as duas preferências e restaura imediatamente os valores anteriores salvos na entrada do GameMode.
 
-Os hooks aprovados continuam em `/usr/local/lib/mocha/performance/`. Eles acionam as pontes `legacy-*.cmd`, que executam os scripts legacy aprovados. Esses scripts chamam o executor fixo `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`, único artefato substituído pelo instalador, e instala uma regra `sudoers` limitada aos argumentos `start`, `end`, `reset`, `stop` e `status`. Chamadas repetidas de início não sobrescrevem o estado original que será restaurado no encerramento.
+Os hooks aprovados continuam em `/usr/local/lib/mocha/performance/`. Eles acionam as pontes `legacy-*.cmd`, que executam os scripts legacy aprovados. Esses scripts chamam o executor fixo `/usr/local/lib/mocha/mocha-nvidia-oc-root-helper`, distribuído junto com o backend NVML e a cadeia completa pelos instaladores, com uma regra `sudoers` limitada aos argumentos `start`, `end`, `reset`, `stop` e `status`. Chamadas repetidas de início não sobrescrevem o estado original que será restaurado no encerramento.
 
 ### Rollback
 
@@ -76,3 +76,5 @@ A tela de rollback localiza e seleciona automaticamente o ponto válido mais rec
 ```
 
 O instalador executa `cargo fmt`, testes e compilação dos dois binários antes de alterar o sistema. Se qualquer validação falhar, nada é instalado.
+
+Correção consolidada: [kernel e OC, 04/10/2026](docs/CORRECAO-KERNEL-OC-20261004.md).
