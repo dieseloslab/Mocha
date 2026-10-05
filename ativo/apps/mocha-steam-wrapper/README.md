@@ -10,6 +10,7 @@ Fontes copiadas do sistema instalado e auditadas em 04/10/2026.
 
 Os três arquivos instalados são independentes dos discos FAST e VM. Usam os caminhos do sistema em `/usr/local`; perfis ficam em `/usr/local/share/mocha/steam-profiles` e nos diretórios XDG do usuário.
 
-A opção de lançamento é `/usr/local/bin/mocha-steam-game-run %command%`. O instalador em `install` cria perfis ausentes e preserva os existentes; ele não instala os três wrappers. Seus registros de montagem são escritos somente nos manuais canônicos do Interno/ativo.
+A opção de lançamento é `/usr/local/bin/mocha-steam-game-run %command%`. A receita específica da biblioteca da matriz é versionada somente no repositório privado Mocha-Interno. Ela cria perfis ausentes e preserva os existentes; não instala os três wrappers. Seus registros de montagem são escritos somente nos manuais canônicos do Interno/ativo.
 
 Verificações: sintaxe Bash e cinco cenários isolados — ausência de comando, preservação de argumentos e passagem pelo GameMode, prefixo já corrigido, padrões sem limite FPS e validação de perfis sem execução de conteúdo. Estes testes não substituem testes reais em jogos.
+
