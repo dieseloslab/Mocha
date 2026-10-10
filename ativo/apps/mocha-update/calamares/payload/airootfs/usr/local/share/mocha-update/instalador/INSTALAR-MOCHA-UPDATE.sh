@@ -224,8 +224,15 @@ done < <(
         sort -z
 )
 
+# MOCHA_BACKUP_HIBERNACAO
+for config in /etc/default/grub /etc/mkinitcpio.conf /etc/mkinitcpio-mocha-729.conf /etc/grub.d/06_mocha_gcc_principal /etc/grub.d/40_custom /boot/grub/grub.cfg; do
+    if [[ -f "$config" ]]; then
+        rsync -aR -- "$config" "$BACKUP/rootfs/"
+    fi
+done
 COPIA_INICIADA=1
 rsync -aH --chown=0:0 --exclude=/etc/gamemode.ini -- "$PAYLOAD/" /
+python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/mocha-disable-hibernation.py" /
 python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" "$PAYLOAD" /
 bash "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" /
 

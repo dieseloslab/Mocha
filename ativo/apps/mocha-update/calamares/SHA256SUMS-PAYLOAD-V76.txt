@@ -25,7 +25,6 @@ b1610eedf2c414b54fbafccc24f80d81b2bd2d69b694d41c884be81e00992353  ./usr/local/li
 49d1df055ac33b621f9166f7108f781bb3c2119405eef036d1466d524dce0c96  ./usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system
 47fef060a663d964cc6340949466b88302510e27d77f413253d71bbbc4e4b6fc  ./usr/local/share/mocha-update/instalador/DEPENDENCIAS-CARGO-LOCK.txt
 91bbe02baf13e5ebae526f97d02576663c7d5c976f15d4bbdeb50821169918b8  ./usr/local/share/mocha-update/instalador/DEPENDENCIAS-LDD.txt
-ebe2a99f776700dbf6a738cb7de0a12e14c7880dbb4984db98fa90247ba409bf  ./usr/local/share/mocha-update/instalador/INSTALAR-MOCHA-UPDATE.sh
 fdc8b9f4f7fc4f2434d33b5600fd0253ea0e583876508ecf750da639f4ec3906  ./usr/local/share/mocha-update/instalador/PACOTES-RUNTIME-OBSERVADOS.txt
 49d96c770a1eec05cda4350cea702d12ec2b2571cc49f689b637c65bcc35b7a3  ./usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh
 099619a02a2c01da0f11eadaf7cebe4c46d82fd94d8e93fc3c4df815e679730e  ./usr/local/share/mocha-update/instalador/install-oc-chain.py
@@ -38,3 +37,12 @@ b396c8e569bb527139cfc29a7d2417048fe1764e74d5419a579f39f16e5a99d3  ./usr/share/mo
 ed979e755dc31c953cdfbeeb217913cf14c6d2a25f4c8cfe9ab9e691d45d8d95  ./usr/share/mocha-update/keys/mocha-release-signing.gpg
 44a51e787adedfbaa05d49f193ace7d5d36286c24dd104b3d5e5aca388292f78  ./usr/share/polkit-1/actions/org.mocha.snapshot.policy
 ff5322b56e58baadb16794c9cd3abcf4ac4b42bfa4d44a9d2869d8c62ce5df2b  ./usr/share/polkit-1/actions/org.mocha.update.policy
+7452b3e19dde6bee6b5e3bacd0b506bcf9b22f11c07a311d780022d843ba0a46  ./etc/systemd/sleep.conf.d/99-mocha-sem-hibernacao.conf
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/hibernate.target
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/hybrid-sleep.target
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/suspend-then-hibernate.target
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/systemd-hibernate.service
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/systemd-hybrid-sleep.service
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./etc/systemd/system/systemd-suspend-then-hibernate.service
+5d601be8d66649074b55fe3a24cb3821314fea8e5432b423e8648146ff1842b9  ./usr/local/share/mocha-update/instalador/INSTALAR-MOCHA-UPDATE.sh
+66bbdea83d29933820e8d19f31e5e448b6b0d8cbcc25a2917215d310b0df2119  ./usr/local/share/mocha-update/instalador/mocha-disable-hibernation.py

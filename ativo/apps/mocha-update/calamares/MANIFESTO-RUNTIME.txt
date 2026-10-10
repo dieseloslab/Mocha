@@ -26,7 +26,6 @@ DESTINO=/usr/local/lib/mocha/performance/mocha-gamemode-end-authority-system|MOD
 DESTINO=/usr/local/lib/mocha/performance/mocha-gamemode-start-authority-system|MODO=755|DONO_ALVO=root:root|SHA256=49d1df055ac33b621f9166f7108f781bb3c2119405eef036d1466d524dce0c96
 DESTINO=/usr/local/share/mocha-update/instalador/DEPENDENCIAS-CARGO-LOCK.txt|MODO=644|DONO_ALVO=root:root|SHA256=47fef060a663d964cc6340949466b88302510e27d77f413253d71bbbc4e4b6fc
 DESTINO=/usr/local/share/mocha-update/instalador/DEPENDENCIAS-LDD.txt|MODO=644|DONO_ALVO=root:root|SHA256=91bbe02baf13e5ebae526f97d02576663c7d5c976f15d4bbdeb50821169918b8
-DESTINO=/usr/local/share/mocha-update/instalador/INSTALAR-MOCHA-UPDATE.sh|MODO=755|DONO_ALVO=root:root|SHA256=ebe2a99f776700dbf6a738cb7de0a12e14c7880dbb4984db98fa90247ba409bf
 DESTINO=/usr/local/share/mocha-update/instalador/PACOTES-RUNTIME-OBSERVADOS.txt|MODO=644|DONO_ALVO=root:root|SHA256=fdc8b9f4f7fc4f2434d33b5600fd0253ea0e583876508ecf750da639f4ec3906
 DESTINO=/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh|MODO=755|DONO_ALVO=root:root|SHA256=49d96c770a1eec05cda4350cea702d12ec2b2571cc49f689b637c65bcc35b7a3
 DESTINO=/usr/local/share/mocha-update/instalador/install-oc-chain.py|MODO=755|DONO_ALVO=root:root|SHA256=099619a02a2c01da0f11eadaf7cebe4c46d82fd94d8e93fc3c4df815e679730e
@@ -39,3 +38,12 @@ DESTINO=/usr/share/mocha-update/keys/mocha-release-signing.asc|MODO=644|DONO_ALV
 DESTINO=/usr/share/mocha-update/keys/mocha-release-signing.gpg|MODO=644|DONO_ALVO=root:root|SHA256=ed979e755dc31c953cdfbeeb217913cf14c6d2a25f4c8cfe9ab9e691d45d8d95
 DESTINO=/usr/share/polkit-1/actions/org.mocha.snapshot.policy|MODO=644|DONO_ALVO=root:root|SHA256=44a51e787adedfbaa05d49f193ace7d5d36286c24dd104b3d5e5aca388292f78
 DESTINO=/usr/share/polkit-1/actions/org.mocha.update.policy|MODO=644|DONO_ALVO=root:root|SHA256=ff5322b56e58baadb16794c9cd3abcf4ac4b42bfa4d44a9d2869d8c62ce5df2b
+DESTINO=/etc/systemd/sleep.conf.d/99-mocha-sem-hibernacao.conf|MODO=644|DONO_ALVO=root:root|SHA256=7452b3e19dde6bee6b5e3bacd0b506bcf9b22f11c07a311d780022d843ba0a46
+DESTINO=/etc/systemd/system/hibernate.target|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/etc/systemd/system/hybrid-sleep.target|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/etc/systemd/system/suspend-then-hibernate.target|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/etc/systemd/system/systemd-hibernate.service|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/etc/systemd/system/systemd-hybrid-sleep.service|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/etc/systemd/system/systemd-suspend-then-hibernate.service|MODO=777|DONO_ALVO=root:root|SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+DESTINO=/usr/local/share/mocha-update/instalador/INSTALAR-MOCHA-UPDATE.sh|MODO=755|DONO_ALVO=root:root|SHA256=5d601be8d66649074b55fe3a24cb3821314fea8e5432b423e8648146ff1842b9
+DESTINO=/usr/local/share/mocha-update/instalador/mocha-disable-hibernation.py|MODO=644|DONO_ALVO=root:root|SHA256=66bbdea83d29933820e8d19f31e5e448b6b0d8cbcc25a2917215d310b0df2119

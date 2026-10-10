@@ -67,6 +67,7 @@ done
 }
 
 rsync -aH --chown=0:0 --exclude=/etc/gamemode.ini -- "$PAYLOAD/" "$ALVO/"
+python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/mocha-disable-hibernation.py" "$ALVO"
 python3 "$PAYLOAD/usr/local/share/mocha-update/instalador/install-oc-chain.py" "$PAYLOAD" "$ALVO"
 bash "$PAYLOAD/usr/local/share/mocha-update/instalador/VALIDAR-MOCHA-OC.sh" "$ALVO"
 

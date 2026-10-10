@@ -69,3 +69,17 @@ fail-closed.
 - timer de índice habilitado e ativo após o primeiro boot;
 - índice JSON legível e tela Rollback carregada;
 - atualização, recasamento e rollback testados separadamente.
+
+<!-- MOCHA-SEM-HIBERNACAO-20261010:BEGIN -->
+## Política sem hibernação — 2026-10-10
+
+O payload inclui `99-mocha-sem-hibernacao.conf` e seis máscaras `/dev/null`
+para hibernação e modos híbridos. Ambos os instaladores chamam
+`mocha-disable-hibernation.py` na raiz correta para remover `resume=` e
+hook `resume`, além de aplicar `nohibernate`. Não há UUID de origem no helper.
+Execute essa etapa depois de instalar as configurações de boot e antes de
+construir os initramfs e o GRUB finais. O helper recusa configurações obrigatórias
+ausentes e links simbólicos não auditados.
+Runtime e menus KDE aprovados; cinco raízes sintéticas testadas duas vezes cada.
+A instalação limpa completa e o dual boot ainda precisam ser testados na ISO.
+<!-- MOCHA-SEM-HIBERNACAO-20261010:END -->
